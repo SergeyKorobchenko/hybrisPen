@@ -1,0 +1,24 @@
+# Localization for UnitTag
+#-----------------------------------------------------------
+INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=ru]
+;internationalization.DAYS.0;день
+;internationalization.DAYS.1;дня
+;internationalization.DAYS.2;дней
+;internationalization.UP_TO_DAYS.0;дня
+;internationalization.UP_TO_DAYS.1;дней
+;internationalization.UP_TO_DAYS.2;дней
+;internationalization.PRODUCTS.0;товар
+;internationalization.PRODUCTS.1;товара
+;internationalization.PRODUCTS.2;товаров
+;internationalization.REVIEWS.0;отзыв
+;internationalization.REVIEWS.1;отзыва
+;internationalization.REVIEWS.2;отзывов
+;internationalization.BONUSES.0;бонус
+;internationalization.BONUSES.1;бонуса
+;internationalization.BONUSES.2;бонусов
+;internationalization.POSITIONS.0;позиция
+;internationalization.POSITIONS.1;позиции
+;internationalization.POSITIONS.2;позиций
+;internationalization.LEFT.0;Остался
+;internationalization.LEFT.1;Осталось
+;internationalization.LEFT.2;Осталось

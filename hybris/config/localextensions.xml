@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hybrisconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="resources/schemas/extensions.xsd">
+	<extensions>
+		<!--
+				All extensions located in ${HYBRIS_BIN_DIR}/platform/ext are automatically loaded.
+				More information about how to configure available extensions can be found here : https://wiki.hybris.com/x/nZVzC
+		-->
+
+		<path dir="${HYBRIS_BIN_DIR}" autoload="false" />
+        <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/billing"/>
+        <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/core"/>
+        <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/testsupport"/>
+		
+		
+		<extension name="pentlandcore"/>
+		<extension name="pentlandfacades"/>
+		<extension name="pentlandstorefront"/>
+		<extension name="pentlandfulfilmentprocess"/>
+		<extension name="pentlandinitialdata"/>
+		<extension name="pentlandbackoffice"/>
+		<extension name="pentlandtest"/>
+		
+		<extension name="internationalization"/>
+        <extension name="internationalizationbackoffice"/>
+
+        <extension name="powertoolsstore"/>
+        <extension name='b2bcommercebackoffice' />
+        <extension name='b2badmincockpit' />
+        <extension name='b2bacceleratoraddon' />
+        <extension name='commerceorgaddon' />
+        <extension name='secureportaladdon'/>
+        <extension name="accountsummaryaddon"/>
+        <extension name="savedorderforms"/>
+
+        <extension name="voucher"/>
+        <extension name="promotions"/>
+        <extension name="customerreview"/>
+        <extension name="cockpit"/>
+        <extension name="springintegrationlibs"/>
+        <extension name="solrfacetsearch"/>
+        <extension name="basecommerce"/>
+        <extension name="payment"/>
+        <extension name="admincockpit"/>
+        <extension name="cms2"/>
+        <extension name="commerceservices"/>
+        <extension name="commercefacades"/>
+        <extension name="cms2lib"/>
+        <extension name="cmscockpit"/>
+        <extension name="solrserver"/>
+        <extension name="ticketsystem"/>
+        <extension name="acceleratorservices"/>
+        <extension name="acceleratorcms"/>
+        <extension name="acceleratorfacades"/>
+        <extension name="acceleratorstorefrontcommons"/>
+        <extension name="cscockpit"/>
+        <extension name="productcockpit"/>
+
+
+        <extension name="hmc" />
+        <extension name="platformhmc" />
+        <extension name="solrfacetsearchhmc"/>
+        <extension name="commercesearchhmc"/>
+        <extension name="ldap" />
+
+        <extension name="commercesearch" />
+        <extension name="commercesearchbackoffice" />
+        <extension name="commerceservicesbackoffice" />
+        <extension name="solrfacetsearchbackoffice" />
+        <extension name="customersupportbackoffice" />
+
+        <extension name="mediaconversion" />
+
+        <extension name="backoffice" />
+        <extension name="platformbackoffice" />
+        <extension name="ticketsystembackoffice" />
+        <extension name="basecommercebackoffice" />
+        <extension name="promotionsbackoffice" />
+        <extension name="voucherbackoffice" />
+        <extension name="mediaconversionbackoffice" />
+        <extension name="npmancillary" />
+
+        <extension name="addonsupport"/>
+
+        <extension name="backofficesolrsearch"  />
+        
+        <extension name='embeddedserver' />
+        <extension name='cmswebservices' />
+        <extension name="tomcatembeddedserver"/>
+        <extension name='smarteditwebservices' />
+        <extension name='smarteditaddon' />
+        <extension name='cmssmartedit' />
+        <extension name='smartedit' />
+        <extension name='cmsfacades' />
+        <extension name='webservicescommons' />
+        <extension name='cmssmarteditwebservices' />
+        <extension name='personalizationcms' />
+        <extension name='personalizationservices' />
+        <extension name='personalizationfacades' />
+        <extension name='personalizationwebservices' />
+        <extension name='personalizationpromotions' />
+        <extension name='previewwebservices' />
+        <extension name='previewpersonalizationweb' />
+        <extension name='personalizationcmsweb' />
+        <extension name='personalizationsmartedit' />
+        <!-- 21.02.2017 -->
+        <extension name='permissionswebservices' />
+
+
+        <!--promotions  -->
+        <!--<extension name='promotionengineservices' />-->
+        <!--<extension name='ruleengine' />-->
+        <!--<extension name='ordercalculation' />-->
+        <!--<extension name='droolsruleengineservices' />-->
+        <!--<extension name='ruleengineservices' />-->
+        <!--<extension name='ruledefinitions' />-->
+        <!--<extension name='rulebuilderbackoffice' />-->
+        <!--<extension name='ruleenginebackoffice' />-->
+        <!--<extension name='couponbackoffice' />-->
+        <!--<extension name='couponfacades' />-->
+        <!--<extension name='couponservices' />-->
+        <!--<extension name='promotionenginebackoffice' />-->
+
+
+        <!--Assisted Service Module-->
+        <extension name="assistedservicestorefront"/>
+        <extension name="assistedservicefacades"/>
+        <extension name="assistedserviceservices"/>
+
+        <!--Customer Ticketing AddOn-->
+        <extension name="customerticketingaddon"/>
+        <extension name="customerticketingfacades"/>
+
+        <extension name="adaptivesearch"/>
+        <extension name="adaptivesearchbackoffice"/>
+        <extension name="adaptivesearchsolr"/>
+
+
+        <!--<extension name="yacceleratorcockpits"/>-->
+        <!--<extension name="yacceleratorcore"/>-->
+        <!--<extension name="yacceleratorfacades"/>-->
+        <!--<extension name="yacceleratorfulfilmentprocess"/>-->
+        <!--<extension name="yacceleratorinitialdata"/>-->
+        <!--<extension name="yacceleratorstorefront"/>-->
+        <!--<extension name="yacceleratortest"/>-->
+
+	</extensions>
+</hybrisconfig>

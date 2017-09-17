@@ -1,0 +1,15 @@
+# Localization for UnitTag
+#-----------------------------------------------------------
+INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
+;internationalization.DAYS.0;day
+;internationalization.DAYS.1;days
+;internationalization.UP_TO_DAYS.0;day
+;internationalization.UP_TO_DAYS.1;days
+;internationalization.PRODUCTS.0;product
+;internationalization.PRODUCTS.1;products
+;internationalization.REVIEWS.0;review
+;internationalization.REVIEWS.1;reviews
+;internationalization.BONUSES.0;bonus
+;internationalization.BONUSES.1;bonuses
+;internationalization.LEFT.0;left
+;internationalization.LEFT.1;left

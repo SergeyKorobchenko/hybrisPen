@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<context component="explorer-tree">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="hmc_treenode_c2l">
+				<n:type-node id="InternationalizationEntries" code="LocalizationEntry" />
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+	<context type="LocalizationEntry" component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="code"/>
+			<list:column qualifier="localizedText"/>
+		</list:list-view>
+	</context>
+
+	<context type="LocalizationEntry" component="simple-search">
+		<yss:simple-search xmlns:yss="http://www.hybris.com/cockpitng/config/simplesearch">
+			<yss:field name="code"/>
+			<yss:sort-field name="code" asc="true"/>
+		</yss:simple-search>
+	</context>
+
+	<context type="LocalizationEntry" component="advanced-search">
+		<as:advanced-search xmlns:as="http://www.hybris.com/cockpitng/config/advancedsearch" connection-operator="AND">
+			<as:field-list>
+				<as:field editor="java.lang.Long" name="pk" operator="equal" selected="false" sortable="false"/>
+				<as:field name="code" operator="contains" selected="true"/>
+				<as:field name="localizedText" selected="true"/>
+
+			</as:field-list>
+			<as:sort-field name="code" asc="false" />
+		</as:advanced-search>
+	</context>
+
+	<context component="create-wizard" type="LocalizationEntry">
+    <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="LocalizationEntryWizard" title="newlocalizationentry.title">
+        <wz:prepare id="localizationEntryPrepare">
+             <wz:initialize property="newEntry" type="LocalizationEntry"/>
+        </wz:prepare>
+        <wz:step id="step1" label="newlocalizationentry.label">
+            <wz:content id="step1.content">
+                <wz:property-list root="newEntry">
+                    <wz:property qualifier="code"/>
+                    <wz:property qualifier="localizedText"/>
+                </wz:property-list>
+            </wz:content>
+            <wz:navigation id="step1.navigation">
+                <wz:cancel/>
+                <wz:done visible="!#empty(newEntry.code)">
+                    <wz:save property="newEntry"/>
+                </wz:done>
+            </wz:navigation>
+        </wz:step>
+    </wz:flow>
+    </context>
+
+</config>

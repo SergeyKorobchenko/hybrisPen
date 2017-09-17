@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Aug 16 15:08:44 UTC 2017
+builddate=20170816 1508
+description=pentlandcore
+group.id=de.hybris.platform
+module.name=platform-module
+name=pentlandcore
+releasedate=20170803 1321
+vendor=hybris
+version=6.5.0.0
+version.api=6.5.0

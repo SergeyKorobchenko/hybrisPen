@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+  version="2.1">
+
+  <display-name>Localization tag</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>localization</short-name>
+  <uri>ru.masterdata.internationalization.tags</uri>
+
+  <tag>
+    <name>unit</name>
+    <tag-class>ru.masterdata.internationalization.tags.UnitTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <description>Quantity that defines the plural form</description>
+      <name>number</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <description>Type of the unit to be localized (e.g. days, months)</description>
+      <name>localizedUnit</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>ru.masterdata.internationalization.enums.LocalizedUnit</type>
+    </attribute>
+    <attribute>
+      <description>The string to use when binding the result to the page,
+        request, session or application scope. If not specified, the result
+        gets outputted to the writer (i.e. typically directly to the JSP).</description>
+      <name>var</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description>The scope to use when exporting the result to a variable.
+        This attribute is only used when var is also set. Possible values are
+        page, request, session and application.</description>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+	<tag>
+		<name>unitOnly</name>
+		<tag-class>ru.masterdata.internationalization.tags.UnitOnlyTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description>Quantity that defines the plural form</description>
+			<name>number</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description>Type of the unit to be localized (e.g. days, months)</description>
+			<name>localizedUnit</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ru.masterdata.internationalization.enums.LocalizedUnit</type>
+		</attribute>
+		<attribute>
+			<description>The string to use when binding the result to the page,
+				request, session or application scope. If not specified, the result
+				gets outputted to the writer (i.e. typically directly to the JSP).</description>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The scope to use when exporting the result to a variable.
+				This attribute is only used when var is also set. Possible values are
+				page, request, session and application.</description>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

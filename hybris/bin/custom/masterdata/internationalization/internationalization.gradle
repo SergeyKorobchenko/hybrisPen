@@ -1,0 +1,69 @@
+import groovy.io.FileType
+
+task translate << {
+
+    def baseDir = new File("${hybris_custom_ext_dir}")
+    def messagePath = '/web/webroot/WEB-INF/messages'
+    def impexDir = new File('hybris/bin/custom/internal/internationalization/resources/internationalization/import/coredata/common')
+
+    if(!impexDir.canRead()){
+        throw new FileNotFoundException('Internationalization module not found')
+    }
+    println "Writing impex to ${impexDir}"
+
+    def storefronts = []
+    baseDir.eachFile(FileType.DIRECTORIES){
+        dir ->
+            if(dir.name.contains('storefront')){
+                storefronts.add(dir)
+            }
+    }
+
+    parseMessageFiles(storefronts, messagePath, impexDir)
+
+}
+
+private void parseMessageFiles(ArrayList storefronts, messagePath, impexDir) {
+    def messageDir
+    storefronts.each {
+        front ->
+            messageDir = new File(front.absolutePath + messagePath)
+            if (messageDir.canRead()) {
+                //get all available localization files
+                messageDir.eachFileRecurse(FileType.FILES) {
+                    file ->
+                        def locale = 'en'
+                        def fileName = file.getName().replaceFirst(~/\.[^\.]+$/, '')
+                        def fileNameArray = fileName.split('_')
+                        if (fileNameArray.size() > 1) {
+                            locale = fileNameArray.last()
+                        }
+                        def frontDir = new File("${impexDir.absolutePath}/${front.name}")
+                        if (!frontDir.canRead()) {
+                            frontDir.mkdir()
+                        }
+                        def impexFile = new File("${frontDir.absolutePath}/${fileName}.impex")
+                        writeToImpex(file, impexFile, locale)
+                }
+            }
+
+    }
+}
+
+private void writeToImpex(def source, def target, def locale){
+    def props = new java.util.Properties()
+    source.withInputStream {
+        stream -> props.load(stream)
+    }
+
+    def impexHeader = "INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=${locale}]"
+    target.write(impexHeader)
+
+
+    props.entrySet().each {
+        i ->
+            def val = new String(i.value.toString().getBytes("ISO-8859-1"), "UTF-8")
+            target.append(System.getProperty("line.separator")+";${i.key};${val}", "UTF-8")
+    }
+
+}
