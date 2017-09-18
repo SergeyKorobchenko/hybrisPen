@@ -10,17 +10,17 @@
         <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/billing"/>
         <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/core"/>
         <path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/testsupport"/>
-		
-		
-		<extension name="pentlandcore"/>
-		<extension name="pentlandfacades"/>
-		<extension name="pentlandstorefront"/>
-		<extension name="pentlandfulfilmentprocess"/>
-		<extension name="pentlandinitialdata"/>
-		<extension name="pentlandbackoffice"/>
-		<extension name="pentlandtest"/>
-		
-		<extension name="internationalization"/>
+
+
+        <extension name="pentlandcore" />
+        <extension name="pentlandfacades" />
+        <extension name="pentlandstorefront" />
+        <extension name="pentlandfulfilmentprocess" />
+        <extension name="pentlandinitialdata" />
+        <extension name="pentlandbackoffice" />
+        <extension name="pentlandtest" />
+
+        <extension name="internationalization"/>
         <extension name="internationalizationbackoffice"/>
 
         <extension name="powertoolsstore"/>

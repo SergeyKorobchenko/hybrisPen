@@ -60,10 +60,10 @@ hybris/bin/custom/**/classes/**
 hybris/bin/custom/**/hmc/classes/**
 hybris/bin/custom/**/build.xml
 hybris/bin/custom/**/testclasses/**/*.class
-hybris/bin/custom/ave/avecore/src/ru/ave/core/jalo/**
-hybris/bin/custom/ave/avecore/src/de/*
+hybris/bin/custom/pentland/pentlandcore/src/com/bridgex/core/jalo/**
+hybris/bin/custom/pentland/pentlandcore/src/de/*
 
-hybris/bin/custom/ave/avestorefront/node_modules
+hybris/bin/custom/pentland/pentlandstorefront/node_modules
 hybris/bin/custom/**/web/commonwebsrc
 hybris/bin/custom/**/web/addonsrc
 hybris/bin/custom/**/web/webroot/_ui/addons/**
@@ -82,6 +82,7 @@ hybris/bin/custom/**/web/webroot/WEB-INF/_ui-src/addons/**
 **/theme-lambda
 internationalizationhmc.jar
 internationalizationbackoffice_bof.jar
+pentlandbackoffice_bof.jar
 
 !environment/**/customize/**/*.class
 
