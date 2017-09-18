@@ -3,6 +3,7 @@
 <%@ attribute name="groupData" required="true" type="de.hybris.platform.commercefacades.order.data.OrderEntryGroupData" %>
 <%@ attribute name="showPotentialPromotions" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="showHead" required="false" type="java.lang.Boolean" %>
+<%@ attribute name="index" required="false" type="java.lang.Integer" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>

@@ -203,9 +203,9 @@
 	</servlet-mapping>
 
 	 <!-- Comment out to see error stack for development -->
-	<error-page>
-		<location>/WEB-INF/common/pages/error/serverError.jsp</location>
-	</error-page>
+	<!--<error-page>-->
+		<!--<location>/WEB-INF/common/pages/error/serverError.jsp</location>-->
+	<!--</error-page>-->
 
 
 	<!-- Session -->

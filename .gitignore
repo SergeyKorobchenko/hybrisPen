@@ -34,6 +34,7 @@ hybris/config/.externalToolBuilders
 hybris/config/tcServer/**
 hybris/config/tomcat/**
 hybris/config/licence/**
+hybris/config/solr/**
 test-reports/*
 *.sublime-*
 hybrisdeps/*
@@ -48,10 +49,10 @@ lib/**
 *.iml
 ruleset.xml
 
-**/.classpath
-**/.pmd
-**/.project
-**/.springBeans
+#**/.classpath
+#**/.pmd
+#**/.project
+#**/.springBeans
 velocity.log
 
 hybris/bin/**/gensrc
@@ -60,7 +61,7 @@ hybris/bin/custom/**/classes/**
 hybris/bin/custom/**/hmc/classes/**
 hybris/bin/custom/**/build.xml
 hybris/bin/custom/**/testclasses/**/*.class
-hybris/bin/custom/pentland/pentlandcore/src/com/bridgex/core/jalo/**
+#hybris/bin/custom/pentland/pentlandcore/src/com/bridgex/core/jalo/**
 hybris/bin/custom/pentland/pentlandcore/src/de/*
 
 hybris/bin/custom/pentland/pentlandstorefront/node_modules
