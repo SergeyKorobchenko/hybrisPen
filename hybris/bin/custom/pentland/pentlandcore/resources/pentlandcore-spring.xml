@@ -32,6 +32,7 @@
 	<import resource="pentlandcore-services-spring.xml"/>
 	<import resource="pentlandcore-dao-spring.xml"/>
 	<import resource="pentlandcore-strategies-spring.xml"/>
+	<import resource="pentlandcore-jobs-spring.xml"/>
 
 	<!-- SystemSetup for the Pentlandcore -->
 	<bean id="acceleratorCoreSystemSetup" class="com.bridgex.core.setup.CoreSystemSetup"
