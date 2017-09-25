@@ -31,8 +31,6 @@ hybris-dependencies/*
 hybris/bin/ext*/**
 hybris/bin/platform/**
 hybris/config/.externalToolBuilders
-hybris/config/tcServer/**
-hybris/config/tomcat/**
 hybris/config/licence/**
 hybris/config/solr/**
 test-reports/*
