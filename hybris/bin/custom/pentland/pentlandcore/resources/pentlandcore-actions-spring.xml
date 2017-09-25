@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Actions -->
+	<bean id="abstractAction" class="de.hybris.platform.processengine.action.AbstractAction"
+	      abstract="true">
+		<property name="modelService" ref="modelService"/>
+		<property name="processParameterHelper" ref="processParameterHelper"/>
+	</bean>
+
+	<bean id="sendEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
+	      parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean>
+
+	<bean id="abstractGenerateEmailAction" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+	      parent="abstractAction" abstract="true">
+		<property name="modelService" ref="modelService"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+	</bean>
+
+	<bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate"/>
+	</bean>
+
+	<bean id="generateOrderConfirmationEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+	</bean>
+
+	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="DeliverySentEmailTemplate"/>
+	</bean>
+
+	<bean id="generateReadyForPickupEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="ReadyForPickupEmailTemplate"/>
+	</bean>
+
+	<bean id="generateOrderCancelledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderCancelledEmailTemplate"/>
+	</bean>
+
+	<bean id="generateOrderRefundEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderRefundEmailTemplate"/>
+	</bean>
+
+	<bean id="generateOrderPartiallyCanceledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderPartiallyCanceledEmailTemplate"/>
+	</bean>
+	<bean id="generateOrderPartiallyRefundedEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderPartiallyRefundedEmailTemplate"/>
+	</bean>
+	<bean id="generateNotPickedUpConsignmentCanceledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="NotPickedUpConsignmentCanceledEmailTemplate"/>
+	</bean>
+
+	<bean id="removeSentEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction"
+	      parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="markQuoteNotificationAsSent"
+	      class="com.bridgex.core.actions.quote.MarkQuoteNotificationAsSentAction"
+	      parent="abstractAction" abstract="true">
+		<property name="quoteService" ref="quoteService"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Product Reference Lookup Strategies-->
+	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
+	<bean id="apparelCrossSellingProductReferenceTargetStrategy"
+	      parent="defaultCrossSellingProductReferenceTargetStrategy">
+		<property name="productReferenceTargetStrategies">
+			<list merge="true">
+				<ref bean="apparelSizeProductReferenceTargetStrategy"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="apparelSizeProductReferenceTargetStrategy"
+	      class="com.bridgex.core.strategies.impl.ApparelSizeProductReferenceTargetStrategy">
+		<property name="commerceCategoryService" ref="commerceCategoryService"/>
+		<property name="rootCategoryCode" value="categories"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Simple Suggestion Service -->
+	<alias alias="simpleSuggestionService" name="defaultSimpleSuggestionService"/>
+	<bean id="defaultSimpleSuggestionService"
+	      class="com.bridgex.core.suggestion.impl.DefaultSimpleSuggestionService" >
+		<property name="simpleSuggestionDao" ref="simpleSuggestionDao"/>
+	</bean>
+
+</beans>

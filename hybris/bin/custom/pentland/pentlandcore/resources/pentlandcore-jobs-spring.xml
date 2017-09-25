@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- Quotes email notification jobs -->
+	<bean id="quoteToExpireSoonJobPerformable"
+	      class="com.bridgex.core.job.QuoteToExpireSoonJobPerformable"
+	      parent="abstractJobPerformable">
+		<property name="supportedQuoteStatuses">
+			<set value-type="de.hybris.platform.core.enums.QuoteState">
+				<value>BUYER_OFFER</value>
+			</set>
+		</property>
+		<property name="commerceQuoteDao" ref="commerceQuoteDao"/>
+		<property name="eventService" ref="eventService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="quoteExpiredJobPerformable"
+	      class="com.bridgex.core.job.QuoteExpiredJobPerformable"
+	      parent="abstractJobPerformable">
+		<property name="supportedQuoteStatuses">
+			<set value-type="de.hybris.platform.core.enums.QuoteState">
+				<value>BUYER_OFFER</value>
+			</set>
+		</property>
+		<property name="commerceQuoteDao" ref="commerceQuoteDao"/>
+		<property name="eventService" ref="eventService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+</beans>

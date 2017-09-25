@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+		Event listeners are singletons, therefore the dependency for a bean in tenant-scope
+		must be configured with a lookup method.
+	-->
+	<bean id="orderCancelledEventListener"
+	      class="com.bridgex.core.event.OrderCancelledEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="orderRefundEventListener"
+	      class="com.bridgex.core.event.OrderRefundEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="customerRegistrationEventListener"
+	      class="com.bridgex.core.event.RegistrationEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="forgottenPasswordEventListener"
+	      class="com.bridgex.core.event.ForgottenPasswordEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="submitOrderEventListener" class="com.bridgex.core.event.SubmitOrderEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+	<bean id="orderConfirmationEventListener"
+	      class="com.bridgex.core.event.OrderConfirmationEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendDeliveryMessageEventListener"
+	      class="com.bridgex.core.event.SendDeliveryMessageEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendReadyForPickupMessageEventListener"
+	      class="com.bridgex.core.event.SendReadyForPickupMessageEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendOrderPartiallyCanceledMessageEventListener"
+	      class="com.bridgex.core.event.SendOrderPartiallyCanceledMessageEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendOrderPartiallyRefundedMessageEventListener"
+	      class="com.bridgex.core.event.SendOrderPartiallyRefundedMessageEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendNotPickedUpConsignmentCanceledMessageEventListener"
+	      class="com.bridgex.core.event.SendNotPickedUpConsignmentCanceledMessageEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="orderCompletedEventListener" class="com.bridgex.core.event.OrderCompletedEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<!-- quote-->
+	<bean id="quoteBuyerSubmitEventListener" class="com.bridgex.core.event.QuoteBuyerSubmitEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="quoteSalesRepSubmitEventListener" class="com.bridgex.core.event.QuoteSalesRepSubmitEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="quoteSellerApprovalSubmitEventListener" class="com.bridgex.core.event.QuoteSellerApprovalSubmitEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="quoteBuyerOrderPlacedEventListener" class="com.bridgex.core.event.QuoteBuyerOrderPlacedEventListener"
+	      parent="abstractEventListener">
+		<property name="commerceQuoteService" ref="commerceQuoteService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="quoteToExpireSoonEventListener" class="com.bridgex.core.event.QuoteToExpireSoonEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="quoteExpiredEventListener" class="com.bridgex.core.event.QuoteExpiredEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="quoteCancelEventListener" class="com.bridgex.core.event.QuoteCancelEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+</beans>
