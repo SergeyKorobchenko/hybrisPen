@@ -31,7 +31,6 @@ hybris-dependencies/*
 hybris/bin/ext*/**
 hybris/bin/platform/**
 hybris/config/.externalToolBuilders
-hybris/config/licence/**
 hybris/config/solr/**
 test-reports/*
 *.sublime-*
@@ -82,6 +81,9 @@ hybris/bin/custom/**/web/webroot/WEB-INF/_ui-src/addons/**
 internationalizationhmc.jar
 internationalizationbackoffice_bof.jar
 pentlandbackoffice_bof.jar
+worldpayaddonbackoffice_bof.jar
+worldpayapihmc.jar
+worldpaynotificationaddonhmc.jar
 
 !environment/**/customize/**/*.class
 
