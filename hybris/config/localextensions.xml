@@ -31,6 +31,7 @@
 		<extension name='b2bcommercebackoffice' />
 		<extension name='b2badmincockpit' />
 		<extension name='b2bacceleratoraddon' />
+		<extension name='b2bacceleratorfacades' />
 		<extension name='commerceorgaddon' />
 		<extension name='secureportaladdon' />
 		<extension name="accountsummaryaddon" />
