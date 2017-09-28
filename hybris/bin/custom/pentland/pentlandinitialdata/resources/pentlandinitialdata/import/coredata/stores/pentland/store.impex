@@ -1,0 +1,39 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# 
+# Create the BaseStore
+#
+
+$productCatalog=pentlandProductCatalog
+$classificationCatalog=pentlandClassificationCatalog
+$currencies=GBP,EUR,USD
+$net=true
+$storeUid=pentland
+$defaultCurrency=GBP
+$languages=en
+$defaultLanguage=en
+$orderProcessCode=order-process
+$pickupInStoreMode=DISABLED
+$customerAllowedToIgnoreSuggestions=true
+$paymentProvider=Mockup
+$expressCheckoutEnabled=false
+$checkoutGroup=b2bCheckoutGroup
+$returnProcessCode=return-process
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;pentlandPromoGrp;
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);submitOrderProcessCode;paymentProvider;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;expressCheckoutEnabled;checkoutFlowGroup;createReturnProcessCode;
+;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;$defaultCurrency;$languages;$defaultLanguage;$orderProcessCode;$paymentProvider;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$expressCheckoutEnabled;$checkoutGroup;$returnProcessCode;
+
+
+

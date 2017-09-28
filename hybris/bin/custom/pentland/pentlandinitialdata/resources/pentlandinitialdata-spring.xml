@@ -22,11 +22,48 @@
 
 	<!-- System Setup -->
 
-	<bean id="yAcceleratorInitialDataSystemSetup"
-	      class="com.bridgex.initialdata.setup.InitialDataSystemSetup"
-	      parent="abstractCoreSystemSetup">
-		<property name="coreDataImportService" ref="coreDataImportService"/>
-		<property name="sampleDataImportService" ref="sampleDataImportService"/>
+
+	<alias alias="b2bAcceleratorCoreSystemSetup" name="pentlandStoreSystemSetup" />
+	<bean id="pentlandStoreSystemSetup" class="com.bridgex.initialdata.setup.InitialDataSystemSetup" parent="abstractCoreSystemSetup">
+		<property name="coreDataImportService" ref="pentlandCoreDataImportService"/>
+		<property name="sampleDataImportService" ref="pentlandSampleDataImportService"/>
+	</bean>
+
+	<bean id="pentlandSampleDataImportService" class="com.bridgex.initialdata.services.dataimport.impl.PentlandSampleDataImportService"
+	      parent="sampleDataImportService">
+	</bean>
+	<bean id="pentlandCoreDataImportService" class="com.bridgex.initialdata.services.dataimport.impl.PentlandCoreDataImportService"
+	      parent="coreDataImportService">
+	</bean>
+
+
+
+	<bean id="pentlandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="pentlandCategorySource"/>
+	</bean>
+	<bean id="pentlandBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="pentlandBrandCategorySource"/>
+	</bean>
+	<bean id="pentlandVariantCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="pentlandVariantCategorySource"/>
+	</bean>
+
+
+	<bean id="pentlandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="pentlandCategorySource"/>
+	</bean>
+
+	<bean id="pentlandBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="pentlandBrandCategorySource"/>
+	</bean>
+
+	<bean id="pentlandCategorySource" parent="variantCategorySource">
+		<property name="rootCategory" value="1"/> <!-- '1' is the root icecat category -->
+	</bean>
+	<bean id="pentlandVariantCategorySource" parent="variantCategorySource"/>
+
+	<bean id="pentlandBrandCategorySource" parent="defaultCategorySource">
+		<property name="rootCategory" value="brands"/> <!-- 'brands' is the root of the brands hierarchy -->
 	</bean>
 
 </beans>

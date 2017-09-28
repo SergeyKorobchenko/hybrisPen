@@ -13,6 +13,7 @@
 	<extension abstractclassprefix="Generated" classprefix="Pentlandinitialdata" name="pentlandinitialdata">
 
 		<requires-extension name="pentlandcore"/>
+		<requires-extension name="b2bacceleratorservices"/>
 
 		<coremodule generated="true" manager="de.hybris.platform.jalo.extension.GenericManager" packageroot="com.bridgex.initialdata"/>
 

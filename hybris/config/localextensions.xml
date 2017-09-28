@@ -7,9 +7,7 @@
 		-->
 
 		<path dir="${HYBRIS_BIN_DIR}" autoload="false" />
-		<path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/billing" />
-		<path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/core" />
-		<path autoload="true" dir="${HYBRIS_BIN_DIR}/ext-integration/sap/testsupport" />
+		<path dir="${HYBRIS_BIN_DIR}/ext-integration/sap" autoload="false" />
 
 		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpay" />
 		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpayfulfilment" />
@@ -21,13 +19,29 @@
 		<extension name="pentlandfulfilmentprocess" />
 		<extension name="pentlandinitialdata" />
 		<extension name="pentlandbackoffice" />
-		<extension name="pentlandtest" />
-
+		<!--<extension name="pentlandtest" />-->
 		<extension name="internationalization" />
 		<extension name="internationalizationbackoffice" />
 
 
-		<extension name="powertoolsstore" />
+		<!--SAP exts-->
+		<extension name="sapcore" />
+		<extension name="sapcoreaddon" />
+		<extension name="sapcorebol" />
+		<extension name="sapcoreconfiguration" />
+		<extension name="sapcoreconfigurationbackoffice" />
+		<extension name="sapcoreconfigurationhmc" />
+		<extension name="sapmodel" />
+		<extension name="sapmodelbackoffice" />
+		<extension name="sapmodelhmc" />
+		<extension name="sapinvoiceaddon" />
+		<extension name="sapinvoicebol" />
+		<extension name="sapinvoiceservices" />
+		<extension name="sapinvoicefacades" />
+		<extension name="sapcoretest" />
+
+
+		<!--<extension name="powertoolsstore" />-->
 		<extension name='b2bcommercebackoffice' />
 		<extension name='b2badmincockpit' />
 		<extension name='b2bacceleratoraddon' />
@@ -36,10 +50,9 @@
 		<extension name='secureportaladdon' />
 		<extension name="accountsummaryaddon" />
 		<extension name="savedorderforms" />
-
 		<extension name="voucher" />
 		<extension name="promotions" />
-		<extension name="customerreview" />
+		<!--<extension name="customerreview" />-->
 		<extension name="cockpit" />
 		<extension name="springintegrationlibs" />
 		<extension name="solrfacetsearch" />
@@ -59,7 +72,6 @@
 		<extension name="acceleratorstorefrontcommons" />
 		<extension name="cscockpit" />
 		<extension name="productcockpit" />
-
 
 		<extension name="hmc" />
 		<extension name="platformhmc" />
@@ -145,15 +157,6 @@
 		<extension name="adaptivesearch" />
 		<extension name="adaptivesearchbackoffice" />
 		<extension name="adaptivesearchsolr" />
-
-
-		<!--<extension name="yacceleratorcockpits"/>-->
-		<!--<extension name="yacceleratorcore"/>-->
-		<!--<extension name="yacceleratorfacades"/>-->
-		<!--<extension name="yacceleratorfulfilmentprocess"/>-->
-		<!--<extension name="yacceleratorinitialdata"/>-->
-		<!--<extension name="yacceleratorstorefront"/>-->
-		<!--<extension name="yacceleratortest"/>-->
 
 	</extensions>
 </hybrisconfig>

@@ -13,15 +13,15 @@
 $regulargroup=regulargroup
 $customergroup=customergroup
 
+$passwordEncoding = md5
+$defaultPassword = 111
+$setPassword = @password[translator = de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default = '$passwordEncoding:$defaultPassword']
 
-$defaultPassword=12341234
 
-# Create Customer Group
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append]
-;$regulargroup;customergroup
 
-# Customers
-INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password[default=$defaultPassword];&userId;defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);&B2BUnitID
+;TestB2BUnit;TestB2BUnit;Test B2B Unit;Test B2B Unit;;TestB2BUnit
 
-# Customer addresses
-INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+
+INSERT_UPDATE B2BCustomer;description;uid[unique=true];originalUid;email;name;title(code);groups(uid);sessionCurrency(isocode)[default='GBP'];sessionLanguage(isocode);$setPassword
+;Test B2B Customer;test;testb2bcustomer;linda.wolf@test.com;Linda Wolf;ms;TestB2BUnit,customergroup;;en;

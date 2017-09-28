@@ -10,4 +10,10 @@
 		<property name="simpleSuggestionDao" ref="simpleSuggestionDao"/>
 	</bean>
 
+	<alias alias="commerceStockService" name="pentlandCommerceStockService"/>
+	<bean id="pentlandCommerceStockService"
+	      class="com.bridgex.core.stock.impl.PentlandCommerceStockService"
+	      parent="defaultCommerceStockService"/>
+
+
 </beans>
