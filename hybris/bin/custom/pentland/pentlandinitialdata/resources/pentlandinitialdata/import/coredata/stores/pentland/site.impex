@@ -33,8 +33,8 @@ $jarResource=$config-jarResource
 $storefrontContextRoot=$config-storefrontContextRoot
 
 # CMS Site
-INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=pentlandPromoGrp]
-;$siteUid;lambda;B2B;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$;true;$storefrontContextRoot/?site=$siteUid;homepage;storefront,language,currency
+INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=pentlandPromoGrp];enableRegistration
+;$siteUid;lambda;B2B;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$;true;$storefrontContextRoot/?site=$siteUid;homepage;storefront,language,currency;;false
 
 # SiteMap Configuration
 # SiteMap Language Currencies

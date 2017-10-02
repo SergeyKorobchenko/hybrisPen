@@ -14,7 +14,7 @@
 
 $productCatalog=pentlandProductCatalog
 $classificationCatalog=pentlandClassificationCatalog
-$currencies=GBP,EUR,USD
+$currencies=GBP
 $net=true
 $storeUid=pentland
 $defaultCurrency=GBP
