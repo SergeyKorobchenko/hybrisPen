@@ -13,7 +13,7 @@ public class PentlandCategoryModelUrlResolver extends DefaultCategoryModelUrlRes
 
     boolean isBrandCategory = CollectionUtils.isEmpty(source.getSupercategories());
     if (isBrandCategory) {
-      return StringUtils.isNotBlank(source.getName()) ? source.getName() : source.getCode();
+      return "/" + (StringUtils.isNotBlank(source.getName()) ? source.getName() : source.getCode());
     }
     return super.resolveInternal(source);
   }
