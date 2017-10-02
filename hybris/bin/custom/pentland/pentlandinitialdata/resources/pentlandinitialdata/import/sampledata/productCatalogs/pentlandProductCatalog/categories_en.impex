@@ -509,3 +509,9 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang];description[l
 ;Ästhetiker;;Ästhetiker;
 
 
+;berghaus;;Berghaus
+;boxfresh;;Boxfresh
+;canterbury;;Canterbury
+;kickers;;Kickers
+;mitre;;Mitre
+;speedo;;Speedo
