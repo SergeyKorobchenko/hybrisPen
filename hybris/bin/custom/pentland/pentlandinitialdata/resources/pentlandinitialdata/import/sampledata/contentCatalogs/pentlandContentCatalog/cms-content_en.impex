@@ -281,7 +281,6 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 #;;BrowseAllStreetwearYouthTShirtsLink;"Browse All >"
 #;;BurtonLink;"Burton"
 #;;CarharttLink;"Carhartt"
-;;ConsentManagementLink;"Consent Management"
 ;;ContactUsLink;"Contact Us"
 #;;DCLink;"DC"
 #;;DaineseLink;"Dainese"
@@ -299,7 +298,6 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 #;;HorsefeathersLink;"Horsefeathers"
 #;;HurleyLink;"Hurley"
 ;;ImportSavedCartLink;"Import Saved Cart"
-;;LandingLink;"Landing"
 ;;LinkedInLink;"Linked In"
 #;;Nike6.0Link;"Nike 6.0"
 #;;NikeLink;"Nike"
@@ -366,9 +364,6 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 #;;droidLink;"droid"
 
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=en]
-;;667NavNode;""
-;;686NavNode;""
-;;69SlamNavNode;""
 ;;AboutAcceleratorNavNode;""
 ;;AboutHybrisNavNode;""
 ;;AcceleratorNavNode;"Accelerator"
@@ -380,7 +375,6 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=en]
 ;;FooterNavNode;""
 ;;HybrisNavNode;"Hybris"
 ;;ImportSavedCartNavNode;""
-;;LandingNavNode;""
 ;;LinkedInNavNode;""
 ;;MyAccountNavNode;"My Account"
 ;;OrderHistoryNavNode;""
@@ -394,3 +388,22 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=en]
 
 
 
+###### Mitre page start
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;mitreBrandPage;Mitre Brand Home Page;BrandPageTemplate;/Mitre
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mitreBrandPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-mitreBrandPage;Section1;;Section1Slot-mitreBrandPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreParagraphComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;MitreParagraphComponent;Mitre Brand Page Paragraph Component;MitreParagraphComponent
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
+;;MitreParagraphComponent;"This is Mitre Brand Homepage Text!"
+
+###### Mitre page end

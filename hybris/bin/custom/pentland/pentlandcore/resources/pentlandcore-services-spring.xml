@@ -23,4 +23,12 @@
 	</bean>
 
 
+
+<!-- url resolvers -->
+	<alias name="pentlandCategoryModelUrlResolver" alias="categoryModelUrlResolver"/>
+	<bean id="pentlandCategoryModelUrlResolver"
+	      class="com.bridgex.core.url.impl.PentlandCategoryModelUrlResolver"
+	      parent="defaultCategoryModelUrlResolver">
+	</bean>
+
 </beans>
