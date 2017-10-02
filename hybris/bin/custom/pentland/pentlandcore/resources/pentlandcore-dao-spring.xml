@@ -10,4 +10,9 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
+	<alias name="pentlandCategoryDao" alias="categoryDao"/>
+	<bean id="pentlandCategoryDao"
+	      class="com.bridgex.core.category.dao.impl.DefaultPentlandCategoryDao"
+	      parent="abstractItemDao"/>
+
 </beans>

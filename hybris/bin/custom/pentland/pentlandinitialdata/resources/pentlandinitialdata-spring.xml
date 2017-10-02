@@ -41,29 +41,12 @@
 	<bean id="pentlandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
 		<property name="categorySource" ref="pentlandCategorySource"/>
 	</bean>
-	<bean id="pentlandBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="pentlandBrandCategorySource"/>
-	</bean>
-	<bean id="pentlandVariantCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="pentlandVariantCategorySource"/>
-	</bean>
-
 
 	<bean id="pentlandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
 		<property name="categorySource" ref="pentlandCategorySource"/>
 	</bean>
 
-	<bean id="pentlandBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="pentlandBrandCategorySource"/>
-	</bean>
+	<bean id="pentlandCategorySource" parent="variantCategorySource"/>
 
-	<bean id="pentlandCategorySource" parent="variantCategorySource">
-		<property name="rootCategory" value="1"/> <!-- '1' is the root icecat category -->
-	</bean>
-	<bean id="pentlandVariantCategorySource" parent="variantCategorySource"/>
-
-	<bean id="pentlandBrandCategorySource" parent="defaultCategorySource">
-		<property name="rootCategory" value="brands"/> <!-- 'brands' is the root of the brands hierarchy -->
-	</bean>
 
 </beans>

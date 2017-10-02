@@ -112,5 +112,26 @@
             </itemtype>
         </typegroup>
 
+
+        <typegroup name="cms">
+            <itemtype code="PentlandCategoryNavigationComponent" autocreate="true"
+                      generate="true" extends="SimpleCMSComponent"
+                      jaloclass="com.bridgex.core.jalo.cms.PentlandCategoryNavigationComponent">
+                <description>Pentland custom navigation menu component with 3 levels, the top being brand categories</description>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="Catalog">
+            <itemtype code="Category" autocreate="false" generate="false">
+                <attributes>
+                    <attribute type="boolean" qualifier="hidden">
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <description>If this category is hidden from the display</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
     </itemtypes>
 </items>

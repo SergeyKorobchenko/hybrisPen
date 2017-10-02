@@ -190,4 +190,24 @@
 	</bean>
 
 	<bean id="genderData" class="com.bridgex.facades.product.data.GenderData" scope="prototype"/>
+
+	<alias name="pentlandCategoryNavigationFacade" alias="categoryNavigationFacade"/>
+	<bean id="pentlandCategoryNavigationFacade" class="com.bridgex.facades.category.impl.PentlandCategoryNavigationFacade">
+		<property name="categoryNavigationConverter" ref="categoryNavigationConverter"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+	</bean>
+
+	<bean id="categoryNavigationPopulator" class="com.bridgex.facades.populators.CategoryNavigationPopulator">
+		<property name="categoryUrlResolver" ref="categoryModelUrlResolver"/>
+	</bean>
+
+	<bean id="categoryNavigationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.bridgex.facades.category.data.CategoryNavigationData"/>
+		<property name="populators">
+			<list>
+				<ref bean="categoryNavigationPopulator"/>
+			</list>
+		</property>
+	</bean>
 </beans>
