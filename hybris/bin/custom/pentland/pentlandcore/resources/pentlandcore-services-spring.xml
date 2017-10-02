@@ -15,5 +15,12 @@
 	      class="com.bridgex.core.stock.impl.PentlandCommerceStockService"
 	      parent="defaultCommerceStockService"/>
 
+	<alias alias="categoryService" name="pentlandCategoryService"/>
+	<bean id="pentlandCategoryService"
+	      class="com.bridgex.core.category.impl.DefaultPentlandCategoryService"
+	      parent="defaultCategoryService">
+		<property name="categoryDao" ref="categoryDao"/>
+	</bean>
+
 
 </beans>

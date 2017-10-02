@@ -19,4 +19,12 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+
+
+	<bean class="com.bridgex.facades.category.data.CategoryNavigationData" extends="de.hybris.platform.commercefacades.product.data.CategoryData" >
+		<property name="parent" type="com.bridgex.facades.category.data.CategoryNavigationData"  />
+		<property name="children" type="java.util.List&lt;com.bridgex.facades.category.data.CategoryNavigationData>"/>
+		<property name="url" type="String"/>
+	</bean>
+
 </beans>
