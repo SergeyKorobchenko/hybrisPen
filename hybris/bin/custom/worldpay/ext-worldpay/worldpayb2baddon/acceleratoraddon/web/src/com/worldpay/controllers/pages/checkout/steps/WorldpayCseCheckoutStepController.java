@@ -27,6 +27,9 @@ import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * Worldpay controller to handle CSE
+ */
 @Controller
 @RequestMapping (value = "/checkout/multi/worldpay/cse")
 public class WorldpayCseCheckoutStepController extends AbstractWorldpayDirectCheckoutStepController {

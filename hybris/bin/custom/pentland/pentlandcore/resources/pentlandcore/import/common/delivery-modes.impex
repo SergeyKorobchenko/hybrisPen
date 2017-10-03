@@ -11,47 +11,37 @@
 ##
 ## Import Delivery Modes / Zones
 ##
-##% impex.setLocale(Locale.GERMAN)
-#
-## Currencies
-#$ukCurrency=GBP
-#$jpCurrency=JPY
-#$usCurrency=USD
-#$europeCurrency=EUR
-#
-## Delivery Zones
-#INSERT_UPDATE Zone                  ; code[unique=true]               ; countries(isocode)
-#                                    ; uk                              ; GB,GG,IM,JE
-#                                    ; continentalEurope               ; AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
-#                                    ; usa                             ; US
-#                                    ; ca                              ; CA
-#                                    ; japan                           ; JP
-#                                    ; china                           ; CN
-#
-## Zone Delivery Modes
-#INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]               ; net                                                                                                                                             ; active[default=true]
-#                                    ; premium-net                     ; true
-#                                    ; standard-net                    ; true
-#                                    ; premium-gross                   ; false
-#                                    ; standard-gross                  ; false
-#                                    ; free-standard-shipping          ; true                                                                                                                                            ; false                          ;
-#
-#
-## UK
-#INSERT_UPDATE ZoneDeliveryModeValue ; deliveryMode(code)[unique=true] ; zone(code)[default='uk'][unique=true]                                                                                                           ; currency(isocode)[unique=true] ; value  ; minimum[unique=true]
-#                                    ; premium-gross                   ;                                                                                                                                                 ; $ukCurrency                    ; 10,99  ; 0,00
-#                                    ; premium-gross                   ;                                                                                                                                                 ; $usCurrency                    ; 14,99  ; 0,00
-#                                    ; premium-gross                   ;                                                                                                                                                 ; $jpCurrency                    ; 99,99  ; 0,00
-#                                    ; premium-gross                   ;                                                                                                                                                 ; $europeCurrency                ; 19,99  ; 0,00
-#                                    ; premium-net                     ;                                                                                                                                                 ; $jpCurrency                    ; 99,99  ; 0,00
-#                                    ; premium-net                     ;                                                                                                                                                 ; $usCurrency                    ; 17,99  ; 0,00
-#                                    ; standard-gross                  ;                                                                                                                                                 ; $ukCurrency                    ; 5,99   ; 0,00
-#                                    ; standard-gross                  ;                                                                                                                                                 ; $usCurrency                    ; 7,99   ; 0,00
-#                                    ; standard-gross                  ;                                                                                                                                                 ; $jpCurrency                    ; 59,99  ; 0,00
-#                                    ; standard-gross                  ;                                                                                                                                                 ; $europeCurrency                ; 9,99   ; 0,00
-#                                    ; standard-net                    ;                                                                                                                                                 ; $jpCurrency                    ; 59,99  ; 0,00
-#                                    ; standard-net                    ;                                                                                                                                                 ; $usCurrency                    ; 9,99   ; 0,00
-#
+#% impex.setLocale(Locale.GERMAN)
+
+# Currencies
+$ukCurrency=GBP
+
+# Delivery Zones
+INSERT_UPDATE Zone                  ; code[unique=true]               ; countries(isocode)
+                                    ; uk                              ; GB,GG,IM,JE
+                                    ; continentalEurope               ; AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
+                                    ; usa                             ; US
+                                    ; ca                              ; CA
+                                    ; japan                           ; JP
+                                    ; china                           ; CN
+
+# Zone Delivery Modes
+INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]               ; net                                                                                                                                             ; active[default=true]
+                                    ; premium-net                     ; true
+                                    ; standard-net                    ; true
+                                    ; premium-gross                   ; false
+                                    ; standard-gross                  ; false
+                                    ; free-standard-shipping          ; true                                                                                                                                            ; false                          ;
+
+
+# UK
+INSERT_UPDATE ZoneDeliveryModeValue ; deliveryMode(code)[unique=true] ; zone(code)[default='uk'][unique=true]                                                                                                           ; currency(isocode)[unique=true] ; value  ; minimum[unique=true]
+                                    ; premium-gross                   ;                                                                                                                                                 ; $ukCurrency                    ; 10,99  ; 0,00
+                                    ; standard-gross                  ;                                                                                                                                                 ; $ukCurrency                    ; 5,99   ; 0,00
+                                    ; premium-net                     ;                                                                                                                                                 ; $ukCurrency                    ; 99,99  ; 0,00
+                                    ; premium-net                     ;                                                                                                                                                 ; $ukCurrency                    ; 19,99  ; 0,00
+
+
 #
 #
 ## Continental Europe

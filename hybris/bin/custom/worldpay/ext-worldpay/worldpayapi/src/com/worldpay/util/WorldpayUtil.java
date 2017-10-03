@@ -39,6 +39,11 @@ public final class WorldpayUtil {
         return (WorldpayAdditionalInfoData) SerializationUtils.deserialize(additionalInfoBytes);
     }
 
+    /**
+     * Used to created a date in the past.
+     * @param days specifies how many days to minus from new date.
+     * @return
+     */
     public static Date createDateInPast(final int days) {
         return new DateTime().minusDays(days).toDate();
     }

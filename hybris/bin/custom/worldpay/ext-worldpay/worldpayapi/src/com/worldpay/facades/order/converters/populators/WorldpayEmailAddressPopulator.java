@@ -5,6 +5,9 @@ import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
+/**
+ * Populates AddressData from AddressModel
+ */
 public class WorldpayEmailAddressPopulator implements Populator<AddressModel, AddressData> {
 
     /**

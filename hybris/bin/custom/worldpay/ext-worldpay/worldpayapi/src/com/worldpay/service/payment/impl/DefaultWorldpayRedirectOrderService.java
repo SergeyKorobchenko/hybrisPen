@@ -197,12 +197,26 @@ public class DefaultWorldpayRedirectOrderService extends AbstractWorldpayOrderSe
         }
     }
 
-    protected RedirectAuthoriseServiceRequest createRedirectAuthoriseRequest(final MerchantInfo merchantInfo, final AdditionalAuthInfo additionalAuthInfo, final Shopper shopper, final WorldpayConfig config, final BasicOrderInfo orderInfo, final List<PaymentType> includedPaymentTypes, final List<PaymentType> excludedPaymentTypes, final Address shippingAddress, final Address billingAddress) {
-        return RedirectAuthoriseServiceRequest.createRedirectAuthoriseRequest(config, merchantInfo, orderInfo, additionalAuthInfo.getInstallationId(), additionalAuthInfo.getOrderContent(), includedPaymentTypes, excludedPaymentTypes, shopper, shippingAddress, billingAddress, additionalAuthInfo.getStatementNarrative());
+    protected RedirectAuthoriseServiceRequest createRedirectAuthoriseRequest(final MerchantInfo merchantInfo, final AdditionalAuthInfo additionalAuthInfo,
+                                                                             final Shopper shopper, final WorldpayConfig config,
+                                                                             final BasicOrderInfo orderInfo, final List<PaymentType> includedPaymentTypes,
+                                                                             final List<PaymentType> excludedPaymentTypes, final Address shippingAddress,
+                                                                             final Address billingAddress) {
+        return RedirectAuthoriseServiceRequest.createRedirectAuthoriseRequest(
+                config, merchantInfo, orderInfo, additionalAuthInfo.getInstallationId(),
+                additionalAuthInfo.getOrderContent(), includedPaymentTypes,
+                excludedPaymentTypes, shopper, shippingAddress, billingAddress, additionalAuthInfo.getStatementNarrative());
     }
 
-    protected RedirectAuthoriseServiceRequest createRedirectTokenAndAuthoriseRequest(final MerchantInfo merchantInfo, final AdditionalAuthInfo additionalAuthInfo, final Shopper shopper, final WorldpayConfig worldpayConfig, final BasicOrderInfo basicOrderInfo, final List<PaymentType> includedPaymentTypes, final List<PaymentType> excludedPaymentTypes, final Address shippingAddress, final Address billingAddress, final TokenRequest tokenRequest) {
-        return RedirectAuthoriseServiceRequest.createTokenAndRedirectAuthoriseRequest(worldpayConfig, merchantInfo, basicOrderInfo, additionalAuthInfo.getInstallationId(), additionalAuthInfo.getOrderContent(), includedPaymentTypes, excludedPaymentTypes, shopper, shippingAddress, billingAddress, additionalAuthInfo.getStatementNarrative(), tokenRequest);
+    protected RedirectAuthoriseServiceRequest createRedirectTokenAndAuthoriseRequest(final MerchantInfo merchantInfo, final AdditionalAuthInfo additionalAuthInfo,
+                                                                                     final Shopper shopper, final WorldpayConfig worldpayConfig,
+                                                                                     final BasicOrderInfo basicOrderInfo, final List<PaymentType> includedPaymentTypes,
+                                                                                     final List<PaymentType> excludedPaymentTypes, final Address shippingAddress,
+                                                                                     final Address billingAddress, final TokenRequest tokenRequest) {
+        return RedirectAuthoriseServiceRequest.createTokenAndRedirectAuthoriseRequest(
+                worldpayConfig, merchantInfo, basicOrderInfo, additionalAuthInfo.getInstallationId(),
+                additionalAuthInfo.getOrderContent(), includedPaymentTypes, excludedPaymentTypes,
+                shopper, shippingAddress, billingAddress, additionalAuthInfo.getStatementNarrative(), tokenRequest);
     }
 
     private PaymentData buildPaymentData(final String redirectReferenceUrl, final Map<String, String> params) throws WorldpayException {
@@ -220,7 +234,7 @@ public class DefaultWorldpayRedirectOrderService extends AbstractWorldpayOrderSe
      * @return {@link PaymentData} object
      */
     private PaymentData buildHOPPageData(final RedirectReference redirectReference, final String countryCode) throws WorldpayException {
-        final String redirectReferenceUrl = redirectReference.getUrl();
+        final String redirectReferenceUrl = redirectReference.getValue();
         if (StringUtils.isEmpty(redirectReferenceUrl)) {
             throw new WorldpayException("RedirectReferenceUrl is required but is empty");
         }

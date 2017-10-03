@@ -40,8 +40,8 @@ public class PaymentInfoInquiryJobPerformable extends AbstractJobPerformable {
     protected static final String WORLDPAY_APM_MINUTES_BEFORE_INQUIRING_TIMEOUT = "worldpay.APM.minutes.before.inquiring.timeout";
     protected static final String WORLDPAY_APM_DAYS_BEFORE_STOP_INQUIRING_TIMEOUT = "worldpay.APM.days.before.stop.inquiring.timeout";
 
-    private int defaultWaitInMinutes = 15;
-    private int defaultBlanketTimeInDays = 5;
+    private static final int DEFAULT_WAIT_IN_MINUTES = 15;
+    private static final int DEFAULT_BLANKET_TIME_IN_DAYS = 5;
 
     private PaymentTransactionRejectionStrategy paymentTransactionRejectionStrategy;
     private OrderInquiryService orderInquiryService;
@@ -52,8 +52,8 @@ public class PaymentInfoInquiryJobPerformable extends AbstractJobPerformable {
     @Override
     public PerformResult perform(final CronJobModel cronJobModel) {
         LOG.info("Executing timeout preparation cronjob for pending payment transaction");
-        final int waitTime = configurationService.getConfiguration().getInt(WORLDPAY_APM_MINUTES_BEFORE_INQUIRING_TIMEOUT, defaultWaitInMinutes);
-        final int blanketTime = configurationService.getConfiguration().getInt(WORLDPAY_APM_DAYS_BEFORE_STOP_INQUIRING_TIMEOUT, defaultBlanketTimeInDays);
+        final int waitTime = configurationService.getConfiguration().getInt(WORLDPAY_APM_MINUTES_BEFORE_INQUIRING_TIMEOUT, DEFAULT_WAIT_IN_MINUTES);
+        final int blanketTime = configurationService.getConfiguration().getInt(WORLDPAY_APM_DAYS_BEFORE_STOP_INQUIRING_TIMEOUT, DEFAULT_BLANKET_TIME_IN_DAYS);
         final List<PaymentTransactionModel> pendingPaymentTransactions = worldpayPaymentTransactionDao.findPendingPaymentTransactions(waitTime);
         for (final PaymentTransactionModel paymentTransactionModel : pendingPaymentTransactions) {
             if (paymentTransactionIsOverBlanketTime(paymentTransactionModel, blanketTime)) {
@@ -104,11 +104,4 @@ public class PaymentInfoInquiryJobPerformable extends AbstractJobPerformable {
         this.paymentTransactionRejectionStrategy = paymentTransactionRejectionStrategy;
     }
 
-    public void setDefaultWaitInMinutes(final int defaultWaitInMinutes) {
-        this.defaultWaitInMinutes = defaultWaitInMinutes;
-    }
-
-    public void setDefaultBlanketTimeInDays(final int defaultBlanketTimeInDays) {
-        this.defaultBlanketTimeInDays = defaultBlanketTimeInDays;
-    }
 }

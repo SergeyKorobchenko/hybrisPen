@@ -18,7 +18,9 @@ import java.io.IOException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-
+/**
+ * Controller mock's response from Worldpay. With this you can emulate Worldpay response.
+ */
 @Controller
 @RequestMapping (value = "/mock")
 public class WorldpayMockController {
@@ -28,6 +30,11 @@ public class WorldpayMockController {
     @Resource
     private WorldpayMockFacade worldpayMockFacade;
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping (method = POST)
     @ResponseBody
     public String mockWorldpayResponse(final HttpServletRequest request) {

@@ -10,10 +10,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpayCronJobSupportInformationService implements WorldpayCronJobSupportInformationService {
 
     private FlexibleSearchService flexibleSearchService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<PaymentTransactionType> getPaymentTransactionType() {
         final OrderModificationCronJobModel exampleOrderModificationCronJobModel = new OrderModificationCronJobModel();

@@ -14,7 +14,6 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
-import static org.apache.commons.lang.StringUtils.repeat;
 
 /**
  * Implementation of {@see WorldpaySupportEmailAppender } to include the list of configured flows
@@ -37,17 +36,17 @@ public class WorldpayConfiguredFlowsAppender implements WorldpaySupportEmailAppe
         final Collection<CMSSiteModel> sites = cmsSiteService.getSites();
         for (final CMSSiteModel site : sites) {
             final String siteName = site.getName();
-            stringBuilder.append(TAB).append(siteName).append(System.lineSeparator());
+            stringBuilder.append(ONE_TAB).append(siteName).append(System.lineSeparator());
             final List<CatalogVersionModel> contentCatalogModels = filterOnlineContentCatalogs(site);
             for (final CatalogVersionModel contentCatalogModel : contentCatalogModels) {
                 final String contentCatalogName = contentCatalogModel.getCatalog().getName();
-                stringBuilder.append(repeat(TAB, 2)).append(contentCatalogName).append(System.lineSeparator());
+                stringBuilder.append(TWO_TABS).append(contentCatalogName).append(System.lineSeparator());
                 final Collection<AbstractPageModel> allPagesByLabel = cmsPageDao.findAllPagesByLabel(PAYMENT_AND_BILLING_LABEL, singletonList(contentCatalogModel));
                 for (final AbstractPageModel pageModel : allPagesByLabel) {
                     final String pageUid = pageModel.getUid();
-                    stringBuilder.append(repeat(TAB, 3)).append("PageId: ").append(pageUid).append(System.lineSeparator());
+                    stringBuilder.append(THREE_TABS).append("PageId: ").append(pageUid).append(System.lineSeparator());
                     final String template = pageModel.getMasterTemplate().getUid();
-                    stringBuilder.append(repeat(TAB, 4)).append("Template: ").append(template).append(System.lineSeparator());
+                    stringBuilder.append(FOUR_TABS).append("Template: ").append(template).append(System.lineSeparator());
                 }
             }
         }

@@ -5,6 +5,7 @@ import com.worldpay.exception.WorldpayModelTransformationException;
 import com.worldpay.internal.model.PaymentService;
 import com.worldpay.service.marshalling.impl.DefaultPaymentServiceMarshaller;
 import com.worldpay.service.notification.OrderNotificationMessage;
+import com.worldpay.worldpaynotificationaddon.controllers.WorldpaynotificationaddonControllerConstants;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.event.EventService;
 import org.apache.log4j.Logger;
@@ -17,7 +18,6 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Set;
 
-import static com.worldpay.worldpaynotificationaddon.controllers.WorldpaynotificationaddonControllerConstants.WorldpayNotificationAddon.Views.WORLDPAY_RESPONSE_OK_VIEW;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
@@ -61,7 +61,7 @@ public class OrderModificationController {
         } catch (WorldpayModelTransformationException | JAXBException | IOException e) {
             LOG.error("Notification message transformation error", e);
         }
-        return WORLDPAY_RESPONSE_OK_VIEW;
+        return WorldpaynotificationaddonControllerConstants.WORLDPAY_RESPONSE_OK_VIEW;
     }
 
     private OrderNotificationMessage createOrderModificationMessageFromRequest(HttpServletRequest request) throws WorldpayModelTransformationException, IOException, JAXBException {

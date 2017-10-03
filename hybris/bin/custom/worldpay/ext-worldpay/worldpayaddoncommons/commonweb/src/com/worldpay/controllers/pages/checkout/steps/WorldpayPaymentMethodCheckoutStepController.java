@@ -7,6 +7,7 @@ import com.worldpay.facades.WorldpayBankConfigurationFacade;
 import com.worldpay.facades.payment.direct.WorldpayDirectOrderFacade;
 import com.worldpay.order.data.WorldpayAdditionalInfoData;
 import com.worldpay.service.WorldpayAddonEndpointService;
+import com.worldpay.service.model.payment.PaymentType;
 import de.hybris.platform.acceleratorservices.payment.data.PaymentData;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -22,12 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 import static de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants.BREADCRUMBS_KEY;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
-@RequestMapping (value = "/checkout/multi/worldpay/payment-method")
+@RequestMapping(value = "/checkout/multi/worldpay/payment-method")
 public class WorldpayPaymentMethodCheckoutStepController extends AbstractWorldpayPaymentMethodCheckoutStepController {
 
     private static final Logger LOGGER = Logger.getLogger(WorldpayPaymentMethodCheckoutStepController.class);
@@ -35,6 +37,7 @@ public class WorldpayPaymentMethodCheckoutStepController extends AbstractWorldpa
     protected static final String HOP_DEBUG_MODE_CONFIG = "hop.debug.mode";
     protected static final String CHECKOUT_MULTI_PAYMENT_METHOD_BREADCRUMB = "checkout.multi.paymentMethod.breadcrumb";
     protected static final String PREFERRED_PAYMENT_METHOD_PARAM = "preferredPaymentMethod";
+    private static final String KLARNA_RESPONSE_PAGE_DATA_PARAM = "KLARNA_VIEW_DATA";
 
     @Resource
     private WorldpayBankConfigurationFacade worldpayBankConfigurationFacade;
@@ -47,9 +50,9 @@ public class WorldpayPaymentMethodCheckoutStepController extends AbstractWorldpa
      * {@inheritDoc}
      */
     @Override
-    @RequestMapping (value = "/add", method = GET)
+    @RequestMapping(value = "/add", method = GET)
     @RequireHardLogIn
-    @PreValidateCheckoutStep (checkoutStep = PAYMENT_METHOD_STEP_NAME)
+    @PreValidateCheckoutStep(checkoutStep = PAYMENT_METHOD_STEP_NAME)
     public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException {
         setupAddPaymentPage(model);
 
@@ -58,9 +61,12 @@ public class WorldpayPaymentMethodCheckoutStepController extends AbstractWorldpa
         // Redirect the customer to the HOP page or show error message if it fails (e.g. no HOP configurations).
         try {
             final String paymentMethod = (String) model.asMap().get(PAYMENT_METHOD_PARAM);
+
             if (isBankTransferAPM(paymentMethod)) {
-                PaymentData paymentData = getPaymentDataForBankTransferAPM(model, paymentMethod);
-                return REDIRECT_PREFIX + paymentData.getPostUrl();
+                return REDIRECT_PREFIX + getRedirectURLForBankTransfer(model, paymentMethod);
+
+            } else if (isKlarnaAPM(paymentMethod)) {
+                return getViewContentForKlarna(model);
             }
 
             final PaymentData paymentData = redirectAuthorise(model, paymentMethod);
@@ -97,14 +103,21 @@ public class WorldpayPaymentMethodCheckoutStepController extends AbstractWorldpa
         return hostedOrderPageData;
     }
 
-    private PaymentData getPaymentDataForBankTransferAPM(final Model model, final String paymentMethod) throws WorldpayException {
+    private String getRedirectURLForBankTransfer(final Model model, final String paymentMethod) throws WorldpayException {
         final String shopperBankCode = (String) model.asMap().get(SHOPPER_BANK_CODE);
         final BankTransferAdditionalAuthInfo bankTransferAdditionalAuthInfo = createBankTransferAdditionalAuthInfo(paymentMethod, shopperBankCode);
         final WorldpayAdditionalInfoData worldpayAdditionalInfoData = getWorldpayAdditionalInfoFacade().createWorldpayAdditionalInfoData((HttpServletRequest) model.asMap().get(REQUEST));
-        final String redirectUrl = worldpayDirectOrderFacade.authoriseBankTransferRedirect(bankTransferAdditionalAuthInfo, worldpayAdditionalInfoData);
-        PaymentData paymentData = new PaymentData();
-        paymentData.setPostUrl(redirectUrl);
-        return paymentData;
+        return worldpayDirectOrderFacade.authoriseBankTransferRedirect(bankTransferAdditionalAuthInfo, worldpayAdditionalInfoData);
+    }
+
+    private String getViewContentForKlarna(final Model model) throws WorldpayException {
+        final Boolean savePaymentInfo = getSavePaymentInfo(model);
+        final WorldpayAdditionalInfoData worldpayAdditionalInfoData = getWorldpayAdditionalInfoFacade().createWorldpayAdditionalInfoData((HttpServletRequest) model.asMap().get(REQUEST));
+        final AdditionalAuthInfo additionalAuthInfo = createAdditionalAuthInfo(savePaymentInfo, PaymentType.KLARNASSL.getMethodCode());
+        final String klarnaRedirectContent = worldpayDirectOrderFacade.authoriseKlarnaRedirect(worldpayAdditionalInfoData, additionalAuthInfo);
+        model.addAttribute(KLARNA_RESPONSE_PAGE_DATA_PARAM, klarnaRedirectContent);
+
+        return  worldpayAddonEndpointService.getKlarnaResponsePage();
     }
 
     private boolean isBankTransferAPM(final String paymentMethod) {
@@ -112,6 +125,10 @@ public class WorldpayPaymentMethodCheckoutStepController extends AbstractWorldpa
             return false;
         }
         return worldpayBankConfigurationFacade.isBankTransferApm(paymentMethod);
+    }
+
+    private boolean isKlarnaAPM(final String paymentMethod) {
+        return PaymentType.KLARNASSL.getMethodCode().equals(paymentMethod);
     }
 
     protected void populateModel(final Model model, final PaymentData hostedOrderPageData) {

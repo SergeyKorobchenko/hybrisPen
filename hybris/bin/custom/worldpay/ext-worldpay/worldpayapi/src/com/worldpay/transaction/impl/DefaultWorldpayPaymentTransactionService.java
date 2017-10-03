@@ -38,6 +38,9 @@ import static de.hybris.platform.payment.dto.TransactionStatusDetails.SUCCESFULL
 import static de.hybris.platform.payment.enums.PaymentTransactionType.*;
 import static java.text.MessageFormat.format;
 
+/**
+ * Default implementation of PaymentTransaction handling
+ */
 public class DefaultWorldpayPaymentTransactionService implements WorldpayPaymentTransactionService {
 
     private static final Logger LOG = Logger.getLogger(DefaultWorldpayPaymentTransactionService.class);
@@ -67,9 +70,9 @@ public class DefaultWorldpayPaymentTransactionService implements WorldpayPayment
             for (final PaymentTransactionEntryModel paymentTransactionEntry : paymentTransaction.getEntries()) {
                 if (paymentTransactionEntry.getType().equals(paymentTransactionType)) {
                     typeFound = true;
-                    if (!TransactionStatus.ACCEPTED.name().equals(paymentTransactionEntry.getTransactionStatus())) {
-                        return false;
-                    }
+                }
+                if (!TransactionStatus.ACCEPTED.name().equals(paymentTransactionEntry.getTransactionStatus()) && paymentTransactionEntry.getType().equals(paymentTransactionType)) {
+                    return false;
                 }
             }
         }
@@ -203,7 +206,10 @@ public class DefaultWorldpayPaymentTransactionService implements WorldpayPayment
      * @return
      */
     @Override
-    public PaymentTransactionEntryModel createPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction, final String merchantCode, final CartModel cartModel, final BigDecimal authorisedAmount) {
+    public PaymentTransactionEntryModel createPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction,
+                                                                                      final String merchantCode,
+                                                                                      final CartModel cartModel,
+                                                                                      final BigDecimal authorisedAmount) {
         final PaymentTransactionEntryModel transactionEntryModel = createAuthorizationPaymentTransactionEntryModel(paymentTransaction, merchantCode, cartModel, authorisedAmount);
 
         modelService.save(transactionEntryModel);
@@ -213,7 +219,10 @@ public class DefaultWorldpayPaymentTransactionService implements WorldpayPayment
     }
 
     @Override
-    public PaymentTransactionEntryModel createNonPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction, final String merchantCode, final AbstractOrderModel abstractOrderModel, final BigDecimal authorisedAmount) {
+    public PaymentTransactionEntryModel createNonPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction,
+                                                                                         final String merchantCode,
+                                                                                         final AbstractOrderModel abstractOrderModel,
+                                                                                         final BigDecimal authorisedAmount) {
         final PaymentTransactionEntryModel transactionEntryModel = createAuthorizationPaymentTransactionEntryModel(paymentTransaction, merchantCode, abstractOrderModel, authorisedAmount);
         transactionEntryModel.setPending(Boolean.FALSE);
 
@@ -317,28 +326,24 @@ public class DefaultWorldpayPaymentTransactionService implements WorldpayPayment
     }
 
     @Override
-    public boolean isAuthorisedAmountCorrect(OrderModel order) {
+    public boolean isAuthorisedAmountCorrect(final OrderModel order) {
         BigDecimal authorisedAmount = BigDecimal.ZERO;
 
         for (final PaymentTransactionModel paymentTransaction : order.getPaymentTransactions()) {
             for (final PaymentTransactionEntryModel entry : paymentTransaction.getEntries()) {
-                if(AUTHORIZATION.equals(entry.getType())) {
-                    if (entry.getAmount() == null) {
-                        return true; //To handle HOP response without authorised amount in response
-                    } else {
-                        authorisedAmount = authorisedAmount.add(entry.getAmount());
-                    }
+                if (AUTHORIZATION.equals(entry.getType()) && entry.getAmount() == null) {
+                    //To handle HOP response without authorised amount in response
+                    return true;
+                }
+                if (AUTHORIZATION.equals(entry.getType())) {
+                    authorisedAmount = authorisedAmount.add(entry.getAmount());
                 }
             }
         }
 
         double tolerance = configurationService.getConfiguration().getDouble("worldpayapi.authoriseamount.validation.tolerance");
 
-        if (Math.abs(order.getTotalPrice() - authorisedAmount.doubleValue()) > tolerance) {
-            return false;
-        }
-
-        return true;
+        return !(Math.abs(order.getTotalPrice() - authorisedAmount.doubleValue()) > tolerance);
     }
 
     protected BigDecimal convertAmount(final Amount amount) {
@@ -384,7 +389,10 @@ public class DefaultWorldpayPaymentTransactionService implements WorldpayPayment
         LOG.warn(format("The amount for the transaction entry [{0}] has changed from [{1}] to [{2}] during [{3}]", entry.getCode(), entry.getAmount(), amountValue, entry.getType()));
     }
 
-    private PaymentTransactionEntryModel createAuthorizationPaymentTransactionEntryModel(final PaymentTransactionModel paymentTransaction, final String merchantCode, final AbstractOrderModel abstractOrderModel, final BigDecimal authorisedAmount) {
+    private PaymentTransactionEntryModel createAuthorizationPaymentTransactionEntryModel(final PaymentTransactionModel paymentTransaction,
+                                                                                         final String merchantCode,
+                                                                                         final AbstractOrderModel abstractOrderModel,
+                                                                                         final BigDecimal authorisedAmount) {
         final PaymentTransactionEntryModel transactionEntryModel = modelService.create(PaymentTransactionEntryModel.class);
 
         transactionEntryModel.setType(AUTHORIZATION);

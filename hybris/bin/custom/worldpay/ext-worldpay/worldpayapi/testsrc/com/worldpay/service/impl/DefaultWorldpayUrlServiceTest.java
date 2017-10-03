@@ -16,15 +16,17 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayUrlServiceTest {
 
-    public static final String FULL_SITE_URL = "fullSiteUrl";
-    public static final String URL = "url";
+    private static final String FULL_SITE_URL = "fullSiteUrl";
+    private static final String URL = "url";
+    private static final String EMPTY_URL = "";
+    private static final String TERMS_URL = "termsUrl";
 
     @Spy
     @InjectMocks
-    private DefaultWorldpayUrlService testObj = new DefaultWorldpayUrlService();
+    private DefaultWorldpayUrlService testObj;
 
     @Mock
     private BaseSiteService baseSiteServiceMock;
@@ -53,7 +55,28 @@ public class DefaultWorldpayUrlServiceTest {
         assertEquals(FULL_SITE_URL, result);
     }
 
-    @Test (expected = WorldpayConfigurationException.class)
+    @Test
+    public void shouldReturnBaseURLForCurrentSite() throws Exception {
+        when(baseSiteServiceMock.getCurrentBaseSite()).thenReturn(currentBaseSiteMock);
+        when(siteBaseUrlResolutionService.getWebsiteUrlForSite(currentBaseSiteMock, true, EMPTY_URL)).thenReturn(FULL_SITE_URL);
+
+        final String result = testObj.getBaseWebsiteUrlForSite();
+
+        assertEquals(FULL_SITE_URL, result);
+    }
+
+    @Test
+    public void shouldReturnFullTermsUrl() throws Exception {
+        when(baseSiteServiceMock.getCurrentBaseSite()).thenReturn(currentBaseSiteMock);
+        doReturn(TERMS_URL).when(testObj).getTermsPath();
+        when(siteBaseUrlResolutionService.getWebsiteUrlForSite(currentBaseSiteMock, true, TERMS_URL)).thenReturn(FULL_SITE_URL);
+
+        final String result = testObj.getFullTermsUrl();
+
+        assertEquals(FULL_SITE_URL, result);
+    }
+
+    @Test(expected = WorldpayConfigurationException.class)
     public void testGetFullUrlShouldRaiseExceptionWhenServiceReturnsNull() throws Exception {
         when(baseSiteServiceMock.getCurrentBaseSite()).thenReturn(currentBaseSiteMock);
         when(siteBaseUrlResolutionService.getWebsiteUrlForSite(currentBaseSiteMock, true, URL)).thenReturn(null);

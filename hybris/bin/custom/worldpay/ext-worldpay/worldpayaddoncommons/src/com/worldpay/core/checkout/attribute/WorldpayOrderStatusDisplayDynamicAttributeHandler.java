@@ -5,6 +5,9 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderhandler.DynamicAttributesOrderStatusDisplayByMap;
 import org.springframework.beans.factory.annotation.Required;
 
+/**
+ * Dynamic attribute handler for the worldpay order status display
+ */
 public class WorldpayOrderStatusDisplayDynamicAttributeHandler extends DynamicAttributesOrderStatusDisplayByMap {
 
     protected static final String APM_OPEN = "APM_OPEN";

@@ -5,9 +5,9 @@ import com.worldpay.order.data.WorldpayAdditionalInfoData;
 import com.worldpay.service.WorldpayServiceGateway;
 import com.worldpay.service.WorldpayUrlService;
 import com.worldpay.service.model.*;
+import com.worldpay.service.model.klarna.KlarnaMerchantUrls;
 import com.worldpay.service.model.payment.Payment;
 import com.worldpay.service.model.payment.PaymentBuilder;
-import com.worldpay.service.model.payment.PaymentType;
 import com.worldpay.service.model.token.TokenRequest;
 import com.worldpay.service.payment.WorldpayOrderService;
 import de.hybris.platform.core.model.c2l.CurrencyModel;
@@ -15,6 +15,8 @@ import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import org.springframework.beans.factory.annotation.Required;
 
 import java.util.Currency;
+
+import static com.worldpay.service.model.payment.PaymentType.IDEAL;
 
 /**
  * {@inheritDoc}
@@ -92,6 +94,7 @@ public class DefaultWorldpayOrderService implements WorldpayOrderService {
     }
 
     /**
+     * WorldpaySummaryCheckoutStepController.java
      * {@inheritDoc}
      */
     @Override
@@ -100,15 +103,17 @@ public class DefaultWorldpayOrderService implements WorldpayOrderService {
     }
 
     @Override
-    public Payment createPayment(final String paymentMethod, final String shopperBankCode, final String shopperCountryCode) throws WorldpayConfigurationException {
-        final PaymentType paymentType = PaymentType.getPaymentType(paymentMethod);
-        if (paymentType != null) {
-            switch (paymentType) {
-                case IDEAL:
-                    return PaymentBuilder.createIDEALSSL(shopperBankCode, worldpayUrlService.getFullSuccessURL(), worldpayUrlService.getFullFailureURL(), worldpayUrlService.getFullCancelURL());
-            }
+    public Payment createBankPayment(final String paymentMethod, final String shopperBankCode) throws WorldpayConfigurationException {
+        if (IDEAL.getMethodCode().equals(paymentMethod)) {
+            return PaymentBuilder.createIDEALSSL(shopperBankCode, worldpayUrlService.getFullSuccessURL(), worldpayUrlService.getFullFailureURL(), worldpayUrlService.getFullCancelURL());
         }
         return null;
+    }
+
+    @Override
+    public Payment createKlarnaPayment(final String countryCode, final String languageCode, final String extraMerchantData) throws WorldpayConfigurationException {
+        final KlarnaMerchantUrls merchantUrls = new KlarnaMerchantUrls(worldpayUrlService.getBaseWebsiteUrlForSite(), worldpayUrlService.getKlarnaConfirmationURL());
+        return PaymentBuilder.createKLARNASSL(countryCode, languageCode, merchantUrls, extraMerchantData);
     }
 
     /**

@@ -20,4 +20,10 @@
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
 
+
+	<alias name="pentlandCartValidationStrategy" alias="cartValidationStrategy"/>
+	<bean id="pentlandCartValidationStrategy"
+	      class="com.bridgex.core.strategies.impl.PentlandCartValidationStrategy" parent="defaultCartValidationStrategy">
+	</bean>
+
 </beans>

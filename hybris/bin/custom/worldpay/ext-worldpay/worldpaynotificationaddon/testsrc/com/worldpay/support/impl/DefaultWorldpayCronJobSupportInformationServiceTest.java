@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 public class DefaultWorldpayCronJobSupportInformationServiceTest {
 
     @InjectMocks
-    private DefaultWorldpayCronJobSupportInformationService testObj = new DefaultWorldpayCronJobSupportInformationService();
+    private DefaultWorldpayCronJobSupportInformationService testObj;
 
     @Mock
     private FlexibleSearchService flexibleSearchServiceMock;

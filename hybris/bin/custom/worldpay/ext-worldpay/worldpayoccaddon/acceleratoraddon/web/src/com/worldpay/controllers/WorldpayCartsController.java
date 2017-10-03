@@ -60,7 +60,7 @@ import java.util.Collection;
 @CacheControl(directive = CacheControlDirective.NO_CACHE)
 public class WorldpayCartsController extends AbstractWorldpayController {
 
-    private final static Logger LOG = LoggerFactory.getLogger(WorldpayCartsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorldpayCartsController.class);
 
     @Resource
     private WorldpayDirectOrderFacade worldpayDirectOrderFacade;
@@ -84,6 +84,8 @@ public class WorldpayCartsController extends AbstractWorldpayController {
     /**
      * Defines details of a new credit card payment details and assigns the payment to the cart.
      *
+     * @param request
+     * @param fields
      * @return Created payment details
      * @throws WebserviceValidationException
      * @formparam accountHolderName Name on card. This parameter is required.
@@ -127,7 +129,7 @@ public class WorldpayCartsController extends AbstractWorldpayController {
     @ResponseBody
     public PaymentDetailsWsDTO addPaymentDetails(final HttpServletRequest request,
                                                  @RequestParam(required = false, defaultValue = FieldSetLevelHelper.DEFAULT_LEVEL) final String fields)
-            throws WebserviceValidationException, WorldpayException, NoCheckoutCartException {
+            throws WorldpayException, NoCheckoutCartException {
         PaymentDetailsWsDTO paymentDetails = new PaymentDetailsWsDTO();
         final Collection<PaymentDetailsWsDTOOption> options = new ArrayList<PaymentDetailsWsDTOOption>();
         options.add(PaymentDetailsWsDTOOption.BASIC);
@@ -147,6 +149,8 @@ public class WorldpayCartsController extends AbstractWorldpayController {
      *                       billingAddress.country.isocode, billingAddress.line1, billingAddress.line2, billingAddress.town,
      *                       billingAddress.postalCode, billingAddress.region.isocode),
      *                       Client side encrypted card information (cseToken)
+     * @param request
+     * @param fields
      * @return Created payment details
      * @throws WebserviceValidationException
      * @throws NoCheckoutCartException
@@ -168,11 +172,13 @@ public class WorldpayCartsController extends AbstractWorldpayController {
     public PaymentDetailsWsDTO addPaymentDetails(final HttpServletRequest request,
                                                  @RequestBody final PaymentDetailsWsDTO paymentDetails,
                                                  @RequestParam(required = false, defaultValue = FieldSetLevelHelper.DEFAULT_LEVEL) final String fields)
-            throws WebserviceValidationException, NoCheckoutCartException, WorldpayException {
+            throws NoCheckoutCartException, WorldpayException {
         return addPaymentDetailsInternal(request, paymentDetails, fields);
     }
 
-    protected PaymentDetailsWsDTO addPaymentDetailsInternal(final HttpServletRequest request, final PaymentDetailsWsDTO paymentDetails, String fields) throws NoCheckoutCartException, WorldpayException {
+    protected PaymentDetailsWsDTO addPaymentDetailsInternal(final HttpServletRequest request,
+                                                            final PaymentDetailsWsDTO paymentDetails,
+                                                            String fields) throws NoCheckoutCartException, WorldpayException {
         validatePayment(paymentDetails);
 
         final CSEAdditionalAuthInfo cseAdditionalAuthInfo = createCSEAdditionalAuthInfo(paymentDetails);
@@ -240,5 +246,3 @@ public class WorldpayCartsController extends AbstractWorldpayController {
         worldpayPaymentCheckoutFacade.setBillingDetails(addressData);
     }
 }
-
-

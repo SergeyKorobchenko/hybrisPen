@@ -64,7 +64,7 @@ public class DefaultWorldpayAuthorisationResultService implements WorldpayAuthor
         setSubscriptionAuthoriseResult(result, REJECTED, REVIEW_NEEDED);
         final RedirectReference redirectReference = response.getRedirectReference();
         result.setPaymentRedirectRequired(true);
-        result.setPaymentRedirectUrl(redirectReference.getUrl());
+        result.setPaymentRedirectUrl(redirectReference.getValue());
     }
 
     private void setSubscriptionAuthoriseResult(final AbstractResult result, final TransactionStatus status, final TransactionStatusDetails statusDetails) {

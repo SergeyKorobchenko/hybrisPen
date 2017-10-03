@@ -1,6 +1,7 @@
 package com.worldpay.facades.payment.direct.impl;
 
 import com.google.common.base.Preconditions;
+import com.worldpay.data.AdditionalAuthInfo;
 import com.worldpay.data.BankTransferAdditionalAuthInfo;
 import com.worldpay.data.CSEAdditionalAuthInfo;
 import com.worldpay.exception.WorldpayConfigurationException;
@@ -28,6 +29,8 @@ import de.hybris.platform.order.InvalidCartException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import java.util.Base64;
+
 import static com.worldpay.service.model.AuthorisedStatus.*;
 import static java.text.MessageFormat.format;
 
@@ -41,6 +44,7 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
     protected static final String ERROR_AUTHORISING_ORDER = "There was a problem authorising the order with worldpayOrderCode [{0}]";
     protected static final String THERE_WAS_AN_ERROR_COMMUNICATING_WTH_WORLDPAY = "There was an error communicating wth Worldpay";
     protected static final String THERE_WAS_AN_ERROR_IN_THE_SERVICE_GATEWAY_MESSAGE = "There was an error in the service gateway:  [{0}]";
+    private static final String THERE_IS_NO_CONFIGURATION = "There is no configuration for the requested merchant. Please review your settings.";
 
     private WorldpayAuthenticatedShopperIdStrategy worldpayAuthenticatedShopperIdStrategy;
     private WorldpayDirectOrderService worldpayDirectOrderService;
@@ -64,7 +68,7 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
 
             worldpayDirectOrderService.createToken(merchantInfo, cart, cseAdditionalAuthInfo, worldpayAdditionalInfoData);
         } catch (WorldpayConfigurationException e) {
-            LOG.error("There is no configuration for the requested merchant. Please review your settings.");
+            LOG.error(THERE_IS_NO_CONFIGURATION);
             throw e;
         }
     }
@@ -85,8 +89,8 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
             final DirectAuthoriseServiceResponse serviceResponse = worldpayDirectOrderService.authorise(merchantInfo, cart, worldpayAdditionalInfoData);
 
             return handleDirectServiceResponse(serviceResponse, merchantInfo, cart);
-        } catch (WorldpayConfigurationException e) {
-            LOG.error("There is no configuration for the requested merchant. Please review your settings.");
+        } catch (final WorldpayConfigurationException e) {
+            LOG.error(THERE_IS_NO_CONFIGURATION);
             throw e;
         }
     }
@@ -99,22 +103,42 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
     }
 
     @Override
-    public DirectResponseData authoriseRecurringPayment(final AbstractOrderModel abstractOrderModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final MerchantInfo merchantInfo) throws WorldpayException, InvalidCartException {
+    public DirectResponseData authoriseRecurringPayment(final AbstractOrderModel abstractOrderModel,
+                                                        final WorldpayAdditionalInfoData worldpayAdditionalInfoData,
+                                                        final MerchantInfo merchantInfo) throws WorldpayException, InvalidCartException {
         return internalAuthoriseRecurringPayment(abstractOrderModel, worldpayAdditionalInfoData, merchantInfo);
     }
 
-    protected DirectResponseData internalAuthoriseRecurringPayment(final AbstractOrderModel abstractOrderModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final MerchantInfo merchantInfo) throws WorldpayException, InvalidCartException {
+    protected DirectResponseData internalAuthoriseRecurringPayment(final AbstractOrderModel abstractOrderModel,
+                                                                   final WorldpayAdditionalInfoData worldpayAdditionalInfoData,
+                                                                   final MerchantInfo merchantInfo) throws WorldpayException, InvalidCartException {
         try {
             final String authenticatedShopperId = worldpayAuthenticatedShopperIdStrategy.getAuthenticatedShopperId(abstractOrderModel.getUser());
             worldpayAdditionalInfoData.setAuthenticatedShopperId(authenticatedShopperId);
 
-            final DirectAuthoriseServiceResponse directAuthoriseServiceResponse = worldpayDirectOrderService.authoriseRecurringPayment(merchantInfo, abstractOrderModel, worldpayAdditionalInfoData);
+            final DirectAuthoriseServiceResponse directAuthoriseServiceResponse = worldpayDirectOrderService.authoriseRecurringPayment(merchantInfo,
+                    abstractOrderModel,
+                    worldpayAdditionalInfoData);
             return handleDirectServiceResponse(directAuthoriseServiceResponse, merchantInfo, abstractOrderModel);
         } catch (final WorldpayConfigurationException e) {
-            LOG.error("There is no configuration for the requested merchant. Please review your settings.");
+            LOG.error(THERE_IS_NO_CONFIGURATION);
             throw e;
         } catch (InvalidCartException e) {
             LOG.error(format("There was an error placing the order for cart [{0}]", abstractOrderModel.getCode()), e);
+            throw e;
+        }
+    }
+
+    @Override
+    public String authoriseKlarnaRedirect(final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final AdditionalAuthInfo additionalAuthInfo) throws WorldpayException {
+        final CartModel cart = cartService.getSessionCart();
+        try {
+            final MerchantInfo merchantInfo = getCurrentMerchantInfo();
+            final DirectAuthoriseServiceResponse serviceResponse = worldpayDirectOrderService.authoriseKlarna(merchantInfo, cart, worldpayAdditionalInfoData, additionalAuthInfo);
+            final String klarnaRedirectContentEncoded = handleAuthoriseRedirectServiceResponse(serviceResponse);
+            return new String(Base64.getDecoder().decode(klarnaRedirectContentEncoded));
+        } catch (WorldpayConfigurationException e) {
+            LOG.error(THERE_IS_NO_CONFIGURATION, e);
             throw e;
         }
     }
@@ -126,16 +150,16 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
         try {
             final MerchantInfo merchantInfo = getCurrentMerchantInfo();
             final DirectAuthoriseServiceResponse serviceResponse = worldpayDirectOrderService.authoriseBankTransfer(merchantInfo, cart, bankTransferAdditionalAuthInfo, worldpayAdditionalInfoData);
-            return handleAuthoriseBankTransferServiceResponse(serviceResponse);
+            return handleAuthoriseRedirectServiceResponse(serviceResponse);
         } catch (WorldpayConfigurationException e) {
-            LOG.error("There is no configuration for the requested merchant. Please review your settings.");
+            LOG.error(THERE_IS_NO_CONFIGURATION);
             throw e;
         }
     }
 
-    protected String handleAuthoriseBankTransferServiceResponse(final DirectAuthoriseServiceResponse serviceResponse) throws WorldpayException {
-        if (shouldProcessBankTransferRedirect(serviceResponse)) {
-            return serviceResponse.getRedirectReference().getUrl();
+    protected String handleAuthoriseRedirectServiceResponse(final DirectAuthoriseServiceResponse serviceResponse) throws WorldpayException {
+        if (shouldProcessRedirect(serviceResponse)) {
+            return serviceResponse.getRedirectReference().getValue();
         } else if (serviceResponse.getErrorDetail() != null) {
             final String errorMessage = format(THERE_WAS_AN_ERROR_IN_THE_SERVICE_GATEWAY_MESSAGE, serviceResponse.getErrorDetail().getMessage());
             LOG.error(errorMessage);
@@ -152,12 +176,17 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
         return internalAuthorise3DSecure(cartModel, paResponse, worldpayAdditionalInfoData);
     }
 
-    protected DirectResponseData internalAuthorise3DSecure(final AbstractOrderModel abstractOrderModel, final String paResponse, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
+    protected DirectResponseData internalAuthorise3DSecure(final AbstractOrderModel abstractOrderModel,
+                                                           final String paResponse,
+                                                           final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
         final MerchantInfo merchantInfo = getCurrentMerchantInfo();
         final String authenticatedShopperId = worldpayAuthenticatedShopperIdStrategy.getAuthenticatedShopperId(abstractOrderModel.getUser());
         worldpayAdditionalInfoData.setAuthenticatedShopperId(authenticatedShopperId);
 
-        final DirectAuthoriseServiceResponse serviceResponse = worldpayDirectOrderService.authorise3DSecure(merchantInfo, abstractOrderModel.getWorldpayOrderCode(), worldpayAdditionalInfoData, paResponse);
+        final DirectAuthoriseServiceResponse serviceResponse = worldpayDirectOrderService.authorise3DSecure(merchantInfo,
+                abstractOrderModel.getWorldpayOrderCode(),
+                worldpayAdditionalInfoData,
+                paResponse);
         if (shouldProcessResponse(serviceResponse)) {
             return handle3DSecureResponse(abstractOrderModel, serviceResponse, merchantInfo);
         } else if (serviceResponse.getErrorDetail() != null) {
@@ -169,8 +198,8 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
         }
     }
 
-        protected DirectResponseData handleDirectServiceResponse(final DirectAuthoriseServiceResponse serviceResponse, final MerchantInfo merchantInfo, final AbstractOrderModel abstractOrderModel)
-                throws WorldpayException, InvalidCartException {
+    protected DirectResponseData handleDirectServiceResponse(final DirectAuthoriseServiceResponse serviceResponse, final MerchantInfo merchantInfo, final AbstractOrderModel abstractOrderModel)
+            throws WorldpayException, InvalidCartException {
         if (shouldProcessResponse(serviceResponse)) {
             return processDirectResponse(serviceResponse, abstractOrderModel, merchantInfo);
         } else if (serviceResponse.getErrorDetail() != null) {
@@ -182,7 +211,9 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
         }
     }
 
-    protected DirectResponseData handle3DSecureResponse(final AbstractOrderModel abstractOrderModel, final DirectAuthoriseServiceResponse serviceResponse, final MerchantInfo merchantInfo) throws InvalidCartException, WorldpayException {
+    protected DirectResponseData handle3DSecureResponse(final AbstractOrderModel abstractOrderModel,
+                                                        final DirectAuthoriseServiceResponse serviceResponse,
+                                                        final MerchantInfo merchantInfo) throws InvalidCartException, WorldpayException {
         final DirectResponseData response = new DirectResponseData();
         final PaymentReply paymentReply = serviceResponse.getPaymentReply();
         final AuthorisedStatus authStatus = paymentReply.getAuthStatus();
@@ -232,7 +263,7 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
         return serviceResponse.getPaymentReply() != null || serviceResponse.getRequest3DInfo() != null;
     }
 
-    protected boolean shouldProcessBankTransferRedirect(final DirectAuthoriseServiceResponse serviceResponse) {
+    protected boolean shouldProcessRedirect(final DirectAuthoriseServiceResponse serviceResponse) {
         return serviceResponse.getRedirectReference() != null;
     }
 
@@ -241,7 +272,7 @@ public class DefaultWorldpayDirectOrderFacade implements WorldpayDirectOrderFaca
         response.setOrderData(orderData);
         response.setTransactionStatus(TransactionStatus.AUTHORISED);
     }
-    
+
     protected void handleRefusedResponse(final DirectResponseData response, final String returnCode) {
         response.setTransactionStatus(TransactionStatus.REFUSED);
         response.setReturnCode(returnCode);

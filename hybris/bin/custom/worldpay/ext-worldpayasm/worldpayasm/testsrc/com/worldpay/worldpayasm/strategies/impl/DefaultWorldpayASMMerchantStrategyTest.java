@@ -15,10 +15,7 @@ import java.util.Map;
 
 import static com.worldpay.strategy.WorldpayMerchantStrategy.CUSTOMER_SERVICE_MERCHANT;
 import static com.worldpay.strategy.WorldpayMerchantStrategy.DESKTOP_MERCHANT;
-import static com.worldpay.strategy.WorldpayMerchantStrategy.MOBILE_MERCHANT;
-import static com.worldpay.worldpayasm.strategies.impl.DefaultWorldpayASMMerchantStrategy.ASM_MERCHANT;
 import static de.hybris.platform.commerceservices.enums.UiExperienceLevel.DESKTOP;
-import static de.hybris.platform.commerceservices.enums.UiExperienceLevel.MOBILE;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -26,22 +23,23 @@ import static org.mockito.Mockito.when;
 @RunWith (MockitoJUnitRunner.class)
 public class DefaultWorldpayASMMerchantStrategyTest {
 
+    private static final String ASM_MERCHANT = "asm";
+
     @InjectMocks
-    private DefaultWorldpayASMMerchantStrategy testObj = new DefaultWorldpayASMMerchantStrategy();
+    private DefaultWorldpayASMMerchantStrategy testObj;
 
     @Mock
     private WorldpayASMService worldpayAsmServiceMock;
     @Mock
     private WorldpayMerchantConfigDataService worldpayMerchantConfigDataServiceMock;
     @Mock
-    private WorldpayMerchantConfigData websiteMerchantConfigDataMock, mobileMerchantConfigDataMock, customerServiceMerchantConfigDataMock, asmMerchantConfigDataMock;
+    private WorldpayMerchantConfigData websiteMerchantConfigDataMock, customerServiceMerchantConfigDataMock, asmMerchantConfigDataMock;
     @Mock
     private Map<String, WorldpayMerchantConfigData> merchantConfigDataMapMock;
 
     @Before
     public void setUp() throws Exception {
         when(worldpayMerchantConfigDataServiceMock.getMerchantConfiguration()).thenReturn(merchantConfigDataMapMock);
-        when(merchantConfigDataMapMock.get(MOBILE_MERCHANT)).thenReturn(mobileMerchantConfigDataMock);
         when(merchantConfigDataMapMock.get(DESKTOP_MERCHANT)).thenReturn(websiteMerchantConfigDataMock);
         when(merchantConfigDataMapMock.get(CUSTOMER_SERVICE_MERCHANT)).thenReturn(customerServiceMerchantConfigDataMock);
         when(merchantConfigDataMapMock.get(ASM_MERCHANT)).thenReturn(asmMerchantConfigDataMock);
@@ -63,17 +61,10 @@ public class DefaultWorldpayASMMerchantStrategyTest {
     }
 
     @Test
-    public void shouldReturnMobileMerchantWhenUIExperienceIsMobile() throws Exception {
-        final WorldpayMerchantConfigData result = testObj.getMerchant(MOBILE);
-
-        assertEquals(mobileMerchantConfigDataMock, result);
-    }
-
-    @Test
     public void shouldReturnAsmMerchant() throws Exception {
         when(worldpayAsmServiceMock.isASMEnabled()).thenReturn(true);
 
-        final WorldpayMerchantConfigData result = testObj.getMerchant(MOBILE);
+        final WorldpayMerchantConfigData result = testObj.getMerchant(DESKTOP);
 
         assertEquals(asmMerchantConfigDataMock, result);
     }

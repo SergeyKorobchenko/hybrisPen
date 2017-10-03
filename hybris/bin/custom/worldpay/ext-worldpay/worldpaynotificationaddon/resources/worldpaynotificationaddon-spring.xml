@@ -175,12 +175,6 @@
         <entry key="REFUSED" value-ref="refusedOrderNotificationProcessorStrategy"/>
     </util:map>
 
-    <alias name="defaultOrderInquiryService" alias="orderInquiryService"/>
-    <bean id="defaultOrderInquiryService" class="com.worldpay.core.services.impl.DefaultOrderInquiryService">
-        <property name="worldpayPaymentInfoService" ref="worldpayPaymentInfoService"/>
-        <property name="worldpayConfigLookupService" ref="worldpayConfigLookupService"/>
-    </bean>
-
     <alias name="defaultWorldpayCronJobSupportInformationService" alias="worldpayCronJobSupportInformationService"/>
     <bean id="defaultWorldpayCronJobSupportInformationService" class="com.worldpay.support.impl.DefaultWorldpayCronJobSupportInformationService">
         <property name="flexibleSearchService" ref="flexibleSearchService"/>

@@ -6,9 +6,6 @@ package com.worldpay.strategies;
  */
 public interface WorldpayOrderModificationNotifierStrategy {
 
-    String WORLDPAYADDON_ERRORS_UNPROCESSED_ORDERS = "worldpayaddon.errors.unprocessed.orders";
-    String WORLDPAYADDON_ERRORS_THERE_ARE_UNPROCESSED_ORDERS = "worldpayaddon.errors.there.are.unprocessed.orders";
-
     /**
      * Notifies about order that have not been processed for a longer period of time.
      *

@@ -1047,3 +1047,116 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $
 ###### Not Found Page End ######
 
 
+
+
+
+################### ASM
+
+$addonExtensionName=assistedservicestorefront
+
+# CMS Assisted Service Component
+INSERT_UPDATE AssistedServiceComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;AssistedServiceComponent;Assisted Service Component;AssistedServiceComponent
+
+# CMS Assisted Service Sub-Components
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;ASMLoginComponent;Assisted Service Agent Login Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmLoginComponent.jsp;ASMLoginComponent
+;;ASMEmulateUserComponent;Assisted Service Agent Emulate User Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmEmulateUserComponent.jsp;ASMEmulateUserComponent
+;;ASMBindComponent;Assisted Service Bind User/Cart Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmBindComponent.jsp;ASMBindComponent
+;;ASMHeaderComponent;Assisted Service Header Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmHeaderComponent.jsp;ASMHeaderComponent
+;;ASMFooterComponent;Assisted Service Footer Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmFooterComponent.jsp;ASMFooterComponent
+;;ASMCustomerListComponent;Assisted Service Customer List Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmCustomerListButtonComponent.jsp;ASMCustomerListComponent
+
+INSERT_UPDATE ASMDevicesUsedComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ASMDevicesUsedComponent;Assisted Service Devices Used Component;ASMDevicesUsedComponent
+
+INSERT_UPDATE ASMFavoriteColorsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ASMFavoriteColorsComponent;Assisted Service Favorite Colors Component;ASMFavoriteColorsComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;TopHeaderSlot;true;AssistedServiceComponent
+
+INSERT_UPDATE AssistedServiceSessionRestriction;$contentCV[unique=true];uid[unique=true];name;&uid
+;;AssistedServiceSessionRestriction;ASM Session Restriction;AssistedServiceSessionRestriction
+
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&uid);uid[unique=true];
+;;Assisted Service Session Reversed Restriction;AssistedServiceSessionRestriction;AssistedServiceSessionReversedRestriction;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;restrictions(uid,$contentCV)
+;;AddMessageButtonComponent;Add Message Button Component;AddMessageButtonComponent;AssistedServiceSessionReversedRestriction
+
+#################### ASM end
+
+
+
+
+################     worldpay
+
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/images/apmIcons
+$picture=media(code, $contentCV);
+$lang=en
+
+
+
+
+# Create medias
+INSERT_UPDATE Media;code[unique=true];$media;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)
+; alipay-icon     ; $siteResource/alipay-icon.png     ; ; ; images
+; cc-icon         ; $siteResource/cc-icon.png         ; ; ; images
+; cup-icon        ; $siteResource/cup-icon.png        ; ; ; images
+; enets-icon      ; $siteResource/enets-icon.jpg      ; ; ; images
+; paypal-icon     ; $siteResource/paypal-icon.png     ; ; ; images
+; boleto-icon     ; $siteResource/boleto-icon.png     ; ; ; images
+; postepay-icon   ; $siteResource/postepay-icon.png   ; ; ; images
+; poli-icon       ; $siteResource/poli-icon.png       ; ; ; images
+; polinz-icon     ; $siteResource/polinz-icon.png     ; ; ; images
+; mistercash-icon ; $siteResource/mistercash-icon.png ; ; ; images
+; nordea-icon     ; $siteResource/nordea-icon.png     ; ; ; images
+; ideal-icon      ; $siteResource/ideal-icon.png      ; ; ; images
+; klarna-icon     ; $siteResource/klarna-icon.png     ; ; ; images
+
+INSERT_UPDATE WorldpayCCComponent;uid[unique=true];$contentCV[unique=true];name;$picture[lang=$lang]
+;creditCardComponent;;"Credit Card";cc-icon
+
+INSERT_UPDATE WorldpayAPMComponent;uid[unique=true];$contentCV[unique=true];name;apmConfiguration(code);$picture[lang=$lang];restrictions(uid,$contentCV)
+; payPalComponent     ; ; "PayPal"     ; PAYPAL-EXPRESS     ; paypal-icon     ; AssistedServiceSessionReversedRestriction
+; boletoComponent     ; ; "Boleto"     ; BOLETO-SSL         ; boleto-icon     ; AssistedServiceSessionReversedRestriction
+; postepayComponent   ; ; "PostePay"   ; POSTEPAY-SSL       ; postepay-icon   ; AssistedServiceSessionReversedRestriction
+; poliComponent       ; ; "POLi"       ; POLI-SSL           ; poli-icon       ; AssistedServiceSessionReversedRestriction
+; polinzComponent     ; ; "POLi - NZ"  ; POLINZ-SSL         ; polinz-icon     ; AssistedServiceSessionReversedRestriction
+; mistercashComponent ; ; "Mistercash" ; MISTERCASH-SSL     ; mistercash-icon ; AssistedServiceSessionReversedRestriction
+; nordeaComponent     ; ; "Nordea"     ; BANKLINKNORDEA-SSL ; nordea-icon     ; AssistedServiceSessionReversedRestriction
+; idealComponent      ; ; "iDeal"      ; IDEAL-SSL          ; ideal-icon      ; AssistedServiceSessionReversedRestriction
+; klarnaComponent     ; ; "Klarna"     ; KLARNA-SSL         ; klarna-icon     ; AssistedServiceSessionReversedRestriction
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;WorldpayPaymentButtonsSlot;creditCardComponent,payPalComponent,boletoComponent,postepayComponent,poliComponent,polinzComponent,mistercashComponent,nordeaComponent,idealComponent,klarnaComponent
+
+
+$lang=en
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+;;WorldpayHelpParagraphComponent;"<strong>Need Help setting up your Merchants?</strong> <span>Contact Your Worldpay Relationship Manager and they will only be too happy to help!</span>";
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;SideContent-WorldpayPaymentAndBillingCheckoutPage;Put content here;true;WorldpayHelpParagraphComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;Side-WorldpayPaymentAndBillingCheckoutPage;SideContent;worldpayPaymentAndBillingCheckoutPage;SideContent-WorldpayPaymentAndBillingCheckoutPage
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page
+# This update modifies the existing AccountOrderDetailsShippingComponent jspInclude component (with payment details in order history) by setting a new page existing in the worldpayb2baddon
+;;AccountOrderDetailsShippingComponent;Account Order Details Shipping Info Component;/WEB-INF/views/addons/worldpayb2baddon/responsive/pages/account/worldpayAccountOrderDetailShippingInfo.jsp
+;;OrderConfirmationShippingComponent;Order Confirmation Shipping Info Component;/WEB-INF/views/addons/worldpayb2baddon/responsive/pages/account/worldpayAccountOrderDetailShippingInfo.jsp
+;;OrderConfirmationThankMessageComponent;Order Confirmation Thank You Message Component;/WEB-INF/views/addons/worldpayb2baddon/responsive/pages/checkout/worldpayCheckoutConfirmationThankMessage.jsp
+# This update modifies the existing CheckoutComponent jspInclude component by setting a new page existing in the worldpayb2baddon
+;;CheckoutComponent;Checkout Display Component;/WEB-INF/views/addons/worldpayb2baddon/responsive/pages/cart/checkoutDisplay.jsp
+
+UPDATE ReorderAction;$contentCV[unique=true];uid[unique=true];url
+;;ReorderAction;/checkout/worldpay/summary/reorder
+
+
+############# Worldpay end

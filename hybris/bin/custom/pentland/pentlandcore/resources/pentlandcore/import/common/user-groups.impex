@@ -24,4 +24,4 @@ INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(
 
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];originalUid;email;name;title(code);groups(uid);sessionCurrency(isocode)[default='GBP'];sessionLanguage(isocode);$setPassword
-;Test B2B Customer;test;testb2bcustomer;linda.wolf@test.com;Linda Wolf;ms;TestB2BUnit,customergroup;;en;
+;Test B2B Customer;test;testb2bcustomer;linda.wolf@test.com;Linda Wolf;ms;TestB2BUnit,customergroup,b2bcustomergroup;;en;

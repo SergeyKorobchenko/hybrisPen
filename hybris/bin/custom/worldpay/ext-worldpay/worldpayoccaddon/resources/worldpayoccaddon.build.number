@@ -1,11 +1,9 @@
 #Ant properties
-#Wed Mar 01 08:34:15 GMT 2017
-builddate=20170301 0834
+#Tue Sep 19 16:43:50 BST 2017
+builddate=20170919 1643
 description=worldpayoccaddon
-group.id=de.hybris.platform
-module.name=platform-module
 name=worldpayoccaddon
-releasedate=20161216 2029
+releasedate=20170808 1424
 vendor=hybris
-version=6.3.0.0-SNAPSHOT
-version.api=6.3.0
+version=6.4.0.3
+version.api=6.4.0

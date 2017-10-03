@@ -3,6 +3,9 @@ package com.worldpay.core.services.strategies;
 import de.hybris.platform.commerceservices.strategies.GenerateMerchantTransactionCodeStrategy;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 
+/**
+ * Used to generate a unique id for Merchant transaction
+ */
 public interface RecurringGenerateMerchantTransactionCodeStrategy extends GenerateMerchantTransactionCodeStrategy {
 
     /**

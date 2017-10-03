@@ -107,7 +107,7 @@ public class DefaultWorldpayMockFacadeTest {
     public void shouldReturnCaptureResponseIfRequestContainsModifyWithCapture() throws WorldpayException {
         when(paymentServiceMock.getSubmitOrModifyOrInquiryOrReplyOrNotifyOrVerify()).thenReturn(singletonList(modifyMock));
         when(modifyMock.getOrderModificationOrBatchModificationOrAccountBatchModificationOrFuturePayAgreementModificationOrPaymentTokenUpdateOrPaymentTokenDelete()).thenReturn(singletonList(orderModificationMock));
-        when(orderModificationMock.getCancelOrCaptureOrRefundOrRevokeOrAddBackOfficeCodeOrAuthoriseOrIncreaseAuthorisationOrCancelOrRefundOrDefendOrShopperWebformRefundDetailsOrExtendExpiryDate()).thenReturn(singletonList(captureMock));
+        when(orderModificationMock.getCancelOrCaptureOrRefundOrRevokeOrAddBackOfficeCodeOrAuthoriseOrIncreaseAuthorisationOrCancelOrRefundOrDefendOrShopperWebformRefundDetailsOrExtendExpiryDateOrCancelRefund()).thenReturn(singletonList(captureMock));
         when(paymentServiceMarshaller.marshal(responsePaymentService)).thenReturn(CAPTURE_OK);
 
         final String result = testObj.buildResponse(paymentServiceMock, httpRequestMock);

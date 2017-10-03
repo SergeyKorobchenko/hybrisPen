@@ -19,15 +19,24 @@ public class DefaultWorldpayB2BDirectOrderFacade extends DefaultWorldpayDirectOr
 
     private B2BOrderService b2BOrderService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DirectResponseData authoriseRecurringPayment(final String orderCode, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
+    public DirectResponseData authoriseRecurringPayment(final String orderCode,
+                                                        final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
         AbstractOrderModel abstractOrderModel = b2BOrderService.getOrderForCode(orderCode);
         final MerchantInfo merchantInfo = getCurrentMerchantInfo();
         return internalAuthoriseRecurringPayment(abstractOrderModel, worldpayAdditionalInfoData, merchantInfo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DirectResponseData authorise3DSecureOnOrder(final String orderCode, final String paResponse, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
+    public DirectResponseData authorise3DSecureOnOrder(final String orderCode,
+                                                       final String paResponse,
+                                                       final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
         final OrderModel orderModel = b2BOrderService.getOrderForCode(orderCode);
         return internalAuthorise3DSecure(orderModel, paResponse, worldpayAdditionalInfoData);
     }

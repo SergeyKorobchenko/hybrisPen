@@ -24,7 +24,6 @@ import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.payment.model.PaymentTransactionModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.time.DateUtils;
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -40,19 +39,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.Date;
 
-import static com.worldpay.core.services.impl.DefaultWorldpayPaymentInfoService.WORLDPAY_CREDIT_CARD_MAPPINGS;
+import static com.worldpay.service.model.payment.PaymentType.UATP;
 import static de.hybris.platform.core.enums.CreditCardType.VISA;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.startsWith;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayPaymentInfoServiceTest {
 
     private static final int TIMEOUT_IN_MINUTES = 19;
@@ -80,10 +74,11 @@ public class DefaultWorldpayPaymentInfoServiceTest {
     private static final String CARD_BRAND = "cardBrand";
     private static final String CARD_TYPE = "CardType";
     private static final String ANOTHER_SUBSCRIPTION_ID = "anotherPaymentId";
+    private static final String WORLDPAY_CREDIT_CARD_MAPPINGS = "worldpay.creditCard.mappings.";
 
     @Spy
     @InjectMocks
-    private DefaultWorldpayPaymentInfoService testObj = new DefaultWorldpayPaymentInfoService();
+    private DefaultWorldpayPaymentInfoService testObj;
 
     @Mock
     private ModelService modelServiceMock;
@@ -91,12 +86,12 @@ public class DefaultWorldpayPaymentInfoServiceTest {
     private EnumerationService enumerationServiceMock;
     @Mock
     private APMConfigurationLookupService apmConfigurationLookupServiceMock;
-    @Mock
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private ConfigurationService configurationServiceMock;
 
     @Mock
     private CreditCardPaymentInfoModel creditCardPaymentInfoModelMock;
-    @Mock (answer = RETURNS_DEEP_STUBS)
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private PaymentTransactionModel paymentTransactionModelMock;
     @Mock
     private OrderNotificationMessage orderNotificationMessageMock;
@@ -106,7 +101,7 @@ public class DefaultWorldpayPaymentInfoServiceTest {
     private PaymentInfoModel paymentTransactionPaymentInfoModelMock;
     @Mock
     private WorldpayAPMPaymentInfoModel worldpayAPMPaymentInfoModelMock;
-    @Mock (answer = RETURNS_DEEP_STUBS)
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private DirectAuthoriseServiceResponse directAuthoriseServiceResponseMock;
     @Mock
     private WorldpayAPMConfigurationModel worldpayAPMConfigurationModelMock;
@@ -114,11 +109,11 @@ public class DefaultWorldpayPaymentInfoServiceTest {
     private PaymentInfoModel orderPaymentInfoModelMock;
     @Mock
     private CartModel cartModelMock;
-    @Mock (answer = RETURNS_DEEP_STUBS)
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private TokenReply tokenReplyMock;
     @Mock
     private PaymentReply paymentReplyMock;
-    @Mock (answer = RETURNS_DEEP_STUBS)
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private Card cardMock;
     @Mock
     private com.worldpay.service.model.Date dateMock;
@@ -131,14 +126,13 @@ public class DefaultWorldpayPaymentInfoServiceTest {
     @Mock
     private CreditCardPaymentInfoModel savedPaymentInfoMock;
     @Mock
-    private Configuration configurationMock;
-    @Mock
     private CreateTokenResponse createTokenResponseMock;
     @Rule
-    public ExpectedException thrown = ExpectedException.none(); //NOPMD @Rule annotated instance members must be public
-    @Mock (answer = RETURNS_DEEP_STUBS)
+    @SuppressWarnings("PMD.MemberScope")
+    public ExpectedException thrown = ExpectedException.none();
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private UpdateTokenServiceRequest updateTokenServiceRequestMock;
-    @Mock (answer = RETURNS_DEEP_STUBS)
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private CardDetails cardDetailsMock;
 
     @Before
@@ -174,8 +168,7 @@ public class DefaultWorldpayPaymentInfoServiceTest {
         when(tokenReplyMock.getAuthenticatedShopperID()).thenReturn(AUTHENTICATED_SHOPPER_ID);
         when(tokenReplyMock.getTokenDetails().getTokenEventReference()).thenReturn(TOKEN_REFERENCE);
         when(paymentReplyMock.getMethodCode()).thenReturn(PaymentType.VISA.getMethodCode());
-        when(configurationServiceMock.getConfiguration()).thenReturn(configurationMock);
-        when(configurationMock.getString(WORLDPAY_CREDIT_CARD_MAPPINGS + paymentReplyMock.getMethodCode())).thenReturn(VISA.getCode());
+        when(configurationServiceMock.getConfiguration().getString(WORLDPAY_CREDIT_CARD_MAPPINGS + paymentReplyMock.getMethodCode())).thenReturn(VISA.getCode());
         doReturn(DATE_TIME).when(testObj).getDateTime(dateMock);
         when(tokenReplyMock.getTokenDetails().getPaymentTokenExpiry()).thenReturn(dateMock);
         when(tokenReplyMock.getTokenDetails().getPaymentTokenID()).thenReturn(PAYMENT_TOKEN_ID);
@@ -441,6 +434,16 @@ public class DefaultWorldpayPaymentInfoServiceTest {
     }
 
     @Test
+    public void shouldSetPaymentTypeAsTOKENWhenCardCannotBeMatchedToAnExistingOne() throws Exception {
+        when(paymentReplyMock.getMethodCode()).thenReturn(UATP.getMethodCode());
+        when(configurationServiceMock.getConfiguration().getString(WORLDPAY_CREDIT_CARD_MAPPINGS + UATP.getMethodCode())).thenReturn("");
+
+        testObj.setCreditCardType(creditCardPaymentInfoModelMock, paymentReplyMock);
+
+        verify(creditCardPaymentInfoModelMock).setType(CreditCardType.TOKEN);
+    }
+
+    @Test
     public void shouldUseExistingCreditCardForTokenInformationAndSaveItToOrderForCreateTokenResponse() {
         when(createTokenResponseMock.getToken()).thenReturn(tokenReplyMock);
         when(tokenReplyMock.getTokenDetails().getTokenEvent()).thenReturn(MATCH);
@@ -498,6 +501,7 @@ public class DefaultWorldpayPaymentInfoServiceTest {
 
         verify(creditCardPaymentInfoModelMock).setPaymentType(PaymentType.VISA.getMethodCode());
         verify(creditCardPaymentInfoModelMock).setType(CreditCardType.VISA);
+        verify(modelServiceMock).save(creditCardPaymentInfoModelMock);
     }
 
     @Test

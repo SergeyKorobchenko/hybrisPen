@@ -13,7 +13,7 @@ import de.hybris.platform.payment.model.PaymentTransactionModel;
 public interface WorldpayMerchantInfoService {
 
     /**
-     * Returns the merchant configured to be used in the Customer Services application (cscockpit)
+     * Returns the merchant configured to be used when the checkout is done by a Customer Service Agent
      * @return
      * @throws WorldpayConfigurationException
      */

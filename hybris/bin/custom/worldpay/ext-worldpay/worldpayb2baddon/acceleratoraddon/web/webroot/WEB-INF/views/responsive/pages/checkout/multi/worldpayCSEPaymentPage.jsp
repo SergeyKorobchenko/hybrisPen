@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-actions">
                             <button class="btn btn-primary btn-block submit_cseDetails checkout-next" tabindex="20">
-                                <spring:theme code="checkout.multi.paymentMethod.continue" text="Continue"/>
+                                <spring:theme code="checkout.multi.paymentMethod.continue" />
                             </button>
                         </div>
                     </ycommerce:testId>

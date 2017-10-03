@@ -8,7 +8,6 @@ import de.hybris.platform.commerceservices.enums.UiExperienceLevel;
  */
 public interface WorldpayMerchantStrategy {
 
-    String MOBILE_MERCHANT = "mobile";
     String DESKTOP_MERCHANT = "web";
     String CUSTOMER_SERVICE_MERCHANT = "customerService";
     String REPLENISHMENT_MERCHANT = "replenishment";
@@ -22,7 +21,7 @@ public interface WorldpayMerchantStrategy {
     WorldpayMerchantConfigData getMerchant(final UiExperienceLevel uiExperienceLevel);
 
     /**
-     * Returns the merchant configured for CSCockpit
+     * Returns the merchant configured to be used when the checkout is done by a Customer Service Agent
      *
      * @return
      */

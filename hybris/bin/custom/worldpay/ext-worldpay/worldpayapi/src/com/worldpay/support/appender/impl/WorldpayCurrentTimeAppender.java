@@ -15,7 +15,7 @@ public class WorldpayCurrentTimeAppender implements WorldpaySupportEmailAppender
         final DateTime dateTime = new DateTime();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE d MMMM, H:mm:ss, zzzz (z)");
         currentTime.append(System.lineSeparator()).append("Time: ");
-        currentTime.append(TAB).append(fmt.print(dateTime)).append(System.lineSeparator());
+        currentTime.append(ONE_TAB).append(fmt.print(dateTime)).append(System.lineSeparator());
         return currentTime.toString();
     }
 }

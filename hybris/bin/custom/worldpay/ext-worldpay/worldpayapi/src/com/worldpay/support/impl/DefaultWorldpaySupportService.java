@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpaySupportService implements WorldpaySupportService {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultWorldpaySupportService.class);
@@ -25,6 +28,9 @@ public class DefaultWorldpaySupportService implements WorldpaySupportService {
     private ConfigurationService configurationService;
     private WorldpaySupportEmailService worldpaySupportEmailService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendSupportEmail() {
         final String emailAddress = configurationService.getConfiguration().getString(WORLDPAY_SUPPORT_EMAIL_CONFIG_KEY);

@@ -4,6 +4,7 @@ import com.worldpay.exception.WorldpayConfigurationException;
 import com.worldpay.order.data.WorldpayAdditionalInfoData;
 import com.worldpay.service.WorldpayUrlService;
 import com.worldpay.service.model.*;
+import com.worldpay.service.model.klarna.KlarnaPayment;
 import com.worldpay.service.model.payment.AlternativeShopperBankCodePayment;
 import com.worldpay.service.model.payment.PaymentType;
 import com.worldpay.service.model.token.TokenRequest;
@@ -24,12 +25,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayOrderServiceTest {
 
     private static final double AMOUNT = 19.3;
     private static final String BANK_CODE = "bankCode";
     private static final String FULL_SUCCESS_URL = "fullSuccessURL";
+    private static final String KLARNA_CHECKOUT_URL = "klarnaCheckoutURL";
+    private static final String KLARNA_CONFIRMATION_URL = "klarnaConfirmationURL";
     private static final String SESSION_ID = "sessionId";
     private static final String IP_ADDRESS = "ipAddress";
     private static final String DEVICE_TYPE = "deviceType";
@@ -42,14 +45,17 @@ public class DefaultWorldpayOrderServiceTest {
     private static final String AUTHENTICATED_SHOPPER_ID = "authenticatedShopperID";
     private static final String TOKEN_EVENT_REFERENCE = "tokenEventReference";
     private static final String TOKEN_REASON = "tokenReason";
+    private static final String COUNTRY_CODE = "countryCode";
+    private static final String LANGUAGE_CODE = "languageCode";
+    private static final String EXTRA_DATA = "extraData";
 
     @InjectMocks
-    private DefaultWorldpayOrderService testObj = new DefaultWorldpayOrderService();
+    private DefaultWorldpayOrderService testObj;
 
     @Mock
     private CommonI18NService commonI18NServiceMock;
     @Mock
-    private WorldpayUrlService worldpayUrlService;
+    private WorldpayUrlService worldpayUrlServiceMock;
     @Mock
     private CurrencyModel currencyModelMock;
     @Mock
@@ -60,6 +66,7 @@ public class DefaultWorldpayOrderServiceTest {
     private Amount amountMock;
     @Mock
     private WorldpayAdditionalInfoData worldpayAdditionalInfoDataMock;
+
 
     @Test
     public void shouldFormatValue() {
@@ -146,9 +153,9 @@ public class DefaultWorldpayOrderServiceTest {
 
     @Test
     public void shouldCreatePaymentForIdealSSL() throws WorldpayConfigurationException {
-        when(worldpayUrlService.getFullSuccessURL()).thenReturn(FULL_SUCCESS_URL);
+        when(worldpayUrlServiceMock.getFullSuccessURL()).thenReturn(FULL_SUCCESS_URL);
 
-        final AlternativeShopperBankCodePayment result = (AlternativeShopperBankCodePayment) testObj.createPayment("IDEAL-SSL", BANK_CODE, null);
+        final AlternativeShopperBankCodePayment result = (AlternativeShopperBankCodePayment) testObj.createBankPayment("IDEAL-SSL", BANK_CODE);
 
         assertEquals(BANK_CODE, result.getShopperBankCode());
         assertEquals(PaymentType.IDEAL, result.getPaymentType());
@@ -157,9 +164,9 @@ public class DefaultWorldpayOrderServiceTest {
 
     @Test
     public void shouldReturnNullWhenPaymentTypeIsNotFound() throws WorldpayConfigurationException {
-        when(worldpayUrlService.getFullSuccessURL()).thenReturn(FULL_SUCCESS_URL);
+        when(worldpayUrlServiceMock.getFullSuccessURL()).thenReturn(FULL_SUCCESS_URL);
 
-        final AlternativeShopperBankCodePayment result = (AlternativeShopperBankCodePayment) testObj.createPayment("notfound", BANK_CODE, null);
+        final AlternativeShopperBankCodePayment result = (AlternativeShopperBankCodePayment) testObj.createBankPayment("notfound", BANK_CODE);
 
         assertNull(result);
     }
@@ -178,5 +185,20 @@ public class DefaultWorldpayOrderServiceTest {
         testObj.createAmount(currency, 8500);
 
         verify(commonI18NServiceMock).convertAndRoundCurrency(Math.pow(10, 2), 1, 2, 8500d);
+    }
+
+    @Test
+    public void shouldCreateKlarnaPayment() throws WorldpayConfigurationException {
+        when(worldpayUrlServiceMock.getBaseWebsiteUrlForSite()).thenReturn(KLARNA_CHECKOUT_URL);
+        when(worldpayUrlServiceMock.getKlarnaConfirmationURL()).thenReturn(KLARNA_CONFIRMATION_URL);
+
+        final KlarnaPayment result = (KlarnaPayment) testObj.createKlarnaPayment(COUNTRY_CODE, LANGUAGE_CODE, EXTRA_DATA);
+
+        assertEquals(PaymentType.KLARNASSL, result.getPaymentType());
+        assertEquals(COUNTRY_CODE, result.getPurchaseCountry());
+        assertEquals(LANGUAGE_CODE, result.getShopperLocale());
+        assertEquals(KLARNA_CHECKOUT_URL, result.getMerchantUrls().getCheckoutURL());
+        assertEquals(KLARNA_CONFIRMATION_URL, result.getMerchantUrls().getConfirmationURL());
+        assertEquals(EXTRA_DATA, result.getExtraMerchantData());
     }
 }

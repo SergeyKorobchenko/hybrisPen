@@ -9,6 +9,9 @@ import de.hybris.platform.core.model.order.payment.PaymentInfoModel;
 import de.hybris.platform.core.model.order.payment.WorldpayAPMPaymentInfoModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
+/**
+ * Populating AbstractOrderData from AbstractOrderModel
+ */
 public class WorldpayAPMPaymentInfoPopulator implements Populator<AbstractOrderModel, AbstractOrderData> {
 
     /**

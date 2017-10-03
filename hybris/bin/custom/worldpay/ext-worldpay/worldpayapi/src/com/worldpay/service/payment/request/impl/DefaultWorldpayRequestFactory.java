@@ -15,6 +15,7 @@ import com.worldpay.service.model.payment.PaymentBuilder;
 import com.worldpay.service.model.token.CardDetails;
 import com.worldpay.service.model.token.Token;
 import com.worldpay.service.model.token.TokenRequest;
+import com.worldpay.service.payment.WorldpayKlarnaStrategy;
 import com.worldpay.service.payment.WorldpayOrderService;
 import com.worldpay.service.payment.WorldpayTokenEventReferenceCreationStrategy;
 import com.worldpay.service.payment.request.WorldpayRequestFactory;
@@ -25,6 +26,7 @@ import com.worldpay.service.request.UpdateTokenServiceRequest;
 import com.worldpay.service.response.CreateTokenResponse;
 import com.worldpay.strategy.WorldpayDeliveryAddressStrategy;
 import de.hybris.platform.commerceservices.customer.CustomerEmailResolutionService;
+import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.payment.CreditCardPaymentInfoModel;
@@ -47,6 +49,8 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
     private CustomerEmailResolutionService customerEmailResolutionService;
     private RecurringGenerateMerchantTransactionCodeStrategy recurringGenerateMerchantTransactionCodeStrategy;
     private WorldpayDeliveryAddressStrategy worldpayDeliveryAddressStrategy;
+    private CommerceCommonI18NService commerceCommonI18NService;
+    private WorldpayKlarnaStrategy worldpayKlarnaStrategy;
 
     protected static final String TOKEN_UPDATED = "Token updated ";
     protected static final String TOKEN_DELETED = "Token deleted ";
@@ -54,93 +58,86 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
 
     /**
      * {@inheritDoc}
-     *
-     * @see WorldpayRequestFactory#buildTokenRequest(MerchantInfo, CartModel, CSEAdditionalAuthInfo, WorldpayAdditionalInfoData)
      */
     @Override
     public CreateTokenServiceRequest buildTokenRequest(MerchantInfo merchantInfo, CartModel cartModel, CSEAdditionalAuthInfo cseAdditionalAuthInfo,
                                                        WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayConfigurationException {
-        final WorldpayConfig worldpayConfig = getWorldpayConfigLookupService().lookupConfig();
+        final WorldpayConfig worldpayConfig = worldpayConfigLookupService.lookupConfig();
 
         final Address billingAddress = getBillingAddress(cartModel, cseAdditionalAuthInfo);
         final String tokenEventReference = getWorldpayTokenEventReferenceCreationStrategy().createTokenEventReference();
-        final TokenRequest tokenRequest = getWorldpayOrderService().createTokenRequest(tokenEventReference, null);
+        final TokenRequest tokenRequest = worldpayOrderService.createTokenRequest(tokenEventReference, null);
         final Cse csePayment = createCsePayment(cseAdditionalAuthInfo, billingAddress);
         return createTokenRequest(worldpayConfig, merchantInfo, worldpayAdditionalInfoData.getAuthenticatedShopperId(), csePayment, tokenRequest);
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @see WorldpayRequestFactory#buildTokenUpdateRequest(MerchantInfo, CSEAdditionalAuthInfo, WorldpayAdditionalInfoData, CreateTokenResponse)
-     * */
+     */
     @Override
     public UpdateTokenServiceRequest buildTokenUpdateRequest(final MerchantInfo merchantInfo, final CSEAdditionalAuthInfo cseAdditionalAuthInfo,
                                                              final WorldpayAdditionalInfoData worldpayAdditionalInfoData,
                                                              final CreateTokenResponse createTokenResponse) throws WorldpayConfigurationException {
-        final WorldpayConfig worldpayConfig = getWorldpayConfigLookupService().lookupConfig();
-        final TokenRequest tokenRequest = getWorldpayOrderService().createTokenRequest(getWorldpayTokenEventReferenceCreationStrategy().createTokenEventReference(), TOKEN_UPDATED + now().toString(TOKEN_DATE_FORMAT));
+        final WorldpayConfig worldpayConfig = worldpayConfigLookupService.lookupConfig();
+        final TokenRequest tokenRequest = worldpayOrderService.createTokenRequest(
+                getWorldpayTokenEventReferenceCreationStrategy().createTokenEventReference(),
+                TOKEN_UPDATED + now().toString(TOKEN_DATE_FORMAT));
 
         final String paymentTokenID = createTokenResponse.getToken().getTokenDetails().getPaymentTokenID();
         final CardDetails cardDetails = new CardDetails();
         final Date expiryDate = new Date(cseAdditionalAuthInfo.getExpiryMonth(), cseAdditionalAuthInfo.getExpiryYear());
         cardDetails.setExpiryDate(expiryDate);
         cardDetails.setCardHolderName(cseAdditionalAuthInfo.getCardHolderName());
-        return createUpdateTokenServiceRequest(merchantInfo, worldpayAdditionalInfoData, worldpayConfig, tokenRequest, paymentTokenID, cardDetails);
+        return createUpdateTokenServiceRequest(merchantInfo, worldpayAdditionalInfoData,
+                worldpayConfig, tokenRequest, paymentTokenID, cardDetails);
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @see WorldpayRequestFactory#buildTokenDeleteRequest(MerchantInfo, CreditCardPaymentInfoModel)
      */
     @Override
     public DeleteTokenServiceRequest buildTokenDeleteRequest(final MerchantInfo merchantInfo, final CreditCardPaymentInfoModel creditCardPaymentInfoModel) throws WorldpayConfigurationException {
-        final WorldpayConfig worldpayConfig = getWorldpayConfigLookupService().lookupConfig();
-        final TokenRequest tokenRequest = getWorldpayOrderService().createTokenRequest(creditCardPaymentInfoModel.getEventReference(), TOKEN_DELETED + now().toString(TOKEN_DATE_FORMAT));
+        final WorldpayConfig worldpayConfig = worldpayConfigLookupService.lookupConfig();
+        final TokenRequest tokenRequest = worldpayOrderService.createTokenRequest(creditCardPaymentInfoModel.getEventReference(), TOKEN_DELETED + now().toString(TOKEN_DATE_FORMAT));
         return createDeleteTokenServiceRequest(merchantInfo, worldpayConfig, creditCardPaymentInfoModel, tokenRequest);
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @see WorldpayRequestFactory#buildDirectAuthoriseRequest(MerchantInfo, CartModel, WorldpayAdditionalInfoData)
      */
     @Override
     public DirectAuthoriseServiceRequest buildDirectAuthoriseRequest(MerchantInfo merchantInfo, CartModel cartModel, WorldpayAdditionalInfoData worldpayAdditionalInfoData)
             throws WorldpayConfigurationException {
-        final String orderCode = getRecurringGenerateMerchantTransactionCodeStrategy().generateCode(cartModel);
-        final WorldpayConfig config = getWorldpayConfigLookupService().lookupConfig();
-        final Amount amount = getWorldpayOrderService().createAmount(cartModel.getCurrency(), cartModel.getTotalPrice());
-        final BasicOrderInfo orderInfo = getWorldpayOrderService().createBasicOrderInfo(orderCode, orderCode, amount);
+        final String orderCode = recurringGenerateMerchantTransactionCodeStrategy.generateCode(cartModel);
+        final WorldpayConfig config = worldpayConfigLookupService.lookupConfig();
+        final Amount amount = worldpayOrderService.createAmount(cartModel.getCurrency(), cartModel.getTotalPrice());
+        final BasicOrderInfo orderInfo = worldpayOrderService.createBasicOrderInfo(orderCode, orderCode, amount);
 
         final Token token = createToken(((CreditCardPaymentInfoModel) cartModel.getPaymentInfo()).getSubscriptionId(), worldpayAdditionalInfoData.getSecurityCode());
 
         final CustomerModel customerModel = (CustomerModel) cartModel.getUser();
 
-        final String shopperEmailAddress = getCustomerEmailResolutionService().getEmailForCustomer(customerModel);
+        final String shopperEmailAddress = customerEmailResolutionService.getEmailForCustomer(customerModel);
 
-        final Session session = getWorldpayOrderService().createSession(worldpayAdditionalInfoData);
-        final Browser browser = getWorldpayOrderService().createBrowser(worldpayAdditionalInfoData);
+        final Session session = worldpayOrderService.createSession(worldpayAdditionalInfoData);
+        final Browser browser = worldpayOrderService.createBrowser(worldpayAdditionalInfoData);
 
-        final Shopper authenticatedShopper = getWorldpayOrderService().createAuthenticatedShopper(shopperEmailAddress, worldpayAdditionalInfoData.getAuthenticatedShopperId(), session, browser);
+        final Shopper authenticatedShopper = worldpayOrderService.createAuthenticatedShopper(shopperEmailAddress, worldpayAdditionalInfoData.getAuthenticatedShopperId(), session, browser);
         final AddressModel deliveryAddress = worldpayDeliveryAddressStrategy.getDeliveryAddress(cartModel);
-        return createTokenisedDirectAuthoriseRequest(config, merchantInfo, orderInfo, token, authenticatedShopper, getWorldpayAddressConverter().convert(deliveryAddress));
+        return createTokenisedDirectAuthoriseRequest(config, merchantInfo, orderInfo, token, authenticatedShopper, worldpayAddressConverter.convert(deliveryAddress));
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @see WorldpayRequestFactory#build3dDirectAuthoriseRequest(MerchantInfo, String, WorldpayAdditionalInfoData, String, String)
      */
     @Override
     public DirectAuthoriseServiceRequest build3dDirectAuthoriseRequest(MerchantInfo merchantInfo, String worldpayOrderCode,
                                                                        WorldpayAdditionalInfoData worldpayAdditionalInfoData,
                                                                        String paRes, String cookie) throws WorldpayConfigurationException {
-        final WorldpayConfig config = getWorldpayConfigLookupService().lookupConfig();
-        final BasicOrderInfo orderInfo = getWorldpayOrderService().createBasicOrderInfo(worldpayOrderCode, worldpayOrderCode, null);
+        final WorldpayConfig config = worldpayConfigLookupService.lookupConfig();
+        final BasicOrderInfo orderInfo = worldpayOrderService.createBasicOrderInfo(worldpayOrderCode, worldpayOrderCode, null);
 
-        final Session session = getWorldpayOrderService().createSession(worldpayAdditionalInfoData);
+        final Session session = worldpayOrderService.createSession(worldpayAdditionalInfoData);
 
         final DirectAuthoriseServiceRequest directAuthoriseServiceRequest = createDirect3DAuthoriseRequest(config, merchantInfo, orderInfo,
                 session, paRes);
@@ -150,61 +147,92 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
 
     /**
      * {@inheritDoc}
-     *
-     * @see WorldpayRequestFactory#buildDirectAuthoriseBankTransferRequest(MerchantInfo, CartModel, BankTransferAdditionalAuthInfo, WorldpayAdditionalInfoData)
      */
     @Override
     public DirectAuthoriseServiceRequest buildDirectAuthoriseBankTransferRequest(final MerchantInfo merchantInfo, final CartModel cartModel,
                                                                                  final BankTransferAdditionalAuthInfo bankTransferAdditionalAuthInfo,
                                                                                  final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayConfigurationException {
-        final String orderCode = getRecurringGenerateMerchantTransactionCodeStrategy().generateCode(cartModel);
-        final WorldpayConfig config = getWorldpayConfigLookupService().lookupConfig();
+        final String orderCode = recurringGenerateMerchantTransactionCodeStrategy.generateCode(cartModel);
+        final WorldpayConfig config = worldpayConfigLookupService.lookupConfig();
 
-        final Amount amount = getWorldpayOrderService().createAmount(cartModel.getCurrency(), cartModel.getTotalPrice());
-        final BasicOrderInfo orderInfo = getWorldpayOrderService().createBasicOrderInfo(orderCode, orderCode, amount);
+        final Amount amount = worldpayOrderService.createAmount(cartModel.getCurrency(), cartModel.getTotalPrice());
+        final BasicOrderInfo orderInfo = worldpayOrderService.createBasicOrderInfo(orderCode, orderCode, amount);
 
         final Address billingAddress = getBillingAddress(cartModel, bankTransferAdditionalAuthInfo);
         final AddressModel deliveryAddressModel = worldpayDeliveryAddressStrategy.getDeliveryAddress(cartModel);
 
-        final Address shippingAddress = getWorldpayAddressConverter().convert(deliveryAddressModel);
+        final Address shippingAddress = worldpayAddressConverter.convert(deliveryAddressModel);
 
-        final Payment payment = getWorldpayOrderService().createPayment(bankTransferAdditionalAuthInfo.getPaymentMethod(),
-                bankTransferAdditionalAuthInfo.getShopperBankCode(), shippingAddress.getCountryCode());
+        final Payment payment = worldpayOrderService.createBankPayment(bankTransferAdditionalAuthInfo.getPaymentMethod(),
+                bankTransferAdditionalAuthInfo.getShopperBankCode());
 
         final CustomerModel customerModel = (CustomerModel) cartModel.getUser();
 
-        final String shopperEmailAddress = getCustomerEmailResolutionService().getEmailForCustomer(customerModel);
+        final String shopperEmailAddress = customerEmailResolutionService.getEmailForCustomer(customerModel);
         final String statementNarrative = bankTransferAdditionalAuthInfo.getStatementNarrative();
 
-        final Session session = getWorldpayOrderService().createSession(worldpayAdditionalInfoData);
-        final Browser browser = getWorldpayOrderService().createBrowser(worldpayAdditionalInfoData);
-        final Shopper shopper = getWorldpayOrderService().createShopper(shopperEmailAddress, session, browser);
+        final Session session = worldpayOrderService.createSession(worldpayAdditionalInfoData);
+        final Browser browser = worldpayOrderService.createBrowser(worldpayAdditionalInfoData);
+        final Shopper shopper = worldpayOrderService.createShopper(shopperEmailAddress, session, browser);
         return createDirectAuthoriseRequest(config, merchantInfo, orderInfo, payment, shopper, shippingAddress, billingAddress, statementNarrative);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DirectAuthoriseServiceRequest buildDirectAuthoriseRecurringPayment(final MerchantInfo merchantInfo, final AbstractOrderModel abstractOrderModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayConfigurationException {
-        final WorldpayConfig config = getWorldpayConfigLookupService().lookupConfig();
-        final String worldpayOrderCode = getRecurringGenerateMerchantTransactionCodeStrategy().generateCode(abstractOrderModel);
-        final Amount amount = getWorldpayOrderService().createAmount(abstractOrderModel.getCurrency(), abstractOrderModel.getTotalPrice());
-        final BasicOrderInfo orderInfo = getWorldpayOrderService().createBasicOrderInfo(worldpayOrderCode, worldpayOrderCode, amount);
-        final Session session = getWorldpayOrderService().createSession(worldpayAdditionalInfoData);
-        final Browser browser = getWorldpayOrderService().createBrowser(worldpayAdditionalInfoData);
+    public DirectAuthoriseServiceRequest buildDirectAuthoriseRecurringPayment(final MerchantInfo merchantInfo, final AbstractOrderModel abstractOrderModel,
+                                                                              final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayConfigurationException {
+        final WorldpayConfig config = worldpayConfigLookupService.lookupConfig();
+        final String worldpayOrderCode = recurringGenerateMerchantTransactionCodeStrategy.generateCode(abstractOrderModel);
+        final Amount amount = worldpayOrderService.createAmount(abstractOrderModel.getCurrency(), abstractOrderModel.getTotalPrice());
+        final BasicOrderInfo orderInfo = worldpayOrderService.createBasicOrderInfo(worldpayOrderCode, worldpayOrderCode, amount);
+        final Session session = worldpayOrderService.createSession(worldpayAdditionalInfoData);
+        final Browser browser = worldpayOrderService.createBrowser(worldpayAdditionalInfoData);
         final String authenticatedShopperId = worldpayAdditionalInfoData.getAuthenticatedShopperId();
-        final String customerEmail = getCustomerEmailResolutionService().getEmailForCustomer((CustomerModel) abstractOrderModel.getUser());
-        final Shopper shopper = getWorldpayOrderService().createAuthenticatedShopper(customerEmail, authenticatedShopperId, session, browser);
+        final String customerEmail = customerEmailResolutionService.getEmailForCustomer((CustomerModel) abstractOrderModel.getUser());
+        final Shopper shopper = worldpayOrderService.createAuthenticatedShopper(customerEmail, authenticatedShopperId, session, browser);
         final Token token = createToken(((CreditCardPaymentInfoModel) abstractOrderModel.getPaymentInfo()).getSubscriptionId(), worldpayAdditionalInfoData.getSecurityCode());
-        final Address shippingAddress = getWorldpayAddressConverter().convert(worldpayDeliveryAddressStrategy.getDeliveryAddress(abstractOrderModel));
+        final Address shippingAddress = worldpayAddressConverter.convert(worldpayDeliveryAddressStrategy.getDeliveryAddress(abstractOrderModel));
         return createTokenisedDirectAuthoriseRequest(config, merchantInfo, orderInfo, token, shopper, shippingAddress);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DirectAuthoriseServiceRequest buildDirectAuthoriseKlarnaRequest(final MerchantInfo merchantInfo, final CartModel cartModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final AdditionalAuthInfo additionalAuthInfo) throws WorldpayConfigurationException {
+        final String orderCode = recurringGenerateMerchantTransactionCodeStrategy.generateCode(cartModel);
+        final WorldpayConfig config = worldpayConfigLookupService.lookupConfig();
+
+        final Amount amount = worldpayOrderService.createAmount(cartModel.getCurrency(), cartModel.getTotalPrice());
+        final BasicOrderInfo orderInfo = worldpayOrderService.createBasicOrderInfo(orderCode, orderCode, amount);
+
+        final Address billingAddress = getBillingAddress(cartModel, additionalAuthInfo);
+        final AddressModel deliveryAddressModel = worldpayDeliveryAddressStrategy.getDeliveryAddress(cartModel);
+
+        final Address shippingAddress = worldpayAddressConverter.convert(deliveryAddressModel);
+
+        final CustomerModel customerModel = (CustomerModel) cartModel.getUser();
+
+        final Payment payment = worldpayOrderService.createKlarnaPayment(billingAddress.getCountryCode(), commerceCommonI18NService.getLocaleForLanguage(customerModel.getSessionLanguage()).toLanguageTag(), null);
+        final OrderLines orderLines = worldpayKlarnaStrategy.createOrderLines(cartModel);
+        final String shopperEmailAddress = customerEmailResolutionService.getEmailForCustomer(customerModel);
+        final String statementNarrative = additionalAuthInfo.getStatementNarrative();
+
+        final Session session = worldpayOrderService.createSession(worldpayAdditionalInfoData);
+        final Browser browser = worldpayOrderService.createBrowser(worldpayAdditionalInfoData);
+        final Shopper shopper = worldpayOrderService.createShopper(shopperEmailAddress, session, browser);
+        return createKlarnaDirectAuthoriseRequest(config, merchantInfo, orderInfo, payment, shopper, shippingAddress, billingAddress, statementNarrative, orderLines);
     }
 
     protected Address getBillingAddress(final CartModel cartModel, final AdditionalAuthInfo additionalAuthInfo) {
         final AddressModel deliveryAddressModel = cartModel.getDeliveryAddress();
         if (deliveryAddressModel != null && additionalAuthInfo.getUsingShippingAsBilling()) {
-            return getWorldpayAddressConverter().convert(deliveryAddressModel);
+            return worldpayAddressConverter.convert(deliveryAddressModel);
         } else {
             if (cartModel.getPaymentAddress() != null) {
-                return getWorldpayAddressConverter().convert(cartModel.getPaymentAddress());
+                return worldpayAddressConverter.convert(cartModel.getPaymentAddress());
             }
         }
         return null;
@@ -228,6 +256,10 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
         return DirectAuthoriseServiceRequest.createDirectAuthoriseRequest(config, merchantInfo, orderInfo, payment, shopper, shopper.getSession(), shippingAddress, billingAddress, statementNarrative);
     }
 
+    protected DirectAuthoriseServiceRequest createKlarnaDirectAuthoriseRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo, final BasicOrderInfo orderInfo, final Payment payment, final Shopper shopper, final Address shippingAddress, final Address billingAddress, final String statementNarrative, final OrderLines orderLines) {
+        return DirectAuthoriseServiceRequest.createKlarnaDirectAuthoriseRequest(worldpayConfig, merchantInfo, orderInfo, payment, shopper, shopper.getSession(), shippingAddress, billingAddress, statementNarrative, orderLines);
+    }
+
     protected Token createToken(final String subscriptionId, final String securityCode) {
         return PaymentBuilder.createToken(subscriptionId, securityCode);
     }
@@ -236,15 +268,18 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
         return PaymentBuilder.createCSE(cseAdditionalAuthInfo.getEncryptedData(), billingAddress);
     }
 
-    protected DirectAuthoriseServiceRequest createDirect3DAuthoriseRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo, final BasicOrderInfo basicOrderInfo, final Session session, final String paRes) {
+    protected DirectAuthoriseServiceRequest createDirect3DAuthoriseRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo,
+                                                                           final BasicOrderInfo basicOrderInfo, final Session session, final String paRes) {
         return DirectAuthoriseServiceRequest.createDirect3DAuthoriseRequest(worldpayConfig, merchantInfo, basicOrderInfo, session, paRes);
     }
 
-    protected DirectAuthoriseServiceRequest createTokenisedDirectAuthoriseRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo, final BasicOrderInfo basicOrderInfo, final Token token, final Shopper shopper, final Address shippingAddress) {
+    protected DirectAuthoriseServiceRequest createTokenisedDirectAuthoriseRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo,
+                                                                                  final BasicOrderInfo basicOrderInfo, final Token token, final Shopper shopper, final Address shippingAddress) {
         return DirectAuthoriseServiceRequest.createTokenisedDirectAuthoriseRequest(worldpayConfig, merchantInfo, basicOrderInfo, token, shopper, shippingAddress, null);
     }
 
-    protected CreateTokenServiceRequest createTokenRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo, final String authenticatedShopperId, final Payment csePayment, final TokenRequest tokenRequest) {
+    protected CreateTokenServiceRequest createTokenRequest(final WorldpayConfig worldpayConfig, final MerchantInfo merchantInfo, final String authenticatedShopperId,
+                                                           final Payment csePayment, final TokenRequest tokenRequest) {
         return CreateTokenServiceRequest.createTokenRequest(worldpayConfig, merchantInfo, authenticatedShopperId, csePayment, tokenRequest);
     }
 
@@ -257,17 +292,9 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
         this.worldpayTokenEventReferenceCreationStrategy = worldpayTokenEventReferenceCreationStrategy;
     }
 
-    private WorldpayOrderService getWorldpayOrderService() {
-        return worldpayOrderService;
-    }
-
     @Required
     public void setWorldpayOrderService(final WorldpayOrderService worldpayOrderService) {
         this.worldpayOrderService = worldpayOrderService;
-    }
-
-    private Converter<AddressModel, Address> getWorldpayAddressConverter() {
-        return worldpayAddressConverter;
     }
 
     @Required
@@ -275,26 +302,15 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
         this.worldpayAddressConverter = worldpayAddressConverter;
     }
 
-    private WorldpayConfigLookupService getWorldpayConfigLookupService() {
-        return worldpayConfigLookupService;
-    }
-
     @Required
     public void setWorldpayConfigLookupService(final WorldpayConfigLookupService worldpayConfigLookupService) {
         this.worldpayConfigLookupService = worldpayConfigLookupService;
     }
 
-    private CustomerEmailResolutionService getCustomerEmailResolutionService() {
-        return customerEmailResolutionService;
-    }
 
     @Required
     public void setCustomerEmailResolutionService(final CustomerEmailResolutionService customerEmailResolutionService) {
         this.customerEmailResolutionService = customerEmailResolutionService;
-    }
-
-    private RecurringGenerateMerchantTransactionCodeStrategy getRecurringGenerateMerchantTransactionCodeStrategy() {
-        return recurringGenerateMerchantTransactionCodeStrategy;
     }
 
     @Required
@@ -305,5 +321,15 @@ public class DefaultWorldpayRequestFactory implements WorldpayRequestFactory {
     @Required
     public void setWorldpayDeliveryAddressStrategy(final WorldpayDeliveryAddressStrategy worldpayDeliveryAddressStrategy) {
         this.worldpayDeliveryAddressStrategy = worldpayDeliveryAddressStrategy;
+    }
+
+    @Required
+    public void setCommerceCommonI18NService(final CommerceCommonI18NService commerceCommonI18NService) {
+        this.commerceCommonI18NService = commerceCommonI18NService;
+    }
+
+    @Required
+    public void setWorldpayKlarnaStrategy(final WorldpayKlarnaStrategy worldpayKlarnaStrategy) {
+        this.worldpayKlarnaStrategy = worldpayKlarnaStrategy;
     }
 }

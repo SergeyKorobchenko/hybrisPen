@@ -34,10 +34,10 @@ import static org.mockito.Mockito.*;
 @RunWith (MockitoJUnitRunner.class)
 public class WorldpayOrderModificationListenerTest {
 
-    public static final String WORLDPAY_ORDER_CODE = "worldpayOrderCode";
-    public static final String ORDER_CODE = "orderCode";
-    public static final String SERIALIZED = "serialized";
-    public static final String RETURN_CODE = "A19";
+    private static final String WORLDPAY_ORDER_CODE = "worldpayOrderCode";
+    private static final String ORDER_CODE = "orderCode";
+    private static final String SERIALIZED = "serialized";
+    private static final String RETURN_CODE = "A19";
 
     @InjectMocks
     private WorldpayOrderModificationListener testObj = new WorldpayOrderModificationListener();

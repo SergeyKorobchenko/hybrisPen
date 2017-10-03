@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Required;
 
 import java.util.Map;
 
+/**
+ * Default implementation of Worldpay merchant strategy
+ */
 public class DefaultWorldpayMerchantStrategy implements WorldpayMerchantStrategy {
 
     private WorldpayMerchantConfigDataService worldpayMerchantConfigDataService;
@@ -15,7 +18,7 @@ public class DefaultWorldpayMerchantStrategy implements WorldpayMerchantStrategy
     @Override
     public WorldpayMerchantConfigData getMerchant(final UiExperienceLevel uiExperienceLevel) {
         final Map<String, WorldpayMerchantConfigData> merchantConfiguration = worldpayMerchantConfigDataService.getMerchantConfiguration();
-        return UiExperienceLevel.MOBILE.equals(uiExperienceLevel) ? merchantConfiguration.get(MOBILE_MERCHANT) : merchantConfiguration.get(DESKTOP_MERCHANT);
+        return merchantConfiguration.get(DESKTOP_MERCHANT);
     }
 
     @Override

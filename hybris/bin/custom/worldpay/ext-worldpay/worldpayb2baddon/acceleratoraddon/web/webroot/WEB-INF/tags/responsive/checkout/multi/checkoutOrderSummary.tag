@@ -27,7 +27,7 @@
         <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />
 
         <c:forEach items="${cartData.pickupOrderGroups}" var="groupData" varStatus="status">
-            <multi-checkout:pickupCartItems cartData="${cartData}" groupData="${groupData}" index="${status.index}" showHead="true" />
+            <multi-checkout:pickupCartItems cartData="${cartData}" groupData="${groupData}" showHead="true" />
         </c:forEach>
 
         <order:appliedVouchers order="${cartData}" />

@@ -4,10 +4,22 @@ import com.worldpay.exception.WorldpayException;
 import com.worldpay.worldpayresponsemock.form.ResponseForm;
 
 /**
- * Created by admin on 26/04/16.
+ * Building Worldpay notification response
  */
 public interface WorldpayNotificationResponseBuilder {
+
+    /**
+     *
+     * @param responseForm
+     * @return
+     * @throws WorldpayException
+     */
     String buildResponse(ResponseForm responseForm) throws WorldpayException;
 
+    /**
+     *
+     * @param responseXML
+     * @return
+     */
     String prettifyXml(String responseXML);
 }

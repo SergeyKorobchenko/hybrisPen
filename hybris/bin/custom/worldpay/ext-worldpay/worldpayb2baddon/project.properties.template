@@ -26,10 +26,10 @@ storefront.supportedUiExperienceLevels.powertools=DESKTOP
 # Payment Service provider.
 payment.service-provider.name=Worldpay
 
-# Set the HOP PCI strategy at this level so that it's consistent across store and cscockpit
+# Set the HOP PCI strategy at this level so that it's consistent across stores
 hop.pci.strategy.enabled=true
 
-worldpayb2baddon.javascript.paths.responsive=/responsive/common/js/worldpayaddon.js;/responsive/common/js/worldpayaddonCSE.js;/responsive/common/js/worldpayaddonRedirect.js;/responsive/common/js/worldpayaddonQuote.js
+worldpayb2baddon.javascript.paths.responsive=/responsive/common/js/worldpayaddon.js;/responsive/common/js/worldpayaddonCSE.js;/responsive/common/js/worldpayaddonRedirect.js
 worldpayb2baddon.css.paths.responsive=/responsive/common/css/worldpayaddon.css
 
 worldpay.addon.prefix=addon:/worldpayb2baddon/

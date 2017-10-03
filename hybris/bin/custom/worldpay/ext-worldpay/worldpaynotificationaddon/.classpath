@@ -9,11 +9,9 @@
 	<classpathentry exported="true" kind="src" path="/ticketsystem" />
 	<classpathentry exported="true" kind="src" path="/addonsupport" />
 	<classpathentry exported="true" kind="src" path="/worldpayapi" />
-	<classpathentry exported="true" kind="src" path="/hmc" />
 	<classpathentry exported="true" kind="lib" path="lib/gson-2.6.2.jar" />
 	<classpathentry exported="true" kind="lib" path="resources" />
 	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
-	<classpathentry exported="true" output="eclipsebin/hmc/classes" kind="src" path="hmc/src" />
 	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
 	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
 				

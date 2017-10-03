@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Required;
 
 import java.util.Map;
 
+/**
+ * Strategy for Worldpay ASM Merchants
+ */
 public class DefaultWorldpayASMMerchantStrategy implements WorldpayMerchantStrategy {
 
-    protected static final String ASM_MERCHANT = "asm";
+    private static final String ASM_MERCHANT = "asm";
 
     private WorldpayMerchantConfigDataService worldpayMerchantConfigDataService;
     private WorldpayASMService worldpayASMService;
@@ -22,7 +25,7 @@ public class DefaultWorldpayASMMerchantStrategy implements WorldpayMerchantStrat
         if (worldpayASMService.isASMEnabled()) {
             return merchantConfiguration.get(ASM_MERCHANT);
         } else {
-            return UiExperienceLevel.MOBILE.equals(uiExperienceLevel) ? merchantConfiguration.get(MOBILE_MERCHANT) : merchantConfiguration.get(DESKTOP_MERCHANT);
+            return merchantConfiguration.get(DESKTOP_MERCHANT);
         }
     }
 

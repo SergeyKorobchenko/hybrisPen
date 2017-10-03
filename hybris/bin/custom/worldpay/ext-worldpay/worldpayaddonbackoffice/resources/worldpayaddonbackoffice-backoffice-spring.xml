@@ -16,7 +16,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="worldpayaddonbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+	<bean id="worldpayaddonbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" init-method="init" lazy-init="false">
   		<property name="location" value="/worldpayaddonbackoffice-backoffice-labels/"/>
   		<property name="name" value="labels"/>
   	</bean>

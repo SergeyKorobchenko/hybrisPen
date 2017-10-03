@@ -69,7 +69,7 @@ public class DefaultWorldpayTokenCreateResponseBuilderTest {
                 paymentInstrument = (PaymentInstrument) o;
             }
         }
-        final CardDetails cardDetails = (CardDetails) paymentInstrument.getCardDetailsOrPaypal().get(0);
+        final CardDetails cardDetails = (CardDetails) paymentInstrument.getCardDetailsOrPaypalOrSepaOrEmvcoTokenDetails().get(0);
         final Derived derived = cardDetails.getDerived();
         final Date expiryDate = cardDetails.getExpiryDate().getDate();
 

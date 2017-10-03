@@ -5,11 +5,18 @@ import de.hybris.platform.order.CartService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Required;
 
+/**
+ * Creates Token event reference
+ */
 public class DefaultWorldpayTokenEventReferenceCreationStrategy implements WorldpayTokenEventReferenceCreationStrategy {
 
     public static final String UNDERSCORE = "_";
     private CartService cartService;
 
+    /**
+     * Create Token event reference from cart code
+     * @return
+     */
     @Override
     public String createTokenEventReference() {
         final String cartCode = cartService.getSessionCart().getCode();

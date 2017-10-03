@@ -45,9 +45,9 @@ public class WorldpayCloneCartAction extends AbstractProceduralAction<Replenishm
         clone.setDeliveryAddress(cartToOrderCronJob.getDeliveryAddress());
         clone.setPaymentInfo(cartToOrderCronJob.getPaymentInfo());
         clone.setStatus(OrderStatus.CREATED);
-        clone.setAllPromotionResults(Collections.EMPTY_SET);
-        clone.setPaymentTransactions(Collections.EMPTY_LIST);
-        clone.setPermissionResults(Collections.EMPTY_LIST);
+        clone.setAllPromotionResults(Collections.emptySet());
+        clone.setPaymentTransactions(Collections.emptyList());
+        clone.setPermissionResults(Collections.emptyList());
         clone.setGuid(guidKeyGenerator.generate().toString());
         this.modelService.save(clone);
         processParameterHelper.setProcessParameter(process, "cart", clone);

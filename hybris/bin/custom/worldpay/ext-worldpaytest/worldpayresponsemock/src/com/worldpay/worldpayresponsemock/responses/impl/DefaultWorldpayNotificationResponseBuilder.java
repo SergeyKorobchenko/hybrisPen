@@ -40,6 +40,9 @@ import static com.worldpay.worldpayresponsemock.builders.PaymentBuilder.aPayment
 import static com.worldpay.worldpayresponsemock.builders.TokenBuilder.aTokenBuilder;
 import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpayNotificationResponseBuilder implements WorldpayNotificationResponseBuilder {
 
     private static final Logger LOG = Logger.getLogger(WorldpayNotificationResponseBuilder.class);
@@ -48,6 +51,9 @@ public class DefaultWorldpayNotificationResponseBuilder implements WorldpayNotif
     private static final String IN_PROCESS_AUTHORISED = "IN_PROCESS_AUTHORISED";
     private static final String TOKEN = "Token";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String buildResponse(ResponseForm responseForm) throws WorldpayException {
         final PaymentService paymentService = new PaymentService();

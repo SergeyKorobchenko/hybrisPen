@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 import static com.worldpay.payment.TransactionStatus.AUTHORISED;
 
 /**
- *   Customized AuthorizePaymentAction to authorize using Worldpay
+ * Customized AuthorizePaymentAction to authorize using Worldpay
  */
 public class WorldpayAuthorizePaymentAction extends AbstractSimpleDecisionAction<ReplenishmentProcessModel> {
 
@@ -45,28 +45,27 @@ public class WorldpayAuthorizePaymentAction extends AbstractSimpleDecisionAction
         final ImpersonationContext context = new ImpersonationContext();
         context.setOrder(clonedCart);
         return impersonationService.executeInContext(context,
-            new ImpersonationService.Executor<Transition, ImpersonationService.Nothing>() {
-
-                @Override
-                public Transition execute() {
-                    if (clonedCart.getPaymentInfo() instanceof CreditCardPaymentInfoModel) {
-                        final WorldpayAdditionalInfoData worldpayAdditionalInfoData = new WorldpayAdditionalInfoData();
-                        DirectResponseData directResponseData = null;
-                        try {
-                            MerchantInfo merchantInfo = worldpayMerchantInfoService.getReplenishmentMerchant();
-                            directResponseData = worldpayDirectOrderFacade.authoriseRecurringPayment(clonedCart, worldpayAdditionalInfoData, merchantInfo);
-                            if (directResponseData != null && AUTHORISED == directResponseData.getTransactionStatus()) {
-                                return Transition.OK;
+                new ImpersonationService.Executor<Transition, ImpersonationService.Nothing>() {
+                    @Override
+                    public Transition execute() {
+                        if (clonedCart.getPaymentInfo() instanceof CreditCardPaymentInfoModel) {
+                            final WorldpayAdditionalInfoData worldpayAdditionalInfoData = new WorldpayAdditionalInfoData();
+                            DirectResponseData directResponseData = null;
+                            try {
+                                MerchantInfo merchantInfo = worldpayMerchantInfoService.getReplenishmentMerchant();
+                                directResponseData = worldpayDirectOrderFacade.authoriseRecurringPayment(clonedCart, worldpayAdditionalInfoData, merchantInfo);
+                                if (directResponseData != null && AUTHORISED == directResponseData.getTransactionStatus()) {
+                                    return Transition.OK;
+                                }
+                            } catch (WorldpayException | InvalidCartException e) {
+                                LOG.error("There was an error authorising the transaction", e);
                             }
-                        } catch (WorldpayException | InvalidCartException e) {
-                            LOG.error("There was an error authorising the transaction", e);
+                            clonedCart.setStatus(OrderStatus.B2B_PROCESSING_ERROR);
+                            modelService.save(clonedCart);
+                            return Transition.NOK;
                         }
-                        clonedCart.setStatus(OrderStatus.B2B_PROCESSING_ERROR);
-                        modelService.save(clonedCart);
-                        return Transition.NOK;
+                        return Transition.OK;
                     }
-                    return Transition.OK;
-                }
-            });
+                });
     }
 }

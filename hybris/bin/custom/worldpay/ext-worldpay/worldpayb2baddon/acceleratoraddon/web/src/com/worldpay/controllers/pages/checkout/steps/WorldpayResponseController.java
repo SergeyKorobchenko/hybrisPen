@@ -18,7 +18,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Worldpay response controller
+ */
 @Controller
 @RequestMapping (value = "/checkout/multi/worldpay")
 public class WorldpayResponseController extends WorldpayChoosePaymentMethodCheckoutStepController {
@@ -28,6 +30,13 @@ public class WorldpayResponseController extends WorldpayChoosePaymentMethodCheck
     @Resource
     private WorldpayAddonEndpointService worldpayAddonEndpointService;
 
+    /**
+     * Endpoint to get billing address form
+     * @param countryIsoCode
+     * @param useDeliveryAddress
+     * @param model
+     * @return
+     */
     @RequestMapping (value = "/billingaddressform", method = RequestMethod.GET)
     public String getCountryAddressForm(@RequestParam ("countryIsoCode") final String countryIsoCode,
                                         @RequestParam ("useDeliveryAddress") final boolean useDeliveryAddress, final Model model) {

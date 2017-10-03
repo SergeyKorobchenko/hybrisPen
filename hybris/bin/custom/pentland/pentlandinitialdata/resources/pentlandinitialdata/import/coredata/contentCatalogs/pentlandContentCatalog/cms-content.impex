@@ -994,3 +994,54 @@ INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterT
 ;;productGrid;Product Grid;ProductGridPageTemplate;false;
 ;;category;Default Category Page;CategoryPageTemplate;false;
 
+
+
+
+
+
+
+AssistedServiceComponent
+################# worldpay
+
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;restrictedPageTypes(code);active[default=true];frontendTemplateName
+;;WorldpayCSEPaymentAndBillingCheckoutPageTemplate;Worldpay CSE Payment Page Template;WorldpayPaymentPage;;addon:/worldpayb2baddon/pages/checkout/multi/worldpayChooseCSEPaymentDetailsPage
+
+#The velocity template is imported after creating a pageTemplate
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;restrictedPageTypes(code);velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;WorldpayCSEPaymentAndBillingCheckoutPageTemplate;Worldpay Responsive CSE Payment Page Template;WorldpayPaymentPage;$jarResourceCms/structure-view/structure_WorldpayResponsiveCSEPaymentAndBillingCheckoutPageTemplate.vm
+
+# Content Pages
+INSERT_UPDATE WorldpayPaymentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;worldpayPaymentAndBillingCheckoutPage;Worldpay Payment And Billing Checkout Page;WorldpayCSEPaymentAndBillingCheckoutPageTemplate;worldpayPaymentAndBillingCheckoutStep
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name
+;;WorldpayPaymentButtonsSlot;"Payment Buttons"
+
+# ContentSlotNames for WorldpayCSEPaymentAndBillingCheckoutPageTemplate
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='WorldpayCSEPaymentAndBillingCheckoutPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;PaymentButtons;;;worldpaypaymentbuttons
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Bind Content Slots to the Worldpay CSE Payment And Billing Checkout Page Template
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='WorldpayCSEPaymentAndBillingCheckoutPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-WorldpayCSEPaymentAndBillingCheckoutPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-WorldpayCSEPaymentAndBillingCheckoutPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-WorldpayCSEPaymentAndBillingCheckoutPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-WorldpayCSEPaymentAndBillingCheckoutPage;MiniCart;;MiniCartSlot;true
+;;PaymentButtons-WorldpayCSEPaymentAndBillingCheckoutPage;PaymentButtons;;WorldpayPaymentButtonsSlot;true
+;;Footer-WorldpayCSEPaymentAndBillingCheckoutPage;Footer;;FooterSlot;true
+;;HeaderLinks-WorldpayCSEPaymentAndBillingCheckoutPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-WorldpayCSEPaymentAndBillingCheckoutPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-WorldpayCSEPaymentAndBillingCheckoutPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-WorldpayCSEPaymentAndBillingCheckoutPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-WorldpayCSEPaymentAndBillingCheckoutPage;PlaceholderContentSlot;;PlaceholderContentSlot;true

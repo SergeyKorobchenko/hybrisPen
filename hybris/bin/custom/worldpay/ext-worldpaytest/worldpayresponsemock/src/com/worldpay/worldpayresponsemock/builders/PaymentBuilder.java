@@ -32,7 +32,7 @@ public final class PaymentBuilder {
     private static final String CC = "CC";
     private static final String VISA_SSL = "VISA-SSL";
     private static final LocalDate DATE = LocalDate.now();
-    private static final String CARD_HOLDER_NAME = "cardHolderName";
+    private static final String DEFAULT_CARD_HOLDER_NAME = "cardHolderName";
     private static final String RESPONSE_CODE_DESCRIPTION = "REPEAT OF LAST TRANSACTION";
     private static final String RESPONSE_CODE = "19";
     private static final String DEFAULT_CURRENCY_CODE = "GBP";
@@ -42,7 +42,7 @@ public final class PaymentBuilder {
     private String cardType = CREDIT_CARD;
     private String expiryMonth = String.valueOf(DATE.getMonthOfYear());
     private String expiryYear = String.valueOf(DATE.plusYears(3).getYear());
-    private String cardHolderName = CARD_HOLDER_NAME;
+    private String cardHolderName = DEFAULT_CARD_HOLDER_NAME;
     private String lastEvent;
     private String paymentMethod = CC;
     private String transactionAmount;

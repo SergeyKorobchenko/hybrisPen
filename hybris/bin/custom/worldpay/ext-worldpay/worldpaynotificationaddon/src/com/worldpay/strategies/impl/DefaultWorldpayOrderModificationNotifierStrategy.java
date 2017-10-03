@@ -26,6 +26,9 @@ import static java.text.MessageFormat.format;
  */
 public class DefaultWorldpayOrderModificationNotifierStrategy implements WorldpayOrderModificationNotifierStrategy {
 
+    public static final String WORLDPAYADDON_ERRORS_UNPROCESSED_ORDERS = "worldpayaddon.errors.unprocessed.orders";
+    public static final String WORLDPAYADDON_ERRORS_THERE_ARE_UNPROCESSED_ORDERS = "worldpayaddon.errors.there.are.unprocessed.orders";
+
     private static final Logger LOG = Logger.getLogger(DefaultWorldpayOrderModificationNotifierStrategy.class);
 
     private TicketBusinessService ticketBusinessService;

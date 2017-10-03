@@ -179,7 +179,7 @@ public class DefaultWorldpayRedirectOrderServiceTest {
         when(worldpayOrderServiceMock.createShopper(CUSTOMER_EMAIL, null, null)).thenReturn(shopperMock);
         when(worldpayServiceGatewayMock.redirectAuthorise(redirectAuthoriseServiceRequestMock)).thenReturn(redirectAuthoriseServiceResponseMock);
         when(merchantInfoMock.getMerchantCode()).thenReturn(MERCHANT_CODE);
-        when(redirectReferenceMock.getUrl()).thenReturn(REDIRECT_URL);
+        when(redirectReferenceMock.getValue()).thenReturn(REDIRECT_URL);
         when(worldpayUrlServiceMock.getFullSuccessURL()).thenReturn(FULL_SUCCESS_URL);
         when(worldpayUrlServiceMock.getFullPendingURL()).thenReturn(FULL_PENDING_URL);
         when(worldpayUrlServiceMock.getFullFailureURL()).thenReturn(FULL_FAILURE_URL);
@@ -247,7 +247,7 @@ public class DefaultWorldpayRedirectOrderServiceTest {
     @Test (expected = WorldpayException.class)
     public void testRedirectAuthoriseShouldThrowWorldpayExceptionIfRedirectUrlIsNull() throws WorldpayException {
         doReturn(redirectAuthoriseServiceRequestMock).when(testObj).createRedirectAuthoriseRequest(eq(merchantInfoMock), eq(additionalAuthInfoMock), eq(shopperMock), eq(worldpayConfigMock), eq(basicOrderInfoMock), anyListOf(PaymentType.class), anyListOf(PaymentType.class), eq(potentialPickupAddressMock), eq(potentialPickupAddressMock));
-        when(redirectReferenceMock.getUrl()).thenReturn(EMPTY);
+        when(redirectReferenceMock.getValue()).thenReturn(EMPTY);
 
         testObj.redirectAuthorise(merchantInfoMock, cartModelMock, additionalAuthInfoMock);
     }

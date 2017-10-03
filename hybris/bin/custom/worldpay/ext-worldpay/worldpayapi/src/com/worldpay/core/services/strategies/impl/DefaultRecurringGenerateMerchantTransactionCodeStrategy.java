@@ -30,7 +30,7 @@ public class DefaultRecurringGenerateMerchantTransactionCodeStrategy implements 
         if (parameterOrder == null) {
             parameterOrder = cartService.getSessionCart();
         }
-        String worldpayOrderCode = parameterOrder.getCode() + "-" + getTime();
+        final String worldpayOrderCode = parameterOrder.getCode() + "-" + getTime();
         parameterOrder.setWorldpayOrderCode(worldpayOrderCode);
         modelService.save(parameterOrder);
         return worldpayOrderCode;

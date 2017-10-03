@@ -14,7 +14,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <import resource="classpath:/merchants/merchants.xml"/>
@@ -152,12 +152,9 @@
         </property>
     </bean>
 
-
-    <bean id="redirectAuthoriseResult" class="com.worldpay.hostedorderpage.data.RedirectAuthoriseResult" scope="prototype"/>
-
     <alias name="defaultRedirectAuthoriseResultConverter" alias="redirectAuthoriseResultConverter"/>
     <bean id="defaultRedirectAuthoriseResultConverter" parent="abstractPopulatingConverter">
-        <lookup-method name="createTarget" bean="redirectAuthoriseResult"/>
+        <property name="targetClass" value="com.worldpay.hostedorderpage.data.RedirectAuthoriseResult"/>
         <property name="populators">
             <list>
                 <ref bean="redirectAuthoriseResultPopulator"/>
@@ -210,6 +207,8 @@
         <property name="recurringGenerateMerchantTransactionCodeStrategy" ref="recurringGenerateMerchantTransactionCodeStrategy"/>
         <property name="worldpayTokenEventReferenceCreationStrategy" ref="worldpayTokenEventReferenceCreationStrategy"/>
         <property name="worldpayDeliveryAddressStrategy" ref="worldpayDeliveryAddressStrategy"/>
+        <property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+        <property name="worldpayKlarnaStrategy" ref="worldpayKlarnaStrategy"/>
     </bean>
 
     <bean id="abstractWorldpayUrlService" class="com.worldpay.service.impl.AbstractWorldpayUrlService" abstract="true">
@@ -220,6 +219,8 @@
         <property name="cancelPath" value="/checkout/multi/worldpay/hop-cancel"/>
         <property name="threeDSecureTermPath" value="/checkout/multi/worldpay/3dsecure/sop/response"/>
         <property name="threeDSecureQuoteTermPath" value="/my-account/worldpay/3dsecure/sop/response"/>
+        <property name="termsPath" value="/checkout/multi/termsAndConditions" />
+        <property name="klarnaConfirmationPath" value="/checkout/multi/worldpay/klarna/confirmation" />
     </bean>
 
     <bean id="bankTransferWorldpayUrlService" class="com.worldpay.service.impl.DefaultWorldpayUrlService" parent="abstractWorldpayUrlService">
@@ -441,6 +442,12 @@
         <property name="worldpayUrlService" ref="bankTransferWorldpayUrlService"/>
     </bean>
 
+    <alias name="defaultWorldpayKlarnaStrategy" alias="worldpayKlarnaStrategy"/>
+    <bean id="defaultWorldpayKlarnaStrategy" class="com.worldpay.service.payment.impl.DefaultWorldpayKlarnaStrategy">
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="worldpayUrlService" ref="worldpayUrlService"/>
+    </bean>
+
     <alias name="defaultWorldpaySupportEmailService" alias="worldpaySupportEmailService"/>
     <bean id="defaultWorldpaySupportEmailService" class="com.worldpay.support.impl.DefaultWorldpaySupportEmailService">
         <property name="emailAppenders">
@@ -536,7 +543,9 @@
         <entry key="REFUSED" value="CANCEL"/>
     </util:map>
 
-    <util:map id="dependingPaymentTransaction" key-type="de.hybris.platform.payment.enums.PaymentTransactionType" value-type="de.hybris.platform.payment.enums.PaymentTransactionType">
+    <util:map id="dependingPaymentTransaction"
+              key-type="de.hybris.platform.payment.enums.PaymentTransactionType"
+              value-type="de.hybris.platform.payment.enums.PaymentTransactionType">
         <entry key="CAPTURE" value="AUTHORIZATION"/>
     </util:map>
 
@@ -609,6 +618,8 @@
         <property name="cartService" ref="cartService"/>
         <property name="deliveryService" ref="deliveryService"/>
         <property name="worldpayCheckoutService" ref="defaultWorldpayCheckoutService"/>
+        <property name="worldpayConfigLookupService" ref="worldpayConfigLookupService"/>
+        <property name="worldpayMerchantInfoService" ref="worldpayMerchantInfoService"/>
     </bean>
 
     <alias name="worldpayCheckoutFacadeDecorator" alias="worldpayCheckoutFacade"/>
@@ -633,6 +644,8 @@
         <property name="worldpayOrderInfoStrategy" ref="worldpayOrderInfoStrategy"/>
         <property name="sessionService" ref="sessionService"/>
         <property name="worldpayMerchantConfigDataFacade" ref="worldpayMerchantConfigDataFacade"/>
+        <property name="orderInquiryService" ref="orderInquiryService"/>
+        <property name="apmConfigurationLookupService" ref="apmConfigurationLookupService"/>
     </bean>
 
     <alias name="defaultWorldpayBankConfigurationFacade" alias="worldpayBankConfigurationFacade"/>
@@ -667,6 +680,12 @@
 
     <bean id="worldpayOrderDataPopulator" class="com.worldpay.facades.order.converters.populators.WorldpayOrderDataPopulator">
         <property name="worldpayPaymentTransactionService" ref="worldpayPaymentTransactionService"/>
+    </bean>
+
+    <alias name="defaultOrderInquiryService" alias="orderInquiryService"/>
+    <bean id="defaultOrderInquiryService" class="com.worldpay.core.services.impl.DefaultOrderInquiryService">
+        <property name="worldpayPaymentInfoService" ref="worldpayPaymentInfoService"/>
+        <property name="worldpayConfigLookupService" ref="worldpayConfigLookupService"/>
     </bean>
 
     <bean name="worldpayAbstractOrderPopulator" class="com.worldpay.order.converters.populator.WorldpayAbstractOrderPopulator">

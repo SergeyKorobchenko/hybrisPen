@@ -38,28 +38,28 @@ INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);con
 
 # SiteMap Configuration
 # SiteMap Language Currencies
-INSERT_UPDATE SiteMapLanguageCurrency;&siteMapLanguageCurrency;language(isoCode)[unique=true];currency(isocode)[unique=true];
-;enUsd;en;USD
-;enGbp;en;GBP
-;enEur;en;EUR
+#INSERT_UPDATE SiteMapLanguageCurrency;&siteMapLanguageCurrency;language(isoCode)[unique=true];currency(isocode)[unique=true];
+#;enUsd;en;USD
+#;enGbp;en;GBP
+#;enEur;en;EUR
 
-INSERT_UPDATE CatalogUnawareMedia;&siteMapMediaId;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='text/plain']
-;$siteUid-siteMapMedia;$siteUid-siteMapMedia;siteMapTemplate.vm;$jarResource/site-siteMapTemplate.vm;
+#INSERT_UPDATE CatalogUnawareMedia;&siteMapMediaId;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='text/plain']
+#;$siteUid-siteMapMedia;$siteUid-siteMapMedia;siteMapTemplate.vm;$jarResource/pentland-siteMapTemplate.vm;
 
-INSERT_UPDATE RendererTemplate;&siteMapRenderer;code[unique=true];content(&siteMapMediaId);contextClass;rendererType(code)[default='velocity'];
-;$siteUid-siteMapTemplate;$siteUid-siteMapTemplate;$siteUid-siteMapMedia;de.hybris.platform.acceleratorservices.sitemap.renderer.SiteMapContext;
+#INSERT_UPDATE RendererTemplate;&siteMapRenderer;code[unique=true];content(&siteMapMediaId);contextClass;rendererType(code)[default='velocity'];
+#;$siteUid-siteMapTemplate;$siteUid-siteMapTemplate;$siteUid-siteMapMedia;de.hybris.platform.acceleratorservices.sitemap.renderer.SiteMapContext;
 
-INSERT_UPDATE SiteMapPage;&siteMapPage;code(code)[unique=true];frequency(code)[unique=true];priority[unique=true];active[default=true]
-;Homepage;Homepage;daily;1.0;;
-;Product;Product;weekly;0.6;;
-;CategoryLanding;CategoryLanding;daily;0.9;;
-;Category;Category;daily;0.8;;
-;Store;Store;weekly;0.6;;
-;Content;Content;monthly;0.4;;
-;Custom;Custom;daily;1.0;;
-
-INSERT_UPDATE SiteMapConfig;&siteMapConfigId;configId[unique=true];siteMapLanguageCurrencies(&siteMapLanguageCurrency);siteMapPages(&siteMapPage);siteMapTemplate(&siteMapRenderer)[unique=true];
-;$siteUidSiteMapConfig;$siteUidSiteMapConfig;$siteMapLangCur;$siteMapPage;$siteUid-siteMapTemplate;$customSiteMapUrls;
+#INSERT_UPDATE SiteMapPage;&siteMapPage;code(code)[unique=true];frequency(code)[unique=true];priority[unique=true];active[default=true]
+#;Homepage;Homepage;daily;1.0;;
+#;Product;Product;weekly;0.6;;
+#;CategoryLanding;CategoryLanding;daily;0.9;;
+#;Category;Category;daily;0.8;;
+#;Store;Store;weekly;0.6;;
+#;Content;Content;monthly;0.4;;
+#;Custom;Custom;daily;1.0;;
+#
+#INSERT_UPDATE SiteMapConfig;&siteMapConfigId;configId[unique=true];siteMapLanguageCurrencies(&siteMapLanguageCurrency);siteMapPages(&siteMapPage);siteMapTemplate(&siteMapRenderer)[unique=true];
+#;$siteUidSiteMapConfig;$siteUidSiteMapConfig;$siteMapLangCur;$siteMapPage;$siteUid-siteMapTemplate;$customSiteMapUrls;
 
 
 # Cart Cleanup CronJobs
@@ -73,3 +73,5 @@ INSERT_UPDATE UncollectedOrdersCronJob;code[unique=true];job(code)[default=uncol
 INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
 ;$siteUid-CartRemovalJob;0;5;4;-1;-1;-1;false;true;-1
 ;$siteUid-UncollectedOrdersJob;0;0;6;-1;-1;-1;true;false;-1
+
+

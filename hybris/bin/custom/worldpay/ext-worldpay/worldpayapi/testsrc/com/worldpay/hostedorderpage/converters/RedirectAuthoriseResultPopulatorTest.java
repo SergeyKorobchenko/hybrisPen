@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.validation.constraints.AssertTrue;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashMap;

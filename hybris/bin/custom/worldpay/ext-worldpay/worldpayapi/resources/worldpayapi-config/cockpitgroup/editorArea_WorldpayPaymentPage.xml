@@ -11,9 +11,6 @@
 		<property qualifier="contentpage.homepage"/>
 		<property qualifier="contentpage.description"/>
 		<property qualifier="contentpage.keywords"/>
-		<property qualifier="WorldpayPaymentPage.lightboxMaskOpacity"/>
-		<property qualifier="WorldpayPaymentPage.lightboxMaskColor"/>
-		<property qualifier="WorldpayPaymentPage.accessibility"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

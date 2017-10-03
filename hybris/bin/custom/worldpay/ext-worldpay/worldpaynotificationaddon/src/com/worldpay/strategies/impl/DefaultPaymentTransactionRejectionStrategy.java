@@ -16,6 +16,9 @@ import java.util.List;
 
 import static de.hybris.platform.payment.enums.PaymentTransactionType.AUTHORIZATION;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultPaymentTransactionRejectionStrategy implements PaymentTransactionRejectionStrategy {
 
     private WorldpayPaymentTransactionService worldpayPaymentTransactionService;
@@ -23,6 +26,9 @@ public class DefaultPaymentTransactionRejectionStrategy implements PaymentTransa
     private ProcessDefinitionDao processDefinitionDao;
     private BusinessProcessService businessProcessService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void executeRejection(final PaymentTransactionModel paymentTransactionModel) {
         rejectTransactionEntries(paymentTransactionModel);

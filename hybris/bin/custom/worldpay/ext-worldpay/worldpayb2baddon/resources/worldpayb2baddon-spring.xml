@@ -78,8 +78,11 @@
 		<property name="extensionName" value="worldpayb2baddon" />
 	</bean>
 
+	<bean id="apmOpenStatusDisplayKey" class="java.lang.String">
+		<constructor-arg value="APM_OPEN"/>
+	</bean>
 	<bean id="worldpayAcceleratorStatusDisplayMapMergeDirective" depends-on="acceleratorStatusDisplayMap" parent="mapMergeDirective">
-		<property name="key" value="APM_OPEN"/>
+		<property name="key" ref="apmOpenStatusDisplayKey"/>
 		<property name="value" value="pending"/>
 	</bean>
 

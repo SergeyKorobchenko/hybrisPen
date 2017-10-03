@@ -1,7 +1,9 @@
 package com.worldpay.service.payment;
 
+import com.worldpay.data.AdditionalAuthInfo;
 import com.worldpay.data.BankTransferAdditionalAuthInfo;
 import com.worldpay.data.CSEAdditionalAuthInfo;
+import com.worldpay.exception.WorldpayConfigurationException;
 import com.worldpay.exception.WorldpayException;
 import com.worldpay.order.data.WorldpayAdditionalInfoData;
 import com.worldpay.service.model.MerchantInfo;
@@ -31,7 +33,7 @@ public interface WorldpayDirectOrderService {
     DirectAuthoriseServiceResponse authorise(final MerchantInfo merchantInfo, final CartModel cartModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException;
 
     /**
-     * Builds the directAuthoriseRequest containing the encrypted card details and the address-details.
+     * Builds the directAuthoriseRequest containing the payment details for a Bank transfer.
      * The request is then sent to Worldpay for processing resulting in either an authorised, refused or error response.
      *
      * @param merchantInfo                   Merchant configuration
@@ -75,7 +77,8 @@ public interface WorldpayDirectOrderService {
      * @param paResponse                 String containing the response from the 3DSecure issuer.
      * @return the {@link DirectAuthoriseServiceResponse} from Worldpay.
      */
-    DirectAuthoriseServiceResponse authorise3DSecure(final MerchantInfo merchantInfo, final String worldpayOrderCode, final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final String paResponse)
+    DirectAuthoriseServiceResponse authorise3DSecure(final MerchantInfo merchantInfo, final String worldpayOrderCode,
+                                                     final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final String paResponse)
             throws WorldpayException;
 
     /**
@@ -106,5 +109,19 @@ public interface WorldpayDirectOrderService {
      * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      * @return the {@link DirectAuthoriseServiceResponse} from Worldpay.
      */
-    DirectAuthoriseServiceResponse authoriseRecurringPayment(final MerchantInfo merchantInfo, final AbstractOrderModel abstractOrderModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException;
+    DirectAuthoriseServiceResponse authoriseRecurringPayment(final MerchantInfo merchantInfo, final AbstractOrderModel abstractOrderModel,
+                                                             final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException;
+
+
+    /**
+     * Builds the directAuthoriseRequest containing the details for Klarna payment.
+     * The request is then sent to Worldpay for processing resulting in either an authorised, refused or error response.
+     *
+     * @param merchantInfo                   Merchant configuration
+     * @param cartModel                      {@link CartModel} used in the current checkout.
+     * @param worldpayAdditionalInfoData     Object that contains information about the current session, browser used, and cookies.
+     * @param additionalAuthInfo
+     * @return the {@link DirectAuthoriseServiceResponse} from Worldpay.
+     */
+    DirectAuthoriseServiceResponse authoriseKlarna(final MerchantInfo merchantInfo, final CartModel cartModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final AdditionalAuthInfo additionalAuthInfo) throws WorldpayException;
 }

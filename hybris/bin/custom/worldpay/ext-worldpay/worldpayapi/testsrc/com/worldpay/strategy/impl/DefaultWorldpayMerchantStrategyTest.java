@@ -23,19 +23,18 @@ import static org.mockito.Mockito.when;
 public class DefaultWorldpayMerchantStrategyTest {
 
     @InjectMocks
-    private DefaultWorldpayMerchantStrategy testObj = new DefaultWorldpayMerchantStrategy();
+    private DefaultWorldpayMerchantStrategy testObj;
 
     @Mock
     private WorldpayMerchantConfigDataService worldpayMerchantConfigDataServiceMock;
     @Mock
-    private WorldpayMerchantConfigData websiteMerchantConfigDataMock, mobileMerchantConfigDataMock, customerServiceMerchantConfigDataMock, replenishmentMerchantConfigDataMock;
+    private WorldpayMerchantConfigData websiteMerchantConfigDataMock, customerServiceMerchantConfigDataMock, replenishmentMerchantConfigDataMock;
     @Mock
     private Map<String, WorldpayMerchantConfigData> merchantConfigDataMapMock;
 
     @Before
     public void setUp() throws Exception {
         when(worldpayMerchantConfigDataServiceMock.getMerchantConfiguration()).thenReturn(merchantConfigDataMapMock);
-        when(merchantConfigDataMapMock.get(MOBILE_MERCHANT)).thenReturn(mobileMerchantConfigDataMock);
         when(merchantConfigDataMapMock.get(DESKTOP_MERCHANT)).thenReturn(websiteMerchantConfigDataMock);
         when(merchantConfigDataMapMock.get(CUSTOMER_SERVICE_MERCHANT)).thenReturn(customerServiceMerchantConfigDataMock);
         when(merchantConfigDataMapMock.get(REPLENISHMENT_MERCHANT)).thenReturn(replenishmentMerchantConfigDataMock);
@@ -54,14 +53,6 @@ public class DefaultWorldpayMerchantStrategyTest {
         final WorldpayMerchantConfigData result = testObj.getMerchant(null);
 
         assertEquals(websiteMerchantConfigDataMock, result);
-    }
-
-    @Test
-    public void shouldReturnMobileMerchantWhenUIExperienceIsMobile() throws Exception {
-
-        final WorldpayMerchantConfigData result = testObj.getMerchant(MOBILE);
-
-        assertEquals(mobileMerchantConfigDataMock, result);
     }
 
     @Test

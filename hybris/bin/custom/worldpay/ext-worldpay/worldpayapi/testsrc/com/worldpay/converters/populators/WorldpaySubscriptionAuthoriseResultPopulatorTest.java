@@ -97,7 +97,7 @@ public class WorldpaySubscriptionAuthoriseResultPopulatorTest {
     public void populateShouldSetRejectedAndReviewNeededWhenDirectAuthoriseServiceResponseHasNoPaymentReplyAndIsAPM() {
         when(directAuthoriseServiceResponseMock.getPaymentReply()).thenReturn(null);
         when(directAuthoriseServiceResponseMock.getRedirectReference()).thenReturn(redirectReferenceMock);
-        when(redirectReferenceMock.getUrl()).thenReturn(REFERENCE_URL);
+        when(redirectReferenceMock.getValue()).thenReturn(REFERENCE_URL);
 
         final WorldpaySubscriptionAuthorizeResult result = new WorldpaySubscriptionAuthorizeResult();
         testObj.populate(directAuthoriseServiceResponseMock, result);

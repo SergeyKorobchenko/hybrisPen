@@ -6,7 +6,6 @@ import com.worldpay.dto.order.ThreeDSecureInfoWsDTO;
 import com.worldpay.exception.WorldpayException;
 import com.worldpay.exceptions.NoCheckoutCartException;
 import com.worldpay.exceptions.ThreeDSecureException;
-import com.worldpay.facades.payment.WorldpayAdditionalInfoFacade;
 import com.worldpay.facades.payment.direct.WorldpayDirectOrderFacade;
 import com.worldpay.order.data.WorldpayAdditionalInfoData;
 import com.worldpay.payment.DirectResponseData;
@@ -55,7 +54,7 @@ import static java.text.MessageFormat.format;
 @RequestMapping(value = "/{baseSiteId}")
 public class WorldpayOrdersController extends AbstractWorldpayController {
 
-    private final static Logger LOG = LoggerFactory.getLogger(WorldpayOrdersController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorldpayOrdersController.class);
 
     // Named like this in order to use the bean definition from ycommercewebservices
     @Resource(name = "commerceWebServicesCartFacade2")
@@ -76,6 +75,10 @@ public class WorldpayOrdersController extends AbstractWorldpayController {
     /**
      * Authorizes cart and places the order. Response contains the new order data.
      *
+     * @param request
+     * @param cartId
+     * @param fields
+     * @param securityCode
      * @formparam cartId Cart code for logged in user, cart GUID for guest checkout
      * @formparam securityCode CCV security code.
      * @queryparam fields Response configuration (list of fields, which should be returned in response)
@@ -93,8 +96,8 @@ public class WorldpayOrdersController extends AbstractWorldpayController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public PlaceOrderResponseWsDTO placeOrder(final HttpServletRequest request,
-                                              @RequestParam(required = true) final String cartId,
-                                              @RequestParam(required = true) final String securityCode,
+                                              @RequestParam final String cartId,
+                                              @RequestParam final String securityCode,
                                               @RequestParam(defaultValue = FieldSetLevelHelper.DEFAULT_LEVEL) final String fields)
             throws InvalidCartException, WebserviceValidationException, NoCheckoutCartException, WorldpayException {
 
@@ -139,14 +142,13 @@ public class WorldpayOrdersController extends AbstractWorldpayController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     protected OrderWsDTO doHandleThreeDSecureResponse(final HttpServletRequest request,
-                                                      @RequestParam(required = true) final String cartId,
-                                                      @RequestParam(required = true) final String paRes,
-                                                      @RequestParam(required = true) final String merchantData,
-                                                      @RequestParam(defaultValue = FieldSetLevelHelper.DEFAULT_LEVEL) final String fields) throws ThreeDSecureException, NoCheckoutCartException, InvalidCartException {
-        final String worldpayOrderCode = merchantData;
+                                  @RequestParam final String cartId,
+                                  @RequestParam final String paRes,
+                                  @RequestParam final String merchantData,
+                                  @RequestParam(defaultValue = FieldSetLevelHelper.DEFAULT_LEVEL) final String fields) throws ThreeDSecureException, NoCheckoutCartException, InvalidCartException {
 
         cartLoaderStrategy.loadCart(cartId);
-        validateCartForPlaceOrder(worldpayOrderCode);
+        validateCartForPlaceOrder(merchantData);
 
         TransactionStatus transactionStatus = ERROR;
         try {
@@ -157,10 +159,10 @@ public class WorldpayOrdersController extends AbstractWorldpayController {
                 return dataMapper.map(responseData.getOrderData(), OrderWsDTO.class, fields);
             } else {
                 LOG.error(format("Failed to create payment authorisation for successful 3DSecure response. Received {0} as transactionStatus", transactionStatus));
-                worldpayCartService.setWorldpayDeclineCodeOnCart(worldpayOrderCode, responseData.getReturnCode());
+                worldpayCartService.setWorldpayDeclineCodeOnCart(merchantData, responseData.getReturnCode());
             }
         } catch (WorldpayException | InvalidCartException e) {
-            LOG.error(format("There was an error processing the 3d secure payment for order with worldpayOrderCode [{0}]", worldpayOrderCode), e);
+            LOG.error(format("There was an error processing the 3d secure payment for order with worldpayOrderCode [{0}]", merchantData), e);
         }
         throw new ThreeDSecureException(format("Failed to handle authorisation for 3DSecure. Received {0} as transactionStatus", transactionStatus));
     }

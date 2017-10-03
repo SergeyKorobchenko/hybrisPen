@@ -8,10 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * Controller to mock 3D response from Worldpay. With this you can emulate 3D secure reponse.
+ */
 @Controller
 @RequestMapping(value = "/3dresponse")
 public class Worldpay3DResponseMockController {
 
+    /**
+     *
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping (method = POST)
     public String mockWorldpayResponse(final ModelMap model, final HttpServletRequest request) {
 

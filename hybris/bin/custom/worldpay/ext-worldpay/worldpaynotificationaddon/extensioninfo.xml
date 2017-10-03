@@ -21,11 +21,9 @@
         <requires-extension name="ticketsystem"/>
         <requires-extension name="addonsupport"/>
         <requires-extension name="worldpayapi"/>
-        <requires-extension name="hmc"/>
 
 		<coremodule generated="true" manager="com.worldpay.worldpaynotificationaddon.jalo.WorldpaynotificationaddonManager" packageroot="com.worldpay.worldpaynotificationaddon"/>
-        <hmcmodule extensionclassname="com.worldpay.worldpaynotificationaddon.hmc.WorldpaynotificationaddonHMCExtension"/>
-        
+
 	</extension>
 
 </extensioninfo>

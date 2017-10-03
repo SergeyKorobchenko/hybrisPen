@@ -106,9 +106,11 @@ public interface WorldpayPaymentTransactionService {
      * @param paymentTransaction The {@link PaymentTransactionModel} to associate the paymentTransactionEntry to
      * @param merchantCode       The merchantCode used in the transaction with Worldpay
      * @param cartModel          The {@link CartModel} to get the amount and currency information from
+     * @param authorisedAmount   The authorisedAmount
      * @return the new {@link PaymentTransactionType#AUTHORIZATION} PaymentTransactionEntry created
      */
-    PaymentTransactionEntryModel createPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction, final String merchantCode, final CartModel cartModel, final BigDecimal authorisedAmount);
+    PaymentTransactionEntryModel createPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction, final String merchantCode,
+                                                                               final CartModel cartModel, final BigDecimal authorisedAmount);
 
     /**
      * Creates a new PaymentTransactionEntry {@link PaymentTransactionEntryModel} of the type {@link PaymentTransactionType#AUTHORIZATION}
@@ -117,9 +119,11 @@ public interface WorldpayPaymentTransactionService {
      * @param paymentTransaction The {@link PaymentTransactionModel} to associate the paymentTransactionEntry to
      * @param merchantCode       The merchantCode used in the transaction with Worldpay
      * @param abstractOrderModel The cart or order to get the amount and currency information from
+     * @param authorisedAmount   The authorisedAmount
      * @return the new {@link PaymentTransactionType#AUTHORIZATION} PaymentTransactionEntry created
      */
-    PaymentTransactionEntryModel createNonPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction, final String merchantCode, final AbstractOrderModel abstractOrderModel, final BigDecimal authorisedAmount);
+    PaymentTransactionEntryModel createNonPendingAuthorisePaymentTransactionEntry(final PaymentTransactionModel paymentTransaction, final String merchantCode,
+                                                                                  final AbstractOrderModel abstractOrderModel, final BigDecimal authorisedAmount);
 
     /**
      * Creates a new PaymentTransactionEntry {@link PaymentTransactionEntryModel} of the type {@link PaymentTransactionType#AUTHORIZATION}
@@ -137,6 +141,7 @@ public interface WorldpayPaymentTransactionService {
      * @param apmOpen                   boolean that marks if the order was placed using an APM and the response was 'open'
      * @param merchantCode              The merchantCode used in the authorization
      * @param commerceCheckoutParameter
+     * @return the created {@link PaymentTransactionModel}
      */
     PaymentTransactionModel createPaymentTransaction(final boolean apmOpen, final String merchantCode, final CommerceCheckoutParameter commerceCheckoutParameter);
 

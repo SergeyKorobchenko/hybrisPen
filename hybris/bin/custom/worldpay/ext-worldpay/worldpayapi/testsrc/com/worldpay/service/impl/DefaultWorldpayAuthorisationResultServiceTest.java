@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayAuthorisationResultServiceTest {
 
     private static final String REDIRECT_REFERENCE = "redirectReference";
@@ -76,7 +76,7 @@ public class DefaultWorldpayAuthorisationResultServiceTest {
     @Test
     public void testSetAuthorizeResultForAPM() throws Exception {
         when(directAuthoriseServiceResponseMock.getRedirectReference()).thenReturn(redirectReferenceMock);
-        when(redirectReferenceMock.getUrl()).thenReturn(REDIRECT_REFERENCE);
+        when(redirectReferenceMock.getValue()).thenReturn(REDIRECT_REFERENCE);
 
         testObj.setAuthorizeResultForAPM(directAuthoriseServiceResponseMock, worldpaySubscriptionAuthorizeResultMock);
 

@@ -1,22 +1,5 @@
 package com.worldpay.worldpayresponsemock.controllers.pages;
 
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
-import static java.util.Calendar.getInstance;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import com.worldpay.core.services.APMConfigurationLookupService;
 import com.worldpay.exception.WorldpayException;
 import com.worldpay.worldpayresponsemock.controllers.WorldpayResponseMockControllerConstants;
@@ -33,6 +16,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static java.util.Calendar.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Controller for page to post mocked order modifications into hybris.
@@ -183,7 +180,7 @@ public class WorldpayOrderModificationMockController {
      */
     @RequestMapping (value = "/merchants/{siteUid}", method = GET)
     @ResponseBody
-    public List<String> getMerchantsBySite(@PathVariable String siteUid) {
+    public Set<String> getMerchantsBySite(@PathVariable String siteUid) {
         return worldpayResponseMockMerchantInfoService.getAllMerchantCodes(siteUid);
     }
 

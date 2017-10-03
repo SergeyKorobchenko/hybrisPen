@@ -127,9 +127,9 @@
     <context component="explorer-tree" merge-by="module">
         <explorer-tree:explorer-tree>
             <explorer-tree:navigation-node id="Worldpay">
+                <explorer-tree:type-node code="WorldpayOrderModification" id="worldpay.order.modifications"/>
                 <explorer-tree:type-node code="WorldpayAPMConfiguration" id="worldpay.apm.configuration"/>
                 <explorer-tree:type-node code="WorldpayBankConfiguration" id="worldpay.bank.configuration"/>
-                <explorer-tree:type-node code="WorldpayOrderModification" id="worldpay.order.modifications"/>
                 <explorer-tree:navigation-node id="CronJobs">
                     <explorer-tree:type-node code="OrderModificationCronJob" id="worldpay.cronjob.orderModification"/>
                     <explorer-tree:type-node code="NotifyUnprocessedOrderModificationsCronJob" id="worldpay.cronjob.unprocessedordermodification"/>

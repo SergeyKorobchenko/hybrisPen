@@ -134,7 +134,12 @@ public class DefaultWorldpayTokenisedAuthorizationCommand extends WorldpayComman
         return PaymentBuilder.createToken(subscriptionId, securityCode);
     }
 
-    protected DirectAuthoriseServiceRequest createTokenisedDirectAuthoriseRequest(final MerchantInfo merchantInfo, final WorldpayConfig config, final BasicOrderInfo orderInfo, final Shopper shopper, final Token token, final Address shippingAddress) {
+    protected DirectAuthoriseServiceRequest createTokenisedDirectAuthoriseRequest(final MerchantInfo merchantInfo,
+                                                                                  final WorldpayConfig config,
+                                                                                  final BasicOrderInfo orderInfo,
+                                                                                  final Shopper shopper,
+                                                                                  final Token token,
+                                                                                  final Address shippingAddress) {
         return DirectAuthoriseServiceRequest.createTokenisedDirectAuthoriseRequest(config, merchantInfo, orderInfo, token, shopper, shippingAddress, null);
     }
 

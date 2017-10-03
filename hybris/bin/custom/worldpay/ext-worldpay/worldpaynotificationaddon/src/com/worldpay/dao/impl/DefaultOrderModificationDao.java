@@ -40,18 +40,21 @@ public class DefaultOrderModificationDao extends AbstractItemDao implements Orde
                     "\t}\n" +
                     "where {pt.code} = ?" + PAYMENT_TRANSACTION_TYPE + "\n" +
                     "AND {wom." + WorldpayOrderModificationModel.PROCESSED + "} = ?" + PROCESSED;
+
     protected static final String ORDER_MODIFICATION_NOTIFICATION_QUERY =
             "select {" + PK + "}\n" +
                     "from {" + _TYPECODE + "}\n" +
                     "WHERE {" + WorldpayOrderModificationModel.PROCESSED + "} = ?" + PROCESSED + "\n" +
                     "AND {" + WorldpayOrderModificationModel.NOTIFIED + "} = ?" + NOTIFIED + "\n" +
                     "AND {" + CREATIONTIME + "} < ?" + BEFORE_DATE;
+
     protected static final String ORDER_MODIFICATION_CLEAN_UP_QUERY =
             "select {" + PK + "}\n" +
                     "from {" + _TYPECODE + "}\n" +
                     "WHERE {" + WorldpayOrderModificationModel.PROCESSED + "} = ?" + PROCESSED + "\n" +
                     "AND {" + WorldpayOrderModificationModel.DEFECTIVE + "} = ?" + DEFECTIVE + "\n" +
                     "AND {" + CREATIONTIME + "} < ?" + BEFORE_DATE;
+
     protected static final String EXISTING_DEFECTIVE_ORDER_MODIFICATION_QUERY =
             "select {" + PK + "}\n" +
                     "from {" + _TYPECODE + "}\n" +

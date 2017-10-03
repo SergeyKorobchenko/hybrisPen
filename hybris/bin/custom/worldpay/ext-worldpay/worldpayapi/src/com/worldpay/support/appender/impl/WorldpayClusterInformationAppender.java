@@ -13,9 +13,9 @@ public class WorldpayClusterInformationAppender implements WorldpaySupportEmailA
         StringBuilder clusterInformation = new StringBuilder();
         clusterInformation.append(System.lineSeparator()).append("Cluster Information:").append(System.lineSeparator());
         final DefaultBroadcastService broadcastService = getBroadCastServiceInstance();
-        clusterInformation.append(TAB).append("Clustering Enabled: ").append(broadcastService.isClusteringEnabled()).append(System.lineSeparator());
-        clusterInformation.append(TAB).append("Cluster Node Id: ").append(broadcastService.getClusterNodeID()).append(System.lineSeparator());
-        clusterInformation.append(TAB).append("Cluster Island Id: ").append(broadcastService.getClusterIslandPK()).append(System.lineSeparator());
+        clusterInformation.append(ONE_TAB).append("Clustering Enabled: ").append(broadcastService.isClusteringEnabled()).append(System.lineSeparator());
+        clusterInformation.append(ONE_TAB).append("Cluster Node Id: ").append(broadcastService.getClusterNodeID()).append(System.lineSeparator());
+        clusterInformation.append(ONE_TAB).append("Cluster Island Id: ").append(broadcastService.getClusterIslandPK()).append(System.lineSeparator());
         return clusterInformation.toString();
     }
 

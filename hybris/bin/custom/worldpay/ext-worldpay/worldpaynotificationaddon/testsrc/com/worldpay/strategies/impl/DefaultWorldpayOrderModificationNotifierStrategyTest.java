@@ -63,8 +63,8 @@ public class DefaultWorldpayOrderModificationNotifierStrategyTest {
         when(orderModificationModelMock.getWorldpayOrderCode()).thenReturn(WORLDPAY_ORDER_CODE);
         when(orderModificationModelMock.getProcessed()).thenReturn(false);
         when(orderModificationModelMock.getNotified()).thenReturn(false);
-        when(l10nService.getLocalizedString(WORLDPAYADDON_ERRORS_THERE_ARE_UNPROCESSED_ORDERS)).thenReturn(THERE_ARE_UNPROCESSED_ORDERS);
-        when(l10nService.getLocalizedString(WORLDPAYADDON_ERRORS_UNPROCESSED_ORDERS)).thenReturn(UNPROCESSED_ORDERS);
+        when(l10nService.getLocalizedString(DefaultWorldpayOrderModificationNotifierStrategy.WORLDPAYADDON_ERRORS_THERE_ARE_UNPROCESSED_ORDERS)).thenReturn(THERE_ARE_UNPROCESSED_ORDERS);
+        when(l10nService.getLocalizedString(DefaultWorldpayOrderModificationNotifierStrategy.WORLDPAYADDON_ERRORS_UNPROCESSED_ORDERS)).thenReturn(UNPROCESSED_ORDERS);
     }
 
     @Test

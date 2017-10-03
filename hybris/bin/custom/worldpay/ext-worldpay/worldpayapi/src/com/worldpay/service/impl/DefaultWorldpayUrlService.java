@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Required;
  */
 public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
 
+    private static final String EMPTY_STRING = "";
     private BaseSiteService baseSiteService;
     private SiteBaseUrlResolutionService siteBaseUrlResolutionService;
 
@@ -30,7 +31,7 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
     protected String getFullUrl(final String url, final boolean isSecure) throws WorldpayConfigurationException {
         final BaseSiteModel currentBaseSite = getBaseSiteService().getCurrentBaseSite();
 
-        final String fullResponseUrl = getSiteBaseUrlResolutionService().getWebsiteUrlForSite(currentBaseSite, isSecure, url);
+        final String fullResponseUrl = siteBaseUrlResolutionService.getWebsiteUrlForSite(currentBaseSite, isSecure, url);
         if (fullResponseUrl == null) {
             throw new WorldpayConfigurationException("The URL returned from the SiteBaseUrlResolutionService is null. Please check the configuration of the HOP URL's");
         }
@@ -39,7 +40,6 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
 
     /**
      * {@inheritDoc}
-     * See {@link WorldpayUrlService#getFullSuccessURL}
      */
     @Override
     public String getFullSuccessURL() throws WorldpayConfigurationException {
@@ -48,8 +48,6 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
 
     /**
      * {@inheritDoc}
-     * <p>
-     * See {@link WorldpayUrlService#getFullPendingURL}
      */
     @Override
     public String getFullPendingURL() throws WorldpayConfigurationException {
@@ -58,8 +56,6 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
 
     /**
      * {@inheritDoc}
-     * <p>
-     * See {@link WorldpayUrlService#getFullFailureURL}
      */
     @Override
     public String getFullFailureURL() throws WorldpayConfigurationException {
@@ -68,8 +64,6 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
 
     /**
      * {@inheritDoc}
-     * <p>
-     * See {@link WorldpayUrlService#getFullCancelURL}
      */
     @Override
     public String getFullCancelURL() throws WorldpayConfigurationException {
@@ -78,8 +72,6 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
 
     /**
      * {@inheritDoc}
-     * <p>
-     * See {@link WorldpayUrlService#getFullErrorURL}
      */
     @Override
     public String getFullErrorURL() throws WorldpayConfigurationException {
@@ -87,17 +79,42 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
     }
     /**
      * {@inheritDoc}
-     * <p>
-     * See {@link WorldpayUrlService#getFullThreeDSecureTermURL()}
      */
     @Override
     public String getFullThreeDSecureTermURL() throws WorldpayConfigurationException {
         return getFullUrl(getThreeDSecureTermPath(), true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFullThreeDSecureQuoteTermURL() throws WorldpayConfigurationException {
         return getFullUrl(getThreeDSecureQuoteTermPath(), true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getFullTermsUrl() throws WorldpayConfigurationException {
+        return getFullUrl(getTermsPath(), true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBaseWebsiteUrlForSite() throws WorldpayConfigurationException {
+        return getFullUrl(EMPTY_STRING, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getKlarnaConfirmationURL() throws WorldpayConfigurationException {
+        return getFullUrl(getKlarnaConfirmationPath(), true);
     }
 
     public BaseSiteService getBaseSiteService() {
@@ -107,10 +124,6 @@ public class DefaultWorldpayUrlService extends AbstractWorldpayUrlService {
     @Required
     public void setBaseSiteService(final BaseSiteService baseSiteService) {
         this.baseSiteService = baseSiteService;
-    }
-
-    public SiteBaseUrlResolutionService getSiteBaseUrlResolutionService() {
-        return siteBaseUrlResolutionService;
     }
 
     @Required

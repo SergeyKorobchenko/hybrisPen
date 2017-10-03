@@ -15,8 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import static com.worldpay.worldpayresponsemock.constants.WorldpayresponsemockConstants.PROTOCOL_SEPARATOR;
 import static com.worldpay.worldpayresponsemock.constants.WorldpayresponsemockConstants.SCHEME_SEPARATOR;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpayResponseBuilder implements WorldpayResponseBuilder {
 
+    private static final int SECURE_PORT_NUMBER = 9002;
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PaymentService buildRedirectResponse(PaymentService request, HttpServletRequest httpServletRequest) {
         final PaymentService paymentService = new PaymentService();
@@ -29,7 +37,9 @@ public class DefaultWorldpayResponseBuilder implements WorldpayResponseBuilder {
         Reference reference = new Reference();
         reference.setId(DateTime.now().toString());
         reference.setvalue(buildStoreFrontHopResponseEndpoint(httpServletRequest));
-        orderStatus.getReferenceOrBankAccountOrErrorOrPaymentOrPaymentAdditionalDetailsOrBillingAddressDetailsOrOrderModificationOrJournalOrRequestInfoOrFxApprovalRequiredOrZappRTPOrContent().add(reference);
+        orderStatus.
+                getReferenceOrBankAccountOrErrorOrPaymentOrCardBalanceOrPaymentAdditionalDetailsOrBillingAddressDetailsOrOrderModificationOrJournalOrRequestInfoOrFxApprovalRequiredOrZappRTPOrContent().
+                add(reference);
         reply.getOrderStatusOrBatchStatusOrErrorOrAddressCheckResponseOrRefundableAmountOrAccountBatchOrShopperOrOkOrFuturePayAgreementStatusOrShopperAuthenticationResultOrFuturePayPaymentResultOrPricePointOrPaymentOptionOrToken().add(orderStatus);
         paymentService.getSubmitOrModifyOrInquiryOrReplyOrNotifyOrVerify().add(reply);
         return paymentService;
@@ -37,7 +47,7 @@ public class DefaultWorldpayResponseBuilder implements WorldpayResponseBuilder {
 
     private String buildStoreFrontHopResponseEndpoint(final HttpServletRequest request) {
         final String serverName = request.getServerName();
-        return WorldpayresponsemockConstants.HTTPS + SCHEME_SEPARATOR + serverName + PROTOCOL_SEPARATOR + 9002 + "/worldpayresponsemock/redirect?";
+        return WorldpayresponsemockConstants.HTTPS + SCHEME_SEPARATOR + serverName + PROTOCOL_SEPARATOR + SECURE_PORT_NUMBER + "/worldpayresponsemock/redirect?";
     }
 }
 

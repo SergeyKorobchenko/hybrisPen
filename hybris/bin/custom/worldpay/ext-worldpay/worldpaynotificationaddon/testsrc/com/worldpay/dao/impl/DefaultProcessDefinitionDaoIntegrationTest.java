@@ -99,7 +99,6 @@ public class DefaultProcessDefinitionDaoIntegrationTest extends ServicelayerTran
         createTestPaymentInfoModel();
 
         final CommerceStrategyTestHelper helper = new CommerceStrategyTestHelper();
-
         final BaseSiteModel baseSite = helper.createSite(modelService, baseSiteService);
 
         baseSite.setName("testsite");
@@ -223,4 +222,3 @@ public class DefaultProcessDefinitionDaoIntegrationTest extends ServicelayerTran
         Assert.assertEquals(authorizeTask.getPk(), result.get(0).getCurrentTasks().iterator().next().getPk());
     }
 }
-    

@@ -46,7 +46,7 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 public class DefaultWorldpayPaymentInfoService implements WorldpayPaymentInfoService {
 
     private static final Logger LOG = Logger.getLogger(DefaultWorldpayPaymentInfoService.class);
-    protected static final String WORLDPAY_CREDIT_CARD_MAPPINGS = "worldpay.creditCard.mappings.";
+    private static final String WORLDPAY_CREDIT_CARD_MAPPINGS = "worldpay.creditCard.mappings.";
 
     private ModelService modelService;
     private EnumerationService enumerationService;
@@ -175,7 +175,7 @@ public class DefaultWorldpayPaymentInfoService implements WorldpayPaymentInfoSer
     private void updateCreditCardType(final CreditCardPaymentInfoModel creditCardPaymentInfoModel, final PaymentReply paymentReply) {
         final String methodCode = paymentReply.getMethodCode();
         final String creditCardTypeValue = getHybrisCCTypeForWPCCType(methodCode);
-        final CreditCardType cardType = enumerationService.getEnumerationValue(CreditCardType.class.getSimpleName(), creditCardTypeValue);
+        final CreditCardType cardType = (StringUtils.isNotBlank(creditCardTypeValue)) ? enumerationService.getEnumerationValue(CreditCardType.SIMPLE_CLASSNAME, creditCardTypeValue) : CreditCardType.TOKEN;
         creditCardPaymentInfoModel.setPaymentType(methodCode);
         creditCardPaymentInfoModel.setType(cardType);
     }

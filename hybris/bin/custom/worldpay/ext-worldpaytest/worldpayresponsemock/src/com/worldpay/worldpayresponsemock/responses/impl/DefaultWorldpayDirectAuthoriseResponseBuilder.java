@@ -10,6 +10,9 @@ import static com.worldpay.worldpayresponsemock.builders.AddressBuilder.anAddres
 import static com.worldpay.worldpayresponsemock.builders.PaymentBuilder.aPaymentBuilder;
 import static com.worldpay.worldpayresponsemock.builders.TokenBuilder.aTokenBuilder;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpayDirectAuthoriseResponseBuilder implements WorldpayDirectAuthoriseResponseBuilder {
 
     protected static final String AUTHORISED = "AUTHORISED";
@@ -17,6 +20,9 @@ public class DefaultWorldpayDirectAuthoriseResponseBuilder implements WorldpayDi
     protected static final String OBFUSCATED_PAN = "4111********1111";
     protected static final String VISA_SSL = "VISA-SSL";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override public PaymentService buildDirectResponse(final PaymentService request) {
         final Submit submitRequest = (Submit) request.getSubmitOrModifyOrInquiryOrReplyOrNotifyOrVerify().get(0);
 
@@ -32,7 +38,8 @@ public class DefaultWorldpayDirectAuthoriseResponseBuilder implements WorldpayDi
         return paymentService;
     }
 
-    @SuppressWarnings("squid:S2583") // Needed because of false positive caused by java8 semantics
+    // Needed because of false positive caused by java8 semantics
+    @SuppressWarnings("squid:S2583")
     private OrderStatus createOrderStatus(final Submit submitRequest) {
         boolean shouldCreateToken = false;
         String tokenReason = "tokenReason";
@@ -54,7 +61,9 @@ public class DefaultWorldpayDirectAuthoriseResponseBuilder implements WorldpayDi
                 final Payment payment = aPaymentBuilder()
                         .withTransactionAmount(intAmount.getValue()).withLastEvent(AUTHORISED).build();
                 orderStatus.setOrderCode(requestOrder.getOrderCode());
-                orderStatus.getReferenceOrBankAccountOrErrorOrPaymentOrPaymentAdditionalDetailsOrBillingAddressDetailsOrOrderModificationOrJournalOrRequestInfoOrFxApprovalRequiredOrZappRTPOrContent().add(payment);
+                orderStatus.
+                        getReferenceOrBankAccountOrErrorOrPaymentOrCardBalanceOrPaymentAdditionalDetailsOrBillingAddressDetailsOrOrderModificationOrJournalOrRequestInfoOrFxApprovalRequiredOrZappRTPOrContent().
+                        add(payment);
 
                 Optional<Object> createTokenOptional = orderElements.stream().filter(e -> e instanceof CreateToken).findFirst();
                 if (createTokenOptional.isPresent()) {

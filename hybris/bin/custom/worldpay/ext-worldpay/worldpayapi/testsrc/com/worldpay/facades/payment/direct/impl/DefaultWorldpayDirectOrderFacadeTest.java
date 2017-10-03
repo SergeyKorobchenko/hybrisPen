@@ -1,5 +1,6 @@
 package com.worldpay.facades.payment.direct.impl;
 
+import com.worldpay.data.AdditionalAuthInfo;
 import com.worldpay.data.BankTransferAdditionalAuthInfo;
 import com.worldpay.data.CSEAdditionalAuthInfo;
 import com.worldpay.exception.WorldpayConfigurationException;
@@ -50,7 +51,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayDirectOrderFacadeTest {
 
     private static final String MERCHANT_CODE = "merchantCode";
@@ -60,18 +61,22 @@ public class DefaultWorldpayDirectOrderFacadeTest {
     private static final String PA_RESPONSE = "paResponse";
     private static final String RETURN_CODE = "A12";
     private static final String EXCEPTION_MESSAGE = "exceptionMessage";
-    private static final String URL_TO_BANK = "urlToBank";
+    private static final String REDIRECT_URL = "redirectUrl";
+    private static final String KLARNA_CONTENT_ENCODED = "a2xhcm5hQ29udGVudA==";
+    private static final String KLARNA_CONTENT_DECODED = "klarnaContent";
     private static final String CVC = "cvc";
     private static final String AUTHENTICATED_SHOPPER_ID = "authenticatedShopperId";
     private static final String WORLDPAY_ORDER_CODE = "worldpayOrderCode";
 
     @InjectMocks
-    private DefaultWorldpayDirectOrderFacade testObj = new DefaultWorldpayDirectOrderFacade();
+    private DefaultWorldpayDirectOrderFacade testObj;
 
     @Mock
     private CSEAdditionalAuthInfo cseAdditionalAuthInfoMock;
     @Mock
     private BankTransferAdditionalAuthInfo bankTransferAdditionAuthInfoMock;
+    @Mock
+    private AdditionalAuthInfo additionalAuthInfoMock;
     @Mock
     private WorldpayDirectOrderService worldpayDirectOrderServiceMock;
     @Mock
@@ -104,7 +109,7 @@ public class DefaultWorldpayDirectOrderFacadeTest {
     @Mock
     private UserModel userModelMock;
 
-    @SuppressWarnings ("PMD")
+    @SuppressWarnings("PMD")
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -182,7 +187,7 @@ public class DefaultWorldpayDirectOrderFacadeTest {
         testObj.authorise(worldpayAdditionalInfoDataMock);
     }
 
-    @Test (expected = WorldpayConfigurationException.class)
+    @Test(expected = WorldpayConfigurationException.class)
     public void authoriseShouldRaiseWorldpayConfigurationExceptionWhenMerchantsAreNotProperlyConfigured() throws WorldpayException, InvalidCartException {
         when(worldpayMerchantInfoServiceMock.getCurrentSiteMerchant(DESKTOP)).thenThrow(new WorldpayConfigurationException(EXCEPTION_MESSAGE));
 
@@ -191,7 +196,7 @@ public class DefaultWorldpayDirectOrderFacadeTest {
         verify(worldpayDirectOrderServiceMock, never()).authorise(merchantInfoMock, cartModelMock, worldpayAdditionalInfoDataMock);
     }
 
-    @Test (expected = WorldpayException.class)
+    @Test(expected = WorldpayException.class)
     public void authoriseShouldRaiseExceptionWhenPaymentReplayIsNullAndErrorDetailIsNotNull() throws Exception {
         when(directAuthoriseServiceResponseMock.getErrorDetail()).thenReturn(errorDetailMock);
         when(errorDetailMock.getMessage()).thenReturn(ERROR_MESSAGE);
@@ -245,7 +250,7 @@ public class DefaultWorldpayDirectOrderFacadeTest {
         verify(worldpayDirectOrderServiceMock, never()).completeAuthorise3DSecure(cartModelMock, directAuthoriseServiceResponse3dSecureMock, merchantInfoMock);
     }
 
-    @Test (expected = WorldpayException.class)
+    @Test(expected = WorldpayException.class)
     public void authorise3DSecureShouldRaiseExceptionWhen3dAuthStatusInvalid() throws WorldpayException, InvalidCartException {
         when(paymentReplyMock.getAuthStatus()).thenReturn(REFUNDED);
 
@@ -255,7 +260,7 @@ public class DefaultWorldpayDirectOrderFacadeTest {
         verify(worldpayDirectOrderServiceMock, never()).completeAuthorise3DSecure(cartModelMock, directAuthoriseServiceResponse3dSecureMock, merchantInfoMock);
     }
 
-    @Test (expected = WorldpayException.class)
+    @Test(expected = WorldpayException.class)
     public void authorise3DSecureShouldRaiseExceptionWhenPaymentReplyIsNull() throws WorldpayException, InvalidCartException {
         when(directAuthoriseServiceResponse3dSecureMock.getPaymentReply()).thenReturn(null);
         when(directAuthoriseServiceResponse3dSecureMock.getErrorDetail()).thenReturn(errorDetailMock);
@@ -287,18 +292,17 @@ public class DefaultWorldpayDirectOrderFacadeTest {
     public void shouldReturnBankURLWhenAuthorisedAndOrderPlacedWithBankTransfer() throws WorldpayException {
         when(worldpayDirectOrderServiceMock.authoriseBankTransfer(merchantInfoMock, cartModelMock, bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock)).thenReturn(directAuthoriseServiceResponseMock);
         when(directAuthoriseServiceResponseMock.getRedirectReference()).thenReturn(redirectReferenceMock);
-        when(redirectReferenceMock.getUrl()).thenReturn(URL_TO_BANK);
+        when(redirectReferenceMock.getValue()).thenReturn(REDIRECT_URL);
 
         final String result = testObj.authoriseBankTransferRedirect(bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock);
 
         verify(uiExperienceServiceMock).getUiExperienceLevel();
         verify(worldpayMerchantInfoServiceMock).getCurrentSiteMerchant(DESKTOP);
-        verify(worldpayDirectOrderServiceMock).authoriseBankTransfer(merchantInfoMock, cartModelMock, bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock);
 
-        assertEquals(URL_TO_BANK, result);
+        assertEquals(REDIRECT_URL, result);
     }
 
-    @Test (expected = WorldpayException.class)
+    @Test(expected = WorldpayException.class)
     public void shouldRaiseExceptionWhenErrorOccurredAuthorisingRedirectWithBankTransfer() throws WorldpayException {
         when(worldpayDirectOrderServiceMock.authoriseBankTransfer(merchantInfoMock, cartModelMock, bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock)).thenReturn(directAuthoriseServiceResponseMock);
         when(directAuthoriseServiceResponseMock.getErrorDetail()).thenReturn(errorDetailMock);
@@ -308,20 +312,17 @@ public class DefaultWorldpayDirectOrderFacadeTest {
 
         verify(uiExperienceServiceMock).getUiExperienceLevel();
         verify(worldpayMerchantInfoServiceMock).getCurrentSiteMerchant(DESKTOP);
-        verify(worldpayDirectOrderServiceMock).authoriseBankTransfer(merchantInfoMock, cartModelMock, bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock);
     }
 
-    @Test (expected = WorldpayException.class)
+    @Test(expected = WorldpayException.class)
     public void shouldRaiseExceptionWhenNoErrorNoRedirectReferenceWasReturnedOccurredAuthorisingRedirectWithBankTransfer() throws WorldpayException {
         when(worldpayDirectOrderServiceMock.authoriseBankTransfer(merchantInfoMock, cartModelMock, bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock)).thenReturn(directAuthoriseServiceResponseMock);
         when(directAuthoriseServiceResponseMock.getErrorDetail()).thenReturn(null);
-        when(errorDetailMock.getMessage()).thenReturn(ERROR_MESSAGE);
 
         testObj.authoriseBankTransferRedirect(bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock);
 
         verify(uiExperienceServiceMock).getUiExperienceLevel();
         verify(worldpayMerchantInfoServiceMock).getCurrentSiteMerchant(DESKTOP);
-        verify(worldpayDirectOrderServiceMock).authoriseBankTransfer(merchantInfoMock, cartModelMock, bankTransferAdditionAuthInfoMock, worldpayAdditionalInfoDataMock);
     }
 
     @Test
@@ -356,4 +357,42 @@ public class DefaultWorldpayDirectOrderFacadeTest {
         assertEquals(PA_REQUEST, result.getPaRequest());
         assertEquals(AUTHENTICATION_REQUIRED, result.getTransactionStatus());
     }
+
+    @Test
+    public void shouldReturnKlarnaURLWhenAuthorisedAndOrderPlacedWithKlarna() throws WorldpayException {
+        when(worldpayDirectOrderServiceMock.authoriseKlarna(merchantInfoMock, cartModelMock, worldpayAdditionalInfoDataMock, additionalAuthInfoMock)).thenReturn(directAuthoriseServiceResponseMock);
+        when(directAuthoriseServiceResponseMock.getRedirectReference()).thenReturn(redirectReferenceMock);
+        when(redirectReferenceMock.getValue()).thenReturn(KLARNA_CONTENT_ENCODED);
+
+        final String result = testObj.authoriseKlarnaRedirect(worldpayAdditionalInfoDataMock, additionalAuthInfoMock);
+
+        verify(uiExperienceServiceMock).getUiExperienceLevel();
+        verify(worldpayMerchantInfoServiceMock).getCurrentSiteMerchant(DESKTOP);
+
+        assertEquals(KLARNA_CONTENT_DECODED, result);
+    }
+
+    @Test(expected = WorldpayException.class)
+    public void shouldRaiseExceptionWhenErrorOccurredAuthorisingRedirectWithKlarna() throws WorldpayException {
+        when(worldpayDirectOrderServiceMock.authoriseKlarna(merchantInfoMock, cartModelMock, worldpayAdditionalInfoDataMock, additionalAuthInfoMock)).thenReturn(directAuthoriseServiceResponseMock);
+        when(directAuthoriseServiceResponseMock.getErrorDetail()).thenReturn(errorDetailMock);
+        when(errorDetailMock.getMessage()).thenReturn(ERROR_MESSAGE);
+
+        testObj.authoriseKlarnaRedirect(worldpayAdditionalInfoDataMock, additionalAuthInfoMock);
+
+        verify(uiExperienceServiceMock).getUiExperienceLevel();
+        verify(worldpayMerchantInfoServiceMock).getCurrentSiteMerchant(DESKTOP);
+    }
+
+    @Test(expected = WorldpayException.class)
+    public void shouldRaiseExceptionWhenNoErrorNoRedirectReferenceWasReturnedOccurredAuthorisingRedirectWithKlarna() throws WorldpayException {
+        when(worldpayDirectOrderServiceMock.authoriseKlarna(merchantInfoMock, cartModelMock, worldpayAdditionalInfoDataMock, additionalAuthInfoMock)).thenReturn(directAuthoriseServiceResponseMock);
+        when(directAuthoriseServiceResponseMock.getErrorDetail()).thenReturn(null);
+
+        testObj.authoriseKlarnaRedirect(worldpayAdditionalInfoDataMock, additionalAuthInfoMock);
+
+        verify(uiExperienceServiceMock).getUiExperienceLevel();
+        verify(worldpayMerchantInfoServiceMock).getCurrentSiteMerchant(DESKTOP);
+    }
+
 }
