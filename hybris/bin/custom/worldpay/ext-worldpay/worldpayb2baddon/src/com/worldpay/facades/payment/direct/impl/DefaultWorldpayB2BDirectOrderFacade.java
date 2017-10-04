@@ -7,6 +7,8 @@ import com.worldpay.payment.DirectResponseData;
 import com.worldpay.payment.TransactionStatus;
 import com.worldpay.service.model.MerchantInfo;
 import de.hybris.platform.b2b.services.B2BOrderService;
+import de.hybris.platform.b2bacceleratorfacades.order.B2BCheckoutFacade;
+import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.order.InvalidCartException;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Required;
 public class DefaultWorldpayB2BDirectOrderFacade extends DefaultWorldpayDirectOrderFacade implements WorldpayB2BDirectOrderFacade {
 
     private B2BOrderService b2BOrderService;
+    private B2BCheckoutFacade b2BCheckoutFacade;
 
     /**
      * {@inheritDoc}
@@ -25,8 +28,8 @@ public class DefaultWorldpayB2BDirectOrderFacade extends DefaultWorldpayDirectOr
     @Override
     public DirectResponseData authoriseRecurringPayment(final String orderCode,
                                                         final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException {
-        AbstractOrderModel abstractOrderModel = b2BOrderService.getOrderForCode(orderCode);
-        final MerchantInfo merchantInfo = getCurrentMerchantInfo();
+        final AbstractOrderModel abstractOrderModel = b2BOrderService.getOrderForCode(orderCode);
+        final MerchantInfo merchantInfo = getWorldpayMerchantInfoService().getCurrentSiteMerchant();
         return internalAuthoriseRecurringPayment(abstractOrderModel, worldpayAdditionalInfoData, merchantInfo);
     }
 
@@ -41,13 +44,19 @@ public class DefaultWorldpayB2BDirectOrderFacade extends DefaultWorldpayDirectOr
         return internalAuthorise3DSecure(orderModel, paResponse, worldpayAdditionalInfoData);
     }
 
-    @Override
-    protected void handleAuthorisedResponse(DirectResponseData response) {
+    protected void handleAuthorisedResponse(final DirectResponseData response) throws InvalidCartException {
+        final OrderData orderData = b2BCheckoutFacade.placeOrder();
+        response.setOrderData(orderData);
         response.setTransactionStatus(TransactionStatus.AUTHORISED);
     }
 
     @Required
     public void setB2BOrderService(B2BOrderService b2BOrderService) {
         this.b2BOrderService = b2BOrderService;
+    }
+
+    @Required
+    public void setB2BCheckoutFacade(B2BCheckoutFacade b2BCheckoutFacade) {
+        this.b2BCheckoutFacade = b2BCheckoutFacade;
     }
 }

@@ -48,6 +48,14 @@ INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[un
 
 ############ Worldpay
 
+$worldpayCheckoutGroup=worldpayB2BCheckoutGroup
+
+# Base Store
+UPDATE BaseStore;uid[unique=true];checkoutFlowGroup
+;$storeUid;$worldpayCheckoutGroup
+
+
+
 INSERT_UPDATE WorldpayCurrencyRange;currency(isocode)[unique=true];min[unique=true];max[unique=true]
 ;EUR;1;2000
 ;EUR;1;3000

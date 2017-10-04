@@ -237,12 +237,6 @@ public class WorldpayCheckoutFacadeDecoratorTest {
         verify(checkoutFlowFacadeMock).createPaymentSubscription(ccPaymentInfoDataMock);
     }
 
-//    @Test
-//    public void getCheckoutFlow() {
-//        testObj.getCheckoutFlow();
-//        verify(checkoutFlowFacadeMock).getCheckoutFlow();
-//    }
-
     @Test
     public void placeOrder() throws InvalidCartException {
         testObj.placeOrder();
