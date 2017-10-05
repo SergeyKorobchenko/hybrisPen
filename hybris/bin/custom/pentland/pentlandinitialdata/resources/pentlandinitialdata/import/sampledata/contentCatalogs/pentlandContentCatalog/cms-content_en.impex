@@ -369,7 +369,6 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=en]
 ;;AcceleratorNavNode;"Accelerator"
 ;;ChangePasswordNavNode;""
 ;;ContactUsNavNode;""
-;;FAQNavNode;""
 ;;FacebookNavNode;""
 ;;FollowUsNavNode;"Follow Us"
 ;;FooterNavNode;""

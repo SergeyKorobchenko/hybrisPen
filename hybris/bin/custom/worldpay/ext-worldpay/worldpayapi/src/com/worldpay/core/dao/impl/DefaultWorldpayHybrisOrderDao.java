@@ -12,7 +12,8 @@ import java.util.Collections;
  */
 public class DefaultWorldpayHybrisOrderDao extends AbstractItemDao implements WorldpayHybrisOrderDao {
 
-    protected static final String QUERY_BY_WORLDPAY_ORDER_CODE = "SELECT {" + OrderModel.PK + "} FROM {" + OrderModel._TYPECODE + "} WHERE {worldpayOrderCode} = ?worldpayOrderCode AND {versionID} is null";
+    protected static final String QUERY_BY_WORLDPAY_ORDER_CODE = "SELECT {" + OrderModel.PK + "} FROM {" + OrderModel._TYPECODE +
+                                                        "} WHERE {worldpayOrderCode} = ?worldpayOrderCode AND {versionID} is null";
     protected static final String PARAM_WORLD_PAY_ORDER_CODE = "worldpayOrderCode";
 
     /**

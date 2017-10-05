@@ -6,6 +6,9 @@ import de.hybris.platform.ordercancel.model.OrderCancelRecordEntryModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import org.springframework.beans.factory.annotation.Required;
 
+/**
+ * Sends cancel notifications
+ */
 public class WorldpayOrderCancelNotificationServiceAdapter implements OrderCancelNotificationServiceAdapter {
     private EventService eventService;
 

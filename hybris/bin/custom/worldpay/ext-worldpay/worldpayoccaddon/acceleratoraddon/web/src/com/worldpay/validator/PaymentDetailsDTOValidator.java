@@ -52,10 +52,6 @@ public class PaymentDetailsDTOValidator implements Validator {
         paymentAddressValidator.validate(paymentDetails, errors);
     }
 
-    public Validator getPaymentAddressValidator() {
-        return paymentAddressValidator;
-    }
-
     @Required
     public void setPaymentAddressValidator(final Validator paymentAddressValidator) {
         this.paymentAddressValidator = paymentAddressValidator;

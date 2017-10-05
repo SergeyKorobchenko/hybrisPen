@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+import static de.hybris.platform.core.enums.CreditCardType.*;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 /**
@@ -46,7 +47,7 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 public class DefaultWorldpayPaymentInfoService implements WorldpayPaymentInfoService {
 
     private static final Logger LOG = Logger.getLogger(DefaultWorldpayPaymentInfoService.class);
-    protected static final String WORLDPAY_CREDIT_CARD_MAPPINGS = "worldpay.creditCard.mappings.";
+    private static final String WORLDPAY_CREDIT_CARD_MAPPINGS = "worldpay.creditCard.mappings.";
 
     private ModelService modelService;
     private EnumerationService enumerationService;
@@ -145,7 +146,7 @@ public class DefaultWorldpayPaymentInfoService implements WorldpayPaymentInfoSer
         creditCardPaymentInfoModel.setCode(generateCcPaymentInfoCode(cartModel));
         creditCardPaymentInfoModel.setWorldpayOrderCode(cartModel.getWorldpayOrderCode());
         creditCardPaymentInfoModel.setUser(cartModel.getUser());
-        creditCardPaymentInfoModel.setType(CreditCardType.TOKEN);
+        creditCardPaymentInfoModel.setType(TOKEN);
         updateCreditCardModel(tokenReply, creditCardPaymentInfoModel, saveCard);
         return creditCardPaymentInfoModel;
     }
@@ -175,7 +176,7 @@ public class DefaultWorldpayPaymentInfoService implements WorldpayPaymentInfoSer
     private void updateCreditCardType(final CreditCardPaymentInfoModel creditCardPaymentInfoModel, final PaymentReply paymentReply) {
         final String methodCode = paymentReply.getMethodCode();
         final String creditCardTypeValue = getHybrisCCTypeForWPCCType(methodCode);
-        final CreditCardType cardType = enumerationService.getEnumerationValue(CreditCardType.class.getSimpleName(), creditCardTypeValue);
+        final CreditCardType cardType = StringUtils.isNotBlank(creditCardTypeValue) ? enumerationService.getEnumerationValue(SIMPLE_CLASSNAME, creditCardTypeValue) : TOKEN;
         creditCardPaymentInfoModel.setPaymentType(methodCode);
         creditCardPaymentInfoModel.setType(cardType);
     }

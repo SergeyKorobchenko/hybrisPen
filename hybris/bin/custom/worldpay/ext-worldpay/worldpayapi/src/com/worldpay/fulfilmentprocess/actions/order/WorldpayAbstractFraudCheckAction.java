@@ -74,8 +74,17 @@ public abstract class WorldpayAbstractFraudCheckAction<T extends OrderProcessMod
         return this.executeAction(process).toString();
     }
 
+    /**
+     *
+     * @param var1
+     * @return
+     * @throws WorldpayException
+     */
     public abstract WorldpayAbstractFraudCheckAction.Transition executeAction(T var1) throws WorldpayException;
 
+    /**
+     * Possible return values
+     */
     public enum Transition {
         OK,
         POTENTIAL;

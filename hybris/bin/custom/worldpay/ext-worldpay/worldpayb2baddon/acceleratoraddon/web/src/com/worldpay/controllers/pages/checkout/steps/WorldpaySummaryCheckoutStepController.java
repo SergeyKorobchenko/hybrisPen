@@ -6,7 +6,6 @@ import com.worldpay.facades.payment.direct.WorldpayDirectOrderFacade;
 import com.worldpay.order.data.WorldpayAdditionalInfoData;
 import com.worldpay.payment.DirectResponseData;
 import com.worldpay.service.WorldpayAddonEndpointService;
-import de.hybris.platform.acceleratorservices.uiexperience.UiExperienceService;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
@@ -48,7 +47,9 @@ import static com.worldpay.payment.TransactionStatus.AUTHORISED;
 import static de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages.addErrorMessage;
 import static java.text.MessageFormat.format;
 
-
+/**
+ * Worldpay summary checkout step controller
+ */
 @Controller
 @RequestMapping(value = "/checkout/multi/worldpay/summary")
 public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirectCheckoutStepController {
@@ -61,16 +62,25 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
     protected static final String REDIRECT_URL_REPLENISHMENT_CONFIRMATION = REDIRECT_PREFIX + "/checkout/replenishment/confirmation/";
     protected static final String TEXT_STORE_DATEFORMAT_KEY = "text.store.dateformat";
     protected static final String DEFAULT_DATEFORMAT = "MM/dd/yyyy";
+    protected static final int NDAYS_END = 30;
+    protected static final int NTHDAYOFMONTH_END = 31;
+    protected static final int NTHWEEK_END = 12;
 
     @Resource
     private WorldpayAdditionalInfoFacade worldpayAdditionalInfoFacade;
-    @Resource
-    private UiExperienceService uiExperienceService;
     @Resource
     private WorldpayDirectOrderFacade worldpayDirectOrderFacade;
     @Resource
     private WorldpayAddonEndpointService worldpayAddonEndpointService;
 
+    /**
+     * Enter step
+     *
+     * @param model
+     * @param redirectAttributes
+     * @return
+     * @throws CMSItemNotFoundException
+     */
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     @RequireHardLogIn
     @Override
@@ -112,9 +122,9 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
     }
 
     protected void addScheduleSetupToModel(Model model) {
-        model.addAttribute("nDays", getNumberRange(1, 30));
-        model.addAttribute("nthDayOfMonth", getNumberRange(1, 31));
-        model.addAttribute("nthWeek", getNumberRange(1, 12));
+        model.addAttribute("nDays", getNumberRange(1, NDAYS_END));
+        model.addAttribute("nthDayOfMonth", getNumberRange(1, NTHDAYOFMONTH_END));
+        model.addAttribute("nthWeek", getNumberRange(1, NTHWEEK_END));
         model.addAttribute("daysOfWeek", getB2BCheckoutFacade().getDaysOfWeekForReplenishmentCheckoutSummary());
     }
 
@@ -136,7 +146,7 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
      * @return
      * @throws CMSItemNotFoundException
      */
-    @RequestMapping (value = "/placeOrder")
+    @RequestMapping(value = "/placeOrder")
     @RequireHardLogIn
     public String placeOrder(@ModelAttribute("placeOrderForm") final PlaceOrderForm placeOrderForm, final Model model, final HttpServletRequest request,
                              final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException, InvalidCartException,
@@ -200,8 +210,7 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
     protected boolean getRequestSecurityCodeValue() {
         // Only request the security code if using a saved card
         Boolean savedCardSelected = getSessionService().getCurrentSession().getAttribute(SAVED_CARD_SELECTED_ATTRIBUTE);
-        final boolean savedCardHasBeenSelected = savedCardSelected != null && savedCardSelected.booleanValue();
-        return savedCardHasBeenSelected;
+        return savedCardSelected != null && savedCardSelected.booleanValue();
     }
 
     /**
@@ -256,27 +265,33 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
         return true;
     }
 
-    protected String redirectToOrderConfirmationPage(final PlaceOrderData placeOrderData, final AbstractOrderData orderData)
-    {
-        if (Boolean.TRUE.equals(placeOrderData.getNegotiateQuote()))
-        {
+    protected String redirectToOrderConfirmationPage(final PlaceOrderData placeOrderData, final AbstractOrderData orderData) {
+        if (Boolean.TRUE.equals(placeOrderData.getNegotiateQuote())) {
             return REDIRECT_URL_QUOTE_ORDER_CONFIRMATION + orderData.getCode();
-        }
-        else if (Boolean.TRUE.equals(placeOrderData.getReplenishmentOrder()) && (orderData instanceof ScheduledCartData))
-        {
+        } else if (Boolean.TRUE.equals(placeOrderData.getReplenishmentOrder()) && (orderData instanceof ScheduledCartData)) {
             return REDIRECT_URL_REPLENISHMENT_CONFIRMATION + ((ScheduledCartData) orderData).getJobCode();
         }
         return REDIRECT_URL_ORDER_CONFIRMATION + orderData.getCode();
     }
 
-    @RequestMapping (value = "/back", method = RequestMethod.GET)
+    /**
+     * Navigate to previous step
+     * @param redirectAttributes
+     * @return
+     */
+    @RequestMapping(value = "/back", method = RequestMethod.GET)
     @RequireHardLogIn
     @Override
     public String back(final RedirectAttributes redirectAttributes) {
         return getCheckoutStep().previousStep();
     }
 
-    @RequestMapping (value = "/next", method = RequestMethod.GET)
+    /**
+     * Navigate to next step
+     * @param redirectAttributes
+     * @return
+     */
+    @RequestMapping(value = "/next", method = RequestMethod.GET)
     @RequireHardLogIn
     @Override
     public String next(final RedirectAttributes redirectAttributes) {
@@ -290,7 +305,6 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
     private WorldpayAdditionalInfoData getWorldpayAdditionalInfo(final HttpServletRequest request,
                                                                  final String securityCode) {
         final WorldpayAdditionalInfoData info = worldpayAdditionalInfoFacade.createWorldpayAdditionalInfoData(request);
-        info.setUiExperienceLevel(uiExperienceService.getUiExperienceLevel());
         info.setSecurityCode(securityCode);
         return info;
     }
@@ -306,8 +320,7 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
     }
 
     @InitBinder
-    protected void initBinder(final ServletRequestDataBinder binder)
-    {
+    protected void initBinder(final ServletRequestDataBinder binder) {
         final Locale currentLocale = getI18nService().getCurrentLocale();
         final String formatString = getMessageSource().getMessage(TEXT_STORE_DATEFORMAT_KEY, null, DEFAULT_DATEFORMAT,
                 currentLocale);

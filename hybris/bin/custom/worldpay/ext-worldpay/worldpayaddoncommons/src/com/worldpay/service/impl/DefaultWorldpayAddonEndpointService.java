@@ -22,6 +22,7 @@ public class DefaultWorldpayAddonEndpointService implements WorldpayAddonEndpoin
     protected static final String BILLINGADDRESSINPAYMENTFORM = "fragments/checkout/worldpayBillingAddressInPaymentForm";
 
     protected static final String GLOBALERRORSFRAGMENT = "fragments/common/globalMessages";
+    private static final String KLARNA_RESPONSE_PAGE = "pages/klarna/klarnaResponseContentPage";
 
     @Resource
     private ConfigurationService configurationService;
@@ -63,5 +64,10 @@ public class DefaultWorldpayAddonEndpointService implements WorldpayAddonEndpoin
 
     protected String getEndpoint(final String path) {
         return configurationService.getConfiguration().getString(WORLDPAY_ADDON_PREFIX, UNDEFINED_PREFIX) + path;
+    }
+
+    @Override
+    public String getKlarnaResponsePage() {
+        return getEndpoint(KLARNA_RESPONSE_PAGE);
     }
 }

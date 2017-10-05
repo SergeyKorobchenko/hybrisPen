@@ -13,21 +13,17 @@ import de.hybris.platform.servicelayer.type.TypeService;
 import de.hybris.platform.servicelayer.user.UserService;
 import org.springframework.beans.factory.annotation.Required;
 
-import javax.annotation.Resource;
 import java.util.Collections;
 
 /**
- *   Customized CloneCartAction in order to be able to set a normal orderCodeGenerator code
- *   on the cloned cart. Using a Guid as the code causes the generated requestId against
- *   Worldpay in the authorisation later on in the process, to be invalid.
+ * Customized CloneCartAction in order to be able to set a normal orderCodeGenerator code
+ * on the cloned cart. Using a Guid as the code causes the generated requestId against
+ * Worldpay in the authorisation later on in the process, to be invalid.
  */
 public class WorldpayCloneCartAction extends AbstractProceduralAction<ReplenishmentProcessModel> {
 
-    @Resource
     private CartService cartService;
-    @Resource
     private TypeService typeService;
-    @Resource
     private UserService userService;
 
     private KeyGenerator keyGenerator;
@@ -45,16 +41,12 @@ public class WorldpayCloneCartAction extends AbstractProceduralAction<Replenishm
         clone.setDeliveryAddress(cartToOrderCronJob.getDeliveryAddress());
         clone.setPaymentInfo(cartToOrderCronJob.getPaymentInfo());
         clone.setStatus(OrderStatus.CREATED);
-        clone.setAllPromotionResults(Collections.EMPTY_SET);
-        clone.setPaymentTransactions(Collections.EMPTY_LIST);
-        clone.setPermissionResults(Collections.EMPTY_LIST);
+        clone.setAllPromotionResults(Collections.emptySet());
+        clone.setPaymentTransactions(Collections.emptyList());
+        clone.setPermissionResults(Collections.emptyList());
         clone.setGuid(guidKeyGenerator.generate().toString());
         this.modelService.save(clone);
         processParameterHelper.setProcessParameter(process, "cart", clone);
-    }
-
-    public KeyGenerator getKeyGenerator() {
-        return keyGenerator;
     }
 
     @Required
@@ -62,12 +54,23 @@ public class WorldpayCloneCartAction extends AbstractProceduralAction<Replenishm
         this.keyGenerator = keyGenerator;
     }
 
-    public KeyGenerator getGuidKeyGenerator() {
-        return guidKeyGenerator;
-    }
-
     @Required
     public void setGuidKeyGenerator(KeyGenerator guidKeyGenerator) {
         this.guidKeyGenerator = guidKeyGenerator;
+    }
+
+    @Required
+    public void setCartService(final CartService cartService) {
+        this.cartService = cartService;
+    }
+
+    @Required
+    public void setTypeService(final TypeService typeService) {
+        this.typeService = typeService;
+    }
+
+    @Required
+    public void setUserService(final UserService userService) {
+        this.userService = userService;
     }
 }

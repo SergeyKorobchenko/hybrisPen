@@ -27,7 +27,7 @@ public class WorldpayPaymentTransactionTypesAppender implements WorldpaySupportE
             final Set<PaymentTransactionType> paymentTransactionTypes = worldpayCronJobSupportInformationService.getPaymentTransactionType();
             processedPaymentTransactionTypes.append(System.lineSeparator()).append("Payment Transaction Types: ").append(System.lineSeparator());
             for (final PaymentTransactionType paymentTransactionType : paymentTransactionTypes) {
-                processedPaymentTransactionTypes.append(TAB).append(paymentTransactionType.getCode()).append(System.lineSeparator());
+                processedPaymentTransactionTypes.append(ONE_TAB).append(paymentTransactionType.getCode()).append(System.lineSeparator());
             }
         }
         return processedPaymentTransactionTypes.toString();

@@ -19,7 +19,7 @@ public class WorldpayExtensionListAppender implements WorldpaySupportEmailAppend
         final List<String> tenantSpecificExtensionNames = getTenantSpecificExtensionNames();
         extensions.append(System.lineSeparator()).append("Extensions:").append(System.lineSeparator());
         for (final String tenantSpecificExtensionName : tenantSpecificExtensionNames) {
-            extensions.append(TAB).append(tenantSpecificExtensionName).append(System.lineSeparator());
+            extensions.append(ONE_TAB).append(tenantSpecificExtensionName).append(System.lineSeparator());
         }
         return extensions.toString();
     }

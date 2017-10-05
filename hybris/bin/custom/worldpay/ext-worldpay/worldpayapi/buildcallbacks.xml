@@ -94,19 +94,4 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="worldpayapi_after_build">
-		<sequential>
-			<copy todir="${ext.hmc.path}/web/webroot/images/icons">
-				<fileset dir="${ext.worldpayapi.path}/hmc/resources/icons">
-					<include name="worldpay_main.gif"/>
-				</fileset>
-			</copy>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="worldpayapi_after_clean">
-		<sequential>
-			<delete file="${ext.hmc.path}/web/webroot/images/icons/worldpay_main.gif" />
-		</sequential>
-	</macrodef>
 </project>

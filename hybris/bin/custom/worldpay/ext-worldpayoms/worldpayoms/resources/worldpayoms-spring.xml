@@ -12,16 +12,15 @@
 -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd">
+           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <alias name="defaultWorldpayomsOrderModificationRefundProcessStrategy" alias="worldpayOrderModificationRefundProcessStrategy"/>
     <bean id="defaultWorldpayomsOrderModificationRefundProcessStrategy" class="com.worldpay.strategies.impl.DefaultWorldpayomsOrderModificationRefundProcessStrategy">
         <property name="businessProcessService" ref="businessProcessService"/>
         <property name="modelService" ref="modelService"/>
     </bean>
-
 
     <!-- Process Definitions -->
     <alias name="worldpayOrderProcessDefinitionResource" alias="orderProcessDefinitionResource"/>
@@ -63,24 +62,22 @@
         <property name="key">
             <value type="com.worldpay.service.model.AuthorisedStatus">REFUNDED</value>
         </property>
-        <property name="value">
-            <value type="de.hybris.platform.payment.enums.PaymentTransactionType">REFUND_FOLLOW_ON</value>
-        </property>
+        <property name="value" ref="refundFollowOnPaymentTransactionType"/>
     </bean>
 
+    <util:constant id="refundFollowOnPaymentTransactionType" static-field="de.hybris.platform.payment.enums.PaymentTransactionType.REFUND_FOLLOW_ON" />
+
     <bean id="worldpayDependingTransactionRefundFollowOnMapMergeDirective" depends-on="dependingPaymentTransaction" parent="mapMergeDirective">
-        <property name="key">
-            <value type="de.hybris.platform.payment.enums.PaymentTransactionType">REFUND_FOLLOW_ON</value>
-        </property>
+        <property name="key" ref="refundFollowOnPaymentTransactionType"/>
         <property name="value">
             <value type="de.hybris.platform.payment.enums.PaymentTransactionType">CAPTURE</value>
         </property>
     </bean>
 
+    <util:constant id="settledPaymentTransactionType" static-field="de.hybris.platform.payment.enums.PaymentTransactionType.SETTLED" />
+
     <bean id="worldpayDependingTransactionSettledMapMergeDirective" depends-on="dependingPaymentTransaction" parent="mapMergeDirective">
-        <property name="key">
-            <value type="de.hybris.platform.payment.enums.PaymentTransactionType">SETTLED</value>
-        </property>
+        <property name="key" ref="settledPaymentTransactionType"/>
         <property name="value">
             <value type="de.hybris.platform.payment.enums.PaymentTransactionType">CAPTURE</value>
         </property>
@@ -97,18 +94,14 @@
         <property name="key">
             <value type="com.worldpay.service.model.AuthorisedStatus">SETTLED</value>
         </property>
-        <property name="value">
-            <value type="de.hybris.platform.payment.enums.PaymentTransactionType">SETTLED</value>
-        </property>
+        <property name="value" ref="settledPaymentTransactionType"/>
     </bean>
 
     <bean id="worldpayPaymentTransactionTypeRefundWebformIssuedMapMergeDirective" depends-on="paymentTransactionTypeMap" parent="mapMergeDirective">
         <property name="key">
             <value type="com.worldpay.service.model.AuthorisedStatus">REFUND_WEBFORM_ISSUED</value>
         </property>
-        <property name="value">
-            <value type="de.hybris.platform.payment.enums.PaymentTransactionType">REFUND_FOLLOW_ON</value>
-        </property>
+        <property name="value" ref="refundFollowOnPaymentTransactionType"/>
     </bean>
 
     <alias name="refundedOrderNotificationProcessorStrategy" alias="refundedOrderNotificationProcessorStrategy"/>

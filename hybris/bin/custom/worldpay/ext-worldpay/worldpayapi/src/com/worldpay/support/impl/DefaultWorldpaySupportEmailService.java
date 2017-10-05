@@ -6,10 +6,16 @@ import org.springframework.beans.factory.annotation.Required;
 
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpaySupportEmailService implements WorldpaySupportEmailService {
 
     private List<WorldpaySupportEmailAppender> emailAppenders;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createEmailBody() {
         final StringBuilder bodyBuilder = new StringBuilder();

@@ -2,9 +2,10 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/responsive/checkout/multi"%>
-<%@ taglib prefix="wp-multi-checkout" tagdir="/WEB-INF/tags/addons/worldpayb2baddon/responsive/checkout/multi" %>
+<%@ taglib prefix="wp-b2b-multi-checkout" tagdir="/WEB-INF/tags/addons/worldpayb2baddon/responsive/checkout/multi" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <spring:url value="/checkout/multi/worldpay/summary/placeOrder" var="placeOrderUrl"/>
 <spring:url value="/checkout/multi/termsAndConditions" var="getTermsAndConditionsUrl"/>
@@ -12,12 +13,11 @@
 
 <template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
 
-
     <div class="row">
         <div class="col-sm-6">
             <div class="checkout-headline">
                 <span class="glyphicon glyphicon-lock"></span>
-                <spring:theme code="checkout.multi.secure.checkout"></spring:theme>
+                <spring:theme code="checkout.multi.secure.checkout"/>
             </div>
 
             <multi-checkout:checkoutSteps checkoutSteps="${checkoutSteps}" progressBarId="${progressBarId}">
@@ -29,17 +29,19 @@
                     </div>
                     <div class="place-order-form hidden-xs">
                         <form:form action="${placeOrderUrl}" id="placeOrderForm1" commandName="placeOrderForm">
-                            <wp-multi-checkout:securityCode/>
-                            <wp-multi-checkout:termsAndConditions/>
+                            <wp-b2b-multi-checkout:securityCode/>
+                            <wp-b2b-multi-checkout:termsAndConditions/>
 
                             <button id="placeOrder" type="submit" class="btn btn-primary btn-block btn-place-order btn-block btn-lg checkoutSummaryButton" disabled="disabled">
                                 <spring:theme code="checkout.summary.placeOrder"/>
                             </button>
-                            <button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">
-                                <spring:theme code="checkout.summary.scheduleReplenishment"/>
-                            </button>
 
-                            <wp-multi-checkout:replenishmentScheduleForm/>
+                            <c:if test="${cartData.quoteData eq null}">
+                                <button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">
+                                    <spring:theme code="checkout.summary.scheduleReplenishment"/>
+                                </button>
+                                <wp-b2b-multi-checkout:replenishmentScheduleForm/>
+                            </c:if>
                         </form:form>
                     </div>
 
@@ -48,7 +50,7 @@
         </div>
 
         <div class="col-sm-6">
-            <wp-multi-checkout:checkoutOrderSummary cartData="${cartData}" showDeliveryAddress="true" showPaymentInfo="true" showTaxEstimate="true" showTax="true" />
+            <wp-b2b-multi-checkout:checkoutOrderSummary cartData="${cartData}" showDeliveryAddress="true" showPaymentInfo="true" showTaxEstimate="true" showTax="true" />
         </div>
 
         <div class="col-sm-12 col-lg-12">

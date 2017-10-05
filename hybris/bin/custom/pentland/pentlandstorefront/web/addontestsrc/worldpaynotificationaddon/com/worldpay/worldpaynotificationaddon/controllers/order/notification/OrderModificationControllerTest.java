@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.worldpay.worldpaynotificationaddon.controllers.WorldpaynotificationaddonControllerConstants.WorldpayNotificationAddon;
+import static com.worldpay.worldpaynotificationaddon.controllers.WorldpaynotificationaddonControllerConstants.WORLDPAY_RESPONSE_OK_VIEW;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
@@ -76,7 +76,7 @@ public class OrderModificationControllerTest {
 
         final String result = testObj.processOrderNotification(requestMock);
 
-        assertEquals(WorldpayNotificationAddon.Views.WORLDPAY_RESPONSE_OK_VIEW, result);
+        assertEquals(WORLDPAY_RESPONSE_OK_VIEW, result);
         verify(eventServiceMock, never()).publishEvent(any(AbstractEvent.class));
     }
 
@@ -87,7 +87,7 @@ public class OrderModificationControllerTest {
 
         final String result = testObj.processOrderNotification(requestMock);
 
-        assertEquals(WorldpayNotificationAddon.Views.WORLDPAY_RESPONSE_OK_VIEW, result);
+        assertEquals(WORLDPAY_RESPONSE_OK_VIEW, result);
         verify(eventServiceMock).publishEvent(orderModificationEventArgumentCaptor.capture());
 
         final OrderModificationEvent orderModificationEvent = orderModificationEventArgumentCaptor.getValue();

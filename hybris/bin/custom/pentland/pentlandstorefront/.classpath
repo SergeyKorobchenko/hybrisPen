@@ -20,10 +20,21 @@
 
 <classpathentry combineaccessrules="false" kind="src" path="/commerceorgaddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/sapinvoiceaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/worldpayb2baddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/worldpaynotificationaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/worldpaysampledataaddon"/>
+
+
+
 <classpathentry combineaccessrules="false" kind="src" path="/b2bacceleratoraddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/secureportaladdon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/worldpaynotifications"/>
+<classpathentry combineaccessrules="false" kind="src" path="/worldpayb2baddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
+
+
+
+
+
+
+
+
 				
 </classpath>

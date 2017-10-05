@@ -18,7 +18,9 @@ public interface WorldpayB2BDirectOrderFacade extends WorldpayDirectOrderFacade 
      * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      * @return {@link DirectResponseData} Wrapper object containing information on the response from Worldpay
      */
-    DirectResponseData authorise3DSecureOnOrder(final String orderCode, final String paResponse, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException;
+    DirectResponseData authorise3DSecureOnOrder(final String orderCode,
+                                                final String paResponse,
+                                                final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException;
 
     /**
      * Performs a direct authorisation using a saved order with Worldpay.
@@ -27,6 +29,7 @@ public interface WorldpayB2BDirectOrderFacade extends WorldpayDirectOrderFacade 
      * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      * @return {@link DirectResponseData} Wrapper object containing information on the response from Worldpay
      */
-    DirectResponseData authoriseRecurringPayment(final String orderCode, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException;
+    DirectResponseData authoriseRecurringPayment(final String orderCode,
+                                                 final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException;
 
 }

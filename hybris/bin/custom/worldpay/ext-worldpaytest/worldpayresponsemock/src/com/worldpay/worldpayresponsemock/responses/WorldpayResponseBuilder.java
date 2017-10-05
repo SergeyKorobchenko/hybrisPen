@@ -5,8 +5,15 @@ import com.worldpay.internal.model.PaymentService;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by admin on 26/04/16.
+ * Building Worldpay response
  */
 public interface WorldpayResponseBuilder {
+
+    /**
+     *
+     * @param request
+     * @param httpServletRequest
+     * @return
+     */
     PaymentService buildRedirectResponse(PaymentService request, HttpServletRequest httpServletRequest);
 }

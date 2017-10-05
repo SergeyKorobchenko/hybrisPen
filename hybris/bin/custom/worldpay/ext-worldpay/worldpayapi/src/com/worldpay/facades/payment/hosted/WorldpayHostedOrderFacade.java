@@ -9,17 +9,18 @@ import java.util.Map;
 
 
 /**
- * worldpay Hosted Order facade interface. Service is responsible for organising the calls and request/response from
- * worldpay Hosted Order page implementation
+ * Worldpay Hosted Order facade interface. Service is responsible for organising the calls and request/response from
+ * Worldpay Hosted Order page implementation
  */
 public interface WorldpayHostedOrderFacade {
 
     /**
      * Carries out the redirectAuthorise against the worldpayServiceGateway and then builds the data required to send to
-     * worldpay Hosted Order Page
+     * Worldpay Hosted Order Page
      *
+     * @param additionalAuthInfo
      * @return carry out the redirect to worldpay Hosted Order Page
-     * @throws WorldpayException if there are any issues found communicating with worldpay
+     * @throws WorldpayException if there are any issues found communicating with Worldpay
      */
     PaymentData redirectAuthorise(final AdditionalAuthInfo additionalAuthInfo) throws WorldpayException;
 
@@ -27,7 +28,7 @@ public interface WorldpayHostedOrderFacade {
      * Complete the redirectAuthorise if successful authorise response received. Create payment details and return back
      * to UI
      *
-     * @param redirectParameters The resultMap of parameters returned from worldpay redirect
+     * @param redirectParameters The resultMap of parameters returned from Worldpay redirect
      */
     void completeRedirectAuthorise(RedirectAuthoriseResult redirectParameters);
 
@@ -38,4 +39,10 @@ public interface WorldpayHostedOrderFacade {
      * @return
      */
     boolean validateRedirectResponse(Map<String, String> worldpayResponse);
+
+    /**
+     * Inquiries the payment status of an order in Worldpay
+     * @return String representing the Authorisation status of the order in Worldpay
+     */
+    RedirectAuthoriseResult inquiryPaymentStatus() throws WorldpayException;
 }

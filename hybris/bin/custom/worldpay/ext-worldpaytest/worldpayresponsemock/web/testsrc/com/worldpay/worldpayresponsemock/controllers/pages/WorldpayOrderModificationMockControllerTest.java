@@ -19,40 +19,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import static com.google.common.collect.Sets.newHashSet;
 import static com.worldpay.worldpayresponsemock.controllers.WorldpayResponseMockControllerConstants.Pages.Views.RESPONSES;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.AVAILABLE_SITES;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_CARD_HOLDER_NAME;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_CARD_MONTH;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_CARD_YEAR;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_CURRENCY_CODE;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_MERCHANT_CODE;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_ORDER_CODE;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_RISK_SCORE;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.DEFAULT_TRANSACTION_AMOUNT;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.FINAL_SCORE;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.MERCHANTS;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.PAYMENT_METHODS;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.PAYMENT_METHOD_APMS;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.POSSIBLE_EVENTS;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.RESPONSE_CODES;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.TEST_CREDIT_CARDS;
-import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.XML_RESPONSE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static com.worldpay.worldpayresponsemock.controllers.pages.WorldpayOrderModificationMockController.*;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.anySetOf;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.startsWith;
 import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @UnitTest
 @RunWith (MockitoJUnitRunner.class)
@@ -112,7 +89,7 @@ public class WorldpayOrderModificationMockControllerTest {
     @Mock
     private WorldpayMockConnector worldpayMockConnectorMock;
 
-    private List<String> merchantList;
+    private Set<String> merchantSet;
 
     @Before
     public void setup() throws WorldpayException {
@@ -127,8 +104,8 @@ public class WorldpayOrderModificationMockControllerTest {
         when(responseFormMock.getSiteId()).thenReturn(SITEID);
         when(site1Mock.getUid()).thenReturn(SITE_1);
         when(site2Mock.getUid()).thenReturn(SITE_2);
-        merchantList = Arrays.asList(MERCHANT_1, MERCHANT_2);
-        when(worldpayMerchantMockServiceMock.getAllMerchantCodes(startsWith("site"))).thenReturn(merchantList);
+        merchantSet = newHashSet(MERCHANT_1, MERCHANT_2);
+        when(worldpayMerchantMockServiceMock.getAllMerchantCodes(startsWith("site"))).thenReturn(merchantSet);
         final List<BaseSiteModel> availableSites = Arrays.asList(site1Mock, site2Mock);
         when(baseSiteServiceMock.getAllBaseSites()).thenReturn(availableSites);
         when(apmConfigurationLookupServiceMock.getAllApmPaymentTypeCodes()).thenReturn(new HashSet<>(Arrays.asList(APM_1, APM_2)));
@@ -141,7 +118,7 @@ public class WorldpayOrderModificationMockControllerTest {
     }
 
     @Test
-    public void testMaskCreditCardNumberOtherlength() throws Exception {
+    public void testMaskCreditCardNumberOtherLength() throws Exception {
         final String result = testObj.maskCreditCardNumber(CREDIT_CARD_NUMBER_2);
         assertEquals(MASKED_CREDIT_CARD_2, result);
     }
@@ -163,7 +140,7 @@ public class WorldpayOrderModificationMockControllerTest {
         verify(modelMock).put(TEST_CREDIT_CARDS, worldpayCreditCardsMock);
         verify(modelMock).put(PAYMENT_METHODS, worldpayPaymentMethodsMock);
         verify(modelMock).put(POSSIBLE_EVENTS, possibleEventsMock);
-        verify(modelMock).put(MERCHANTS, merchantList);
+        verify(modelMock).put(MERCHANTS, merchantSet);
     }
 
     @Test
@@ -179,7 +156,7 @@ public class WorldpayOrderModificationMockControllerTest {
         verify(modelMock).put(PAYMENT_METHODS, worldpayPaymentMethodsMock);
         verify(modelMock).put(POSSIBLE_EVENTS, possibleEventsMock);
         verify(worldpayMerchantMockServiceMock).getAllMerchantCodes(SITE_1);
-        verify(modelMock).put(MERCHANTS, merchantList);
+        verify(modelMock).put(MERCHANTS, merchantSet);
     }
 
     @Test
@@ -207,7 +184,7 @@ public class WorldpayOrderModificationMockControllerTest {
 
     @Test
     public void getAllMerchantsForSiteShouldReturnAListOfMerchants() {
-        final List<String> merchantsBySite = testObj.getMerchantsBySite(SITE_1);
+        final Set<String> merchantsBySite = testObj.getMerchantsBySite(SITE_1);
 
         verify(worldpayMerchantMockServiceMock).getAllMerchantCodes(SITE_1);
         assertTrue(merchantsBySite.contains(MERCHANT_1));

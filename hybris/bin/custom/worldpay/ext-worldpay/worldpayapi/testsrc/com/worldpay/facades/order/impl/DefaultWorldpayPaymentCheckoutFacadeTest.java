@@ -1,6 +1,14 @@
 package com.worldpay.facades.order.impl;
 
 import com.worldpay.core.checkout.WorldpayCheckoutService;
+import com.worldpay.core.services.OrderInquiryService;
+import com.worldpay.exception.WorldpayException;
+import com.worldpay.hostedorderpage.data.KlarnaRedirectAuthoriseResult;
+import com.worldpay.merchant.WorldpayMerchantInfoService;
+import com.worldpay.service.model.Amount;
+import com.worldpay.service.model.AuthorisedStatus;
+import com.worldpay.service.model.MerchantInfo;
+import com.worldpay.service.response.OrderInquiryServiceResponse;
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
@@ -10,11 +18,11 @@ import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.order.CartService;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Collections;
@@ -25,12 +33,19 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayPaymentCheckoutFacadeTest {
 
-    public static final String ADDRESS_DATA_ID = "0";
+    private static final String ADDRESS_DATA_ID = "0";
+
+    @Rule
+    @SuppressWarnings("PMD.MemberScope")
+    public ExpectedException expectedException = ExpectedException.none();
+
+    @Spy
     @InjectMocks
-    private DefaultWorldpayPaymentCheckoutFacade testObj = new DefaultWorldpayPaymentCheckoutFacade();
+    private DefaultWorldpayPaymentCheckoutFacade testObj;
+
     @Mock
     private AddressData addressDataMock;
     @Mock
@@ -47,7 +62,6 @@ public class DefaultWorldpayPaymentCheckoutFacadeTest {
     private DeliveryService deliveryServiceMock;
     @Mock
     private AddressModel paymentAddressMock;
-
 
     @Before
     public void setUp() {
@@ -79,14 +93,14 @@ public class DefaultWorldpayPaymentCheckoutFacadeTest {
     @Test
     public void setBillingDetailsDoesNotSetPaymentAddressWhenNoDeliveryAddressesReturned() {
         when(addressDataMock.getId()).thenReturn(ADDRESS_DATA_ID);
-        when(deliveryServiceMock.getSupportedDeliveryAddressesForOrder(cartModelMock, false)).thenReturn(Collections.EMPTY_LIST);
+        when(deliveryServiceMock.getSupportedDeliveryAddressesForOrder(cartModelMock, false)).thenReturn(Collections.emptyList());
 
         testObj.setBillingDetails(addressDataMock);
 
         Mockito.verify(worldpayCheckoutServiceMock, never()).setPaymentAddress(cartModelMock, addressModelMock);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void setBillingDetailsThrowsIllegalArgumentExceptionWhenAddressDataIdIsNull() {
         when(addressDataMock.getId()).thenReturn(null);
         when(addressModelMock.getPk()).thenReturn(PK.BIG_PK);

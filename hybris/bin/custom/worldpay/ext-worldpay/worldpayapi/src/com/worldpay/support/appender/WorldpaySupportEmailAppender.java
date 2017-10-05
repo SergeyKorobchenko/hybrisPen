@@ -5,10 +5,14 @@ package com.worldpay.support.appender;
  */
 public interface WorldpaySupportEmailAppender {
 
-    String TAB = "\t";
+    String ONE_TAB = "\t";
+    String TWO_TABS = "\t\t";
+    String THREE_TABS = "\t\t\t";
+    String FOUR_TABS = "\t\t\t\t";
 
     /**
      * Returns the content to be appended to the email support service
+     * @return
      */
     String appendContent();
 }

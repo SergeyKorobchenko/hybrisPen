@@ -1,5 +1,6 @@
 package com.worldpay.facades.payment.direct;
 
+import com.worldpay.data.AdditionalAuthInfo;
 import com.worldpay.data.BankTransferAdditionalAuthInfo;
 import com.worldpay.data.CSEAdditionalAuthInfo;
 import com.worldpay.exception.WorldpayException;
@@ -31,13 +32,14 @@ public interface WorldpayDirectOrderFacade {
     DirectResponseData authorise(final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException, InvalidCartException;
 
     /**
-     * Performs a request to Worldpay to retrieve the URL to redirect to when using authorisation using Client Side Encryption with Worldpay.
+     * Performs a request to Worldpay to retrieve the URL to redirect to when using authorisation using Bank transfer
      *
      * @param bankTransferAdditionalAuthInfo Object that contains additional authorisation information and the shopperBank
      * @param worldpayAdditionalInfoData     Object that contains information about the current session, browser used, and cookies.
-     * @return {@link DirectResponseData} Wrapper object containing information on the response from Worldpay
+     * @return String containing the redirect url
      */
-    String authoriseBankTransferRedirect(final BankTransferAdditionalAuthInfo bankTransferAdditionalAuthInfo, final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException;
+    String authoriseBankTransferRedirect(final BankTransferAdditionalAuthInfo bankTransferAdditionalAuthInfo,
+                                         final WorldpayAdditionalInfoData worldpayAdditionalInfoData) throws WorldpayException;
 
     /**
      * Performs authorisation of a transaction after it has been handled by 3dSecure issuer.
@@ -64,6 +66,15 @@ public interface WorldpayDirectOrderFacade {
      * @param merchantInfo The Worldpay merchant
      * @return {@link DirectResponseData} Wrapper object containing information on the response from Worldpay
      */
-    DirectResponseData authoriseRecurringPayment(final AbstractOrderModel abstractOrderModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final MerchantInfo merchantInfo) throws WorldpayException, InvalidCartException;
+    DirectResponseData authoriseRecurringPayment(final AbstractOrderModel abstractOrderModel, final WorldpayAdditionalInfoData worldpayAdditionalInfoData,
+                                                 final MerchantInfo merchantInfo) throws WorldpayException, InvalidCartException;
 
+    /**
+     * Performs a request to Worldpay to retrieve the URL to redirect to when using Klarna.
+     *
+     * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
+     * @param additionalAuthInfo
+     * @return String containing the redirect url
+     */
+    String authoriseKlarnaRedirect(final WorldpayAdditionalInfoData worldpayAdditionalInfoData, final AdditionalAuthInfo additionalAuthInfo) throws WorldpayException;
 }

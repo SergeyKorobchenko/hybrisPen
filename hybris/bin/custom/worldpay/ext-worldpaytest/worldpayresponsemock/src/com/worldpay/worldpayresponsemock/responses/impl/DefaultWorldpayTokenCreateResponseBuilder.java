@@ -19,6 +19,9 @@ import org.joda.time.DateTime;
 
 import java.util.UUID;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpayTokenCreateResponseBuilder implements com.worldpay.worldpayresponsemock.responses.WorldpayTokenCreateResponseBuilder {
 
     protected static final String CC_OWNER = "ccOwner";
@@ -27,13 +30,17 @@ public class DefaultWorldpayTokenCreateResponseBuilder implements com.worldpay.w
     protected static final String ISSUER_COUNTRY_CODE = "N/A";
     protected static final String OBFUSCATED_PAN = "4444********1111";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PaymentService buildTokenResponse(final PaymentService paymentService) {
 
         final PaymentService response = new PaymentService();
 
         final Submit submit = (Submit) paymentService.getSubmitOrModifyOrInquiryOrReplyOrNotifyOrVerify().get(0);
-        final PaymentTokenCreate paymentTokenCreate = (PaymentTokenCreate) submit.getOrderOrOrderBatchOrShopperOrFuturePayAgreementOrMakeFuturePayPaymentOrIdentifyMeRequestOrPaymentTokenCreate().get(0);
+        final PaymentTokenCreate paymentTokenCreate = (PaymentTokenCreate) submit.
+                getOrderOrOrderBatchOrShopperOrFuturePayAgreementOrMakeFuturePayPaymentOrIdentifyMeRequestOrPaymentTokenCreate().get(0);
         final String authenticatedShopperID = paymentTokenCreate.getAuthenticatedShopperID();
         final String tokenEventReference = paymentTokenCreate.getCreateToken().getTokenEventReference();
 
@@ -71,7 +78,7 @@ public class DefaultWorldpayTokenCreateResponseBuilder implements com.worldpay.w
         derived.setObfuscatedPAN(OBFUSCATED_PAN);
         cardDetails.setDerived(derived);
 
-        paymentInstrument.getCardDetailsOrPaypal().add(cardDetails);
+        paymentInstrument.getCardDetailsOrPaypalOrSepaOrEmvcoTokenDetails().add(cardDetails);
         token.getTokenReasonOrTokenDetailsOrPaymentInstrumentOrError().add(paymentInstrument);
         reply.getOrderStatusOrBatchStatusOrErrorOrAddressCheckResponseOrRefundableAmountOrAccountBatchOrShopperOrOkOrFuturePayAgreementStatusOrShopperAuthenticationResultOrFuturePayPaymentResultOrPricePointOrPaymentOptionOrToken().add(token);
         response.getSubmitOrModifyOrInquiryOrReplyOrNotifyOrVerify().add(reply);

@@ -5,6 +5,9 @@ import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
+/**
+ * {@inheritDoc}
+ */
 public class WorldpayAddressEmailReversePopulator extends AddressReversePopulator {
 
     /**

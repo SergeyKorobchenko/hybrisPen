@@ -11,11 +11,22 @@
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
 	<extension abstractclassprefix="Generated" classprefix="Pentlandstorefront" name="pentlandstorefront" usemaven="false">		
-        <requires-extension name="secureportaladdon"/>
-<requires-extension name="b2bacceleratoraddon"/>
-<requires-extension name="worldpaysampledataaddon"/>
-<requires-extension name="worldpaynotificationaddon"/>
+        
+
+
+
+
+
+
+
+<requires-extension name="assistedservicestorefront"/>
 <requires-extension name="worldpayb2baddon"/>
+<requires-extension name="worldpaynotifications"/>
+<requires-extension name="secureportaladdon"/>
+<requires-extension name="b2bacceleratoraddon"/>
+
+
+
 <requires-extension name="sapinvoiceaddon"/>
 <requires-extension name="commerceorgaddon"/>
 

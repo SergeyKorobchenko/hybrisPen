@@ -59,6 +59,7 @@ public interface WorldpayPaymentInfoService {
      * Creates a paymentInfo based on the passed cart {@link CartModel}
      *
      * @param cartModel cart to base the paymentInfo on
+     * @return
      */
     PaymentInfoModel createPaymentInfo(final CartModel cartModel);
 

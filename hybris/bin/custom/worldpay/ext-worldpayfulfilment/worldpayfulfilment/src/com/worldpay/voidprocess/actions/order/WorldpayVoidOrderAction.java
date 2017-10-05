@@ -14,6 +14,9 @@ import java.util.Set;
 import static de.hybris.platform.payment.enums.PaymentTransactionType.AUTHORIZATION;
 import static de.hybris.platform.payment.enums.PaymentTransactionType.CAPTURE;
 
+/**
+ * Action to cancel an Order
+ */
 public class WorldpayVoidOrderAction extends AbstractAction<WorldpayVoidProcessModel> {
 
     private PaymentService paymentService;
@@ -43,6 +46,9 @@ public class WorldpayVoidOrderAction extends AbstractAction<WorldpayVoidProcessM
         return Transition.getStringValues();
     }
 
+    /**
+     * enum containing "OK" and "NOK"
+     */
     public enum Transition {
         OK, NOK;
 

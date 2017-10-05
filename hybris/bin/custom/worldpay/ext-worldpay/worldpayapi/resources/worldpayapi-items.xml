@@ -400,21 +400,6 @@
             <itemtype code="WorldpayPaymentPage" jaloclass="com.worldpay.jalo.WorldpayPaymentPage"
                       autocreate="true" generate="true" extends="ContentPage">
                 <attributes>
-                    <attribute qualifier="lightboxMaskOpacity" type="java.lang.Integer">
-                        <modifiers optional="false"/>
-                        <persistence type="property"/>
-                        <defaultvalue>java.lang.Integer.valueOf(80)</defaultvalue>
-                    </attribute>
-                    <attribute qualifier="lightboxMaskColor" type="java.lang.String">
-                        <modifiers optional="false"/>
-                        <persistence type="property"/>
-                        <defaultvalue>"#000023"</defaultvalue>
-                    </attribute>
-                    <attribute qualifier="accessibility" type="boolean">
-                        <modifiers optional="false"/>
-                        <persistence type="property"/>
-                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
-                    </attribute>
                     <attribute qualifier="debug" type="boolean">
                         <modifiers optional="false"/>
                         <persistence type="property"/>

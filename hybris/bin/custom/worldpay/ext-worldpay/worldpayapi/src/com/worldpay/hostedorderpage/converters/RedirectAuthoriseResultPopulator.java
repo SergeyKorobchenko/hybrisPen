@@ -55,7 +55,6 @@ public class RedirectAuthoriseResultPopulator implements Populator<Map<String, S
         target.setPaymentStatus(source.get(PAYMENT_STATUS) != null ? source.get(PAYMENT_STATUS) : source.get(STATUS));
         target.setSaveCard(Boolean.valueOf(source.get(SAVE_PAYMENT_INFO)));
         target.setPaymentAmount(getPaymentAmount(source));
-
     }
 
     protected void setOrderCode(final RedirectAuthoriseResult target, final String orderKey) {

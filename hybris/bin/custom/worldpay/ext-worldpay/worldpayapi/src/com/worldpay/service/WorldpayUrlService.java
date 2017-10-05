@@ -56,4 +56,29 @@ public interface WorldpayUrlService {
      * @return Fully qualified 3D secure termURL for Quote acceptance
      */
     String getFullThreeDSecureQuoteTermURL() throws WorldpayConfigurationException;
+
+    /**
+     * Get the fully qualified secure terms url
+     *
+     * @return The terms url
+     * @throws WorldpayConfigurationException
+     */
+    String getFullTermsUrl() throws WorldpayConfigurationException;
+
+    /**
+     * Get the base site url for the current site
+     *
+     * @return The base site url
+     * @throws WorldpayConfigurationException
+     */
+    String getBaseWebsiteUrlForSite() throws WorldpayConfigurationException;
+
+
+    /**
+     * Get the Klarna confirmation url to confirm the order
+     *
+     * @return The Klarna confirmation url
+     * @throws WorldpayConfigurationException
+     */
+    String getKlarnaConfirmationURL() throws WorldpayConfigurationException;
 }

@@ -1,33 +1,15 @@
 package com.worldpay.worldpayresponsemock.responses.impl;
 
 import com.worldpay.exception.WorldpayException;
-import com.worldpay.internal.model.AAVAddressResultCode;
-import com.worldpay.internal.model.AAVCardholderNameResultCode;
-import com.worldpay.internal.model.AAVEmailResultCode;
-import com.worldpay.internal.model.AAVPostcodeResultCode;
-import com.worldpay.internal.model.AAVTelephoneResultCode;
-import com.worldpay.internal.model.AccountTx;
-import com.worldpay.internal.model.Address;
-import com.worldpay.internal.model.Amount;
-import com.worldpay.internal.model.ISO8583ReturnCode;
-import com.worldpay.internal.model.Journal;
-import com.worldpay.internal.model.Notify;
-import com.worldpay.internal.model.OrderStatusEvent;
-import com.worldpay.internal.model.Payment;
-import com.worldpay.internal.model.PaymentService;
-import com.worldpay.internal.model.ShopperWebformRefundDetails;
-import com.worldpay.internal.model.Token;
-import com.worldpay.service.marshalling.impl.DefaultPaymentServiceMarshaller;
+import com.worldpay.internal.model.*;
+import com.worldpay.service.marshalling.PaymentServiceMarshaller;
 import com.worldpay.worldpayresponsemock.builders.WebformRefundBuilder;
 import com.worldpay.worldpayresponsemock.form.ResponseForm;
 import com.worldpay.worldpayresponsemock.responses.WorldpayNotificationResponseBuilder;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.StringReader;
@@ -40,6 +22,9 @@ import static com.worldpay.worldpayresponsemock.builders.PaymentBuilder.aPayment
 import static com.worldpay.worldpayresponsemock.builders.TokenBuilder.aTokenBuilder;
 import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
 
+/**
+ * {@inheritDoc}
+ */
 public class DefaultWorldpayNotificationResponseBuilder implements WorldpayNotificationResponseBuilder {
 
     private static final Logger LOG = Logger.getLogger(WorldpayNotificationResponseBuilder.class);
@@ -48,6 +33,11 @@ public class DefaultWorldpayNotificationResponseBuilder implements WorldpayNotif
     private static final String IN_PROCESS_AUTHORISED = "IN_PROCESS_AUTHORISED";
     private static final String TOKEN = "Token";
 
+    private PaymentServiceMarshaller paymentServiceMarshaller;
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String buildResponse(ResponseForm responseForm) throws WorldpayException {
         final PaymentService paymentService = new PaymentService();
@@ -77,7 +67,7 @@ public class DefaultWorldpayNotificationResponseBuilder implements WorldpayNotif
         notify.getOrderStatusEventOrReport().add(orderStatusEvent);
         payment.setISO8583ReturnCode(iso8583ReturnCode);
         paymentService.getSubmitOrModifyOrInquiryOrReplyOrNotifyOrVerify().add(notify);
-        return getPaymentServiceMarshaller().marshal(paymentService);
+        return paymentServiceMarshaller.marshal(paymentService);
     }
 
     @Override
@@ -179,7 +169,8 @@ public class DefaultWorldpayNotificationResponseBuilder implements WorldpayNotif
         return iso8583ReturnCode;
     }
 
-    protected DefaultPaymentServiceMarshaller getPaymentServiceMarshaller() {
-        return DefaultPaymentServiceMarshaller.getInstance();
+    @Required
+    public void setPaymentServiceMarshaller(final PaymentServiceMarshaller paymentServiceMarshaller) {
+        this.paymentServiceMarshaller = paymentServiceMarshaller;
     }
 }

@@ -1,7 +1,15 @@
 package com.worldpay.facades.order.impl;
 
 import com.worldpay.core.checkout.WorldpayCheckoutService;
+import com.worldpay.core.services.OrderInquiryService;
+import com.worldpay.exception.WorldpayException;
 import com.worldpay.facades.order.WorldpayPaymentCheckoutFacade;
+import com.worldpay.hostedorderpage.data.KlarnaRedirectAuthoriseResult;
+import com.worldpay.merchant.WorldpayMerchantInfoService;
+import com.worldpay.service.model.AuthorisedStatus;
+import com.worldpay.service.model.MerchantInfo;
+import com.worldpay.service.model.PaymentReply;
+import com.worldpay.service.response.OrderInquiryServiceResponse;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commerceservices.delivery.DeliveryService;
@@ -14,14 +22,15 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-
+/**
+ * Worldpay checkout facade to ensure Worldpay details are included in correct place
+ */
 public class DefaultWorldpayPaymentCheckoutFacade implements WorldpayPaymentCheckoutFacade {
 
     private CheckoutFacade checkoutFacade;
     private WorldpayCheckoutService worldpayCheckoutService;
     private CartService cartService;
     private DeliveryService deliveryService;
-
 
     /**
      * {@inheritDoc}
@@ -34,7 +43,6 @@ public class DefaultWorldpayPaymentCheckoutFacade implements WorldpayPaymentChec
             worldpayCheckoutService.setPaymentAddress(cartModel, addressModel);
         }
     }
-
 
     /**
      * {@inheritDoc}
@@ -53,7 +61,7 @@ public class DefaultWorldpayPaymentCheckoutFacade implements WorldpayPaymentChec
         Assert.notNull(code, "Parameter code cannot be null.");
         final CartModel cartModel = getCart();
         if (cartModel != null) {
-            final List<AddressModel> addresses = getDeliveryService().getSupportedDeliveryAddressesForOrder(cartModel, false);
+            final List<AddressModel> addresses = deliveryService.getSupportedDeliveryAddressesForOrder(cartModel, false);
             if (CollectionUtils.isNotEmpty(addresses)) {
                 return getMatchingAddressModel(code, addresses);
             }
@@ -75,7 +83,6 @@ public class DefaultWorldpayPaymentCheckoutFacade implements WorldpayPaymentChec
         this.checkoutFacade = checkoutFacade;
     }
 
-    @Required
     public CartService getCartService() {
         return cartService;
     }
@@ -83,10 +90,6 @@ public class DefaultWorldpayPaymentCheckoutFacade implements WorldpayPaymentChec
     @Required
     public void setCartService(CartService cartService) {
         this.cartService = cartService;
-    }
-
-    public DeliveryService getDeliveryService() {
-        return deliveryService;
     }
 
     @Required

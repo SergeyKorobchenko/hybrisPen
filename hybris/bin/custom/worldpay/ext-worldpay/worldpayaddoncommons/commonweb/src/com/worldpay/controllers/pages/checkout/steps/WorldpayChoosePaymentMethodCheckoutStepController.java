@@ -12,6 +12,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutSt
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
+import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.CartData;
@@ -36,7 +37,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
-import static java.lang.Boolean.TRUE;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -62,6 +62,7 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
     private MessageSource themeSource;
     @Resource
     private String redirectToPaymentMethod;
+
     @Resource
     private WorldpayPaymentCheckoutFacade worldpayPaymentCheckoutFacade;
     @Resource (name = "worldpayCheckoutFacade")
@@ -72,6 +73,8 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
     private WorldpayCartService worldpayCartService;
     @Resource
     private PaymentDetailsFormValidator paymentDetailsFormValidator;
+    @Resource(name = "addressDataUtil")
+    private AddressDataUtil addressDataUtil;
 
     /**
      * {@inheritDoc}
@@ -208,14 +211,13 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
     }
 
     private AddressData getAddressData(final AddressForm billingAddress, final Boolean useDeliveryAddress) {
-        AddressData addressData = new AddressData();
         if (useDeliveryAddress) {
-            addressData = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
+            final AddressData addressData = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
             addressData.setBillingAddress(true);
+            return addressData;
         } else {
-            populateAddressData(billingAddress, addressData);
+            return populateAddressData(billingAddress);
         }
-        return addressData;
     }
 
     protected void prepareErrorView(final Model model, final PaymentDetailsForm paymentDetailsForm) throws CMSItemNotFoundException {
@@ -241,22 +243,11 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
         return false;
     }
 
-    protected void populateAddressData(final AddressForm addressForm, final AddressData addressData) {
+    protected AddressData populateAddressData(final AddressForm addressForm) {
         if (addressForm != null) {
-            addressData.setId(addressForm.getAddressId());
-            addressData.setFirstName(addressForm.getFirstName());
-            addressData.setLastName(addressForm.getLastName());
-            addressData.setLine1(addressForm.getLine1());
-            addressData.setLine2(addressForm.getLine2());
-            addressData.setTown(addressForm.getTownCity());
-            addressData.setPostalCode(addressForm.getPostcode());
-            addressData.setCountry(getI18NFacade().getCountryForIsocode(addressForm.getCountryIso()));
-            if (addressForm.getRegionIso() != null) {
-                addressData.setRegion(getI18NFacade().getRegion(addressForm.getCountryIso(), addressForm.getRegionIso()));
-            }
-            addressData.setPhone(addressForm.getPhone());
-            addressData.setShippingAddress(TRUE.equals(addressForm.getShippingAddress()));
-            addressData.setBillingAddress(TRUE.equals(addressForm.getBillingAddress()));
+            return addressDataUtil.convertToAddressData(addressForm);
+        } else {
+            return new AddressData();
         }
     }
 

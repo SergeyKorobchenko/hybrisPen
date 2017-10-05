@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Required;
 
 import java.text.MessageFormat;
 
+/**
+ * Event listener to handle a CancelFinished event
+ */
 public class WorldpayCancelFinishedEventListener extends AbstractEventListener<CancelFinishedEvent> {
 
     protected static final String WORLDPAY_VOID_PROCESS_NAME = "worldpay-void-process";

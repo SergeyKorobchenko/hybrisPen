@@ -2,8 +2,6 @@ package com.worldpay.core.services;
 
 import de.hybris.platform.core.model.order.OrderModel;
 
-import java.util.List;
-
 /**
  * Service providing extended Worldpay order service functionality.
  *

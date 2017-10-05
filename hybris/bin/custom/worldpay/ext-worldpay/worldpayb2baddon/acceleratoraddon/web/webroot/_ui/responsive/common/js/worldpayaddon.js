@@ -146,7 +146,7 @@ ACC.worldpay = {
             });
             $("#bankElement").removeClass("hidden");
 
-            if (callback != null) {
+            if (callback !== null) {
                 callback();
             }
         });
@@ -158,7 +158,7 @@ ACC.worldpay = {
             this.populateBankListByAPM(selectedAPM.val(), function () {
                 var shopperBankCodeSelectElem = $("#shopperBankCode");
                 var selectedBankCode = shopperBankCodeSelectElem.data("bankcode");
-                if (selectedBankCode != undefined) {
+                if (selectedBankCode !== undefined) {
                     shopperBankCodeSelectElem.val(selectedBankCode);
                 }
             });
@@ -186,7 +186,7 @@ ACC.worldpay = {
         this.bindUseDeliveryAddress();
         this.bindCountrySelector();
         this.bindCreditCardAddressForm();
-        if (ACC.paymentStatus == "REFUSED") {
+        if (ACC.paymentStatus === "REFUSED") {
             this.populateDeclineCodeTimeout();
         }
         this.hideOrShowSaveDetails();

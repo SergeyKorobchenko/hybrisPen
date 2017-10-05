@@ -33,15 +33,14 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @UnitTest
-@RunWith (MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
 
     private static final String REFUND_REFERENCE = "refundReference";
     private static final String RETURN_PROCESS_CODE = "returnProcessCode";
 
-
     @InjectMocks
-    private DefaultWorldpayomsOrderModificationRefundProcessStrategy testObj = new DefaultWorldpayomsOrderModificationRefundProcessStrategy();
+    private DefaultWorldpayomsOrderModificationRefundProcessStrategy testObj;
 
     @Mock
     private OrderModel orderModelMock;
@@ -51,7 +50,7 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
     private PaymentTransactionEntryModel paymentTransactionEntryMock;
     @Mock
     private ReturnProcessModel refundWaitingReturnProcessMock1;
-    @Mock (answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private OrderNotificationMessage orderNotificationMessageMock;
     @Mock
     private BusinessProcessService businessProcessServiceMock;
@@ -70,12 +69,11 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
         when(returnRequestMock2.getPaymentTransactionEntry()).thenReturn(paymentTransactionEntryMock);
         when(returnRequestMock1.getReturnProcess()).thenReturn(singletonList(refundWaitingReturnProcessMock1));
         when(refundWaitingReturnProcessMock1.getCode()).thenReturn(RETURN_PROCESS_CODE);
+        when(orderModelMock.getReturnRequests()).thenReturn(singletonList(returnRequestMock1));
     }
 
     @Test
     public void shouldTriggerReturnProcessWhenNotificationIsREFUND() {
-        when(orderModelMock.getReturnRequests()).thenReturn(singletonList(returnRequestMock1));
-
         testObj.processRefundFollowOn(orderModelMock, orderNotificationMessageMock);
 
         verify(businessProcessServiceMock).triggerEvent(RETURN_PROCESS_CODE + "_" + REFUND_FOLLOW_ON.toString());
@@ -83,8 +81,6 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
 
     @Test
     public void shouldMarkReturnRequestAsRefunded() {
-        when(orderModelMock.getReturnRequests()).thenReturn(singletonList(returnRequestMock1));
-
         testObj.processRefundFollowOn(orderModelMock, orderNotificationMessageMock);
 
         verify(returnRequestMock1).setStatus(ReturnStatus.PAYMENT_REVERSED);
@@ -96,7 +92,6 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
         when(orderModelMock.getReturnRequests()).thenReturn(Arrays.asList(returnRequestMock1, returnRequestMock2));
         when(returnRequestMock2.getReturnProcess()).thenReturn(singletonList(refundWaitingReturnProcessMock2));
         when(refundWaitingReturnProcessMock2.getCode()).thenReturn(RETURN_PROCESS_CODE + "_INVALID");
-        when(orderNotificationMessageMock.getPaymentReply().getRefundReference()).thenReturn(REFUND_REFERENCE);
 
         testObj.processRefundFollowOn(orderModelMock, orderNotificationMessageMock);
 
@@ -105,9 +100,7 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
 
     @Test
     public void shouldNotTriggerReturnProcessWhenRefundReferenceIsNotEqualToTransactionEntryCode() {
-        when(orderModelMock.getReturnRequests()).thenReturn(singletonList(returnRequestMock1));
         when(paymentTransactionEntryMock.getCode()).thenReturn(REFUND_REFERENCE + "_INVALID");
-        when(orderNotificationMessageMock.getPaymentReply().getRefundReference()).thenReturn(REFUND_REFERENCE);
 
         testObj.processRefundFollowOn(orderModelMock, orderNotificationMessageMock);
 
@@ -125,7 +118,6 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
 
     @Test
     public void shouldTriggerCorrectProcessForCancelledReturnRequest() {
-        when(orderModelMock.getReturnRequests()).thenReturn(singletonList(returnRequestMock1));
         when(returnRequestMock1.getStatus()).thenReturn(CANCELED);
 
         final boolean result = testObj.processRefundFollowOn(orderModelMock, orderNotificationMessageMock);
@@ -147,5 +139,15 @@ public class DefaultWorldpayomsOrderModificationRefundProcessStrategyTest {
         verify(businessProcessServiceMock).triggerEvent(RETURN_PROCESS_CODE + "_" + REFUND_FOLLOW_ON.toString());
         verifyNoMoreInteractions(businessProcessServiceMock);
         assertTrue(result);
+    }
+
+
+    @Test
+    public void shoudReturnFalseWhenRefundReferenceIsNull() throws Exception {
+        when(orderNotificationMessageMock.getPaymentReply().getRefundReference()).thenReturn(null);
+
+        final boolean result = testObj.processRefundFollowOn(orderModelMock, orderNotificationMessageMock);
+
+        assertFalse(result);
     }
 }

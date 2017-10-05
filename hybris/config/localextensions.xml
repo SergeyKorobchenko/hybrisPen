@@ -11,6 +11,7 @@
 
 		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpay" />
 		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpayfulfilment" />
+		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpayhac" />
 
 
 		<extension name="pentlandcore" />

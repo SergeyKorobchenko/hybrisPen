@@ -16,12 +16,23 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Class containing methods to safely (null safe) render a cell in a list
+ */
 public class WorldpayNullSafeCellRenderer implements WidgetComponentRenderer<Listcell, ListColumn, Object> {
 
     private static final Logger LOG = LoggerFactory.getLogger(WorldpayNullSafeCellRenderer.class);
     private WidgetComponentRenderer<Listcell, ListColumn, Object> defaultListCellRenderer;
     private NestedAttributeUtils nestedAttributeUtils;
 
+    /**
+     * Null safe rendering of a cell in a list
+     * @param parent
+     * @param columnConfiguration
+     * @param object
+     * @param dataType
+     * @param widgetInstanceManager
+     */
     public void render(Listcell parent, ListColumn columnConfiguration, Object object, DataType dataType, WidgetInstanceManager widgetInstanceManager) {
         String qualifier = columnConfiguration.getQualifier();
         Object nestedObject = object;
@@ -58,7 +69,7 @@ public class WorldpayNullSafeCellRenderer implements WidgetComponentRenderer<Lis
     }
 
     protected boolean checkIfObjectIsEmptyCollection(Object object) {
-        return object instanceof Collection ? CollectionUtils.isEmpty((Collection)object):false;
+        return object instanceof Collection && CollectionUtils.isEmpty((Collection) object);
     }
 
     @Required

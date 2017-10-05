@@ -1,22 +1,11 @@
 package com.worldpay.worldpayresponsemock.builders;
 
+import com.worldpay.enums.token.TokenEvent;
+import com.worldpay.internal.model.*;
+import org.joda.time.DateTime;
+
 import static com.worldpay.worldpayresponsemock.builders.AddressBuilder.anAddressBuilder;
 import static org.springframework.util.Assert.notNull;
-
-import com.worldpay.enums.token.TokenEvent;
-import com.worldpay.internal.model.Address;
-import com.worldpay.internal.model.CardAddress;
-import com.worldpay.internal.model.CardDetails;
-import com.worldpay.internal.model.CardHolderName;
-import com.worldpay.internal.model.Date;
-import com.worldpay.internal.model.Derived;
-import com.worldpay.internal.model.ExpiryDate;
-import com.worldpay.internal.model.PaymentInstrument;
-import com.worldpay.internal.model.PaymentTokenExpiry;
-import com.worldpay.internal.model.Token;
-import com.worldpay.internal.model.TokenDetails;
-import com.worldpay.internal.model.TokenReason;
-import org.joda.time.DateTime;
 
 /**
  * Builder for the internal Token model generated from the Worldpay DTD
@@ -271,7 +260,7 @@ public final class TokenBuilder {
 
         cardDetails.setDerived(derived);
 
-        paymentInstrument.getCardDetailsOrPaypal().add(cardDetails);
+        paymentInstrument.getCardDetailsOrPaypalOrSepaOrEmvcoTokenDetails().add(cardDetails);
         token.setAuthenticatedShopperID(authenticatedShopperId);
         token.setTokenEventReference(tokenEventReference);
         final TokenReason tokenReason = new TokenReason();

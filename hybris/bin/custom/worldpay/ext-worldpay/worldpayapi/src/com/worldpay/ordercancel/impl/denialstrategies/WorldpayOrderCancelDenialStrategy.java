@@ -15,22 +15,39 @@ import java.util.List;
 import static de.hybris.platform.payment.enums.PaymentTransactionType.CAPTURE;
 import static java.text.MessageFormat.format;
 
+/**
+ */
 public class WorldpayOrderCancelDenialStrategy extends AbstractCancelDenialStrategy implements OrderCancelDenialStrategy {
 
     private static final Logger LOG = Logger.getLogger(WorldpayOrderCancelDenialStrategy.class);
 
+    /**
+     *
+     * @param orderCancelConfigModel
+     * @param orderModel
+     * @param principalModel
+     * @param partialCancel
+     * @param partialEntryCancel
+     * @return
+     */
     @Override
     public OrderCancelDenialReason getCancelDenialReason(final OrderCancelConfigModel orderCancelConfigModel, final OrderModel orderModel,
                                                          final PrincipalModel principalModel, boolean partialCancel, boolean partialEntryCancel) {
         final List<PaymentTransactionModel> paymentTransactions = orderModel.getPaymentTransactions();
+
         if (paymentTransactions != null) {
-            for (final PaymentTransactionModel paymentTransaction : paymentTransactions) {
-                final List<PaymentTransactionEntryModel> entries = paymentTransaction.getEntries();
-                for (final PaymentTransactionEntryModel entry : entries) {
-                    if (shouldReturnDenialReason(entry)) {
-                        LOG.warn(format("The order {0} cannot be cancelled because the transaction entry with requestId {1} is captured", orderModel.getCode(), entry.getRequestId()));
-                        return getReason();
-                    }
+            return findReason(orderModel, paymentTransactions);
+        }
+        return null;
+    }
+
+    private OrderCancelDenialReason findReason(OrderModel orderModel, List<PaymentTransactionModel> paymentTransactions) {
+        for (final PaymentTransactionModel paymentTransaction : paymentTransactions) {
+            final List<PaymentTransactionEntryModel> entries = paymentTransaction.getEntries();
+            for (final PaymentTransactionEntryModel entry : entries) {
+                if (shouldReturnDenialReason(entry)) {
+                    LOG.warn(format("The order {0} cannot be cancelled because the transaction entry with requestId {1} is captured", orderModel.getCode(), entry.getRequestId()));
+                    return getReason();
                 }
             }
         }

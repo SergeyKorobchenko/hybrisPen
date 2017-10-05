@@ -24,6 +24,9 @@ import static com.worldpay.payment.TransactionStatus.ERROR;
 import static java.text.MessageFormat.format;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * Controller to handle 3D secure response
+ */
 @Controller
 @RequestMapping (value = "/checkout/multi/worldpay/3dsecure/sop/response")
 public class WorldpayThreeDSecureEndpointController extends WorldpayChoosePaymentMethodCheckoutStepController {
@@ -36,6 +39,13 @@ public class WorldpayThreeDSecureEndpointController extends WorldpayChoosePaymen
     @Resource
     private WorldpayCartService worldpayCartService;
 
+    /**
+     * Method to handle 3D secure response
+     * @param request
+     * @param threeDSecureForm
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping (method = POST)
     @RequireHardLogIn
     public String doHandleThreeDSecureResponse(final HttpServletRequest request, final ThreeDSecureForm threeDSecureForm, final RedirectAttributes redirectAttributes) {

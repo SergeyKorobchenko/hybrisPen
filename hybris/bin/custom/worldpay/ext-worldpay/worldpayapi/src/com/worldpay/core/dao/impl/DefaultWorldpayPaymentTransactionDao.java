@@ -110,7 +110,7 @@ public class DefaultWorldpayPaymentTransactionDao extends AbstractItemDao implem
     public PaymentTransactionModel findPaymentTransactionByRequestIdFromOrdersOnly(final String requestId) {
         final FlexibleSearchQuery query = new FlexibleSearchQuery(QUERY_TRANSACTION_BY_REQUESTID_IN_ORDERS);
         query.addQueryParameter(REQUESTID, requestId);
-        return flexibleSearchService.<PaymentTransactionModel>searchUnique(query);
+        return flexibleSearchService.searchUnique(query);
     }
 
     /**
@@ -120,7 +120,7 @@ public class DefaultWorldpayPaymentTransactionDao extends AbstractItemDao implem
     public PaymentTransactionModel findPaymentTransactionByRequestId(final String requestId) {
         final FlexibleSearchQuery query = new FlexibleSearchQuery(QUERY_TRANSACTION_BY_REQUESTID);
         query.addQueryParameter(REQUESTID, requestId);
-        return flexibleSearchService.<PaymentTransactionModel>searchUnique(query);
+        return flexibleSearchService.searchUnique(query);
     }
 
     /**

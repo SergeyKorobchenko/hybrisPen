@@ -51,9 +51,7 @@ public class WorldpayCheckAuthorizeOrderPaymentAction extends WorldpayAbstractOr
                     return NOK.toString();
                 }
 
-                boolean waitForAuthorisation = isAuthorizationPending(order);
-
-                if (waitForAuthorisation) {
+                if (isAuthorizationPending(order)) {
                     setOrderStatus(order, PAYMENT_PENDING);
                     returnTransition = WAIT.toString();
                 } else {

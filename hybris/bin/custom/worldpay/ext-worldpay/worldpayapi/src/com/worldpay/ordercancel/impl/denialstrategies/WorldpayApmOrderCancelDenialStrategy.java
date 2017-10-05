@@ -15,10 +15,21 @@ import java.util.List;
 
 import static java.text.MessageFormat.format;
 
+/**
+ */
 public class WorldpayApmOrderCancelDenialStrategy extends AbstractCancelDenialStrategy implements OrderCancelDenialStrategy {
 
     private static final Logger LOG = Logger.getLogger(WorldpayApmOrderCancelDenialStrategy.class);
 
+    /**
+     *
+     * @param orderCancelConfigModel
+     * @param orderModel
+     * @param principalModel
+     * @param partialCancel
+     * @param partialEntryCancel
+     * @return
+     */
     @Override
     public OrderCancelDenialReason getCancelDenialReason(final OrderCancelConfigModel orderCancelConfigModel, final OrderModel orderModel,
                                                          final PrincipalModel principalModel, boolean partialCancel, boolean partialEntryCancel) {

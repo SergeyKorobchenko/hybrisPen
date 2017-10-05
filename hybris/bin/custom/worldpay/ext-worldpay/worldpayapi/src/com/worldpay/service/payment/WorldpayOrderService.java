@@ -2,7 +2,6 @@ package com.worldpay.service.payment;
 
 import com.worldpay.exception.WorldpayConfigurationException;
 import com.worldpay.order.data.WorldpayAdditionalInfoData;
-import com.worldpay.service.WorldpayServiceGateway;
 import com.worldpay.service.model.*;
 import com.worldpay.service.model.payment.Payment;
 import com.worldpay.service.model.token.TokenRequest;
@@ -17,24 +16,25 @@ public interface WorldpayOrderService {
 
     /**
      * Creates a Worldpay {@link Amount} object using the  currencyIsoCode and the amount.
-     * @param currency      currency to be used
-     * @param amount        total amount of the order
      *
+     * @param currency currency to be used
+     * @param amount   total amount of the order
      * @return Amount object
      */
     Amount createAmount(final Currency currency, final int amount);
 
     /**
      * Creates a Worldpay {@link Amount} object using the {@link CurrencyModel} and the amount.
+     *
      * @param currencyModel currency to be used
      * @param amount        total amount of the order
-     *
      * @return Amount object
      */
     Amount createAmount(final CurrencyModel currencyModel, final double amount);
 
     /**
      * Creates a Worldpay {@link Amount} object using the {@link Currency} and the amount.
+     *
      * @param currency
      * @param amount
      * @return Amount object required by DirectAuthoriseServiceRequest
@@ -43,39 +43,33 @@ public interface WorldpayOrderService {
 
     /**
      * Creates a Worldpay {@link Session} object
-     * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      *
+     * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      * @return Session object
      */
     Session createSession(final WorldpayAdditionalInfoData worldpayAdditionalInfoData);
 
     /**
      * Creates a Worldpay {@link Browser} object
-     * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      *
+     * @param worldpayAdditionalInfoData Object that contains information about the current session, browser used, and cookies.
      * @return Browser object
      */
     Browser createBrowser(final WorldpayAdditionalInfoData worldpayAdditionalInfoData);
 
     /**
      * Creates a Worldpay {@link BasicOrderInfo} object
+     *
      * @param worldpayOrderCode Identifier of the order in Worldpay
      * @param description       Description of the order
      * @param amount            Payable amount {@link Amount}
-     *
      * @return Basic order information object
      */
     BasicOrderInfo createBasicOrderInfo(final String worldpayOrderCode, final String description, final Amount amount);
 
     /**
-     * @return {@link WorldpayServiceGateway} used to communicate with Worldpay
-     *
-     * @return Gateway to Worldpay
-     */
-    WorldpayServiceGateway getWorldpayServiceGateway();
-
-    /**
      * Creates a {@link Shopper} object to be used in the Requests
+     *
      * @param customerEmail customer email
      * @param session       session information
      * @param browser       browser information
@@ -101,10 +95,21 @@ public interface WorldpayOrderService {
 
     /**
      * Creates a payment element to be used in bank transfers
-     * @param paymentMethod      indicates which payment method for bank transfer is going to be used (IDEAL-SSL,...)
-     * @param shopperCountryCode indicates the country code of the shopper
-     * @param shopperBankCode    indicates the selected bank by the user
+     *
+     * @param paymentMethod   indicates which payment method for bank transfer is going to be used (IDEAL-SSL,...)
+     * @param shopperBankCode indicates the selected bank by the user
      * @return Payment object
      */
-    Payment createPayment(final String paymentMethod, final String shopperBankCode, final String shopperCountryCode) throws WorldpayConfigurationException;
+    Payment createBankPayment(final String paymentMethod, final String shopperBankCode) throws WorldpayConfigurationException;
+
+    /**
+     * Creates a payment element to be used in klarna
+     *
+     * @param countryCode       indicates the shopper country code
+     * @param languageCode      indicates the session language code of the user
+     * @param extraMerchantData extra data to be filled by the merchant
+     * @return Payment object
+     */
+    Payment createKlarnaPayment(final String countryCode, final String languageCode, final String extraMerchantData) throws WorldpayConfigurationException;
+
 }
