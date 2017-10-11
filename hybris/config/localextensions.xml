@@ -159,5 +159,7 @@
 		<extension name="adaptivesearchbackoffice" />
 		<extension name="adaptivesearchsolr" />
 
+		<extension name='samlsinglesignon' />
+
 	</extensions>
 </hybrisconfig>
