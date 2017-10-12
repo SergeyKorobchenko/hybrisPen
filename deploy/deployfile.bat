@@ -33,7 +33,7 @@ echo(
 
 cd ../../../../bin/platform/
 CALL setantenv.bat
-rem CALL ant production
+CALL ant production
 
 cd ../../temp/"%FOLDERNAME%"/hybris/bin
 echo f | xcopy "..\..\..\hybris\hybrisServer\hybrisServer-AllExtensions.zip" "hybrisServer-AllExtensions.zip"
