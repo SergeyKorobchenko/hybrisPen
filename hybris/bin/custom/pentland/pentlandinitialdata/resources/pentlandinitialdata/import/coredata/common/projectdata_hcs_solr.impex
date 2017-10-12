@@ -1,0 +1,19 @@
+$serverConfigName=standaloneSolrServerConfig
+$indexConfigName=standaloneSolrIndexConfig
+$facetSearchConfig1Name=pentlandIndex
+ 
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
+;$serverConfigName;standalone;false
+  
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+# Add all search servers here. The first one should be the master, all others slaves.
+;$serverConfigName;http://pnt-d-fr-srch-001.hybrishosting.com:8983/solr;true
+ 
+
+INSERT_UPDATE SolrIndexConfig;name[unique=true];indexMode(code)
+;$indexConfigName;DIRECT
+ 
+# Lastly, update the facet search config with this new server config
+UPDATE SolrFacetSearchConfig;name[unique=true];solrServerConfig(name);solrIndexConfig(name)
+;$facetSearchConfig1Name;$serverConfigName;$indexConfigName
+

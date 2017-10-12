@@ -15,11 +15,27 @@ $productCatalog=pentlandProductCatalog
 $catalogVersions=catalogVersions(catalog(id),version);
 $facetSearchConfigName=pentlandIndex
 $facetSearchConfigDescription=Pentland Solr Index
+$serverConfigName=standaloneSolrServerConfig
+$indexConfigName=standaloneSolrIndexConfig
 $searchIndexNamePrefix=pentland
 $solrIndexedType=pentlandProductType
 $indexBaseSite=pentland
 $indexLanguages=en
 $indexCurrencies=USD,EUR,GBP
+
+
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
+;$serverConfigName;standalone;false
+
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+# Add all search servers here. The first one should be the master, all others slaves.
+;$serverConfigName;http://pnt-d-fr-srch-001.hybrishosting.com:8983/solr;true
+
+
+INSERT_UPDATE SolrIndexConfig;name[unique=true];indexMode(code)
+;$indexConfigName;DIRECT
+
+
 
 #
 # Setup the indexed types, their properties, and the update queries
@@ -31,6 +47,9 @@ INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&
 
 INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
 ;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
+
+UPDATE SolrFacetSearchConfig;name[unique=true];solrServerConfig(name);solrIndexConfig(name)
+;$facetSearchConfigName;$serverConfigName;$indexConfigName
 
 UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 ;$indexBaseSite;$facetSearchConfigName
