@@ -16,6 +16,7 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorcms"/>
 		<requires-extension name="solrserver"/>
+		<requires-extension name="samlsinglesignon"/>
 
 		<coremodule generated="true" manager="com.bridgex.core.jalo.PentlandcoreManager" packageroot="com.bridgex.core"/>
 

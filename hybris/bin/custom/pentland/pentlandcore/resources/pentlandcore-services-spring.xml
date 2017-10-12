@@ -22,6 +22,9 @@
 		<property name="categoryDao" ref="categoryDao"/>
 	</bean>
 
+	<alias name="pentlandSSOUserService" alias="ssoUserService"/>
+	<bean id="pentlandSSOUserService" class="com.bridgex.core.sso.impl.PentlandSSOUserService" parent="defaultSSOUserService"/>
+
 
 
 <!-- url resolvers -->
