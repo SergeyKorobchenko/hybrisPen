@@ -42,7 +42,7 @@
 		<constructor-arg>
 			<!--to import both into Online and Staged - specify two impex headers in the value -->
 			<value># ImpEx for importing data into $CATALOG$
-				$catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Online'])[unique=true]
+				$catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
 				$approved=approvalstatus(code)[default='check']
 				$lang=$LANGUAGE$</value>
 		</constructor-arg>

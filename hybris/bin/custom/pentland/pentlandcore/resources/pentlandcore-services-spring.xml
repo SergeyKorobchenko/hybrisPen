@@ -26,6 +26,10 @@
 	<bean id="pentlandSSOUserService" class="com.bridgex.core.sso.impl.PentlandSSOUserService" parent="defaultSSOUserService"/>
 
 
+	<bean id="hotfolderImportService" class="com.bridgex.core.impex.impl.HotfolderImportService" parent="defaultImportService">
+		<property name="clusterService" ref="clusterService"/>
+	</bean>
+
 
 <!-- url resolvers -->
 	<alias name="pentlandCategoryModelUrlResolver" alias="categoryModelUrlResolver"/>
