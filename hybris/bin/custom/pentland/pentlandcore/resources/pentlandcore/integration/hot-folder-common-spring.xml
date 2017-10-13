@@ -22,68 +22,166 @@
 		http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<context:annotation-config/> 
+	<context:annotation-config/>
+	<bean id="pentlandFileOrderComparator" class="de.hybris.platform.acceleratorservices.dataimport.batch.FileOrderComparator">
+		<property name="prefixPriority">
+			<map>
+				<!-- default priority is 0; todo set appropriate priorities -->
+				<entry key="product" value="2" />
+				<entry key="media" value="1" />
+				<entry key="price" value="1" />
+				<entry key="b2bcustomer" value="1" />
+				<entry key="b2bunit" value="1" />
+				<entry key="invoice" value="1" />
+				<entry key="order" value="1" />
+			</map>
+		</property>
+	</bean>
+	<!-- product import -->
+	<bean id="pentlandImpexProductHeader" class="java.lang.String">
+		<constructor-arg>
+			<!--to import both into Online and Staged - specify two impex headers in the value -->
+			<value># ImpEx for importing data into $CATALOG$
+				$catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
+				$approved=approvalstatus(code)[default='check']
+				$lang=$LANGUAGE$</value>
+		</constructor-arg>
+	</bean>
+	<bean id="baseDirectoryPentland" class="java.lang.String">
+		<constructor-arg value="#{baseDirectory}/${tenantId}/pentland"/>
+	</bean>
+
+	<!-- 1) Scan for files -->
+	<file:inbound-channel-adapter id="batchFilesPentland" directory="#{baseDirectoryPentland}"
+	                              filename-regex="^(.*)-(\d+)\.csv" comparator="pentlandFileOrderComparator"
+	                              auto-startup="#{configurationService.configuration.getProperty('hotfolder.autostart')}">
+		<int:poller fixed-rate="1000"/>
+	</file:inbound-channel-adapter>
+
+	<alias name="pentlandBatchRunnerTask" alias="batchRunnerTask"/>
+	<bean id="pentlandBatchRunnerTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.AbstractImpexRunnerTask">
+		<property name="sessionService" ref="sessionService" />
+		<property name="importService" ref="hotfolderImportService" />
+		<lookup-method name="getImportConfig" bean="importConfig" />
+	</bean>
+
+	<!-- 2) move the file to processing and create header -->
+	<int:service-activator input-channel="pentlandBatchFilesHeaderInit" output-channel="pentlandBatchFilesHeader" ref="pentlandHeaderInitTask"
+	                       method="execute" />
+	<bean id="pentlandHeaderInitTask" parent="headerInitTask">
+		<property name="fallbackLanguage" value="en" />
+	</bean>
+
+	<file:outbound-gateway request-channel="batchFilesPentland" reply-channel="batchFilesPentlandProc"
+	                       directory="#{baseDirectoryPentland}/processing" delete-source-files="true"/>
+	<int:service-activator input-channel="batchFilesPentlandProc" output-channel="pentlandBatchFilesHeaderInit" ref="pentlandHeaderSetupTask"
+	                       method="execute"/>
+
+	<bean id="pentlandHeaderSetupTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+		<property name="catalog" value="pentlandProductCatalog"/>
+		<property name="net" value="false"/>
+		<property name="storeBaseDirectory" ref="baseDirectoryPentland"/>
+	</bean>
+
+	<!-- 3) transform csv to impex file -->
+	<int:service-activator input-channel="pentlandBatchFilesHeader" output-channel="batchFilesTran" ref="pentlandBatchTransformerTask"
+	                       method="execute" />
+	<bean id="pentlandBatchTransformerTask" parent="batchTransformerTask">
+		<property name="fieldSeparator" value=";" />
+	</bean>
+
 	<!-- Transformer converters mappings -->
+	<bean id="batchProductConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="product"
+	      p:converter-ref="pentlandBatchProductConverter"/>
+
+	<alias name="batchProductPriceConverterMapping" alias="batchPriceConverterMapping"/>
+	<bean id="batchProductPriceConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="price"
+	      p:converter-ref="pentlandBatchProductPriceConverter"/>
+
 	<bean id="batchMediaConverterMapping" 
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
 		  p:mapping="media" 
-		  p:converter-ref="batchMediaConverter"/>
+		  p:converter-ref="pentlandBatchMediaConverter"/>
 
 	<bean id="batchMediaContainerConverterMapping" 
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
 		  p:mapping="media" 
-		  p:converter-ref="batchMediaContainerConverter"/>
+		  p:converter-ref="pentlandBatchMediaContainerConverter"/>
 
 	<bean id="batchMediaProductConverterMapping" 
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
 		  p:mapping="media" 
-		  p:converter-ref="batchMediaProductConverter"/>
+		  p:converter-ref="pentlandBatchMediaProductConverter"/>
+
 							
 	<!-- Converters -->
-	<bean id="batchMediaConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="pentlandBatchProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
-			<value>#{defaultImpexProductHeader}
+			<value>#{pentlandImpexProductHeader}
+				INSERT_UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};;{1};{S}</value>
+		</property>
+	</bean>
+	<bean id="pentlandBatchProductPriceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				#% impex.enableCodeExecution(true)
+				INSERT_UPDATE PriceRow;product(code)[unique = true];price;ug(code)[unique =true][default = customer];startTime[dateformat='dd.MM.yyyy HH:mm',default='01.01.1900 00:00'];endTime[dateformat='dd.MM.yyyy HH:mm',default='31.12.3000 23:59'];baseStore(uid)[unique=true, default=pentland];unit(code[unique = true, default=pieces]);currency(isocode)[unique = true,default=GBP];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{+1};;;;;;;{S}</value>
+		</property>
+	</bean>
+	<bean id="pentlandBatchMediaConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
 				# Import media from filesystem
-				$importFolder=file:$BASE_SOURCE_DIR$/images
-				INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];mime[default='image/jpeg'];$catalogVersion;folder(qualifier)[default=images];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+				$mediaCatalog = pentlandMediaCatalog
+				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
+				UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+				$importFolder=$config-mediaremotesource
+				INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];mime[default='image/jpeg'];$mediaCV;folder(qualifier)[default=product];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;1200Wx1200H;/1200Wx1200H/{+1};;;;{+1};$importFolder/1200Wx1200H/{+1}
-;515Wx515H;/515Wx515H/{+1};;;;{+1};$importFolder/515Wx515H/{+1}
-;300Wx300H;/300Wx300H/{+1};;;;{+1};$importFolder/300Wx300H/{+1}
-;96Wx96H;/96Wx96H/{+1};;;;{+1};$importFolder/96Wx96H/{+1}
-;65Wx65H;/65Wx65H/{+1};;;;{+1};$importFolder/65Wx65H/{+1}
-;30Wx30H;/30Wx30H/{+1};;;;{+1};$importFolder/30Wx30H/{+1}</value>
+			<value>;1200Wx1200H;{+2};;;;{+2};$importFolder/{+2}</value>
 		</property>
 	</bean>
-	<bean id="batchMediaContainerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="pentlandBatchMediaContainerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
-			<value>#{defaultImpexProductHeader}
+			<value>#{pentlandImpexProductHeader}
+				$mediaCatalog = pentlandMediaCatalog
+				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				# Import media container
-				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $catalogVersion);$catalogVersion
+				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $mediaCV)[mode=append];$mediaCV;conversionGroup(code)[default=galleryConversionGroup];order
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{1};/1200Wx1200H/{1},/515Wx515H/{1},/300Wx300H/{1},/96Wx96H/{1},/65Wx65H/{1},/30Wx30H/{1}</value>
+			<value>;{+1};{2};;{3};{4}</value>
 		</property>
 	</bean>
-	<bean id="batchMediaProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="pentlandBatchMediaProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
-			<value>#{defaultImpexProductHeader}
-				$thumbnail=thumbnail(code, $catalogVersion)
-				$thumbnails=thumbnails(code, $catalogVersion)
-				$picture=picture(code, $catalogVersion)
-				$detail=detail(code, $catalogVersion)
-				$normal=normal(code, $catalogVersion)
-				$others=others(code, $catalogVersion)
-				$galleryImages=galleryImages(qualifier, $catalogVersion)
+			<value>#{pentlandImpexProductHeader}
+				#% impex.enableCodeExecution(true)
+				$mediaCatalog = pentlandMediaCatalog
+				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
+				$galleryImages=galleryImages(qualifier, $mediaCV)[mode=append]
 				# Import product media
-				UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.GreaterSequenceIdTranslator];$catalogVersion
+				UPDATE Product;code[unique=true];$galleryImages;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.GreaterSequenceIdTranslator];$catalogVersion
+				#%groovy% afterEach: productService.convertAssignedMedia(modelService.get(impex.getLastImportedItem()),line.get(2))
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};/300Wx300H/{1};/96Wx96H/{1};/1200Wx1200H/{1};/515Wx515H/{1},/96Wx96H/{1},/30Wx30H/{1};/300Wx300H/{1};/96Wx96H/{1};{1};{S}</value>
+			<value>;{+0};{1};{S}</value>
 		</property>
 	</bean>
 </beans>
