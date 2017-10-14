@@ -30,6 +30,15 @@
 		<property name="clusterService" ref="clusterService"/>
 	</bean>
 
+	<bean id="pentlandB2BUnitService"
+	      class="com.bridgex.core.services.impl.DefaultPentlandB2BUnitService" parent="defaultB2BUnitService">
+	</bean>
+
+	<alias alias="b2bUnitService" name="pentlandB2bUnitServiceProxy"/>
+	<bean id="pentlandB2bUnitServiceProxy" class="de.hybris.platform.b2b.services.impl.B2BUnitServiceProxy">
+		<property name="defaultB2BUnitService" ref="pentlandB2BUnitService"/>
+	</bean>
+
 
 <!-- url resolvers -->
 	<alias name="pentlandCategoryModelUrlResolver" alias="categoryModelUrlResolver"/>
