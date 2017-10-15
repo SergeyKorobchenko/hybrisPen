@@ -50,5 +50,11 @@
 	<import resource="/pentlandcore/processes/quote/quote-expired-email-process-spring.xml"/>
 
 	<import resource="/pentlandcore/processes/quote/quote-post-cancellation-process-spring.xml"/>
-	
+
+
+	<bean id="europe1.manager" class="com.bridgex.core.price.PentlandPriceFactory"
+	      init-method="init">
+		<property name="retrieveChannelStrategy" ref="retrieveChannelStrategy" />
+	</bean>
+
 </beans>
