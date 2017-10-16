@@ -6330,7 +6330,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 
 
 # Create products
-UPDATE ApparelProduct;code[unique=true];$picture;$thumbnail;$others;$normal;$thumbnails;$catalogVersion;$galleryImages
+UPDATE Product;code[unique=true];$picture;$thumbnail;$others;$normal;$thumbnails;$catalogVersion;$galleryImages
 ;103410;/300Wx300H/103410_1.jpg;/96Wx96H/103410_1.jpg;/515Wx515H/103410_1.jpg,/300Wx300H/103410_1.jpg,/96Wx96H/103410_1.jpg,/65Wx65H/103410_1.jpg,/30Wx30H/103410_1.jpg;/300Wx300H/103410_1.jpg;/96Wx96H/103410_1.jpg;;103410_base_1,103410_base_2,103410_base_3
 ;100191;/300Wx300H/100191_1.jpg;/96Wx96H/100191_1.jpg;/515Wx515H/100191_1.jpg,/300Wx300H/100191_1.jpg,/96Wx96H/100191_1.jpg,/65Wx65H/100191_1.jpg,/30Wx30H/100191_1.jpg;/300Wx300H/100191_1.jpg;/96Wx96H/100191_1.jpg;;100191_base_1,100191_base_2,100191_base_3,100191_base_4
 ;94474;/300Wx300H/94474_1.jpg;/96Wx96H/94474_1.jpg;/515Wx515H/94474_1.jpg,/300Wx300H/94474_1.jpg,/96Wx96H/94474_1.jpg,/65Wx65H/94474_1.jpg,/30Wx30H/94474_1.jpg;/300Wx300H/94474_1.jpg;/96Wx96H/94474_1.jpg;;94474_base_1,94474_base_2

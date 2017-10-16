@@ -27,7 +27,7 @@
 		</advanced-search:advanced-search>
 	</context>
 
-	<context merge-by="type" type="ApparelProduct" component="editor-area" parent="Product">
+	<context merge-by="type" type="Product" component="editor-area">
 		<editorArea:editorArea>
 			<editorArea:essentials>
 			<editorArea:essentialSection name="hmc.essential">
@@ -46,10 +46,10 @@
 		</editorArea:editorArea>
 	</context>
 
-	<context merge-by="type" type="ApparelStyleVariantProduct" component="editor-area" parent="ApparelProduct">
+	<context merge-by="type" type="ApparelStyleVariantProduct" component="editor-area" parent="Product">
 		<editorArea:editorArea>
-			<editorArea:tab name="hmc.tab.product.properties" merge-mode="append">
-				<editorArea:section name="pentland.product.style.section" position="0">
+			<editorArea:tab name="hmc.tab.product.extendedattributes" merge-mode="append">
+				<editorArea:section name="pentland.product.additional.section" position="0">
 					<editorArea:attribute qualifier="sapName"/>
 					<editorArea:attribute qualifier="primColor"/>
 					<editorArea:attribute qualifier="secColor"/>
