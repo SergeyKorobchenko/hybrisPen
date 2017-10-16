@@ -42,6 +42,7 @@
 		<constructor-arg>
 			<!--to import both into Online and Staged - specify two impex headers in the value -->
 			<value># ImpEx for importing data into $CATALOG$
+				$catalog=$CATALOG$
 				$catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
 				$approved=approvalstatus(code)[default='check']
 				$baseProduct=baseProduct(code, catalogVersion(catalog(id[default=$CATALOG$]),version[default='Staged']))
@@ -137,7 +138,10 @@
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{6};{11};{12};{13};{14};{16};{17};;;;{S}</value>
+			<value>
+				;{+0};{6};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
+				;{+0};{6};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
+			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -147,7 +151,10 @@
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{+1};{5};{7};{8};{9};{11};{12};{13};{14};{16};{17};;;;{S}</value>
+			<value>
+				;{+0}:$catalog:Staged;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
+				;{+0}:$catalog:Online;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
+			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -157,7 +164,10 @@
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+1};{2};{+3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};;;{S}</value>
+			<value>
+				;{+1}:$catalog:Staged;{2};{+3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};$catalog:Staged;;{S}
+				;{+1}:$catalog:Online;{2};{+3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};$catalog:Online;;{S}
+			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchProductPriceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
