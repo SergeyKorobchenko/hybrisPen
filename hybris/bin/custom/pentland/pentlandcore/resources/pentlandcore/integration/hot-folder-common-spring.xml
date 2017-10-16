@@ -44,6 +44,7 @@
 			<value># ImpEx for importing data into $CATALOG$
 				$catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
 				$approved=approvalstatus(code)[default='check']
+				$baseProduct=baseProduct(code, catalogVersion(catalog(id[default=$CATALOG$]),version[default='Staged']))
 				$lang=$LANGUAGE$</value>
 		</constructor-arg>
 	</bean>

@@ -33,6 +33,10 @@
             <value code="WHITE"/>
             <value code="YELLOW"/>
         </enumtype>
+
+        <enumtype generate="true" code="DiscontinuedStatus" autocreate="true" dynamic="false">
+            <value code="DISCONTINUED"/>
+          </enumtype>
     </enumtypes>
 
     <itemtypes>
@@ -48,10 +52,43 @@
                       jaloclass="com.bridgex.core.jalo.ApparelProduct">
                 <description>Base apparel product extension that contains additional attributes.</description>
                 <attributes>
+                    <attribute qualifier="sapBrand" type="java.lang.String">
+                        <description>SAP Brand</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
+                    <attribute qualifier="season" type="localized:java.lang.String">
+                        <description>Season</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
                     <attribute qualifier="genders" type="GenderList">
                         <description>List of genders that the ApparelProduct is designed for</description>
                         <modifiers/>
                         <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="clearance" type="java.lang.Boolean">
+                        <description>Clearance flag</description>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="discontinuedStatus" type="DiscontinuedStatus">
+                        <description>Discontinued status is similar to approval status, but product is available by direct url</description>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="smu" type="java.lang.Boolean">
+                        <description>SMU flag</description>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="productGroup" type="java.lang.String">
+                        <description>SAP Product Group</description>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
                 </attributes>
             </itemtype>
@@ -68,12 +105,21 @@
                         <modifiers/>
                         <persistence type="property"/>
                     </attribute>
-
                     <attribute qualifier="swatchColors" type="SwatchColorSet">
                         <description>A normalized color mapping to a standardized front-end navigable name.
                         </description>
                         <modifiers/>
                         <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="sapName" type="java.lang.String">
+                        <description>SAP Name</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
+                    <attribute qualifier="secColor" type="localized:java.lang.String">
+                        <description>Secondary Color</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" search="true" read="true" write="true"/>
                     </attribute>
                 </attributes>
 
@@ -85,6 +131,16 @@
                 <description>Apparel size variant type that contains additional attribute describing variant size.
                 </description>
                 <attributes>
+                    <attribute qualifier="sku" type="java.lang.String">
+                        <description>Material code concatenated with size</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
+                    <attribute qualifier="upc" type="java.lang.String">
+                        <description>Universal Product Code</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
                     <attribute qualifier="size" type="localized:java.lang.String"
                                metatype="VariantAttributeDescriptor">
                         <description>Size of the product.</description>
