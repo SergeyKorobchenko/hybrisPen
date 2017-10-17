@@ -17,13 +17,8 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.variants.model.VariantProductModel;
-import com.bridgex.core.model.ApparelProductModel;
 import com.bridgex.facades.product.data.GenderData;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 
@@ -49,20 +44,7 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 	public void populate(final ProductModel source, final ProductData target) throws ConversionException
 	{
 		final ProductModel baseProduct = getBaseProduct(source);
-
-		if (baseProduct instanceof ApparelProductModel)
-		{
-			final ApparelProductModel apparelProductModel = (ApparelProductModel) baseProduct;
-			if (CollectionUtils.isNotEmpty(apparelProductModel.getGenders()))
-			{
-				final List<GenderData> genders = new ArrayList<GenderData>();
-				for (final Gender gender : apparelProductModel.getGenders())
-				{
-					genders.add(getGenderConverter().convert(gender));
-				}
-				target.setGenders(genders);
-			}
-		}
+		target.setGender(getGenderConverter().convert(baseProduct.getGender()));
 	}
 
 	protected ProductModel getBaseProduct(final ProductModel productModel)

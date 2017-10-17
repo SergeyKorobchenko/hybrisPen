@@ -34,3 +34,6 @@ INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];activ
 INSERT_UPDATE ClassificationSystemVersion;catalog(id)[unique=true];version[unique=true];active;inclPacking[virtual=true,default=true];inclDuty[virtual=true,default=true];inclFreight[virtual=true,default=true];inclAssurance[virtual=true,default=true]
 ;$classificationCatalog;1.0;true
 
+
+INSERT_UPDATE CatalogVersionAwareCronJob;code[unique=true];job(code);catalogVersions(catalog(id[default=$productCatalog]),version[default='Staged']);active[default=true];sessionLanguage(isocode)[default=en];sessionCurrency(isocode)[default=GBP];sessionUser(uid)[default=admin]
+;specialCategoryAssignmentJob;specialCategoryAssignmentJobPerformable;$productCatalog:Staged,$productCatalog:Online
