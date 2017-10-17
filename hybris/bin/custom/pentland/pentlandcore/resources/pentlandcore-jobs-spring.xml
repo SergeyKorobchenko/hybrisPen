@@ -32,4 +32,9 @@
 		<property name="timeService" ref="timeService" />
 	</bean>
 
+	<bean id="specialCategoryAssignmentJobPerformable" class="com.bridgex.core.job.SpecialCategoryAssignmentJobPerformable" parent="abstractJobPerformable">
+		<property name="categoryService" ref="categoryService"/>
+		<property name="productService" ref="productService"/>
+	</bean>
+
 </beans>

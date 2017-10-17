@@ -111,3 +111,4 @@ INSERT_UPDATE Tax;code[unique=true];value;currency(isocode)
 INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;cartRemovalJob;cartRemovalJob
 ;siteMapMediaJob;siteMapMediaJob
+;specialCategoryAssignmentJobPerformable;specialCategoryAssignmentJobPerformable
