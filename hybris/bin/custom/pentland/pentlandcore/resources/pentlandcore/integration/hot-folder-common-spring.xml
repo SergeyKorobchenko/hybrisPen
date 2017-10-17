@@ -134,7 +134,7 @@
 	<bean id="pentlandBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code);productGroup;varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup;varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -147,7 +147,7 @@
 	<bean id="pentlandBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];swatchColors(code)[mode=replace];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code);productGroup;varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];swatchColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup;varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -160,7 +160,7 @@
 	<bean id="pentlandBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];swatchColors(code)[mode=replace];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code);clearance;discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];smu;productGroup;$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];swatchColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];smu;productGroup;$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
