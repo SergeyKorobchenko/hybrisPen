@@ -936,11 +936,10 @@ INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = t
 ; ; MyAccountLinkApproverGroupRestriction ; My Account Link Approver Group Restriction ; b2bapprovergroup ; true ; ApprovalDashboardLink
 ###### Restriction End ######
 
-
 ###### Media Start ######
 ## site logo ##
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/svg+xml']; altText; folder(qualifier)[default = 'images']
-; ; /images/theme/logo_hybris_responsive.svg ; logo_hybris_responsive.svg ; $siteResource/images/theme/logo_hybris_responsive.svg ; image/svg+xml ; hybris Accelerator ;
+; ; /images/theme/logo_pentland.png ; logo_pentland.png ; $siteResource/images/theme/logo_pentland.png ; image/png ; hybris Accelerator ;
 
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; folder(qualifier)[default = 'images']
 ; ; addEditAddressPagePreview            ; text/png ; AddEditAddressPage.png            ; $jarResourceCms/preview-images/pentland/AddEditAddressPage.png
