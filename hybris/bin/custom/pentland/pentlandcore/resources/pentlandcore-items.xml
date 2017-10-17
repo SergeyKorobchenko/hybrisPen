@@ -35,8 +35,17 @@
         </enumtype>
 
         <enumtype generate="true" code="DiscontinuedStatus" autocreate="true" dynamic="false">
-            <value code="DISCONTINUED"/>
+            <value code="D01"/>
+            <value code="D02"/>
+            <value code="D03"/>
+            <value code="D04"/>
+            <value code="D05"/>
+            <value code="D06"/>
+            <value code="D98"/>
+            <value code="D99"/>
           </enumtype>
+
+        <enumtype code="Gender" autocreate="false" dynamic="true"/>
     </enumtypes>
 
     <itemtypes>
@@ -65,7 +74,7 @@
                         <modifiers/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="clearance" type="java.lang.Boolean">
+                    <attribute qualifier="clearance" type="boolean">
                         <description>Clearance flag</description>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>
@@ -76,7 +85,7 @@
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="smu" type="java.lang.Boolean">
+                    <attribute qualifier="smu" type="boolean">
                         <description>SMU flag</description>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>

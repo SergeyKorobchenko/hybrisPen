@@ -152,15 +152,15 @@
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0}:$catalog:Staged;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
-				;{+0}:$catalog:Online;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
+				;{+0}:$catalog:Staged;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{15};{16};{17};;$catalog:Staged;;{S}
+				;{+0}:$catalog:Online;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{15};{16};{17};;$catalog:Online;;{S}
 			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];swatchColors(code)[mode=replace];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code);clearance;discontinuedStatus;smu;productGroup;$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];swatchColors(code)[mode=replace];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code);clearance;discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];smu;productGroup;$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
