@@ -53,6 +53,7 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ##--- level 3. children of PentlandNavNode ---##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&componentRef); &nodeRef
 ; MyAccountNavNode  ; ; My Account   ; PentlandNavNode ; ; MyAccountNavNode
+; MyCompanyNavNode  ; ; My Company   ; PentlandNavNode ; ; MyCompanyNavNode
 ; OrderToolsNavNode ; ; Order Tools  ; PentlandNavNode ; ; OrderToolsNavNode
 #;PentlandCategoryNavNode;;Categories;PentlandNavNode;;PentlandCategoryNavNode
 ; FooterNavNode     ; ; Footer Pages ; PentlandNavNode ; ; FooterNavNode
@@ -61,41 +62,34 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 
 
 ##---- level 4. children of My Account Nav ----##
-INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef;
 ; PersonalDetailsNavNode       ; ; Personal Details        ; MyAccountNavNode ; ; PersonalDetailsNavNode
 ; UpdateEmailNavNode           ; ; Update Email            ; MyAccountNavNode ; ; UpdateEmailNavNode
-; PaymentDetailsNavNode        ; ; Payment Details         ; MyAccountNavNode ; ; PaymentDetailsNavNode
 ; ChangePasswordNavNode        ; ; Change Password         ; MyAccountNavNode ; ; ChangePasswordNavNode
 ; OrderHistoryNavNode          ; ; Order History           ; MyAccountNavNode ; ; OrderHistoryNavNode
-; AddressBookNavNode           ; ; Address Book            ; MyAccountNavNode ; ; AddressBookNavNode
-; MyQuotesNavNode              ; ; My Quotes               ; MyAccountNavNode ; ; MyQuotesNavNode
-; ApprovalDashboardNavNode     ; ; Approval Dashboard      ; MyAccountNavNode ; ; ApprovalDashboardNavNode
-; MyReplenishmentOrdersNavNode ; ; My Replenishment Orders ; MyAccountNavNode ; ; MyReplenishmentOrdersNavNode
 ; SavedCartsNavNode            ; ; Saved Carts             ; MyAccountNavNode ; ; SavedCartsNavNode
+; OrderQueriesNavNode          ; ; Order Queries           ; MyAccountNavNode ; ; OrderQueriesNavNode
+; SupportTicketsNavNode        ; ; Support Tickets         ; MyAccountNavNode ; ; SupportTicketsNavNode
 ## entries of the above navigation nodes ##
+
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
 ; PersonalDetailsNavNodeEntry       ; ; PersonalDetailsNavNodeEntry       ; PersonalDetailsNavNode       ; PersonalDetailsLink       ;
 ; UpdateEmailNavNodeEntry           ; ; UpdateEmailNavNodeEntry           ; UpdateEmailNavNode           ; UpdateEmailLink           ;
 ; ChangePasswordNavNodeEntry        ; ; ChangePasswordNavNodeEntry        ; ChangePasswordNavNode        ; UpdatePasswordLink        ;
-; AddressBookNavNodeEntry           ; ; AddressBookNavNodeEntry           ; AddressBookNavNode           ; AddressBookLink           ;
-; PaymentDetailsNavNodeEntry        ; ; PaymentDetailsNavNodeEntry        ; PaymentDetailsNavNode        ; PaymentDetailsLink        ;
 ; OrderHistoryNavNodeEntry          ; ; OrderHistoryNavNodeEntry          ; OrderHistoryNavNode          ; OrderHistoryLink          ;
 ; SavedCartsNavNodeEntry            ; ; SavedCartsNavNodeEntry            ; SavedCartsNavNode            ; SavedCartsLink            ;
-; MyQuotesNavNodeEntry              ; ; MyQuotesNavNodeEntry              ; MyQuotesNavNode              ; MyQuotesLink              ;
-; MyReplenishmentOrdersNavNodeEntry ; ; MyReplenishmentOrdersNavNodeEntry ; MyReplenishmentOrdersNavNode ; MyReplenishmentOrdersLink ;
-; ApprovalDashboardNavNodeEntry     ; ; ApprovalDashboardNavNodeEntry     ; ApprovalDashboardNavNode     ; ApprovalDashboardLink     ;
+; OrderQueriesNavNodeEntry          ; ; OrderQueriesNavNodeEntry          ; OrderQueriesNavNode          ; OrderQueriesLink          ;
+; SupportTicketsNavNodeEntry        ; ; SupportTicketsNavNodeEntry        ; SupportTicketsNavNode        ; SupportTicketsLink        ;
+
 ## links of the above navigattion entries ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; target(code)[default = 'sameWindow']
 ; ; PersonalDetailsLink       ; PersonalDetailsLink       ; /my-account/update-profile     ; PersonalDetailsLink       ;
 ; ; UpdateEmailLink           ; UpdateEmailLink           ; /my-account/update-email       ; UpdateEmailLink           ;
 ; ; UpdatePasswordLink        ; UpdatePasswordLink        ; /my-account/update-password    ; UpdatePasswordLink        ;
-; ; AddressBookLink           ; AddressBookLink           ; /my-account/address-book       ; AddressBookLink           ;
-; ; PaymentDetailsLink        ; PaymentDetailsLink        ; /my-account/payment-details    ; PaymentDetailsLink        ;
 ; ; OrderHistoryLink          ; OrderHistoryLink          ; /my-account/orders             ; OrderHistoryLink          ;
 ; ; SavedCartsLink            ; SavedCartsLink            ; /my-account/saved-carts        ; SavedCartsLink            ;
-; ; MyQuotesLink              ; MyQuotesLink              ; /my-account/my-quotes          ; MyQuotesLink              ;
-; ; MyReplenishmentOrdersLink ; MyReplenishmentOrdersLink ; /my-account/my-replenishment   ; MyReplenishmentOrdersLink ;
-; ; ApprovalDashboardLink     ; ApprovalDashboardLink     ; /my-account/approval-dashboard ; ApprovalDashboardLink     ;
+; ; OrderQueriesLink          ; OrderQueriesLink          ; /my-account/order-queries      ; OrderQueriesLink          ;
+; ; SupportTicketsLink        ; SupportTicketsLink        ; /my-account/support-tickets    ; SupportTicketsLink        ;
 
 
 ##---- level 4. children of Order Tools ----##
@@ -116,7 +110,15 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 
 
 
+##---- level 4. children of My Company Nav ----##
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;AccountSummaryLink;Company Manage Budget Link;/my-company/account-summary/;AccountSummaryLink;
 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AccountSummaryNavNode;;AccountSummary;MyCompanyNavNode;;AccountSummaryNavNode
+
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;AccountSummaryNavNodeEntry;;Account Summary Nav Node Entry;AccountSummaryNavNode;AccountSummaryLink;
 
 
 
@@ -241,10 +243,11 @@ INSERT_UPDATE FooterNavigationComponent; $contentCV[unique = true]; uid[unique =
 
 ## headerlinks slot ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
-; ; HeaderLinksSlot ; MyAccountComponent
+; ; HeaderLinksSlot ; MyAccountComponent,MyCompanyComponent
 
 INSERT_UPDATE NavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; styleClass; &componentRef; navigationNode(&nodeRef)
-; ; MyAccountComponent ; My Account ; accNavComponent ; MyAccountComponent ; MyAccountNavNode
+; ; MyAccountComponent ; My Account ; accNavComponent    ; MyAccountComponent ; MyAccountNavNode
+; ; MyCompanyComponent ; My Company ; companyNavComponent; MyCompanyComponent ; MyCompanyNavNode
 
 ## search box slot ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
@@ -605,20 +608,6 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 ###### Terms and Conditions Page End ######
 
 
-###### Account Address Book Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'address-book']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-address-book ; SideContent ; ; SideContent-address-book ; ; ;
-; ; BodyContent-address-book ; BodyContent ; ; BodyContent-address-book ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-address-book ; Side Content Slot for Account Address Book ; true ;                             ; ; ;
-; ; BodyContent-address-book ; Body Content Slot for Account Address Book ; true ; AccountAddressBookComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; AccountAddressBookComponent ; Account Address Book Component ; accountAddressBookPage.jsp ; ; AccountAddressBookComponent
-###### Account Address Book End ######
-
-
 ###### Account Add Edit Address Start ######
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'add-edit-address']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; SideContent-add-edit-address ; SideContent ; ; SideContent-add-edit-address ; ; ;
@@ -631,21 +620,6 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ; ; AccountAddEditAddressComponent ; Account Add Edit Address Component ; accountEditAddressPage.jsp ; ; AccountAddEditAddressComponent
 ###### Account Add Edit Address End ######
-
-
-###### Account payment detail page Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'payment-details']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-payment-details ; SideContent ; ; SideContent-payment-details ; ; ;
-; ; BodyContent-payment-details ; BodyContent ; ; BodyContent-payment-details ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-payment-details ; Side Content Slot for My Account payment-details ; true ;                                ; ; ;
-; ; BodyContent-payment-details ; Body Content Slot for My Account payment-details ; true ; AccountPaymentDetailsComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; AccountPaymentDetailsComponent ; Account Payment Details Component ; accountPaymentInfoPage.jsp ; ; AccountPaymentDetailsComponent
-###### Account payment detail page End ######
-
 
 ###### Account My Quotes Start ######
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-quotes']; contentSlot(uid, $contentCV)[unique = true];;;
@@ -677,39 +651,6 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 INSERT_UPDATE ViewOrderAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
 ; ; ViewOrderAction ; /my-account/order/{orderCode} ; View Order Action ; ActionRestriction ; ViewOrderAction
 ###### Account Order History End ######
-
-
-###### Account My Replenishment Orders Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-replenishment-orders']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-my-replenishment-orders ; SideContent ; ; SideContent-my-replenishment-orders ; ; ;
-; ; BodyContent-my-replenishment-orders ; BodyContent ; ; BodyContent-my-replenishment-orders ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-my-replenishment-orders ; Side Content Slot for My Account Replenishment Orders ; true ;                                       ; ; ;
-; ; BodyContent-my-replenishment-orders ; Body Content Slot for My Account Replenishment Orders ; true ; AccountMyReplenishmentOrdersComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; AccountMyReplenishmentOrdersComponent ; Account My Replenishment Orders Component ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentSchedule.jsp ; ; AccountMyReplenishmentOrdersComponent
-###### Account My Replenishment Orders End ######
-
-
-###### Account My Replenishment Order Details Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-replenishment-details']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-my-replenishment-details ; SideContent ; ; SideContent-my-replenishment-details ; ; ;
-; ; BodyContent-my-replenishment-details ; BodyContent ; ; BodyContent-my-replenishment-details ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-my-replenishment-details ; Side Content Slot for My Replenishment Order Details ; true ;                                                                                                                                                                                                                                                                                                                                            ; ; ;
-; ; BodyContent-my-replenishment-details ; Body Content Slot for My Replenishment Order Details ; true ; AccountMyReplenishmentOrderDetailsHeadlineComponent,AccountMyReplenishmentOrderDetailsOverviewComponent,AccountMyReplenishmentOrderDetailsActionsComponent,AccountMyReplenishmentOrderDetailsItemsComponent,AccountOrderDetailsShippingComponent,AccountReplenishmentOrderDetailsTotalsComponent,AccountReplenishmentOrderHistoryComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; AccountMyReplenishmentOrderDetailsHeadlineComponent ; Account My Replenishment Order Details Headline Component ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentOrderDetailHeadline.jsp ; ; AccountMyReplenishmentOrderDetailsHeadlineComponent
-; ; AccountMyReplenishmentOrderDetailsOverviewComponent ; Account My Replenishment Order Details Overview Component ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentOrderDetailOverview.jsp ; ; AccountMyReplenishmentOrderDetailsOverviewComponent
-; ; AccountMyReplenishmentOrderDetailsActionsComponent  ; Account My Replenishment Order Details Actions Component  ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentOrderDetailActions.jsp  ; ; AccountMyReplenishmentOrderDetailsActionsComponent
-; ; AccountMyReplenishmentOrderDetailsItemsComponent    ; Account Replenishment Order Details Items Info Component  ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentOrderDetailItems.jsp    ; ; AccountMyReplenishmentOrderDetailsItemsComponent
-; ; AccountReplenishmentOrderHistoryComponent           ; Account History Component                                 ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentOrderHistoryPage.jsp    ; ; AccountReplenishmentOrderHistoryComponent
-; ; AccountReplenishmentOrderDetailsTotalsComponent     ; Account Replenishment Order Details Totals Component      ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/account/accountReplenishmentOrderDetailTotals.jsp   ; ; AccountReplenishmentOrderDetailsTotalsComponent
-###### Account My Replenishment Order Details End ######
 
 
 ###### Account Order Details Start ######
@@ -845,21 +786,6 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 ; ; OrderConfirmationContinueButtonComponent ; Order Confirmaiton Continue Button Component   ; checkoutConfirmationContinueButton.jsp                                                                ; ; OrderConfirmationContinueButtonComponent
 ###### Order Confirmation Page End ######
 
-
-###### Replenishment Confirmation Page Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'replenishmentConfirmationPage']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-replenishmentConfirmation ; SideContent ; ; SideContent-replenishmentConfirmation ; ; ;
-; ; BodyContent-replenishmentConfirmation ; BodyContent ; ; BodyContent-replenishmentConfirmation ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-replenishmentConfirmation ; Side Content Slot for Replenishment Confirmation ; true ;                                                                                                                                                                                                                                                             ; ; ;
-; ; BodyContent-replenishmentConfirmation ; Body Content Slot for Replenishment Confirmation ; true ; ReplenishmentConfirmationMessageComponent,AccountMyReplenishmentOrderDetailsOverviewComponent,AccountMyReplenishmentOrderDetailsItemsComponent,OrderConfirmationShippingComponent,OrderConfirmationTotalsComponent,OrderConfirmationContinueButtonComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; ReplenishmentConfirmationMessageComponent ; Replenishment Confirmation Message Component ; /WEB-INF/views/addons/b2bacceleratoraddon/responsive/pages/checkout/replenishmentCheckoutConfirmationMessage.jsp ; ; ReplenishmentConfirmationMessageComponent
-###### Replenishment Confirmation Page End ######
-
-
 ###### Import CSV as Saved Cart Page Start ######
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'importCSVSavedCartPage']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; SideContent-importCSVSavedCartPage ; SideContent ; ; SideContent-importCSVSavedCartPage ; ; ;
@@ -932,8 +858,8 @@ INSERT_UPDATE CMSInverseRestriction; $contentCV[unique = true]; name; originalRe
 ; ; Logged in User ; anonymousUserRestriction ; loggedInUser ; MyAccountComponent
 
 INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&linkRef)
-; ; MyAccountLinkCustomerGroupRestriction ; My Account Link Customer Group Restriction ; b2bcustomergroup ; true ; AddressBookLink,PaymentDetailsLink,MyQuotesLink,OrderHistoryLink,MyReplenishmentOrdersLink
-; ; MyAccountLinkApproverGroupRestriction ; My Account Link Approver Group Restriction ; b2bapprovergroup ; true ; ApprovalDashboardLink
+; ; MyAccountLinkCustomerGroupRestriction ; My Account Link Customer Group Restriction ; b2bcustomergroup ; true ; MyAccountComponent
+; ; MyCompanyLinkAdminGroupRestriction    ; My Company Link Admin Group Restriction    ; b2bmanagergroup  ; true ; MyCompanyComponent
 ###### Restriction End ######
 
 ###### Media Start ######
