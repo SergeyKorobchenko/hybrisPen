@@ -112,16 +112,6 @@
 								</ycommerce:testId>
 							</div>
 
-							<c:if test="${empty hideHeaderLinks}">
-								<ycommerce:testId code="header_StoreFinder_link">
-									<div class="mobile__nav__row--table-cell hidden-sm hidden-md hidden-lg mobile__nav__row--seperator">
-										<a href="<c:url value="/store-finder"/>" class="mobile__nav__row--btn mobile__nav__row--btn-location btn">
-											<span class="glyphicon glyphicon-map-marker"></span>
-										</a>
-									</div>
-								</ycommerce:testId>
-							</c:if>
-
 							<cms:pageSlot position="MiniCart" var="cart" element="div" class="miniCartSlot componentContainer mobile__nav__row--table hidden-sm hidden-md hidden-lg">
 								<cms:component component="${cart}" element="div" class="mobile__nav__row--table-cell" />
 							</cms:pageSlot>
@@ -149,19 +139,6 @@
 				</div>
 				<div class="nav__right col-xs-6 col-xs-6 hidden-xs">
 					<ul class="nav__links nav__links--shop_info">
-						<li>
-							<c:if test="${empty hideHeaderLinks}">
-								<ycommerce:testId code="header_StoreFinder_link">
-									<div class="nav-location hidden-xs">
-										<a href="<c:url value="/store-finder"/>" class="btn">
-											<span class="glyphicon glyphicon-map-marker"></span>
-										</a>
-									</div>
-								</ycommerce:testId>
-							</c:if>
-
-						</li>
-
 						<li>
 							<cms:pageSlot position="MiniCart" var="cart" element="div" class="componentContainer">
 

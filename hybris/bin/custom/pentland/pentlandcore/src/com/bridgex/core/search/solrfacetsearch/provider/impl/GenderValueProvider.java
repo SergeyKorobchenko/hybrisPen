@@ -11,6 +11,7 @@
 package com.bridgex.core.search.solrfacetsearch.provider.impl;
 
 import de.hybris.platform.core.enums.Gender;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.solrfacetsearch.config.IndexConfig;
 import de.hybris.platform.solrfacetsearch.config.IndexedProperty;
 import de.hybris.platform.solrfacetsearch.config.exceptions.FieldValueProviderException;
@@ -18,7 +19,6 @@ import de.hybris.platform.solrfacetsearch.provider.FieldNameProvider;
 import de.hybris.platform.solrfacetsearch.provider.FieldValue;
 import de.hybris.platform.solrfacetsearch.provider.FieldValueProvider;
 import de.hybris.platform.solrfacetsearch.provider.impl.AbstractPropertyFieldValueProvider;
-import com.bridgex.core.model.ApparelProductModel;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
 
@@ -38,21 +38,20 @@ public class GenderValueProvider extends AbstractPropertyFieldValueProvider impl
 	public Collection<FieldValue> getFieldValues(final IndexConfig indexConfig, final IndexedProperty indexedProperty,
 			final Object model) throws FieldValueProviderException
 	{
-		final ApparelProductModel apparelModel = getApparelProductModel(model);
+		final ProductModel apparelModel = getBaseProductModel(model);
 		if (apparelModel == null)
 		{
 			return Collections.emptyList();
 		}
 
-		final List<Gender> genders = apparelModel.getGenders();
+		final Gender gender = apparelModel.getGender();
 
-		if (genders != null && !genders.isEmpty())
+		if (gender != null)
 		{
 			final Collection<FieldValue> fieldValues = new ArrayList<FieldValue>();
-			for (final Gender gender : genders)
-			{
-				fieldValues.addAll(createFieldValue(gender, indexedProperty));
-			}
+
+			fieldValues.addAll(createFieldValue(gender, indexedProperty));
+
 			return fieldValues;
 		}
 		else
@@ -73,7 +72,7 @@ public class GenderValueProvider extends AbstractPropertyFieldValueProvider impl
 		return fieldValues;
 	}
 
-	protected ApparelProductModel getApparelProductModel(final Object model)
+	protected ProductModel getBaseProductModel(final Object model)
 	{
 		Object finalModel = model;
 		if (model instanceof ApparelSizeVariantProductModel)
@@ -86,9 +85,9 @@ public class GenderValueProvider extends AbstractPropertyFieldValueProvider impl
 			finalModel = ((ApparelStyleVariantProductModel) finalModel).getBaseProduct();
 		}
 
-		if (finalModel instanceof ApparelProductModel)
+		if (finalModel instanceof ProductModel)
 		{
-			return (ApparelProductModel) finalModel;
+			return (ProductModel) finalModel;
 		}
 		else
 		{

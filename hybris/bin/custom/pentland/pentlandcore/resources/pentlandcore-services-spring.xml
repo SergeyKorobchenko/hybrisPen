@@ -39,6 +39,11 @@
 		<property name="defaultB2BUnitService" ref="pentlandB2BUnitService"/>
 	</bean>
 
+	<alias name="pentlandProductService" alias="productService"/>
+	<bean id="pentlandProductService" class="com.bridgex.core.product.impl.DefaultPentlandProductService" parent="defaultProductService">
+		<property name="pentlandProductDao" ref="pentlandProductDao"/>
+	</bean>
+
 
 <!-- url resolvers -->
 	<alias name="pentlandCategoryModelUrlResolver" alias="categoryModelUrlResolver"/>

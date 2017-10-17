@@ -4,10 +4,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.bridgex.core.category.dao.PentlandCategoryDao;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.category.daos.impl.DefaultCategoryDao;
 import de.hybris.platform.category.model.CategoryModel;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 public class DefaultPentlandCategoryDao extends DefaultCategoryDao implements PentlandCategoryDao {
@@ -24,6 +27,24 @@ public class DefaultPentlandCategoryDao extends DefaultCategoryDao implements Pe
     final Map<String, Object> params = (Map) Collections.singletonMap(CategoryModel.CATALOGVERSION, catalogVersion);
 
     final SearchResult<CategoryModel> searchRes = search(query, params);
+    return searchRes.getResult();
+  }
+
+  @Override
+  public Collection<CategoryModel> findCategoriesWithFlag(String flagField, Boolean value, Collection<CatalogVersionModel> catalogVersions) {
+    StringBuilder queryBuilder = new StringBuilder("select {pk} from {" + CategoryModel._TYPECODE + "} ");
+    queryBuilder.append("where {" + flagField + "}=?state ");
+    if(CollectionUtils.isNotEmpty(catalogVersions)){
+      queryBuilder.append(" AND {" + CategoryModel.CATALOGVERSION + "} in (?catalogVersions)");
+    }
+
+    FlexibleSearchQuery query = new FlexibleSearchQuery(queryBuilder.toString());
+    query.addQueryParameter("state", value);
+    if(CollectionUtils.isNotEmpty(catalogVersions)){
+      query.addQueryParameter("catalogVersions", catalogVersions);
+    }
+
+    final SearchResult<CategoryModel> searchRes = getFlexibleSearchService().search(query);
     return searchRes.getResult();
   }
 }
