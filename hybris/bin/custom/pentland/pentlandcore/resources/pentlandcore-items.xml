@@ -95,7 +95,6 @@
                         <description>SAP Product Group</description>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>
-                        <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
                     <attribute qualifier="sapName" type="java.lang.String">
                         <description>SAP Name</description>
@@ -191,6 +190,24 @@
                         <persistence type="property"/>
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                         <description>If this category is hidden from the display</description>
+                    </attribute>
+                    <attribute qualifier="smu" type="boolean">
+                        <description>Is this SMU category</description>
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="clearance" type="boolean">
+                        <description>Is this a Clearance category</description>
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CatalogVersionAwareCronJob" extends="CronJob" autocreate="true" generate="true">
+                <attributes>
+                    <attribute qualifier="catalogVersions" type="CatalogVersionCollection">
+                        <persistence type="property"/>
                     </attribute>
                 </attributes>
             </itemtype>

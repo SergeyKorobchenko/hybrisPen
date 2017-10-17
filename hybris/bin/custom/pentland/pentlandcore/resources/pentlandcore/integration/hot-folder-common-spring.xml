@@ -134,26 +134,26 @@
 	<bean id="pentlandBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code);clearance;smu;productGroup;varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code);productGroup;varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0};{6};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
-				;{+0};{6};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
+				;{+0};{6};{11};{12};{13};{17};;$catalog:Staged;;{S}
+				;{+0};{6};{11};{12};{13};{17};;$catalog:Online;;{S}
 			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];swatchColors(code)[mode=replace];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code);clearance;smu;productGroup;varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];swatchColors(code)[mode=replace];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code);productGroup;varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0}:$catalog:Staged;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{15};{16};{17};;$catalog:Staged;;{S}
-				;{+0}:$catalog:Online;{+1};{5};{7};{8};{9};{11};{12};{13};{14};{15};{16};{17};;$catalog:Online;;{S}
+				;{+0}:$catalog:Staged;{+1};{5};{7};{8};{9};{11};{12};{13};{17};;$catalog:Staged;;{S}
+				;{+0}:$catalog:Online;{+1};{5};{7};{8};{9};{11};{12};{13};{17};;$catalog:Online;;{S}
 			</value>
 		</property>
 	</bean>

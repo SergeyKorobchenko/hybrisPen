@@ -24,7 +24,7 @@ $approved=approvalstatus(code)[default='approved']
 # Apparel products may have no variations, only colour (style) variations or both colour and size variations.
 
 # Create products
-INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategories(code,$catalogVersion);varianttype(code);$approved;;ean;genders(code)
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategories(code,$catalogVersion);varianttype(code);$approved;;ean;gender(code)
 ;300441142;;pieces;Blue Tomato,caps;;;;1022436212;MALE
 ;29531;;pieces;Toko,skigear;;;;989514105;FEMALE
 ;29532;;pieces;Toko,skigear;;;;953539556;MALE
@@ -199,7 +199,7 @@ INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseP
 # Apparel products may have no variations, only colour (style) variations or both colour and size variations.
 
 # Create products
-INSERT_UPDATE ApparelProduct;code[unique=true];$catalogVersion;unit(code)[default='pieces'];supercategories(code,$catalogVersion);varianttype(code);$approved;ean;genders(code)
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code)[default='pieces'];supercategories(code,$catalogVersion);varianttype(code);$approved;ean;gender(code)
 ;103410;;pieces;190100,snow,Quiksilver;ApparelStyleVariantProduct;;;;MALE
 ;100191;;pieces;190100,snow,Armada;ApparelStyleVariantProduct;;;;MALE
 ;94474;;pieces;190100,snow,Special Blend;ApparelStyleVariantProduct;;;;MALE
