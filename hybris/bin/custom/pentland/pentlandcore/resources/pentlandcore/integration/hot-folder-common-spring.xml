@@ -31,7 +31,7 @@
 				<entry key="media" value="1" />
 				<entry key="price" value="1" />
 				<entry key="b2bcustomer" value="1" />
-				<entry key="b2bunit" value="1" />
+				<entry key="customer" value="1" />
 				<entry key="invoice" value="1" />
 				<entry key="order" value="1" />
 			</map>
@@ -117,8 +117,44 @@
 		  p:mapping="media" 
 		  p:converter-ref="pentlandBatchMediaProductConverter"/>
 
-							
+	<bean id="batchParentB2BUnitConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="customer"
+	      p:converter-ref="pentlandBatchParentB2BUnitConverter"/>
+
+	<alias name="batchB2BUnitConverterMapping" alias="batchCustomerConverterMapping" />
+	<bean id="batchB2BUnitConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="customer"
+	      p:converter-ref="pentlandBatchB2BUnitConverter"/>
+
 	<!-- Converters -->
+	<!-- B2BUnit converters -->
+
+	<bean id="pentlandBatchParentB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;sapID;userPriceGroup(code);sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0}_{+1};{0};{1};{2};{+0}_{+1}_{+3};{4};{5};{6};{7};{8};{8}</value>
+		</property>
+	</bean>
+
+	<bean id="pentlandBatchB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid);salesOrg;distCh;sapID;userPriceGroup(code);sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0}_{+1}_{+2};{+0}_{+1};{0};{1};{2};{+0}_{+1}_{+2}_{+3};{4};{5};{6};{7};{8};{8}</value>
+		</property>
+	</bean>
+
+	<!-- end of B2BUnit converters -->
+
 	<bean id="pentlandBatchProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
