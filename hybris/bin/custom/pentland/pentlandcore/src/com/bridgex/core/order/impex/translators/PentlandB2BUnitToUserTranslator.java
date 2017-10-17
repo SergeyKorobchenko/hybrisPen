@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.fest.util.Collections;
 
 import com.bridgex.core.services.impl.DefaultPentlandB2BUnitService;
@@ -32,6 +33,8 @@ public class PentlandB2BUnitToUserTranslator extends SingleValueTranslator {
   private static final String DEFAULT_CUSTOMER_UID   = "DefaultCustomer";
   private static final String DEFAULT_CUSTOMER_EMAIL = "empty@empty.com";
 
+  private static final Logger LOG = Logger.getLogger(PentlandB2BUnitToUserTranslator.class);
+
   private DefaultPentlandB2BUnitService pentlandB2BUnitService;
   private ModelService modelService;
   private UserService userService;
@@ -49,23 +52,31 @@ public class PentlandB2BUnitToUserTranslator extends SingleValueTranslator {
     clearStatus();
     User result = null;
     if (StringUtils.isNotBlank(value)) {
-      UserModel contact;
+      UserModel contact = null;
       B2BUnitModel b2BUnitModel = pentlandB2BUnitService.getUnitForUid(value);
-      contact = b2BUnitModel.getContact();
-      if (contact == null) {
-        Set<B2BCustomerModel> unitCustomers = pentlandB2BUnitService.getB2BCustomers(b2BUnitModel);
-        if (!Collections.isEmpty(unitCustomers)) {
-          contact = unitCustomers.iterator().next();
-        } else {
-          contact = createContact(b2BUnitModel);
+      if (b2BUnitModel != null) {
+        try {
+          contact = b2BUnitModel.getContact();
+          if (contact == null) {
+              Set<B2BCustomerModel> unitCustomers = pentlandB2BUnitService.getB2BCustomers(b2BUnitModel);
+              if (!Collections.isEmpty(unitCustomers)) {
+                contact = unitCustomers.iterator().next();
+              }
+              else {
+                contact = createContact(b2BUnitModel);
+              }
+              b2BUnitModel.setContact(contact);
+              modelService.save(b2BUnitModel);
+          }
+          result = modelService.getSource(contact);
+          if (item != null && item instanceof AbstractOrder) {
+            AbstractOrder order = (AbstractOrder) item;
+            order.setUser(result);
+          }
+        } catch (Exception e) {
+          setError();
+          LOG.error(e.getMessage(), e);
         }
-        b2BUnitModel.setContact(contact);
-        modelService.save(b2BUnitModel);
-      }
-      result = modelService.getSource(contact);
-      if (item != null && item instanceof AbstractOrder) {
-        AbstractOrder order = (AbstractOrder) item;
-        order.setUser(result);
       }
     }
     return result;
