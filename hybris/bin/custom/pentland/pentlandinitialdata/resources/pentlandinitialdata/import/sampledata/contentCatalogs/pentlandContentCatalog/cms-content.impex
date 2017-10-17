@@ -857,7 +857,7 @@ INSERT_UPDATE CMSUserRestriction; $contentCV[unique = true]; uid[unique = true];
 INSERT_UPDATE CMSInverseRestriction; $contentCV[unique = true]; name; originalRestriction(&userRestriction)[allownull = true]; uid[unique = true]; components(&componentRef)
 ; ; Logged in User ; anonymousUserRestriction ; loggedInUser ; MyAccountComponent
 
-INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&linkRef)
+INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&componentRef)
 ; ; MyAccountLinkCustomerGroupRestriction ; My Account Link Customer Group Restriction ; b2bcustomergroup ; true ; MyAccountComponent
 ; ; MyCompanyLinkAdminGroupRestriction    ; My Company Link Admin Group Restriction    ; b2bmanagergroup  ; true ; MyCompanyComponent
 ###### Restriction End ######
