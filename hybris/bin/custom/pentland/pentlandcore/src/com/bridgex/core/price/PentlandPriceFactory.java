@@ -3,6 +3,7 @@ package com.bridgex.core.price;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.price.impl.DefaultPentlandPDTRowsQueryBuilder;
@@ -46,21 +47,35 @@ public class PentlandPriceFactory extends Europe1PriceFactory {
 
   public List<EnumerationValue> getUPGs(SessionContext ctx, User user) throws JaloPriceFactoryException {
     List<EnumerationValue> groups = this.getEnumsFromContextOrItem(ctx, user, "Europe1PriceFactory_UPG");
-    return groups != null?groups: Collections.singletonList(this.getEnumFromGroups(user, "userPriceGroup"));
+    if(groups == null){
+      EnumerationValue userPriceGroup = this.getEnumFromGroups(user, "userPriceGroup");
+      if(userPriceGroup != null){
+        groups = Collections.singletonList(userPriceGroup);
+      }
+    }
+    return groups;
   }
 
   @SuppressWarnings("unchecked")
   protected List<EnumerationValue> getEnumsFromContextOrItem(SessionContext ctx, ExtensibleItem item, String qualifier) {
     List<EnumerationValue> enums = (List<EnumerationValue>)(ctx != null?ctx.getAttribute(qualifier):null);
-    if(enums == null) {
-      enums = item != null? Collections.singletonList((EnumerationValue)item.getProperty(ctx, qualifier)):null;
+    if(enums == null && item != null) {
+      EnumerationValue property = (EnumerationValue) item.getProperty(ctx, qualifier);
+      if(property != null) {
+        enums = Collections.singletonList(property);
+      }
     }
 
     return enums;
   }
 
   public List getProductPriceInformations(SessionContext ctx, Product product, Date date, boolean net) throws JaloPriceFactoryException {
-    return this.getPriceInformations(ctx, product, this.getPPG(ctx, product), ctx.getUser(), this.getUPGs(ctx, ctx.getUser()), ctx.getCurrency(), net, date, (Collection)null);
+    List<EnumerationValue> upGs = this.getUPGs(ctx, ctx.getUser());
+    if(CollectionUtils.isNotEmpty(upGs)) {
+      return this.getPriceInformations(ctx, product, this.getPPG(ctx, product), ctx.getUser(), upGs, ctx.getCurrency(), net, date, null);
+    }else{
+      return Collections.EMPTY_LIST;
+    }
   }
 
   protected List getPriceInformations(SessionContext ctx, Product product, EnumerationValue productGroup, User user, List<EnumerationValue> upgs, Currency curr, boolean net, Date date, Collection taxValues) throws JaloPriceFactoryException {
