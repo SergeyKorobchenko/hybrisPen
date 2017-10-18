@@ -124,55 +124,80 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 ##---- level 4. children of FooterNavNode ----##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
-; AcceleratorNavNode ; ; Accelerator Pages ; FooterNavNode ; ; AcceleratorNavNode
-; HybrisNavNode      ; ; Hybris Pages      ; FooterNavNode ; ; HybrisNavNode
-; FollowUsNavNode    ; ; Follow Us Pages   ; FooterNavNode ; ; FollowUsNavNode
+; FooterCol1NavNode ; ; Footer Column One  ; FooterNavNode ; ; FooterCol1NavNode
+; FooterCol2NavNode ; ; Footer Column Two  ; FooterNavNode ; ; FooterCol2NavNode
+; FooterCol3NavNode ; ; Footer Column Three; FooterNavNode ; ; FooterCol3NavNode
+; FooterCol4NavNode ; ; Footer Column Four ; FooterNavNode ; ; FooterCol4NavNode
 
-##----- level 5. children of HybrisNavNode -----##
+
+##----- level 5. children of FooterCol1NavNode -----##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
-; AboutAcceleratorNavNode ; ; About Accelerator Page ; AcceleratorNavNode ; ; AboutAcceleratorNavNode
-; DocumentationNavNode    ; ; Documentation Page     ; AcceleratorNavNode ; ; DocumentationNavNode
+; PentlandLtdNavNode ; ; Pentland Ltd ; FooterCol1NavNode ; ; PentlandLtdNavNode
+; OurBrandsNavNode   ; ; Our Brands   ; FooterCol1NavNode ; ; OurBrandsNavNode
+; OurNewsNavNode     ; ; Our News     ; FooterCol1NavNode ; ; OurNewsNavNode
+
 ## entries of the above navigation nodes ##
-INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
-; AboutAcceleratorNavNodeEntry ; ; About Accelerator Navigation Node Entry ; AboutAcceleratorNavNode ; AboutAcceleratorLink ;
-; DocumentationNavNodeEntry    ; ; Documentation Navigation Node Entry     ; DocumentationNavNode    ; DocumentationLink    ;
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
+; PentlandLtdNavNodeEntry ; ; Pentland Ltd Navigation Node Entry ; PentlandLtdNavNode ; PentlandLtdLink ;
+; OurBrandsNavNodeEntry   ; ; Our Brands Navigation Node Entry   ; OurBrandsNavNode ; OurBrandsLink   ;
+; OurNewsNavNodeEntry     ; ; Our News Navigation Node Entry     ; OurNewsNavNode ; OurNewsLink     ;
+
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; AboutAcceleratorLink ; About Accelerator Link ; "http://www.hybris.com/multichannel-accelerator" ; AboutAcceleratorLink ; AboutAcceleratorLink ; newWindow
-; ; DocumentationLink    ; Documentation Link     ; "https://help.hybris.com"                        ; DocumentationLink    ; DocumentationLink    ; newWindow
+; ; PentlandLtdLink ; Pentland Ltd Link ; "/pentlandLtd" ; PentlandLtdLink ; PentlandLtdLink ; newWindow
+; ; OurBrandsLink   ; Our Brands Link   ; "/brands"      ; OurBrandsLink   ; OurBrandsLink   ; newWindow
+; ; OurNewsLink     ; Our News Link     ; "/news"        ; OurNewsLink     ; OurNewsLink     ; newWindow
 
-##----- level 5. children of AcceleratorNavNode -----##
+
+##----- level 5. children of FooterCol2NavNode -----##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
-; AboutHybrisNavNode ; ; About Hybris Page ; HybrisNavNode ; ; AboutHybrisNavNode
-; ContactUsNavNode   ; ; Contact Us Page   ; HybrisNavNode ; ; ContactUsNavNode
+; TermsOfUseNavNode   ; ; Terms Of Use  ; FooterCol2NavNode ; ; TermsOfUseNavNode
+; CookiePolicyNavNode ; ; Cookie Policy ; FooterCol2NavNode ; ; CookiePolicyNavNode
+; PrivacyPolicyNavNode; ; Privacy Policy; FooterCol2NavNode ; ; PrivacyPolicyNavNode
+; ModernSlaveryNavNode; ; Modern Slavery; FooterCol2NavNode ; ; ModernSlaveryNavNode
+
 ## entries of the above navigation nodes ##
-INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
-; AboutHybrisNavNodeEntry ; ; About Hybris Navigation Node Entry ; AboutHybrisNavNode ; AboutHybrisLink ;
-; ContactUsNavNodeEntry   ; ; Contact Us Navigation Node Entry   ; ContactUsNavNode   ; ContactUsLink   ;
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
+; TermsOfUseNavNodeEntry        ; ; Terms Of Use Navigation Node Entry     ; TermsOfUseNavNode ; TermsOfUseLink   ;
+; CookiePolicyNavNodeEntry      ; ; Cookie Policy Navigation Node Entry    ; CookiePolicyNavNode ; CookiePolicyLink    ;
+; PrivacyPolicyNavNodeEntry     ; ; Privacy Policy Navigation Node Entry   ; PrivacyPolicyNavNode ; PrivacyPolicyLink      ;
+; ModernSlaveryNavNodeEntry     ; ; Modern Slavery Navigation Node Entry   ; ModernSlaveryNavNode ; ModernSlaveryLink;
+
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; AboutHybrisLink ; About Hybris Link ; "http://www.hybris.com"         ; AboutHybrisLink ; AboutHybrisLink ; newWindow
-; ; ContactUsLink   ; Contact Us Link   ; "http://www.hybris.com/contact" ; ContactUsLink   ; ContactUsLink   ; newWindow
+; ; TermsOfUseLink        ; Terms Of Use Link    ; "/termsofuse#1" ; TermsOfUseLink    ; TermsOfUseLink    ; newWindow
+; ; CookiePolicyLink      ; Cookie Policy Link   ; "/termsofuse#2" ; CookiePolicyLink  ; CookiePolicyLink  ; newWindow
+; ; PrivacyPolicyLink     ; Privacy Policy Link  ; "/termsofuse#3" ; PrivacyPolicyLink ; PrivacyPolicyLink ; newWindow
+; ; ModernSlaveryLink     ; Modern Slavery Link  ; "/modernslavery"; ModernSlaveryLink ; ModernSlaveryLink ; newWindow
 
-##----- level 5. children of FollowUsNavNode -----##
+
+##----- level 5. children of FooterCol3NavNode -----##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
-; AgileCommerceBlogNavNode ; ; Agile Commerce Blog Page ; FollowUsNavNode ; ; AgileCommerceBlogNavNode
-; LinkedInNavNode          ; ; LinkedIn Page            ; FollowUsNavNode ; ; LinkedInNavNode
-; FacebookNavNode          ; ; Facebook Page            ; FollowUsNavNode ; ; FacebookNavNode
-; TwitterNavNode           ; ; Twitter Page             ; FollowUsNavNode ; ; TwitterNavNode
+; FacebookNavNode          ; ; Facebook Page            ; FooterCol3NavNode ; ; FacebookNavNode
+; TwitterNavNode           ; ; Twitter Page             ; FooterCol3NavNode ; ; TwitterNavNode
+
 ## entries of the above navigation nodes ##
-INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
-; AgileCommerceBlogNavNodeEntry ; ; Agile Commerce Blog Navigation Node Entry ; AgileCommerceBlogNavNode ; AgileCommerceBlogLink ;
-; LinkedInNavNodeEntry          ; ; LinkedIn Navigation Node Entry            ; LinkedInNavNode          ; LinkedInLink          ;
-; FacebookNavNodeEntry          ; ; Facebook Navigation Node Entry            ; FacebookNavNode          ; FacebookLink          ;
-; TwitterNavNodeEntry           ; ; Twitter Navigation Node Entry             ; TwitterNavNode           ; TwitterLink           ;
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
+; FacebookNavNodeEntry     ; ; Facebook Navigation Node Entry  ; FacebookNavNode ; FacebookLink ;
+; TwitterNavNodeEntry      ; ; Twitter Navigation Node Entry   ; TwitterNavNode  ; TwitterLink  ;
+
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; AgileCommerceBlogLink ; Agile Commerce Blog Link ; "http://www.agile-commerce.com/"         ; AgileCommerceBlogLink ; AgileCommerceBlogLink ; newWindow
-; ; LinkedInLink          ; Linked In Link           ; "http://www.linkedin.com/company/97435"  ; LinkedInLink          ; LinkedInLink          ; newWindow
-; ; FacebookLink          ; Facebook Link            ; "http://www.facebook.com/hybrissoftware" ; FacebookLink          ; FacebookLink          ; newWindow
-; ; TwitterLink           ; Twitter Link             ; "http://twitter.com/#!/hybris_software"  ; TwitterLink           ; TwitterLink           ; newWindow
+; ; FacebookLink  ; Facebook Link ; "https://www.facebook.com/PentlandBrands" ; FacebookLink ; FacebookLink ; newWindow
+; ; TwitterLink   ; Twitter Link  ; "https://twitter.com/PentlandBrands"      ; TwitterLink  ; TwitterLink  ; newWindow
 
+
+##----- level 5. children of FooterCol4NavNode -----##
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef;
+; ContactUsNavNode; ; Contact Us ; FooterCol4NavNode ; ; ContactUsNavNode
+
+## entries of the above navigation nodes ##
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
+; ContactUsNavNodeEntry; ; Contact Us Navigation Node Entry; ContactUsNavNode; ContactUsLink;
+
+## links of the above navigation nodes ##
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
+; ; ContactUsLink  ; Contact Us Link ; "/contactus" ; ContactUsLink ; ContactUsLink ; newWindow
 ###### Navigation End ######
 
 

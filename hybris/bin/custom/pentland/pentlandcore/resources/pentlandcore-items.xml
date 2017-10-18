@@ -46,6 +46,13 @@
           </enumtype>
 
         <enumtype code="Gender" autocreate="false" dynamic="true"/>
+
+        <enumtype code="OrderType" generate="true" autocreate="true" dynamic="true" />
+
+        <enumtype code="SalesApplication" generate="false" autocreate="false" dynamic="true">
+            <value code="SAP"/>
+        </enumtype>
+
     </enumtypes>
 
     <itemtypes>
@@ -213,5 +220,29 @@
             </itemtype>
         </typegroup>
 
+        <typegroup name="Order">
+            <itemtype code="AbstractOrder" autocreate="false" generate="false">
+                <description>Extending AbstractOrder type with additional attributes.</description>
+                <attributes>
+                    <attribute qualifier="totalQty" type="java.lang.Integer">
+                        <description>Total quantity</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="orderType" type="OrderType">
+                        <description>Order type code</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="rdd" type="java.util.Date">
+                        <description>Requested delivery date</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute type="java.lang.Long" qualifier="sequenceId">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Attribute is used in batch import process for avoiding multiple imports.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
     </itemtypes>
 </items>
