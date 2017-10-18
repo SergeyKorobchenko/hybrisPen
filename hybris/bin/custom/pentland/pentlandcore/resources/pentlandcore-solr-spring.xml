@@ -142,6 +142,15 @@
 		<property name="add" ref="additionalFiltersQueryPopulator"/>
 	</bean>
 
-	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.PentlandFsQueryParameterProvider"/>
+	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider"/>
+
+	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractValueResolver">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
+
+	<bean id="pentlandBrandCategoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandBrandCategoryNameValueResolver" parent="abstractBrandCategoryResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+	<bean id="pentlandBrandCategoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandBrandCategoryCodeValueResolver" parent="abstractBrandCategoryResolver"/>
 
 </beans>

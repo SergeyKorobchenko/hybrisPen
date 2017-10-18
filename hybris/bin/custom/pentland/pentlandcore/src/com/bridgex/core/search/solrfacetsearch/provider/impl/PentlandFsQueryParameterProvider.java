@@ -1,4 +1,4 @@
-package com.bridgex.core.search.solrfacetsearch.provider;
+package com.bridgex.core.search.solrfacetsearch.provider.impl;
 
 import java.util.Arrays;
 import java.util.HashMap;

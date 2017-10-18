@@ -23,7 +23,7 @@ $searchIndexNamePrefix=pentland
 $solrIndexedType=pentlandProductType
 $indexBaseSite=pentland
 $indexLanguages=en
-$indexCurrencies=USD,EUR,GBP
+$indexCurrencies=GBP
 
 
 INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
@@ -73,18 +73,10 @@ UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 
 # Define price range set
 INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
-;pentlandPriceRangeUSD;USD;double;rangeRefUSD1,rangeRefUSD2,rangeRefUSD3,rangeRefUSD4,rangeRefUSD5
 ;pentlandPriceRangeGBP;GBP;double;rangeRefGBP1,rangeRefGBP2,rangeRefGBP3,rangeRefGBP4,rangeRefGBP5
-;pentlandPriceRangeEUR;EUR;double;rangeRefEUR1,rangeRefEUR2,rangeRefEUR3,rangeRefEUR4,rangeRefEUR5
-
 
 # Define price ranges
 INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
-; rangeRefUSD1 ; pentlandPriceRangeUSD ; $0-$49.99       ; 0    ; 49.99
-; rangeRefUSD2 ; pentlandPriceRangeUSD ; $50-$199.99     ; 50   ; 199.99
-; rangeRefUSD3 ; pentlandPriceRangeUSD ; $200-$499.99    ; 200  ; 499.99
-; rangeRefUSD4 ; pentlandPriceRangeUSD ; $500-$999.99    ; 500  ; 999.99
-; rangeRefUSD5 ; pentlandPriceRangeUSD ; $1,000-$100,000 ; 1000 ; 100000
 ; rangeRefGBP1 ; pentlandPriceRangeGBP ; £0-£49.99       ; 0    ; 49.99
 ; rangeRefGBP2 ; pentlandPriceRangeGBP ; £50-£199.99     ; 50   ; 199.99
 ; rangeRefGBP3 ; pentlandPriceRangeGBP ; £200-£499.99    ; 200  ; 499.99
@@ -123,20 +115,23 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
 ;$solrIndexedType; allCategories   	;string ;	 ;;		;    ;    ;categoryCodeValueProvider			   ;    ;  ;    ;  ;    ;
 ;$solrIndexedType; categoryName     ;text   ;true;;		;true;true;pentlandCategoryNameValueProvider     ;true;40;true;20;true;10
+;$solrIndexedType; brandName        ;text   ;true;false;		;    ;    ;pentlandBrandCategoryNameValueResolver     ;    ;  ;    ;  ;    ;
+
 
 # Category facets
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
 ;$solrIndexedType; categoryPath  ;string;;;Refine;Alpha;-9999;false;false;categoryPathValueProvider;
 ;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;pentlandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; brand         ;string;false;;Refine;Alpha; 5000;true;;pentlandBrandCategoryCodeValueResolver     ;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
 
 # Other facet properties
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
 ;$solrIndexedType; style            ;string ; ;     ;true;    ; ;MultiSelectOr ;Alpha ;-1   ;false;    ;    ;optionalModelPropertyFieldValueProvider;                                             ;                             ;
 ;$solrIndexedType; swatchColors     ;string ; ;     ;    ;true; ;MultiSelectOr ;Alpha ; 2500;true;    ;    ;colorFacetValueProvider                ;colorFacetDisplayNameProvider                ;                             ;
 ;$solrIndexedType; size             ;string ; ;     ;true;    ; ;MultiSelectOr ;Custom; 2000;true;    ;    ;optionalModelPropertyFieldValueProvider;                                             ;sizeAttributeSortProvider    ;
-;$solrIndexedType; price        	;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;volumeAwareProductPriceValueProvider;;;defaultTopValuesProvider;pentlandPriceRangeUSD,pentlandPriceRangeGBP,pentlandPriceRangeEUR
-;$solrIndexedType; availableInStores;string	;	 ;     ;     ;true ;     ;MultiSelectOr ;Custom;10000;true;     ;     ;productStoreStockValueProvider;electronicsPointOfServiceFacetDisplayNameProvider;distanceAttributeSortProvider
-
+;$solrIndexedType; price        	  ;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;volumeAwareProductPriceValueProvider;;;defaultTopValuesProvider;pentlandPriceRangeUSD,pentlandPriceRangeGBP,pentlandPriceRangeEUR
+;$solrIndexedType; productGroup     ;string ;  ; ; true; ; ;MultiSelectOr; Alpha; 5000; true; ; ; springELValueProvider;;
 
 # Create the queries that will be used to extract data for Solr
 INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid);parameterProvider[default='pentlandFsQueryParameterProvider']
@@ -218,3 +213,8 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 ;size:$solrIndexedType				;	;Refine	 		;2000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 ;price:$solrIndexedType			;	;MultiSelectOr	;4000	;													;								;defaultTopValuesProvider	;;
+;productGroup:$solrIndexedType;;MultiSelectOr; 5000;
+
+# Category search query facets
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
+;brand:$solrIndexedType 			;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
