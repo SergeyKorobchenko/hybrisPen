@@ -23,24 +23,15 @@
 	</bean>
 
 
-	<bean id="electronicsCategorySource" parent="abstractCategorySource">
-		<property name="rootCategory" value="1"/>
-		<!-- '1' is the root icecat category -->
-	</bean>
-	<bean id="electronicsBrandCategorySource" parent="abstractCategorySource">
-		<property name="rootCategory" value="brands"/>
-		<!-- 'brands' is the root of the brands hierarchy -->
-	</bean>
-
-	<bean id="apparelCategorySource" parent="abstractCategorySource">
+	<bean id="pentlandCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="categories"/>
-		<!-- 'categories' is the root apparel category -->
+		<!-- 'categories' is the root pentland category -->
 	</bean>
-	<bean id="apparelBrandCategorySource" parent="abstractCategorySource">
+	<bean id="pentlandBrandCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="brands"/>
 		<!-- 'brands' is the root of the brands hierarchy -->
 	</bean>
-	<bean id="apparelCollectionCategorySource" parent="abstractCategorySource">
+	<bean id="pentlandCollectionCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="collections"/> <!-- 'collections' is the root of the collections hierarchy -->
 	</bean>
 
@@ -57,36 +48,12 @@
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
-	<bean id="electronicsCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="electronicsCategorySource"/>
-	</bean>
-	<bean id="electronicsBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="electronicsBrandCategorySource"/>
-	</bean>
-	<bean id="electronicsCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="electronicsCategorySource"/>
-	</bean>
-	<bean id="electronicsBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="electronicsBrandCategorySource"/>
+	<bean id="pentlandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="pentlandCategorySource"/>
 	</bean>
 
-	<bean id="apparelCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="apparelCategorySource"/>
-	</bean>
-	<bean id="apparelBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="apparelBrandCategorySource"/>
-	</bean>
-	<bean id="apparelCollectionCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="apparelCollectionCategorySource"/>
-	</bean>
-	<bean id="apparelCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="apparelCategorySource"/>
-	</bean>
-	<bean id="apparelBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="apparelBrandCategorySource"/>
-	</bean>
-	<bean id="apparelCollectionCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="apparelCollectionCategorySource"/>
+	<bean id="pentlandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="pentlandCategorySource"/>
 	</bean>
 
 	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
@@ -142,13 +109,7 @@
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
-	<bean id="apparelPointOfServiceFacetDisplayNameProvider"
-	      class="com.bridgex.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider"
-	>
-		<property name="pointOfServiceService" ref="pointOfServiceService"/>
-	</bean>
-
-	<bean id="electronicsPointOfServiceFacetDisplayNameProvider"
+	<bean id="pentlandPointOfServiceFacetDisplayNameProvider"
 	      class="com.bridgex.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider"
 	>
 		<property name="pointOfServiceService" ref="pointOfServiceService"/>
@@ -169,7 +130,7 @@
 	</bean>
 
 	<bean id="categoryVisibilityValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryVisibilityValueResolver"
-	      parent="abstractValueResolver"></bean>
+	      parent="abstractValueResolver"/>
 
 
 	<bean id="additionalFiltersQueryPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.AdditionalFiltersQueryPopulator">

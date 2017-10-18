@@ -37,16 +37,4 @@
 	</bean>
 
 
-
-	<bean id="pentlandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="pentlandCategorySource"/>
-	</bean>
-
-	<bean id="pentlandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="pentlandCategorySource"/>
-	</bean>
-
-	<bean id="pentlandCategorySource" parent="variantCategorySource"/>
-
-
 </beans>
