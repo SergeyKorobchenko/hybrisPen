@@ -142,4 +142,6 @@
 		<property name="add" ref="additionalFiltersQueryPopulator"/>
 	</bean>
 
+	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.PentlandFsQueryParameterProvider"/>
+
 </beans>

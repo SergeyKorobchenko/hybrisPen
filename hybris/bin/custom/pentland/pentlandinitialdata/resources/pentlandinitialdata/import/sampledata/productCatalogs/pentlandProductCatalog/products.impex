@@ -106,19 +106,19 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 ;M34705_W;;M34705_B;pieces;WHITE;Playboard,shirts;ApparelSizeVariantProduct
 
 # Create ApparelSizeVariantProduct variants
-INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);swatchColors(code);supercategories(code,$catalogVersion);;$approved
+INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);swatchColors(code);supercategories(code,$catalogVersion);discontinuedStatus(code)[default=D03];$approved
 ;35099;;M18729;0700053336407;pieces;BLACK;Vans,shoes
 ;35100;;M18729;0700053336414;pieces;BLACK;Vans,shoes
 ;35101;;M18729;0700053336421;pieces;BLACK;Vans,shoes
 ;35102;;M18729;0700053336445;pieces;BLACK;Vans,shoes
 ;35104;;M18729;0700053336377;pieces;BLACK;Vans,shoes
 ;35105;;M18729;0700053336384;pieces;BLACK;Vans,shoes
-;35106;;M18729;0700053336391;pieces;BLACK;Vans,shoes
-;35135;;M18729;0700053336360;pieces;BLACK;Vans,shoes
+;35106;;M18729;0700053336391;pieces;BLACK;Vans,shoes;D99
+;35135;;M18729;0700053336360;pieces;BLACK;Vans,shoes;D98
 ;300147490;;M25687_B;4260125824707;pieces;BLACK;Playboard,shirts
-;300147493;;M25687_B;4260203210132;pieces;BLACK;Playboard,shirts
+;300147493;;M25687_B;4260203210132;pieces;BLACK;Playboard,shirts;D98
 ;300147503;;M25687_W;4260125824639;pieces;WHITE;Playboard,shirts
-;300147505;;M25687_W;4260203210118;pieces;WHITE;Playboard,shirts
+;300147505;;M25687_W;4260203210118;pieces;WHITE;Playboard,shirts;D06
 ;300020465;;M27160;8030016531726;pieces;BLACK,SILVER;Dainese,shirts
 ;300020466;;M27160;8030016531740;pieces;BLACK,SILVER;Dainese,shirts
 ;300026672;;M28323;0700053803930;pieces;BLACK,WHITE;Vans,shoes

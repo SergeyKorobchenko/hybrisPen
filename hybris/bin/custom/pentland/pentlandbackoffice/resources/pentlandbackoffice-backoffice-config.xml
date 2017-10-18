@@ -27,6 +27,14 @@
 		</advanced-search:advanced-search>
 	</context>
 
+	<context merge-by="type" component="advanced-search" type="Product">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list >
+				<advanced-search:field name="discontinuedStatus"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
 	<context merge-by="type" type="Product" component="editor-area">
 		<editorArea:editorArea>
 			<editorArea:essentials>
