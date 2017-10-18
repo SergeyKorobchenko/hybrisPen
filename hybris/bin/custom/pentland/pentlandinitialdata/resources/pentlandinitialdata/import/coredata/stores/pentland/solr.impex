@@ -10,7 +10,9 @@
 # -----------------------------------------------------------------------
 #
 # Import the Solr configuration for the Pentland store
-#
+
+#% impex.enableCodeExecution(true);
+
 $productCatalog=pentlandProductCatalog
 $catalogVersions=catalogVersions(catalog(id),version);
 $facetSearchConfigName=pentlandIndex
@@ -27,9 +29,29 @@ $indexCurrencies=USD,EUR,GBP
 INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
 ;$serverConfigName;standalone;false
 
+#% if: "stage".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+
+#% endif:
+
+#% if: "prod".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+
+#% endif:
+
+#% if: "dev".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
 # Add all search servers here. The first one should be the master, all others slaves.
 ;$serverConfigName;http://pnt-d-fr-srch-001.hybrishosting.com:8983/solr;true
+#% endif:
+
+#% if: "common".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+; $serverConfigName ; http://localhost:8983/solr ; true
+#% endif:
+
+
+
 
 
 INSERT_UPDATE SolrIndexConfig;name[unique=true];indexMode(code)
@@ -46,7 +68,7 @@ INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&
 ;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6
 
 INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
-;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online
 
 UPDATE SolrFacetSearchConfig;name[unique=true];solrServerConfig(name);solrIndexConfig(name)
 ;$facetSearchConfigName;$serverConfigName;$indexConfigName
@@ -82,10 +104,10 @@ INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=tru
 
 
 # Non-facet properties
-INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameters[map-delimiter=|];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
 ;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;code          ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
-;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider                     ;getName(#lang);true;100;true;50 ;true;25;    ;   ;  ;
+;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider                     ;              ;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; manufacturerName       ;text   ;            ;    ;    ;    ;true;true;                                          ;              ;true;80 ;true;40 ;true;20;    ;   ;  ;
@@ -111,6 +133,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; firstCategoryNameList  ;string ;            ;    ;    ;    ;    ;    ;firstVariantCategoryNameListValueProvider ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; configurable           ;boolean;            ;    ;    ;    ;    ;    ;productConfigurableProvider               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; categoryVisibility     ;string ;            ;    ;    ;true;    ;    ;categoryVisibilityValueResolver           ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; baseProductCode		    ;string ;			       ;	  ;	   ;	  ;	   ;	  ;productAttributesValueResolver			       ;attribute->code|skipVariants->TRUE ;;;;;;;;;;
 
 # Category fields
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
@@ -190,52 +213,53 @@ INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fiel
 ;$solrIndexedType:price-asc;priceValue;true
 ;$solrIndexedType:price-desc;priceValue;false
 
-# Search query template
-#INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
-#;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder
-#
-## Non-facet search query properties
-#INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
-#;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
-#;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
-#;description:$solrIndexedType            ;	 ;	  ;TRUE;50 ;TRUE;25;TRUE;10 ;  ;       ;  ;
-#;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;manufacturerName:$solrIndexedType       ;	 ;	  ;TRUE;80 ;TRUE;40;TRUE;20 ;  ;       ;  ;
-#;manufacturerAID:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;ean:$solrIndexedType                    ;   ;    ;TRUE;100;    ;  ;TRUE;   ;  ;POSTFIX;50;3;
-#;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;keywords:$solrIndexedType               ;	 ;    ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
-#;reviewAvgRating:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-515Wx515H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-300Wx300H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-96Wx96H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-65Wx65H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-30Wx30H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;primaryPromotionCode:$solrIndexedType   ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;primaryPromotionBanner:$solrIndexedType ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;stockLevelStatus:$solrIndexedType       ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;inStockFlag:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;configurable:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;volumePrices:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;firstVariantUrl:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;firstCategoryNameList:$solrIndexedType	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+ #Search query template
+INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder;group[default=true];groupFacets[default=true];groupLimit[default=-1];groupProperty(name, solrIndexedType(identifier))
+;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder;;;;baseProductCode:$solrIndexedType
+
+# Non-facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
+;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+;description:$solrIndexedType            ;	 ;	  ;TRUE;50 ;TRUE;25;TRUE;10 ;  ;       ;  ;
+;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;manufacturerName:$solrIndexedType       ;	 ;	  ;TRUE;80 ;TRUE;40;TRUE;20 ;  ;       ;  ;
+;manufacturerAID:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;ean:$solrIndexedType                    ;   ;    ;TRUE;100;    ;  ;TRUE;   ;  ;POSTFIX;50;3;
+;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;keywords:$solrIndexedType               ;	 ;    ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;reviewAvgRating:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-515Wx515H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-300Wx300H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-96Wx96H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-65Wx65H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-30Wx30H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;primaryPromotionCode:$solrIndexedType   ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;primaryPromotionBanner:$solrIndexedType ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;stockLevelStatus:$solrIndexedType       ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;inStockFlag:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;configurable:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;volumePrices:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;firstVariantUrl:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;firstCategoryNameList:$solrIndexedType	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
 #;brandName:$solrIndexedType	 			 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 #;allPromotions:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#
-## Facet search query properties
-#INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
-#;allCategories:$solrIndexedType	;	;Refine	 		;-9999	;						   							;								;							;;
-#;categoryPath:$solrIndexedType		;	;Refine	 		;-9999	;													;								;							;;
-#;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
+;baseProductCode:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+
+# Facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+;allCategories:$solrIndexedType	;	;Refine	 		;-9999	;						   							;								;							;;
+;categoryPath:$solrIndexedType		;	;Refine	 		;-9999	;													;								;							;;
+;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 #;brand:$solrIndexedType			;	;Refine	 		;5000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 #;color:$solrIndexedType			;	;Refine	 		;4000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 #;fit:$solrIndexedType				;	;Refine	 		;3000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;size:$solrIndexedType				;	;Refine	 		;2000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;price:$solrIndexedType			;	;MultiSelectOr	;4000	;													;								;defaultTopValuesProvider	;;
-#;availableInStores:$solrIndexedType;	;MultiSelectOr	;10000	;electronicsPointOfServiceFacetDisplayNameProvider	;distanceAttributeSortProvider	;							;;
+;size:$solrIndexedType				;	;Refine	 		;2000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
+;price:$solrIndexedType			;	;MultiSelectOr	;4000	;													;								;defaultTopValuesProvider	;;
+;availableInStores:$solrIndexedType;	;MultiSelectOr	;10000	;electronicsPointOfServiceFacetDisplayNameProvider	;distanceAttributeSortProvider	;							;;
