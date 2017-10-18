@@ -38,12 +38,7 @@ public class GenderValueProvider extends AbstractPropertyFieldValueProvider impl
 	public Collection<FieldValue> getFieldValues(final IndexConfig indexConfig, final IndexedProperty indexedProperty,
 			final Object model) throws FieldValueProviderException
 	{
-		final ProductModel apparelModel = getBaseProductModel(model);
-		if (apparelModel == null)
-		{
-			return Collections.emptyList();
-		}
-
+		ProductModel apparelModel = (ProductModel) model;
 		final Gender gender = apparelModel.getGender();
 
 		if (gender != null)

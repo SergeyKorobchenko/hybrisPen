@@ -91,7 +91,7 @@
                         <persistence type="property"/>
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
-                    <attribute qualifier="productGroup" type="java.lang.String">
+                    <attribute qualifier="productGroup" type="localized:java.lang.String">
                         <description>SAP Product Group</description>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>
