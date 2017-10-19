@@ -163,6 +163,8 @@
 	<bean id="wholesalePriceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.WholesalePriceValueResolver" parent="abstractValueResolver">
 		<property name="qualifierProvider" ref="userPriceGroupCurrencyQualifierProvider"/>
 		<property name="priceService" ref="priceService"/>
-		<property name="rangeNameProvider" ref="rangeNameProvider"/>
 	</bean>
+
+	<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>
+	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
 </beans>

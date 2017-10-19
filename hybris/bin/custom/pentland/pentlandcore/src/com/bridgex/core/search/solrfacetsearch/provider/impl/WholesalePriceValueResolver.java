@@ -7,6 +7,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
+import com.bridgex.core.search.solrfacetsearch.indexer.spi.impl.PentlandDefaultSolrInputDocument;
 
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -30,7 +31,6 @@ public class WholesalePriceValueResolver extends AbstractValueResolver<ProductMo
   public static final boolean OPTIONAL_PARAM_DEFAULT_VALUE = true;
 
   private   PriceService      priceService;
-  private RangeNameProvider rangeNameProvider;
 
   @Override
   protected void addFieldValues(InputDocument document,
@@ -47,7 +47,12 @@ public class WholesalePriceValueResolver extends AbstractValueResolver<ProductMo
       if (priceValue != null)
       {
         hasPrice = true;
-        document.addField(indexedProperty, priceValue, resolverContext.getFieldQualifier());
+        if(document instanceof PentlandDefaultSolrInputDocument){
+          ((PentlandDefaultSolrInputDocument)document).addField(indexedProperty, priceValue, resolverContext.getFieldQualifier(),
+                                                                resolverContext.getQualifier().getValueForType(CurrencyModel.class).getIsocode());
+        }else {
+          document.addField(indexedProperty, priceValue, resolverContext.getFieldQualifier());
+        }
       }
     }
 
@@ -101,8 +106,4 @@ public class WholesalePriceValueResolver extends AbstractValueResolver<ProductMo
     this.priceService = priceService;
   }
 
-  @Required
-  public void setRangeNameProvider(RangeNameProvider rangeNameProvider) {
-    this.rangeNameProvider = rangeNameProvider;
-  }
 }
