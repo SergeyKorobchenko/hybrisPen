@@ -3,11 +3,11 @@ $catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),ver
 $lang=en
 
 # Create Categories
-INSERT_UPDATE Category; code[unique = true]; name[lang = $lang];sapBrand;hidden[default=false]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion[unique = true];
-;skiing;ski stuff;sappingol;;;;
-;skiwear;ski wear;sappingol;;;;
-;skigear;ski gear;sappingol;;;;
-;snowboarding;snowboard stuff;burtsap;;;;
-;snowwear;snowboard gear;burtsap;;;;
-;snowgear;snowboard wear;burtsap;;;;
-;climbing;climbing gear;saptzl;;;;
+INSERT_UPDATE Category; code[unique = true]; name[lang = $lang];hidden[default=false]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion[unique = true];
+;skiing;ski stuff;;;;
+;skiwear;ski wear;;;;
+;skigear;ski gear;;;;
+;snowboarding;snowboard stuff;;;;
+;snowwear;snowboard gear;;;;
+;snowgear;snowboard wear;;;;
+;climbing;climbing gear;;;;
