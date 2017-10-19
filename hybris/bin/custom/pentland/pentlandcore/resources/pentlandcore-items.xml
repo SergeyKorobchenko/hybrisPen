@@ -133,7 +133,7 @@
                         <modifiers/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="swatchColors" type="SwatchColorSet">
+                    <attribute qualifier="primaryColors" type="SwatchColorSet">
                         <description>A normalized color mapping to a standardized front-end navigable name.
                         </description>
                         <modifiers/>

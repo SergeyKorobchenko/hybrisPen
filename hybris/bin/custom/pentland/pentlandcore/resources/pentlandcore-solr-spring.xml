@@ -153,4 +153,16 @@
 	</bean>
 	<bean id="pentlandBrandCategoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandBrandCategoryCodeValueResolver" parent="abstractBrandCategoryResolver"/>
 
+	
+	<bean id="userPriceGroupCurrencyQualifierProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.UserPriceGroupCurrencyQualifierProvider" parent="currencyQualifierProvider">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="wholesalePriceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.WholesalePriceValueResolver" parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="userPriceGroupCurrencyQualifierProvider"/>
+		<property name="priceService" ref="priceService"/>
+		<property name="rangeNameProvider" ref="rangeNameProvider"/>
+	</bean>
 </beans>

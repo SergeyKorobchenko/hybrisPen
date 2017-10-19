@@ -83,7 +83,7 @@ INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategori
 ;M35392_B;;pieces;Vans,shoes;ApparelStyleVariantProduct;;;;FEMALE
 
 # Create ApparelStyleVariantProduct variants
-INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);swatchColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved
+INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);primaryColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved
 ;M25687_B;;M25687;pieces;BLACK;Playboard,shirts;ApparelSizeVariantProduct
 ;M25687_W;;M25687;pieces;WHITE;Playboard,shirts;ApparelSizeVariantProduct
 ;M27160;;M27160_B;pieces;BLACK,SILVER;Dainese,shirts;ApparelSizeVariantProduct
@@ -106,7 +106,7 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 ;M34705_W;;M34705_B;pieces;WHITE;Playboard,shirts;ApparelSizeVariantProduct
 
 # Create ApparelSizeVariantProduct variants
-INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);swatchColors(code);supercategories(code,$catalogVersion);discontinuedStatus(code)[default=D03];$approved
+INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);primaryColors(code);supercategories(code,$catalogVersion);discontinuedStatus(code)[default=D03];$approved
 ;35099;;M18729;0700053336407;pieces;BLACK;Vans,shoes
 ;35100;;M18729;0700053336414;pieces;BLACK;Vans,shoes
 ;35101;;M18729;0700053336421;pieces;BLACK;Vans,shoes
@@ -407,7 +407,7 @@ INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code)[default='piec
 
 
 # Create ApparelStyleVariantProduct variants
-INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);swatchColors(code);unit(code)[default='pieces'];varianttype(code);$approved
+INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];varianttype(code);$approved
 ;103410_snapper;;103410;190100,snow,Quiksilver;BLUE,GREY;pieces;ApparelSizeVariantProduct;
 ;100191_glacier;;100191;190100,snow,Armada;BLUE;pieces;ApparelSizeVariantProduct;
 ;100191_lime;;100191;190100,snow,Armada;GREEN;pieces;ApparelSizeVariantProduct;
@@ -878,7 +878,7 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 
 
 # Create ApparelStyleVariantProduct variants without sizes
-INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);swatchColors(code);unit(code)[default='pieces'];$approved
+INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];$approved
 ;74036_red;;74036;100200,Toko;RED;pieces;;
 ;21618_-;;21618;100200,Toko;;pieces;;
 ;135304_neutral;;135304;100200,Toko;;pieces;;

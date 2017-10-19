@@ -114,10 +114,10 @@ public class DefaultPentlandPDTRowsQueryBuilder implements PentlandPDTRowsQueryB
           params.putAll(userParams);
         }
 
-        if (CollectionUtils.isNotEmpty(userGroupsPk)) {
-          query.append(" AND {").append("ug").append("} IN (?").append("userGroups").append(") ");
-          params.put("userGroups", userGroupsPk);
-        }
+//        if (CollectionUtils.isNotEmpty(userGroupsPk)) {
+//          query.append(" AND {").append("ug").append("} IN (?").append("userGroups").append(") ");
+//          params.put("userGroups", userGroupsPk);
+//        }
 
       }
 
@@ -137,9 +137,9 @@ public class DefaultPentlandPDTRowsQueryBuilder implements PentlandPDTRowsQueryB
           query.append(Joiner.on(", ?").join(userParams.keySet())).append(")");
         }
 
-        if (CollectionUtils.isNotEmpty(userGroupsPk)) {
-          query.append(" AND {").append("ug").append("} IN (?").append("userGroups").append(") ");
-        }
+//        if (CollectionUtils.isNotEmpty(userGroupsPk)) {
+//          query.append(" AND {").append("ug").append("} IN (?").append("userGroups").append(") ");
+//        }
       }
 
       StringBuilder resultQuery;
@@ -181,8 +181,8 @@ public class DefaultPentlandPDTRowsQueryBuilder implements PentlandPDTRowsQueryB
       params.put("user", userPk.getLong());
     }
 
-    if (userGroupPk != null) {
-      params.put("userGroup", userGroupPk.getLong());
+    if (userGroupsPk != null) {
+      params.put("userGroups", userGroupsPk);
     }
 
     return params.build();
