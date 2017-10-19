@@ -52,4 +52,13 @@
 	      parent="defaultCategoryModelUrlResolver">
 	</bean>
 
+	<bean id="pentlandB2BUnitModelValidateInterceptor" class="com.bridgex.core.service.interceptor.PentlandB2BUnitModelValidateInterceptor" />
+
+	<alias name="pentlandB2BUnitModelValidateInterceptorMapping" alias="B2BUnitModelValidateInterceptorMapping" />
+	<bean id="pentlandB2BUnitModelValidateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="pentlandB2BUnitModelValidateInterceptor"/>
+		<property name="typeCode" value="B2BUnit"/>
+		<property name="replacedInterceptors" ref="B2BUnitModelValidateInterceptor" />
+	</bean>
+
 </beans>
