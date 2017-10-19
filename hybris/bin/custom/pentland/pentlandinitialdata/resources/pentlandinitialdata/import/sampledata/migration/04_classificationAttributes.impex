@@ -1,0 +1,29 @@
+$lang=en
+$systemVersion=systemVersion(catalog(id[default='pentlandClassificationCatalog']),version[default='1.0'])[unique=true]
+$catalogVersion=catalogVersion(catalog(id[default='pentlandClassificationCatalog']),version[default='1.0'])[unique=true,default='pentlandClassificationCatalog:1.0']
+$class=classificationClass(code,$catalogVersion)
+$attribute=classificationAttribute(code,$systemVersion)
+
+INSERT_UPDATE ClassificationClass; code[unique = true]; name[lang = $lang]; $catalogVersion[unique = true]
+;clSkies;Ski classification category;
+;clSnowboards;Snowboard classification category;
+;clRopes;Rope classification category;
+
+INSERT_UPDATE ClassificationAttribute; code[unique = true]; name[lang = $lang]; $systemVersion[unique = true];
+;length;Length;
+;width;Width;
+;stickiness;Stickiness;
+;style;Style;
+;dynamic;Dynamic;
+
+INSERT_UPDATE ClassAttributeAssignment; $class[unique = true]; $attribute[unique = true]; position; attributeType(code[default = string]); multiValued[default = false]; range[default = false]; localized[default = true]; listable[default=true]
+;clSkies;length;0;number;;;;
+;clSkies;width;1;number;;;;
+;clSkies;stickiness;2;number;;;;
+;clSkies;style;3;string;;;;
+;clSnowboards;length;0;number;;;;
+;clSnowboards;width;1;number;;;;
+;clSnowboards;stickiness;2;number;;;;
+;clSnowboards;style;3;string;;;;
+;clRopes;length;0;number;;;;
+;clRopes;dynamic;1;boolean;;;;
