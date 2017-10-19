@@ -32,6 +32,7 @@
 				<entry key="price" value="1" />
 				<entry key="b2bcustomer" value="1" />
 				<entry key="customer" value="1" />
+				<entry key="address" value="2" />
 				<entry key="invoice" value="1" />
 				<entry key="order" value="1" />
 			</map>
@@ -140,24 +141,29 @@
 	      p:mapping="customer"
 	      p:converter-ref="pentlandBatchB2BUnitConverter"/>
 
+	<bean id="batchAddressConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="address"
+	      p:converter-ref="pentlandBatchAddressConverter"/>
+
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
 
 	<bean id="pentlandBatchParentB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;sapID;userPriceGroup(code);sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
+				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;sapID;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0}_{+1};{0};{1};{2};{+0}_{+1}_{+3};{4};{5};{6};{7};{8};{8}</value>
+			<value>;{+0}_{+1};{0};{1};;{+0}_{+1}_{+3};{4};{5};{6};{7};{8};{8}</value>
 		</property>
 	</bean>
 
 	<bean id="pentlandBatchB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid);salesOrg;distCh;sapID;userPriceGroup(code);sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
+				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid);salesOrg;distCh;sapID;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -166,6 +172,24 @@
 	</bean>
 
 	<!-- end of B2BUnit converters -->
+
+	<!-- Address converters -->
+
+	<bean id="pentlandBatchAddressConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				#% impex.enableCodeExecution(true)
+				INSERT_UPDATE Address;owner(B2BUnit.uid);sapCustomerID[unique=true];addressID[unique=true];displayName[lang=en];country(isocode)[default='GB'];state;postalcode;town;streetname;streetnumber;district;building;appartment;department;markForAddresses(addressID);markForAddress[default=false];visibleInAddressBook[default=true];contactAddress[default=false];billingAddress[default=false];unloadingAddress[default=false];shippingAddress[default=true];
+				#%groovy% beforeEach: line.put(1, pentlandB2BUnitService.getUnitBySapID(line.get(2)).getUid());
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;;{+0};{+1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};{18};{19};</value>
+		</property>
+	</bean>
+
+	<!-- End of Address converters -->
+
 
 	<bean id="pentlandBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">

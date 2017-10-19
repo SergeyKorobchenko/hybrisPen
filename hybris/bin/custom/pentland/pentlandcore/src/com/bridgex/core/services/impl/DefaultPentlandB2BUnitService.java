@@ -2,7 +2,13 @@ package com.bridgex.core.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.util.Assert;
+
+import com.bridgex.core.services.PentlandB2BUnitService;
 
 import de.hybris.platform.b2b.constants.B2BConstants;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
@@ -11,13 +17,14 @@ import de.hybris.platform.b2b.services.impl.DefaultB2BUnitService;
 import de.hybris.platform.core.model.enumeration.EnumerationValueModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.europe1.constants.Europe1Constants;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.session.Session;
 import de.hybris.platform.servicelayer.session.SessionExecutionBody;
 
 /**
  * Created by Lenar on 10/13/2017.
  */
-public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService {
+public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService implements PentlandB2BUnitService {
 
   @Override
   public void updateBranchInSession(final Session session, final UserModel currentUser)
@@ -74,6 +81,21 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService {
     }
   }
 
+  @Override
+  public B2BUnitModel getUnitBySapID(String sapID)
+  {
+    Assert.notNull(sapID);
 
+    final Map<String, Object> paramMap = new HashMap<String, Object>();
+    paramMap.put("sapID", sapID);
+
+    final List<B2BUnitModel> B2BUnits = getB2bUnitDao().find(paramMap);
+    if (B2BUnits != null && !B2BUnits.isEmpty())
+    {
+      return B2BUnits.get(0);
+    }
+
+    throw new ModelNotFoundException("No B2BUnit with sapID " + sapID + " found");
+  }
 
 }

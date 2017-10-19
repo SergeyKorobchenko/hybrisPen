@@ -258,10 +258,29 @@
         <typegroup name="User">
             <itemtype code="Address" autocreate="false" generate="false" >
                 <attributes>
+                    <attribute qualifier="addressID" type="java.lang.String">
+                        <persistence type="property" />
+                        <modifiers read="true" write="true" optional="true"/>
+                        <description>SAP Address ID</description>
+                    </attribute>
                     <attribute qualifier="markForAddress" type="java.lang.Boolean">
                         <persistence type="property" />
                         <modifiers read="true" write="true" optional="false"/>
                         <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <description>Flag for Mark For address type</description>
+                    </attribute>
+                    <attribute qualifier="displayName" type="localized:java.lang.String" >
+                        <persistence type="property" />
+                        <description>Address display name - for address dropdown</description>
+                    </attribute>
+                    <attribute qualifier="state" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>Address region/state string property</description>
+                    </attribute>
+                    <attribute qualifier="markForAddresses" type="AddressCollection" >
+                        <description>Collection of Mark For addresses of this address</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
                     </attribute>
                 </attributes>
             </itemtype>
