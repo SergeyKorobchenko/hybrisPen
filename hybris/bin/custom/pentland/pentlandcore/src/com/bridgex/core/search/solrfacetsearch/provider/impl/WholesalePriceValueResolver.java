@@ -41,11 +41,9 @@ public class WholesalePriceValueResolver extends AbstractValueResolver<ProductMo
     boolean hasPrice = false;
 
     final List<PriceInformation> priceInformations = resolverContext.getQualifierData();
-    if (priceInformations != null)
-    {
-      final Double priceValue = getPriceValue(indexedProperty, priceInformations);
-      if (priceValue != null)
-      {
+    if (priceInformations != null) {
+      final Double priceValue = getPriceValue(priceInformations);
+      if (priceValue != null) {
         hasPrice = true;
         if(document instanceof PentlandDefaultSolrInputDocument){
           ((PentlandDefaultSolrInputDocument)document).addField(indexedProperty, priceValue, resolverContext.getFieldQualifier(),
@@ -56,12 +54,10 @@ public class WholesalePriceValueResolver extends AbstractValueResolver<ProductMo
       }
     }
 
-    if (!hasPrice)
-    {
+    if (!hasPrice) {
       final boolean isOptional = ValueProviderParameterUtils.getBoolean(indexedProperty, OPTIONAL_PARAM,
                                                                         OPTIONAL_PARAM_DEFAULT_VALUE);
-      if (!isOptional)
-      {
+      if (!isOptional) {
         throw new FieldValueProviderException("No value resolved for indexed property " + indexedProperty.getName());
       }
     }
@@ -78,12 +74,11 @@ public class WholesalePriceValueResolver extends AbstractValueResolver<ProductMo
     return priceService.getPriceInformationsForProduct(baseProductModel);
   }
 
-  private Double getPriceValue(final IndexedProperty indexedProperty, final List<PriceInformation> priceInformations)
+  private Double getPriceValue(final List<PriceInformation> priceInformations)
     throws FieldValueProviderException {
     Double value = null;
 
-    if (priceInformations != null && !priceInformations.isEmpty())
-    {
+    if (priceInformations != null && !priceInformations.isEmpty()) {
       value = priceInformations.get(0).getPriceValue().getValue();
     }
 
