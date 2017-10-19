@@ -109,7 +109,7 @@
                         <persistence type="property"/>
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
-                    <attribute qualifier="productGroup" type="java.lang.String">
+                    <attribute qualifier="productGroup" type="localized:java.lang.String">
                         <description>SAP Product Group</description>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>
@@ -144,7 +144,7 @@
                         <modifiers/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="swatchColors" type="SwatchColorSet">
+                    <attribute qualifier="primaryColors" type="SwatchColorSet">
                         <description>A normalized color mapping to a standardized front-end navigable name.
                         </description>
                         <modifiers/>

@@ -44,7 +44,7 @@ public class ColorFacetValueProvider extends AbstractPropertyFieldValueProvider 
 			return Collections.emptyList();
 		}
 
-		final Set<SwatchColorEnum> colors = apparelStyleModel.getSwatchColors();
+		final Set<SwatchColorEnum> colors = apparelStyleModel.getPrimaryColors();
 
 		if (colors != null && !colors.isEmpty())
 		{

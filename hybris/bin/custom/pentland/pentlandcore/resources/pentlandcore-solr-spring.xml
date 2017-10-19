@@ -142,4 +142,29 @@
 		<property name="add" ref="additionalFiltersQueryPopulator"/>
 	</bean>
 
+	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider"/>
+
+	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractValueResolver">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
+
+	<bean id="pentlandBrandCategoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandBrandCategoryNameValueResolver" parent="abstractBrandCategoryResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+	<bean id="pentlandBrandCategoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandBrandCategoryCodeValueResolver" parent="abstractBrandCategoryResolver"/>
+
+	
+	<bean id="userPriceGroupCurrencyQualifierProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.UserPriceGroupCurrencyQualifierProvider" parent="currencyQualifierProvider">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="wholesalePriceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.WholesalePriceValueResolver" parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="userPriceGroupCurrencyQualifierProvider"/>
+		<property name="priceService" ref="priceService"/>
+	</bean>
+
+	<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>
+	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
 </beans>

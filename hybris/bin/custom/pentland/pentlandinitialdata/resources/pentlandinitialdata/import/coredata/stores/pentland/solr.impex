@@ -10,7 +10,9 @@
 # -----------------------------------------------------------------------
 #
 # Import the Solr configuration for the Pentland store
-#
+
+#% impex.enableCodeExecution(true);
+
 $productCatalog=pentlandProductCatalog
 $catalogVersions=catalogVersions(catalog(id),version);
 $facetSearchConfigName=pentlandIndex
@@ -21,21 +23,35 @@ $searchIndexNamePrefix=pentland
 $solrIndexedType=pentlandProductType
 $indexBaseSite=pentland
 $indexLanguages=en
-$indexCurrencies=USD,EUR,GBP
+$indexCurrencies=GBP
 
 
 INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
 ;$serverConfigName;standalone;false
 
+#% if: "stage".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+
+#% endif:
+
+#% if: "prod".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+
+#% endif:
+
+#% if: "dev".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
-# Add all search servers here. The first one should be the master, all others slaves.
 ;$serverConfigName;http://pnt-d-fr-srch-001.hybrishosting.com:8983/solr;true
+#% endif:
+
+#% if: "common".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+; $serverConfigName ; http://localhost:8983/solr ; true
+#% endif:
 
 
 INSERT_UPDATE SolrIndexConfig;name[unique=true];indexMode(code)
 ;$indexConfigName;DIRECT
-
-
 
 #
 # Setup the indexed types, their properties, and the update queries
@@ -46,7 +62,7 @@ INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&
 ;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6
 
 INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
-;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online
 
 UPDATE SolrFacetSearchConfig;name[unique=true];solrServerConfig(name);solrIndexConfig(name)
 ;$facetSearchConfigName;$serverConfigName;$indexConfigName
@@ -56,102 +72,77 @@ UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 
 # Define price range set
 INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
-;pentlandPriceRangeUSD;USD;double;rangeRefUSD1,rangeRefUSD2,rangeRefUSD3,rangeRefUSD4,rangeRefUSD5
 ;pentlandPriceRangeGBP;GBP;double;rangeRefGBP1,rangeRefGBP2,rangeRefGBP3,rangeRefGBP4,rangeRefGBP5
-;pentlandPriceRangeEUR;EUR;double;rangeRefEUR1,rangeRefEUR2,rangeRefEUR3,rangeRefEUR4,rangeRefEUR5
-
 
 # Define price ranges
 INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
-; rangeRefUSD1 ; pentlandPriceRangeUSD ; $0-$49.99       ; 0    ; 49.99
-; rangeRefUSD2 ; pentlandPriceRangeUSD ; $50-$199.99     ; 50   ; 199.99
-; rangeRefUSD3 ; pentlandPriceRangeUSD ; $200-$499.99    ; 200  ; 499.99
-; rangeRefUSD4 ; pentlandPriceRangeUSD ; $500-$999.99    ; 500  ; 999.99
-; rangeRefUSD5 ; pentlandPriceRangeUSD ; $1,000-$100,000 ; 1000 ; 100000
 ; rangeRefGBP1 ; pentlandPriceRangeGBP ; £0-£49.99       ; 0    ; 49.99
 ; rangeRefGBP2 ; pentlandPriceRangeGBP ; £50-£199.99     ; 50   ; 199.99
 ; rangeRefGBP3 ; pentlandPriceRangeGBP ; £200-£499.99    ; 200  ; 499.99
 ; rangeRefGBP4 ; pentlandPriceRangeGBP ; £500-£999.99    ; 500  ; 999.99
 ; rangeRefGBP5 ; pentlandPriceRangeGBP ; £1,000-£100,000 ; 1000 ; 100000
-; rangeRefEUR1 ; pentlandPriceRangeEUR ; 0-£49.99        ; 0    ; 49.99
-; rangeRefEUR2 ; pentlandPriceRangeEUR ; 50-£199.99      ; 50   ; 199.99
-; rangeRefEUR3 ; pentlandPriceRangeEUR ; 200-£499.99     ; 200  ; 499.99
-; rangeRefEUR4 ; pentlandPriceRangeEUR ; 500-£999.99     ; 500  ; 999.99
-; rangeRefEUR5 ; pentlandPriceRangeEUR ; 1,000-£100,000  ; 1000 ; 100000
-
 
 
 # Non-facet properties
-INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameters[map-delimiter=|];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
 ;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;code          ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
-;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider                     ;getName(#lang);true;100;true;50 ;true;25;    ;   ;  ;
-;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; manufacturerName       ;text   ;            ;    ;    ;    ;true;true;                                          ;              ;true;80 ;true;40 ;true;20;    ;   ;  ;
-;$solrIndexedType; manufacturerAID        ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; ean                    ;string ;            ;    ;    ;    ;true;true;                                          ;              ;    ;   ;true;100;    ;  ;true;POSTFIX;50;3
-;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;volumeAwareProductPriceValueProvider      ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider                     ;              ;true;100;true;50 ;true;25;    ;   ;  ;
+;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; volumePrices           ;boolean;            ;true;    ;    ;    ;    ;productVolumePricesProvider               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider              ;              ;true;40 ;true;20 ;true;10;    ;   ;  ;
-;$solrIndexedType; reviewAvgRating        ;double ;            ;    ;true;    ;    ;    ;productReviewAverageRatingValueProvider   ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-300Wx300H          ;string ;            ;    ;    ;    ;    ;    ;image300ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-96Wx96H            ;string ;            ;    ;    ;    ;    ;    ;image96ValueProvider                      ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-65Wx65H            ;string ;            ;    ;    ;    ;    ;    ;image65ValueProvider                      ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-30Wx30H            ;string ;            ;    ;    ;    ;    ;    ;image30ValueProvider                      ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; url                    ;string ;            ;    ;true;    ;    ;    ;productUrlValueProvider                   ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; primaryPromotionCode   ;string ;            ;    ;    ;    ;    ;    ;promotionCodeValueProvider                ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; primaryPromotionBanner ;string ;            ;    ;    ;    ;    ;    ;promotionImageValueProvider               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; stockLevelStatus       ;string ;            ;    ;    ;    ;    ;    ;productStockLevelStatusValueProvider      ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; inStockFlag            ;boolean;            ;    ;    ;    ;    ;    ;productInStockFlagValueProvider           ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; multidimensional       ;boolean;            ;    ;    ;    ;    ;    ;multidimentionalProductFlagValueProvider  ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; priceRange             ;string ;            ;    ;    ;    ;    ;    ;productPriceRangeValueProvider            ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; firstVariantUrl        ;string ;            ;    ;    ;    ;    ;    ;firstGenericVariantProductUrlValueProvider;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; firstCategoryNameList  ;string ;            ;    ;    ;    ;    ;    ;firstVariantCategoryNameListValueProvider ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; configurable           ;boolean;            ;    ;    ;    ;    ;    ;productConfigurableProvider               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; categoryVisibility     ;string ;            ;    ;    ;true;    ;    ;categoryVisibilityValueResolver           ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; baseProductCode		    ;string ;			       ;	  ;	   ;	  ;	   ;	  ;productAttributesValueResolver			       ;attribute->code|skipVariants->TRUE ;;;;;;;;;;
+;$solrIndexedType; clearance              ;boolean;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;             ;
 
 # Category fields
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
 ;$solrIndexedType; allCategories   	;string ;	 ;;		;    ;    ;categoryCodeValueProvider			   ;    ;  ;    ;  ;    ;
 ;$solrIndexedType; categoryName     ;text   ;true;;		;true;true;pentlandCategoryNameValueProvider     ;true;40;true;20;true;10
-#;$solrIndexedType; brandName        ;text   ;true;;		;    ;    ;pentlandBrandCategoryNameValueProvider;    ;  ;    ;  ;    ;
-#;$solrIndexedType; allPromotions   	;string ;	 ;;false;    ;	  ;promotionCodeValueProvider			   ;    ;  ;    ;  ;    ;
+;$solrIndexedType; brandName        ;text   ;true;false;		;    ;    ;pentlandBrandCategoryNameValueResolver     ;    ;  ;    ;  ;    ;
+
 
 # Category facets
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
 ;$solrIndexedType; categoryPath  ;string;;;Refine;Alpha;-9999;false;false;categoryPathValueProvider;
 ;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;pentlandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-#;$solrIndexedType; brand         ;string;;;Refine;Alpha; 5000;true;;pentlandBrandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-#;$solrIndexedType; color	     ;string;;;Refine;Alpha; 4000;true;;pentlandVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-#;$solrIndexedType; fit		     ;string;;;Refine;Alpha; 3000;true;;pentlandVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-#;$solrIndexedType; size		     ;string;;;Refine;Alpha; 2000;true;;pentlandVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; brand         ;string;false;;Refine;Alpha; 5000;true;;pentlandBrandCategoryCodeValueResolver     ;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
 
 # Other facet properties
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
 ;$solrIndexedType; style            ;string ; ;     ;true;    ; ;MultiSelectOr ;Alpha ;-1   ;false;    ;    ;optionalModelPropertyFieldValueProvider;                                             ;                             ;
-;$solrIndexedType; swatchColors     ;string ; ;     ;    ;true; ;MultiSelectOr ;Alpha ; 2500;true;    ;    ;colorFacetValueProvider                ;colorFacetDisplayNameProvider                ;                             ;
+;$solrIndexedType; primaryColors    ;string ; ;     ;    ;true; ;MultiSelectOr ;Alpha ; 2500;true;    ;    ;colorFacetValueProvider                ;colorFacetDisplayNameProvider                ;                             ;
 ;$solrIndexedType; size             ;string ; ;     ;true;    ; ;MultiSelectOr ;Custom; 2000;true;    ;    ;optionalModelPropertyFieldValueProvider;                                             ;sizeAttributeSortProvider    ;
-;$solrIndexedType; price        	;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;volumeAwareProductPriceValueProvider;;;defaultTopValuesProvider;pentlandPriceRangeUSD,pentlandPriceRangeGBP,pentlandPriceRangeEUR
-;$solrIndexedType; availableInStores;string	;	 ;     ;     ;true ;     ;MultiSelectOr ;Custom;10000;true;     ;     ;productStoreStockValueProvider;electronicsPointOfServiceFacetDisplayNameProvider;distanceAttributeSortProvider
+;$solrIndexedType; price        	  ;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;wholesalePriceValueResolver;;;defaultTopValuesProvider;pentlandPriceRangeGBP
+;$solrIndexedType; productGroup     ;string ;  ; ; true; ; ;MultiSelectOr; Alpha; 5000; true; ; ; springELValueProvider;;
+;$solrIndexedType; season           ;string ; ; ; true; ; ;MultiSelectOr; Alpha; 6000; true; ; ; springELValueProvider;;
+;$solrIndexedType; gender           ;string;;;;;;Refine;Alpha; 4500;true;false;;genderValueProvider                       ;genderFacetDisplayNameProvider
 
 
 # Create the queries that will be used to extract data for Solr
-INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
-;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {p:PK} FROM {Product AS p} WHERE {p:varianttype} IS NULL";anonymous
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid);parameterProvider[default='pentlandFsQueryParameterProvider']
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {p:PK} FROM {Product AS p} WHERE {p:varianttype} IS NULL AND {p:approvalStatus}=?approvalStatus AND ({p:discontinuedStatus} IS NULL OR {p:discontinuedStatus} IN (?discontinuedStates))";anonymous
 ;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
 SELECT DISTINCT tbl.pk, tbl.code FROM (
 	{{
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
-		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
-		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+		FROM {Product AS p}
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime) AND {p:approvalStatus}=?approvalStatus AND ({p:discontinuedStatus} IS NULL OR {p:discontinuedStatus} IN (?discontinuedStates))
 	}}
 	UNION
 	{{
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
-		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK} LEFT JOIN CustomerReview AS cr ON {cr:product}={bp1:PK} }
-		WHERE {p:varianttype} IS NULL AND ({bp1:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}}
+		WHERE {p:varianttype} IS NULL AND ({bp1:modifiedtime} >= ?lastIndexTime)
 	}}
 	UNION
 	{{
@@ -159,16 +150,9 @@ SELECT DISTINCT tbl.pk, tbl.code FROM (
 		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} LEFT JOIN CustomerReview AS cr ON {cr:product}={bp2:PK} }
 		WHERE {p:varianttype} IS NULL AND ({bp2:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
 	}}
-	UNION
-	{{
-		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p} WHERE {p:code} IN (
-			{{
-				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
-			}}
-		)
-	}}
 ) tbl ORDER BY tbl.code
 ";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-deleteQuery;delete;;;false;"SELECT {p:PK} FROM {Product AS p} WHERE {p:approvalStatus} NOT IN (?approvalStatus) OR ({p:discontinuedStatus} IS NOT NULL AND {p:discontinuedStatus} IN (?discontinuedStates))";anonymous
 
 # Define the available sorts
 INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost
@@ -181,61 +165,48 @@ INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[uniq
 
 # Define the sort fields
 INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
-;$solrIndexedType:relevance;inStockFlag;false
 ;$solrIndexedType:relevance;score;false
-;$solrIndexedType:topRated;inStockFlag;false
-;$solrIndexedType:topRated;reviewAvgRating;false
 ;$solrIndexedType:name-asc;name;true
 ;$solrIndexedType:name-desc;name;false
 ;$solrIndexedType:price-asc;priceValue;true
 ;$solrIndexedType:price-desc;priceValue;false
 
-# Search query template
-#INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
-#;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder
-#
-## Non-facet search query properties
-#INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
-#;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
-#;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
-#;description:$solrIndexedType            ;	 ;	  ;TRUE;50 ;TRUE;25;TRUE;10 ;  ;       ;  ;
-#;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;manufacturerName:$solrIndexedType       ;	 ;	  ;TRUE;80 ;TRUE;40;TRUE;20 ;  ;       ;  ;
-#;manufacturerAID:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;ean:$solrIndexedType                    ;   ;    ;TRUE;100;    ;  ;TRUE;   ;  ;POSTFIX;50;3;
-#;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;keywords:$solrIndexedType               ;	 ;    ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
-#;reviewAvgRating:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-515Wx515H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-300Wx300H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-96Wx96H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-65Wx65H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;img-30Wx30H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;primaryPromotionCode:$solrIndexedType   ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;primaryPromotionBanner:$solrIndexedType ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;stockLevelStatus:$solrIndexedType       ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;inStockFlag:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;configurable:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;volumePrices:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;firstVariantUrl:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;firstCategoryNameList:$solrIndexedType	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
-#;brandName:$solrIndexedType	 			 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#;allPromotions:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-#
-## Facet search query properties
-#INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
-#;allCategories:$solrIndexedType	;	;Refine	 		;-9999	;						   							;								;							;;
-#;categoryPath:$solrIndexedType		;	;Refine	 		;-9999	;													;								;							;;
-#;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;brand:$solrIndexedType			;	;Refine	 		;5000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;color:$solrIndexedType			;	;Refine	 		;4000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;fit:$solrIndexedType				;	;Refine	 		;3000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;size:$solrIndexedType				;	;Refine	 		;2000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-#;price:$solrIndexedType			;	;MultiSelectOr	;4000	;													;								;defaultTopValuesProvider	;;
-#;availableInStores:$solrIndexedType;	;MultiSelectOr	;10000	;electronicsPointOfServiceFacetDisplayNameProvider	;distanceAttributeSortProvider	;							;;
+ #Search query template
+INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder;group[default=true];groupFacets[default=true];groupLimit[default=-1];groupProperty(name, solrIndexedType(identifier))
+;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder;;;;baseProductCode:$solrIndexedType
+
+# Non-facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
+;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;keywords:$solrIndexedType               ;	 ;    ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;img-515Wx515H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-300Wx300H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-96Wx96H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-65Wx65H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-30Wx30H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;volumePrices:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;baseProductCode:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;clearance:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+
+# Facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+;allCategories:$solrIndexedType	;	;Refine	 		;-9999	;						   							;								;							;;
+;categoryPath:$solrIndexedType		;	;Refine	 		;-9999	;													;								;							;;
+;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
+;size:$solrIndexedType				;	;Refine	 		;2000	;					;								;defaultTopValuesProvider	;;
+;price:$solrIndexedType			;	;MultiSelectOr	;4000	;													;								;defaultTopValuesProvider	;;
+;productGroup:$solrIndexedType;;MultiSelectOr; 5000;
+;season:$solrIndexedType;;MultiSelectOr; 6000;
+;gender:$solrIndexedType 			;;Refine;7000;genderFacetDisplayNameProvider;;
+
+# Category search query facets
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
+;brand:$solrIndexedType 			;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
