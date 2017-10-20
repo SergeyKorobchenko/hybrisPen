@@ -51,6 +51,7 @@
 
         <enumtype code="SalesApplication" generate="false" autocreate="false" dynamic="true">
             <value code="SAP"/>
+            <value code="Hybris"/>
         </enumtype>
 
     </enumtypes>

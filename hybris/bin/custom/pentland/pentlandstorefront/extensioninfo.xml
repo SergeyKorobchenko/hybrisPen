@@ -19,11 +19,14 @@
 
 
 
+
+
+<requires-extension name="pentlandb2baddon"/>
 <requires-extension name="assistedservicestorefront"/>
 <requires-extension name="worldpayb2baddon"/>
 <requires-extension name="worldpaynotifications"/>
 <requires-extension name="secureportaladdon"/>
-<requires-extension name="b2bacceleratoraddon"/>
+
 
 
 
