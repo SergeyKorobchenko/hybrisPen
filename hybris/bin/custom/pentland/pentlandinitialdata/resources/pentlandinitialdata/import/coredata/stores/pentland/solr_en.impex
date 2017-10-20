@@ -28,8 +28,6 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
 ;$solrIndexedType;name;"Name"
 ;$solrIndexedType;price;"Wholesale Price"
 ;$solrIndexedType;size;"Size"
-;$solrIndexedType;style;"Style"
-;$solrIndexedType;summary;"Summary"
 ;$solrIndexedType;primaryColors;"Primary Color"
 ;$solrIndexedType;productGroup;"Product Group"
 ;$solrIndexedType;season;"Season"
