@@ -11,10 +11,6 @@
 # ImpEx for Importing Product prices into Apparel store
 #% impex.setLocale( Locale.GERMAN )
 
-INSERT_UPDATE UserPriceGroup;code[unique=true]
-;pronto
-;pronto-services
-
 # Insert Product prices
 INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net;ug(code)
 ;M25687_B;pieces;GBP;8,46;1;1;false;pronto-services
