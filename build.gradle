@@ -1,0 +1,5 @@
+// load the config
+if (file("buildgradle/config.gradle").exists()) {
+    logger.lifecycle("Loading config from config.gradle")
+    apply from: "buildgradle/config.gradle";
+}

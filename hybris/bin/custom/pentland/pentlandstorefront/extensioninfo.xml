@@ -10,29 +10,18 @@
  license agreement you entered into with SAP.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
-	<extension abstractclassprefix="Generated" classprefix="Pentlandstorefront" name="pentlandstorefront" usemaven="false">		
-        
+	<extension abstractclassprefix="Generated" classprefix="Pentlandstorefront" name="pentlandstorefront" usemaven="false">
 
-
-
-
-
-
-
-<requires-extension name="assistedservicestorefront"/>
-<requires-extension name="worldpayb2baddon"/>
-<requires-extension name="worldpaynotifications"/>
-<requires-extension name="secureportaladdon"/>
-<requires-extension name="b2bacceleratoraddon"/>
-
-
-
-<requires-extension name="sapinvoiceaddon"/>
-<requires-extension name="commerceorgaddon"/>
-
-<requires-extension name="accountsummaryaddon"/>
-
-<requires-extension name="acceleratorstorefrontcommons"/>
+		<requires-extension name="internationalization"/>
+		<requires-extension name="assistedservicestorefront"/>
+		<requires-extension name="worldpayb2baddon"/>
+		<requires-extension name="worldpaynotifications"/>
+		<requires-extension name="secureportaladdon"/>
+		<requires-extension name="b2bacceleratoraddon"/>
+		<requires-extension name="sapinvoiceaddon"/>
+		<requires-extension name="commerceorgaddon"/>
+		<requires-extension name="accountsummaryaddon"/>
+		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="pentlandfacades"/>
 
 		<webmodule jspcompile="false" webroot="/pentlandstorefront"/>
