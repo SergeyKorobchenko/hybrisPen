@@ -56,15 +56,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping(value = "/my-account/my-quotes")
+@RequestMapping(value = "/my-account/order-queries")
 public class MyQuotesController extends AbstractSearchPageController
 {
 	private static final Logger LOG = Logger.getLogger(MyQuotesController.class);
 
 	private static final String MY_QUOTES_CMS_PAGE = "my-quotes";
 	private static final String QUOTE_DETAILS_CMS_PAGE = "quote-detail";
-	private static final String REDIRECT_QUOTE_LIST_URL = REDIRECT_PREFIX + "/my-account/my-quotes/";
-	private static final String REDIRECT_QUOTE_EDIT_URL = REDIRECT_PREFIX + "/quote/%s/edit/";
+	private static final String REDIRECT_QUOTE_LIST_URL = REDIRECT_PREFIX + "/my-account/order-queries/";
+	private static final String REDIRECT_QUOTE_EDIT_URL = REDIRECT_PREFIX + "/order-query/%s/edit/";
 	private static final String PAGINATION_NUMBER_OF_COMMENTS = "quote.pagination.numberofcomments";
 	private static final String ALLOWED_ACTIONS = "allowedActions";
 	private static final String SYSTEM_ERROR_PAGE_NOT_FOUND = "system.error.page.not.found";
@@ -100,7 +100,7 @@ public class MyQuotesController extends AbstractSearchPageController
 		populateModel(model, searchPageData, showMode);
 
 		final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-		breadcrumbs.add(new Breadcrumb("/my-account/my-quotes", getMessageSource().getMessage(
+		breadcrumbs.add(new Breadcrumb("/my-account/order-queries", getMessageSource().getMessage(
 				"text.account.manageQuotes.breadcrumb", null, getI18nService().getCurrentLocale()), null));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, breadcrumbs);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MY_QUOTES_CMS_PAGE));
@@ -134,7 +134,7 @@ public class MyQuotesController extends AbstractSearchPageController
 			setAllowedActions(model, quoteCode);
 
 			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-			breadcrumbs.add(new Breadcrumb("/my-account/my-quotes", getMessageSource().getMessage(
+			breadcrumbs.add(new Breadcrumb("/my-account/order-queries", getMessageSource().getMessage(
 					"text.account.manageQuotes.breadcrumb", null, getI18nService().getCurrentLocale()), null));
 			breadcrumbs.add(new Breadcrumb("/" + urlEncode(quoteCode) + "/", getMessageSource().getMessage("breadcrumb.quote.view",
 					new Object[]
