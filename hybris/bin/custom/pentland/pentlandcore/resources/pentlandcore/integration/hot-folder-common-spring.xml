@@ -31,7 +31,8 @@
 				<entry key="media" value="1" />
 				<entry key="price" value="1" />
 				<entry key="b2bcustomer" value="1" />
-				<entry key="b2bunit" value="1" />
+				<entry key="customer" value="1" />
+				<entry key="address" value="2" />
 				<entry key="invoice" value="1" />
 				<entry key="order" value="1" />
 			</map>
@@ -129,16 +130,76 @@
 		  p:mapping="media" 
 		  p:converter-ref="pentlandBatchMediaProductConverter"/>
 
+	<bean id="batchParentB2BUnitConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="customer"
+	      p:converter-ref="pentlandBatchParentB2BUnitConverter"/>
+
+	<alias name="batchB2BUnitConverterMapping" alias="batchCustomerConverterMapping" />
+	<bean id="batchB2BUnitConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="customer"
+	      p:converter-ref="pentlandBatchB2BUnitConverter"/>
+
+	<bean id="batchAddressConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="address"
+	      p:converter-ref="pentlandBatchAddressConverter"/>
+
 	<bean id="batchOrderConverterMapping"
 	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 	      p:mapping="order"
 	      p:converter-ref="pentlandBatchOrderConverter"/>
-							
+
 	<!-- Converters -->
+	<!-- B2BUnit converters -->
+
+	<bean id="pentlandBatchParentB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;sapID;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0}-{+1};{0};{1};;{+0}-{+1}-{+3};{4};{5};{6};{7};{8};{8}</value>
+		</property>
+	</bean>
+
+	<bean id="pentlandBatchB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid);salesOrg;distCh;sapID;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);;name;locName[lang=en];active[default=true]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0}-{+1}-{+2};{+0}-{+1};{0};{1};{2};{+0}-{+1}-{+2}-{+3};{4};{5};{6};{7};{8};{8}</value>
+		</property>
+	</bean>
+
+	<!-- end of B2BUnit converters -->
+
+	<!-- Address converters -->
+
+	<bean id="pentlandBatchAddressConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				#% impex.enableCodeExecution(true)
+				INSERT_UPDATE Address;owner(B2BUnit.uid);sapCustomerID[unique=true];addressID[unique=true];displayName[lang=en];country(isocode)[default='GB'];state;postalcode;town;streetname;streetnumber;district;building;appartment;department;markForAddresses(addressID);markForAddress[default=false];visibleInAddressBook[default=true];contactAddress[default=false];billingAddress[default=false];unloadingAddress[default=false];shippingAddress[default=true];
+				#%groovy% beforeEach: line.put(1, pentlandB2BUnitService.getUnitBySapID(line.get(2)).getUid());
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;;{+0};{+1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};{18};{19};</value>
+		</property>
+	</bean>
+
+	<!-- End of Address converters -->
+
+
 	<bean id="pentlandBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup;varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -151,7 +212,7 @@
 	<bean id="pentlandBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];swatchColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup;varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -164,7 +225,7 @@
 	<bean id="pentlandBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];swatchColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];smu;productGroup;$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];smu;productGroup[lang=$lang];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">

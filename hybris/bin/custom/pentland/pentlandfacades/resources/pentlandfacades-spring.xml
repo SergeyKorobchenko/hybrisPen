@@ -216,6 +216,12 @@
 		</property>
 	</bean>
 
+	<alias name="pentlandSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="pentlandSearchResultProductPopulator" class="com.bridgex.facades.search.converters.populator.PentlandSearchResultProductPopulator"
+	      parent="variantOptionsCommerceSearchResultProductPopulator">
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
 	<alias name="pentlandOrderHistoryPopulator" alias="orderHistoryPopulator"/>
 	<bean id="pentlandOrderHistoryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderHistoryPopulator" parent="defaultOrderHistoryPopulator"/>
 

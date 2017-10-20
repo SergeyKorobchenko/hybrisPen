@@ -34,6 +34,17 @@
             <value code="YELLOW"/>
         </enumtype>
 
+        <enumtype code="B2BUnitType" autocreate="true" dynamic="true">
+            <value code="ACCOUNT" />
+            <value code="CREDITCARD" />
+            <value code="PROFORMA" />
+        </enumtype>
+
+        <enumtype code="DivisionType" autocreate="true" dynamic="true">
+            <value code="ACTIVE" />
+            <value code="FOOTWEAR" />
+        </enumtype>
+
         <enumtype generate="true" code="DiscontinuedStatus" autocreate="true" dynamic="false">
             <value code="D01"/>
             <value code="D02"/>
@@ -99,7 +110,7 @@
                         <persistence type="property"/>
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
-                    <attribute qualifier="productGroup" type="java.lang.String">
+                    <attribute qualifier="productGroup" type="localized:java.lang.String">
                         <description>SAP Product Group</description>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                         <persistence type="property"/>
@@ -134,7 +145,7 @@
                         <modifiers/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="swatchColors" type="SwatchColorSet">
+                    <attribute qualifier="primaryColors" type="SwatchColorSet">
                         <description>A normalized color mapping to a standardized front-end navigable name.
                         </description>
                         <modifiers/>
@@ -215,6 +226,68 @@
             <itemtype code="CatalogVersionAwareCronJob" extends="CronJob" autocreate="true" generate="true">
                 <attributes>
                     <attribute qualifier="catalogVersions" type="CatalogVersionCollection">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="B2BCommerce" >
+            <itemtype code="B2BUnit" autocreate="false" generate="false" >
+                <attributes>
+                    <attribute qualifier="customerType" type="B2BUnitType" >
+                        <persistence type="property" />
+                        <description>Customer Type - used for payment options selection mostly</description>
+                    </attribute>
+                    <attribute qualifier="division" type="DivisionType" >
+                        <persistence type="property" />
+                        <description>Customer division</description>
+                    </attribute>
+                    <attribute qualifier="sapID" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>Customer SAP ID</description>
+                    </attribute>
+                    <attribute qualifier="salesOrg" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>SAP Sales organiaition</description>
+                    </attribute>
+                    <attribute qualifier="distCh" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>SAP distribution channel</description>
+                    </attribute>
+                    <attribute qualifier="sapBrand" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>SAP brand (code) assigned to this Customer</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="User">
+            <itemtype code="Address" autocreate="false" generate="false" >
+                <attributes>
+                    <attribute qualifier="addressID" type="java.lang.String">
+                        <persistence type="property" />
+                        <modifiers read="true" write="true" optional="true"/>
+                        <description>SAP Address ID</description>
+                    </attribute>
+                    <attribute qualifier="markForAddress" type="java.lang.Boolean">
+                        <persistence type="property" />
+                        <modifiers read="true" write="true" optional="false"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <description>Flag for Mark For address type</description>
+                    </attribute>
+                    <attribute qualifier="displayName" type="localized:java.lang.String" >
+                        <persistence type="property" />
+                        <description>Address display name - for address dropdown</description>
+                    </attribute>
+                    <attribute qualifier="state" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>Address region/state string property</description>
+                    </attribute>
+                    <attribute qualifier="markForAddresses" type="AddressCollection" >
+                        <description>Collection of Mark For addresses of this address</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
                 </attributes>

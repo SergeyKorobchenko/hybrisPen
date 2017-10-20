@@ -140,7 +140,7 @@ INSERT_UPDATE CategoryProductRelation;$categories;$products
 ;snow;300060401
 ;snow;300066928
 
-UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;swatchColors(code)
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;primaryColors(code)
 ;M35392;;BLACK
 ;M33477;;BLACK
 ;M28324;;WHITE

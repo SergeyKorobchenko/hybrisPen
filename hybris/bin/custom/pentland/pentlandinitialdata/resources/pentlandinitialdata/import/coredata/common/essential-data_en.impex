@@ -47,4 +47,5 @@ UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
 ;515Wx515H;515Wx515H;
 ;65Wx65H;65Wx65H;
 ;96Wx96H;96Wx96H;
+;sizeChart;SizeChart;
 

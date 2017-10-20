@@ -1,0 +1,21 @@
+$productCatalog=pentlandProductCatalog
+$productCatalogName=Pentland Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$categories=source(code, $catalogVersion)[unique=true]
+$products=target(code, $catalogVersion)[unique=true]
+
+INSERT_UPDATE CategoryProductRelation;$categories;$products
+;skiwear;300022348;
+;skiwear;300022349;
+;skiwear;300022352;
+;skiwear;300022356;
+;skiwear;300040462;
+;skiwear;300044323;
+;snowwear;300044596;
+;snowwear;300044599;
+;snowwear;300044600;
+;snowwear;300044601;
+;snowwear;300044617;
+;climbing;300044623;
+;climbing;300044624;

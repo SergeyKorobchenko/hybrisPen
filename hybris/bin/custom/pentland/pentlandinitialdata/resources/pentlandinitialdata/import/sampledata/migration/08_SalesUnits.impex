@@ -1,0 +1,7 @@
+
+
+INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType[default=SAP]
+;sampleUnit;Sample Unit;;
+;secondSampleUnit;Second Sample Unit;;
+;anotherSampleUnit;Another Sample Unit;;
+;oneMoreSampleUnit;One More Sample Unit;;

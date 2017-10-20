@@ -12,6 +12,7 @@
 # Import the Content Catalog
 #
 $contentCatalog=pentlandContentCatalog
+$mediaCatalog=pentlandMediaCatalog
 $languages=en
 
 # Content catalog for CMS contents
@@ -22,3 +23,11 @@ INSERT_UPDATE ContentCatalog;id[unique=true]
 INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode)
 ;$contentCatalog;Staged;false;$languages
 ;$contentCatalog;Online;true;$languages
+
+
+# Media catalog
+INSERT_UPDATE Catalog;id[unique=true]
+;$mediaCatalog
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode)
+;$mediaCatalog;"1.0";true;$languages
