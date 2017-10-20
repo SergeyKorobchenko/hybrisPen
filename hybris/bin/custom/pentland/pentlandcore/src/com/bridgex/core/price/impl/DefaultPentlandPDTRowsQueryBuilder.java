@@ -114,11 +114,6 @@ public class DefaultPentlandPDTRowsQueryBuilder implements PentlandPDTRowsQueryB
           params.putAll(userParams);
         }
 
-//        if (CollectionUtils.isNotEmpty(userGroupsPk)) {
-//          query.append(" AND {").append("ug").append("} IN (?").append("userGroups").append(") ");
-//          params.put("userGroups", userGroupsPk);
-//        }
-
       }
 
       if (addPricesByProductId) { //TODO is there really need for two queries?
@@ -137,9 +132,6 @@ public class DefaultPentlandPDTRowsQueryBuilder implements PentlandPDTRowsQueryB
           query.append(Joiner.on(", ?").join(userParams.keySet())).append(")");
         }
 
-//        if (CollectionUtils.isNotEmpty(userGroupsPk)) {
-//          query.append(" AND {").append("ug").append("} IN (?").append("userGroups").append(") ");
-//        }
       }
 
       StringBuilder resultQuery;
