@@ -1,0 +1,11 @@
+repositories.mavenCentral()
+
+configurations { cxf }
+
+ext{
+     hybris_dir = 'hybris'
+    hybris_bin = 'hybris/bin'
+    hybris_config = 'hybris/config'
+     hybris_custom_ext_dir = "${hybris_bin}/custom"
+}
+apply from: "buildgradle/internationalization.gradle"

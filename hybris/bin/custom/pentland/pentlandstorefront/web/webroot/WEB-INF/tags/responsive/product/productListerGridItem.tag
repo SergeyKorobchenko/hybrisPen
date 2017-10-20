@@ -36,7 +36,7 @@
 			<ycommerce:testId code="product_productPrice">
 				<div class="price"><product:productListerItemPrice product="${product}"/></div>
 			</ycommerce:testId>
-			<c:forEach var="variantOption" items="${product.variantOptions}">
+			<c:forEach var="variantOption" items="${product.variantOptions}" begin="0" end="${product.variantOptions.size() > 5 ? 4 : product.variantOptions.size()}">
 				<c:forEach items="${variantOption.variantOptionQualifiers}" var="variantOptionQualifier">
 					<c:if test="${variantOptionQualifier.qualifier eq 'rollupProperty'}">
 	                    <c:set var="rollupProperty" value="${variantOptionQualifier.value}"/>
@@ -50,6 +50,9 @@
 				</c:forEach>
 				<img style="width: 32px; height: 32px;" src="${imageUrl}" title="${variantName}" alt="${variantName}"/>
 			</c:forEach>
+			<c:if test="${product.variantOptions.size() > 5}">
+				<p><spring:theme code="product.grid.variants.more"/></p>
+			</c:if>
 		</div>
 
 
