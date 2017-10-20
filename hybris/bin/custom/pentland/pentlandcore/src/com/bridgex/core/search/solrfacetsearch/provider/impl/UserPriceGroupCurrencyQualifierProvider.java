@@ -105,7 +105,7 @@ public class UserPriceGroupCurrencyQualifierProvider extends CurrencyQualifierPr
     this.modelService = modelService;
   }
 
-  protected static class UserPriceGroupCurrencyQualifier extends CurrencyQualifierProvider.CurrencyQualifier {
+  public static class UserPriceGroupCurrencyQualifier extends CurrencyQualifierProvider.CurrencyQualifier {
     private final UserPriceGroup userPriceGroup;
 
     public UserPriceGroupCurrencyQualifier(UserPriceGroup priceGroup, CurrencyModel currency) {
