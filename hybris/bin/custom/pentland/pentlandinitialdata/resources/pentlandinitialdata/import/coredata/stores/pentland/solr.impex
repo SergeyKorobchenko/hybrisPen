@@ -70,6 +70,19 @@ UPDATE SolrFacetSearchConfig;name[unique=true];solrServerConfig(name);solrIndexC
 UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 ;$indexBaseSite;$facetSearchConfigName
 
+INSERT_UPDATE SolrURIRedirect;&redirectID;url[unique=true]
+;terms;"/terms"
+;contact;"/contact-us"
+;sizes;"/size-guides"
+;my-account;"/my-account/update-profile"
+
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[default=$facetSearchConfigName];keyword[unique=true];redirect(&redirectID);language(isocode)[default=en];ignoreCase[default=true];matchType(code)[default=EXACT];
+;;"Terms";terms
+;;"Customer service";contact
+;;"contact us";contact
+;;"Size guides";sizes
+;;"My account";my-account
+
 # Define price range set
 INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
 ;pentlandPriceRangeGBP;GBP;double;rangeRefGBP1,rangeRefGBP2,rangeRefGBP3,rangeRefGBP4,rangeRefGBP5
