@@ -23,6 +23,7 @@ $lang=en
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
 ;$solrIndexedType;brand;"Brand"
 ;$solrIndexedType;category;"Category"
+#;$solrIndexedType;description;"Description"
 ;$solrIndexedType;code;"Code"
 ;$solrIndexedType;itemtype;"Type"
 ;$solrIndexedType;name;"Name"

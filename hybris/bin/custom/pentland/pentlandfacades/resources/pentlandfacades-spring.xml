@@ -210,4 +210,10 @@
 			</list>
 		</property>
 	</bean>
+
+	<alias name="pentlandSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="pentlandSearchResultProductPopulator" class="com.bridgex.facades.search.converters.populator.PentlandSearchResultProductPopulator"
+	      parent="variantOptionsCommerceSearchResultProductPopulator">
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
 </beans>

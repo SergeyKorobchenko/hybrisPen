@@ -1,0 +1,9 @@
+$mediaCatalog=pentlandMediaCatalog
+$productCatalog=pentlandProductCatalog
+$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
+$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/productCatalogs/$productCatalog
+
+INSERT_UPDATE Media;code[unique=true];realfilename;mediaFormat(qualifier)[default=sizeChart];$mediaCV;folder(qualifier)[default=product];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;1411353;/1200Wx1200H/29531_1.jpg;;;;$siteResource/images/1200Wx1200H/29531_1.jpg;
+;1234343;/1200Wx1200H/29532_1.jpg;;;;$siteResource/images/1200Wx1200H/29532_1.jpg;
+;1515334;/1200Wx1200H/29533_1.jpg;;;;$siteResource/images/1200Wx1200H/29533_1.jpg;

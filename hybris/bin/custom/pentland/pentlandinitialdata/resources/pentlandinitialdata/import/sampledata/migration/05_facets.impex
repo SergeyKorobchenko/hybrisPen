@@ -1,0 +1,21 @@
+$fieldValueProvider = productClassificationAttributesValueResolver
+$facetSort = Alpha
+$facetType = MultiSelectOr
+$classCatalogVersion=catalogVersion(catalog(id[default='pentlandClassificationCatalog']),version[default='1.0'])[unique=true,default='pentlandClassificationCatalog:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='pentlandClassificationCatalog']),version[default='1.0'])[unique=true]
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+$lang=en
+
+INSERT_UPDATE SolrIndexedProperty ;  name[unique = true] ; $classAttributeAssignment ; displayName[lang=$lang] ; type(code) ; facet[default = true] ; facetType(code)[default=$facetType] ; facetSort(code)[default=$facetSort] ; multiValue[default=false] ; localized[default = false] ;  fieldValueProvider[default=$fieldValueProvider]; solrIndexedType(identifier)[unique = true, default=pentlandProductType] ;
+;skiLength;clSkies:::length::::;Length;int;;;Count;;;;;
+;skiWidth;clSkies:::width::::;Width;int;;;Count;;;;;
+;skiStikiness;clSkies:::stickiness::::;Stickiness;int;;;Count;;;;;
+;skiStyle;clSkies:::style::::;Style;string;;Refine;Alpha;;;;;
+;snowboardLength;clSnowboards:::length::::;Length;int;;;Count;;;;;
+;snowboardWidth;clSnowboards:::width::::;Width;int;;;Count;;;;;
+;snowboardStikiness;clSnowboards:::stickiness::::;Stickiness;int;;;Count;;;;;
+;snowboardStyle;clSnowboards:::style::::;Style;string;;Refine;Alpha;;;;;
+;ropeLength;clRopes:::length::::;Length;int;;;Count;;;;;
+;ropeDyno;clRopes:::dynamic::::;Dynamic;boolean;;Refine;Alpha;;;;;
