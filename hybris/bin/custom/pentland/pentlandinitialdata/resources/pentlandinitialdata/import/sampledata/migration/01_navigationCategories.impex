@@ -1,0 +1,13 @@
+# Macros / Replacement Parameter definitions
+$catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),version[default='Staged'])[unique=true,default='pentlandProductCatalog:Staged']
+$lang=en
+
+# Create Categories
+INSERT_UPDATE Category; code[unique = true]; name[lang = $lang];hidden[default=false]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion[unique = true];
+;skiing;ski stuff;;;;
+;skiwear;ski wear;;;;
+;skigear;ski gear;;;;
+;snowboarding;snowboard stuff;;;;
+;snowwear;snowboard gear;;;;
+;snowgear;snowboard wear;;;;
+;climbing;climbing gear;;;;

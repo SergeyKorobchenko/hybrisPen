@@ -1,0 +1,11 @@
+$catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),version[default='Staged'])[unique=true,default='pentlandProductCatalog:Staged']
+
+# Create Categories Relations
+INSERT_UPDATE CategoryCategoryRelation; source(code, $catalogVersion)[unique = true]; target(code, $catalogVersion)[unique = true]
+;mitre;skiing;
+;mitre;snowboarding;
+;mitre;climbing;
+;skiing;skiwear;
+;skiing;skigear;
+;snowboarding;snowwear;
+;snowboarding;snowgear;
