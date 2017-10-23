@@ -2834,4 +2834,41 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;worldpay.paymentMethod.creditcard;Card
 ;worldpay.paymentMethod.invalid;Please select a Payment Method
 ;worldpay.paymentMethod.noShopperBankCode;Please select a bank for payment Method
+
 ;product.grid.variants.more;More colors available
+
+;ymlIntegration.paramNames.activeIngredients;
+;ymlIntegration.paramNames.brandCountry;
+;ymlIntegration.paramNames.cautions;
+;ymlIntegration.paramNames.contraindications;
+;ymlIntegration.paramNames.description;
+;ymlIntegration.paramNames.directions;
+;ymlIntegration.paramNames.dosage;
+;ymlIntegration.paramNames.egk;
+;ymlIntegration.paramNames.expirationDateAfterOpen;
+;ymlIntegration.paramNames.friendlyName;
+;ymlIntegration.paramNames.ingredients;
+;ymlIntegration.paramNames.interactionWithOthers;
+;ymlIntegration.paramNames.isPrescription;
+;ymlIntegration.paramNames.itemCount;
+;ymlIntegration.paramNames.itemVolume;
+;ymlIntegration.paramNames.overdose;
+;ymlIntegration.paramNames.pharmacologicEffect;
+;ymlIntegration.paramNames.pharmocokinetics;
+;ymlIntegration.paramNames.precautionaryMeasures;
+;ymlIntegration.paramNames.pregnancyWarnings;
+;ymlIntegration.paramNames.sideEffect;
+;ymlIntegration.paramNames.storage;
+;ymlIntegration.paramUnits.volume;
+;ymlIntegration.values.shop.company;
+;ymlIntegration.values.shop.name;
+;ymlIntegration.values.shop.offer.sales_notes;
+;ymlIntegration.values.shop.offer.url.utm_medium;
+;ymlIntegration.values.shop.offer.url.utm_source;
+;text.account.orderHistory.page.sort.byPurchaseOrderNumber;Purchase Order Number
+;text.account.orderHistory.page.sort.byStatus;Status
+;text.account.orderHistory.page.sort.byOrderType;OrderType
+;text.account.orderHistory.page.sort.byRdd;Requested delivery date
+;text.account.orderHistory.orderType;Order Type
+;text.account.orderHistory.rdd;Requested delivery date
+;text.account.orderHistory.totalQty;Total Quantity
