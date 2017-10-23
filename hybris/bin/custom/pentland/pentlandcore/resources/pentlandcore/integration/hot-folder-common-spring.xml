@@ -151,6 +151,11 @@
 	      p:mapping="order"
 	      p:converter-ref="pentlandBatchOrderConverter"/>
 
+	<bean id="batchOrderStatusConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="orderstatus"
+	      p:converter-ref="pentlandBatchOrderStatusConverter"/>
+
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
 
@@ -298,6 +303,16 @@
 		</property>
 		<property name="impexRow">
 			<value>;{+0};{+1};{+1};{2};{+3};{+4};{+5};{+6};{+7};{+8};{9};;{S}</value>
+		</property>
+	</bean>
+	<bean id="pentlandBatchOrderStatusConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				UPDATE Order;code[unique=true];status(code)[type=OrderStatus,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{+1};{S}</value>
 		</property>
 	</bean>
 
