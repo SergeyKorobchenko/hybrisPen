@@ -3139,3 +3139,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;ymlIntegration.values.shop.offer.sales_notes;
 ;ymlIntegration.values.shop.offer.url.utm_medium;
 ;ymlIntegration.values.shop.offer.url.utm_source;
+;text.account.orderHistory.page.sort.byPurchaseOrderNumber;Purchase Order Number
+;text.account.orderHistory.page.sort.byStatus;Status
+;text.account.orderHistory.page.sort.byOrderType;OrderType
+;text.account.orderHistory.page.sort.byRdd;Requested delivery date
+;text.account.orderHistory.orderType;Order Type
+;text.account.orderHistory.rdd;Requested delivery date
+;text.account.orderHistory.totalQty;Total Quantity
