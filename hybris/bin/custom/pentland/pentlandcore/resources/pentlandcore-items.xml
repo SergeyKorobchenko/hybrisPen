@@ -318,6 +318,15 @@
                 </indexes>
             </itemtype>
 
+            <itemtype code="B2BCustomer" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="division" type="Division">
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
         </typegroup>
 
         <typegroup name="Order">
