@@ -61,7 +61,6 @@ import de.hybris.platform.commercefacades.address.data.AddressVerificationResult
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
-import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
@@ -80,6 +79,8 @@ import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
+
+import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
 
@@ -144,7 +145,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
 	@Resource(name = "orderFacade")
-	private OrderFacade orderFacade;
+	private PentlandOrderFacade orderFacade;
 
 	@Resource(name = "acceleratorCheckoutFacade")
 	private CheckoutFacade checkoutFacade;
@@ -300,7 +301,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		// Handle paged search results
 		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
-		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
+		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedB2BOrderHistoryForStatuses(pageableData);
 		populateModel(model, searchPageData, showMode);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));

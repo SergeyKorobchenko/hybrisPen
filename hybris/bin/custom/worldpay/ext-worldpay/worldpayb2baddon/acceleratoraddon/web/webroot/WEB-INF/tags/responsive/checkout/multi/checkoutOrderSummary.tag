@@ -11,7 +11,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/responsive/checkout/multi" %>
 <%@ taglib prefix="wp-multi-checkout" tagdir="/WEB-INF/tags/addons/worldpayb2baddon/responsive/checkout/multi" %>
-<%@ taglib prefix="b2b-multi-checkout" tagdir="/WEB-INF/tags/addons/b2bacceleratoraddon/responsive/checkout/multi" %>
+<%@ taglib prefix="b2b-multi-checkout" tagdir="/WEB-INF/tags/addons/pentlandb2baddon/responsive/checkout/multi" %>
 <%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 
 <spring:url value="/checkout/multi/worldpay/summary/placeOrder" var="placeOrderUrl"/>

@@ -4,7 +4,7 @@
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 
 	<classpathentry exported="true" kind="src" path="/addonsupport" />
-	<classpathentry exported="true" kind="src" path="/b2bacceleratoraddon" />
+	<classpathentry exported="true" kind="src" path="/pentlandb2baddon" />
 	<classpathentry exported="true" kind="src" path="/worldpayaddoncommons" />
 	<classpathentry exported="true" kind="lib" path="resources" />
 	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
