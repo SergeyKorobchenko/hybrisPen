@@ -118,15 +118,15 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 
 # Category fields
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
-;$solrIndexedType; allCategories   	;string ;	 ;;		;    ;    ;categoryCodeValueProvider			   ;    ;  ;    ;  ;    ;
-;$solrIndexedType; categoryName     ;text   ;true;;		;true;true;pentlandCategoryNameValueProvider     ;true;40;true;20;true;10
+;$solrIndexedType; allCategories   	;string ;	 ;;		;    ;    ;categoryCodeValueResolver			   ;    ;  ;    ;  ;    ;
+;$solrIndexedType; categoryName     ;text   ;true;;		;true;true;categoryNameValueResolver     ;true;40;true;20;true;10
 ;$solrIndexedType; brandName        ;text   ;true;false;		;    ;    ;pentlandBrandCategoryNameValueResolver     ;    ;  ;    ;  ;    ;
 
 
 # Category facets
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
 ;$solrIndexedType; categoryPath  ;string;;;Refine;Alpha;-9999;false;false;categoryPathValueProvider;
-;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;pentlandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;categoryCodeValueResolver;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 ;$solrIndexedType; brand         ;string;false;;Refine;Alpha; 5000;true;;pentlandBrandCategoryCodeValueResolver     ;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 
 
