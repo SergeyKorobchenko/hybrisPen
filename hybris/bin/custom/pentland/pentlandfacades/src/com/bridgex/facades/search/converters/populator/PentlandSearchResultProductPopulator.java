@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
@@ -69,6 +70,19 @@ public class PentlandSearchResultProductPopulator extends SearchResultVariantOpt
 
     final List<SearchResultValueData> variants = source.getVariants().stream()
                                                        .filter(distinctByKey(p -> getValue(p, rollupProperty))).collect(Collectors.toList());
+
+    Boolean clearance = this.<Boolean>getValue(source, "clearance");
+    if(BooleanUtils.isTrue(clearance)){
+      target.setClearance(clearance);
+    }else {
+      for (SearchResultValueData variant : variants) {
+        clearance = this.<Boolean>getValue(variant, "clearance");
+        if (BooleanUtils.isTrue(clearance)) {
+          target.setClearance(clearance);
+          break;
+        }
+      }
+    }
 
     target.setVariantOptions(getVariantOptions(variants, variantTypeAttributes, rollupProperty));
   }

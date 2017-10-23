@@ -179,4 +179,6 @@
 		<property name="qualifierProvider" ref="currencyQualifierProvider"/>
 	</bean>
 
+	<bean id="clearanceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ClearanceValueResolver" parent="abstractValueResolver"/>
+
 </beans>
