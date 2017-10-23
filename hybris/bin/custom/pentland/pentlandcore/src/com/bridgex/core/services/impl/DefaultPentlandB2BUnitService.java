@@ -5,9 +5,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.util.Assert;
 
+import com.bridgex.core.constants.PentlandcoreConstants;
 import com.bridgex.core.services.PentlandB2BUnitService;
 
 import de.hybris.platform.b2b.constants.B2BConstants;
@@ -15,6 +17,7 @@ import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.b2b.services.impl.DefaultB2BUnitService;
 import de.hybris.platform.core.model.enumeration.EnumerationValueModel;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.europe1.constants.Europe1Constants;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
@@ -40,13 +43,22 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
           final B2BCustomerModel currentCustomer = (B2BCustomerModel) currentUser;
           final List<B2BUnitModel> unitsOfCustomer = getParents(currentCustomer);
 
-          List<Object> userPriceGroups = new ArrayList<>();
-          unitsOfCustomer.forEach(unitOfCustomer -> {
-            final EnumerationValueModel userPriceGroup = (unitOfCustomer.getUserPriceGroup() != null ? getTypeService().getEnumerationValue(unitOfCustomer.getUserPriceGroup()) : lookupPriceGroupFromClosestParent(unitOfCustomer));
-            userPriceGroups.add(userPriceGroup);
+          List<Object> userPriceGroups = unitsOfCustomer.stream()
+                                                        .filter(u -> u.getUserPriceGroup() != null)
+                                                        .map(u -> getTypeService().getEnumerationValue(u.getUserPriceGroup()))
+                                                        .collect(Collectors.toList());
+
+          List<Object> parentUserPriceGroups = new ArrayList<>();
+
+          unitsOfCustomer.forEach(unit -> {
+            final List<B2BUnitModel> groups = unit.getGroups().stream().filter(B2BUnitModel.class::isInstance).map(u -> (B2BUnitModel) u).collect(Collectors.toList());
+            groups.stream().filter(g -> g.getUserPriceGroup() != null)
+                  .map(g -> getTypeService().getEnumerationValue(g.getUserPriceGroup())).sequential()
+                  .collect(Collectors.toCollection(() -> parentUserPriceGroups));
           });
+
           return new Object[]
-            { getRootUnit(unitsOfCustomer.get(0)), getBranch(unitsOfCustomer.get(0)), unitsOfCustomer.get(0), userPriceGroups };
+            { getRootUnit(unitsOfCustomer.get(0)), getBranch(unitsOfCustomer.get(0)), unitsOfCustomer.get(0), userPriceGroups, parentUserPriceGroups };
         }
       });
 
@@ -54,7 +66,7 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
       getSessionService().setAttribute(B2BConstants.CTX_ATTRIBUTE_BRANCH, branchInfo[1]);
       getSessionService().setAttribute(B2BConstants.CTX_ATTRIBUTE_UNIT, branchInfo[2]);
       getSessionService().setAttribute(Europe1Constants.PARAMS.UPG, branchInfo[3]);
-
+      getSessionService().setAttribute(PentlandcoreConstants.PARENT_UPG, branchInfo[4]);
 
     }
   }
@@ -67,17 +79,10 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
     {
       return null;
     }
-    else if (employee.getDefaultB2BUnit() != null)
-    {
-      // the customer has selected a unit to use
-      return Collections.singletonList(employee.getDefaultB2BUnit());
-    }
     else
     {
       // customer has not selected a default parent unit, all B2BUnit parents will be used.
-      List<B2BUnitModel> groups = new ArrayList<>();
-      employee.getGroups().stream().filter(u -> u instanceof B2BUnitModel).forEach(u -> groups.add((B2BUnitModel) u));
-      return groups;
+      return employee.getGroups().stream().filter(B2BUnitModel.class::isInstance).map(u -> (B2BUnitModel)u).collect(Collectors.toList());
     }
   }
 

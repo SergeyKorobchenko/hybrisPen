@@ -61,4 +61,6 @@
 		<property name="replacedInterceptors" ref="B2BUnitModelValidateInterceptor" />
 	</bean>
 
+	<alias alias="commercePriceService" name="pentlandCommercePriceService"/>
+	<bean name="pentlandCommercePriceService" class="com.bridgex.core.price.impl.PentlandCommercePriceService" parent="defaultCommercePriceService"/>
 </beans>
