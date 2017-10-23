@@ -26,4 +26,13 @@
 	      class="com.bridgex.core.strategies.impl.PentlandCartValidationStrategy" parent="defaultCartValidationStrategy">
 	</bean>
 
+	<alias name="pentlandQuoteUserTypeIdentificationStrategy" alias="quoteUserTypeIdentificationStrategy"/>
+	<bean id="pentlandQuoteUserTypeIdentificationStrategy"
+	      class="com.bridgex.core.strategies.impl.PentlandQuoteUserTypeIdentificationStrategy" parent="defaultQuoteUserTypeIdentificationStrategy">
+		<property name="b2bCustomerGroup" value="b2bcustomergroup"/>
+		<property name="b2bManagerGroup" value="b2bmanagergroup"/>
+		<property name="salesRepGroup" value="salesrepgroup"/>
+		<property name="b2bApproverGroup" value="b2bapprovergroup"/>
+	</bean>
+
 </beans>
