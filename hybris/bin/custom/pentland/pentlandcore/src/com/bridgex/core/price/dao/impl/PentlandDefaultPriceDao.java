@@ -23,7 +23,7 @@ public class PentlandDefaultPriceDao extends AbstractItemDao implements Pentland
 
     query.append("({").append(PriceRowModel.PRODUCTMATCHQUALIFIER).append("}=?productPK ");
     query.append("or {").append(PriceRowModel.PRODUCTID).append("}=?productID) ");
-    query.append("and {").append(PriceRowModel.CURRENCY).append("}=?").append(currencyModel);
+    query.append("and {").append(PriceRowModel.CURRENCY).append("}=?currency");
 
     query.append(" order by {").append(PriceRowModel.PRICE).append("} DESC");
 

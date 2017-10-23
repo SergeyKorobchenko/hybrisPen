@@ -18,4 +18,7 @@
 	<alias name="pentlandProductDao" alias="productDao"/>
 	<bean id="pentlandProductDao" class="com.bridgex.core.product.dao.impl.DefaultPentlandProductDao" parent="defaultProductDao"/>
 
+	<alias name="pentlandDefaultPriceDao" alias="pentlandPriceDao"/>
+	<bean id="pentlandDefaultPriceDao" class="com.bridgex.core.price.dao.impl.PentlandDefaultPriceDao" parent="abstractItemDao"/>
+
 </beans>

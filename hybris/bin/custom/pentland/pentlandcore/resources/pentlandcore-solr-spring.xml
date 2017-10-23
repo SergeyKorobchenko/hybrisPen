@@ -174,4 +174,9 @@
 
 	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver"/>
 
+	<bean id="priceRangeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PriceRangeValueResolver" parent="abstractValueResolver">
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="qualifierProvider" ref="currencyQualifierProvider"/>
+	</bean>
+
 </beans>
