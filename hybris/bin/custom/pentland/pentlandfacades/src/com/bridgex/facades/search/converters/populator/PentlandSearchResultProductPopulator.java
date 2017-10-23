@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
+import com.bridgex.core.constants.PentlandcoreConstants;
 import com.bridgex.core.search.solrfacetsearch.provider.impl.UserPriceGroupCurrencyQualifierProvider;
 
 import de.hybris.platform.commercefacades.product.data.ImageData;
@@ -75,23 +76,35 @@ public class PentlandSearchResultProductPopulator extends SearchResultVariantOpt
   @Override
   protected void populatePrices(final SearchResultValueData source, final ProductData target)
   {
+    Double priceValue = null;
     //We have to check prices for all price groups in session
     List<UserPriceGroup> sessionUPGs = sessionService.getAttribute(Europe1Constants.PARAMS.UPG);
     CurrencyModel currentCurrency = getCommonI18NService().getCurrentCurrency();
 
+    priceValue = getPriceForUPG(source, sessionUPGs, currentCurrency);
+
+    if(priceValue == null){
+      List<UserPriceGroup> parentUPG = sessionService.getAttribute(PentlandcoreConstants.PARENT_UPG);
+      priceValue = getPriceForUPG(source, parentUPG, currentCurrency);
+    }
+
+    if (priceValue != null) {
+      final PriceData priceData = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(priceValue), currentCurrency);
+      target.setPrice(priceData);
+    }
+  }
+
+  private Double getPriceForUPG(SearchResultValueData source,  List<UserPriceGroup> sessionUPGs, CurrencyModel currentCurrency) {
     for(UserPriceGroup priceGroup: sessionUPGs) {
       UserPriceGroupCurrencyQualifierProvider.UserPriceGroupCurrencyQualifier qualifier =
         new UserPriceGroupCurrencyQualifierProvider.UserPriceGroupCurrencyQualifier(priceGroup, currentCurrency);
       String priceField = String.format("priceValue_%s_double", qualifier.toFieldQualifier().toLowerCase());
       Double priceValue = this.<Double>getValue(source, priceField);
-
-      if (priceValue != null) {
-
-        final PriceData priceData = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(priceValue), currentCurrency);
-        target.setPrice(priceData);
-        break;
+      if(priceValue != null){
+        return priceValue;
       }
     }
+    return null;
   }
 
   @Required
