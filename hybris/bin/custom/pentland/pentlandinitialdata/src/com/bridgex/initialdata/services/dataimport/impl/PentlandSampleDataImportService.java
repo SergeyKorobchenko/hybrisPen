@@ -68,6 +68,9 @@ public class PentlandSampleDataImportService extends SampleDataImportService {
     if (isExtensionLoaded(CUSTOMER_SUPPORT_BACKOFFICE_EXTENSION_NAME) && isExtensionLoaded(ASSISTED_SERVICE_EXTENSION_NAME)) {
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/customersupport-assistedservice-groups.impex", extensionName), false);
     }
+
+    //user sample data
+    getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/customers/sample_users.impex", extensionName), false);
   }
 
   @Override

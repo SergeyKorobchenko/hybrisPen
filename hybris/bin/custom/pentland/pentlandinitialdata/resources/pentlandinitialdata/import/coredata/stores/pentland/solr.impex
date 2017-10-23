@@ -70,6 +70,19 @@ UPDATE SolrFacetSearchConfig;name[unique=true];solrServerConfig(name);solrIndexC
 UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 ;$indexBaseSite;$facetSearchConfigName
 
+INSERT_UPDATE SolrURIRedirect;&redirectID;url[unique=true]
+;terms;"/terms"
+;contact;"/contact-us"
+;sizes;"/size-guides"
+;my-account;"/my-account/update-profile"
+
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[default=$facetSearchConfigName];keyword[unique=true];redirect(&redirectID);language(isocode)[default=en];ignoreCase[default=true];matchType(code)[default=EXACT];
+;;"Terms";terms
+;;"Customer service";contact
+;;"contact us";contact
+;;"Size guides";sizes
+;;"My account";my-account
+
 # Define price range set
 INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
 ;pentlandPriceRangeGBP;GBP;double;rangeRefGBP1,rangeRefGBP2,rangeRefGBP3,rangeRefGBP4,rangeRefGBP5
@@ -87,10 +100,9 @@ INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=tru
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameters[map-delimiter=|];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
 ;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
-;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
+#;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
 ;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider                     ;              ;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; volumePrices           ;boolean;            ;true;    ;    ;    ;    ;productVolumePricesProvider               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider              ;              ;true;40 ;true;20 ;true;10;    ;   ;  ;
 ;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-300Wx300H          ;string ;            ;    ;    ;    ;    ;    ;image300ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -166,7 +178,7 @@ INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[uniq
 
 # Define the sort fields
 INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
-;$solrIndexedType:relevance;score;false
+#;$solrIndexedType:relevance;score;false
 ;$solrIndexedType:name-asc;name;true
 ;$solrIndexedType:name-desc;name;false
 ;$solrIndexedType:price-asc;priceValue;true
@@ -191,7 +203,6 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;img-30Wx30H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-;volumePrices:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
@@ -200,7 +211,6 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 
 # Facet search query properties
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
-;allCategories:$solrIndexedType	;	;Refine	 		;-9999	;						   							;								;							;;
 ;categoryPath:$solrIndexedType		;	;Refine	 		;-9999	;													;								;							;;
 ;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 ;size:$solrIndexedType				;	;Refine	 		;2000	;					;								;defaultTopValuesProvider	;;
@@ -208,6 +218,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;productGroup:$solrIndexedType;;MultiSelectOr; 5000;
 ;season:$solrIndexedType;;MultiSelectOr; 6000;
 ;gender:$solrIndexedType 			;;Refine;7000;genderFacetDisplayNameProvider;;
+;primaryColors:$solrIndexedType 			;;MultiSelectOr;2000;colorFacetDisplayNameProvider;;
 
 # Category search query facets
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
