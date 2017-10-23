@@ -10,7 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCh
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
-import de.hybris.platform.b2bacceleratoraddon.forms.PlaceOrderForm;
+import de.hybris.platform.pentlandb2baddon.forms.PlaceOrderForm;
 import de.hybris.platform.b2bacceleratorfacades.api.cart.CheckoutFacade;
 import de.hybris.platform.b2bacceleratorfacades.checkout.data.PlaceOrderData;
 import de.hybris.platform.b2bacceleratorfacades.exception.EntityValidationException;

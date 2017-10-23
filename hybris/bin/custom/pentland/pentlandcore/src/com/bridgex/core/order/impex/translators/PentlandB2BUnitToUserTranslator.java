@@ -3,9 +3,9 @@ package com.bridgex.core.order.impex.translators;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.fest.util.Collections;
 
 import com.bridgex.core.services.impl.DefaultPentlandB2BUnitService;
 
@@ -59,7 +59,7 @@ public class PentlandB2BUnitToUserTranslator extends SingleValueTranslator {
           contact = b2BUnitModel.getContact();
           if (contact == null) {
               Set<B2BCustomerModel> unitCustomers = pentlandB2BUnitService.getB2BCustomers(b2BUnitModel);
-              if (!Collections.isEmpty(unitCustomers)) {
+              if (!CollectionUtils.isEmpty(unitCustomers)) {
                 contact = unitCustomers.iterator().next();
               }
               else {

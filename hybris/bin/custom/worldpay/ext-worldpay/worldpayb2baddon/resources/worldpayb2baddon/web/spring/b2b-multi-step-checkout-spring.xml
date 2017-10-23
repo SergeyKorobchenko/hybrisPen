@@ -107,7 +107,7 @@
     </bean>
 
     <alias name="defaultWorldpayB2BPaymentMethodCheckoutStep" alias="worldpayB2BPaymentMethodCheckoutStep"/>
-    <bean id="defaultWorldpayB2BPaymentMethodCheckoutStep" class="de.hybris.platform.b2bacceleratoraddon.checkout.steps.B2BPaymentMethodCheckoutStep" parent="checkoutStep">
+    <bean id="defaultWorldpayB2BPaymentMethodCheckoutStep" class="de.hybris.platform.pentlandb2baddon.checkout.steps.B2BPaymentMethodCheckoutStep" parent="checkoutStep">
         <property name="checkoutGroup" ref="worldpayB2BCheckoutGroup"/>
         <property name="checkoutStepValidator" ref="defaultPaymentMethodCheckoutValidator"/>
         <property name="checkoutFacade" ref="b2bCheckoutFacade"/>

@@ -17,7 +17,7 @@
 
 		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
 		<requires-extension name="addonsupport"/>
-		<requires-extension name="b2bacceleratoraddon"/>
+		<requires-extension name="pentlandb2baddon"/>
 		<requires-extension name="worldpayaddoncommons"/>
 
 		<coremodule generated="true" manager="com.worldpay.jalo.Worldpayb2baddonManager" packageroot="com.worldpay"/>

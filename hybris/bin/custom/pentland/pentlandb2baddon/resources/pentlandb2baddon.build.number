@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Aug 16 00:17:34 UTC 2017
+builddate=20170816 0017
+description=pentlandb2baddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=pentlandb2baddon
+releasedate=20170803 1321
+vendor=hybris
+version=6.5.0.0
+version.api=6.5.0

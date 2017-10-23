@@ -44,6 +44,10 @@
 		<property name="pentlandProductDao" ref="pentlandProductDao"/>
 	</bean>
 
+	<bean id="pentlandCustomerAccountService" class="com.bridgex.core.customer.impl.DefaultPentlandCustomerAccountService" parent="defaultCustomerAccountService">
+		<property name="pentlandCustomerAccountDao" ref="pentlandCustomerAccountDao" />
+	</bean>
+
 
 <!-- url resolvers -->
 	<alias name="pentlandCategoryModelUrlResolver" alias="categoryModelUrlResolver"/>
