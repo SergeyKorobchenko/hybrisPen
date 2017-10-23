@@ -7,8 +7,11 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.constants.PentlandcoreConstants;
+import com.bridgex.core.jalo.ApparelSizeVariantProduct;
 import com.bridgex.core.price.impl.DefaultPentlandPDTRowsQueryBuilder;
 
+import de.hybris.platform.constants.GeneratedCoreConstants;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.europe1.channel.strategies.RetrieveChannelStrategy;
 import de.hybris.platform.europe1.constants.Europe1Constants;
@@ -54,7 +57,18 @@ public class PentlandPriceFactory extends Europe1PriceFactory {
   }
 
   public List<EnumerationValue> getUPGs(SessionContext ctx, User user) throws JaloPriceFactoryException {
-    List<EnumerationValue> groups = this.getEnumsFromContextOrItem(ctx, user, "Europe1PriceFactory_UPG");
+    List<EnumerationValue> groups = this.getEnumsFromContextOrItem(ctx, user, Europe1Constants.PARAMS.UPG);
+    if(groups == null){
+      EnumerationValue userPriceGroup = this.getEnumFromGroups(user, "userPriceGroup");
+      if(userPriceGroup != null){
+        groups = Collections.singletonList(userPriceGroup);
+      }
+    }
+    return groups;
+  }
+
+  public List<EnumerationValue> getParentUPGs(SessionContext ctx, User user) throws JaloPriceFactoryException {
+    List<EnumerationValue> groups = this.getEnumsFromContextOrItem(ctx, user, PentlandcoreConstants.PARENT_UPG);
     if(groups == null){
       EnumerationValue userPriceGroup = this.getEnumFromGroups(user, "userPriceGroup");
       if(userPriceGroup != null){
@@ -80,7 +94,14 @@ public class PentlandPriceFactory extends Europe1PriceFactory {
   public List getProductPriceInformations(SessionContext ctx, Product product, Date date, boolean net) throws JaloPriceFactoryException {
     List<EnumerationValue> upGs = this.getUPGs(ctx, ctx.getUser());
     if(CollectionUtils.isNotEmpty(upGs)) {
-      return this.getPriceInformations(ctx, product, this.getPPG(ctx, product), ctx.getUser(), upGs, ctx.getCurrency(), net, date, null);
+      List result = this.getPriceInformations(ctx, product, this.getPPG(ctx, product), ctx.getUser(), upGs, ctx.getCurrency(), net, date, null);
+      if (CollectionUtils.isEmpty(result)){
+        List<EnumerationValue> parentUPGs = this.getParentUPGs(ctx, ctx.getUser());
+        if (CollectionUtils.isNotEmpty(parentUPGs)) {
+          result = this.getPriceInformations(ctx, product, this.getPPG(ctx, product), ctx.getUser(), parentUPGs, ctx.getCurrency(), net, date, null);
+        }
+      }
+      return result;
     }else{
       return Collections.EMPTY_LIST;
     }
@@ -125,6 +146,7 @@ public class PentlandPriceFactory extends Europe1PriceFactory {
     }
   }
 
+  @SuppressWarnings("unchecked")
   public List<PriceRow> matchPriceRowsForInfo(SessionContext ctx, Product product, EnumerationValue productGroup, User user, List<EnumerationValue> upgs, Currency currency, Date date, boolean net) throws JaloPriceFactoryException {
     if(product == null && productGroup == null) {
       throw new JaloPriceFactoryException("cannot match price info without product and product group - at least one must be present", 0);
@@ -174,13 +196,22 @@ public class PentlandPriceFactory extends Europe1PriceFactory {
     boolean net = false;
     Date date = null;
     Product product = entry.getProduct();
-    boolean giveAwayMode = entry.isGiveAway(ctx).booleanValue();
-    boolean entryIsRejected = entry.isRejected(ctx).booleanValue();
+    if (product instanceof ApparelSizeVariantProduct) {
+      product = ((ApparelSizeVariantProduct)product).getBaseProduct();
+    }
+    boolean giveAwayMode = entry.isGiveAway(ctx);
+    boolean entryIsRejected = entry.isRejected(ctx);
     PriceRow row;
     if(giveAwayMode && entryIsRejected) {
       row = null;
     } else {
-      row = this.matchPriceRowForPrice(ctx, product, productGroup = this.getPPG(ctx, product), user = order.getUser(), userGroups = this.getUPGs(ctx, user), quantity = entry.getQuantity(ctx).longValue(), unit = entry.getUnit(ctx), currency = order.getCurrency(ctx), date = order.getDate(ctx), net = order.isNet().booleanValue(), giveAwayMode);
+      row = this.matchPriceRowForPrice(ctx, product, productGroup = this.getPPG(ctx, product), user = order.getUser(), userGroups = this.getUPGs(ctx, user), quantity = entry.getQuantity(ctx), unit = entry.getUnit(ctx), currency = order.getCurrency(ctx), date = order.getDate(ctx), net = order.isNet(), giveAwayMode);
+      if (row == null) {
+        List<EnumerationValue> parentUPGs = this.getParentUPGs(ctx, user);
+        if (CollectionUtils.isNotEmpty(parentUPGs)) {
+          row = this.matchPriceRowForPrice(ctx, product, productGroup = this.getPPG(ctx, product), user = order.getUser(), userGroups = parentUPGs, quantity = entry.getQuantity(ctx), unit = entry.getUnit(ctx), currency = order.getCurrency(ctx), date = order.getDate(ctx), net = order.isNet(), giveAwayMode);
+        }
+      }
     }
 
     if(row != null) {
@@ -197,7 +228,7 @@ public class PentlandPriceFactory extends Europe1PriceFactory {
       double convertedPrice = priceUnit.convertExact(entryUnit, price);
       return new PriceValue(currency.getIsoCode(), convertedPrice, row.isNetAsPrimitive());
     } else if(giveAwayMode) {
-      return new PriceValue(order.getCurrency(ctx).getIsoCode(), 0.0D, order.isNet().booleanValue());
+      return new PriceValue(order.getCurrency(ctx).getIsoCode(), 0.0D, order.isNet());
     } else {
       String msg = Localization.getLocalizedString("exception.europe1pricefactory.getbaseprice.jalopricefactoryexception1", new Object[]{product, productGroup, user, userGroups, Long.toString(quantity), unit, currency, date, Boolean.toString(net)});
       throw new JaloPriceFactoryException(msg, 0);
