@@ -172,7 +172,9 @@
 
 	<bean id="categoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryCodeValueResolver" parent="abstractNavCategoryResolver"/>
 
-	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver"/>
+	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
 
 	<bean id="priceRangeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PriceRangeValueResolver" parent="abstractValueResolver">
 		<property name="commercePriceService" ref="commercePriceService"/>
