@@ -53,6 +53,9 @@
 			<c:if test="${product.variantOptions.size() > 5}">
 				<p><spring:theme code="product.grid.variants.more"/></p>
 			</c:if>
+			<c:if test="${product.clearance}">
+				<p><spring:theme code="product.grid.variants.clearance"/></p>
+			</c:if>
 		</div>
 
 

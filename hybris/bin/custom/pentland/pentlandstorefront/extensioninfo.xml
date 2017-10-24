@@ -17,7 +17,7 @@
 		<requires-extension name="worldpayb2baddon"/>
 		<requires-extension name="worldpaynotifications"/>
 		<requires-extension name="secureportaladdon"/>
-		<requires-extension name="b2bacceleratoraddon"/>
+		<requires-extension name="pentlandb2baddon"/>
 		<requires-extension name="sapinvoiceaddon"/>
 		<requires-extension name="commerceorgaddon"/>
 		<requires-extension name="accountsummaryaddon"/>

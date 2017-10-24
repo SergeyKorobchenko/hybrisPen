@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<alias alias="simpleSuggestionDao" name="defaultSimpleSuggestionDao"/>
 	<bean id="defaultSimpleSuggestionDao"
@@ -17,5 +17,17 @@
 
 	<alias name="pentlandProductDao" alias="productDao"/>
 	<bean id="pentlandProductDao" class="com.bridgex.core.product.dao.impl.DefaultPentlandProductDao" parent="defaultProductDao"/>
+
+	<alias name="pentlandCustomerAccountDao" alias="customerAccountDao"/>
+	<bean id="pentlandCustomerAccountDao" class="com.bridgex.core.customer.dao.impl.DefaultPentlandCustomerAccountDao" parent="defaultCustomerAccountDao">
+		<property name="filterSalesApplicationList" ref="salesApplicationB2BOrderFilterList"/>
+	</bean>
+
+	<util:list value-type="de.hybris.platform.commerceservices.enums.SalesApplication" id="salesApplicationB2BOrderFilterList">
+		<value>HYBRIS</value>
+	</util:list>
+
+	<alias name="pentlandDefaultPriceDao" alias="pentlandPriceDao"/>
+	<bean id="pentlandDefaultPriceDao" class="com.bridgex.core.price.dao.impl.PentlandDefaultPriceDao" parent="abstractItemDao"/>
 
 </beans>

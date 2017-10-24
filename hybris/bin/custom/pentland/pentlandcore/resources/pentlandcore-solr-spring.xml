@@ -167,4 +167,18 @@
 
 	<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>
 	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
+
+	<bean id="abstractNavCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractNavCategoryResolver" abstract="true" parent="abstractValueResolver"/>
+
+	<bean id="categoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryCodeValueResolver" parent="abstractNavCategoryResolver"/>
+
+	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver"/>
+
+	<bean id="priceRangeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PriceRangeValueResolver" parent="abstractValueResolver">
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="qualifierProvider" ref="currencyQualifierProvider"/>
+	</bean>
+
+	<bean id="clearanceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ClearanceValueResolver" parent="abstractValueResolver"/>
+
 </beans>

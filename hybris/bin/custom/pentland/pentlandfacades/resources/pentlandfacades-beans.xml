@@ -13,6 +13,7 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="gender" type="com.bridgex.facades.product.data.GenderData"/>
+		<property name="clearance" type="Boolean"/>
 	</bean>
 
 	<bean class="com.bridgex.facades.product.data.GenderData">
@@ -25,6 +26,12 @@
 		<property name="parent" type="com.bridgex.facades.category.data.CategoryNavigationData"  />
 		<property name="children" type="java.util.List&lt;com.bridgex.facades.category.data.CategoryNavigationData>"/>
 		<property name="url" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="totalQty" type="java.lang.Integer"/>
+		<property name="orderType" type="com.bridgex.core.enums.OrderType"/>
+		<property name="rdd" type="java.util.Date"/>
 	</bean>
 
 </beans>

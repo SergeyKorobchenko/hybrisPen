@@ -62,6 +62,7 @@
 
         <enumtype code="SalesApplication" generate="false" autocreate="false" dynamic="true">
             <value code="SAP"/>
+            <value code="Hybris"/>
         </enumtype>
 
     </enumtypes>
@@ -291,6 +292,41 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="Division" autocreate="true" generate="true">
+                <deployment table="division" typecode="10101" />
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <description>Unique identifier</description>
+                        <persistence type="property" />
+                        <modifiers initial="true" unique="true" optional="false" read="true" write="true" search="true" />
+                    </attribute>
+                    <attribute qualifier="name" type="localized:java.lang.String">
+                        <description>Localized display name for division</description>
+                        <persistence type="property" />
+                        <modifiers initial="true" optional="false" read="true" write="true" search="true" />
+                    </attribute>
+                    <attribute qualifier="email" type="java.lang.String">
+                        <modifiers initial="true" optional="false" read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+                <indexes>
+                    <index name="divisionCode">
+                        <key attribute="code"/>
+                    </index>
+                </indexes>
+            </itemtype>
+
+            <itemtype code="B2BCustomer" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="division" type="Division">
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
         </typegroup>
 
         <typegroup name="Order">

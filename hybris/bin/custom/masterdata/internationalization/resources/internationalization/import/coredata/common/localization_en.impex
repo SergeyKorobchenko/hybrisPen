@@ -1,5 +1,4 @@
 INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
-;Pattern.placeOrderForm.phone;
 ;account.confirmation.address.added;Address created successfully
 ;account.confirmation.address.removed;Address removed successfully
 ;account.confirmation.address.updated;Address updated successfully
@@ -137,9 +136,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;b2busergroup.name;User group Name
 ;b2busergroup.parent;Parent Business Unit
 ;b2busergroup.save;Save Updates
-;badFormat.orderFilterForm.end;
-;badFormat.orderFilterForm.start;
-;badPassword.updatePasswordForm.newPassword;
 ;basket.add.free.gift;Add your free gift to Cart
 ;basket.add.to.basket;Add to bag
 ;basket.add.to.cart;Add
@@ -186,7 +182,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.item;Item (style number)
 ;basket.page.itemNumber;Item no.
 ;basket.page.itemPrice;Item price
-;basket.page.message.regionChanged;
 ;basket.page.message.remove;Product has been removed from your bag.
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
@@ -278,7 +273,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.validation.invalidGroup;This group is improperly configured. Please edit it.
 ;basket.validation.lowStock;"Unfortunately a lower quantity of <a href=""{1}"" {4}>{0}</a> was applied to your cart due to low stock. You previously had {2} in your cart, you now have {3}."
 ;basket.validation.movedFromPOSToStore;Your items have been modified to match available stock levels. One or more pickup in store items were updated to shipping.
-;basket.validation.newPrice;
 ;basket.validation.noStock;"Unfortunately <a href=""{1}"">{0}</a> was removed from your cart as it is out of stock. You previously had {2} in your cart."
 ;basket.validation.unavailable;Unfortunately {0} was removed from your cart as it is no longer available.
 ;basket.validation.voucherNotValid;The coupon applied on the cart is no longer valid and has been removed from the cart.
@@ -291,8 +285,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;brands.search.placeholder;Enter brand name
 ;breadcrumb.brands;Brands
 ;breadcrumb.cart;Bag
-;breadcrumb.checkout.desktop.toCart;
-;breadcrumb.checkout.mobile.toCart;
 ;breadcrumb.home;Home
 ;breadcrumb.login;Login
 ;breadcrumb.mnn;Active substances
@@ -300,54 +292,24 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;breadcrumb.quickOrder;Quick Order
 ;breadcrumb.quote.edit;Edit Quote
 ;breadcrumb.quote.view;Quote {0}
-;cart.balance;
 ;cart.checkout;CHECKOUT
 ;cart.checkout.error;Error proceeding to checkout.
-;cart.cost;
 ;cart.count;{0}
-;cart.discount;
-;cart.empty;
-;cart.empty.alert;
-;cart.entry.discount;
 ;cart.expresscheckout.checkbox;I would like to Express Checkout
-;cart.go.main.page;
 ;cart.groups.edit;edit
 ;cart.groups.remove;remove
-;cart.have.promo;
 ;cart.items;{0} item(s)
-;cart.order.make;
-;cart.order.title;
 ;cart.page.checkout;Checkout
 ;cart.page.continue;Continue Shopping
 ;cart.page.minimalorderamountnotpassed;Lowest order amount is {0}
 ;cart.page.shop;Shop
 ;cart.page.title;Your Shopping Cart
 ;cart.page.total;Total:
-;cart.price;
-;cart.price.warn;
 ;cart.product.configuration.toolong;Value is too long
-;cart.products.count;
-;cart.region.edit;
-;cart.reorder.default;
-;cart.reorder.warning.reducedQuantity;
-;cart.stock.in;
-;cart.stock.onrequest;
-;cart.stock.out;
-;cart.sum;
-;cart.title;
-;cart.total;
 ;cart.view;VIEW CART
-;cart.voucher.applied;
 ;category.navTitle;Shop by Category
-;checkou.multi.product.unpurchasable;
-;checkout.;
-;checkout.addComment;
 ;checkout.billing.address.page.global.field.error;Some fields were not filled in correctly. Please check your details are correct
 ;checkout.checkout;Check Out
-;checkout.checkout.contact.email.title;
-;checkout.checkout.contact.fio.title;
-;checkout.checkout.contact.info.title;
-;checkout.checkout.contact.phone.title;
 ;checkout.checkout.customer.email.title;Customer email
 ;checkout.checkout.flow.select;Select an alternative checkout flow
 ;checkout.checkout.multi;Checkout Multi
@@ -358,10 +320,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.checkout.multi.pci-ws;PCI-Default
 ;checkout.checkout.multi.pci.select;Select a PCI option
 ;checkout.checkout.single;Checkout Single
-;checkout.comment.size;
 ;checkout.deliveryAddress.notSelected;Please provide a delivery address for your order
 ;checkout.deliveryMethod.notSelected;Please select a method of delivery for your order
-;checkout.email.invalid;
 ;checkout.error.authorization.failed;We are sorry but your transaction could not be completed at this time
 ;checkout.error.cart.notcalculated;We are sorry but your transaction could not be completed at this time
 ;checkout.error.invalid.accountType;Your account does not allow you to checkout here.
@@ -431,7 +391,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.express.error.deliveryMode;Express checkout is not available. An error occurred setting the delivery mode.
 ;checkout.express.error.notAvailable;Express checkout is not available since it is disabled.
 ;checkout.express.error.paymentInfo;Express checkout is not available since you do not have a default payment info. Please set a default payment info in your account to use Express Checkout next time.
-;checkout.fio.invalid;
 ;checkout.information.delivery.method.changed;Your delivery method has been updated based on your delivery location.
 ;checkout.login.guestCheckout;Check Out as a Guest
 ;checkout.login.loginAndCheckout;Log In and Check Out
@@ -503,7 +462,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.next;Next &raquo
 ;checkout.multi.order.summary;Order Summary
 ;checkout.multi.payment;Payment:
-;checkout.multi.payment.cachs;
 ;checkout.multi.paymentDetails.notprovided;You must provide a payment details in order to go to the next step.
 ;checkout.multi.paymentMethod;Payment & Billing Address
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
@@ -608,7 +566,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.order.fields.name.help;Real Name
 ;checkout.order.fields.phone.help;Phone
 ;checkout.orderConfirmation.auth;Authorization
-;checkout.orderConfirmation.breadcrumb;
 ;checkout.orderConfirmation.checkoutSuccessful;Checkout Successful
 ;checkout.orderConfirmation.continueShopping;Continue Shopping
 ;checkout.orderConfirmation.copySentTo;A copy of your order details has been sent to {0}
@@ -618,9 +575,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.orderConfirmation.coupon.valid.range;Valid from {0} until {1}
 ;checkout.orderConfirmation.coupon.valid.until;Valid until {0}
 ;checkout.orderConfirmation.get.coupon;You've earned the following coupon!
-;checkout.orderConfirmation.label.delivery.time;
-;checkout.orderConfirmation.label.manager;
-;checkout.orderConfirmation.label.orderKeep.time;
 ;checkout.orderConfirmation.orderNumber;Your order number is {0}
 ;checkout.orderConfirmation.orderNumberShort;Order # {0}
 ;checkout.orderConfirmation.orderStatus;Order Status : {0}
@@ -641,7 +595,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.paymentMethod.createSubscription.failed;Failed to create subscription. Please check the values entered.
 ;checkout.paymentMethod.noSecurityCode;Please provide security code.
 ;checkout.paymentMethod.notSelected;Please provide details of your payment for your order
-;checkout.phone.missing;
 ;checkout.pickup.confirm.and.continue;Simply confirm the information below and continue to the next step of checkout.
 ;checkout.pickup.continue.button;Continue
 ;checkout.pickup.estimated.total;Estimated Total:
@@ -659,14 +612,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.pickup.store.destinations;{0} store pickup destination(s)
 ;checkout.placeOrder.failed;Failed to place the order
 ;checkout.security.code;Security Code
-;checkout.single.form.invalid;
 ;checkout.single.pickup.notActive;Error message, offer to choose another pharmacy
-;checkout.single.pickup.notSelected;
-;checkout.single.pickupStore.editPickupStoreButton;
-;checkout.single.pickupStore.enterPickupStoreButton;
-;checkout.single.pickupStore.select;
-;checkout.single.pickupStore.selectExistingAddress;
-;checkout.single.placeOrder.checkCart;
 ;checkout.summary.deliveryAddress;Delivery Address
 ;checkout.summary.deliveryAddress.edit;Edit
 ;checkout.summary.deliveryAddress.editDeliveryAddressButton;Edit Delivery Address
@@ -734,50 +680,15 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;coupon.invalid.code.provided;The coupon code entered is not valid.
 ;coupon.not.active.expired;The coupon code entered is no longer valid.
 ;coupon.order.recalculation.error;Error occured while re-calculatinng the order.
-;cs.message.integration.order.calculation.outdated;
-;cs.message.integration.order.export.fail;
-;cs.message.integration.order.reservation.unresolved;
-;currency;
-;date.month.1;
-;date.month.10;
-;date.month.11;
-;date.month.12;
-;date.month.2;
-;date.month.3;
-;date.month.4;
-;date.month.5;
-;date.month.6;
-;date.month.7;
-;date.month.8;
-;date.month.9;
-;deliverydate.orderentry.one_day.message;
-;deliverydate.orderentry.out_of_stock.message;
-;deliverydate.orderentry.two_days.message;
-;deliverydate.orderentry.up_to_n_days.message;
-;deliverydate.product.one_day.message;
-;deliverydate.product.out_of_stock.message;
-;deliverydate.product.two_days.message;
-;deliverydate.product.up_to_n_days.message;
 ;download.view;Download
-;email.confirmed;
 ;employee.login.bad.credentials;Bad credentials!
 ;employee.login.email;E-mail:
 ;employee.login.footer;footer:
-;employee.login.instruction;
 ;employee.login.password;Password:
 ;employee.login.submit;Submit:
 ;employee.login.title;Welcome!
-;empty.updatePasswordForm.newPassword;
 ;error.budget.parentunit.disabled;This budget may not be set to not active state because the parent B2B Unit not active.
 ;error.bugetcode.notfound;Budget code is not valid
-;facet.button.apply;
-;facet.button.clear;
-;facet.filter.button;
-;facet.range.from;
-;facet.range.selected.title;
-;facet.range.to;
-;favorites.form.title.in;
-;favorites.form.title.out;
 ;favorites.page.list.empty;Empty list
 ;favorites.page.title;Favorites
 ;feedback.email.required;E-mail - required field
@@ -787,7 +698,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;feedback.form.email.description;Email description
 ;feedback.form.header;Feedback
 ;feedback.form.image;Image
-;feedback.form.image.description;
 ;feedback.form.message;Message
 ;feedback.form.name;Name
 ;feedback.form.orderCode;Order code
@@ -795,7 +705,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;feedback.form.phone;Phone
 ;feedback.form.phone.description;Phone description
 ;feedback.form.subject;Subject
-;feedback.form.submit;
 ;feedback.message.placeholder;Write, please, the reason of the reference or in detail tell about a problem. You can also attach a file with a screenshot
 ;feedback.message.required;Write, please, the reason of the reference or in detail tell about a problem
 ;feedback.page.breadcrumbs;feedback
@@ -810,7 +719,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;forgottenPwd.description;Please enter your account email address.  Instructions on how to Reset your Password will be sent to this address.
 ;forgottenPwd.email;Email Address
 ;forgottenPwd.email.invalid;Please enter a valid email
-;forgottenPwd.link;
 ;forgottenPwd.submit;Send Email
 ;forgottenPwd.title;Reset Password
 ;form.b2bcustomer.adminrole.error;A B2B Administrator can not downgrade their administrative role.
@@ -862,7 +770,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;header.link.company;My Company
 ;header.link.login;Sign in / Register
 ;header.link.logout;Sign Out
-;header.link.register;
 ;header.mobile.link.login;Login
 ;header.welcome;Welcome {0}
 ;img.account.addressBook;/_ui/desktop/theme-blue/images/icon-cust-acc-address.png
@@ -870,7 +777,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;img.account.paymentDetails;/_ui/desktop/theme-blue/images/icon-cust-acc-details.png
 ;img.account.profile;/_ui/desktop/theme-blue/images/icon-cust-acc-profile.png
 ;img.buttonArrowSmall;/_ui/desktop/theme-blue/images/button-arrow-small.png
-;img.buttonArrowSmallMulti;
 ;img.favIcon;/_ui/responsive/theme-lambda/images/favicon.ico
 ;img.favIcon16;/_ui/responsive/theme-alpha/images/favicon-16x16.png
 ;img.favIcon32;/_ui/responsive/theme-alpha/images/favicon-32x32.png
@@ -908,31 +814,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;import.csv.savedCart.success;"Your import is now being processed. Check <a href=""{0}"" style=""text-decoration: underline"">saved carts</a> page to see its progress."
 ;import.csv.savedCart.title;Import Saved Cart
 ;import.csv.savedCart.uploadStarted;Uploading file...
-;input.file.select;
-;internationalization.BONUSES.0;bonus
-;internationalization.BONUSES.1;bonuses
-;internationalization.BONUSES.2;
-;internationalization.DAYS.0;day
-;internationalization.DAYS.1;days
-;internationalization.DAYS.2;
-;internationalization.LEFT.0;left
-;internationalization.LEFT.1;left
-;internationalization.LEFT.2;
-;internationalization.POSITIONS.0;
-;internationalization.POSITIONS.1;
-;internationalization.POSITIONS.2;
-;internationalization.PRODUCTS.0;product
-;internationalization.PRODUCTS.1;products
-;internationalization.PRODUCTS.2;
-;internationalization.REVIEWS.0;review
-;internationalization.REVIEWS.1;reviews
-;internationalization.REVIEWS.2;
-;internationalization.STORES.0;
-;internationalization.STORES.1;
-;internationalization.STORES.2;
-;internationalization.UP_TO_DAYS.0;day
-;internationalization.UP_TO_DAYS.1;days
-;internationalization.UP_TO_DAYS.2;
 ;invoice.page.details.error.message;Invoice details could not be retrieved.
 ;j_password;Password
 ;j_username;Login
@@ -949,7 +830,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;login.required;Required
 ;login.required.message;Fields marked * are required
 ;login.title;Returning Customer
-;login.toregister;
 ;menu.button.home;Home
 ;minicart.cart.alt;Your Shopping Cart
 ;minicart.checkout.checkout;Checkout
@@ -1004,12 +884,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.totals.savings;Savings:
 ;order.totals.subtotal;Subtotal:
 ;order.totals.total;Total:
-;orderHistory.filter.button.clear;
-;orderHistory.filter.button.find;
-;orderHistory.filter.number;
 ;orderHistory.page.totalResults;of {0} Orders
 ;orderHistory.page.totalResultsDetails;{0} of {1} Orders
-;orders.page.error.formFieldsFormat;
 ;password.strength.medium;Medium
 ;password.strength.minchartext;Minimum length is %d characters
 ;password.strength.strong;Strong
@@ -1062,13 +938,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;pickup.results.button;Pick Up
 ;pickup.search.button;Find Stores
 ;pickup.search.message;Enter a Town/City or Zip Code:
-;popup.add.to.cart.checkout.mob;
-;popup.add.to.cart.continue;
-;popup.add.to.cart.continue.mob;
-;popup.add.to.cart.details;
-;popup.add.to.cart.details.mobile;
-;popup.add.to.cart.go.cart;
-;popup.add.to.cart.label;
 ;popup.cart.empty;Empty Bag
 ;popup.cart.pickup;Pick Up
 ;popup.cart.quantity;Quantity
@@ -1080,17 +949,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;popup.close;Close
 ;popup.done;Done
 ;popup.quick.view.select;Select Options
-;product.activeIngredients.title;
 ;product.average.review.rating;Products Average Rating {0} / 5
 ;product.bookmark.and.share;Bookmark and Share
-;product.brandCountry.title;
 ;product.bundles;Buy this item in a bundle
-;product.cautions.title;
 ;product.close;Close
-;product.code.title;
-;product.contraindications.title;
-;product.directions.title;
-;product.dosage.title;
 ;product.grid.availability;Availability
 ;product.grid.averagePriceUnitText;Average Price / Unit
 ;product.grid.confirmQtys.message;Navigating away from this page will result in losing the data you have entered!
@@ -1115,21 +977,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.grid.yourPrice;Your Price
 ;product.image.zoom.in;Click To Zoom
 ;product.image.zoom.out;Zoom Out
-;product.info.prescription;
-;product.ingredients.title;
-;product.latinName.title;
-;product.list.empty;
-;product.manufacturer.title;
-;product.overdose.title;
 ;product.overview;Details
-;product.page.info.delivery.title;
-;product.page.info.instruction.title;
-;product.page.info.pickup.title;
-;product.page.info.showAllButton.title;
-;product.pharmacologicEffect.title;
-;product.pregnancyWarnings.title;
-;product.prescription.text;
-;product.price.free;
 ;product.price.from;From {0}
 ;product.product.details;Product details
 ;product.product.details.future.date;Estimated delivery date
@@ -1138,14 +986,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.product.details.future.quantity;Quantity
 ;product.product.details.future.title;Future availability
 ;product.product.details.more;More product details
-;product.product.details.tab.certificates;
-;product.product.details.tab.common;
-;product.product.details.tab.contraindications;
-;product.product.details.tab.effect;
-;product.product.details.tab.information;
-;product.product.details.tab.instructions;
-;product.product.details.tab.show.more;
-;product.product.details.tab.special.instructions;
 ;product.product.spec;Specs
 ;product.related.products;Related Products
 ;product.share.email;E-mail
@@ -1154,24 +994,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.share.share;Share
 ;product.share.tweet;Tweet this
 ;product.share.viewMoreServices;View more services
-;product.sideEffect.title;
 ;product.start.bundle;Start Bundle
-;product.storage.title;
-;product.tab.block.activeIngredients;
-;product.tab.block.cautions;
-;product.tab.block.contraindications;
-;product.tab.block.description;
-;product.tab.block.directions;
-;product.tab.block.dosage;
-;product.tab.block.ingredients;
-;product.tab.block.latinName;
-;product.tab.block.overdose;
-;product.tab.block.pharmacologicEffect;
-;product.tab.block.pregnancyWarnings;
-;product.tab.block.prescription;
-;product.tab.block.prescription.yes;
-;product.tab.block.sideEffect;
-;product.tab.block.storage;
 ;product.variants.available;available online
 ;product.variants.colour;Colour
 ;product.variants.in.stock;In Stock
@@ -1196,31 +1019,18 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;profile.checkPwd.invalid;Please confirm your password
 ;profile.currentPassword;Current Password
 ;profile.currentPassword.invalid;Please enter your current password
-;profile.date.day;
-;profile.date.month;
-;profile.date.year;
-;profile.dateOfBirth;
 ;profile.email;New Email Address
-;profile.email.help;
 ;profile.email.invalid;Please enter a valid email
 ;profile.email.unique;The email you entered is not available
 ;profile.firstName;First Name
 ;profile.firstName.invalid;Please enter a first name
-;profile.gender;
-;profile.gender.female;
-;profile.gender.male;
 ;profile.lastName;Last Name
 ;profile.lastName.invalid;Please enter a last name
-;profile.middleName;
 ;profile.newPassword;New Password
 ;profile.newPassword.invalid;Please enter your new password
 ;profile.phone;Phone Number
 ;profile.pwd;Password
-;profile.pwd.check.help;
 ;profile.pwd.invalid;Please enter your password
-;profile.pwd.new.help;
-;profile.pwd.old;
-;profile.secondPhone;
 ;profile.submit;Update
 ;profile.title;Title
 ;profile.title.invalid;Please select a title
@@ -1266,7 +1076,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.submit.success;Quote submitted with success.
 ;quote.view;View Quote
 ;recently.viewed.products.title;Recently Viewed Products
-;register.acceptedEULA;
 ;register.back.login;Back to login
 ;register.checkPwd;Confirm Password
 ;register.checkPwd.invalid;Please confirm your password
@@ -1277,8 +1086,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;register.firstName.invalid;Please enter a first name
 ;register.lastName;Last Name
 ;register.lastName.invalid;Please enter a last name
-;register.middleName;
-;register.name;
 ;register.name.invalid;Combined length of first name and last name must be less than 255 characters
 ;register.new.customer;Create an Account
 ;register.phone;Phone Number (Mobile Preferred)
@@ -1286,7 +1093,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;register.pwd.invalid;Password does not meet minimum requirements.
 ;register.remember;Remember me on this computer
 ;register.submit;Register
-;register.subscribedToPromotions;
 ;register.title;Title
 ;register.title.invalid;Please select a title
 ;registration.confirmation.message.subtitle;Please check your email to verify your email address.
@@ -1305,7 +1111,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;replenishmentScheduleForm.weekly.daysOfWeek;Send every
 ;replenishmentScheduleForm.weekly.weeks;Every
 ;replenishmentScheduleForm.weeks;weeks
-;resetPwd.submit;
 ;resetPwd.title;Reset Password
 ;responsive.checkout.summary.requestApproval.maxchars;Maximum 255 characters
 ;responsive.replenishmentScheduleForm.activateDaily;Daily
@@ -1408,12 +1213,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.nav.resultsForStore;Results for: {0}
 ;search.nav.selectRefinements.title;Select Refinements
 ;search.no.results;0 items found for keyword <strong>{0}</strong>
-;search.no.results.empty;
 ;search.page.currentPage;Page {0} of {1}
-;search.page.empty.checkQuery;
-;search.page.empty.tryAnotherQuery;
-;search.page.empty.trySimpleQuery;
-;search.page.empty.useFeedback;
 ;search.page.firstPage;&laquo
 ;search.page.lastPage;&raquo
 ;search.page.linkNextPage;Next Page
@@ -1433,35 +1233,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.page.totalResults;{0} Products found
 ;search.placeholder;I'm looking for
 ;search.spellingSuggestion.prompt;Did you mean:
-;seo.templates.activeIngredient.description;
-;seo.templates.activeIngredient.h1;
-;seo.templates.activeIngredient.keywords;
-;seo.templates.activeIngredient.title;
-;seo.templates.activeIngredientList.description;
-;seo.templates.activeIngredientList.h1;
-;seo.templates.activeIngredientList.keywords;
-;seo.templates.activeIngredientList.title;
-;seo.templates.category.description;
-;seo.templates.category.keywords;
-;seo.templates.category.title;
-;seo.templates.manufacturer.description;
-;seo.templates.manufacturer.h1;
-;seo.templates.manufacturer.keywords;
-;seo.templates.manufacturer.title;
-;seo.templates.manufacturerList.description;
-;seo.templates.manufacturerList.h1;
-;seo.templates.manufacturerList.keywords;
-;seo.templates.manufacturerList.title;
-;seo.templates.product.description;
-;seo.templates.product.keywords;
-;seo.templates.product.title;
-;sitemap.brands.name;
-;sitemap.mnn.name;
-;sitemap.page.title;
-;sitemap.pos.name;
-;social.links.list.title;
-;storeDetails.block.additional.title;
-;storeDetails.block.path.title;
 ;storeDetails.map.link;Map
 ;storeDetails.table.address;Address
 ;storeDetails.table.distance;Distance
@@ -1512,9 +1283,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;storelocator.search.results.go;Go
 ;storelocator.search.totalResults;Showing {0} nearest stores
 ;storelocator.service.error;Service error. Use the map to locate the store
-;subscribe.form.email.placeholder;
-;subscribe.form.success;
-;subscribe.title;
 ;success.remove.user.from.unit;{0} successfully removed from {1} Business Unit
 ;system.error.link.expired.subtitle;Complete the forgotten password form again.
 ;system.error.link.expired.title;Sorry, this link has expired
@@ -1612,7 +1380,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.consignment.trackingID.notavailable;Not available.
 ;text.account.order.delivery;Delivery:
 ;text.account.order.deliveryDate;Delivery Date
-;text.account.order.deliveryType.title;
 ;text.account.order.discount;Order Discounts:
 ;text.account.order.includesTax;Your order includes {0} tax
 ;text.account.order.netTax;Tax:
@@ -1634,7 +1401,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.permission.notes;Approver Comments
 ;text.account.order.permission.title;Permission
 ;text.account.order.pickup.location;Pick Up Location:
-;text.account.order.pickup.title;
 ;text.account.order.placedBy;Placed by: {0}
 ;text.account.order.placedByText;Placed by: Customer Service Team Member
 ;text.account.order.purchase;Purchaser
@@ -1650,24 +1416,17 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.status.display.cancelled;Cancelled
 ;text.account.order.status.display.cancelling;Cancel Pending
 ;text.account.order.status.display.completed;Completed
-;text.account.order.status.display.confirmed;
 ;text.account.order.status.display.created;Created
 ;text.account.order.status.display.error;Pending
-;text.account.order.status.display.finished;
-;text.account.order.status.display.in_process;
 ;text.account.order.status.display.merchant.approved;Merchant Approved
 ;text.account.order.status.display.merchant.rejected;Merchant Rejected
 ;text.account.order.status.display.open;Open
 ;text.account.order.status.display.pending;Pending
 ;text.account.order.status.display.pending.approval;Pending Approval
 ;text.account.order.status.display.pending.merchant.approval;Pending Merchant Approval
-;text.account.order.status.display.picking;
 ;text.account.order.status.display.processing;In Process
-;text.account.order.status.display.ready;
 ;text.account.order.status.display.refused;Refused
 ;text.account.order.status.display.rejected;Rejected
-;text.account.order.status.display.shipped;
-;text.account.order.status.display.timeout;
 ;text.account.order.status.display.valid;Valid
 ;text.account.order.status.title;Status
 ;text.account.order.subtotal;Subtotal:
@@ -1976,13 +1735,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.button.showall;Show All
 ;text.button.use;Use
 ;text.cart;Cart
-;text.catalog.navigation.title;
 ;text.checkout;Checkout
 ;text.checkout.noDeliveryModes;Please check the delivery address. If not selected already, please select the delivery address first and try again.
 ;text.checkout.pickup.in.store;Pickup in Store
 ;text.checkout.pickup.in.store.address;Pickup in Store - {0}, {1}
-;text.checkout.pickup.in.store.title;
-;text.checkout.pickup.select.title;
 ;text.company.accountsummary;Account Summary
 ;text.company.accountsummary.address.label;Address
 ;text.company.accountsummary.allstatus.label;All
@@ -2871,21 +2627,17 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.i18n.analogs;Analogs
 ;text.i18n.categories;Categories
 ;text.i18n.products;Products
-;text.i18n.producttypes;
 ;text.iconCartRemove;Remove
 ;text.invoice.download.error;Invoice download failed.
 ;text.invoice.otherInformation;Other Information
 ;text.invoiceInformation;Invoice Information
 ;text.itemPrice;Item Price
 ;text.javascript.disabled;JavaScript is required to access the page. Please enable JavaScript.
-;text.label.active.ingredient;
 ;text.label.loadingmoreresults;Loading more results...
 ;text.label.phone;Phone
 ;text.label.showmoreresults;Show more results
 ;text.language;Select Language
-;text.link.back;
 ;text.link.home.label;Home
-;text.loading.unexpected.error;
 ;text.loadingMessage;Loading...
 ;text.logout;Logout
 ;text.manageuser.error.email.exists.title;Email already exists
@@ -2900,7 +2652,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.order.reorderbutton;Reorder
 ;text.page.message.underconstruction;<strong>Information:</strong>  Page Under Construction - Not Completely Functional
 ;text.parentunit.disabled.warning;The parent business unit of this customer is not active. In order to manage this customer activate the parent unit first.
-;text.password.update;
 ;text.paymentDetails;Payment Details
 ;text.paymentMethod;Payment Method
 ;text.paymentcard.remove.confirm;Are you sure you want to delete this payment card?
@@ -3040,32 +2791,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.total;Total
 ;text.updates;Updates
 ;text.user.disabled;Disabled User
-;text.validation.field.accept;
-;text.validation.field.badPassword;
-;text.validation.field.date;
-;text.validation.field.dateISO;
-;text.validation.field.digits;
-;text.validation.field.equaPasslTo;
-;text.validation.field.equalTo;
-;text.validation.field.error;
-;text.validation.field.letter.digits;
-;text.validation.field.max;
-;text.validation.field.maxlength;
-;text.validation.field.min;
-;text.validation.field.minlength;
-;text.validation.field.number;
-;text.validation.field.old_new_password;
-;text.validation.field.policy;
-;text.validation.field.pwd;
-;text.validation.field.range;
-;text.validation.field.rangelength;
-;text.validation.field.remote;
-;text.validation.field.required;
-;text.validation.field.select.required;
-;text.validation.field.url;
-;text.validation.form.login.error;
-;text.validation.form.password.error;
-;text.validation.form.register.email.error;
 ;text.view;View
 ;text.viewfullsite;View Full Site
 ;text.volumePrices;Volume prices available
@@ -3074,8 +2799,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.voucher.apply.input.label;Coupon code
 ;text.voucher.apply.input.placeholder;enter coupon code
 ;text.voucher.apply.invalid.error;This coupon is not valid
-;text.voucher.applyed;
-;text.voucher.close.button.label;
 ;text.voucher.release.error;Error while removing the voucher {0}
 ;tooShort.updatePasswordForm.newPassword;Must be at least 6 characters.
 ;unit.name.invalid;Please select a name for the business unit
@@ -3111,31 +2834,13 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;worldpay.paymentMethod.creditcard;Card
 ;worldpay.paymentMethod.invalid;Please select a Payment Method
 ;worldpay.paymentMethod.noShopperBankCode;Please select a bank for payment Method
-;ymlIntegration.paramNames.activeIngredients;
-;ymlIntegration.paramNames.brandCountry;
-;ymlIntegration.paramNames.cautions;
-;ymlIntegration.paramNames.contraindications;
-;ymlIntegration.paramNames.description;
-;ymlIntegration.paramNames.directions;
-;ymlIntegration.paramNames.dosage;
-;ymlIntegration.paramNames.egk;
-;ymlIntegration.paramNames.expirationDateAfterOpen;
-;ymlIntegration.paramNames.friendlyName;
-;ymlIntegration.paramNames.ingredients;
-;ymlIntegration.paramNames.interactionWithOthers;
-;ymlIntegration.paramNames.isPrescription;
-;ymlIntegration.paramNames.itemCount;
-;ymlIntegration.paramNames.itemVolume;
-;ymlIntegration.paramNames.overdose;
-;ymlIntegration.paramNames.pharmacologicEffect;
-;ymlIntegration.paramNames.pharmocokinetics;
-;ymlIntegration.paramNames.precautionaryMeasures;
-;ymlIntegration.paramNames.pregnancyWarnings;
-;ymlIntegration.paramNames.sideEffect;
-;ymlIntegration.paramNames.storage;
-;ymlIntegration.paramUnits.volume;
-;ymlIntegration.values.shop.company;
-;ymlIntegration.values.shop.name;
-;ymlIntegration.values.shop.offer.sales_notes;
-;ymlIntegration.values.shop.offer.url.utm_medium;
-;ymlIntegration.values.shop.offer.url.utm_source;
+
+;product.grid.variants.more;More colors available
+
+;text.account.orderHistory.page.sort.byPurchaseOrderNumber;Purchase Order Number
+;text.account.orderHistory.page.sort.byStatus;Status
+;text.account.orderHistory.page.sort.byOrderType;OrderType
+;text.account.orderHistory.page.sort.byRdd;Requested delivery date
+;text.account.orderHistory.orderType;Order Type
+;text.account.orderHistory.rdd;Requested delivery date
+;text.account.orderHistory.totalQty;Total Quantity
