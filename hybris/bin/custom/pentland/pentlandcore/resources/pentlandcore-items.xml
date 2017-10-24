@@ -324,6 +324,11 @@
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute type="java.lang.Long" qualifier="sequenceId">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Attribute is used in batch import process for avoiding multiple imports.</description>
+                    </attribute>
                 </attributes>
             </itemtype>
 

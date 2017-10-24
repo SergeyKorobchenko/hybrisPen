@@ -319,19 +319,15 @@
 			<value>;{+0};{+1};{S}</value>
 		</property>
 	</bean>
-	<bean id="pentlandBatchB2BCustomerConverter"
-		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+	<bean id="pentlandBatchB2BCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				$name=name[cellDecorator=com.bridgex.core.customer.impex.decorator.UserNameDecorator]
-				$groups=groups(uid)[default=b2bcustomergroup,cellDecorator=com.bridgex.core.customer.impex.decorator.B2BCustomerGroupsDecorator]
-				$defaultPassword=123456
-				INSERT
-				B2BCustomer;uid[unique=true];$groups;$name;division(uid);sessionCurrency(isocode)[default=GBP];password[default=$defaultPassword];loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				$defaultPassword=Nm8c5f8I
+				INSERT B2BCustomer;uid[unique=true];email[unique=true];@b2bGroups[translator=com.bridgex.core.customer.impex.translators.B2BCustomerGroupsTranslator,default=b2bcustomergroup];name;groups(uid);division(code);sessionCurrency(isocode)[default=GBP];password[default=$defaultPassword];passwordEncoding[default=pbkdf2];loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{+1};{+2};{5};;;{S}</value>
+			<value>;{+0};{+0};{1};{+2} {+3};{+4};{5};{6};{7};{8};;{S}</value>
 		</property>
 	</bean>
 </beans>
