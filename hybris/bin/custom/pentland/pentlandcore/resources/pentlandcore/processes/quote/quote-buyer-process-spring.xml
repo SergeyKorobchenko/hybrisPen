@@ -27,7 +27,7 @@
         <property name="quoteService" ref="quoteService"/>
     </bean>
 
-    <bean id="generateBuyerQuoteSubmissionEmail" parent="abstractGenerateEmailAction">
+    <bean id="generateBuyerQuoteSubmissionEmail" parent="generateQuoteEmailAction">
         <property name="frontendTemplateName" value="QuoteBuyerSubmissionEmailTemplate"/>
     </bean>
 
