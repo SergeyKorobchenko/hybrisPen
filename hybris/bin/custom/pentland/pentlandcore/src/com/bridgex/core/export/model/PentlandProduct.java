@@ -25,12 +25,9 @@ public class PentlandProduct {
   private String trainingwearType;
   private String sport;
   private String accessoryType;
-  private String teamwear;
   private String useageOccasion;
   private String surface;
   private String trainingMethod;
-  private String equipment;
-  private String balls;
 
   public String getCode() {
     return code;
@@ -149,20 +146,11 @@ public class PentlandProduct {
     this.accessoryType = accessoryType;
   }
 
-  public String getTeamwear() {
-    return teamwear;
-  }
-
-  @DelimitedFileMethod(position = 14)
-  public void setTeamwear(String teamwear) {
-    this.teamwear = teamwear;
-  }
-
   public String getUseageOccasion() {
     return useageOccasion;
   }
 
-  @DelimitedFileMethod(position = 15)
+  @DelimitedFileMethod(position = 14)
   public void setUseageOccasion(String useageOccasion) {
     this.useageOccasion = useageOccasion;
   }
@@ -171,7 +159,7 @@ public class PentlandProduct {
     return surface;
   }
 
-  @DelimitedFileMethod(position = 16)
+  @DelimitedFileMethod(position = 15)
   public void setSurface(String surface) {
     this.surface = surface;
   }
@@ -180,26 +168,9 @@ public class PentlandProduct {
     return trainingMethod;
   }
 
-  @DelimitedFileMethod(position = 17)
+  @DelimitedFileMethod(position = 16)
   public void setTrainingMethod(String trainingMethod) {
     this.trainingMethod = trainingMethod;
   }
 
-  public String getEquipment() {
-    return equipment;
-  }
-
-  @DelimitedFileMethod(position = 18)
-  public void setEquipment(String equipment) {
-    this.equipment = equipment;
-  }
-
-  public String getBalls() {
-    return balls;
-  }
-
-  @DelimitedFileMethod(position = 19)
-  public void setBalls(String balls) {
-    this.balls = balls;
-  }
 }
