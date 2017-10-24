@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Created by ekaterina.agievich@masterdata.ru on 9/25/2017.
+ * @author Created by ekaterina.agievich on 9/25/2017.
  */
 public class CategoryVisibilityValueResolver extends AbstractValueResolver<ProductModel, Object, Object> {
   @Override

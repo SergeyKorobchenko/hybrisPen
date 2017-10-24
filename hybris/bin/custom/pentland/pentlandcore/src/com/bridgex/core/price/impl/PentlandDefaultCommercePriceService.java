@@ -19,7 +19,7 @@ import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.jalo.order.price.PriceInformation;
 
 /**
- * @author Created by konstantin.pavlyukov@masterdata.ru on 10/23/2017.
+ * @author Created by konstantin.pavlyukov on 10/23/2017.
  */
 public class PentlandDefaultCommercePriceService extends DefaultCommercePriceService implements PentlandCommercePriceService{
 
