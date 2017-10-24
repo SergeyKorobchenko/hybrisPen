@@ -24,7 +24,7 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 
 /**
- * Created by dmitry.konovalov@masterdata.ru on 16.10.2017.
+ * Created by dmitry.konovalov on 16.10.2017.
  */
 public class PentlandB2BUnitToUserTranslator extends SingleValueTranslator {
 

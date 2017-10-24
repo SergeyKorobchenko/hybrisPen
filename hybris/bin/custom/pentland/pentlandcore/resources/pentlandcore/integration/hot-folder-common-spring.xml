@@ -248,12 +248,11 @@
 	<bean id="pentlandBatchProductPriceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				#% impex.enableCodeExecution(true)
-				INSERT_UPDATE PriceRow;product(code)[unique = true];price;ug(code)[unique =true][default = customer];startTime[dateformat='dd.MM.yyyy HH:mm',default='01.01.1900 00:00'];endTime[dateformat='dd.MM.yyyy HH:mm',default='31.12.3000 23:59'];baseStore(uid)[unique=true, default=pentland];unit(code[unique = true, default=pieces]);currency(isocode)[unique = true,default=GBP];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE PriceRow;productId[unique = true];price;currency(isocode)[unique = true,default=GBP];ug(code)[unique =true,type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];startTime[dateformat='dd.MM.yyyy HH:mm',default='01.01.1900 00:00'];endTime[dateformat='dd.MM.yyyy HH:mm',default='31.12.3000 23:59'];unitFactor[default=1];minqtd[default=1];net[default=true];unit(code[unique = true])[cellDecorator=com.bridgex.core.impex.decorator.PriceProductUnitDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{+1};;;;;;;{S}</value>
+			<value>;{+0};{+1};{2};{3};;;;;;{+0};{S}</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchMediaConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">

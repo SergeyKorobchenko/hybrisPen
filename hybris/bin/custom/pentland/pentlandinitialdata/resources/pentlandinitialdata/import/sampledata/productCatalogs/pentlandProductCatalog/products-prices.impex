@@ -175,7 +175,7 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=piec
 ;102284_asteroid_plaid;pieces;GBP;59,46;1;1;false;pronto-services
 ;99063_red;pieces;EUR;68,14;1;1;false;pronto-services
 ;99063_kelly;pieces;GBP;59,46;1;1;false;pronto-services
-;95353_mascot_trippleo;pieces;EUR;68,14;1;1;false;pronto-services
+;95353_mascot_trippleo;pieces;GBP;68,14;1;1;false;pronto-services
 ;95353_sugar_cane;pieces;GBP;59,46;1;1;false;pronto-services
 ;95366_mini_heart_camo;pieces;EUR;68,14;1;1;false;pronto-services
 ;95366_honeydew;pieces;GBP;59,46;1;1;false;pronto-services

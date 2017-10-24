@@ -16,7 +16,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.solrfacetsearch.search.impl.SearchQueryConverterData;
 
 /**
- * @author Created by ekaterina.agievich@masterdata.ru on 9/25/2017.
+ * @author Created by ekaterina.agievich on 9/25/2017.
  */
 public class AdditionalFiltersQueryPopulator implements Populator<SearchQueryConverterData, SolrQuery> {
 

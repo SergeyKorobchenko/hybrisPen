@@ -27,4 +27,7 @@
 		<value>HYBRIS</value>
 	</util:list>
 
+	<alias name="pentlandDefaultPriceDao" alias="pentlandPriceDao"/>
+	<bean id="pentlandDefaultPriceDao" class="com.bridgex.core.price.dao.impl.PentlandDefaultPriceDao" parent="abstractItemDao"/>
+
 </beans>
