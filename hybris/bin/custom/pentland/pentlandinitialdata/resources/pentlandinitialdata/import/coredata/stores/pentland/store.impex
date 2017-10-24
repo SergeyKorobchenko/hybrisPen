@@ -93,3 +93,9 @@ INSERT_UPDATE WorldpayBankConfiguration; code[unique = true]; name[lang = en]; d
 ; TRIODOS      ; Triodos      ; Triodos Bank      ; true ; IDEAL-SSL
 ; VAN_LANSCHOT ; Van Lanschot ; Van Lanschot Bank ; true ; IDEAL-SSL
 ; KNAB         ; Knab         ; Knab bank         ;      ; IDEAL-SSL
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId
+;exportDataJobPerformable;exportDataJobPerformable
+
+INSERT_UPDATE ExportDataCronJob;code[unique=true];job(code);baseStore(uid);cmsSite(uid);language(isocode);currency(isocode);user(uid);thirdPartyHost;thirdPartyUsername;thirdPartyPassword;dataGenerationPipeline;sessionLanguage(isocode)
+;pentlandProductsExportJob;exportDataJobPerformable;$storeUid;$storeUid;$defaultLanguage;$defaultCurrency;anonymous;;;;exportPentlandProductPipeline;$defaultLanguage
