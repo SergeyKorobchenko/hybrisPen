@@ -101,7 +101,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
 #;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
-;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider                     ;              ;true;100;true;50 ;true;25;    ;   ;  ;
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;productAttributesValueResolver            ;attribute->name|skipVariants->TRUE;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider              ;              ;true;40 ;true;20 ;true;10;    ;   ;  ;
 ;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -138,7 +138,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; price        	  ;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;wholesalePriceValueResolver;;;defaultTopValuesProvider;pentlandPriceRangeGBP
 ;$solrIndexedType; productGroup     ;string ;  ; ; true; ; ;MultiSelectOr; Alpha; 5000; true; ; ; springELValueProvider;;
 ;$solrIndexedType; season           ;string ; ; ; true; ; ;MultiSelectOr; Alpha; 6000; true; ; ; springELValueProvider;;
-;$solrIndexedType; gender           ;string;;;;;;Refine;Alpha; 4500;true;false;;genderValueProvider                       ;genderFacetDisplayNameProvider
+;$solrIndexedType; gender           ;string;;;;;;Refine;Alpha; 4500;true;false;;genderValueResolver                       ;genderFacetDisplayNameProvider
 
 
 # Create the queries that will be used to extract data for Solr

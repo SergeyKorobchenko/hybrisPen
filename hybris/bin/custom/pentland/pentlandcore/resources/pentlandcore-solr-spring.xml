@@ -144,7 +144,7 @@
 
 	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider"/>
 
-	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractValueResolver">
+	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractBaseProductValueResolver">
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
 
@@ -167,4 +167,8 @@
 
 	<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>
 	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
+
+	<bean id="abstractBaseProductValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBaseProductValueResolver" parent="abstractValueResolver" abstract="true"/>
+
+	<bean id="genderValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.GenderValueResolver" parent="abstractBaseProductValueResolver"/>
 </beans>
