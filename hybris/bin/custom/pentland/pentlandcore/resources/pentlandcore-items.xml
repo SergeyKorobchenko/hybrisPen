@@ -304,7 +304,7 @@
                     <attribute qualifier="name" type="localized:java.lang.String">
                         <description>Localized display name for division</description>
                         <persistence type="property" />
-                        <modifiers initial="true" optional="false" read="true" write="true" search="true" />
+                        <modifiers initial="false" optional="true" read="true" write="true" search="true" />
                     </attribute>
                     <attribute qualifier="email" type="java.lang.String">
                         <modifiers initial="true" optional="false" read="true" write="true" search="true" />
