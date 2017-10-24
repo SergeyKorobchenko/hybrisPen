@@ -55,10 +55,8 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;pentland_Email_Quote_Buyer_Cancellation_Subject;"Quote Buyer Cancellation Email Subject";$emailResource/email-quoteBuyerCancellationSubject.vm
  ;pentland_Email_Quote_Buyer_Submission_Body;"Quote Buyer Submission Email Body";$emailResource/email-quoteBuyerSubmissionBody.vm
  ;pentland_Email_Quote_Buyer_Submission_Subject;"Quote Buyer Submission Email Subject";$emailResource/email-quoteBuyerSubmissionSubject.vm
- ;pentland_Email_Quote_Expired_Body;"Quote Expired Body";$emailResource/email-quoteExpiredBody.vm
- ;pentland_Email_Quote_Expired_Subject;"Quote Expired Subject";$emailResource/email-quoteExpiredSubject.vm
- ;pentland_Email_Quote_To_Expire_Soon_Body;"Quote To Expire Soon Body";$emailResource/email-quoteToExpireSoonBody.vm
- ;pentland_Email_Quote_To_Expire_Soon_Subject;"Quote To Expire Soon Subject";$emailResource/email-quoteToExpireSoonSubject.vm
+ ;pentland_Email_Quote_SalesRep_Submission_Body;"Quote SalesRep Submission Email Body";$emailResource/email-quoteSalesRepSubmissionBody.vm
+ ;pentland_Email_Quote_SalesRep_Submission_Subject;"Quote SalesRep Submission Email Subject";$emailResource/email-quoteSalesRepSubmissionSubject.vm
  ;pentland_Email_Ready_For_Pickup_Body;"Ready For Pickup Email Body";$emailResource/email-readyForPickupBody.vm
  ;pentland_Email_Ready_For_Pickup_Subject;"Ready For Pickup Email Subject";$emailResource/email-readyForPickupSubject.vm
 
@@ -75,22 +73,21 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
 
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
- ;;CustomerRegistrationEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;DeliverySentEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;ForgottenPasswordEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderApprovalRejectionEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderCancelledEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderCollectionReminderEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderConfirmationEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderMoveToCsEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderPartiallyCanceledEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderPartiallyRefundedEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderPendingApprovalEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;OrderRefundEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;QuoteBuyerCancellationEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;QuoteBuyerSubmissionEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;QuoteExpiredEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;QuoteToExpireSoonEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;ReadyForPickupEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;ReplenishmentOrderConfirmationEmail;"customerservices@hybris.com";"Customer Services Team"
- ;;ReplenishmentOrderPlacedEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;CustomerRegistrationEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;DeliverySentEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;ForgottenPasswordEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderApprovalRejectionEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderCancelledEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderCollectionReminderEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderConfirmationEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderMoveToCsEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderPartiallyCanceledEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderPartiallyRefundedEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderPendingApprovalEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderRefundEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;QuoteBuyerCancellationEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;QuoteBuyerSubmissionEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;QuoteSalesRepSubmissionEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;ReadyForPickupEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;ReplenishmentOrderConfirmationEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;ReplenishmentOrderPlacedEmail;"customerservices@pentland.com";"Pentland Customer Service"

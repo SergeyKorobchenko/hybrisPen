@@ -15,7 +15,6 @@
 
     <action id="checkForQuoteAutoApprovalAction" bean="checkForQuoteAutoApprovalAction">
         <transition name="OK" to="createBuyerOfferAction"/>
-        <transition name="NOK" to="continue"/>
     </action>
 
     <action id="createBuyerOfferAction" bean="createBuyerOfferAction">
