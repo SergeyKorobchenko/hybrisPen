@@ -70,17 +70,17 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;aria.pickupinstore.loading;Loading... Please wait...
 ;aria.pickupinstore.storesloaded;Stores loaded
 ;asm.action.restricted;You do not have access rights to perform this action.
-;asm.bindCart.error.not_anonymous_cart;Only anonymous cart can be bound to customer.
-;asm.bindCart.error.unknown_cart_id;Unknown Cart ID. Cart will not be bound.
+;asm.bindCart.error.not_anonymous_cart;Only anonymous basket can be bound to customer.
+;asm.bindCart.error.unknown_cart_id;Unknown Basket ID. Basket will not be bound.
 ;asm.createCustomer.duplicate.error;Customer ID already exists
 ;asm.createCustomer.error;Error during customer creating
 ;asm.emulate.at;Location:
-;asm.emulate.cart-order.label;Cart ID/Order Id
-;asm.emulate.cart-order.placeholder;Cart ID/Order ID Number
+;asm.emulate.cart-order.label;Basket ID/Order Id
+;asm.emulate.cart-order.placeholder;Basket ID/Order ID Number
 ;asm.emulate.cart.bind;Assign
 ;asm.emulate.cart.bind.ending;&nbsp
-;asm.emulate.cart.label;Cart ID
-;asm.emulate.cart.placeholder;Cart ID Number
+;asm.emulate.cart.label;Basket ID
+;asm.emulate.cart.placeholder;Basket ID Number
 ;asm.emulate.createAccount;Create
 ;asm.emulate.createAccount.ending;&nbsp
 ;asm.emulate.customer.bind.ending;&nbsp
@@ -88,10 +88,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;asm.emulate.end;End
 ;asm.emulate.end.ending;Session
 ;asm.emulate.error.agent_missed;Log in to continue
-;asm.emulate.error.cart;Cart ID/Order ID not found
-;asm.emulate.error.cart_became_an_order;The customer''s cart has been checked out into the order below.
-;asm.emulate.error.customer;Unknown customer ID. Will not add customer and/or cart to the session.
-;asm.emulate.error.no_customer_or_cart_id_provided;No Customer or Cart ID were provided.
+;asm.emulate.error.cart;Basket ID/Order ID not found
+;asm.emulate.error.cart_became_an_order;The customer''s basket has been checked out into the order below.
+;asm.emulate.error.customer;Unknown customer ID. Will not add customer and/or basket to the session.
+;asm.emulate.error.no_customer_or_cart_id_provided;No Customer or Basket ID were provided.
 ;asm.emulate.error.order_not_found;The customer''s order ID {0} cannot be found. Please investigate.
 ;asm.emulate.multiple_stores;Multiple Store Assignments
 ;asm.emulate.no_stores;Not Assigned
@@ -136,24 +136,24 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;b2busergroup.name;User group Name
 ;b2busergroup.parent;Parent Business Unit
 ;b2busergroup.save;Save Updates
-;basket.add.free.gift;Add your free gift to Cart
+;basket.add.free.gift;Add your free gift to Basket
 ;basket.add.to.basket;Add to bag
 ;basket.add.to.cart;Add
 ;basket.added.to.basket;Added to Your Shopping Bag
 ;basket.added.to.mobile.basket;Added Item
 ;basket.configure.product;Configure
 ;basket.confirmation.items.added;Your saved items were added to your bag.
-;basket.error.checkout.empty.cart;You cannot proceed to checkout with empty cart.
-;basket.error.entrygroup.remove;Unable to remove cart entry group #{0} due to an error.
+;basket.error.checkout.empty.cart;You cannot proceed to checkout with empty basket.
+;basket.error.entrygroup.remove;Unable to remove basket entry group #{0} due to an error.
 ;basket.error.invalid.configuration;You have invalid product configuration. {0} issue(s) must be resolved before checkout.
 ;basket.error.invalid.configuration.edit;Resolve issues
 ;basket.error.no.pickup.location;Please select stores for the entries highlighted in red
 ;basket.error.occurred;Error occurred while adding to bag
 ;basket.error.product.removed;Sorry, one or more products were removed from your bag as they are not in stock or are no longer available.
 ;basket.error.quantity.invalid;Please provide a positive number to update the quantity of an item.
-;basket.error.quantity.invalid.binding;Invalid quantity: please provide a valid quantity number to add this product to your cart
+;basket.error.quantity.invalid.binding;Invalid quantity: please provide a valid quantity number to add this product to your basket
 ;basket.error.quantity.notNull;Quantity field cannot be empty.
-;basket.export.cart.error;There was an exception while exporting Cart
+;basket.export.cart.error;There was an exception while exporting Basket
 ;basket.export.cart.item.name;Name
 ;basket.export.cart.item.price;Price
 ;basket.export.cart.item.quantity;Quantity
@@ -162,10 +162,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.information.merge.successful;The bag saved against your user account and your current bag have been merged. Click here to visit your bag.
 ;basket.information.quantity.adjusted;Your items have been modified to match available stock levels
 ;basket.information.quantity.noItemsAdded.lowStock;Sorry, there is insufficient stock for your bag.
-;basket.information.quantity.noItemsAdded.maxOrderQuantityExceeded;Unfortunately the quantity you chose exceeded the maximum order quantity for this product. The quantity in your cart has been reduced to the maximum order quantity.
-;basket.information.quantity.noItemsAdded.noStock;Sorry, there is insufficient stock for your cart.
+;basket.information.quantity.noItemsAdded.maxOrderQuantityExceeded;Unfortunately the quantity you chose exceeded the maximum order quantity for this product. The quantity in your basket has been reduced to the maximum order quantity.
+;basket.information.quantity.noItemsAdded.noStock;Sorry, there is insufficient stock for your basket.
 ;basket.information.quantity.reducedNumberOfItemsAdded.lowStock;A lower quantity of this product has been added to your bag due to insufficient stock
-;basket.information.quantity.reducedNumberOfItemsAdded.maxOrderQuantityExceeded;Unfortunately the quantity you chose exceeded the maximum order quantity for this product. The quantity in your cart has been reduced to the maximum order quantity.
+;basket.information.quantity.reducedNumberOfItemsAdded.maxOrderQuantityExceeded;Unfortunately the quantity you chose exceeded the maximum order quantity for this product. The quantity in your basket has been reduced to the maximum order quantity.
 ;basket.items;Items
 ;basket.page.availability;Availability
 ;basket.page.cartHelpContent;Need help? <br />Call our team to help you directly 1-222-333-444<br />Your bag ID for assistance is {0}
@@ -176,7 +176,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.comment.menu;Comment
 ;basket.page.delivery;Delivery
 ;basket.page.entry.action.REMOVE;Remove
-;basket.page.entry.unknownAction;Unknown cart entry action
+;basket.page.entry.unknownAction;Unknown basket entry action
 ;basket.page.free;FREE
 ;basket.page.id;Item ID
 ;basket.page.item;Item (style number)
@@ -186,8 +186,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
 ;basket.page.message.update.pickupinstoreitem.toship;Pickup in store item was updated to shipping.
-;basket.page.message.update.reducedNumberOfItemsAdded.lowStock;"The cart quantity of <a href=""{3}"" style=""text-decoration: underline"">{0}</a> has been reduced to {1} from {2} due to insufficient stock."
-;basket.page.message.update.reducedNumberOfItemsAdded.noStock;"<a href=""{1}"" style=""text-decoration: underline"">{0}</a> has been removed from the cart due to insufficient stock."
+;basket.page.message.update.reducedNumberOfItemsAdded.lowStock;"The basket quantity of <a href=""{3}"" style=""text-decoration: underline"">{0}</a> has been reduced to {1} from {2} due to insufficient stock."
+;basket.page.message.update.reducedNumberOfItemsAdded.noStock;"<a href=""{1}"" style=""text-decoration: underline"">{0}</a> has been removed from the basket due to insufficient stock."
 ;basket.page.needHelp;Need help?
 ;basket.page.number;No.
 ;basket.page.price;Price
@@ -195,7 +195,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.productdetails;Product Details
 ;basket.page.qty;Qty
 ;basket.page.quantity;Quantity
-;basket.page.quote.discounts;Quote Discount:
+;basket.page.quote.discounts;Order Query Discount:
 ;basket.page.quote.discounts.link;Discount
 ;basket.page.quote.discounts.link.absolute.off;{0} off
 ;basket.page.quote.discounts.link.percent.off;{0}% off
@@ -233,49 +233,49 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.totals.total.items;{0} items
 ;basket.page.totals.total.items.one;{0} item
 ;basket.page.update;Update
-;basket.page.validation.message;Product(s) have been updated/removed in your cart.
+;basket.page.validation.message;Product(s) have been updated/removed in your basket.
 ;basket.page.viewFuture;Future Availability
 ;basket.page.viewFuture.not.multisku;The selected code {0} is not a multidimensional product.
 ;basket.page.viewFuture.unavailable;Future stock system is unavailable, please try again later.
 ;basket.pickup.product.variant;{0}: {1}
 ;basket.potential.promotions;Potential Promotions
-;basket.quick.order.error;{0} Product(s) were not added to the cart, Review errors on quick orders page
+;basket.quick.order.error;{0} Product(s) were not added to the basket, Review errors on quick orders page
 ;basket.received.promotions;Received Promotions
-;basket.restoration;Welcome back {0}. Some items from your previous shopping cart have been restored to your current shopping cart.
-;basket.restoration.delivery.changed;{0} was restored to your cart, but the delivery method has changed due to low local stock.
-;basket.restoration.errorMsg;Your cart could not be restored.
+;basket.restoration;Welcome back {0}. Some items from your previous shopping basket have been restored to your current shopping basket.
+;basket.restoration.delivery.changed;{0} was restored to your basket, but the delivery method has changed due to low local stock.
+;basket.restoration.errorMsg;Your basket could not be restored.
 ;basket.restoration.items.msg;The following items are:
-;basket.restoration.lowStock;Unfortunately a lower quantity of {0} was restored to your cart due to low stock. {3} were added to your cart, you now have {2}.
-;basket.restoration.noStock;"Unfortunately <a href=""{1}"" {4}>{0}</a> could not be restored to your cart as it is out of stock. You previously had {2} in your cart."
-;basket.restoration.restorationError;Your cart could not be restored.
+;basket.restoration.lowStock;Unfortunately a lower quantity of {0} was restored to your basket due to low stock. {3} were added to your basket, you now have {2}.
+;basket.restoration.noStock;"Unfortunately <a href=""{1}"" {4}>{0}</a> could not be restored to your basket as it is out of stock. You previously had {2} in your basket."
+;basket.restoration.restorationError;Your basket could not be restored.
 ;basket.restoration.success;{0}
-;basket.restoration.unavailable;Unfortunately {0} is no longer available. You previously had {2} in your cart.
-;basket.restoration.view.cart;"<a href=""{0}"">  Click to view cart</a>."
-;basket.restoration.view.cart.btn;View Cart
-;basket.save.cart;New Cart
+;basket.restoration.unavailable;Unfortunately {0} is no longer available. You previously had {2} in your basket.
+;basket.restoration.view.cart;"<a href=""{0}"">  Click to view basket</a>."
+;basket.restoration.view.cart.btn;View Basket
+;basket.save.cart;New Basket
 ;basket.save.cart.action.cancel;Cancel
 ;basket.save.cart.action.save;Save
 ;basket.save.cart.description;Description
-;basket.save.cart.info.msg;Your cart will be moved to Saved Cart list.
+;basket.save.cart.info.msg;Your basket will be moved to Saved Basket list.
 ;basket.save.cart.max.chars;Characters Left
 ;basket.save.cart.name;Name
-;basket.save.cart.on.error;There was an exception while saving Cart {0}
-;basket.save.cart.on.success;Cart {0} was successfully saved
-;basket.save.cart.validation.description.size;Cart description cannot be more than 255 characters
-;basket.save.cart.validation.name.charset;Cart name can only be alpha numeric
-;basket.save.cart.validation.name.notBlank;Cart name cannot be blank
-;basket.save.cart.validation.name.size;Cart name cannot be more than 255 characters
+;basket.save.cart.on.error;There was an exception while saving Basket {0}
+;basket.save.cart.on.success;Basket {0} was successfully saved
+;basket.save.cart.validation.description.size;Basket description cannot be more than 255 characters
+;basket.save.cart.validation.name.charset;Basket name can only be alpha numeric
+;basket.save.cart.validation.name.notBlank;Basket name cannot be blank
+;basket.save.cart.validation.name.size;Basket name cannot be more than 255 characters
 ;basket.select.product;Select
 ;basket.validation.availableAgain;"<strong><a href=""{1}"">{0}</a></strong> is available again. Your items have been modified."
 ;basket.validation.configurationError;{0} has configuration error(s) that need to be fixed before proceeding to checkout.
-;basket.validation.couponNotValid;The coupon applied on the cart is no longer valid and has been removed from the cart.
+;basket.validation.couponNotValid;The coupon applied on the basket is no longer valid and has been removed from the basket.
 ;basket.validation.entryGroupError;One of entry groups has error(s) that need to be fixed before proceeding to checkout.
 ;basket.validation.invalidGroup;This group is improperly configured. Please edit it.
-;basket.validation.lowStock;"Unfortunately a lower quantity of <a href=""{1}"" {4}>{0}</a> was applied to your cart due to low stock. You previously had {2} in your cart, you now have {3}."
+;basket.validation.lowStock;"Unfortunately a lower quantity of <a href=""{1}"" {4}>{0}</a> was applied to your basket due to low stock. You previously had {2} in your basket, you now have {3}."
 ;basket.validation.movedFromPOSToStore;Your items have been modified to match available stock levels. One or more pickup in store items were updated to shipping.
-;basket.validation.noStock;"Unfortunately <a href=""{1}"">{0}</a> was removed from your cart as it is out of stock. You previously had {2} in your cart."
-;basket.validation.unavailable;Unfortunately {0} was removed from your cart as it is no longer available.
-;basket.validation.voucherNotValid;The coupon applied on the cart is no longer valid and has been removed from the cart.
+;basket.validation.noStock;"Unfortunately <a href=""{1}"">{0}</a> was removed from your basket as it is out of stock. You previously had {2} in your basket."
+;basket.validation.unavailable;Unfortunately {0} was removed from your basket as it is no longer available.
+;basket.validation.voucherNotValid;The coupon applied on the basket is no longer valid and has been removed from the basket.
 ;basket.view.basket;View bag
 ;basket.your.shopping.basket;Your shopping bag
 ;brands.all;All
@@ -290,8 +290,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;breadcrumb.mnn;Active substances
 ;breadcrumb.not.found;Page Not Found
 ;breadcrumb.quickOrder;Quick Order
-;breadcrumb.quote.edit;Edit Quote
-;breadcrumb.quote.view;Quote {0}
+;breadcrumb.quote.edit;Edit Order Query
+;breadcrumb.quote.view;Order Query {0}
 ;cart.checkout;CHECKOUT
 ;cart.checkout.error;Error proceeding to checkout.
 ;cart.count;{0}
@@ -303,7 +303,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.page.continue;Continue Shopping
 ;cart.page.minimalorderamountnotpassed;Lowest order amount is {0}
 ;cart.page.shop;Shop
-;cart.page.title;Your Shopping Cart
+;cart.page.title;Your Shopping Basket
 ;cart.page.total;Total:
 ;cart.product.configuration.toolong;Value is too long
 ;cart.view;VIEW CART
@@ -367,7 +367,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.error.paymentethod.formentry.sop.missing.billTo_street2;Please enter a value for this field
 ;checkout.error.paymentethod.formentry.sop.missing.billTo_titleCode;Please enter a value for this field
 ;checkout.error.paymentethod.formentry.sop.missing.card_accountNumber;Please enter a card number
-;checkout.error.paymentethod.formentry.sop.missing.card_cardType;Please select a cart type
+;checkout.error.paymentethod.formentry.sop.missing.card_cardType;Please select a basket type
 ;checkout.error.paymentethod.formentry.sop.missing.card_cvNumber;Please enter a value for this field
 ;checkout.error.paymentethod.formentry.sop.missing.card_expirationMonth;Please enter an expiry month
 ;checkout.error.paymentethod.formentry.sop.missing.card_expirationYear;Please enter an expiry year
@@ -674,7 +674,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.summary.scheduleReplenishment;Schedule Replenishment
 ;checkout.summary.select.payment.method;Select Payment Method
 ;checkout.summary.shippingAddress;Shipping Address
-;coupon.already.exists.cart;A coupon of the same campaign has already been applied to the cart.
+;coupon.already.exists.cart;A coupon of the same campaign has already been applied to the basket.
 ;coupon.already.redeemed;The coupon code entered has been redeemed already.
 ;coupon.general.error;Coupon Redemption Failed.
 ;coupon.invalid.code.provided;The coupon code entered is not valid.
@@ -806,13 +806,13 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;import.csv.savedCart.fileContentNote;The text file should list the product SKUs and quantities in the following format:
 ;import.csv.savedCart.fileMaxSizeExceeded;The file is too large.
 ;import.csv.savedCart.fileRequired;The file cannot be empty.
-;import.csv.savedCart.filesNote;The imported file will be used to create a saved cart.
+;import.csv.savedCart.filesNote;The imported file will be used to create a saved basket.
 ;import.csv.savedCart.genericError;An error occured. Please try again later.
 ;import.csv.savedCart.import;Import
 ;import.csv.savedCart.noFile;No file chosen.
 ;import.csv.savedCart.selectFile;Select a file to upload. The file must be a text file with extension CSV.
-;import.csv.savedCart.success;"Your import is now being processed. Check <a href=""{0}"" style=""text-decoration: underline"">saved carts</a> page to see its progress."
-;import.csv.savedCart.title;Import Saved Cart
+;import.csv.savedCart.success;"Your import is now being processed. Check <a href=""{0}"" style=""text-decoration: underline"">saved baskets</a> page to see its progress."
+;import.csv.savedCart.title;Import Saved Basket
 ;import.csv.savedCart.uploadStarted;Uploading file...
 ;invoice.page.details.error.message;Invoice details could not be retrieved.
 ;j_password;Password
@@ -831,7 +831,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;login.required.message;Fields marked * are required
 ;login.title;Returning Customer
 ;menu.button.home;Home
-;minicart.cart.alt;Your Shopping Cart
+;minicart.cart.alt;Your Shopping Basket
 ;minicart.checkout.checkout;Checkout
 ;mnn.allmnn;All ingredients
 ;mnn.search.placeholder;Enter ingredient name
@@ -958,7 +958,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.grid.confirmQtys.message;Navigating away from this page will result in losing the data you have entered!
 ;product.grid.editSize;Edit
 ;product.grid.expand;Expand
-;product.grid.formDescription;Select items below and add to cart
+;product.grid.formDescription;Select items below and add to basket
 ;product.grid.future.tooltip.delivery;Delivery
 ;product.grid.future.tooltip.error;Sorry, but it is not possible to retrieve the future availability data at this time. Please try later.
 ;product.grid.future.tooltip.qty;QTY
@@ -1034,47 +1034,47 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;profile.submit;Update
 ;profile.title;Title
 ;profile.title.invalid;Please select a title
-;quote.accept.error;Error accepting quote.
+;quote.accept.error;Error accepting order query.
 ;quote.acceptandcheckout;Accept and Checkout
-;quote.approve;Approve Quote
-;quote.approve.error;Error approving quote.
-;quote.approve.success;Quote approved with success.
-;quote.cancel;Cancel Quote
-;quote.cart.checkout.error;The vendor quote was modified, Please Accept & Checkout again.
-;quote.cart.comments;Cart Comments
-;quote.cart.empty.error;Missing or empty cart
-;quote.cart.insufficient.access.rights.error;Insufficient access rights for cart {0}.
-;quote.cart.title;This cart is being quoted
+;quote.approve;Approve Order Query
+;quote.approve.error;Error approving order query.
+;quote.approve.success;Order Query approved with success.
+;quote.cancel;Cancel Order Query
+;quote.cart.checkout.error;The vendor order query was modified, Please Accept & Checkout again.
+;quote.cart.comments;Basket Comments
+;quote.cart.empty.error;Missing or empty basket
+;quote.cart.insufficient.access.rights.error;Insufficient access rights for basket {0}.
+;quote.cart.title;This basket is being order queryd
 ;quote.comment.invalid;Comment cannot be more than 255 characters
-;quote.create;Request a Quote
-;quote.create.error;Error creating quote.
-;quote.create.success;Quote created with success.
+;quote.create;Request a Order Query
+;quote.create.error;Error creating order query.
+;quote.create.success;Order Query created with success.
 ;quote.description.invalid;Description cannot be more than 255 characters
-;quote.edit;Edit Quote
-;quote.edit.done;New Cart
-;quote.edit.locked;Quote ID : {0} is currently being edited by {1}
+;quote.edit;Edit Order Query
+;quote.edit.done;New Basket
+;quote.edit.locked;Order Query ID : {0} is currently being edited by {1}
 ;quote.enter.comment;Add a comment and press enter
 ;quote.less.comments;View less comments
 ;quote.more.comments;View more comments
 ;quote.name.invalid;Please enter a valid name
 ;quote.newcart.error;An error occurred processing your request. Please try to submit your request again.
-;quote.newcart.success;Quote {0} was successfully saved
-;quote.not.editable;Quote ID : {0} is not editable
-;quote.reject;Reject Quote
-;quote.reject.error;Error rejecting quote.
-;quote.reject.initiate.request;Minimum {0} subtotal to submit a quote.
-;quote.reject.success;Quote rejected with success.
+;quote.newcart.success;Order Query {0} was successfully saved
+;quote.not.editable;Order Query ID : {0} is not editable
+;quote.reject;Reject Order Query
+;quote.reject.error;Error rejecting order query.
+;quote.reject.initiate.request;Minimum {0} subtotal to submit a order query.
+;quote.reject.success;Order Query rejected with success.
 ;quote.requote;Requote
 ;quote.requote.error;Error requoting.
-;quote.save;Save Quote
+;quote.save;Save Order Query
 ;quote.save.cart.error;There was an internal error. Please try again.
-;quote.save.error;Error saving quote.
+;quote.save.error;Error saving order query.
 ;quote.state.BUYER_DRAFT;DRAFT
-;quote.state.expired;This quote has expired. Create a new quote or edit the expired quote.
-;quote.submit;Submit Quote
-;quote.submit.error;Error submitting quote.
-;quote.submit.success;Quote submitted with success.
-;quote.view;View Quote
+;quote.state.expired;This order query has expired. Create a new order query or edit the expired order query.
+;quote.submit;Submit Order Query
+;quote.submit.error;Error submitting order query.
+;quote.submit.success;Order Query submitted with success.
+;quote.view;View Order Query
 ;recently.viewed.products.title;Recently Viewed Products
 ;register.back.login;Back to login
 ;register.checkPwd;Confirm Password
@@ -1151,9 +1151,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;review.write.title;Write a Review
 ;review.write.title.product;Write a Review for {0}
 ;saved.cart.total.description;You have
-;saved.cart.total.number;Saved Carts ({0})
-;saved.cart.total.number.one;{0} Saved Cart
-;saved.quote.total.number;Quotes ({0})
+;saved.cart.total.number;Saved Baskets ({0})
+;saved.cart.total.number.one;{0} Saved Basket
+;saved.quote.total.number;Order Queries ({0})
 ;search.advanced;Order Forms
 ;search.advanced.catalog;Catalog
 ;search.advanced.createorderform;Create Order Form
@@ -1360,7 +1360,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.invoice.termsOfDelivery;Terms of Delivery
 ;text.account.invoice.termsOfPayment;Terms of Payment
 ;text.account.invoice.totalNet;Net Invoice Value
-;text.account.manageQuotes.breadcrumb;Quotes
+;text.account.manageQuotes.breadcrumb;Order Queries
 ;text.account.manageReplenishment;Manage Replenishment Schedule
 ;text.account.manageReplenishment.confirm.cancel.breadcrumb;Remove Replenishment Schedule {0}
 ;text.account.myReplenishment;My Replenishment Orders
@@ -1537,23 +1537,23 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.profile.updatePersonalDetails;Personal details
 ;text.account.profile.updatePersonalDetails.mobile;Edit
 ;text.account.profile.updateProfile.mobile;Update Profile
-;text.account.quote.action.display.CANCEL;Cancel Quote
-;text.account.quote.action.display.CHECKOUT;Accept and Check Out Quote
-;text.account.quote.action.display.CREATE;Create Quote
-;text.account.quote.action.display.EDIT;Edit Quote
+;text.account.quote.action.display.CANCEL;Cancel Order Query
+;text.account.quote.action.display.CHECKOUT;Accept and Check Out Order Query
+;text.account.quote.action.display.CREATE;Create Order Query
+;text.account.quote.action.display.EDIT;Edit Order Query
 ;text.account.quote.action.display.EXPIRED;Expired
-;text.account.quote.action.display.ORDER;Order Quote
-;text.account.quote.action.display.REJECT;Reject Quote
-;text.account.quote.action.display.SAVE;Save Quote
-;text.account.quote.action.display.SUBMIT;Submit Quote
-;text.account.quote.action.display.VIEW;View Quote
+;text.account.quote.action.display.ORDER;Order Order Query
+;text.account.quote.action.display.REJECT;Reject Order Query
+;text.account.quote.action.display.SAVE;Save Order Query
+;text.account.quote.action.display.SUBMIT;Submit Order Query
+;text.account.quote.action.display.VIEW;View Order Query
 ;text.account.quote.cancel;Cancel
-;text.account.quote.code;Quote ID
+;text.account.quote.code;Order Query ID
 ;text.account.quote.date.placed;Date Placed
 ;text.account.quote.date.updated;Date Updated
 ;text.account.quote.duplicate;Duplicate
 ;text.account.quote.manage.items;Manage Items
-;text.account.quote.myquotes;My Quotes
+;text.account.quote.myquotes;My Order Queries
 ;text.account.quote.name;Name
 ;text.account.quote.page.currentPage;Page {0} of {1}
 ;text.account.quote.page.firstPage;&laquo
@@ -1562,21 +1562,21 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.page.linkPreviousPage;Previous Page
 ;text.account.quote.page.showAllResults;Show all
 ;text.account.quote.page.showPageResults;Show paginated
-;text.account.quote.page.sort.byCode;Quote ID
+;text.account.quote.page.sort.byCode;Order Query ID
 ;text.account.quote.page.sort.byDate;Updated Date
 ;text.account.quote.page.sort.byName;Name
 ;text.account.quote.page.sort.byState;Status
 ;text.account.quote.page.sortTitle;Sort by
-;text.account.quote.page.totalResults;of {0} Quotes
-;text.account.quote.page.totalResultsCurrPage;{0} of {1} Quotes
-;text.account.quote.page.totalResultsSingleOrder;1 Quote found
-;text.account.quote.page.totalResultsSinglePag;{0} Quotes found
+;text.account.quote.page.totalResults;of {0} Order Queries
+;text.account.quote.page.totalResultsCurrPage;{0} of {1} Order Queries
+;text.account.quote.page.totalResultsSingleOrder;1 Order Query found
+;text.account.quote.page.totalResultsSinglePag;{0} Order Queries found
 ;text.account.quote.remove;Remove
 ;text.account.quote.status;Status
 ;text.account.quote.status.display.BUYER_ACCEPTED;Accepted
 ;text.account.quote.status.display.BUYER_APPROVED;Approved
 ;text.account.quote.status.display.BUYER_DRAFT;Draft
-;text.account.quote.status.display.BUYER_OFFER;Vendor Quote
+;text.account.quote.status.display.BUYER_OFFER;Vendor Order Query
 ;text.account.quote.status.display.BUYER_ORDERED;Ordered
 ;text.account.quote.status.display.BUYER_REJECTED;Rejected
 ;text.account.quote.status.display.BUYER_SUBMITTED;Submitted
@@ -1590,8 +1590,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.status.display.SELLER_REQUEST;Requested
 ;text.account.quote.status.display.SELLER_SUBMITTED;Submitted
 ;text.account.quote.total;Total
-;text.account.quotes.noQuotes;No Quotes
-;text.account.quotes.page.totalResultsCurrPage;{0} of {1} Quotes
+;text.account.quotes.noQuotes;No Order Queries
+;text.account.quotes.page.totalResultsCurrPage;{0} of {1} Order Queries
 ;text.account.replenishment.Schedule;Schedule
 ;text.account.replenishment.actions;Cancel
 ;text.account.replenishment.cancel.button;Cancel Replenishment
@@ -1634,25 +1634,25 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.replenishment.total;Est. Total
 ;text.account.replenishment.viewReplenishmentOrders;View your replenishment orders
 ;text.account.replenishmentOrderDetails.title;Replenishment Order Details
-;text.account.saveCart.edit.error;There was an exception while updating Cart {0}
-;text.account.saveCart.edit.success;Cart {0} was successfully updated
-;text.account.savedCart.backToSavedCarts;Back to Saved Carts
+;text.account.saveCart.edit.error;There was an exception while updating Basket {0}
+;text.account.saveCart.edit.success;Basket {0} was successfully updated
+;text.account.savedCart.backToSavedCarts;Back to Saved Baskets
 ;text.account.savedCart.dateSaved;Date Saved
-;text.account.savedCart.delete;Delete Cart
+;text.account.savedCart.delete;Delete Basket
 ;text.account.savedCart.description;Description
 ;text.account.savedCart.edit;Edit
-;text.account.savedCart.edit.title;Edit Saved Cart
+;text.account.savedCart.edit.title;Edit Saved Basket
 ;text.account.savedCart.id;ID
-;text.account.savedCart.message;Promotions and totals reflect what existed at the time the cart was saved. Promotions and totals may change or no longer apply when the cart is restored.
+;text.account.savedCart.message;Promotions and totals reflect what existed at the time the basket was saved. Promotions and totals may change or no longer apply when the basket is restored.
 ;text.account.savedCart.name;Name
 ;text.account.savedCart.numberOfProducts;Number of Products
 ;text.account.savedCart.qty;QTY
 ;text.account.savedCart.restore;Restore
-;text.account.savedCart.savedCartBreadcrumb;Saved Cart {0}
-;text.account.savedCart.title.details;Saved Cart Details
+;text.account.savedCart.savedCartBreadcrumb;Saved Basket {0}
+;text.account.savedCart.title.details;Saved Basket Details
 ;text.account.savedCart.total;Total
-;text.account.savedCarts;Saved Carts
-;text.account.savedCarts.noSavedCarts;No Saved Carts Found
+;text.account.savedCarts;Saved Baskets
+;text.account.savedCarts.noSavedCarts;No Saved Baskets Found
 ;text.account.savedCarts.page.currentPage;Page {0} of {1}
 ;text.account.savedCarts.page.firstPage;&laquo
 ;text.account.savedCarts.page.lastPage;&raquo
@@ -1666,21 +1666,21 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.savedCarts.page.sort.byName;Name
 ;text.account.savedCarts.page.sort.byTotal;Total
 ;text.account.savedCarts.page.sortTitle;Sort by
-;text.account.savedCarts.page.totalResults;of {0} Saved Carts
-;text.account.savedCarts.page.totalResultsCurrPage;{0} of {1} Saved Carts
-;text.account.savedCarts.page.totalResultsSingleOrder;1 Saved Cart
-;text.account.savedCarts.page.totalResultsSinglePag;{0} Saved Carts
-;text.account.savedcart.activecart.msg;The current items in the cart will be saved as:
+;text.account.savedCarts.page.totalResults;of {0} Saved Baskets
+;text.account.savedCarts.page.totalResultsCurrPage;{0} of {1} Saved Baskets
+;text.account.savedCarts.page.totalResultsSingleOrder;1 Saved Basket
+;text.account.savedCarts.page.totalResultsSinglePag;{0} Saved Baskets
+;text.account.savedcart.activecart.msg;The current items in the basket will be saved as:
 ;text.account.savedcart.cart.id;ID
-;text.account.savedcart.cart.name;Cart Name
-;text.account.savedcart.delete.msg;The following cart will be deleted
-;text.account.savedcart.delete.popuptitle;Delete Saved Cart
+;text.account.savedcart.cart.name;Basket Name
+;text.account.savedcart.delete.msg;The following basket will be deleted
+;text.account.savedcart.delete.popuptitle;Delete Saved Basket
 ;text.account.savedcart.numberofproducts;Number of products
 ;text.account.savedcart.restore.btn;Restore
-;text.account.savedcart.restore.popuptitle;Restore Saved Cart
-;text.account.savedcart.retain.savedcart;Keep a copy of this cart on saved list
+;text.account.savedcart.restore.popuptitle;Restore Saved Basket
+;text.account.savedcart.retain.savedcart;Keep a copy of this basket on saved list
 ;text.account.savedcart.save.activecart;I do not want to save items for later
-;text.account.savedcart.to.activecart;The following saved cart will restore as active cart
+;text.account.savedcart.to.activecart;The following saved basket will restore as active basket
 ;text.account.trackOrders;Track your orders
 ;text.account.update.email.address;Email Address
 ;text.account.user.saveUpdates;Save Updates
@@ -1689,7 +1689,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.yourAccount;My Account
 ;text.accountsummary.invoice.title.details;Invoice Details
 ;text.actions;Actions
-;text.addToCart;Add to cart
+;text.addToCart;Add to basket
 ;text.addToCart.outOfStock;out of stock online
 ;text.address;Address
 ;text.address.delete;Delete
@@ -1708,7 +1708,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.asm.customerList.phone;PHONE
 ;text.asm.customerList.phone.empty;-
 ;text.asm.customerList.picture.alt;Emulate ASM Customer Session
-;text.asm.customerList.viewCarts;View Cart
+;text.asm.customerList.viewCarts;View Basket
 ;text.asm.customerList.viewOrders;View Orders
 ;text.asm.util.DAY;a day
 ;text.asm.util.DAYS;{0} days
@@ -2495,13 +2495,13 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.customer360.activity;ACTIVITY
 ;text.customer360.activity.general;General
 ;text.customer360.activity.general.cart;Cart
-;text.customer360.activity.general.cart.description;Cart items: {0}/ Total Amount: {1}{2}
+;text.customer360.activity.general.cart.description;Basket items: {0}/ Total Amount: {1}{2}
 ;text.customer360.activity.general.created;Created
 ;text.customer360.activity.general.description;Description
 ;text.customer360.activity.general.id;ID
 ;text.customer360.activity.general.order;Order
 ;text.customer360.activity.general.order.description;Order items: {0}/ Total Amount: {1}{2}
-;text.customer360.activity.general.savedcart;Saved Cart
+;text.customer360.activity.general.savedcart;Saved Basket
 ;text.customer360.activity.general.status;Status
 ;text.customer360.activity.general.status.COMPLETED;Completed
 ;text.customer360.activity.general.status.FRAUD_CHECKED;Fraud Checked
@@ -2537,21 +2537,21 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.customer360.feedback.review.no;There are currently no Product Review items
 ;text.customer360.fragment.notfound;Fragment Not Found!
 ;text.customer360.headline;{0} 360&#176
-;text.customer360.headline.cart;{0} items added to cart
-;text.customer360.headline.cart.empty;The cart is empty
+;text.customer360.headline.cart;{0} items added to basket
+;text.customer360.headline.cart.empty;The basket is empty
 ;text.customer360.headline.order;Last order
 ;text.customer360.headline.order.empty;There are no orders
 ;text.customer360.headline.ticket;Last ticket
 ;text.customer360.headline.ticket.empty;There are no tickets
 ;text.customer360.headline.ticket.empty.link;view all tickets
-;text.customer360.overview.customer.cart;Active Cart
+;text.customer360.overview.customer.cart;Active Basket
 ;text.customer360.overview.customer.cart.item.qty;Qty
 ;text.customer360.overview.customer.cart.items.price;Item Price
-;text.customer360.overview.customer.cart.no;There are currently no Active Cart items
+;text.customer360.overview.customer.cart.no;There are currently no Active Basket items
 ;text.customer360.overview.customer.cart.total.items;Total No. Items
 ;text.customer360.overview.customer.cart.total.price;Total Price
-;text.customer360.overview.customer.savedCart;Last saved Cart
-;text.customer360.overview.customer.savedCart.no;There are currently no Saved Cart items
+;text.customer360.overview.customer.savedCart;Last saved Basket
+;text.customer360.overview.customer.savedCart.no;There are currently no Saved Basket items
 ;text.customer360.overview.devices.heading;{0} Uses
 ;text.customer360.overview.favoritecolors.heading;Favorites
 ;text.customer360.profile;Profile
@@ -2566,7 +2566,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.customer360.review.stars;Rate
 ;text.customer360.sales_summary;SALES
 ;text.customer360.storeLocations;MAPS
-;text.customer360.summary.cartId;Cart ID
+;text.customer360.summary.cartId;Basket ID
 ;text.customer360.summary.customer.since;Customer For
 ;text.customer360.summary.days.ago;Days
 ;text.customer360.summary.heading;Summary
@@ -2574,14 +2574,14 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.customer360.summary.signedUp;Signed up
 ;text.customerInformation;Customer Information
 ;text.default;Default
-;text.delete.savedcart.error;Error while deleting saved cart
+;text.delete.savedcart.error;Error while deleting saved basket
 ;text.deliveryAddress;Delivery Address
 ;text.deliveryMethod;Delivery Method
 ;text.edit;Edit
 ;text.expires;Expires
 ;text.expresscheckout.header;Express Checkout
 ;text.expresscheckout.info1;By succesfully configuring your settings this way, signed users will proceed directly to the Final Review step when proceeding to checkout
-;text.expresscheckout.info2;Users who have not yet signed in may choose Express Checkout in the shopping cart
+;text.expresscheckout.info2;Users who have not yet signed in may choose Express Checkout in the shopping basket
 ;text.expresscheckout.info3;The express checkout feature is not available to Guest Users
 ;text.expresscheckout.line1;setting a default Delivery Address in your account or when you checkout
 ;text.expresscheckout.line2;setting a default Payment Details when you checkout
@@ -2656,7 +2656,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.paymentMethod;Payment Method
 ;text.paymentcard.remove.confirm;Are you sure you want to delete this payment card?
 ;text.pleaseSelect;title
-;text.popupCartTitle;Your Shopping Cart
+;text.popupCartTitle;Your Shopping Basket
 ;text.product;Product
 ;text.productDetails;Product Details
 ;text.productreviews;Reviews
@@ -2675,17 +2675,17 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quickOrder.product.quantity.invalid;Invalid quantity
 ;text.quickOrder.product.quantity.max;Quantity reduced due to insufficient stock
 ;text.quote.cancel.button.label;Cancel
-;text.quote.cancel.confirmation.message;Are you sure you want to cancel this quote?
-;text.quote.cancel.confirmation.modal.title;Cancel Quote {0}
-;text.quote.cancel.success;Quote {0} has been canceled
-;text.quote.checkout.confirmation.modal.title;Confirm Accept and Checkout Quote {0}?
-;text.quote.checkout.warning.message;Modifying the cart may result in voiding the vendor quote.
-;text.quote.code;Quote ID:
+;text.quote.cancel.confirmation.message;Are you sure you want to cancel this order query?
+;text.quote.cancel.confirmation.modal.title;Cancel Order Query {0}
+;text.quote.cancel.success;Order Query {0} has been canceled
+;text.quote.checkout.confirmation.modal.title;Confirm Accept and Checkout Order Query {0}?
+;text.quote.checkout.warning.message;Modifying the basket may result in voiding the vendor order query.
+;text.quote.code;Order Query ID:
 ;text.quote.comment.label;Negotiation Comment
 ;text.quote.comments.label;Comments
-;text.quote.conteroffer.confirmation.message;Are you sure you want to offer this vendor quote?
-;text.quote.conteroffer.confirmation.modal.title;Confirm Vendor Quote {0}?
-;text.quote.conteroffer.possible.checkout.message;This is a binding vendor quote. The buyer may check out immediately.
+;text.quote.conteroffer.confirmation.message;Are you sure you want to offer this vendor order query?
+;text.quote.conteroffer.confirmation.modal.title;Confirm Vendor Order Query {0}?
+;text.quote.conteroffer.possible.checkout.message;This is a binding vendor order query. The buyer may check out immediately.
 ;text.quote.dateformat;MM/dd/yyyy
 ;text.quote.dateformat.datepicker.selection;mm/dd/yy
 ;text.quote.dateformat.datepicker.selection.hint;mm/dd/yyyy
@@ -2700,30 +2700,30 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quote.discount.rate.null.error;The discount rate is null.
 ;text.quote.discount.type.null.error;The discount type is null.
 ;text.quote.done.button.label;Done
-;text.quote.edit.confirmation.message;This quote has been approved, Editing this quote will prevent checkout until the new edits are approved.
-;text.quote.edit.confirmation.modal.title;Edit Quote Warning
-;text.quote.edit.warning.message;Are you sure you want to edit this approved quote?
+;text.quote.edit.confirmation.message;This order query has been approved, Editing this order query will prevent checkout until the new edits are approved.
+;text.quote.edit.confirmation.modal.title;Edit Order Query Warning
+;text.quote.edit.warning.message;Are you sure you want to edit this approved order query?
 ;text.quote.expiration.time.invalid;Please enter a valid expiry date
 ;text.quote.expiration.time.label;Expiry Date
 ;text.quote.expiration.time.warning;Note: If the expiry date is set to today or earlier, it will be set to {0} days from today.
-;text.quote.illegal.state.error;Please note that {0} action you tried to perform is not allowed for quote {1} with {2} status
+;text.quote.illegal.state.error;Please note that {0} action you tried to perform is not allowed for order query {1} with {2} status
 ;text.quote.name.description.invalid;Please enter a valid name and description
 ;text.quote.name.label;Name
 ;text.quote.no.button.label;No
-;text.quote.not.cancelable;Quote {0} is not cancelable
-;text.quote.not.submitable;Quote cannot be submitted since total is negative
+;text.quote.not.cancelable;Order Query {0} is not cancelable
+;text.quote.not.submitable;Order Query cannot be submitted since total is negative
 ;text.quote.previous.estimated.total.display;Previous Estimated Total
 ;text.quote.state.label;Status
-;text.quote.submit.confirmation.message;Are you sure you want to submit this quote?
-;text.quote.submit.confirmation.modal.title;Confirm Requested Quote {0}?
-;text.quote.submit.not.modifiable.message;Once a request for quote is submitted it cannot be modified.
-;text.quote.validity.message;This quote is valid until {0}
+;text.quote.submit.confirmation.message;Are you sure you want to submit this order query?
+;text.quote.submit.confirmation.modal.title;Confirm Requested Order Query {0}?
+;text.quote.submit.not.modifiable.message;Once a request for order query is submitted it cannot be modified.
+;text.quote.validity.message;This order query is valid until {0}
 ;text.quote.yes.button.label;Yes
 ;text.quotes.enterSecurityCode;Card Verification Number
 ;text.region.select.title;Select Region
 ;text.remove;Remove
-;text.restore.savedcart.error;Error while restoring saved cart
-;text.save.cart.title;Save Cart
+;text.restore.savedcart.error;Error while restoring saved basket
+;text.save.cart.title;Save Basket
 ;text.search;Search
 ;text.secureportal.link.createAccount;Register
 ;text.secureportal.register.account.existing;Account already exists.
