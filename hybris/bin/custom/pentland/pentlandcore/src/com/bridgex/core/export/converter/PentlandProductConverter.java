@@ -18,6 +18,16 @@ import de.hybris.platform.core.model.product.ProductModel;
  * @author Created by ekaterina.agievich@bridge-x.com on 10/24/2017.
  */
 public class PentlandProductConverter extends AbstractConverter<Message<ProductModel>, PentlandProduct> {
+
+  private static final String PENTLAND_CLASSIFICATION_CATALOG_1_0 = "pentlandClassificationCatalog/1.0/";
+  private static final String CL_TEAMWEAR_TEAMWEARTYPE = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clTeamwear.teamweartype";
+  private static final String CL_TRAINING_WEAR_TRAININGWEARTYPE = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clTrainingWear.trainingweartype";
+  private static final String CL_BALLS_SPORT = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clBalls.sport";
+  private static final String CL_EQUIPMENT_ACCESSORYTYPE = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clEquipment.accessorytype";
+  private static final String CL_BALLS_USEAGEOCCASION = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clBalls.useageoccasion";
+  private static final String CL_BALLS_SURFACE = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clBalls.surface";
+  private static final String CL_EQUIPMENT_TRAININGMETHOD = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clEquipment.trainingmethod";
+
   @Override
   public void populate(Message<ProductModel> productModelMessage, PentlandProduct pentlandProduct) {
     final ProductModel productModel = productModelMessage.getPayload();
@@ -43,19 +53,19 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
     if(CollectionUtils.isNotEmpty(features)){
       features.forEach(feature ->{
         switch(feature.getQualifier()){
-          case "pentlandClassificationCatalog/1.0/clClass.teamwearType": pentlandProduct.setTeamwearType(feature.getValue().toString());
+          case CL_TEAMWEAR_TEAMWEARTYPE: pentlandProduct.setTeamwearType(feature.getValue().toString());
                break;
-          case "pentlandClassificationCatalog/1.0/clClass.trainingwearType": pentlandProduct.setTrainingwearType(feature.getValue().toString());
+          case CL_TRAINING_WEAR_TRAININGWEARTYPE: pentlandProduct.setTrainingwearType(feature.getValue().toString());
                break;
-          case "pentlandClassificationCatalog/1.0/clClass.sport": pentlandProduct.setSport(feature.getValue().toString());
+          case CL_BALLS_SPORT: pentlandProduct.setSport(feature.getValue().toString());
                break;
-          case "pentlandClassificationCatalog/1.0/clClass.accessoryType": pentlandProduct.setAccessoryType(feature.getValue().toString());
+          case CL_EQUIPMENT_ACCESSORYTYPE: pentlandProduct.setAccessoryType(feature.getValue().toString());
                break;
-          case "pentlandClassificationCatalog/1.0/clClass.useageOccasion": pentlandProduct.setUseageOccasion(feature.getValue().toString());
+          case CL_BALLS_USEAGEOCCASION: pentlandProduct.setUseageOccasion(feature.getValue().toString());
                break;
-          case "pentlandClassificationCatalog/1.0/clClass.surface": pentlandProduct.setSurface(feature.getValue().toString());
+          case CL_BALLS_SURFACE: pentlandProduct.setSurface(feature.getValue().toString());
                break;
-          case "pentlandClassificationCatalog/1.0/clClass.trainingMethod": pentlandProduct.setTrainingMethod(feature.getValue().toString());
+          case CL_EQUIPMENT_TRAININGMETHOD: pentlandProduct.setTrainingMethod(feature.getValue().toString());
                break;
         }
       });
