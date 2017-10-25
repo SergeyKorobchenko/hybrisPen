@@ -43,7 +43,7 @@ public class B2BCustomerGroupsTranslator extends AbstractSpecialValueTranslator 
       cellValue = defaultValue;
     }
     if (StringUtils.isNotEmpty(cellValue) && processedItem != null && processedItem instanceof B2BCustomer) {
-      B2BCustomerModel customerModel = ((B2BCustomerModel) userService.getUserForUID(((B2BCustomer) processedItem).getUid()));
+      B2BCustomerModel customerModel = modelService.get(processedItem);
       try {
         String[] groups = cellValue.split(",");
         Set<PrincipalGroupModel> principalGroups = new HashSet<>(customerModel.getGroups());
