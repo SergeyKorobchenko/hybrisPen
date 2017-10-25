@@ -43,15 +43,19 @@ public class B2BCustomerGroupsTranslator extends AbstractSpecialValueTranslator 
       cellValue = defaultValue;
     }
     if (StringUtils.isNotEmpty(cellValue) && processedItem != null && processedItem instanceof B2BCustomer) {
-      String[] groups = cellValue.split(",");
       B2BCustomerModel customerModel = ((B2BCustomerModel) userService.getUserForUID(((B2BCustomer) processedItem).getUid()));
-      Set<PrincipalGroupModel> principalGroups = new HashSet<>(customerModel.getGroups());
-      Arrays.stream(groups).forEach(s -> {
-        UserGroupModel userGroupModel = userService.getUserGroupForUID(s);
-        principalGroups.add(userGroupModel);
-      });
-      customerModel.setGroups(principalGroups);
-      modelService.save(customerModel);
+      try {
+        String[] groups = cellValue.split(",");
+        Set<PrincipalGroupModel> principalGroups = new HashSet<>(customerModel.getGroups());
+        Arrays.stream(groups).forEach(s -> {
+          UserGroupModel userGroupModel = userService.getUserGroupForUID(s);
+          principalGroups.add(userGroupModel);
+        });
+        customerModel.setGroups(principalGroups);
+        modelService.save(customerModel);
+      } catch (Exception e) {
+        LOG.error("User import has caused an error! User(B2BCustomer) uid=" + customerModel.getUid() + ". Message: " + e.getMessage());
+      }
     }
   }
 
