@@ -83,6 +83,9 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
       if(attribute.contains("\"")){
         attribute = attribute.replaceAll("\"", "\"\"");
       }
+      if(attribute.contains("&quot;")){
+        attribute = attribute.replaceAll("&quot;", "\"\"");
+      }
       return "\"" + attribute + "\"";
     }else{
       return attribute;
