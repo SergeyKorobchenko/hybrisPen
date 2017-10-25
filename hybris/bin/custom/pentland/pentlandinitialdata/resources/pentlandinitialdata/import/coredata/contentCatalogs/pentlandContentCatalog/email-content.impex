@@ -13,8 +13,10 @@
 #
 $contentCatalog=pentlandContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV)
 $wideContent=CMSImageComponent,BannerComponent
 $jarEmailResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/coredata/contentCatalogs/pentlandContentCatalog/emails
+$lang=en
 
 # Import modulegen config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
@@ -37,10 +39,8 @@ INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;ac
 ;;NotPickedUpConsignmentCanceledEmailTemplate;Not Picked Up Consignment Canceled Email Template;true;notPickedUpConsignmentCanceledEmail;pentland_Email_NotPickedUpConsignment_Canceled_Subject;pentland_Email_NotPickedUpConsignment_Canceled_Body;EmailPage
 ;;OrderApprovalRejectionEmailTemplate;Order Approval Rejection Email Template;true;orderApprovalRejectionEmail;pentland_Email_Order_ApprovalRejection_Subject;pentland_Email_Order_ApprovalRejection_Body;EmailPage
 ;;OrderPendingApprovalEmailTemplate;Order Pending Approval Email Template;true;orderPendingApprovalEmail;pentland_Email_Order_PendingApproval_Subject;pentland_Email_Order_PendingApproval_Body;EmailPage
-;;ReplenishmentOrderPlacedEmailTemplate;Replenishment Order Placed Email Template;true;replenishmentOrderPlacedEmail;pentland_Email_Replenishment_Order_Placed_Subject;pentland_Email_Replenishment_Order_Placed_Body;EmailPage
-;;ReplenishmentOrderConfirmationEmailTemplate;Replenishment Order Confirmation Email Template;true;replenishmentOrderConfirmationEmail;pentland_Email_Replenishment_Order_Confirmation_Subject;pentland_Email_Replenishment_Order_Confirmation_Body;EmailPage
 ;;QuoteBuyerSubmissionEmailTemplate;Quote Buyer Submission Email Template;true;quoteBuyerSubmissionEmail;pentland_Email_Quote_Buyer_Submission_Subject;pentland_Email_Quote_Buyer_Submission_Body;EmailPage
-;;QuoteSalesRepSubmissionEmailTemplate;Quote SalesRep Submission Email Template;true;quoteSalesRepSubmissionEmail;pentland_Email_Quote_SalesRep_Submission_Subject;pentland_Email_SalesRep_Buyer_Submission_Body;EmailPage
+;;QuoteSalesRepSubmissionEmailTemplate;Quote SalesRep Submission Email Template;true;quoteSalesRepSubmissionEmail;pentland_Email_Quote_SalesRep_Submission_Subject;pentland_Email_Quote_SalesRep_Submission_Body;EmailPage
 ;;QuoteBuyerCancellationEmailTemplate;Quote Buyer Cancellation Email Template;true;quoteBuyerCancellationEmail;pentland_Email_Quote_Buyer_Cancellation_Subject;pentland_Email_Quote_Buyer_Cancellation_Body;EmailPage
 
 # Templates for CMS Cockpit Page Edit
@@ -59,8 +59,6 @@ UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTempla
 ;;NotPickedUpConsignmentCanceledEmailTemplate;$jarResourceCms/structure-view/structure_notPickedUpConsignmentCanceledEmailTemplate.vm
 ;;OrderApprovalRejectionEmailTemplate;$jarEmailResource/structure-view/structure_orderApprovalRejectionEmailTemplate.vm
 ;;OrderPendingApprovalEmailTemplate;$jarEmailResource/structure-view/structure_orderPendingApprovalEmailTemplate.vm
-;;ReplenishmentOrderPlacedEmailTemplate;$jarEmailResource/structure-view/structure_replenishmentOrderPlacedEmailTemplate.vm
-;;ReplenishmentOrderConfirmationEmailTemplate;$jarEmailResource/structure-view/structure_replenishmentOrderConfirmationEmailTemplate.vm
 ;;QuoteBuyerSubmissionEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 ;;QuoteSalesRepSubmissionEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 ;;QuoteBuyerCancellationEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
@@ -135,16 +133,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopContent;;$wideContent;
 ;BottomContent;;$wideContent;
 
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ReplenishmentOrderPlacedEmailTemplate'];validComponentTypes(code)
-;SiteLogo;;;logo
-;TopContent;;$wideContent;
-;BottomContent;;$wideContent;
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ReplenishmentOrderConfirmationEmailTemplate'];validComponentTypes(code)
-;SiteLogo;;;logo
-;TopContent;;$wideContent;
-;BottomContent;;$wideContent;
-
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteBuyerSubmissionEmailTemplate'];validComponentTypes(code)
 ;SiteLogo;;;logo
 ;TopContent;;$wideContent;
@@ -161,11 +149,20 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopContent;;$wideContent;
 ;BottomContent;;$wideContent;
 
+
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+;;/images/logo_pentland.png;logo-pentland.png;$jarEmailResource/images/logo_pentland.png;
+
+INSERT_UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];name;$picture[lang=$lang];
+;;EmailSiteLogoImage;Email Site Logo Image;/images/logo_pentland.png;
+
 # Create Content Slots
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
-;;EmailTopSlot;Default Email Top Slot;true
-;;EmailBottomSlot;Default Email Bottom Slot;true
-;;EmailSiteLogoSlot;Default Email Site Slot;true
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;EmailTopSlot;Default Email Top Slot;true;;
+;;EmailBottomSlot;Default Email Bottom Slot;true;;
+;;EmailSiteLogoSlot;Default Email Site Slot;true;EmailSiteLogoImage
+
 
 # Bind Content Slots to Email Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CustomerRegistrationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -233,16 +230,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopContent-OrderPendingApprovalEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-OrderPendingApprovalEmail;BottomContent;;EmailBottomSlot;true
 
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReplenishmentOrderConfirmationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-ReplenishmentOrderConfirmationEmail;SiteLogo;;SiteLogoSlot;true
-;;TopContent-ReplenishmentOrderConfirmationEmail;TopContent;;EmailTopSlot;true
-;;BottomContent-ReplenishmentOrderConfirmationEmail;BottomContent;;EmailBottomSlot;true
-
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReplenishmentOrderPlacedEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-ReplenishmentOrderPlacedEmail;SiteLogo;;SiteLogoSlot;true
-;;TopContent-ReplenishmentOrderPlacedEmail;TopContent;;EmailTopSlot;true
-;;BottomContent-ReplenishmentOrderPlacedEmail;BottomContent;;EmailBottomSlot;true
-
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteBuyerSubmissionEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-QuoteBuyerSubmissionEmail;SiteLogo;;EmailSiteLogoSlot;true
 ;;TopContent-QuoteBuyerSubmissionEmail;TopContent;;EmailTopSlot;true
@@ -274,8 +261,6 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 ;;NotPickedUpConsignmentCanceledEmail;Not Picked Up Consignment Canceled Email;NotPickedUpConsignmentCanceledEmailTemplate;true;
 ;;OrderApprovalRejectionEmail;Order Approval Rejection Email;OrderApprovalRejectionEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
 ;;OrderPendingApprovalEmail;Order Pending Approval Email;OrderPendingApprovalEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
-;;ReplenishmentOrderPlacedEmail;Order Confirmation Email;ReplenishmentOrderPlacedEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
-;;ReplenishmentOrderConfirmationEmail;Order Confirmation Email;ReplenishmentOrderConfirmationEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
 ;;QuoteBuyerSubmissionEmail;Quote Buyer Submission Email;QuoteBuyerSubmissionEmailTemplate;true;
 ;;QuoteSalesRepSubmissionEmail;Quote SalesRep Submission Email;QuoteSalesRepSubmissionEmailTemplate;true;
 ;;QuoteBuyerCancellationEmail;Quote Buyer Cancellation Email;QuoteBuyerCancellationEmailTemplate;true;
@@ -318,10 +303,6 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 ;pentland_Email_Order_ApprovalRejection_Subject;$emailPackageName.OrderNotificationEmailContext
 ;pentland_Email_Order_PendingApproval_Subject;$emailPackageName.OrderNotificationEmailContext
 ;pentland_Email_Order_PendingApproval_Body;$emailPackageName.OrderNotificationEmailContext
-;pentland_Email_Replenishment_Order_Placed_Body;de.hybris.platform.pentlandb2baddon.proccess.email.context.OrderReplenishmentEmailContext
-;pentland_Email_Replenishment_Order_Placed_Subject;de.hybris.platform.pentlandb2baddon.proccess.email.context.OrderReplenishmentEmailContext
-;pentland_Email_Replenishment_Order_Confirmation_Subject;$emailPackageName.OrderNotificationEmailContext
-;pentland_Email_Replenishment_Order_Confirmation_Body;$emailPackageName.OrderNotificationEmailContext
 ;pentland_Email_Quote_Buyer_Submission_Subject;$emailPackageName.QuoteNotificationEmailContext
 ;pentland_Email_Quote_Buyer_Submission_Body;$emailPackageName.QuoteNotificationEmailContext
 ;pentland_Email_Quote_SalesRep_Submission_Subject;$emailPackageName.QuoteNotificationEmailContext
@@ -348,8 +329,6 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $co
 ;;NotPickedUpConsignmentCanceledEmail;EmailPageModel_preview
 ;;OrderApprovalRejectionEmail;EmailPageModel_preview
 ;;OrderPendingApprovalEmail;EmailPageModel_preview
-;;ReplenishmentOrderPlacedEmail;EmailPageModel_preview
 ;;QuoteBuyerSubmissionEmail;EmailPageModel_preview
 ;;QuoteSalesRepSubmissionEmail;EmailPageModel_preview
 ;;QuoteBuyerCancellationEmail;EmailPageModel_preview
-;;ReplenishmentOrderConfirmationEmail;EmailPageModel_preview

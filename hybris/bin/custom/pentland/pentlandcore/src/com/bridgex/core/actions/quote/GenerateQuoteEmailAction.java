@@ -1,8 +1,8 @@
 package com.bridgex.core.actions.quote;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-
-import javax.annotation.Resource;
 
 import com.bridgex.core.model.DivisionModel;
 
@@ -31,17 +31,25 @@ public class GenerateQuoteEmailAction extends GenerateEmailAction {
     Transition result = super.executeAction(businessProcessModel);
 
     if (result == Transition.OK) {
-      UserModel user = businessProcessModel.getUser();
+      UserModel user = (businessProcessModel.getUser());
 
       if (user instanceof B2BCustomerModel) {
         B2BCustomerModel b2BCustomer = (B2BCustomerModel) user;
         EmailMessageModel emailMessage = businessProcessModel.getEmails().iterator().next();
         EmailAddressModel emailAddress = getCustomerRepEmail(b2BCustomer);
-        emailMessage.getToAddresses().add(emailAddress);
+        addToAddress(emailMessage, emailAddress);
         return Transition.OK;
       }
+
     }
     return Transition.NOK;
+  }
+
+  private void addToAddress(EmailMessageModel emailMessage, EmailAddressModel emailAddress) {
+    List<EmailAddressModel> toAddresses = new ArrayList<>(emailMessage.getToAddresses());
+    toAddresses.add(emailAddress);
+    emailMessage.setToAddresses(toAddresses);
+    modelService.save(emailMessage);
   }
 
   private EmailAddressModel getCustomerRepEmail(B2BCustomerModel b2BCustomer) {

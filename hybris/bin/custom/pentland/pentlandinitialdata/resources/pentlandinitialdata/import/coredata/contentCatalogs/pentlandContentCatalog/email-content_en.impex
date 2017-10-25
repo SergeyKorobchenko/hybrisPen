@@ -66,10 +66,6 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;pentland_Email_Order_ApprovalRejection_Subject;"Order Approval Rejection Email Subject";$jarEmailResource/email-orderApprovalRejectionSubject.vm
  ;pentland_Email_Order_PendingApproval_Body;"Order Pending Approval Email Body";$jarEmailResource/email-orderPendingApprovalBody.vm
  ;pentland_Email_Order_PendingApproval_Subject;"Order Pending Approval Email Subject";$jarEmailResource/email-orderPendingApprovalSubject.vm
- ;pentland_Email_Replenishment_Order_Confirmation_Body;"";$jarEmailResource/email-replenishmentOrderConfirmationBody.vm
- ;pentland_Email_Replenishment_Order_Confirmation_Subject;"Order Confirmation Email Subject";$jarEmailResource/email-replenishmentOrderConfirmationSubject.vm
- ;pentland_Email_Replenishment_Order_Placed_Body;"Order Confirmation Email Subject";$jarEmailResource/email-replenishmentOrderPlacedBody.vm
- ;pentland_Email_Replenishment_Order_Placed_Subject;"Order Confirmation Email Subject";$jarEmailResource/email-replenishmentOrderPlacedSubject.vm
 
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
@@ -89,5 +85,3 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;QuoteBuyerSubmissionEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;QuoteSalesRepSubmissionEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;ReadyForPickupEmail;"customerservices@pentland.com";"Pentland Customer Service"
- ;;ReplenishmentOrderConfirmationEmail;"customerservices@pentland.com";"Pentland Customer Service"
- ;;ReplenishmentOrderPlacedEmail;"customerservices@pentland.com";"Pentland Customer Service"

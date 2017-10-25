@@ -1576,7 +1576,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.status.display.BUYER_ACCEPTED;Accepted
 ;text.account.quote.status.display.BUYER_APPROVED;Approved
 ;text.account.quote.status.display.BUYER_DRAFT;Draft
-;text.account.quote.status.display.BUYER_OFFER;Vendor Order Query
+;text.account.quote.status.display.BUYER_OFFER;Completed
 ;text.account.quote.status.display.BUYER_ORDERED;Ordered
 ;text.account.quote.status.display.BUYER_REJECTED;Rejected
 ;text.account.quote.status.display.BUYER_SUBMITTED;Submitted

@@ -52,6 +52,7 @@ public class QuoteSalesRepSubmitEventListener extends AbstractEventListener<Quot
 
 		final QuoteModel quoteModel = event.getQuote();
 		quoteSalesRepProcessModel.setQuoteCode(quoteModel.getCode());
+		quoteSalesRepProcessModel.setUser(quoteModel.getUser());
 		getModelService().save(quoteSalesRepProcessModel);
 		//start the business process
 		getBusinessProcessService().startProcess(quoteSalesRepProcessModel);

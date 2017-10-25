@@ -15,10 +15,11 @@
 
     <action id="checkForQuoteAutoApprovalAction" bean="checkForQuoteAutoApprovalAction">
         <transition name="OK" to="createBuyerOfferAction"/>
+        <transition name="NOK" to="error"/>
     </action>
 
     <action id="createBuyerOfferAction" bean="createBuyerOfferAction">
-        <transition name="OK" to="success"/>
+        <transition name="OK" to="generateSalesRepQuoteSubmissionEmail"/>
     </action>
 
     <action id="generateSalesRepQuoteSubmissionEmail" bean="generateSalesRepQuoteSubmissionEmail">
