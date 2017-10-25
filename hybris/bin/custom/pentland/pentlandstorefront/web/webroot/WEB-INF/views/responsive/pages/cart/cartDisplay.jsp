@@ -78,8 +78,13 @@
             </div>
         </div>
     </div>
-
+    <div class="cart-header">
+        <div class="row">
+            <cart:cartHeader />
+        </div>
+    </div>
     <div class="row">
+
         <cart:exportCart/>
 
         <div class="col-sm-12 col-md-4 col-md-push-5">

@@ -34,4 +34,10 @@
 		<property name="rdd" type="java.util.Date"/>
 	</bean>
 
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="rdd" type="java.util.Date"/>
+		<property name="purchaseOrderNumber" type="String"/>
+		<property name="customerNotes" type="String"/>
+	</bean>
+
 </beans>
