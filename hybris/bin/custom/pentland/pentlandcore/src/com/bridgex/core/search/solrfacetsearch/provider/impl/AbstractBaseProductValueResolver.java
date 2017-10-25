@@ -13,7 +13,7 @@ public abstract class AbstractBaseProductValueResolver extends AbstractValueReso
   public ProductModel getBaseProductModel(final ProductModel model)
   {
     if (model instanceof ApparelSizeVariantProductModel) {
-      //prices are stored at style level
+      //most attributes are stored at style level
       return ((ApparelSizeVariantProductModel) model).getBaseProduct();
     }else{
       //in case of non-variant or style-only products

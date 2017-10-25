@@ -8,7 +8,7 @@ import de.hybris.platform.impex.jalo.header.AbstractImpExCSVCellDecorator;
 
 /**
  * Add catalog version to category identifier
- * Depends on catalog version being found on position 1
+ * Depends on catalog version being found on position 2
  * @author Created by ekaterina.agievich@bridge-x.com on 10/25/2017.
  */
 public class CategoryCatalogVersionDecorator extends AbstractImpExCSVCellDecorator {

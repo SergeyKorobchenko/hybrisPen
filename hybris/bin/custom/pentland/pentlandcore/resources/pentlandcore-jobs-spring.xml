@@ -37,34 +37,4 @@
 		<property name="productService" ref="productService"/>
 	</bean>
 
-	<bean id="exportPentlandProductPipeline" class="de.hybris.platform.acceleratorservices.dataexport.generic.config.PipelineConfig" >
-		<property name="query" ref="exportPentlandProductQuery"/>
-		<property name="itemConverter" ref="exportPentlandProductConverter"/>
-		<property name="outputConverter" ref="pentlandExportConvertObjectsToCSV"/>
-		<property name="filename" value="'productrich-' + headers.timestamp + '.csv'"/>
-	</bean>
-
-	<alias name="defaultExportPentlandProductQuery" alias="exportPentlandProductQuery"/>
-	<bean id="defaultExportPentlandProductQuery" class="de.hybris.platform.acceleratorservices.dataexport.generic.query.impl.FlexibleSearchExportQuery" >
-		<property name="flexibleSearchService" ref="flexibleSearchService"/>
-		<property name="query" value="SELECT {p.pk} FROM {ApparelStyleVariantProduct! AS p
-			JOIN CatalogVersion AS cv ON {p.catalogVersion}={cv.pk}
-			JOIN Catalog AS cat ON {cv.pk}={cat.activeCatalogVersion}
-			JOIN CMSSite AS site ON {cat.pk}={site.defaultCatalog}}
-			WHERE {site.pk} = ?cmsSite"/>
-		<property name="parameters">
-			<map>
-				<entry key="cmsSite" value="payload.site"/>
-			</map>
-		</property>
-		<property name="impersonationService" ref="impersonationService"/>
-	</bean>
-
-	<alias name="defaultExportPentlandProductConverter" alias="exportPentlandProductConverter"/>
-	<bean id="defaultExportPentlandProductConverter" class="com.bridgex.core.export.converter.PentlandProductConverter" >
-		<property name="targetClass" value="com.bridgex.core.export.model.PentlandProduct"/>
-	</bean>
-
-	<bean id="pentlandExportConvertObjectsToCSV" class="com.bridgex.core.export.generic.output.csv.PentlandConvertObjectsToCSV" />
-
 </beans>
