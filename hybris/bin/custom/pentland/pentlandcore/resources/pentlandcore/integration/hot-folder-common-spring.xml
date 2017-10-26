@@ -29,7 +29,7 @@
 				<!-- default priority is 0; todo set appropriate priorities -->
 				<entry key="productmaster" value="2" />
 				<entry key="productrich" value="3" />
-				<entry key="media" value="1" />
+				<entry key="media" value="3" />
 				<entry key="price" value="1" />
 				<entry key="b2bcustomer" value="1" />
 				<entry key="customer" value="1" />
@@ -305,11 +305,11 @@
 				$mediaCatalog = pentlandMediaCatalog
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				# Import media container
-				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $mediaCV)[mode=append];$mediaCV;conversionGroup(code)[default=galleryConversionGroup];order
+				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $mediaCV)[mode=append];$mediaCV;conversionGroup(code)[default=galleryConversionGroup];
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+1};{2};;{3};{4}</value>
+			<value>;{+1};{2};;{3};</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchMediaProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -320,12 +320,15 @@
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				$galleryImages=galleryImages(qualifier, $mediaCV)[mode=append]
 				# Import product media
-				UPDATE Product;code[unique=true];$galleryImages;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.GreaterSequenceIdTranslator];$catalogVersion
+				UPDATE Product;code[unique=true];$galleryImages;$catalogVersion
 				#%groovy% afterEach: productService.convertAssignedMedia(modelService.get(impex.getLastImportedItem()),line.get(2))
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{1};{S}</value>
+			<value>
+				;{+0};{1};
+				;{+0};{1};$catalog:Online
+			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchOrderConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">

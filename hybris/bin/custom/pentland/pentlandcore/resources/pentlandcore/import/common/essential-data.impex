@@ -57,9 +57,11 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 ;images;images
 ;email-body;email-body
 ;email-attachments;email-attachments
+;product;product
 
 # Media formats
-INSERT_UPDATE MediaFormat;qualifier[unique=true]
+#remove OOTB formats to avoid conflicts
+REMOVE MediaFormat;qualifier[unique=true]
 ;1200Wx1200H
 ;515Wx515H
 ;365Wx246H
@@ -67,10 +69,25 @@ INSERT_UPDATE MediaFormat;qualifier[unique=true]
 ;96Wx96H
 ;65Wx65H
 ;30Wx30H
+
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
 ;mobile
 ;tablet
 ;desktop
 ;widescreen
+
+INSERT_UPDATE ConversionMediaFormat; qualifier[unique = true]; name[lang = en]; name[lang = ru]; conversionStrategy; conversion
+; 1200Wx1200H ; superZoomConversionMediaFormat   ; superZoomConversionMediaFormat   ; imageMagickMediaConversionStrategy ; -resize 1200x1200 -background white -gravity center -extent 1200x1200
+; 515Wx515H   ; zoomConversionMediaFormat        ; zoomConversionMediaFormat        ; imageMagickMediaConversionStrategy ; -resize 515x515 -background white -gravity center -extent 515x515
+; 365Wx246H   ; storeConversionMediaFormat       ; storeConversionMediaFormat       ; imageMagickMediaConversionStrategy ; -resize 365x246 -background white -gravity center -extent 365x246
+; 300Wx300H   ; productConversionMediaFormat     ; productConversionMediaFormat     ; imageMagickMediaConversionStrategy ; -resize 300x300 -background white -gravity center -extent 300x300
+; 96Wx96H     ; thumbnailConversionMediaFormat   ; thumbnailConversionMediaFormat   ; imageMagickMediaConversionStrategy ; -resize 96x96 -background white -gravity center -extent 96x96
+; 65Wx65H     ; cartIconConversionMediaFormat    ; cartIconConversionMediaFormat    ; imageMagickMediaConversionStrategy ; -resize 65x65 -background white -gravity center -extent 65x65
+; 30Wx30H     ; styleSwatchConversionMediaFormat ; styleSwatchConversionMediaFormat ; imageMagickMediaConversionStrategy ; -resize 30x30 -background white -gravity center -extent 30x30
+
+INSERT_UPDATE ConversionGroup; code[unique = true]; supportedFormats(qualifier)
+; productConversionGroup ; 515Wx515H, 365Wx246H, 300Wx300H, 96Wx96H, 65Wx65H, 30Wx30H
+; galleryConversionGroup ; 300Wx300H, 96Wx96H, 515Wx515H
 
 # Tax & Tax Groups
 INSERT_UPDATE UserTaxGroup;code[unique=true]
