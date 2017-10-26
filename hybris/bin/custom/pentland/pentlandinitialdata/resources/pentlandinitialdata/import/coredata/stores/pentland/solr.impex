@@ -29,7 +29,7 @@ $indexCurrencies=GBP
 INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
 ;$serverConfigName;standalone;false
 
-#% if: "stage".equals(Config.getParameter("environment.id"));
+#% if: "stag".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
 
 #% endif:
