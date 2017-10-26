@@ -25,21 +25,6 @@
         <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.netTax"/></div>
         <div class="col-xs-6 cart-totals-right text-right"><format:price priceData="${cartData.totalTax}"/></div>
     </c:if>
-    
-	<c:if test="${not empty cartData.quoteData}">
-		<quote:quoteDiscounts cartData="${cartData}"/>
-	</c:if>
-	
-	<c:if test="${cartData.quoteDiscounts.value > 0}">
-		<div class="col-xs-6 cart-totals-left discount">
-			<spring:theme code="basket.page.quote.discounts" />
-		</div>
-		<div class="col-xs-6 cart-totals-right text-right discount">
-			<ycommerce:testId code="Quote_Totals_Savings">
-				<format:price priceData="${cartData.quoteDiscounts}" displayNegationForDiscount="true" />
-			</ycommerce:testId>
-		</div>
-	</c:if>
 
 	<c:if test="${cartData.totalDiscounts.value > 0}">
 		<div class="col-xs-6 cart-totals-left discount">

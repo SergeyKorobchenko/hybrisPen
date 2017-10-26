@@ -58,6 +58,7 @@ public class QuoteCancelEventListener extends AbstractEventListener<QuoteCancelE
 
 		final QuoteModel quoteModel = event.getQuote();
 		quotePostCancellationProcessModel.setQuoteCode(quoteModel.getCode());
+		quotePostCancellationProcessModel.setUser(quoteModel.getUser());
 		getModelService().save(quotePostCancellationProcessModel);
 		//start the business process
 		getBusinessProcessService().startProcess(quotePostCancellationProcessModel);

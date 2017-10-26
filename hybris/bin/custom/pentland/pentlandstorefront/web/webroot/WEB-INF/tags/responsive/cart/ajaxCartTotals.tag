@@ -33,21 +33,6 @@
             <div class="col-xs-6 cart-totals-right text-right">{{= totalTax.formattedValue}}</div>
         {{/if}}
 
-		{{if quoteData }}
-			<quote:quoteDiscounts cartData="${cartData}"/>
-		{{/if}}
-
-		{{if quoteDiscounts.value > 0}}
-			<div class="col-xs-6 cart-totals-left discount">
-				<spring:theme code="basket.page.quote.discounts"/>
-			</div>
-			<div class="col-xs-6 cart-totals-right text-right discount">
-				<ycommerce:testId code="Quote_Totals_Savings">
-					<format:price priceData="${quoteDiscounts}" displayNegationForDiscount="true" />
-				</ycommerce:testId>
-			</div>
-		{{/if}}
-
 		{{if totalDiscounts.value > 0}}
 			<div class="col-xs-6 cart-totals-left discount">
 				<spring:theme code="basket.page.totals.discounts"/>

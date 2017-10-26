@@ -15,14 +15,29 @@
 
     <action id="checkForQuoteAutoApprovalAction" bean="checkForQuoteAutoApprovalAction">
         <transition name="OK" to="createBuyerOfferAction"/>
-        <transition name="NOK" to="continue"/>
+        <transition name="NOK" to="error"/>
     </action>
 
     <action id="createBuyerOfferAction" bean="createBuyerOfferAction">
+        <transition name="OK" to="generateSalesRepQuoteSubmissionEmail"/>
+    </action>
+
+    <action id="generateSalesRepQuoteSubmissionEmail" bean="generateSalesRepQuoteSubmissionEmail">
+        <transition name="OK" to="sendEmail"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="sendEmail" bean="sendEmail">
+        <transition name="OK" to="removeSentEmail"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="removeSentEmail" bean="removeSentEmail">
         <transition name="OK" to="success"/>
+        <transition name="NOK" to="error"/>
     </action>
 
     <end id="success" state="SUCCEEDED">Quote Offered.</end>
-    <end id="continue" state="SUCCEEDED">Requires seller approval.</end>
+    <end id="error" state="ERROR">Something went wrong.</end>
 
 </process>

@@ -42,21 +42,12 @@ public class CheckForQuoteAutoApprovalAction extends AbstractSimpleDecisionActio
 
 		if (LOG.isDebugEnabled())
 		{
-			LOG.debug(String.format("In CheckForQuoteAutoApprovalAction for process code : [%s]", process.getCode()));
+			LOG.debug(String.format("Autoapprove in CheckForQuoteAutoApprovalAction for process code : [%s]", process.getCode()));
 		}
 
 		final QuoteModel quoteModel = getQuoteService().getCurrentQuoteForCode(process.getQuoteCode());
-
-		if (getCommerceQuoteService().shouldAutoApproveTheQuoteForSellerApproval(quoteModel))
-		{
-			getCommerceQuoteService().createQuoteSnapshotWithState(quoteModel, QuoteState.SELLERAPPROVER_APPROVED);
-			result = Transition.OK;
-		}
-		else
-		{
-			getCommerceQuoteService().createQuoteSnapshotWithState(quoteModel, QuoteState.SELLERAPPROVER_PENDING);
-			result = Transition.NOK;
-		}
+		getCommerceQuoteService().createQuoteSnapshotWithState(quoteModel, QuoteState.SELLERAPPROVER_APPROVED);
+		result = Transition.OK;
 
 		return result;
 	}

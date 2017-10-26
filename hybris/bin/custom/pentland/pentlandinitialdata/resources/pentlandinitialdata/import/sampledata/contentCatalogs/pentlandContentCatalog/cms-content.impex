@@ -88,7 +88,7 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; UpdatePasswordLink        ; UpdatePasswordLink        ; /my-account/update-password    ; UpdatePasswordLink        ;
 ; ; OrderHistoryLink          ; OrderHistoryLink          ; /my-account/orders             ; OrderHistoryLink          ;
 ; ; SavedCartsLink            ; SavedCartsLink            ; /my-account/saved-carts        ; SavedCartsLink            ;
-; ; OrderQueriesLink          ; OrderQueriesLink          ; /my-account/order-queries      ; OrderQueriesLink          ;
+; ; OrderQueriesLink          ; OrderQueriesLink          ; /my-account/my-quotes          ; OrderQueriesLink          ;
 ; ; SupportTicketsLink        ; SupportTicketsLink        ; /my-account/support-tickets    ; SupportTicketsLink        ;
 
 

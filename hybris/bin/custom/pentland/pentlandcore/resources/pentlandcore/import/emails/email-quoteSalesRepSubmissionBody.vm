@@ -1,4 +1,4 @@
-## messageSource=classpath:/pentlandcore/messages/email-quoteBuyerCancellation_$lang.properties
+## messageSource=classpath:/pentlandcore/messages/email-quoteSalesRepSubmission_$lang.properties
 #macro( genHtmlBoldFont $text )
 <font color="#414a4f" size="2" face="Arial, Helvetica, sans-serif"><b>$text</b></font>
 #end
@@ -83,6 +83,9 @@
                                         <br />
 
                                         <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('quoteDetailsParagraph', "#genHtmlLinkStartTag($quoteDetailsUrl)", "#genHtmlBoldFont(${ctx.quote.code})", "#genHtmlLinkEndTag()")}</font></p>
+                                        <br />
+
+                                        <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('quoteReviewParagraph', "#genHtmlLinkStartTag($quoteDetailsUrl)", "#genHtmlBoldFont(${ctx.quote.code})", "#genHtmlLinkEndTag()")}</font></p>
                                         <br />
 
                                         <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('thankYouParagraph', "#genHtmlLinkStartTag($quoteDetailsUrl)", "#genHtmlBoldFont(${ctx.quote.code})", "#genHtmlLinkEndTag()")}</font></p>
@@ -249,13 +252,13 @@
                                     <td></td>
                                 </tr>
                                 #if (${ctx.cmsSlotContents.BottomContent})
-                                  <tr>
-                                    <td align="center" valign="middle">
-                                      <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
-                                    </td>
-                                  </tr>
+                                    <tr>
+                                        <td align="center" valign="middle">
+                                            <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
+                                        </td>
+                                    </tr>
                                 #end
-                              <tr>
+                                <tr>
                                     <td> </td>
                                 </tr>
                             </table>
