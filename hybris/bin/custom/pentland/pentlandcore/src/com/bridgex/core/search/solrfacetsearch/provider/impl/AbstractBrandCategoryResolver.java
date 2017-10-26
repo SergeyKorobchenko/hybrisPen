@@ -15,14 +15,15 @@ import de.hybris.platform.solrfacetsearch.provider.impl.AbstractValueResolver;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/18/2017.
  */
-public abstract class AbstractBrandCategoryResolver extends AbstractValueResolver<ProductModel, Object, Object> {
+public abstract class AbstractBrandCategoryResolver extends AbstractBaseProductValueResolver {
 
   private static final Logger LOG = Logger.getLogger(AbstractBrandCategoryResolver.class);
 
   private PentlandCategoryService categoryService;
 
   protected CategoryModel getBrandCategoryForProduct(ProductModel productModel){
-    String sapBrand = productModel.getSapBrand();
+    ProductModel baseProductModel = getBaseProductModel(productModel);
+    String sapBrand = baseProductModel.getSapBrand();
     if(StringUtils.isNotEmpty(sapBrand)) {
       try {
         return categoryService.getCategoryForCode(productModel.getCatalogVersion(), sapBrand);
