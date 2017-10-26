@@ -156,6 +156,11 @@
 	      p:mapping="orderstatus"
 	      p:converter-ref="pentlandBatchOrderStatusConverter"/>
 
+	<bean id="pentlandB2BCustomerConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="user"
+	      p:converter-ref="pentlandBatchB2BCustomerConverter"/>
+
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
 
@@ -314,5 +319,15 @@
 			<value>;{+0};{+1};{S}</value>
 		</property>
 	</bean>
-
+	<bean id="pentlandBatchB2BCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				$defaultPassword=1000:03e09d25692029426e0c764546156206:7eb171c2523cd785269d3340b2d0546d345aa3394d8ae28c9c580221a3e609b8edc258c3bc75897056d6400c94380697a84d43b67450d86bc4ce0617eb58b68f
+				INSERT B2BCustomer;uid[unique=true];email[unique=true];@b2bGroups[translator=com.bridgex.core.customer.impex.translators.B2BCustomerGroupsTranslator,default=b2bcustomergroup];name;groups(uid);division(code);sessionCurrency(isocode)[default=GBP];encodedPassword[default=$defaultPassword];passwordEncoding[default=pbkdf2];loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{+0};{1};{+2} {+3};{+4};{5};{6};{7};{8};;{S}</value>
+		</property>
+	</bean>
 </beans>
