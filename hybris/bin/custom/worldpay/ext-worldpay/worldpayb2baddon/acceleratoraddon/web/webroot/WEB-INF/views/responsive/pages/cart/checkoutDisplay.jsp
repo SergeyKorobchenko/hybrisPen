@@ -57,27 +57,3 @@
         </div>
     </div>
 </div>
-
-<c:if test="${showCheckoutStrategies && not empty cartData.entries}">
-    <div class="cart__actions">
-        <div class="row">
-            <div class="col-xs-12 col-sm-5 col-md-3 col-lg-2 pull-right">
-                <input type="hidden" name="flow" id="flow"/>
-                <input type="hidden" name="pci" id="pci"/>
-                <select id="selectAltCheckoutFlow" class="doFlowSelectedChange form-control">
-                    <option value="select-checkout"><spring:theme code="checkout.checkout.flow.select"/></option>
-                    <option value="multistep"><spring:theme code="checkout.checkout.multi"/></option>
-                    <option value="multistep-pci"><spring:theme code="checkout.checkout.multi.pci"/></option>
-                </select>
-                <select id="selectPciOption" class="display-none">
-                    <option value=""><spring:theme code="checkout.checkout.multi.pci.select"/></option>
-                    <c:if test="${!isOmsEnabled}">
-                        <option value="default"><spring:theme code="checkout.checkout.multi.pci-ws"/></option>
-                        <option value="hop"><spring:theme code="checkout.checkout.multi.pci-hop"/></option>
-                    </c:if>
-                    <option value="sop"><spring:theme code="checkout.checkout.multi.pci-sop" text="PCI-SOP"/></option>
-                </select>
-            </div>
-        </div>
-    </div>
-</c:if>

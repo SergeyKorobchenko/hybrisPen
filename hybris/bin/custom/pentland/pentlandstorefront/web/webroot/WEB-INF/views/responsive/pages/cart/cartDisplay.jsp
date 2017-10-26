@@ -11,17 +11,9 @@
 <div class="cart-header border">
     <div class="row">
         <div class="col-xs-12 col-sm-5">
-            <h1 class="cart-headline">
-                <spring:theme code="text.cart"/>
-                <c:if test="${not empty cartData.code}">
-                    <span class="cart__id--label">
-                        <spring:theme code="basket.page.cartIdShort"/><span class="cart__id">${fn:escapeXml(cartData.code)}</span>
-                    </span>
-                </c:if>
-            </h1>
+
         </div>
         <div class="col-xs-12 col-sm-7">
-
             <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
                 <c:if test="${not empty savedCartCount and savedCartCount ne 0}">
                     <spring:url value="/my-account/saved-carts" var="listSavedCartUrl" htmlEscape="false"/>
@@ -34,7 +26,6 @@
                             <spring:theme code="saved.quote.total.number" arguments="${quoteCount}"/>
                         </a>
                     </c:if>
-
                 </c:if>
             </sec:authorize>
             <cart:saveCart/>
@@ -53,6 +44,11 @@
         <div class="col-xs-12 pull-right cart-actions--print">
             <div class="cart__actions border">
                 <div class="row">
+                    <div class="col-sm-4 col-md-3">
+                        <button class="btn btn-primary btn-block btn--savecart-checkout js-savecart-checkout-button">
+                            <spring:theme code="checkout.savecart"/>
+                        </button>
+                    </div>
                     <div class="col-sm-4 col-md-3 pull-right">
                         <ycommerce:testId code="checkoutButton">
                             <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">
@@ -75,14 +71,11 @@
                         </button>
                     </div>
                 </div>
+                <cart:cartHeader />
             </div>
         </div>
     </div>
-    <div class="cart-header">
-        <div class="row">
-            <cart:cartHeader />
-        </div>
-    </div>
+
     <div class="row">
 
         <cart:exportCart/>

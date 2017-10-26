@@ -26,4 +26,7 @@
 	      class="com.bridgex.core.strategies.impl.PentlandCartValidationStrategy" parent="defaultCartValidationStrategy">
 	</bean>
 
+	<alias name="pentlandCommerceUpdateCartEntryStrategy" alias="commerceUpdateCartEntryStrategy"/>
+	<bean id="pentlandCommerceUpdateCartEntryStrategy" class="com.bridgex.core.order.impl.PentlandCommerceUpdateCartEntryStrategy" parent="defaultCommerceUpdateCartEntryStrategy"/>
+
 </beans>

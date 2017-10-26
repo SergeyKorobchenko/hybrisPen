@@ -225,4 +225,7 @@
 	<alias name="pentlandOrderHistoryPopulator" alias="orderHistoryPopulator"/>
 	<bean id="pentlandOrderHistoryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderHistoryPopulator" parent="defaultOrderHistoryPopulator"/>
 
+	<alias name="pentlandCartPopulator" alias="cartPopulator"/>
+	<bean id="pentlandCartPopulator" class="com.bridgex.facades.order.converters.populator.PentlandCartPopulator" parent="defaultCartPopulator"/>
+
 </beans>

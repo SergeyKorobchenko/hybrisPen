@@ -285,40 +285,49 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
-			@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-		if (bindingResult.hasErrors())
+		public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
+		@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
+		final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 		{
-			for (final ObjectError error : bindingResult.getAllErrors())
+			if (bindingResult.hasErrors())
 			{
-				if ("typeMismatch".equals(error.getCode()))
+				for (final ObjectError error : bindingResult.getAllErrors())
 				{
-					GlobalMessages.addErrorMessage(model, "basket.error.quantity.invalid");
-				}
-				else
-				{
-					GlobalMessages.addErrorMessage(model, error.getDefaultMessage());
+					if ("typeMismatch".equals(error.getCode()))
+					{
+						GlobalMessages.addErrorMessage(model, "basket.error.quantity.invalid");
+					}
+					else
+					{
+						GlobalMessages.addErrorMessage(model, error.getDefaultMessage());
+					}
 				}
 			}
-		}
-		else if (getCartFacade().hasEntries())
-		{
-			try
+			else if (getCartFacade().hasEntries())
 			{
-				final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
-						form.getQuantity().longValue());
-				addFlashMessage(form, request, redirectModel, cartModification);
+				try
+				{
+					final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
+					                                                                              form.getQuantity().longValue());
+					addFlashMessage(form, request, redirectModel, cartModification);
 
-				// Redirect to the cart page on update success so that the browser doesn't re-post again
-				return getCartPageRedirectUrl();
+					// Redirect to the cart page on update success so that the browser doesn't re-post again
+					return getCartPageRedirectUrl();
+				}
+				catch (final CommerceCartModificationException ex)
+				{
+					LOG.warn("Couldn't update product with the entry number: " + entryNumber + ".", ex);
+				}
 			}
-			catch (final CommerceCartModificationException ex)
-			{
-				LOG.warn("Couldn't update product with the entry number: " + entryNumber + ".", ex);
-			}
-		}
+
+		// if could not update cart, display cart/quote page again with error
+		return prepareCartUrl(model);
+	}
+
+	@RequestMapping(value = "/update-all", method = RequestMethod.POST)
+	public String updateCartQuantitiesAll(final Model model, final BindingResult bindingResult, final HttpServletRequest request,
+	                                   final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
 
 		// if could not update cart, display cart/quote page again with error
 		return prepareCartUrl(model);
