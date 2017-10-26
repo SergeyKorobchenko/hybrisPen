@@ -12,7 +12,8 @@
 
 	<extension abstractclassprefix="Generated" classprefix="Pentlandstorefront" name="pentlandstorefront" usemaven="false">
 
-		<requires-extension name="internationalization"/>
+		<requires-extension name="customerticketingaddon"/>
+<requires-extension name="internationalization"/>
 		<requires-extension name="assistedservicestorefront"/>
 		<requires-extension name="worldpayb2baddon"/>
 		<requires-extension name="worldpaynotifications"/>
