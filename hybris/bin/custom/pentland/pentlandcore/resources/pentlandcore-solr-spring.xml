@@ -165,7 +165,8 @@
 		<property name="priceService" ref="priceService"/>
 	</bean>
 
-	<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>
+	<!--TODO fix clash with backoffice context -->
+	<!--<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>-->
 	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
 
 	<bean id="abstractNavCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractNavCategoryResolver" abstract="true" parent="abstractValueResolver"/>
