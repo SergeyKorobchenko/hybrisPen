@@ -103,7 +103,7 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 	public String choose(@ModelAttribute final PaymentTypeForm paymentTypeForm, final BindingResult bindingResult,
 			final Model model) throws CMSItemNotFoundException, CommerceCartModificationException
 	{
-		paymentTypeFormValidator.validate(paymentTypeForm, bindingResult);
+//		paymentTypeFormValidator.validate(paymentTypeForm, bindingResult);
 
 		if (bindingResult.hasErrors())
 		{
@@ -135,18 +135,6 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 		paymentTypeData.setCode(paymentTypeForm.getPaymentType());
 
 		cartData.setPaymentType(paymentTypeData);
-
-		// set cost center
-		if (CheckoutPaymentType.ACCOUNT.getCode().equals(cartData.getPaymentType().getCode()))
-		{
-			final B2BCostCenterData costCenter = new B2BCostCenterData();
-			costCenter.setCode(paymentTypeForm.getCostCenterId());
-
-			cartData.setCostCenter(costCenter);
-		}
-
-		// set purchase order number
-		cartData.setPurchaseOrderNumber(paymentTypeForm.getPurchaseOrderNumber());
 
 		b2bCheckoutFacade.updateCheckoutCart(cartData);
 	}
@@ -181,18 +169,6 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 			paymentTypeForm.setPaymentType(CheckoutPaymentType.ACCOUNT.getCode());
 		}
 
-		// set cost center
-		if (cartData.getCostCenter() != null && StringUtils.isNotBlank(cartData.getCostCenter().getCode()))
-		{
-			paymentTypeForm.setCostCenterId(cartData.getCostCenter().getCode());
-		}
-		else if (!CollectionUtils.isEmpty(getVisibleActiveCostCenters()) && getVisibleActiveCostCenters().size() == 1)
-		{
-			paymentTypeForm.setCostCenterId(getVisibleActiveCostCenters().get(0).getCode());
-		}
-
-		// set purchase order number
-		paymentTypeForm.setPurchaseOrderNumber(cartData.getPurchaseOrderNumber());
 		return paymentTypeForm;
 	}
 

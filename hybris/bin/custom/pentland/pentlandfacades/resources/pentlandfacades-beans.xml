@@ -34,4 +34,8 @@
 		<property name="rdd" type="java.util.Date"/>
 	</bean>
 
+	<bean class="de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData">
+		<property name="customerType" type="com.bridgex.core.enums.B2BUnitType"/>
+	</bean>
+
 </beans>
