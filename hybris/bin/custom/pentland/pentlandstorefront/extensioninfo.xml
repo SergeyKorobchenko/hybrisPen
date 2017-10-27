@@ -12,7 +12,8 @@
 
 	<extension abstractclassprefix="Generated" classprefix="Pentlandstorefront" name="pentlandstorefront" usemaven="false">
 
-		<requires-extension name="customerticketingaddon"/>
+		
+<requires-extension name="pentlandsupportticketingaddon"/>
 <requires-extension name="internationalization"/>
 		<requires-extension name="assistedservicestorefront"/>
 		<requires-extension name="worldpayb2baddon"/>
@@ -24,6 +25,7 @@
 		<requires-extension name="accountsummaryaddon"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="pentlandfacades"/>
+		
 
 		<webmodule jspcompile="false" webroot="/pentlandstorefront"/>
 

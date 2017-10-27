@@ -10,10 +10,10 @@
 # -----------------------------------------------------------------------
 $contentCatalog = pentlandContentCatalog
 $contentCatalogName = Pentland Content Catalog
-$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Online])[default = $contentCatalog:Online]
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
 $productCatalog = pentlandProductCatalog
 $productCatalogName = Pentland Product Catalog
-$productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Online'])[unique = true, default = $productCatalog:Online]
+$productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
 $picture = media(code, $contentCV);
 $image = image(code, $contentCV);
 $media = media(code, $contentCV);
@@ -89,7 +89,7 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; OrderHistoryLink          ; OrderHistoryLink          ; /my-account/orders             ; OrderHistoryLink          ;
 ; ; SavedCartsLink            ; SavedCartsLink            ; /my-account/saved-carts        ; SavedCartsLink            ;
 ; ; OrderQueriesLink          ; OrderQueriesLink          ; /my-account/my-quotes          ; OrderQueriesLink          ;
-; ; SupportTicketsLink        ; SupportTicketsLink        ; /add-ticket                    ; SupportTicketsLink        ;
+; ; SupportTicketsLink        ; SupportTicketsLink        ; /add-support-ticket            ; SupportTicketsLink        ;
 
 
 ##---- level 4. children of Order Tools ----##
@@ -660,7 +660,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 # components
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
-;;AccountAddSupportTicketComponent;Account AddSupport Ticket Component;/WEB-INF/views/addons/customerticketingaddon/responsive/pages/account/accountAddSupportTicketPage.jsp;AccountAddSupportTicketComponent
+;;AccountAddSupportTicketComponent;Account AddSupport Ticket Component;/WEB-INF/views/addons/pentlandsupportticketingaddon/responsive/pages/addSupportTicketPage.jsp;AccountAddSupportTicketComponent
 ###### Account Support Tickets End ######
 
 ###### Account My Quotes Start ######
