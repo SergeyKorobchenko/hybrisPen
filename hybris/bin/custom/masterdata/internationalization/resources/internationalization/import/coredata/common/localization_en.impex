@@ -2844,3 +2844,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.orderType;Order Type
 ;text.account.orderHistory.rdd;Requested delivery date
 ;text.account.orderHistory.totalQty;Total Quantity
+
+;text.account.supporttickets.createticket.ticketcategory.PRODUCT_ENQUIRY;Product Enquiry
+;text.account.supporttickets.createticket.ticketcategory.B2B_SYSTEM_ISSUE;B2B System issue
+;text.account.supporttickets.success;Your ticket successfully sended

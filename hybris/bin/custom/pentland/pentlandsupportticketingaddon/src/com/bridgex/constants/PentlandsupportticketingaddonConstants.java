@@ -20,7 +20,6 @@ public final class PentlandsupportticketingaddonConstants extends GeneratedPentl
 
 	public static final String ADD_SUPPORT_TICKET_PAGE = "add-support-ticket";
 	public static final String SUPPORT_TICKET_FORM = "supportTicketForm";
-	public static final String SUPPORT_TICKET_DATA = "ticketData";
 
 	public static final String SUPPORT_TICKET_ASSOCIATED_OBJECTS = "associatedObjects";
 	public static final String SUPPORT_TICKET_CATEGORIES = "categories";
@@ -28,16 +27,15 @@ public final class PentlandsupportticketingaddonConstants extends GeneratedPentl
 	public static final String MAX_UPLOAD_SIZE = "maxUploadSize";
 	public static final String MAX_UPLOAD_SIZE_MB = "maxUploadSizeMB";
 	public static final String TEXT_SUPPORT_TICKETING_TRY_LATER = "text.account.supporttickets.tryLater";
-	public static final String TEXT_SUPPORT_TICKETING_HISTORY = "text.account.supporttickets.history";
-	public static final String TEXT_SUPPORT_TICKETING_UPDATE = "text.account.supporttickets.updateSupportTicket";
 	public static final String TEXT_SUPPORT_TICKETING_ADD = "text.account.supporttickets.addSupportTicket";
-	public static final String TEXT_SUPPORT_TICKETING_ADDED = "text.account.supportTicket.confirmation.ticket.added";
 	public static final String FORM_GLOBAL_ERROR_KEY = "form-global-error";
 	public static final String FORM_GLOBAL_ERROR = "form.global.error";
 
 	public static final String TEXT_SUPPORT_TICKETING_ATTACHMENT_BLOCK_LISTED = "text.account.supporttickets.attachment.block.listed";
+  public static final String SUPPORT_TICKET_SUCCESS = "supporttickets-success";
+	public static final String TEXT_SUPPORT_TICKET_SUCCESS = "text.account.supporttickets.success";
 
-	private PentlandsupportticketingaddonConstants()
+  private PentlandsupportticketingaddonConstants()
 	{
 		//empty to avoid instantiating this constant class
 	}

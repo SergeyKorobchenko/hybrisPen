@@ -30,9 +30,9 @@ import de.hybris.platform.customerticketingfacades.data.StatusData;
 import de.hybris.platform.customerticketingfacades.data.TicketData;
 import de.hybris.platform.ticket.service.UnsupportedAttachmentException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -52,7 +52,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 
@@ -114,17 +113,14 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PentlandsupportticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PentlandsupportticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
 
-		model.addAttribute(WebConstants.BREADCRUMBS_KEY,
-				getBreadcrumbs(PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADD));
+		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getBreadcrumbs(PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADD));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_FORM, new SupportTicketForm());
-		model.addAttribute(PentlandsupportticketingaddonConstants.MAX_UPLOAD_SIZE, Long.valueOf(maxUploadSizeValue));
-		model.addAttribute(PentlandsupportticketingaddonConstants.MAX_UPLOAD_SIZE_MB,
-				FileUtils.byteCountToDisplaySize(maxUploadSizeValue));
+		model.addAttribute(PentlandsupportticketingaddonConstants.MAX_UPLOAD_SIZE, maxUploadSizeValue);
+		model.addAttribute(PentlandsupportticketingaddonConstants.MAX_UPLOAD_SIZE_MB, FileUtils.byteCountToDisplaySize(maxUploadSizeValue));
 		try
 		{
-			model.addAttribute(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_ASSOCIATED_OBJECTS,
-					ticketFacade.getAssociatedToObjects());
+			model.addAttribute(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_ASSOCIATED_OBJECTS, ticketFacade.getAssociatedToObjects());
 			model.addAttribute(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_CATEGORIES, ticketFacade.getTicketCategories());
 		}
 		catch (final UnsupportedOperationException ex)
@@ -136,6 +132,7 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
+
 	/**
 	 * Creates a ticket.
 	 *
@@ -146,17 +143,15 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequireHardLogIn
 	@ResponseBody
-	public ResponseEntity<List<Map<String, String>>> addSupportTicket(final SupportTicketForm supportTicketForm,
+	public ResponseEntity<Map<String, String>> addSupportTicket(final SupportTicketForm supportTicketForm,
 			final BindingResult bindingResult)
 	{
 		validator.validate(supportTicketForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
-			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
-			list.add(buildMessageMap(PentlandsupportticketingaddonConstants.FORM_GLOBAL_ERROR_KEY,
-					PentlandsupportticketingaddonConstants.FORM_GLOBAL_ERROR));
+			final Map<String, String> map = buildErrorMessagesMap(bindingResult);
 
-			return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 		}
 
 		try
@@ -170,7 +165,7 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 			map.put(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_TRY_LATER, getMessageSource()
 					.getMessage(PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKETING_ATTACHMENT_BLOCK_LISTED, new Object[]
 			{ allowedUploadedFormats }, getI18nService().getCurrentLocale()));
-			return new ResponseEntity<>(Lists.newArrayList(map), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 		}
 		catch (final RuntimeException rEX)
 		{
@@ -179,11 +174,18 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 
 			map.put(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_TRY_LATER, getMessageSource().getMessage(
 					PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKETING_TRY_LATER, null, getI18nService().getCurrentLocale()));
-			return new ResponseEntity<>(Lists.newArrayList(map), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(getSuccessMessageMap(), HttpStatus.OK);
 
+	}
+
+	private Map<String, String> getSuccessMessageMap() {
+		final Map<String, String> map = Maps.newHashMap();
+		map.put(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_SUCCESS, getMessageSource().getMessage(
+			PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKET_SUCCESS, null, getI18nService().getCurrentLocale()));
+		return map;
 	}
 
 	/**
@@ -233,14 +235,21 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 	 * @param bindingResult
 	 * @return Map of error code and message
 	 */
-	protected List<Map<String, String>> buildErrorMessagesMap(final BindingResult bindingResult)
+	protected Map<String, String> buildErrorMessagesMap(final BindingResult bindingResult)
 	{
-		return bindingResult.getAllErrors().stream().filter(err -> err.getCode() != null && err.getCode().length() > 0).map(err ->
-			{
-				final Map<String, String> map = Maps.newHashMap();
-				map.put(err.getCodes()[0].replaceAll("\\.", "-"), err.getDefaultMessage());
-				return map;
-			}).collect(Collectors.toList());
+		return bindingResult.getAllErrors()
+		                    .stream()
+		                    .filter(err -> err.getCode() != null && err.getCode().length() > 0)
+		                    .map(err ->
+												{
+													final Map<String, String> map = Maps.newHashMap();
+													map.put(err.getCodes()[0].replaceAll("\\.", "-"), err.getDefaultMessage());
+													return map;
+												})
+		                    .reduce(new HashMap<>(), (k,v)-> {
+												k.putAll(v);
+												return k;
+												});
 	}
 
 	/**

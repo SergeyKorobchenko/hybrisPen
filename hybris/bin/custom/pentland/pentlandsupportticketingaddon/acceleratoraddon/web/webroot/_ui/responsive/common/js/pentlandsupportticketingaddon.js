@@ -23,6 +23,12 @@ ACC.pentlandsupportticketingaddon = {
 		}
 	},
 
+    clearForm: function(_this) {
+        $('#createTicket-subject').val("");
+        $('#createTicket-message').val("");
+    },
+
+
 	onStatusChange: function () {
         $(document).on('change', '.js-add-message-status', function () {
             ACC.pentlandsupportticketingaddon.disableMessage(this);
@@ -193,9 +199,10 @@ ACC.pentlandsupportticketingaddon = {
             data: formData,
             contentType: false,
             processData: false,
-            success: function () {
-                window.location.replace(successRedirectUrl);
-            },
+            success: function (result) {
+                ACC.pentlandsupportticketingaddon.displayCustomerTicketingAlert({message: result["supporttickets-success"]});
+                ACC.pentlandsupportticketingaddon.clearForm();
+                },
             error: function (jqXHR) {
                 ACC.pentlandsupportticketingaddon.processErrorResponse(jqXHR);
             }
@@ -206,9 +213,8 @@ ACC.pentlandsupportticketingaddon = {
         ACC.pentlandsupportticketingaddon.clearAlerts();
         if (jqXHR.status === 400 && jqXHR.responseJSON) {
 
-            $.each(jqXHR.responseJSON, function() {
-                $.each(this, function(k, v) {
-                    var target = '#' + k;
+            $.each(jqXHR.responseJSON, function(k,v) {
+                var target = '#' + k;
                     $(target).show();
                     $(target).text(v);
                     if (k === 'NotEmpty-supportTicketForm-subject'
@@ -221,7 +227,6 @@ ACC.pentlandsupportticketingaddon = {
                         ACC.pentlandsupportticketingaddon.displayGlobalAlert({type: 'error', message: v});
                     }
                 });
-            });
 
             return;
         }

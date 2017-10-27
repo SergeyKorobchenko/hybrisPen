@@ -10,13 +10,8 @@
     <div id="global-alerts" class="global-alerts"></div>
     <div class="back-link border">
         <div class="row">
-            <div class="container-lg col-md-6">
-                <a href="support-tickets">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <span class="label"><spring:theme code="text.account.supporttickets" text="Support Tickets" /></span>
-            </div>
-        </div>
+            <span class="label"><spring:theme code="text.account.supporttickets.addSupportTicket" text="Add Support Ticket" /></span>
+         </div>
     </div>
 
     <div class="row">
@@ -81,18 +76,12 @@
                         <div id="customer-ticketing-buttons" class="form-actions">
                             <div class="accountActions">
                                 <div class="row">
-                                    <div class="col-sm-6 col-sm-push-6 accountButtons">
+                                    <div class="col-sm-6 col-sm-push-3 accountButtons">
                                         <ycommerce:testId code="supportTicket_create_button">
                                             <button class="btn btn-primary btn-block" type="submit" id="addTicket">
                                             <spring:theme code="text.account.supporttickets.createTicket.submit" text="Submit"/>
                                             </button>
                                         </ycommerce:testId>
-                                    </div>
-
-                                    <div class="col-sm-6 col-sm-pull-6 accountButtons">
-                                        <a href="support-tickets" class="btn btn-default btn-block">
-                                            <spring:theme code="text.account.supporttickets.createTicket.back" text="Cancel" />
-                                        </a>
                                     </div>
                                 </div>
                             </div>
