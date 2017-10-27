@@ -1,0 +1,46 @@
+#set($removePrefix = "removeValue==")
+#set($values = [])
+#foreach($v in $enumValue)
+  #set($var = $values.add($v.name))
+#end
+/*
+* ----------------------------------------------------------------
+* --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN!
+* --- Generated at $currentDateTime
+* ----------------------------------------------------------------
+*
+*/
+package $packageName;
+
+#if ( $hasDescription || $hasDeprecated )
+/**
+#end
+#if ( $hasDescription)
+* $description
+#end
+#if ( $hasDescription && $hasDeprecated )
+*
+#end
+#if ( $hasDeprecated )
+* @deprecated $deprecated
+#end
+#if ( $hasDescription || $hasDeprecated )
+*/
+#end
+#if ( $hasDeprecated )
+@Deprecated
+#end
+public enum $shortClassName
+{
+
+#foreach($v in $enumValue)
+  #if( ! ${StringUtils.startsWith($v.name, $removePrefix)})
+    #if (! $values.contains(${StringUtils.join($removePrefix, $v.name)}))
+      $v.comment
+
+      ${StringUtils.upperCase($v.name)}#if ($foreach.last)  #else , #end
+    #end
+  #end
+#end
+
+}
