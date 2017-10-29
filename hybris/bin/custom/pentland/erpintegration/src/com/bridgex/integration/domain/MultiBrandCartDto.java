@@ -49,7 +49,7 @@ public class MultiBrandCartDto {
   private String creditCheck;
 
   @JsonProperty("I_MULTI_BRAND_CART_INPUT_T")
-  private List<MultiBrandCartInputDto> cartInput;
+  private List<MultiBrandCartInput> cartInput;
 
   public String getDocType() {
     return docType;
@@ -147,11 +147,11 @@ public class MultiBrandCartDto {
     this.creditCheck = creditCheck;
   }
 
-  public List<MultiBrandCartInputDto> getCartInput() {
+  public List<MultiBrandCartInput> getCartInput() {
     return cartInput;
   }
 
-  public void setCartInput(List<MultiBrandCartInputDto> cartInput) {
+  public void setCartInput(List<MultiBrandCartInput> cartInput) {
     this.cartInput = cartInput;
   }
 }
