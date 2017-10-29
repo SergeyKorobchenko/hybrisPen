@@ -32,10 +32,10 @@ public class AbstractRESTClient implements RESTClient {
     try {
 
       LOG.info(IntegrationUtils.toJSON(requestEntity, LOG));
-      LOG.info("TEST");
+
       ResponseEntity responseEntity = restTemplate.exchange(requestEntity, responseClass);
 
-      LOG.debug(IntegrationUtils.toJSON(responseEntity, LOG));
+      LOG.info(IntegrationUtils.toJSON(responseEntity, LOG));
 
       return responseEntity;
     } catch (HttpClientErrorException e) {

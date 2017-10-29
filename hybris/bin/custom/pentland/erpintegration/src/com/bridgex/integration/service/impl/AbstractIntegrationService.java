@@ -22,7 +22,7 @@ import de.hybris.platform.util.Config;
 /**
  * @author Created by konstantin.pavlyukov on 10/26/2017.
  */
-public abstract class AbstractIntegrationService<REQUEST> implements IntegrationService<REQUEST> {
+public abstract class AbstractIntegrationService<REQUEST, RESPONSE> implements IntegrationService<REQUEST, RESPONSE> {
 
   private final static String DEF_ERP_INT_PROP = "erp.integration.";
   private final static String DEF_URL_PROP = ".url";
@@ -51,7 +51,7 @@ public abstract class AbstractIntegrationService<REQUEST> implements Integration
   }
 
   public HttpHeaders getHeaders() {
-    return Optional.ofNullable(headers).orElse(new HttpHeaders());
+    return headers = Optional.ofNullable(headers).orElse(new HttpHeaders());
   }
 
   public void setHeaders(HttpHeaders headers) {
@@ -77,11 +77,11 @@ public abstract class AbstractIntegrationService<REQUEST> implements Integration
   }
 
   @Override
-  public ResponseEntity sendRequest(final REQUEST requestDto, final Class responseClass) {
+  public ResponseEntity<RESPONSE> sendRequest(final REQUEST requestDto, final Class responseClass) {
     if (isBasicAuth()) {basicAuth();}
     final URI uri = UriComponentsBuilder.fromHttpUrl(getServiceUrl()).build().toUri();
     RequestEntity<REQUEST> request = new RequestEntity<>(requestDto, getHeaders(), getMethod(), uri);
-    ResponseEntity response = getClient().sendPostRequest(request, responseClass);
+    ResponseEntity<RESPONSE> response = getClient().sendPostRequest(request, responseClass);
     getResponseProcessor().process(response);
     return response;
   }

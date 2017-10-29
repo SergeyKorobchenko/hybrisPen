@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * @author Created by konstantin.pavlyukov on 10/26/2017.
  */
-public interface IntegrationService<REQUEST> {
+public interface IntegrationService<REQUEST, RESPONSE> {
 
-  ResponseEntity sendRequest(REQUEST requestDto, Class responseClass);
+  ResponseEntity<RESPONSE> sendRequest(REQUEST requestDto, Class responseClass);
 }
