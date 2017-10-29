@@ -173,7 +173,7 @@ public class DefaultPentlandPDTRowsQueryBuilder implements PentlandPDTRowsQueryB
       params.put("user", userPk.getLong());
     }
 
-    if (userGroupsPk != null) {
+    if (CollectionUtils.isNotEmpty(userGroupsPk)) {
       params.put("userGroups", userGroupsPk);
     }
 

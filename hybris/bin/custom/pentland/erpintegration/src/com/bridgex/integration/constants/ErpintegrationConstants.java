@@ -24,5 +24,15 @@ public final class ErpintegrationConstants extends GeneratedErpintegrationConsta
 
 	// implement here constants used by this extension
 
-    public static final String PLATFORM_LOGO_CODE = "erpintegrationPlatformLogo";
+  public static final String PLATFORM_LOGO_CODE = "erpintegrationPlatformLogo";
+
+	public static final String ERP_USERNAME = "erp.integration.username";
+
+	public static final String ERP_PASSWORD = "erp.integration.password";
+
+	public static class REQUEST {
+		public static final String DEFAULT_DOC_TYPE = "C";
+		public static final String DEFAULT_SERVICE_CONSUMER = "Hybris_B2B";
+
+	}
 }
