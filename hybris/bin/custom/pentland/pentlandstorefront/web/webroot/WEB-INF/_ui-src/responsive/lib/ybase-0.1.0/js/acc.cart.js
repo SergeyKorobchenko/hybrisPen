@@ -7,7 +7,9 @@ ACC.cart = {
         "bindMultiDEntryRemoval",
         "bindMultidCartProduct",
         ["bindApplyVoucher", $("#js-voucher-apply-btn").length != 0],
-        ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0]
+        ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0],
+        "bindRddDatetimePicker",
+        "bindUpdateAllFormSubmit"
     ],
 
     bindHelp: function () {
@@ -391,6 +393,53 @@ ACC.cart = {
     bindToReleaseVoucher: function () {
         $('.js-release-voucher-remove-btn').on("click", function (event) {
             $(this).closest('form').submit();
+        });
+    },
+
+    bindRddDatetimePicker: function() {
+        $(document).ready(function () {
+            var startDate = new Date();
+            startDate.setDate(startDate.getDate() + 2);
+            $('#cartrdddatetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD',
+                minDate: startDate,
+                daysOfWeekDisabled: [0, 6],
+                allowInputToggle: true,
+                useCurrent: false,
+                disabledDates: ['2017-12-25', '2017-12-26', '2018-01-01', '2018-03-30', '2018-04-02', '2018-05-07', '2018-05-28', '2018-08-27', '2018-12-25', '2018-12-26']
+            });
+        });
+    },
+
+    submitUpdateAllForm: function () {
+        var $form = $('#updateAllCartForm');
+        if (!$form) {
+            return;
+        }
+        var updateFormData = $form.serialize();
+        $('input[id^=quantity_][name=quantity]:visible').each(function (index, value) {
+            var $input = $(value);
+            var entryNumber = $input.attr('id').substring('quantity_'.length);
+            updateFormData += '&quantities[' + entryNumber + ']=' + $input.val();
+        });
+        $.ajax({
+            url: $form.attr("action"),
+            data: updateFormData,
+            type: "POST",
+            success: function (data) {
+                location.reload();
+            },
+            error: function () {
+                alert("Failed save form");
+            }
+        });
+    },
+
+    bindUpdateAllFormSubmit: function() {
+        $(document).ready(function () {
+            $('.js-savecart-checkout-button').click(function () {
+                ACC.cart.submitUpdateAllForm();
+            })
         });
     }
 

@@ -35,6 +35,9 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 	</bean>
 
+	<alias name="pentlandCartFacade" alias="cartFacade"/>
+	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade" />
+
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">

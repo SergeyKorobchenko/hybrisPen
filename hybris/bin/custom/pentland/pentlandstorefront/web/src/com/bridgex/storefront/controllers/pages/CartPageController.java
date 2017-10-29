@@ -47,15 +47,15 @@ import de.hybris.platform.core.enums.QuoteState;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
+
+import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
+import com.bridgex.storefront.forms.PentlandCartForm;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -126,6 +126,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "cartEntryActionFacade")
 	private CartEntryActionFacade cartEntryActionFacade;
+
+	@Resource(name = "pentlandCartFacade")
+	private PentlandCartFacade pentlandCartFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -325,12 +328,30 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update-all", method = RequestMethod.POST)
-	public String updateCartQuantitiesAll(final Model model, final BindingResult bindingResult, final HttpServletRequest request,
-	                                   final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String updateCartQuantitiesAll(final Model model, final PentlandCartForm cartForm, final BindingResult bindingResult, final HttpServletRequest request,
+	                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		if (bindingResult.hasErrors()){
 
-		// if could not update cart, display cart/quote page again with error
-		return prepareCartUrl(model);
+		} else {
+			CartData cart = getCartFacade().getSessionCart();
+			cart.setPurchaseOrderNumber(cartForm.getPurchaseOrderNumber());
+			cart.setRdd(cartForm.getRequestedDeliveryDate());
+			cart.setCustomerNotes(cartForm.getCustomerNotes());
+			pentlandCartFacade.saveB2BCartData(cart);
+			if (getCartFacade().hasEntries()) {
+				for (int i = 0; i < cartForm.getQuantities().size(); ++i) {
+					try {
+						final CartModificationData cartModification = getCartFacade().updateCartEntry(i, cartForm.getQuantities().get(i));
+					}
+					catch (final CommerceCartModificationException ex) {
+						LOG.warn("Couldn't update product with the entry number: " + i + ".", ex);
+					}
+				}
+				return getCartPageRedirectUrl();
+			}
+		}
+		return getCartPageRedirectUrl();
 	}
 
 	@Override
@@ -349,6 +370,7 @@ public class CartPageController extends AbstractCartPageController
 		model.addAttribute("siteQuoteEnabled", Config.getBoolean(siteQuoteProperty, Boolean.FALSE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs("breadcrumb.cart"));
 		model.addAttribute("pageType", PageType.CART.name());
+		model.addAttribute("b2bCartForm", new PentlandCartForm(getCartFacade().getSessionCart()));
 	}
 
 	protected void addFlashMessage(final UpdateQuantityForm form, final HttpServletRequest request,
@@ -630,6 +652,33 @@ public class CartPageController extends AbstractCartPageController
 	{
 		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
 		return quoteData != null ? String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode())) : REDIRECT_CART_URL;
+	}
+
+	@Override
+	protected boolean validateCart(final RedirectAttributes redirectModel)
+	{
+		//Validate the cart
+		List<CartModificationData> modifications = new ArrayList<>();
+		try
+		{
+			modifications = getCartFacade().validateCartData();
+		}
+		catch (final CommerceCartModificationException e)
+		{
+			LOG.error("Failed to validate cart", e);
+		}
+		if (!modifications.isEmpty())
+		{
+			redirectModel.addFlashAttribute("validationData", modifications);
+
+			// Invalid cart. Bounce back to the cart page.
+			return true;
+		}
+		CartData cartData = getCartFacade().getSessionCart();
+		if (StringUtils.isEmpty(cartData.getPurchaseOrderNumber())) {
+			return false;
+		}
+		return false;
 	}
 
 }

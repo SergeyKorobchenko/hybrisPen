@@ -2844,3 +2844,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.orderType;Order Type
 ;text.account.orderHistory.rdd;Requested delivery date
 ;text.account.orderHistory.totalQty;Total Quantity
+
+;text.cart.rdd;Requested Delivery Date
+;text.cart.purchaseOrderNumber;P.O. Number
+;text.cart.customerNotes;Notes
+;checkout.savecart;Save Cart
