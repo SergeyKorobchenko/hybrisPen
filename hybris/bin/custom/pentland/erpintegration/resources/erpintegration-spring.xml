@@ -39,6 +39,14 @@
 		<property name="client" ref="defaultRESTClient" />
 	</bean>
 
-	<bean id="orderSimulateService" class="com.bridgex.integration.service.impl.OrderSimulateServiceImpl" parent="abstractIntegrationService" />
+	<beans profile="prod">
+		<bean id="orderSimulateService" class="com.bridgex.integration.service.impl.OrderSimulateServiceImpl" parent="abstractIntegrationService" />
+	</beans>
+
+	<beans profile="dev">
+		<alias alias="orderSimulateService" name="orderSimulateServiceMock"/>
+		<bean id="orderSimulateServiceMock" class="com.bridgex.integration.service.mock.OrderSimulateServiceMock" parent="abstractIntegrationService" />
+	</beans>
+
 
 </beans>
