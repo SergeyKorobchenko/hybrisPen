@@ -26,4 +26,12 @@ public interface PentlandProductService extends ProductService{
    * @return
    */
   List<ProductModel> findClearanceProductsForSapBrandAndCatalogVersion(String sapBrand, CatalogVersionModel catalogVersion);
+
+  /**
+   * Convert media during hot folder import
+   * @param product
+   * @param mediaContainerCode
+   * @return
+   */
+  boolean convertAssignedMedia(ProductModel product, String mediaContainerCode);
 }

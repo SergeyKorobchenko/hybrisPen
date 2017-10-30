@@ -66,11 +66,13 @@
                                 <tr>
                                     <td></td>
                                 </tr>
-                                <tr>
+                                #if (${ctx.cmsSlotContents.TopContent})
+                                  <tr>
                                     <td align="center" valign="middle">
-                                        <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;font-family:arial,helvetica,sans-serif; font-size: 14px;color:#19212b;text-decoration: none;">${ctx.cmsSlotContents.TopContent}</a>
+                                      <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;font-family:arial,helvetica,sans-serif; font-size: 14px;color:#19212b;text-decoration: none;">${ctx.cmsSlotContents.TopContent}</a>
                                     </td>
-                                </tr>
+                                  </tr>
+                                #end
                                 <tr>
                                     <td></td>
                                 </tr>
@@ -246,12 +248,14 @@
                                 <tr>
                                     <td></td>
                                 </tr>
-                                <tr>
+                                #if (${ctx.cmsSlotContents.BottomContent})
+                                  <tr>
                                     <td align="center" valign="middle">
-                                        <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
+                                      <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
                                     </td>
-                                </tr>
-                                <tr>
+                                  </tr>
+                                #end
+                              <tr>
                                     <td> </td>
                                 </tr>
                             </table>

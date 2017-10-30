@@ -125,6 +125,26 @@
                         <persistence type="property"/>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                     </attribute>
+                    <attribute qualifier="featureDescription" type="localized:java.lang.String">
+                        <description>Features description</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="packSize" type="int">
+                        <defaultvalue>0</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="videoURL" type="java.lang.String">
+                        <description>Link to video</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="externalURL" type="java.lang.String">
+                        <description>Link to external sites</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="sizeChartImage" type="Media">
+                        <description>Size chart image</description>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -299,7 +319,7 @@
                     <attribute qualifier="name" type="localized:java.lang.String">
                         <description>Localized display name for division</description>
                         <persistence type="property" />
-                        <modifiers initial="true" optional="false" read="true" write="true" search="true" />
+                        <modifiers initial="false" optional="true" read="true" write="true" search="true" />
                     </attribute>
                     <attribute qualifier="email" type="java.lang.String">
                         <modifiers initial="true" optional="false" read="true" write="true" search="true" />
@@ -318,6 +338,11 @@
                     <attribute qualifier="division" type="Division">
                         <modifiers read="true" write="true" search="true" optional="true"/>
                         <persistence type="property"/>
+                    </attribute>
+                    <attribute type="java.lang.Long" qualifier="sequenceId">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Attribute is used in batch import process for avoiding multiple imports.</description>
                     </attribute>
                 </attributes>
             </itemtype>

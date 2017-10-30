@@ -28,7 +28,8 @@
 			<map>
 				<!-- default priority is 0; todo set appropriate priorities -->
 				<entry key="productmaster" value="2" />
-				<entry key="media" value="1" />
+				<entry key="productrich" value="3" />
+				<entry key="media" value="3" />
 				<entry key="price" value="1" />
 				<entry key="b2bcustomer" value="1" />
 				<entry key="customer" value="1" />
@@ -45,7 +46,6 @@
 			<value># ImpEx for importing data into $CATALOG$
 				$catalog=$CATALOG$
 				$catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
-				$approved=approvalstatus(code)[default='check']
 				$baseProduct=baseProduct(code, catalogVersion(catalog(id[default=$CATALOG$]),version[default='Staged']))
 				$lang=$LANGUAGE$</value>
 		</constructor-arg>
@@ -109,6 +109,11 @@
 	      p:mapping="productmaster"
 	      p:converter-ref="pentlandBatchSizeProductConverter"/>
 
+	<bean id="batchRichProductConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="productrich"
+	      p:converter-ref="pentlandBatchRichProductConverter"/>
+
 	<alias name="batchProductPriceConverterMapping" alias="batchPriceConverterMapping"/>
 	<bean id="batchProductPriceConverterMapping"
 	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
@@ -155,6 +160,11 @@
 	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 	      p:mapping="orderstatus"
 	      p:converter-ref="pentlandBatchOrderStatusConverter"/>
+
+	<bean id="pentlandB2BCustomerConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="user"
+	      p:converter-ref="pentlandBatchB2BCustomerConverter"/>
 
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
@@ -204,6 +214,7 @@
 	<bean id="pentlandBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
+				$approved=approvalstatus(code)[default='check']
 				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
@@ -217,26 +228,53 @@
 	<bean id="pentlandBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				$approved=approvalstatus(code)[default='check']
+				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0}:$catalog:Staged;{+1};{5};{7};{8};{9};{11};{12};{13};{17};;$catalog:Staged;;{S}
-				;{+0}:$catalog:Online;{+1};{5};{7};{8};{9};{11};{12};{13};{17};;$catalog:Online;;{S}
+				;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
+				;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
 			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];size[lang=$lang];unit(code);season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];smu;productGroup[lang=$lang];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				$approved=approvalstatus(code)[default='check']
+				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+1}:$catalog:Staged;{2};{+3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};$catalog:Staged;;{S}
-				;{+1}:$catalog:Online;{2};{+3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};$catalog:Online;;{S}
+				;{+1}:$catalog:Staged;{2};{+3};{4};{10};{11};{15};$catalog:Staged;;{S}
+				;{+1}:$catalog:Online;{2};{+3};{4};{10};{11};{15};$catalog:Online;;{S}
+			</value>
+		</property>
+	</bean>
+	<bean id="pentlandBatchRichProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				$approved=approvalstatus(code)[default='approved']
+				$mediaCatalog = pentlandMediaCatalog
+				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
+				$classificationCatalog = pentlandClassificationCatalog
+				$clAttrModifiers = system = '$classificationCatalog', version = '1.0', lang = $lang, translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+				$teamwearType = @teamwearType[$clAttrModifiers];
+				$trainingwearType = @trainingwearType[$clAttrModifiers];
+				$sport = @sport[$clAttrModifiers];
+				$accessoryType = @accessoryType[$clAttrModifiers];
+				$useageOccasion = @useageOccasion[$clAttrModifiers];
+				$surface = @surface[$clAttrModifiers];
+				$trainingMethod = @trainingMethod[$clAttrModifiers];
+				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator];$teamwearType;$trainingwearType;$sport;$accessoryType;$useageOccasion;$surface;$trainingMethod;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>
+				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{S}
+				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{S}
 			</value>
 		</property>
 	</bean>
@@ -271,11 +309,11 @@
 				$mediaCatalog = pentlandMediaCatalog
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				# Import media container
-				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $mediaCV)[mode=append];$mediaCV;conversionGroup(code)[default=galleryConversionGroup];order
+				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $mediaCV)[mode=append];$mediaCV;conversionGroup(code)[default=galleryConversionGroup];
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+1};{2};;{3};{4}</value>
+			<value>;{+1};{2};;{3};</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchMediaProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -286,12 +324,15 @@
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				$galleryImages=galleryImages(qualifier, $mediaCV)[mode=append]
 				# Import product media
-				UPDATE Product;code[unique=true];$galleryImages;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.GreaterSequenceIdTranslator];$catalogVersion
+				UPDATE Product;code[unique=true];$galleryImages;$catalogVersion
 				#%groovy% afterEach: productService.convertAssignedMedia(modelService.get(impex.getLastImportedItem()),line.get(2))
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{1};{S}</value>
+			<value>
+				;{+0};{1};
+				;{+0};{1};$catalog:Online
+			</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchOrderConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -314,5 +355,15 @@
 			<value>;{+0};{+1};{S}</value>
 		</property>
 	</bean>
-
+	<bean id="pentlandBatchB2BCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				$defaultPassword=1000:03e09d25692029426e0c764546156206:7eb171c2523cd785269d3340b2d0546d345aa3394d8ae28c9c580221a3e609b8edc258c3bc75897056d6400c94380697a84d43b67450d86bc4ce0617eb58b68f
+				INSERT B2BCustomer;uid[unique=true];email[unique=true];@b2bGroups[translator=com.bridgex.core.customer.impex.translators.B2BCustomerGroupsTranslator,default=b2bcustomergroup];name;groups(uid);division(code);sessionCurrency(isocode)[default=GBP];encodedPassword[default=$defaultPassword];passwordEncoding[default=pbkdf2];loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{+0};{1};{+2} {+3};{+4};{5};{6};{7};{8};;{S}</value>
+		</property>
+	</bean>
 </beans>

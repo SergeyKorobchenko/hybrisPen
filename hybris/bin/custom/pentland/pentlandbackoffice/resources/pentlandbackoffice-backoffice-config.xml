@@ -49,6 +49,19 @@
 					<editorArea:attribute qualifier="smu"/>
 					<editorArea:attribute qualifier="productGroup"/>
 					<editorArea:attribute qualifier="season"/>
+					<editorArea:attribute qualifier="packSize"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.product.properties" position="2" merge-mode="append">
+				<editorArea:section name="hmc.product.descriptions">
+					<editorArea:attribute qualifier="featureDescription" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.product.multimedia" position="18" merge-mode="append">
+				<editorArea:section name="hmc.section.product.additionalmedias">
+					<editorArea:attribute qualifier="videoURL"/>
+					<editorArea:attribute qualifier="externalURL"/>
+					<editorArea:attribute qualifier="sizeChartImage"/>
 				</editorArea:section>
 			</editorArea:tab>
 		</editorArea:editorArea>

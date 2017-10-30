@@ -23,6 +23,7 @@
 
 	<!-- Spring Integration -->
 	<import resource="classpath:/pentlandcore/integration/hot-folder-common-spring.xml"/>
+	<import resource="classpath:/pentlandcore/integration/export-spring.xml"/>
 	<import resource="pentlandcore-solr-spring.xml"/>
 	<import resource="pentlandcore-resources-spring.xml"/>
 	<import resource="pentlandcore-listeners-spring.xml"/>
