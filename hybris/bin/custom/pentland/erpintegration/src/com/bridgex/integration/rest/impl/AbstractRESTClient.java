@@ -18,7 +18,7 @@ import com.bridgex.integration.util.IntegrationUtils;
 /**
  * @author Created by konstantin.pavlyukov on 10/25/2017.
  */
-public class AbstractRESTClient implements RESTClient {
+public abstract class AbstractRESTClient implements RESTClient {
 
   private static final Logger LOG = LoggerFactory.getLogger(AbstractRESTClient.class.getName());
   private RestTemplate restTemplate;

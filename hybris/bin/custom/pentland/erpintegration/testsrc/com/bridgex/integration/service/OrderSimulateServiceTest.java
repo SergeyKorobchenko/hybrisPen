@@ -55,7 +55,7 @@ public class OrderSimulateServiceTest {
 
     mockServer.expect(requestTo(Config.getString("erp.integration.int_sync_04.url", "")))
               .andExpect(method(HttpMethod.POST))
-              .andRespond(withSuccess("{\"ET_RETURN\":{\"TYPE\":\"TEST\"}}", MediaType.APPLICATION_JSON));
+              .andRespond(withSuccess("{\"ET_RETURN\":{\"TYPE\":\"TEST\",\"TTTT\":\"1111\"}}", MediaType.APPLICATION_JSON));
 
     MultiBrandCartDto dto = new MultiBrandCartDto();
     dto.setDocType("C");
