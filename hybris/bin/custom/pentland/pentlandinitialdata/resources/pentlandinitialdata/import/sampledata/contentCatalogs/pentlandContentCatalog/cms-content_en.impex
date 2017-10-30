@@ -58,6 +58,7 @@ UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];title[lang=e
 
 # CMS Footer Navigation Component
 UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en]
+;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";
 
 # CMS Paragraph Component
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
@@ -369,7 +370,7 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 ;;ModernSlaveryLink;"Modern Slavery"
 ;;FacebookLink;"Facebook"
 ;;TwitterLink;"Twitter"
-;;ContactUsLink;"ContactUs"
+;;ContactUsLink;"Contact Us"
 
 
 
