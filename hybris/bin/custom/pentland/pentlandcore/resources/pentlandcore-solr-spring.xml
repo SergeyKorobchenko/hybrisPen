@@ -144,7 +144,7 @@
 
 	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider"/>
 
-	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractValueResolver">
+	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractBaseProductValueResolver">
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
 
@@ -165,20 +165,28 @@
 		<property name="priceService" ref="priceService"/>
 	</bean>
 
-	<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>
+	<!--TODO fix clash with backoffice context -->
+	<!--<alias name="pentlandSolrDocumentFactory" alias="solrDocumentFactory"/>-->
 	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
 
 	<bean id="abstractNavCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractNavCategoryResolver" abstract="true" parent="abstractValueResolver"/>
 
 	<bean id="categoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryCodeValueResolver" parent="abstractNavCategoryResolver"/>
 
-	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver"/>
+	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
 
 	<bean id="priceRangeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PriceRangeValueResolver" parent="abstractValueResolver">
 		<property name="commercePriceService" ref="commercePriceService"/>
 		<property name="qualifierProvider" ref="currencyQualifierProvider"/>
 	</bean>
 
-	<bean id="clearanceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ClearanceValueResolver" parent="abstractValueResolver"/>
+	<bean id="clearanceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ClearanceValueResolver" parent="abstractBaseProductValueResolver"/>
+
+
+	<bean id="abstractBaseProductValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBaseProductValueResolver" parent="abstractValueResolver" abstract="true"/>
+
+	<bean id="genderValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.GenderValueResolver" parent="abstractBaseProductValueResolver"/>
 
 </beans>

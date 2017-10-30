@@ -42,6 +42,7 @@
 	<alias name="pentlandProductService" alias="productService"/>
 	<bean id="pentlandProductService" class="com.bridgex.core.product.impl.DefaultPentlandProductService" parent="defaultProductService">
 		<property name="pentlandProductDao" ref="pentlandProductDao"/>
+		<property name="mediaConversionService" ref="mediaConversionService"/>
 	</bean>
 
 	<bean id="pentlandCustomerAccountService" class="com.bridgex.core.customer.impl.DefaultPentlandCustomerAccountService" parent="defaultCustomerAccountService">

@@ -130,6 +130,26 @@
                         <persistence type="property"/>
                         <modifiers optional="true" read="true" write="true" search="true"/>
                     </attribute>
+                    <attribute qualifier="featureDescription" type="localized:java.lang.String">
+                        <description>Features description</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="packSize" type="int">
+                        <defaultvalue>0</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="videoURL" type="java.lang.String">
+                        <description>Link to video</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="externalURL" type="java.lang.String">
+                        <description>Link to external sites</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="sizeChartImage" type="Media">
+                        <description>Size chart image</description>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 

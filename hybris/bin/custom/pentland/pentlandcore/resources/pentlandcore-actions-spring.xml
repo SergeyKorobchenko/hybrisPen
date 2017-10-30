@@ -23,6 +23,11 @@
 		<property name="emailGenerationService" ref="emailGenerationService"/>
 	</bean>
 
+	<bean id="generateQuoteEmailAction" class="com.bridgex.core.actions.quote.GenerateQuoteEmailAction"
+	      parent="abstractGenerateEmailAction" abstract="true">
+		<property name="emailService" ref="emailService"/>
+	</bean>
+
 	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
 	</bean>

@@ -44,7 +44,7 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 	public void populate(final ProductModel source, final ProductData target) throws ConversionException
 	{
 		final ProductModel baseProduct = getBaseProduct(source);
-		if(baseProduct.getGender() != null) {
+		if (baseProduct.getGender() != null) {
 			target.setGender(getGenderConverter().convert(baseProduct.getGender()));
 		}
 	}

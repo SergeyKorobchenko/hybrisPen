@@ -1,0 +1,38 @@
+$lang=en
+$systemVersion=systemVersion(catalog(id[default='pentlandClassificationCatalog']),version[default='1.0'])[unique=true]
+$catalogVersion=catalogVersion(catalog(id[default='pentlandClassificationCatalog']),version[default='1.0'])[unique=true,default='pentlandClassificationCatalog:1.0']
+$productCatalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),version[default='Staged'])[unique=true,default='pentlandProductCatalog:Staged']
+$class=classificationClass(code,$catalogVersion)
+$attribute=classificationAttribute(code,$systemVersion)
+$supercategories = source(code, $catalogVersion)[unique = true]
+$categories = target(code, $productCatalogVersion)[unique = true]
+
+INSERT_UPDATE ClassificationClass; code[unique = true]; name[lang = $lang]; $catalogVersion[unique = true]
+;clTeamwear;Teamwear
+;clTrainingWear;Training Wear
+;clBalls;Balls
+;clEquipment;Equipment
+
+INSERT_UPDATE ClassificationAttribute; code[unique = true]; name[lang = $lang]; $systemVersion[unique = true];
+;teamwearType;Teamwear Type;
+;trainingwearType;Trainingwear Type;
+;sport;Sport;
+;useageOccasion;Useage Occasion;
+;surface;Surface;
+;accessoryType;Accessory Type;
+;trainingMethod;Training Method;
+
+INSERT_UPDATE ClassAttributeAssignment; $class[unique = true]; $attribute[unique = true]; position; attributeType(code[default = string]); multiValued[default = false]; range[default = false]; localized[default = true]; listable[default=true]
+;clTeamwear;teamwearType;0
+;clTrainingWear;trainingwearType;0
+;clBalls;sport;0
+;clBalls;useageOccasion;1
+;clBalls;surface;2
+;clEquipment;accessoryType;0
+;clEquipment;trainingMethod;1
+
+INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
+;mitre;clTrainingWear
+;mitre;clTeamwear
+;mitre;clBalls
+;mitre;clEquipment

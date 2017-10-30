@@ -28,6 +28,8 @@ mkdir bin
 mkdir config
 cd config
 mkdir dev
+mkdir prod
+mkdir stag
 echo done
 echo(
 
@@ -41,8 +43,24 @@ echo f | xcopy "..\..\..\hybris\hybrisServer\hybrisServer-Platform.zip" "hybrisS
 
 cd ..\config\dev
 
-copy ..\..\..\..\..\config\local.properties "customer.properties"
+copy ..\..\..\..\..\config\env\dev\customer.properties "customer.properties"
 copy ..\..\..\..\..\config\localextensions.xml "localextensions.xml"
+robocopy "..\..\..\..\..\config\customize" "customize" /e
+robocopy " ..\..\..\..\..\..\..\config\languages" "languages" /e
+
+cd ..\stag
+copy ..\..\..\..\..\config\env\stag\customer.adm.properties "customer.adm.properties"
+copy ..\..\..\..\..\config\env\stag\customer.app.properties "customer.app.properties"
+copy ..\..\..\..\..\config\localextensions.xml "localextensions.adm.xml"
+copy ..\..\..\..\..\config\localextensions.xml "localextensions.app.xml"
+robocopy "..\..\..\..\..\config\customize" "customize" /e
+robocopy " ..\..\..\..\..\..\..\config\languages" "languages" /e
+
+cd ..\prod
+copy ..\..\..\..\..\config\env\prod\customer.adm.properties "customer.adm.properties"
+copy ..\..\..\..\..\config\env\prod\customer.app.properties "customer.app.properties"
+copy ..\..\..\..\..\config\localextensions.xml "localextensions.adm.xml"
+copy ..\..\..\..\..\config\localextensions.xml "localextensions.app.xml"
 robocopy "..\..\..\..\..\config\customize" "customize" /e
 robocopy " ..\..\..\..\..\..\..\config\languages" "languages" /e
 

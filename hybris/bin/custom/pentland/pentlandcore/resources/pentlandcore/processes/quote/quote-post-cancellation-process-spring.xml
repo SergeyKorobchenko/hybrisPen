@@ -19,7 +19,7 @@
 
     <context:annotation-config/>
 
-    <bean id="generateBuyerQuoteCancellationEmail" parent="abstractGenerateEmailAction">
+    <bean id="generateBuyerQuoteCancellationEmail" parent="generateQuoteEmailAction">
         <property name="frontendTemplateName" value="QuoteBuyerCancellationEmailTemplate"/>
     </bean>
 
