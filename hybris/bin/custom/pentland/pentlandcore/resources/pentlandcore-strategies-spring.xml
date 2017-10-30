@@ -35,4 +35,10 @@
 		<property name="b2bApproverGroup" value="b2bapprovergroup"/>
 	</bean>
 
+ <alias name="pentlandB2BDeliveryAddressesLookupStrategy" alias="b2bDeliveryAddressesLookupStrategy"/>
+	<bean id="pentlandB2BDeliveryAddressesLookupStrategy" class="com.bridgex.core.strategies.impl.PentlandB2BDeliveryAddressesLookupStrategy"
+	      parent="defaultB2BDeliveryAddressesLookupStrategy">
+		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
+	</bean>
+
 </beans>

@@ -20,7 +20,7 @@ import de.hybris.platform.core.model.user.UserModel;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
  */
-public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade{
+public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
 
   private Map<B2BUnitType, List<CheckoutPaymentType>> b2bPaymentTypeMapping;
   private B2BUnitService<B2BUnitModel, UserModel>     b2bUnitService;
