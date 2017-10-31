@@ -58,11 +58,12 @@ UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];title[lang=e
 
 # CMS Footer Navigation Component
 UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en]
-;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";
+;;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";
 
 # CMS Paragraph Component
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
 ;;QuickOrderInfoParagraphComponent;"You can add up to 25 valid SKUs below and add to cart. Stock is reserved once products are added to cart."
+;;PentlandHomPageParagraphComponent;"Building a family of brands for the world to love generation after generation";
 
 # Dynamic banner for Product grid page
 UPDATE  DynamicBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
@@ -149,10 +150,12 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 ;pentland-homepage-women-street-en;Appa_200x240_Women_EN_01_200W.jpg,Appa_240x290_Women_EN_01_240W.jpg,Appa_350x430_Women_EN_01_350W.jpg
 ;pentland-homepage-youth-en;Appa_200x240_Youth_EN_01_200W.jpg,Appa_240x290_Youth_EN_01_240W.jpg,Appa_350x430_Youth_EN_01_350W.jpg
 
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;PentlandHomepageBrandsBannerComponent;Appa_960x400_Season_EN_01_960W.jpg
+;;PentlandHomepageFreeDelBannerComponent;Appa_960x400_Season_EN_01_960W.jpg
+;;PentlandHomepageMenStreetBannerComponent;Appa_960x400_Season_EN_01_960W.jpg
+
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;PentlandHomepageBrandsBannerComponent;pentland-homepage-brands-en
-;;PentlandHomepageFreeDelBannerComponent;pentland-homepage-discount-en
-;;PentlandHomepageMenStreetBannerComponent;pentland-homepage-men-en
 ;;PentlandHomepageSaveBannerComponent;pentland-homepage-save-en
 ;;PentlandHomepageServiceBannerComponent;pentland-homepage-service-en
 ;;PentlandHomepageShipmentBannerComponent;pentland-homepage-shipment-en
