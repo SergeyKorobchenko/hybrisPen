@@ -43,35 +43,8 @@
     <div class="row">
         <div class="col-xs-12 pull-right cart-actions--print">
             <div class="cart__actions border">
-                <div class="row">
-                    <div class="col-sm-4 col-md-3">
-                        <button class="btn btn-primary btn-block btn--savecart-checkout js-savecart-checkout-button">
-                            <spring:theme code="checkout.savecart"/>
-                        </button>
-                    </div>
-                    <div class="col-sm-4 col-md-3 pull-right">
-                        <ycommerce:testId code="checkoutButton">
-                            <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">
-                                <spring:theme code="checkout.checkout"/>
-                            </button>
-                        </ycommerce:testId>
-                    </div>
-
-                    <c:if test="${not empty siteQuoteEnabled and siteQuoteEnabled eq 'true'}">
-                        <div class="col-sm-4 col-md-3 col-md-offset-3 pull-right">
-                            <button class="btn btn-default btn-block btn-create-quote js-create-quote-button" data-create-quote-url="${createQuoteUrl}">
-                                <spring:theme code="quote.create"/>
-                            </button>
-                        </div>
-                    </c:if>
-
-                    <div class="col-sm-4 col-md-3 pull-right">
-                        <button class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button" data-continue-shopping-url="${continueShoppingUrl}">
-                            <spring:theme code="cart.page.continue"/>
-                        </button>
-                    </div>
-                </div>
-                <cart:cartHeader />
+                <cart:cartActions/>
+                <cart:cartHeader/>
             </div>
         </div>
     </div>

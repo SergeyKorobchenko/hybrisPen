@@ -64,6 +64,8 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
@@ -328,11 +330,12 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update-all", method = RequestMethod.POST)
-	public String updateCartQuantitiesAll(final Model model, final PentlandCartForm cartForm, final BindingResult bindingResult, final HttpServletRequest request,
-	                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public ResponseEntity<String> updateCartQuantitiesAll(final Model model, final PentlandCartForm cartForm, final BindingResult bindingResult, final HttpServletRequest request,
+	                                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		if (bindingResult.hasErrors()){
-
+			//TODO add error messages
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 			CartData cart = getCartFacade().getSessionCart();
 			cart.setPurchaseOrderNumber(cartForm.getPurchaseOrderNumber());
@@ -348,10 +351,9 @@ public class CartPageController extends AbstractCartPageController
 						LOG.warn("Couldn't update product with the entry number: " + i + ".", ex);
 					}
 				}
-				return getCartPageRedirectUrl();
 			}
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return getCartPageRedirectUrl();
 	}
 
 	@Override
@@ -370,7 +372,13 @@ public class CartPageController extends AbstractCartPageController
 		model.addAttribute("siteQuoteEnabled", Config.getBoolean(siteQuoteProperty, Boolean.FALSE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs("breadcrumb.cart"));
 		model.addAttribute("pageType", PageType.CART.name());
-		model.addAttribute("b2bCartForm", new PentlandCartForm(getCartFacade().getSessionCart()));
+		model.addAttribute("b2bCartForm", newCartForm());
+	}
+
+	protected PentlandCartForm newCartForm() {
+		PentlandCartForm cartForm = new PentlandCartForm(getCartFacade().getSessionCart());
+		cartForm.setBankHolidays(getMessageSource().getMessage("text.cart.bankHolidays", null, getI18nService().getCurrentLocale()));
+		return cartForm;
 	}
 
 	protected void addFlashMessage(final UpdateQuantityForm form, final HttpServletRequest request,

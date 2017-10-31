@@ -1,5 +1,7 @@
 package com.bridgex.storefront.forms;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -18,6 +20,8 @@ public class PentlandCartForm {
 
   private String purchaseOrderNumber;
   private String customerNotes;
+  private String minDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ISO_LOCAL_DATE);
+  private String bankHolidays;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date requestedDeliveryDate;
@@ -66,5 +70,17 @@ public class PentlandCartForm {
 
   public void setQuantities(List<Long> quantities) {
     this.quantities = quantities;
+  }
+
+  public String getMinDate() {
+    return minDate;
+  }
+
+  public String getBankHolidays() {
+    return bankHolidays;
+  }
+
+  public void setBankHolidays(String bankHolidays) {
+    this.bankHolidays = bankHolidays;
   }
 }

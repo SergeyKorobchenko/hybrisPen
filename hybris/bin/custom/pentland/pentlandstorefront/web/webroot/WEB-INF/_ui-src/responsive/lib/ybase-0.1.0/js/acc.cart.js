@@ -398,20 +398,20 @@ ACC.cart = {
 
     bindRddDatetimePicker: function() {
         $(document).ready(function () {
-            var startDate = new Date();
-            startDate.setDate(startDate.getDate() + 2);
+            var inputData = $('#cartrdddatetimepicker input').data();
+
             $('#cartrdddatetimepicker').datetimepicker({
                 format: 'YYYY-MM-DD',
-                minDate: startDate,
+                minDate: inputData.mindate,
                 daysOfWeekDisabled: [0, 6],
                 allowInputToggle: true,
                 useCurrent: false,
-                disabledDates: ['2017-12-25', '2017-12-26', '2018-01-01', '2018-03-30', '2018-04-02', '2018-05-07', '2018-05-28', '2018-08-27', '2018-12-25', '2018-12-26']
+                disabledDates: [inputData.disableddates.split(',')]
             });
         });
     },
 
-    submitUpdateAllForm: function () {
+    submitUpdateAllForm: function (successFunction) {
         var $form = $('#updateAllCartForm');
         if (!$form) {
             return;
@@ -427,7 +427,7 @@ ACC.cart = {
             data: updateFormData,
             type: "POST",
             success: function (data) {
-                location.reload();
+                successFunction();
             },
             error: function () {
                 alert("Failed save form");
@@ -438,7 +438,7 @@ ACC.cart = {
     bindUpdateAllFormSubmit: function() {
         $(document).ready(function () {
             $('.js-savecart-checkout-button').click(function () {
-                ACC.cart.submitUpdateAllForm();
+                ACC.cart.submitUpdateAllForm(function() {location.reload()});
             })
         });
     }

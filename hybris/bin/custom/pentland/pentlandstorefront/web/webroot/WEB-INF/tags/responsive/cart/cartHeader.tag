@@ -14,7 +14,8 @@
 			<strong><spring:theme code="text.cart.rdd"/></strong>
 			<div class="form-group">
 				<div class="input-group date" id="cartrdddatetimepicker">
-					<form:input type="text" class="form-control" path="requestedDeliveryDate" data-value="${b2bCartForm.requestedDeliveryDate}" />
+					<form:input type="text" class="form-control" path="requestedDeliveryDate" data-mindate="${b2bCartForm.minDate}"
+								data-disableddates="${b2bCartForm.bankHolidays}" />
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
