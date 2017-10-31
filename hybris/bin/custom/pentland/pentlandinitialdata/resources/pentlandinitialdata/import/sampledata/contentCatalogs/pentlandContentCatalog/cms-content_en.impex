@@ -388,22 +388,34 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=en]
 ;;UpdateEmailNavNode;""
 ;;MyCompanyNavNode;"My Company"
 
-###### Mitre page start
-
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;mitreBrandPage;Mitre Brand Home Page;BrandPageTemplate;/Mitre
 
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mitreBrandPage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section1-mitreBrandPage;Section1;;Section1Slot-mitreBrandPage
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreParagraphComponent
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;MitreParagraphComponent;Mitre Brand Page Paragraph Component;MitreParagraphComponent
 
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;MitreParagraphComponent;"This is Mitre Brand Homepage Text!"
+###### Mitre page media
 
-###### Mitre page end
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;desktop;/mitre-splash-1.jpg;$siteResource/images/banners/mitre/responsive/mitre-splash-1.jpg;mitre-splash-1.jpg;"Shop Now";
+;desktop;/mitre-splash-2.jpg;$siteResource/images/banners/mitre/responsive/mitre-splash-2.jpg;mitre-splash-2.jpg;"Shop All";
+;desktop;/mitre-banner-1.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-1.jpg;mitre-banner-1.jpg;"Shop Now";
+;desktop;/mitre-banner-2.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-2.jpg;mitre-banner-2.jpg;"Shop Now";
+;desktop;/mitre-banner-3.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-3.jpg;mitre-banner-3.jpg;"Shop Now";
+;desktop;/mitre-banner-4.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-4.jpg;mitre-banner-4.jpg;"Shop Now";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;mitre-banner1-en;/mitre-banner-1.jpg;
+;mitre-banner2-en;/mitre-banner-2.jpg;
+;mitre-banner3-en;/mitre-banner-3.jpg;
+;mitre-banner4-en;/mitre-banner-4.jpg;
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+; ; MitreBrandPageBannerComponent ; /mitre-splash-1.jpg
+; ; MitreBrandPage2BannerComponent ; /mitre-splash-2.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; MitreBrandPageHelmetBannerComponent     ; mitre-banner1-en
+; ; MitreBrandPageProtectionBannerComponent ; mitre-banner2-en
+; ; MitreBrandPageShoesBannerComponent      ; mitre-banner3-en
+; ; MitreBrandPageSurfBannerComponent       ; mitre-banner4-en
+

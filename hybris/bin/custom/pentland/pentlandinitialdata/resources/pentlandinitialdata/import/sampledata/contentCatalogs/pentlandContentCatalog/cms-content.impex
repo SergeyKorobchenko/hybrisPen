@@ -865,6 +865,43 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 
 ###### Quick Order Page End ######
 
+
+###### Mitre page start ######
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;mitreBrandPage;Mitre Brand Home Page;BrandPageTemplate;/Mitre
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mitreBrandPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-mitreBrandPage;Section1;;Section1Slot-mitreBrandPage
+;;Section2-mitreBrandPage;Section2;;Section2Slot-mitreBrandPage
+;;Section3-mitreBrandPage;Section3;;Section3Slot-mitreBrandPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-mitreBrandPage;Section2 Slot for mitreBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-mitreBrandPage;Section3 Slot for mitreBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+
+## components in slot 1 ##
+INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
+; ;MitreBrandPageBannersCarouselComponent;Mitre Brand Page Banners Carousel Component;zoom;MitreBrandPageBannerComponent,MitreBrandPage2BannerComponent;MitreBrandPageBannersCarouselComponent
+
+INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+; ; MitreBrandPageBannerComponent ; Mitre Brand Banner Page Component ; /helmet ; MitreBrandPageBannerComponent
+; ; MitreBrandPage2BannerComponent ; Mitre Brand Banner Page Component ; /protection  ; MitreBrandPage2BannerComponent
+
+## components in slot 2 ##
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+; ; MitreBrandPageHelmetBannerComponent     ; Mitre Brand Page Helmet Banner Component    ; ; MitreBrandPageHelmetBannerComponent
+; ; MitreBrandPageProtectionBannerComponent ; Mitre Brand Page Protection Banner Component; ; MitreBrandPageProtectionBannerComponent
+; ; MitreBrandPageShoesBannerComponent      ; Mitre Brand Page Shoes Banner Component     ; ; MitreBrandPageShoesBannerComponent
+; ; MitreBrandPageSurfBannerComponent       ; Mitre Brand Page Surf Banner Component      ; ; MitreBrandPageSurfBannerComponent
+
+## components in slot 3 ##
+INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
+; ; MitreBrandPageBestSellersCarouselComponent ;Best Sellers Mitre Brand Page Product Carousel ;45572,300046592,300044323,300047199,M27160_B,300020465,300050255,300050257,102277_trench_green,104668_red,111159_white,94374_ink,95430_risque; allVisible ; false ; MitreBrandPageBestSellersCarouselComponent
+
+###### Mitre page end ######
+
 ###### Restriction Start ######
 INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name;
 ; ; ActionRestriction ; A CMSAction restriction ;
