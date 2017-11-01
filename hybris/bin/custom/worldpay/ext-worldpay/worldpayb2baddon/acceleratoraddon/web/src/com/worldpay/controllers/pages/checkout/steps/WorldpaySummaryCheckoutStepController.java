@@ -249,14 +249,6 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
             return false;
         }
 
-        if (!getCheckoutFacade().containsTaxValues()) {
-            LOGGER.error(format(
-                    "Cart {0} does not have any tax values, which means the tax calculation was not properly done, placement of order can't continue",
-                    cartData.getCode()));
-            addErrorMessage(model, "checkout.error.tax.missing");
-            return false;
-        }
-
         if (!cartData.isCalculated()) {
             LOGGER.error(format("Cart {0} has a calculated flag of FALSE, placement of order can't continue", cartData.getCode()));
             addErrorMessage(model, "checkout.error.cart.notcalculated");

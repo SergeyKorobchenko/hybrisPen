@@ -1,0 +1,84 @@
+$lang='en'
+
+REMOVE CsTicketEventEmailConfiguration;code[unique=true];
+;1
+;2
+;3
+;4
+;5
+;6
+;7
+;8
+;9
+;10
+;11
+;12
+;13
+;14
+;15
+;16
+;17
+;18
+;19
+
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$lang];rendererType(code)[default='velocity'];templateScript[lang=$lang];
+
+;TickSystem_Customer_TicketCreated_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
+	Dear ${ctx.name}
+
+	A customer support ticket with the following reference number was created ${ctx.ticketId}.
+
+	Please quote this reference number in all emails or phone calls with us.
+
+	Thank you
+
+	Your Customer Service Team
+	";
+;TickSystem_Customer_TicketCreated_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer HTML Email;;"
+	<html>
+		<head></head>
+		<body>
+			<div>
+				<p>Dear ${ctx.name}</p>
+				<p>A customer support ticket with the following reference number was created ${ctx.ticketId}.</p>
+				<p>Please quote this reference number in all emails or phone calls with us.</p>
+  			<p>Thank you</p>
+				<p>Your Customer Service Team</p>
+			</div>
+		</body>
+	</html>
+	";
+
+##
+## Email sent to CS Agent Manager when a new ticket is created
+##
+;TickSystem_CustomerRep_TicketCreated_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
+	Dear Customer Service Agent Manager
+
+	The following customer support ticket ${ctx.ticketId} was created with the following message:
+
+	${ctx.text}
+
+	Thank you
+	Your Customer Service Team
+	";
+;TickSystem_CustomerRep_TicketCreated_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer HTML Email;;"
+	<html>
+		<head></head>
+		<body>
+			<div>
+				<p>Dear Customer Service Agent Manager</p>
+				<p>The following customer support ticket ${ctx.ticketId} was created with the following message: ${ctx.htmlText}</p>
+				<p>Thank you</p>
+				<p>Your Customer Service Team</p>
+			</div>
+		</body>
+	</html>
+	";
+
+INSERT_UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);alteredAttributes(qualifier,enclosingType(ComposedType.code));eventType(code);subject;plainTextTemplate(code);htmlTemplate(code);
+#Ticket Creation
+;1;Customer;;ticketCreationEvent;${ctx.ticket.ticketID} - ${ctx.ticket.headline};TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
+;2;CustomerRep;;ticketCreationEvent;${ctx.ticket.ticketID} - ${ctx.ticket.headline};TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
+
