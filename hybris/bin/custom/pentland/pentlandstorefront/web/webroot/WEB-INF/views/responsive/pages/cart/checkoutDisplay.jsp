@@ -57,7 +57,6 @@
         </div>
     </div>
 </div>
-123
 
 <c:if test="${showCheckoutStrategies && not empty cartData.entries}" >
     <div class="cart__actions">

@@ -14,7 +14,7 @@
 	<c:otherwise>
 		<%-- Theme CSS files --%>
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/style.css"/>
-		<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/bootstrap/css/bootstrap-datetimepicker.css"/>
+		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/bootstrap-datetimepicker.css"/>
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
 			<link rel="stylesheet" type="text/css" media="all" href="${addOnCommonCss}"/>

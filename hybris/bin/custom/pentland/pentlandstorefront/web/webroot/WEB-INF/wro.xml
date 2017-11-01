@@ -19,6 +19,7 @@
 
 	<group name="lambda_responsive">
 		<css>/_ui/responsive/theme-lambda/css/style.css</css>
+		<css>/_ui/responsive/theme-lambda/css/bootstrap-datetimepicker.css</css>
 	</group>
 	
 	<group name="all_responsive">
@@ -44,7 +45,9 @@
 		<js>/_ui/responsive/common/js/owl.carousel.custom.js</js>
 		<js minimize="false">/_ui/responsive/common/js/jquery.tmpl-1.0.0pre.min.js</js>
 		<js minimize="false">/_ui/responsive/common/js/jquery.currencies.min.js</js>
-		
+		<js minimize="false">/_ui/responsive/common/js/moment.min.js</js>
+		<js>/_ui/responsive/common/js/bootstrap-datetimepicker.js</js>
+
 		<!-- Custom ACC JS -->
 		<js>/_ui/responsive/common/js/acc.address.js</js>
 		<js>/_ui/responsive/common/js/acc.autocomplete.js</js>
