@@ -49,3 +49,6 @@ UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
 ;96Wx96H;96Wx96H;
 ;sizeChart;SizeChart;
 
+INSERT_UPDATE Division;code[unique=true];name[lang=$lang];
+;active;Active
+;footwear;Footwear

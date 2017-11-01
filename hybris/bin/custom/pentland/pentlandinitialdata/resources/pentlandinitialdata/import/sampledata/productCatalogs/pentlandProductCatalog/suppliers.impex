@@ -15,21 +15,21 @@ $catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),ver
 
 # Create Categories
 INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid)[default='customergroup']
-;667;;brands
-;686;;brands
-;69 Slam;;brands
-;adidas Originals;;brands
-;Aesthetiker;;brands
-;Burton;;brands
-;Carhartt;;brands
-;droid;;brands
-;Femipleasure;;brands
-;GoPro Cam;;brands
-;Nixon;;brands
-;Oakley;;brands
-;Skim One;;brands
-;Southpoint;;brands
-;Surftech;;brands
-;VIVO;;brands
-;Volcom;;brands
-;WLD;;brands
+#;667;;brands
+#;686;;brands
+#;69 Slam;;brands
+#;adidas Originals;;brands
+#;Aesthetiker;;brands
+#;Burton;;brands
+#;Carhartt;;brands
+#;droid;;brands
+#;Femipleasure;;brands
+#;GoPro Cam;;brands
+#;Nixon;;brands
+#;Oakley;;brands
+#;Skim One;;brands
+#;Southpoint;;brands
+#;Surftech;;brands
+#;VIVO;;brands
+#;Volcom;;brands
+#;WLD;;brands

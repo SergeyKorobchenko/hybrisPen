@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+					 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="erpRestTemplate" class="org.springframework.web.client.RestTemplate" />
+
+	<bean id="abstractRESTClient" class="com.bridgex.integration.rest.impl.AbstractRESTClient" abstract="true"/>
+
+	<bean id="defaultRESTClient" class="com.bridgex.integration.rest.impl.ERPClient" parent="abstractRESTClient" >
+		<property name="restTemplate" ref="erpRestTemplate" />
+	</bean>
+
+	<bean id="abstractResponseProcessor" class="com.bridgex.integration.service.processor.impl.AbstractResponseProcessor" abstract="true" />
+
+	<bean id="defaultResponseProcess" parent="abstractResponseProcessor" />
+
+	<util:map id="defaultHeaders" key-type="java.lang.String" value-type="java.lang.String" map-class="org.springframework.http.HttpHeaders">
+		<entry key="Content-Type" value="application/json"/>
+		<entry key="Accept" value="application/json;charset=utf-8"/>
+	</util:map>
+
+	<bean id="abstractIntegrationService" class="com.bridgex.integration.service.impl.AbstractIntegrationService" abstract="true" >
+		<property name="headers" ref="defaultHeaders" />
+		<property name="responseProcessor" ref="defaultResponseProcess" />
+		<property name="client" ref="defaultRESTClient" />
+	</bean>
+
+	<beans profile="prod">
+		<bean id="orderSimulateService" class="com.bridgex.integration.service.impl.OrderSimulateServiceImpl" parent="abstractIntegrationService" />
+	</beans>
+
+	<beans profile="dev">
+		<alias alias="orderSimulateService" name="orderSimulateServiceMock"/>
+		<bean id="orderSimulateServiceMock" class="com.bridgex.integration.service.mock.OrderSimulateServiceMock" parent="abstractIntegrationService" />
+	</beans>
+
+
+</beans>

@@ -16,255 +16,253 @@ $categories=target(code, $catalogVersion)[unique=true]
 $supercategories=source(code, $catalogVersion)[unique=true]
 
 # Create Categories
-INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid)[default='customergroup,TestB2BUnit'];hidden
-;berghaus;;
-;boxfresh;;
-;canterbury;;
-;kickers;;
-;mitre;;
-;speedo;;
+INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
+;berghaus;;;Pronto
+;boxfresh;;;Pronto
+;canterbury;;;Pronto
+;kickers;;;TestB2BUnit
+;mitre;;;TestB2BUnit
+;speedo;;;TestB2BUnit
 
-;categories;;;;true
-;collections;;;;true
-;clothes;;categories
-;caps;;clothes,collections
-;sunglasses;;clothes,collections
-;shoes;;clothes,collections
+;clothes;;mitre
+;caps;;clothes
+;sunglasses;;clothes
+;shoes;;clothes
 ;sandals;;shoes,surf
-;shirts;;clothes,collections
+;shirts;;clothes
 ;tshirts;;clothes,surf
-;helmet;;clothes,collections
-;others;;categories
+;helmet;;clothes
+;others;;mitre
 ;skigear;;others,snow
 ;goggles;;others,snow
 ;tools;;others,snow
 ;guides;;others,surf
-;backpack;;others,collections
-;brands;;;;true
-;32;;brands
-;7S;;brands
-;Absinthe;;brands
-;adidas;;brands
-;adidas eyewear;;brands
-;Adio;;brands
-;ainwear;;brands
-;Airhole;;brands
-;Al Merrick;;brands
-;Alien Workshop;;brands
-;Alpinestars;;brands
-;Alptraum;;brands
-;Amplid;;brands
-;Analog;;brands
-;Anon;;brands
-;Apo;;brands
-;Arcus;;brands
-;Armada;;brands
-;Armourdillo;;brands
-;Arnette;;brands
-;Artec;;brands
-;Ashbury;;brands
-;Ästhetiker;;brands
-;Atomic;;brands
-;Atticus;;brands
-;Bataleon;;brands
-;Bench;;brands
-;Bergfex;;brands
-;Bern;;brands
-;Billabong;;brands
-;Blowfish;;brands
-;Blue Tomato;;brands
-;Body Glove;;brands
-;Bond;;brands
-;Bonfire;;brands
-;Buster;;brands
-;Capita;;brands
-;Cartel Skateboards;;brands
-;Celtek;;brands
-;Chanex;;brands
-;Chocolate;;brands
-;Clast;;brands
-;Coal;;brands
-;Creatures of Leisure;;brands
-;Cross;;brands
-;Dainese;;brands
-;Dakine;;brands
-;Dalbello;;brands
-;DC;;brands
-;DEELUXE;;brands
-;Dragon;;brands
-;DVS;;brands
-;Dynastar;;brands
-;Elan;;brands
-;Electric;;brands
-;Element;;brands
-;eleven;;brands
-;Elm;;brands
-;Emerica;;brands
-;Enjoi;;brands
-;Es;;brands
-;Etnies;;brands
-;F2-FTWO;;brands
-;Famous;;brands
-;FCS;;brands
-;fenchurch;;brands
-;Firewire;;brands
-;Flip;;brands
-;Flow;;brands
-;Flying Wheels;;brands
-;Forum;;brands
-;Foursquare;;brands
-;Fox;;brands
-;Frends;;brands
-;Frontline;;brands
-;Full Tilt;;brands
-;Giro;;brands
-;Globe;;brands
-;Golden Ride Magazin;;brands
-;Gorilla Grip;;brands
-;Gravis;;brands
-;Grenade;;brands
-;H2O Audio;;brands
-;Habitat;;brands
-;Head;;brands
-;Hello Kitty;;brands
-;Helly Hansen;;brands
-;Herrlicher;;brands
-;Holden;;brands
-;Horsefeathers;;brands
-;Hurley;;brands
-;Icetools;;brands
-;Independent;;brands
-;Insight;;brands
-;IPath;;brands
-;Iriedaily;;brands
-;Iron Fist;;brands
-;Isenseven;;brands
-;K2;;brands
-;Kari Traa;;brands
-;Krew;;brands
-;Kustom;;brands
-;Landing;;brands
-;Laxavala;;brands
-;Leki;;brands
-;Level;;brands
-;Lib Tech;;brands
-;Light;;brands
-;Lightning Bolt;;brands
-;Line;;brands
-;Liquid Force;;brands
-;Loop;;brands
-;Love;;brands
-;Lowlife;;brands
-;Madness;;brands
-;Makia;;brands
-;Mammut;;brands
-;Marker;;brands
-;Matix;;brands
-;MBM;;brands
-;Mr. Lacy;;brands
-;Naketano;;brands
-;Neff;;brands
-;New Era;;brands
-;New Stormrider Guide;;brands
-;Nike;;brands
-;Nike 6.0;;brands
-;Nike ACG;;brands
-;Nikita;;brands
-;Nitro;;brands
-;Nomis;;brands
-;Nooka;;brands
-;Nordica;;brands
-;Northwave;;brands
-;Nümph;;brands
-;NXTZ;;brands
-;Ocean & Earth;;brands
-;Odlo;;brands
-;Onboard;;brands
-;O'Neill;;brands
-;Onitsuka Tiger;;brands
-;Orage;;brands
-;Ortovox;;brands
-;Oxbow;;brands
-;Periplus AC+Ion Guides;;brands
-;Planet Earth;;brands
-;Playboard;;brands
-;POC;;brands
-;Pow;;brands
-;Pro Tec;;brands
-;Pussy Deluxe;;brands
-;PYUA;;brands
-;Quiksilver;;brands
-;Rad Air;;brands
-;Red;;brands
-;Red Bull;;brands
-;Reef;;brands
-;REELL;;brands
-;Replay;;brands
-;Ride;;brands
-;Riggler;;brands
-;Rip Curl;;brands
-;Rome;;brands
-;Ronix;;brands
-;Rossignol;;brands
-;Roxy;;brands
-;Rusty;;brands
-;RVCA;;brands
-;Sabre;;brands
-;Salomon;;brands
-;Sanük;;brands
-;Scott;;brands
-;Sector 9;;brands
-;Sessions;;brands
-;Shred;;brands
-;Sixxa;;brands
-;Skiing;;brands
-;Skins;;brands
-;Skullcandy;;brands
-;Slam 69;;brands
-;Smith;;brands
-;Sniper;;brands
-;SOMA Airbags;;brands
-;SP;;brands
-;Special Blend;;brands
-;Spitfire;;brands
-;Spy;;brands
-;Stepchild;;brands
-;Stüssy;;brands
-;Sub Industries;;brands
-;Supra;;brands
-;Surfco Hawaii;;brands
-;Surfing Europe;;brands
-;Sweet;;brands
-;Sykum;;brands
-;Technine;;brands
-;The Hundreds;;brands
-;The North Face;;brands
-;Toko;;brands
-;Troy Lee Designs;;brands
-;TSG;;brands
-;Union;;brands
-;UPZ;;brands
-;Vans;;brands
-;VAS Entertainment;;brands
-;Venture;;brands
-;Vestal;;brands
-;Völkl;;brands
-;Von Zipper;;brands
-;Vox;;brands
-;Wave-Finder Surf Guide;;brands
-;WeSC;;brands
-;Westbeach;;brands
-;Yackfou;;brands
-;Zanier;;brands
-;Zimtstern;;brands
+;backpack;;others
+#;brands;;;;true
+#;32;;brands
+#;7S;;brands
+#;Absinthe;;brands
+#;adidas;;brands
+#;adidas eyewear;;brands
+#;Adio;;brands
+#;ainwear;;brands
+#;Airhole;;brands
+#;Al Merrick;;brands
+#;Alien Workshop;;brands
+#;Alpinestars;;brands
+#;Alptraum;;brands
+#;Amplid;;brands
+#;Analog;;brands
+#;Anon;;brands
+#;Apo;;brands
+#;Arcus;;brands
+#;Armada;;brands
+#;Armourdillo;;brands
+#;Arnette;;brands
+#;Artec;;brands
+#;Ashbury;;brands
+#;Ästhetiker;;brands
+#;Atomic;;brands
+#;Atticus;;brands
+#;Bataleon;;brands
+#;Bench;;brands
+#;Bergfex;;brands
+#;Bern;;brands
+#;Billabong;;brands
+#;Blowfish;;brands
+#;Blue Tomato;;brands
+#;Body Glove;;brands
+#;Bond;;brands
+#;Bonfire;;brands
+#;Buster;;brands
+#;Capita;;brands
+#;Cartel Skateboards;;brands
+#;Celtek;;brands
+#;Chanex;;brands
+#;Chocolate;;brands
+#;Clast;;brands
+#;Coal;;brands
+#;Creatures of Leisure;;brands
+#;Cross;;brands
+#;Dainese;;brands
+#;Dakine;;brands
+#;Dalbello;;brands
+#;DC;;brands
+#;DEELUXE;;brands
+#;Dragon;;brands
+#;DVS;;brands
+#;Dynastar;;brands
+#;Elan;;brands
+#;Electric;;brands
+#;Element;;brands
+#;eleven;;brands
+#;Elm;;brands
+#;Emerica;;brands
+#;Enjoi;;brands
+#;Es;;brands
+#;Etnies;;brands
+#;F2-FTWO;;brands
+#;Famous;;brands
+#;FCS;;brands
+#;fenchurch;;brands
+#;Firewire;;brands
+#;Flip;;brands
+#;Flow;;brands
+#;Flying Wheels;;brands
+#;Forum;;brands
+#;Foursquare;;brands
+#;Fox;;brands
+#;Frends;;brands
+#;Frontline;;brands
+#;Full Tilt;;brands
+#;Giro;;brands
+#;Globe;;brands
+#;Golden Ride Magazin;;brands
+#;Gorilla Grip;;brands
+#;Gravis;;brands
+#;Grenade;;brands
+#;H2O Audio;;brands
+#;Habitat;;brands
+#;Head;;brands
+#;Hello Kitty;;brands
+#;Helly Hansen;;brands
+#;Herrlicher;;brands
+#;Holden;;brands
+#;Horsefeathers;;brands
+#;Hurley;;brands
+#;Icetools;;brands
+#;Independent;;brands
+#;Insight;;brands
+#;IPath;;brands
+#;Iriedaily;;brands
+#;Iron Fist;;brands
+#;Isenseven;;brands
+#;K2;;brands
+#;Kari Traa;;brands
+#;Krew;;brands
+#;Kustom;;brands
+#;Landing;;brands
+#;Laxavala;;brands
+#;Leki;;brands
+#;Level;;brands
+#;Lib Tech;;brands
+#;Light;;brands
+#;Lightning Bolt;;brands
+#;Line;;brands
+#;Liquid Force;;brands
+#;Loop;;brands
+#;Love;;brands
+#;Lowlife;;brands
+#;Madness;;brands
+#;Makia;;brands
+#;Mammut;;brands
+#;Marker;;brands
+#;Matix;;brands
+#;MBM;;brands
+#;Mr. Lacy;;brands
+#;Naketano;;brands
+#;Neff;;brands
+#;New Era;;brands
+#;New Stormrider Guide;;brands
+#;Nike;;brands
+#;Nike 6.0;;brands
+#;Nike ACG;;brands
+#;Nikita;;brands
+#;Nitro;;brands
+#;Nomis;;brands
+#;Nooka;;brands
+#;Nordica;;brands
+#;Northwave;;brands
+#;Nümph;;brands
+#;NXTZ;;brands
+#;Ocean & Earth;;brands
+#;Odlo;;brands
+#;Onboard;;brands
+#;O'Neill;;brands
+#;Onitsuka Tiger;;brands
+#;Orage;;brands
+#;Ortovox;;brands
+#;Oxbow;;brands
+#;Periplus AC+Ion Guides;;brands
+#;Planet Earth;;brands
+#;Playboard;;brands
+#;POC;;brands
+#;Pow;;brands
+#;Pro Tec;;brands
+#;Pussy Deluxe;;brands
+#;PYUA;;brands
+#;Quiksilver;;brands
+#;Rad Air;;brands
+#;Red;;brands
+#;Red Bull;;brands
+#;Reef;;brands
+#;REELL;;brands
+#;Replay;;brands
+#;Ride;;brands
+#;Riggler;;brands
+#;Rip Curl;;brands
+#;Rome;;brands
+#;Ronix;;brands
+#;Rossignol;;brands
+#;Roxy;;brands
+#;Rusty;;brands
+#;RVCA;;brands
+#;Sabre;;brands
+#;Salomon;;brands
+#;Sanük;;brands
+#;Scott;;brands
+#;Sector 9;;brands
+#;Sessions;;brands
+#;Shred;;brands
+#;Sixxa;;brands
+#;Skiing;;brands
+#;Skins;;brands
+#;Skullcandy;;brands
+#;Slam 69;;brands
+#;Smith;;brands
+#;Sniper;;brands
+#;SOMA Airbags;;brands
+#;SP;;brands
+#;Special Blend;;brands
+#;Spitfire;;brands
+#;Spy;;brands
+#;Stepchild;;brands
+#;Stüssy;;brands
+#;Sub Industries;;brands
+#;Supra;;brands
+#;Surfco Hawaii;;brands
+#;Surfing Europe;;brands
+#;Sweet;;brands
+#;Sykum;;brands
+#;Technine;;brands
+#;The Hundreds;;brands
+#;The North Face;;brands
+#;Toko;;brands
+#;Troy Lee Designs;;brands
+#;TSG;;brands
+#;Union;;brands
+#;UPZ;;brands
+#;Vans;;brands
+#;VAS Entertainment;;brands
+#;Venture;;brands
+#;Vestal;;brands
+#;Völkl;;brands
+#;Von Zipper;;brands
+#;Vox;;brands
+#;Wave-Finder Surf Guide;;brands
+#;WeSC;;brands
+#;Westbeach;;brands
+#;Yackfou;;brands
+#;Zanier;;brands
+#;Zimtstern;;brands
 ;boards;;surf
-;snow;;collections
-;surf;;collections
-;kids;;collections
-;streetwear;;collections
+;snow;;canterbury
+;surf;;canterbury
+;kids;;canterbury
+;streetwear;;canterbury
 
 
-INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)[default='customergroup,TestB2BUnit']
+INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;220000;;;
 ;221600;;;
 ;221200;;;
@@ -832,3 +830,12 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;360100;360000;
 ;360200;360000;
 ;360700;360000;
+
+#update groups again for interceptors to kick in
+UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
+;berghaus;;;Pronto
+;boxfresh;;;Pronto
+;canterbury;;;Pronto
+;kickers;;;TestB2BUnit
+;mitre;;;TestB2BUnit
+;speedo;;;TestB2BUnit

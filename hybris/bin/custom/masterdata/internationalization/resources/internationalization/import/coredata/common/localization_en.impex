@@ -2849,6 +2849,11 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.rdd;Requested delivery date
 ;text.account.orderHistory.totalQty;Total Quantity
 
+;text.account.supporttickets.success;Your ticket successfully sended
+;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
+;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
+
+
 ;checkout.payment.CARD.CREDITCARD;Online payment
 ;checkout.payment.CARD.PROFORMA;Online payment
 ;checkout.payment.ACCOUNT.ACCOUNT;Account

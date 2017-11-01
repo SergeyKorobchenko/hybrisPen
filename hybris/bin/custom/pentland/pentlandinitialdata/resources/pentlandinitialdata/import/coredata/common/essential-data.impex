@@ -114,3 +114,7 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;cartRemovalJob;cartRemovalJob
 ;siteMapMediaJob;siteMapMediaJob
 ;specialCategoryAssignmentJobPerformable;specialCategoryAssignmentJobPerformable
+
+INSERT_UPDATE Division;code[unique=true];email
+;active;active@test.test
+;footwear;footwear@test.test

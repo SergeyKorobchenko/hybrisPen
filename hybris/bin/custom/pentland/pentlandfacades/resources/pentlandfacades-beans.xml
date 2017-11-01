@@ -33,6 +33,12 @@
 		<property name="orderType" type="com.bridgex.core.enums.OrderType"/>
 		<property name="rdd" type="java.util.Date"/>
 	</bean>
+	
+	<enum class="de.hybris.platform.customerticketingfacades.data.TicketCategory" template="resources/pentland-enumtemplate.vm">
+		<value>removeValue==Problem</value>
+		<value>Product_enquiry</value>
+		<value>B2B_system_issue</value>
+	</enum>
 
 	<bean class="de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData">
 		<property name="customerType" type="com.bridgex.core.enums.B2BUnitType"/>
