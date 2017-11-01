@@ -154,7 +154,7 @@
 		<extension name="assistedserviceservices" />
 
 		<!--Customer Ticketing AddOn-->
-		<extension name="customerticketingaddon" />
+		<extension name="pentlandsupportticketingaddon" />
 		<extension name="customerticketingfacades" />
 
 		<extension name="adaptivesearch" />
