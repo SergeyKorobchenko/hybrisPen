@@ -497,7 +497,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 ; ; EmptyCartMiddleContent-cartPage ; Empty Cart Middle Slot for Cart Page    ; true ; EmptyCartParagraphComponent
 ; ; CenterLeftContentSlot-cartPage  ; Center Left Content Slot for Cart Page  ; true ; PromotionsComponent,PotentialPromotionsComponent
 ; ; CenterRightContentSlot-cartPage ; Center Right Content Slot for Cart Page ; true ; CartTotalsComponent
-; ; BottomContentSlot-cartPage      ; Bottom Content Slot for Cart Page       ; true ; CheckoutComponent,CartSuggestions
+; ; BottomContentSlot-cartPage      ; Bottom Content Slot for Cart Page       ; true ; CartBottomParagraphComponent,CheckoutComponent,CartSuggestions
 
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink
 ; ; NextDayDeliveryBanner120 ; Next Day Delivery Banner (120) ; NextDayDeliveryBanner120 ; #
@@ -515,6 +515,7 @@ INSERT_UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = t
 
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 ; ; EmptyCartParagraphComponent ; Empty Cart Paragraph Component ; EmptyCartParagraphComponent
+; ; CartBottomParagraphComponent; Cart Bottom Paragraph Component   ; CartBottomParagraphComponent
 ###### Cart Page End ######
 
 
