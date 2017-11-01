@@ -30,12 +30,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;SearchResultsGridPageTemplate;Search Results Grid Page Template;search/searchGridPage;ContentPage
 ;;SearchResultsEmptyPageTemplate;Search Results Empty Page Template;search/searchEmptyPage;ContentPage
 ;;CategoryPageTemplate;Category Page Template;category/categoryPage;CategoryPage
-;;LandingPage1Template;Landing Page 1 Template;layout/landingLayout1Page;CategoryPage,ContentPage
 ;;LandingPage2Template;Landing Page 2 Template;layout/landingLayout2Page;CategoryPage,ContentPage
-;;LandingPage3Template;Landing Page 3 Template;layout/landingLayout3Page;CategoryPage,ContentPage
-;;LandingPage4Template;Landing Page 4 Template;layout/landingLayout4Page;CategoryPage,ContentPage
-;;LandingPage5Template;Landing Page 5 Template;layout/landingLayout5Page;CategoryPage,ContentPage
-;;LandingPage6Template;Landing Page 6 Template;layout/landingLayout6Page;CategoryPage,ContentPage
 ;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
 ;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage
 ;;SearchAdvancedResultsEmptyPageTemplate;Advanced Search Results Empty Page Template;addon:/pentlandb2baddon/cms/pages/search/searchAdvancedEmptyPage;ContentPage
@@ -59,13 +54,8 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;ProductListPageTemplate   ;$jarResourceCms/structure-view/structure_productListPageTemplate.vm
 ;;ProductGridPageTemplate   ;$jarResourceCms/structure-view/structure_productGridPageTemplate.vm
 ;;CategoryPageTemplate      ;$jarResourceCms/structure-view/structure_categoryPageTemplate.vm
-;;LandingPage1Template      ;$jarResourceCms/structure-view/structure_landingPage1Template.vm
 ;;LandingPage2Template      ;$jarResourceCms/structure-view/structure_landingPage2Template.vm
 ;;BrandPageTemplate         ;$jarResourceCms/structure-view/structure_brandPageTemplate.vm
-;;LandingPage3Template      ;$jarResourceCms/structure-view/structure_landingPage3Template.vm
-;;LandingPage4Template      ;$jarResourceCms/structure-view/structure_landingPage4Template.vm
-;;LandingPage5Template      ;$jarResourceCms/structure-view/structure_landingPage5Template.vm
-;;LandingPage6Template      ;$jarResourceCms/structure-view/structure_landingPage6Template.vm
 ;;ContentPage1Template      ;$jarResourceCms/structure-view/structure_contentPage1Template.vm
 ;;SearchResultsListPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsListPageTemplate.vm
 ;;SearchResultsGridPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsGridPageTemplate.vm
@@ -242,27 +232,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
 
-
-# Landing Page Templates
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage1Template'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;NavigationBar;;;navigation
-;Section1;;;wide
-;Section2A;;;wide
-;Section2B;;;narrow
-;Section2C;;;narrow
-;Section3;;;wide
-;Section4;;;narrow
-;Section5;;;wide
-;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
-
-
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
@@ -270,11 +239,9 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
 ;Section1;;;wide
-;Section2A;;;narrow
-;Section2B;;;narrow
-;Section2C;;;wide
-;Section3;;;wide
-;Section4;;;narrow
+;Section2;;;wide
+;Section3;;;narrow
+;Section4;;;wide
 ;Section5;;;wide
 ;Footer;;;footer
 ;TopHeaderSlot;;;wide
@@ -300,77 +267,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
 
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage3Template'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;NavigationBar;;;navigation
-;Section1;;;wide
-;Section2A;;;wide
-;Section2B;;;narrow
-;Section2C;;;narrow
-;Section3;;;wide
-;Section4;;;narrow
-;Section5;;;wide
-;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
-
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage4Template'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;NavigationBar;;;navigation
-;Section1;;;wide
-;Section2A;;;narrow
-;Section2B;;;narrow
-;Section2C;;;wide
-;Section3;;;wide
-;Section4;;;narrow
-;Section5;;;wide
-;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
-
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage5Template'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;NavigationBar;;;navigation
-;Section1;;;wide
-;Section2;;;wide
-;Section3;;;narrow
-;Section4;;;narrow
-;Section5;;;wide
-;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
-
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage6Template'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;NavigationBar;;;navigation
-;Section1;;;wide
-;Section2;;;wide
-;Section3;;;narrow
-;Section4;;;narrow
-;Section5;;;wide
-;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
 
 
 # Simple Content Page Templates
@@ -529,7 +425,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopContent;;;wide
 ;PlaceholderContentSlot;;;
 
-
 # Create Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;SiteLogoSlot;Default Site Logo Slot;true
@@ -654,19 +549,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;PlaceholderContentSlot-CategoryPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 
 
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-LandingPage1;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-LandingPage1;HomepageNavLink;;HomepageNavLinkSlot;true
-;;MiniCart-LandingPage1;MiniCart;;MiniCartSlot;true
-;;NavigationBar-LandingPage1;NavigationBar;;NavigationBarSlot;true
-;;Footer-LandingPage1;Footer;;FooterSlot;true
-;;HeaderLinks-LandingPage1;HeaderLinks;;HeaderLinksSlot;true
-;;SearchBox-LandingPage1;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-LandingPage1;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-LandingPage1;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-LandingPage1;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
-
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage2;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage2;HomepageNavLink;;HomepageNavLinkSlot;true
@@ -690,58 +572,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopHeaderSlot-BrandPage;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-BrandPage;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-BrandPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
-
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage3Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-LandingPage3;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-LandingPage3;HomepageNavLink;;HomepageNavLinkSlot;true
-;;NavigationBar-LandingPage3;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-LandingPage3;MiniCart;;MiniCartSlot;true
-;;Footer-LandingPage3;Footer;;FooterSlot;true
-;;HeaderLinks-LandingPage3;HeaderLinks;;HeaderLinksSlot;true
-;;SearchBox-LandingPage3;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-LandingPage3;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-LandingPage3;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-LandingPage3;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
-
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage4Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-LandingPage4;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-LandingPage4;HomepageNavLink;;HomepageNavLinkSlot;true
-;;NavigationBar-LandingPage4;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-LandingPage4;MiniCart;;MiniCartSlot;true
-;;Footer-LandingPage4;Footer;;FooterSlot;true
-;;HeaderLinks-LandingPage4;HeaderLinks;;HeaderLinksSlot;true
-;;SearchBox-LandingPage4;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-LandingPage4;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-LandingPage4;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-LandingPage4;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
-
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage5Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-LandingPage5;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-LandingPage5;HomepageNavLink;;HomepageNavLinkSlot;true
-;;NavigationBar-LandingPage5;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-LandingPage5;MiniCart;;MiniCartSlot;true
-;;Footer-LandingPage5;Footer;;FooterSlot;true
-;;HeaderLinks-LandingPage5;HeaderLinks;;HeaderLinksSlot;true
-;;SearchBox-LandingPage5;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-LandingPage5;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-LandingPage5;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-LandingPage5;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
-
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage6Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-LandingPage6;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-LandingPage6;HomepageNavLink;;HomepageNavLinkSlot;true
-;;NavigationBar-LandingPage6;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-LandingPage6;MiniCart;;MiniCartSlot;true
-;;Footer-LandingPage6;Footer;;FooterSlot;true
-;;HeaderLinks-LandingPage6;HeaderLinks;;HeaderLinksSlot;true
-;;SearchBox-LandingPage6;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-LandingPage6;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-LandingPage6;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-LandingPage6;PlaceholderContentSlot;;PlaceholderContentSlot;true
 
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContentPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -941,7 +771,6 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
 ;;multiStepCheckoutSummaryPage;Multi Checkout Summary Page;MultiStepCheckoutSummaryPageTemplate;multiStepCheckoutSummary
 ;;orderConfirmationPage;Order Confirmation Page;OrderConfirmationPageTemplate;orderConfirmation
-;;replenishmentConfirmationPage;Replenishment Confirmation Page;OrderConfirmationPageTemplate;replenishmentConfirmation
 ;;cartPage;Cart Page;CartPageTemplate;cart
 ;;search;Search Results List Page;SearchResultsListPageTemplate;search
 ;;searchGrid;Search Results Grid Page;SearchResultsGridPageTemplate;search;false
@@ -952,9 +781,6 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;payment-details;Payment Details Page;AccountPageTemplate;payment-details
 ;;quote-detail;My Quote Details;AccountPageTemplate;quote-detail
 ;;my-quotes;My Quotes Page;AccountPageTemplate;my-quotes
-;;my-replenishment-orders;My Replenishment Orders Page;AccountPageTemplate;my-replenishment-orders
-;;my-replenishment-cancel-confirmation;My Replenishemnt Cancel Confirmation Page;AccountPageTemplate;my-replenishment-cancel-confirmation
-;;my-replenishment-details;My Replenishemnt Details Page;AccountPageTemplate;my-replenishment-details
 ;;order;Order Details Page;AccountPageTemplate;order
 ;;orders;Order History Page;AccountPageTemplate;orders
 ;;order-approval-dashboard;Order Approval Dashboard Page;AccountPageTemplate;order-approval-dashboard
@@ -1009,7 +835,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;restric
 #The velocity template is imported after creating a pageTemplate
 INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;restrictedPageTypes(code);velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
 ;;WorldpayCSEPaymentAndBillingCheckoutPageTemplate;Worldpay Responsive CSE Payment Page Template;WorldpayPaymentPage;$jarResourceCms/structure-view/structure_WorldpayResponsiveCSEPaymentAndBillingCheckoutPageTemplate.vm
-;;WorldpayRedirectPaymentAndBillingCheckoutPageTemplate;Worldpay Responsive Redirect Payment Page Template;WorldpayRedirectPaymentPage;$jarResourceCms/structure-view/structure_WorldpayResponsiveRedirectPaymentAndBillingCheckoutPageTemplate.vm
+;;WorldpayRedirectPaymentAndBillingCheckoutPageTemplate;Worldpay Responsive Redirect Payment Page Template;;$jarResourceCms/structure-view/structure_WorldpayResponsiveRedirectPaymentAndBillingCheckoutPageTemplate.vm
 
 # Content Pages
 INSERT_UPDATE WorldpayPaymentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
