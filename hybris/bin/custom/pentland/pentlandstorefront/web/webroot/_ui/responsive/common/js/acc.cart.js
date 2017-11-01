@@ -398,16 +398,18 @@ ACC.cart = {
 
     bindRddDatetimePicker: function() {
         $(document).ready(function () {
-            var inputData = $('#cartrdddatetimepicker input').data();
-
-            $('#cartrdddatetimepicker').datetimepicker({
-                format: 'YYYY-MM-DD',
-                minDate: inputData.mindate,
-                daysOfWeekDisabled: [0, 6],
-                allowInputToggle: true,
-                useCurrent: false,
-                disabledDates: [inputData.disableddates.split(',')]
-            });
+            var $cartRddContainer = $('#cartrdddatetimepicker');
+            var inputData = $cartRddContainer.find('input').data();
+            if ($cartRddContainer.length && inputData) {
+                $cartRddContainer.datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    minDate: inputData.mindate,
+                    daysOfWeekDisabled: [0, 6],
+                    allowInputToggle: true,
+                    useCurrent: false,
+                    disabledDates: [inputData.disableddates.split(',')]
+                });
+            }
         });
     },
 
