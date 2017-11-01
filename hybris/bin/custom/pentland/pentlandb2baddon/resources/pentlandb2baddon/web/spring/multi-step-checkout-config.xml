@@ -183,7 +183,7 @@
 	<!-- Alias B2B checkout beans for multistep checkout -->
     <alias alias="b2bCheckoutFlowStrategy" name="b2bMultiStepCheckoutFlowStrategy"/>
     
-	<alias name="defaultB2BAcceleratorCheckoutFacade" alias="acceleratorCheckoutFacade"/>
+	<alias name="pentlandB2BAcceleratorCheckoutFacade" alias="acceleratorCheckoutFacade"/>
 	
 	<alias name="b2bMultiStepCheckoutFlowFacade" alias="checkoutFlowFacade"/>
 </beans>

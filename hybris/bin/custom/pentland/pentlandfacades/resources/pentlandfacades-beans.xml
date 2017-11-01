@@ -38,4 +38,10 @@
 		<property name="customerType" type="com.bridgex.core.enums.B2BUnitType"/>
 	</bean>
 
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter">
+		<property name="markFor" type="de.hybris.platform.core.model.user.AddressModel">
+			<description>the Mark For Address</description>
+		</property>
+	</bean>
+
 </beans>

@@ -319,6 +319,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.checkout.multi.pci-sop;PCI-SOP
 ;checkout.checkout.multi.pci-ws;PCI-Default
 ;checkout.checkout.multi.pci.select;Select a PCI option
+;checkout.multi.deliveryAddress.markFor;Mark For Address
+;checkout.multi.deliveryAddress.markFor.description;Select Mark For address or press Next to skip this step
+;checkout.multi.deliveryAddress.markFor.empty;There are no Mark For addresses for selected shipping address. Press Next to skip this step
+;checkout.multi.deliveryAddress.markFor.breadcrumb;Mark For
 ;checkout.checkout.single;Checkout Single
 ;checkout.deliveryAddress.notSelected;Please provide a delivery address for your order
 ;checkout.deliveryMethod.notSelected;Please select a method of delivery for your order

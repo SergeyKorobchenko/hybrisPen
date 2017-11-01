@@ -41,4 +41,9 @@
 		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
 	</bean>
 
+	<alias name="defaultMarkForAddressStrategy" alias="markForAddressStrategy"/>
+	<bean id="defaultMarkForAddressStrategy" class="com.bridgex.core.order.impl.DefaultMarkForAddressStrategy">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
 </beans>

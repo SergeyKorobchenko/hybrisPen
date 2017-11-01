@@ -261,9 +261,10 @@
 		<value>ACCOUNT</value>
 	</util:list>
 
-	<alias name="defaultPentlandB2BAcceleratorCheckoutFacade" alias="defaultB2BAcceleratorCheckoutFacade"/>
+	<alias name="defaultPentlandB2BAcceleratorCheckoutFacade" alias="pentlandB2BAcceleratorCheckoutFacade"/>
 	<bean id="defaultPentlandB2BAcceleratorCheckoutFacade" class="com.bridgex.facades.order.impl.DefaultPentlandB2BAcceleratorCheckoutFacade" parent="defaultB2BCheckoutFacade">
 		<property name="acceleratorCheckoutFacade" ref="defaultAcceleratorCheckoutFacade"/>
+		<property name="pentlandCommerceCheckoutService" ref="pentlandCommerceCheckoutService"/>
 	</bean>
 
 </beans>
