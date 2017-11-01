@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!-- Product Reference Lookup Strategies-->
 	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
@@ -34,5 +34,15 @@
 		<property name="salesRepGroup" value="salesrepgroup"/>
 		<property name="b2bApproverGroup" value="b2bapprovergroup"/>
 	</bean>
+
+	<alias name="pentlandRecipientTypeToContextClassMap" alias="recipientTypeToContextClassMap"/>
+	<util:map id="pentlandRecipientTypeToContextClassMap">
+		<entry value="com.bridgex.core.ticket.PentlandCustomerTicketContext">
+			<key><util:constant static-field="de.hybris.platform.ticket.enums.CsEmailRecipients.CUSTOMER"/></key>
+		</entry>
+		<entry value="com.bridgex.core.ticket.PentlandCustomerRepTicketContext">
+			<key><util:constant static-field="de.hybris.platform.ticket.enums.CsEmailRecipients.CUSTOMERREP"/></key>
+		</entry>
+	</util:map>
 
 </beans>

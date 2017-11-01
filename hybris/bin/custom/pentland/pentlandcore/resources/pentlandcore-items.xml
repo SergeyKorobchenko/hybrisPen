@@ -60,6 +60,10 @@
             <value code="Hybris"/>
         </enumtype>
 
+        <enumtype code="CsEmailRecipients" autocreate="false" generate="false" dynamic="true">
+            <value code="CustomerRep" />
+        </enumtype>
+
     </enumtypes>
 
     <itemtypes>
