@@ -422,7 +422,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
 ; ; Section1Slot-Homepage  ; Section1 Slot for Homepage  ; true ; PentlandHompageBannersCarouselComponent
 ; ; Section2Slot-Homepage  ; Section2 Slot for Homepage  ; true ; PentlandHomPageParagraphComponent
-; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ; PentlandHomepageServiceBannerComponent,PentlandHomepageShopBannerComponent,PentlandHomepageSmDiscountBannerComponent
+; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ; PentlandHomepageStreetYouthBannerComponent,PentlandHomepageWomenStreetBannerComponent,PentlandHomepageManStreetBannerComponent,PentlandHomepageBrandsBannerComponent
 ; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ; PentlandHomepageNewProductCarouselComponent,PentlandHomepageProductCarouselComponent
 
 ## slot 5: nothing to display ##
@@ -431,12 +431,12 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 
 ## components in slot 1 ##
 INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
-; ;PentlandHompageBannersCarouselComponent;Pentland Homepage Banner Carousel Component;zoom;PentlandHomepageBrandsBannerComponent,PentlandHomepageFreeDelBannerComponent,PentlandHomepageMenStreetBannerComponent;PentlandHompageBannersCarouselComponent
+; ;PentlandHompageBannersCarouselComponent;Pentland Homepage Banner Carousel Component;zoom;PentlandHomepageBerghausBannerComponent,PentlandHomepageCanterburyBannerComponent,PentlandHomepageSpeedoBannerComponent;PentlandHompageBannersCarouselComponent
 
 INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHomepageBrandsBannerComponent ; Pentland Homepage Brands Banner Component ; /Open-Catalogue/c/skigear ; PentlandHomepageBrandsBannerComponent
-; ; PentlandHomepageFreeDelBannerComponent ; Pentland Homepage Free Delivery Banner Component  ; /Open-Catalogue/c/shirts  ; PentlandHomepageFreeDelBannerComponent
-; ; PentlandHomepageMenStreetBannerComponent ; Pentland Homepage Sandals Men Street Banner Component ; /Open-Catalogue/shoes/c/sandals ; PentlandHomepageMenStreetBannerComponent
+; ; PentlandHomepageBerghausBannerComponent ; Pentland Homepage Berghaus Banner Component ; /berghaus ; PentlandHomepageBerghausBannerComponent
+; ; PentlandHomepageCanterburyBannerComponent ; Pentland Homepage Canterbury Banner Component  ; /canterbury  ; PentlandHomepageCanterburyBannerComponent
+; ; PentlandHomepageSpeedoBannerComponent ; Pentland Homepage Speedo Banner Component ; /speedo ; PentlandHomepageSpeedoBannerComponent
 
 ## components in slot 2 ##
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;
@@ -444,9 +444,10 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 
 ## components in slot 3 ##
 INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHomepageServiceBannerComponent     ; Pentland Homepage Service Banner Component    ; ; PentlandHomepageServiceBannerComponent
-; ; PentlandHomepageShopBannerComponent        ; Pentland Homepage Shop Banner Component       ; ; PentlandHomepageShopBannerComponent
-; ; PentlandHomepageSmDiscountBannerComponent  ; Pentland Homepage SmDiscount Banner Component ; ; PentlandHomepageSmDiscountBannerComponent
+;;PentlandHomepageStreetYouthBannerComponent;Pentland Homepage Street Youth Banner Component;/youth;PentlandHomepageStreetYouthBannerComponent
+;;PentlandHomepageWomenStreetBannerComponent;Pentland Homepage Women Street Banner Component;/women;PentlandHomepageWomenStreetBannerComponent
+;;PentlandHomepageManStreetBannerComponent;Pentland Homepage Man Street Banner Component;/men;PentlandHomepageManStreetBannerComponent
+;;PentlandHomepageBrandsBannerComponent;Pentland Homepage Brands Banner Component;/brands;PentlandHomepageBrandsBannerComponent
 
 ## components in slot 4 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
