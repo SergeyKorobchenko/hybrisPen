@@ -40,11 +40,6 @@
             <value code="PROFORMA" />
         </enumtype>
 
-        <enumtype code="DivisionType" autocreate="true" dynamic="true">
-            <value code="ACTIVE" />
-            <value code="FOOTWEAR" />
-        </enumtype>
-
         <enumtype generate="true" code="DiscontinuedStatus" autocreate="true" dynamic="false">
             <value code="D01"/>
             <value code="D02"/>
@@ -259,7 +254,7 @@
                         <persistence type="property" />
                         <description>Customer Type - used for payment options selection mostly</description>
                     </attribute>
-                    <attribute qualifier="division" type="DivisionType" >
+                    <attribute qualifier="division" type="Division" >
                         <persistence type="property" />
                         <description>Customer division</description>
                     </attribute>

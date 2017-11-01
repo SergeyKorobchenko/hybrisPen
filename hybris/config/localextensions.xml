@@ -25,6 +25,7 @@
 		<extension name="internationalization" />
 		<extension name="internationalizationbackoffice" />
 
+		<extension name="erpintegration" />
 
 		<!--SAP exts-->
 		<extension name="sapcore" />
