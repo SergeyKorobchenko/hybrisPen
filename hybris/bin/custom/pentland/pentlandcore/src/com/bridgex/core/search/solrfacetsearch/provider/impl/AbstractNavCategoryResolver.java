@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
+
 import de.hybris.platform.catalog.model.classification.ClassificationClassModel;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -24,7 +26,8 @@ public abstract class AbstractNavCategoryResolver extends AbstractValueResolver<
                                 ProductModel productModel,
                                 ValueResolverContext<Object, Object> valueResolverContext) throws FieldValueProviderException
   {
-    Collection<CategoryModel> categories = productModel.getSupercategories();
+    ProductModel baseProductModel = getBaseProductModel(productModel);
+    Collection<CategoryModel> categories = baseProductModel.getSupercategories();
     if(CollectionUtils.isNotEmpty(categories)) {
 
       for (CategoryModel category : categories) {
@@ -38,6 +41,17 @@ public abstract class AbstractNavCategoryResolver extends AbstractValueResolver<
           }
         }
       }
+    }
+  }
+
+  public ProductModel getBaseProductModel(final ProductModel model)
+  {
+    if (model instanceof ApparelSizeVariantProductModel) {
+      //most attributes are stored at style level
+      return ((ApparelSizeVariantProductModel) model).getBaseProduct();
+    }else{
+      //in case of non-variant or style-only products
+      return model;
     }
   }
 

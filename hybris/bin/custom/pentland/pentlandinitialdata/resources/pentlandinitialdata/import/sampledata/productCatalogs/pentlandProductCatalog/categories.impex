@@ -24,7 +24,51 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;mitre;;;TestB2BUnit
 ;speedo;;;TestB2BUnit
 
-;clothes;;mitre
+;teamwear;;mitre
+;trainingwear;;mitre
+;balls;;mitre
+;equipment;;mitre
+
+;jersey;;teamwear
+;shorts;;teamwear
+;socks;;teamwear
+;goalkeeper;;teamwear
+;referees;;teamwear
+;baseLayers;;teamwear
+;smallSided;;teamwear
+;bags;;teamwear
+
+;jacketsTrousers;;trainingwear
+;rainwear;;trainingwear
+;tshirts;;trainingwear
+;sweatshirts;;trainingwear
+;compression;;trainingwear
+;shorts;;trainingwear
+
+;professional;;balls
+;match;;balls
+;training;;balls
+;recreation;;balls
+;specialist;;balls
+;netballs;;balls
+;rugby;;balls
+;otherBalls;;balls
+;hyperseam;;balls
+;deltaCapsule;;balls
+
+;gameDay;;equipment
+;ballSacks;;equipment
+;conesMarkers;;equipment
+;gloves;;equipment
+;goals;;equipment
+;ladders;;equipment
+;poles;;equipment
+;bottles;;equipment
+;bibs;;equipment
+;referee;;equipment
+;others;;equipment
+
+;clothes;;mitre;;true
 ;caps;;clothes
 ;sunglasses;;clothes
 ;shoes;;clothes
@@ -32,7 +76,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;shirts;;clothes
 ;tshirts;;clothes,surf
 ;helmet;;clothes
-;others;;mitre
+;others;;mitre;;true
 ;skigear;;others,snow
 ;goggles;;others,snow
 ;tools;;others,snow
@@ -262,7 +306,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;streetwear;;canterbury
 
 
-INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
+INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid);hidden
 ;220000;;;
 ;221600;;;
 ;221200;;;
@@ -354,14 +398,14 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;111100;;;
 ;111800;;;
 ;111600;;;
-;450000;;;
+;450000;;;true
 ;450500;;;
 ;450100;;;
 ;450600;;;
 ;450300;;;
 ;450200;;;
 ;450700;;;
-;70000;;;
+;70000;;;true
 ;450500;;;
 ;450100;;;
 ;450600;;;
@@ -374,7 +418,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;20000;;;
 ;20100;;;
 ;20400;;;
-;230000;;;
+;230000;;;true
 ;230400;;;
 ;230200;;;
 ;230100;;;
@@ -409,7 +453,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;10000;;;
 ;10100;;;
 ;30300;;;
-;20000;;;
+;20000;;;true
 ;20400;;;
 ;10200;;;
 ;10500;;;
@@ -460,7 +504,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;252300;;;
 ;251000;;;
 ;251400;;;
-;260000;;;
+;260000;;;true
 ;260800;;;
 ;262300;;;
 ;262400;;;
@@ -485,7 +529,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;261300;;;
 ;261000;;;
 ;261500;;;
-;270000;;;
+;270000;;;true
 ;460000;;;
 ;270600;;;
 ;270500;;;
@@ -496,7 +540,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid)
 ;270200;;;
 ;270100;;;
 ;271000;;;
-;350000;;;
+;350000;;;true
 ;350400;;;
 ;360500;;;
 ;180400;;;
