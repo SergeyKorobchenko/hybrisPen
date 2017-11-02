@@ -8,26 +8,32 @@
 # Information and shall use it only in accordance with the terms of the
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
+$siteUid = pentland
+
 $contentCatalog = pentlandContentCatalog
 $contentCatalogName = Pentland Content Catalog
 $contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$contentPage = contentPage(uid, $contentCV);
+$page = page(uid, $contentCV);
+$siteResource = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/cockpits/cmscockpit
+
 $productCatalog = pentlandProductCatalog
 $productCatalogName = Pentland Product Catalog
 $productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$productResource = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/productCatalogs/$productCatalog
+$product = product(code, $productCV)
+$category = category(code, $productCV)
+
+$medias = medias(code, $contentCV);
 $picture = media(code, $contentCV);
 $image = image(code, $contentCV);
 $media = media(code, $contentCV);
-$page = page(uid, $contentCV);
-$contentPage = contentPage(uid, $contentCV);
-$product = product(code, $productCV)
-$category = category(code, $productCV)
-$siteResource = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/contentCatalogs/$contentCatalog
-$productResource = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/productCatalogs/$productCatalog
-$jarResourceCms = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/cockpits/cmscockpit
-$addonExtensionName = pentlandb2baddon
-$medias = medias(code, $contentCV);
 $mediaContainer = media(qualifier, $contentCV);
-$siteUid = pentland
+
+$addonExtensionName = pentlandb2baddon
+
+$lang=en
 
 # CMS Site Settings
 UPDATE CMSSite; uid[unique = true]; defaultPreviewCategory(code, $productCV); defaultPreviewProduct(code, $productCV); theme(code)
@@ -55,7 +61,6 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; MyAccountNavNode  ; ; My Account   ; PentlandNavNode ; ; MyAccountNavNode
 ; MyCompanyNavNode  ; ; My Company   ; PentlandNavNode ; ; MyCompanyNavNode
 ; OrderToolsNavNode ; ; Order Tools  ; PentlandNavNode ; ; OrderToolsNavNode
-#;PentlandCategoryNavNode;;Categories;PentlandNavNode;;PentlandCategoryNavNode
 ; FooterNavNode     ; ; Footer Pages ; PentlandNavNode ; ; FooterNavNode
 
 
@@ -407,59 +412,49 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 ## Based on landingLayout2Page.jsp ##
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'homepage']; contentSlot(uid, $contentCV)[unique = true]
 ; ; Section1-Homepage  ; Section1  ; ; Section1Slot-Homepage
-; ; Section2A-Homepage ; Section2A ; ; Section2ASlot-Homepage
-; ; Section2B-Homepage ; Section2B ; ; Section2BSlot-Homepage
+; ; Section2-Homepage  ; Section2  ; ; Section2Slot-Homepage
 ; ; Section3-Homepage  ; Section3  ; ; Section3Slot-Homepage
 ; ; Section4-Homepage  ; Section4  ; ; Section4Slot-Homepage
 ; ; Section5-Homepage  ; Section5  ; ; Section5Slot-Homepage
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
-; ; Section1Slot-Homepage  ; Section1 Slot for Homepage  ; true ; PentlandHompageSplashBannerComponent,PentlandHompageBrandsBannerComponent
-; ; Section2ASlot-Homepage ; Section2A Slot for Homepage ; true ; PentlandHompageSkigearBannerComponent,PentlandHompageShirtsBannerComponent
-; ; Section2BSlot-Homepage ; Section2B Slot for Homepage ; true ; PentlandHompageSandalsBannerComponent,PentlandHompageCapsBannerComponent
-; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ; PentlandHomepageNewProductCarouselComponent,PentlandHomepageProductCarouselComponent
+; ; Section1Slot-Homepage  ; Section1 Slot for Homepage  ; true ; PentlandHompageBannersCarouselComponent
+; ; Section2Slot-Homepage  ; Section2 Slot for Homepage  ; true ; PentlandHomPageParagraphComponent
+; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ; PentlandHomepageStreetYouthBannerComponent,PentlandHomepageWomenStreetBannerComponent,PentlandHomepageManStreetBannerComponent,PentlandHomepageBrandsBannerComponent
+; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ; PentlandHomepageProductCarouselComponent
 
-; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ; PentlandHompage25%BannerComponent,PentlandHompage30dayBannerComponent,PentlandHompage6pmBannerComponent,PentlandHompage24/7BannerComponent
-
-## slot 2C and 5: nothing to display ##
+## slot 5: nothing to display ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
-; ; Section2CSlot-Homepage ;
 ; ; Section5Slot-Homepage  ;
 
 ## components in slot 1 ##
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHompageBrandsBannerComponent ; Pentland Homepage Brands Banner Component ; /Brands/c/brands              ; PentlandHompageBrandsBannerComponent
-; ; PentlandHompageSplashBannerComponent ; Pentland Homepage Splash Banner Component ; /Open-Catalogue/Shoes/c/shoes ; PentlandHompageSplashBannerComponent
+INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
+; ;PentlandHompageBannersCarouselComponent;Pentland Homepage Banner Carousel Component;zoom;PentlandHomepageBerghausBannerComponent,PentlandHomepageCanterburyBannerComponent,PentlandHomepageSpeedoBannerComponent;PentlandHompageBannersCarouselComponent
 
-## components in slot 2A ##
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHompageSkigearBannerComponent ; Pentland Homepage Skigear Banner Component ; /Open-Catalogue/c/skigear ; PentlandHompageSkigearBannerComponent
-; ; PentlandHompageShirtsBannerComponent  ; Pentland Homepage Shirts Banner Component  ; /Open-Catalogue/c/shirts  ; PentlandHompageShirtsBannerComponent
+INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+; ; PentlandHomepageBerghausBannerComponent ; Pentland Homepage Berghaus Banner Component ; /berghaus ; PentlandHomepageBerghausBannerComponent
+; ; PentlandHomepageCanterburyBannerComponent ; Pentland Homepage Canterbury Banner Component  ; /canterbury  ; PentlandHomepageCanterburyBannerComponent
+; ; PentlandHomepageSpeedoBannerComponent ; Pentland Homepage Speedo Banner Component ; /speedo ; PentlandHomepageSpeedoBannerComponent
 
-## components in slot 2B ##
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHompageSandalsBannerComponent ; Pentland Homepage Sandals Banner Component ; /Open-Catalogue/shoes/c/sandals ; PentlandHompageSandalsBannerComponent
-; ; PentlandHompageCapsBannerComponent    ; Pentland Homepage Caps Banner Component    ; /Open-Catalogue/clothes/c/caps  ; PentlandHompageCapsBannerComponent
+## components in slot 2 ##
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;
+; ; PentlandHomPageParagraphComponent ; Pentland Homepage Paragraph Component ; PentlandHomPageParagraphComponent;
 
 ## components in slot 3 ##
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+;;PentlandHomepageStreetYouthBannerComponent;Pentland Homepage Street Youth Banner Component;/youth;PentlandHomepageStreetYouthBannerComponent
+;;PentlandHomepageWomenStreetBannerComponent;Pentland Homepage Women Street Banner Component;/women;PentlandHomepageWomenStreetBannerComponent
+;;PentlandHomepageManStreetBannerComponent;Pentland Homepage Man Street Banner Component;/men;PentlandHomepageManStreetBannerComponent
+;;PentlandHomepageBrandsBannerComponent;Pentland Homepage Brands Banner Component;/brands;PentlandHomepageBrandsBannerComponent
+
+## components in slot 4 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
-; ; PentlandHomepageNewProductCarouselComponent ; What's New Pentland Homepage Product Carousel ; 45572,300046592,300044323,300047199,M27160_B,300020465,300050255                          ; allVisible ; false ; PentlandHomepageNewProductCarouselComponent
 ; ; PentlandHomepageProductCarouselComponent    ; Pentland Homepage Product Carousel            ; 300050257,102277_trench_green,104668_red,111159_white,94374_ink,95430_risque,102278_white ; allVisible ; false ; PentlandHomepageProductCarouselComponent
 
 ## This component is not used currently, but still import for future use ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; searchQuery; categoryCode; &componentRef
 ; ; PremiumbuyersgroupHomepageProductCarouselComponent ; Premium buyer Homepage Product Carousel ; ; allVisible ; false ; :topRated:price:$500-$999.99:price:$200-$499.99 ; 1 ; PremiumbuyersgroupHomepageProductCarouselComponent
-
-## components in slot 4 ##
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHompage25%BannerComponent   ; Pentland Homepage 25% Great Deal Banner Component ; ; PentlandHompage25%BannerComponent
-; ; PentlandHompage30dayBannerComponent ; Pentland Homepage 30 Day Banner Component         ; ; PentlandHompage30dayBannerComponent
-; ; PentlandHompage6pmBannerComponent   ; Pentland Homepage 6pm Banner Component            ; ; PentlandHompage6pmBannerComponent
-; ; PentlandHompage24/7BannerComponent  ; Pentland Homepage 24/7 Banner Component           ; ; PentlandHompage24/7BannerComponent
 ###### Homepage End ######
-
-
-
 
 ###### Search Results Page Start ######
 ## search result empty page ##
@@ -501,7 +496,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 ; ; EmptyCartMiddleContent-cartPage ; Empty Cart Middle Slot for Cart Page    ; true ; EmptyCartParagraphComponent
 ; ; CenterLeftContentSlot-cartPage  ; Center Left Content Slot for Cart Page  ; true ; PromotionsComponent,PotentialPromotionsComponent
 ; ; CenterRightContentSlot-cartPage ; Center Right Content Slot for Cart Page ; true ; CartTotalsComponent
-; ; BottomContentSlot-cartPage      ; Bottom Content Slot for Cart Page       ; true ; CheckoutComponent,CartSuggestions
+; ; BottomContentSlot-cartPage      ; Bottom Content Slot for Cart Page       ; true ; CartBottomParagraphComponent,CheckoutComponent,CartSuggestions
 
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink
 ; ; NextDayDeliveryBanner120 ; Next Day Delivery Banner (120) ; NextDayDeliveryBanner120 ; #
@@ -519,6 +514,7 @@ INSERT_UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = t
 
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 ; ; EmptyCartParagraphComponent ; Empty Cart Paragraph Component ; EmptyCartParagraphComponent
+; ; CartBottomParagraphComponent; Cart Bottom Paragraph Component   ; CartBottomParagraphComponent
 ###### Cart Page End ######
 
 
@@ -887,6 +883,78 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 
 ###### Quick Order Page End ######
 
+
+###### Brand pages start ######
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;mitreBrandPage;Mitre Brand Home Page;BrandPageTemplate;/Mitre
+;;speedoBrandPage;Speedo Brand Home Page;BrandPageTemplate;/Speedo
+;;kickersBrandPage;Kickers Brand Home Page;BrandPageTemplate;/Kickers
+;;canterburyBrandPage;Canterbury Brand Home Page;BrandPageTemplate;/Canterbury
+;;boxfreshBrandPage;Boxfresh Brand Home Page;BrandPageTemplate;/Boxfresh
+;;berghausBrandPage;Berghaus Brand Home Page;BrandPageTemplate;/Berghaus
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-mitreBrandPage;Section2 Slot for mitreBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-mitreBrandPage;Section3 Slot for mitreBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-speedoBrandPage;Section1 Slot for speedoBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-speedoBrandPage;Section2 Slot for speedoBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-speedoBrandPage;Section3 Slot for speedoBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-kickersBrandPage;Section1 Slot for kickersBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-kickersBrandPage;Section2 Slot for kickersBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-kickersBrandPage;Section3 Slot for kickersBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-canterburyBrandPage;Section1 Slot for canterburyBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-canterburyBrandPage;Section2 Slot for canterburyBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-canterburyBrandPage;Section3 Slot for canterburyBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-boxfreshBrandPage;Section1 Slot for boxfreshBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-boxfreshBrandPage;Section2 Slot for boxfreshBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-boxfreshBrandPage;Section3 Slot for boxfreshBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-berghausBrandPage;Section1 Slot for berghausBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-berghausBrandPage;Section2 Slot for berghausBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-berghausBrandPage;Section3 Slot for berghausBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-mitreBrandPage;Section1;mitreBrandPage;Section1Slot-mitreBrandPage
+;;Section2-mitreBrandPage;Section2;mitreBrandPage;Section2Slot-mitreBrandPage
+;;Section3-mitreBrandPage;Section3;mitreBrandPage;Section3Slot-mitreBrandPage
+;;Section1-speedoBrandPage;Section1;speedoBrandPage;Section1Slot-speedoBrandPage
+;;Section2-speedoBrandPage;Section2;speedoBrandPage;Section2Slot-speedoBrandPage
+;;Section3-speedoBrandPage;Section3;speedoBrandPage;Section3Slot-speedoBrandPage
+;;Section1-kickersBrandPage;Section1;kickersBrandPage;Section1Slot-kickersBrandPage
+;;Section2-kickersBrandPage;Section2;kickersBrandPage;Section2Slot-kickersBrandPage
+;;Section3-kickersBrandPage;Section3;kickersBrandPage;Section3Slot-kickersBrandPage
+;;Section1-canterburyBrandPage;Section1;canterburyBrandPage;Section1Slot-canterburyBrandPage
+;;Section2-canterburyBrandPage;Section2;canterburyBrandPage;Section2Slot-canterburyBrandPage
+;;Section3-canterburyBrandPage;Section3;canterburyBrandPage;Section3Slot-canterburyBrandPage
+;;Section1-boxfreshBrandPage;Section1;boxfreshBrandPage;Section1Slot-boxfreshBrandPage
+;;Section2-boxfreshBrandPage;Section2;boxfreshBrandPage;Section2Slot-boxfreshBrandPage
+;;Section3-boxfreshBrandPage;Section3;boxfreshBrandPage;Section3Slot-boxfreshBrandPage
+;;Section1-berghausBrandPage;Section1;berghausBrandPage;Section1Slot-berghausBrandPage
+;;Section2-berghausBrandPage;Section2;berghausBrandPage;Section2Slot-berghausBrandPage
+;;Section3-berghausBrandPage;Section3;berghausBrandPage;Section3Slot-berghausBrandPage
+
+## components in slot 1 ##
+INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
+; ;MitreBrandPageBannersCarouselComponent;Mitre Brand Page Banners Carousel Component;zoom;MitreBrandPageBannerComponent,MitreBrandPage2BannerComponent;MitreBrandPageBannersCarouselComponent
+
+INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+; ; MitreBrandPageBannerComponent ; Mitre Brand Banner Page Component ; /helmet ; MitreBrandPageBannerComponent
+; ; MitreBrandPage2BannerComponent ; Mitre Brand Banner Page Component ; /protection  ; MitreBrandPage2BannerComponent
+
+## components in slot 2 ##
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+; ; MitreBrandPageHelmetBannerComponent     ; Mitre Brand Page Helmet Banner Component    ; ; MitreBrandPageHelmetBannerComponent
+; ; MitreBrandPageProtectionBannerComponent ; Mitre Brand Page Protection Banner Component; ; MitreBrandPageProtectionBannerComponent
+; ; MitreBrandPageShoesBannerComponent      ; Mitre Brand Page Shoes Banner Component     ; ; MitreBrandPageShoesBannerComponent
+; ; MitreBrandPageSurfBannerComponent       ; Mitre Brand Page Surf Banner Component      ; ; MitreBrandPageSurfBannerComponent
+
+## components in slot 3 ##
+INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
+; ; MitreBrandPageBestSellersCarouselComponent ;Best Sellers Mitre Brand Page Product Carousel ;45572,300046592,300044323,300047199,M27160_B,300020465,300050255,300050257,102277_trench_green,104668_red,111159_white,94374_ink,95430_risque; allVisible ; false ; MitreBrandPageBestSellersCarouselComponent
+
+###### Mitre page end ######
+
 ###### Restriction Start ######
 INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name;
 ; ; ActionRestriction ; A CMSAction restriction ;
@@ -925,7 +993,6 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 ; ; orderHistoryPagePreview              ; text/png ; OrderHistoryPage.png              ; $jarResourceCms/preview-images/pentland/OrderHistoryPage.png
 ; ; paymentDetailsPagePreview            ; text/png ; PaymentDetailsPage.png            ; $jarResourceCms/preview-images/pentland/PaymentDetailsPage.png
 ; ; myQuotesPagePreview                  ; text/png ; MyQuotesPage.png                  ; $jarResourceCms/preview-images/pentland/MyQuotesPage.png
-; ; myReplenishmentOrdersPagePreview     ; text/png ; MyReplenishmentOrdersPage.png     ; $jarResourceCms/preview-images/pentland/MyReplenishmentOrdersPage.png
 ; ; productDetailsPagePreview            ; text/png ; ProductDetailsPage.png            ; $jarResourceCms/preview-images/pentland/ProductDetailsPage.png
 ; ; productListPagePreview               ; text/png ; ProductListPage.png               ; $jarResourceCms/preview-images/pentland/ProductListPage.png
 ; ; profilePagePreview                   ; text/png ; ProfilePage.png                   ; $jarResourceCms/preview-images/pentland/ProfilePage.png
@@ -936,14 +1003,12 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 #;;productGridPagePreview;text/png;ProductGridPage.png;$jarResourceCms/preview-images/pentland/ProductGridPage.png
 ; ; orderApprovalDashboardPagePreview    ; text/png ; OrderApprovalDashboardPage.png    ; $jarResourceCms/preview-images/pentland/OrderApprovalDashboardPage.png
 ; ; updatePasswordPagePreview            ; text/png ; UpdatePasswordPage.png            ; $jarResourceCms/preview-images/pentland/UpdatePasswordPage.png
-; ; myReplenishmentDetailsPreview        ; text/png ; UpdatePasswordPage.png            ; $jarResourceCms/preview-images/pentland/MyReplenishmentDetailsPage.png
 ; ; quoteDetailPreview                   ; text/png ; UpdatePasswordPage.png            ; $jarResourceCms/preview-images/pentland/QuoteDetailPage.png
 ; ; updateEmailPreview                   ; text/png ; UpdatePasswordPage.png            ; $jarResourceCms/preview-images/pentland/UpdateEmailPage.png
 ; ; updateProfilePreview                 ; text/png ; UpdatePasswordPage.png            ; $jarResourceCms/preview-images/pentland/UpdateProfilePage.png
 ; ; searchAdvancedEmptyPreview           ; text/png ; UpdatePasswordPage.png            ; $jarResourceCms/preview-images/pentland/SearchAdvancedEmptyPage.png
 ; ; savedCartsPagePreview                ; text/png ; SavedCartsPage.png                ; $jarResourceCms/preview-images/pentland/SavedCartsPage.png
 ; ; savedCartDetailsPagePreview          ; text/png ; SavedCartDetailsPage.png          ; $jarResourceCms/preview-images/pentland/SavedCartDetailsPage.png
-; ; replenishmentConfirmationPagePreview ; text/png ; ReplenishmentConfirmationPage.png ; $jarResourceCms/preview-images/pentland/ReplenishmentConfirmationPage.png
 ###### Media End ######
 
 
@@ -972,7 +1037,6 @@ UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(
 ; ; add-edit-address              ; addEditAddressPagePreview
 ; ; payment-details               ; paymentDetailsPagePreview
 ; ; my-quotes                     ; myQuotesPagePreview
-; ; my-replenishment-orders       ; myReplenishmentOrdersPagePreview
 ; ; order                         ; orderDetailsPagePreview
 ; ; orders                        ; orderHistoryPagePreview
 ; ; storefinderPage               ; storefinderPagePreview
@@ -984,14 +1048,12 @@ UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(
 ; ; updatePassword                ; updateForgottenPasswordPagePreview
 ; ; order-approval-dashboard      ; orderApprovalDashboardPagePreview
 ; ; order-approval-details        ; orderApprovalDashboardPagePreview
-; ; my-replenishment-details      ; myReplenishmentDetailsPreview
 ; ; quote-detail                  ; quoteDetailPreview
 ; ; update-email                  ; updateEmailPreview
 ; ; update-profile                ; updateProfilePreview
 ; ; searchAdvancedEmpty           ; searchAdvancedEmptyPreview
 ; ; saved-carts                   ; savedCartsPagePreview
 ; ; savedCartDetailsPage          ; savedCartDetailsPagePreview
-; ; replenishmentConfirmationPage ; replenishmentConfirmationPagePreview
 ###### update contentPage to set previewImage End ######
 
 
@@ -1063,9 +1125,6 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 $media = @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $siteResource = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/images/apmIcons
 $picture = media(code, $contentCV);
-$lang = en
-
-
 
 
 # Create medias
@@ -1104,9 +1163,6 @@ INSERT_UPDATE WorldpayAPMComponent; uid[unique = true]; $contentCV[unique = true
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
 ; ; WorldpayPaymentButtonsSlot ;creditCardComponent
 #,boletoComponent,postepayComponent,poliComponent,polinzComponent,mistercashComponent,nordeaComponent,idealComponent,klarnaComponent
-
-
-$lang = en
 
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
 ; ; WorldpayHelpParagraphComponent ; "<strong>Need Help setting up your Merchants?</strong> <span>Contact Your Worldpay Relationship Manager and they will only be too happy to help!</span>" ;

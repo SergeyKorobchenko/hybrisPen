@@ -12,28 +12,16 @@
                 <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 no-space yComponentWrapper"/>
             </cms:pageSlot>
         </div>
-        <div class="col-xs-12 col-md-6 no-space">
-            <cms:pageSlot position="Section2B" var="feature" element="div" class="row no-margin">
-                <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 no-space yComponentWrapper"/>
-            </cms:pageSlot>
-        </div>
-        <div class="col-xs-12">
-            <cms:pageSlot position="Section2C" var="feature" element="div" class="landingLayout2PageSection2C">
-                <cms:component component="${feature}" element="div" class="yComponentWrapper"/>
-            </cms:pageSlot>
-        </div>
+    </div>
+
+    <div class="col-xs-12 section2">
+        <cms:pageSlot position="Section2" var="feature" element="div">
+            <cms:component component="${feature}" element="div" class="col-xs-2"/>
+        </cms:pageSlot>
     </div>
 
     <cms:pageSlot position="Section3" var="feature" element="div">
         <cms:component component="${feature}" element="div" class="no-space yComponentWrapper"/>
-    </cms:pageSlot>
-
-    <cms:pageSlot position="Section4" var="feature" element="div" class="row no-margin">
-        <cms:component component="${feature}" element="div" class="col-xs-6 col-md-3 no-space yComponentWrapper"/>
-    </cms:pageSlot>
-
-    <cms:pageSlot position="Section5" var="feature" element="div">
-        <cms:component component="${feature}" element="div" class="yComponentWrapper"/>
     </cms:pageSlot>
 
 </template:page>

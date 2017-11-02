@@ -37,6 +37,9 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 	</bean>
 
+	<alias name="pentlandCartFacade" alias="cartFacade"/>
+	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade" />
+
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
@@ -226,6 +229,9 @@
 
 	<alias name="pentlandOrderHistoryPopulator" alias="orderHistoryPopulator"/>
 	<bean id="pentlandOrderHistoryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderHistoryPopulator" parent="defaultOrderHistoryPopulator"/>
+
+	<alias name="pentlandCartPopulator" alias="cartPopulator"/>
+	<bean id="pentlandCartPopulator" class="com.bridgex.facades.order.converters.populator.PentlandCartPopulator" parent="defaultCartPopulator"/>
 
 	<alias name="pentlandB2BUnitPopulator" alias="b2bUnitPopulator"/>
 	<bean id="pentlandB2BUnitPopulator" class="com.bridgex.facades.populators.PentlandB2BUnitPopulator" parent="defaultB2BUnitPopulator"/>

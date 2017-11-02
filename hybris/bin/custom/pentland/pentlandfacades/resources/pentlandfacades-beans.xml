@@ -40,6 +40,12 @@
 		<value>B2B_system_issue</value>
 	</enum>
 
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="rdd" type="java.util.Date"/>
+		<property name="purchaseOrderNumber" type="String"/>
+		<property name="customerNotes" type="String"/>
+	</bean>
+
 	<bean class="de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData">
 		<property name="customerType" type="com.bridgex.core.enums.B2BUnitType"/>
 	</bean>
