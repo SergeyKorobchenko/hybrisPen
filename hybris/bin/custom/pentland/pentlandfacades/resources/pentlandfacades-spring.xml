@@ -35,9 +35,19 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 	</bean>
 
-	<bean id="orderDetailIntegrationFacade" class="com.bridgex.facades.integration.OrderDetailsIntegrationFacade">
-		<property name="integrationService" ref="orderDetailsIntegrationService"/>
+	<bean id="orderDetailsFacade" class="com.bridgex.facades.integration.OrderDetailsFacade">
+		<property name="orderDetailsService" ref="orderDetailsService"/>
 		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
+	</bean>
+
+	<bean id="orderDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.bridgex.facades.order.data.OrderDetailsData"/>
+		<property name="populators">
+			<list>
+				<ref bean="orderDetailsPopulator"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">

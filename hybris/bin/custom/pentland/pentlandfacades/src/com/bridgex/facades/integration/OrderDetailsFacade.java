@@ -6,6 +6,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 
+import com.bridgex.core.integration.OrderDetailsService;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
 import com.bridgex.integration.service.IntegrationService;
@@ -18,19 +19,24 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 /**
  * @author Goncharenko Mikhail, created on 01.11.2017.
  */
-public class OrderDetailsIntegrationFacade {
+public class OrderDetailsFacade {
 
   private final static String I_SERVICE_CONSUMER = "Hybris_B2B";
   private final static String I_VBTYP = "C";
   private final static String I_CUSTOMER_VIEW_FLAG = "";
 
-  private IntegrationService<OrderDetailsDto, OrderDetailsResponse> integrationService;
-  private StoreSessionFacade storeSessionFacade;
+  private OrderDetailsService                       orderDetailsService;
+  private StoreSessionFacade                        storeSessionFacade;
   private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
 
   @Required
-  public void setIntegrationService(IntegrationService integrationService) {
-    this.integrationService = integrationService;
+  public void setOrderDetailsConverter(Converter<OrderDetailsResponse, OrderData> orderDetailsConverter) {
+    this.orderDetailsConverter = orderDetailsConverter;
+  }
+
+  @Required
+  public void setOrderDetailsService(OrderDetailsService orderDetailsService) {
+    this.orderDetailsService = orderDetailsService;
   }
 
   @Required
@@ -38,10 +44,9 @@ public class OrderDetailsIntegrationFacade {
     this.storeSessionFacade = storeSessionFacade;
   }
 
-  private OrderData requestOrderDetails(String orderCode) {
-    ResponseEntity<OrderDetailsResponse> responseEntity = integrationService.sendRequest(createRequestDto(orderCode), OrderDetailsResponse.class);
-
-    return new OrderData();
+  public OrderData requestOrderDetails(String orderCode) {
+    OrderDetailsResponse response = orderDetailsService.requestOrderDetails(createRequestDto(orderCode));
+    return orderDetailsConverter.convert(response);
   }
 
   private OrderDetailsDto createRequestDto(String code) {
@@ -52,14 +57,6 @@ public class OrderDetailsIntegrationFacade {
     request.setServiceConsumer(I_SERVICE_CONSUMER);
     request.setCustomerViewFlag(I_CUSTOMER_VIEW_FLAG);
     return request;
-  }
-
-  private OrderData extractOrderData(ResponseEntity<OrderDetailsResponse> responseEntity) {
-    if (responseEntity.getStatusCodeValue() != 200) {
-      throw new ResourceAccessException("ERP Request failed with code " + responseEntity.getStatusCodeValue());
-    }
-    OrderDetailsResponse response = responseEntity.getBody();
-    return orderDetailsConverter.convert(response);
   }
 
 }
