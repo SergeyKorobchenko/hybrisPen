@@ -48,12 +48,6 @@
                                                action="${addPaymentAddressUrl}" class="create_update_payment_form">
 
                                         <wp-multi-checkout:paymentButtons/>
-                                        <div class="save_payment_details hidden">
-                                            <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-                                                <form:checkbox id="SaveDetails" path="saveInAccount" tabindex="19"/>
-                                                <label for="SaveDetails"><spring:theme code="checkout.multi.paymentMethod.addPaymentDetails.savePaymentDetailsInAccount"/></label>
-                                            </sec:authorize>
-                                        </div>
 
                                         <wp-multi-checkout:bankSelect/>
                                         <wp-multi-checkout:billingAddress/>

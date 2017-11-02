@@ -2864,3 +2864,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.payment.CARD.PROFORMA;Online payment
 ;checkout.payment.ACCOUNT.ACCOUNT;Account
 ;checkout.payment.ACCOUNT.PROFORMA;Pro-Forma
+
+;checkout.multi.deliveryAddress.noAddress;There are no shipping addresses assigned to current customer.

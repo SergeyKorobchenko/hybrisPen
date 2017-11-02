@@ -25,12 +25,14 @@
                             <%--<multi-checkout:shipmentItems cartData="${cartData}" showDeliveryAddress="false" />--%>
 
                             <div class="checkout-indent">
-                                <div class="headline"><spring:theme code="checkout.summary.shippingAddress" /></div>
+                                <c:choose>
+                                    <c:when test="${not empty deliveryAddresses}">
+                                        <div class="headline"><spring:theme code="checkout.summary.shippingAddress" /></div>
 
 
-                                    <address:addressFormSelector supportedCountries="${countries}"
-                                        regions="${regions}" cancelUrl="${currentStepUrl}"
-                                        country="${country}" />
+                                        <address:addressFormSelector supportedCountries="${countries}"
+                                                                     regions="${regions}" cancelUrl="${currentStepUrl}"
+                                                                     country="${country}" />
 
                                         <div id="addressbook"  class="long-scrollable ">
 
@@ -41,19 +43,19 @@
                                                         <ul>
                                                             <li>
                                                                 <strong>${fn:escapeXml(deliveryAddress.title)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.firstName)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.lastName)}</strong>
+                                                                        ${fn:escapeXml(deliveryAddress.firstName)}&nbsp;
+                                                                        ${fn:escapeXml(deliveryAddress.lastName)}</strong>
                                                                 <br>
-                                                                ${fn:escapeXml(deliveryAddress.line1)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.line2)}
+                                                                    ${fn:escapeXml(deliveryAddress.line1)}&nbsp;
+                                                                    ${fn:escapeXml(deliveryAddress.line2)}
                                                                 <br>
-                                                                ${fn:escapeXml(deliveryAddress.town)}
+                                                                    ${fn:escapeXml(deliveryAddress.town)}
                                                                 <c:if test="${not empty deliveryAddress.region.name}">
                                                                     &nbsp;${fn:escapeXml(deliveryAddress.region.name)}
                                                                 </c:if>
                                                                 <br>
-                                                                ${fn:escapeXml(deliveryAddress.country.name)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.postalCode)}
+                                                                    ${fn:escapeXml(deliveryAddress.country.name)}&nbsp;
+                                                                    ${fn:escapeXml(deliveryAddress.postalCode)}
                                                             </li>
                                                         </ul>
                                                         <button type="submit" class="btn btn-primary btn-block">
@@ -63,6 +65,13 @@
                                                 </div>
                                             </c:forEach>
                                         </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <br>
+                                        <p class="lead"><spring:theme code="checkout.multi.deliveryAddress.noAddress"/></p>
+                                    </c:otherwise>
+                                </c:choose>
+
 
                                         <address:suggestedAddresses selectedAddressUrl="/checkout/multi/delivery-address/select" />
                             </div>
@@ -70,9 +79,8 @@
                                 <multi-checkout:pickupGroups cartData="${cartData}" />
                     </div>
 
-
                     <button id="addressSubmit" type="button"
-                        class="btn btn-primary btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.continue"/></button>
+                        class="btn btn-primary btn-block checkout-next" <c:if test="${empty deliveryAddresses}">disabled="disabled"</c:if>><spring:theme code="checkout.multi.deliveryAddress.continue"/></button>
                 </ycommerce:testId>
             </jsp:body>
         </multi-checkout:checkoutSteps>

@@ -59,4 +59,8 @@
 		<property name="modelService" ref="modelService"/>
 	</bean>
 
+	<alias name="pentlandCommercePlaceOrderStrategy" alias="b2bCommercePlaceOrderStrategy"/>
+	<alias name="pentlandCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
+	<bean id="pentlandCommercePlaceOrderStrategy" class="com.bridgex.core.order.impl.PentlandCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy"/>
+
 </beans>
