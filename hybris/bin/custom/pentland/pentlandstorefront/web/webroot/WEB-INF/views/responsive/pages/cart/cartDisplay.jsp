@@ -11,17 +11,9 @@
 <div class="cart-header border">
     <div class="row">
         <div class="col-xs-12 col-sm-5">
-            <h1 class="cart-headline">
-                <spring:theme code="text.cart"/>
-                <c:if test="${not empty cartData.code}">
-                    <span class="cart__id--label">
-                        <spring:theme code="basket.page.cartIdShort"/><span class="cart__id">${fn:escapeXml(cartData.code)}</span>
-                    </span>
-                </c:if>
-            </h1>
+
         </div>
         <div class="col-xs-12 col-sm-7">
-
             <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
                 <c:if test="${not empty savedCartCount and savedCartCount ne 0}">
                     <spring:url value="/my-account/saved-carts" var="listSavedCartUrl" htmlEscape="false"/>
@@ -34,7 +26,6 @@
                             <spring:theme code="saved.quote.total.number" arguments="${quoteCount}"/>
                         </a>
                     </c:if>
-
                 </c:if>
             </sec:authorize>
             <cart:saveCart/>
@@ -52,34 +43,14 @@
     <div class="row">
         <div class="col-xs-12 pull-right cart-actions--print">
             <div class="cart__actions border">
-                <div class="row">
-                    <div class="col-sm-4 col-md-3 pull-right">
-                        <ycommerce:testId code="checkoutButton">
-                            <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">
-                                <spring:theme code="checkout.checkout"/>
-                            </button>
-                        </ycommerce:testId>
-                    </div>
-
-                    <c:if test="${not empty siteQuoteEnabled and siteQuoteEnabled eq 'true'}">
-                        <div class="col-sm-4 col-md-3 col-md-offset-3 pull-right">
-                            <button class="btn btn-default btn-block btn-create-quote js-create-quote-button" data-create-quote-url="${createQuoteUrl}">
-                                <spring:theme code="quote.create"/>
-                            </button>
-                        </div>
-                    </c:if>
-
-                    <div class="col-sm-4 col-md-3 pull-right">
-                        <button class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button" data-continue-shopping-url="${continueShoppingUrl}">
-                            <spring:theme code="cart.page.continue"/>
-                        </button>
-                    </div>
-                </div>
+                <cart:cartActions/>
+                <cart:cartHeader/>
             </div>
         </div>
     </div>
 
     <div class="row">
+
         <cart:exportCart/>
 
         <div class="col-sm-12 col-md-4 col-md-push-5">

@@ -2848,3 +2848,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
+
+;text.cart.rdd;Requested Delivery Date
+;text.cart.purchaseOrderNumber;P.O. Number
+;text.cart.customerNotes;Notes
+;checkout.savecart;Save updated cart
+;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"

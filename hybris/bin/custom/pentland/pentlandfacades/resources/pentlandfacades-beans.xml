@@ -40,4 +40,10 @@
 		<value>B2B_system_issue</value>
 	</enum>
 
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="rdd" type="java.util.Date"/>
+		<property name="purchaseOrderNumber" type="String"/>
+		<property name="customerNotes" type="String"/>
+	</bean>
+
 </beans>
