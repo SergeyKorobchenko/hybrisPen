@@ -421,7 +421,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 ; ; Section1Slot-Homepage  ; Section1 Slot for Homepage  ; true ; PentlandHompageBannersCarouselComponent
 ; ; Section2Slot-Homepage  ; Section2 Slot for Homepage  ; true ; PentlandHomPageParagraphComponent
 ; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ; PentlandHomepageStreetYouthBannerComponent,PentlandHomepageWomenStreetBannerComponent,PentlandHomepageManStreetBannerComponent,PentlandHomepageBrandsBannerComponent
-; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ; PentlandHomepageNewProductCarouselComponent,PentlandHomepageProductCarouselComponent
+; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ; PentlandHomepageProductCarouselComponent
 
 ## slot 5: nothing to display ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
@@ -449,7 +449,6 @@ INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[un
 
 ## components in slot 4 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
-; ; PentlandHomepageNewProductCarouselComponent ; What's New Pentland Homepage Product Carousel ; 45572,300046592,300044323,300047199,M27160_B,300020465,300050255                          ; allVisible ; false ; PentlandHomepageNewProductCarouselComponent
 ; ; PentlandHomepageProductCarouselComponent    ; Pentland Homepage Product Carousel            ; 300050257,102277_trench_green,104668_red,111159_white,94374_ink,95430_risque,102278_white ; allVisible ; false ; PentlandHomepageProductCarouselComponent
 
 ## This component is not used currently, but still import for future use ##

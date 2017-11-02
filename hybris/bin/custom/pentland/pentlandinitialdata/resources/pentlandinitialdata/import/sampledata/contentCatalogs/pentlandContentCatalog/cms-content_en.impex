@@ -319,11 +319,11 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 ;widescreen;Appa_350x430_Men_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Men_EN_01_350W.jpg;Appa_350x430_Men_EN_01_350W.jpg;"Men";
 ;widescreen;Appa_350x430_Women_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Women_EN_01_350W.jpg;Appa_350x430_Women_EN_01_350W.jpg;"Women";
 ;widescreen;Appa_350x430_Youth_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Youth_EN_01_350W.jpg;Appa_350x430_Youth_EN_01_350W.jpg;"Youth";
-;desktop;slider-berghaus.jpg   ;$siteResource/images/banners/homepage/responsive/slider-berghaus.jpg;slider-berghaus.jpg;"berghaus";
-;desktop;slider-canterbury.jpg ;$siteResource/images/banners/homepage/responsive/slider-canterbury.jpg;slider-canterbury.jpg;"canterbury";
-;desktop;slider-speedo.jpg     ;$siteResource/images/banners/homepage/responsive/slider-speedo.jpg;slider-speedo.jpg;"speedo";
+;desktop;slider-berghaus.jpg   ;$siteResource/images/banners/homepage/slider-berghaus.jpg;slider-berghaus.jpg;"berghaus";
+;desktop;slider-canterbury.jpg ;$siteResource/images/banners/homepage/slider-canterbury.jpg;slider-canterbury.jpg;"canterbury";
+;desktop;slider-speedo.jpg     ;$siteResource/images/banners/homepage/slider-speedo.jpg;slider-speedo.jpg;"speedo";
 
-INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];
 ;;PentlandHomepageBerghausBannerComponent;slider-berghaus.jpg
 ;;PentlandHomepageCanterburyBannerComponent;slider-canterbury.jpg
 ;;PentlandHomepageSpeedoBannerComponent;slider-speedo.jpg
@@ -342,7 +342,6 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 
 UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
 ;;PentlandHomepageProductCarouselComponent;"Best Selling Products"
-;;PentlandHomepageNewProductCarouselComponent;"What's New"
 
 ###### Mitre page end
 
