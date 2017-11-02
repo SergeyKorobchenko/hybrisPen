@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.facades.order.PentlandOrderFacade;
+import com.bridgex.integration.service.IntegrationService;
 
+import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.order.impl.DefaultOrderFacade;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -17,7 +19,7 @@ import de.hybris.platform.store.BaseStoreModel;
 /**
  * Created by dmitry.konovalov@masterdata.ru on 18.10.2017.
  */
-public class DefaultPentalndOrderFacade extends DefaultOrderFacade implements PentlandOrderFacade {
+public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements PentlandOrderFacade {
 
   PentlandCustomerAccountService pentlandCustomerAccountService;
 
@@ -31,6 +33,12 @@ public class DefaultPentalndOrderFacade extends DefaultOrderFacade implements Pe
     return convertPageData(orderResults, getOrderHistoryConverter());
   }
 
+  @Override
+  public OrderData getOrderDetailsForCode(String code) {
+
+    return super.getOrderDetailsForCode(code);
+  }
+
   protected PentlandCustomerAccountService getPentlandCustomerAccountService() {
     return pentlandCustomerAccountService;
   }
@@ -39,4 +47,5 @@ public class DefaultPentalndOrderFacade extends DefaultOrderFacade implements Pe
   public void setPentlandCustomerAccountService(PentlandCustomerAccountService pentlandCustomerAccountService) {
     this.pentlandCustomerAccountService = pentlandCustomerAccountService;
   }
+
 }

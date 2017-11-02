@@ -12,8 +12,8 @@ public class OrderDetailsDto {
   @JsonProperty("I_SDOC_NUMBER")
   private String orderCode;
 
-  @JsonProperty("I_SERVICE_CUSTOMER")
-  private String serviceCustomer;
+  @JsonProperty("I_SERVICE_CONSUMER")
+  private String serviceConsumer;
 
   @JsonProperty("I_VBTYP")
   private String orderType;
@@ -32,12 +32,12 @@ public class OrderDetailsDto {
     this.orderCode = orderCode;
   }
 
-  public String getServiceCustomer() {
-    return serviceCustomer;
+  public String getServiceConsumer() {
+    return serviceConsumer;
   }
 
-  public void setServiceCustomer(String serviceCustomer) {
-    this.serviceCustomer = serviceCustomer;
+  public void setServiceConsumer(String serviceConsumer) {
+    this.serviceConsumer = serviceConsumer;
   }
 
   public String getOrderType() {

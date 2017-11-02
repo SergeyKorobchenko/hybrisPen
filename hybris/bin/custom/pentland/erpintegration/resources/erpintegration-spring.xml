@@ -39,6 +39,8 @@
 		<property name="client" ref="defaultRESTClient" />
 	</bean>
 
+	<bean id="orderDetailsIntegrationService" class="com.bridgex.integration.service.impl.OrderDetailsIntegrationService" parent="abstractIntegrationService"/>
+
 	<beans profile="prod">
 		<bean id="orderSimulateService" class="com.bridgex.integration.service.impl.OrderSimulateServiceImpl" parent="abstractIntegrationService" />
 	</beans>
