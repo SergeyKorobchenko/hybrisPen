@@ -170,7 +170,7 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
             // For B2B the payment address needs to be set from paymentInfo
             final CartModel sessionCart = cartService.getSessionCart();
             if (sessionCart.getPaymentAddress() == null) {
-                sessionCart.setPaymentAddress(sessionCart.getPaymentInfo().getBillingAddress());
+                sessionCart.setPaymentAddress(sessionCart.getDeliveryAddress());
                 cartService.saveOrder(sessionCart);
             }
         }

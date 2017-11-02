@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +61,12 @@ public class MarkForAddressCheckoutStepController extends AbstractCheckoutStepCo
 	{
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
-		populateCommonModelAttributes(model, cartData, new AddressForm());
+		List<? extends AddressData> markForAddresses = getMarkForAddresses(cartData.getDeliveryAddress());
+		if(CollectionUtils.isEmpty(markForAddresses)){
+			return getCheckoutStep().nextStep();
+		}
+
+		populateCommonModelAttributes(model, cartData, new AddressForm(), markForAddresses);
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.MarkForPage;
 	}
@@ -119,12 +125,12 @@ public class MarkForAddressCheckoutStepController extends AbstractCheckoutStepCo
 		return getCheckoutStep(MARK_FOR);
 	}
 
-	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
-			throws CMSItemNotFoundException
+	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm,
+	                                             final List<? extends AddressData> markFors) throws CMSItemNotFoundException
 	{
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
-		model.addAttribute("deliveryAddresses", getMarkForAddresses(cartData.getDeliveryAddress()));
+		model.addAttribute("deliveryAddresses", markFors);
 		model.addAttribute("noAddress", getCheckoutFlowFacade().hasNoDeliveryAddress());
 		model.addAttribute("addressFormEnabled", getCheckoutFacade().isNewAddressEnabledForCart());
 		model.addAttribute("removeAddressEnabled", getCheckoutFacade().isRemoveAddressEnabledForCart());
