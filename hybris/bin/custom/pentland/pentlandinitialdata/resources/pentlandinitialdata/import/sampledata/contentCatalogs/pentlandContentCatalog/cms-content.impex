@@ -884,20 +884,55 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 ###### Quick Order Page End ######
 
 
-###### Mitre page start ######
+###### Brand pages start ######
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 ;;mitreBrandPage;Mitre Brand Home Page;BrandPageTemplate;/Mitre
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mitreBrandPage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section1-mitreBrandPage;Section1;;Section1Slot-mitreBrandPage
-;;Section2-mitreBrandPage;Section2;;Section2Slot-mitreBrandPage
-;;Section3-mitreBrandPage;Section3;;Section3Slot-mitreBrandPage
+;;speedoBrandPage;Speedo Brand Home Page;BrandPageTemplate;/Speedo
+;;kickersBrandPage;Kickers Brand Home Page;BrandPageTemplate;/Kickers
+;;canterburyBrandPage;Canterbury Brand Home Page;BrandPageTemplate;/Canterbury
+;;boxfreshBrandPage;Boxfresh Brand Home Page;BrandPageTemplate;/Boxfresh
+;;berghausBrandPage;Berghaus Brand Home Page;BrandPageTemplate;/Berghaus
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreBrandPageBannersCarouselComponent
 ;;Section2Slot-mitreBrandPage;Section2 Slot for mitreBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
 ;;Section3Slot-mitreBrandPage;Section3 Slot for mitreBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-speedoBrandPage;Section1 Slot for speedoBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-speedoBrandPage;Section2 Slot for speedoBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-speedoBrandPage;Section3 Slot for speedoBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-kickersBrandPage;Section1 Slot for kickersBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-kickersBrandPage;Section2 Slot for kickersBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-kickersBrandPage;Section3 Slot for kickersBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-canterburyBrandPage;Section1 Slot for canterburyBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-canterburyBrandPage;Section2 Slot for canterburyBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-canterburyBrandPage;Section3 Slot for canterburyBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-boxfreshBrandPage;Section1 Slot for boxfreshBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-boxfreshBrandPage;Section2 Slot for boxfreshBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-boxfreshBrandPage;Section3 Slot for boxfreshBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section1Slot-berghausBrandPage;Section1 Slot for berghausBrandPage;true;MitreBrandPageBannersCarouselComponent
+;;Section2Slot-berghausBrandPage;Section2 Slot for berghausBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section3Slot-berghausBrandPage;Section3 Slot for berghausBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-mitreBrandPage;Section1;mitreBrandPage;Section1Slot-mitreBrandPage
+;;Section2-mitreBrandPage;Section2;mitreBrandPage;Section2Slot-mitreBrandPage
+;;Section3-mitreBrandPage;Section3;mitreBrandPage;Section3Slot-mitreBrandPage
+;;Section1-speedoBrandPage;Section1;speedoBrandPage;Section1Slot-speedoBrandPage
+;;Section2-speedoBrandPage;Section2;speedoBrandPage;Section2Slot-speedoBrandPage
+;;Section3-speedoBrandPage;Section3;speedoBrandPage;Section3Slot-speedoBrandPage
+;;Section1-kickersBrandPage;Section1;kickersBrandPage;Section1Slot-kickersBrandPage
+;;Section2-kickersBrandPage;Section2;kickersBrandPage;Section2Slot-kickersBrandPage
+;;Section3-kickersBrandPage;Section3;kickersBrandPage;Section3Slot-kickersBrandPage
+;;Section1-canterburyBrandPage;Section1;canterburyBrandPage;Section1Slot-canterburyBrandPage
+;;Section2-canterburyBrandPage;Section2;canterburyBrandPage;Section2Slot-canterburyBrandPage
+;;Section3-canterburyBrandPage;Section3;canterburyBrandPage;Section3Slot-canterburyBrandPage
+;;Section1-boxfreshBrandPage;Section1;boxfreshBrandPage;Section1Slot-boxfreshBrandPage
+;;Section2-boxfreshBrandPage;Section2;boxfreshBrandPage;Section2Slot-boxfreshBrandPage
+;;Section3-boxfreshBrandPage;Section3;boxfreshBrandPage;Section3Slot-boxfreshBrandPage
+;;Section1-berghausBrandPage;Section1;berghausBrandPage;Section1Slot-berghausBrandPage
+;;Section2-berghausBrandPage;Section2;berghausBrandPage;Section2Slot-berghausBrandPage
+;;Section3-berghausBrandPage;Section3;berghausBrandPage;Section3Slot-berghausBrandPage
 
 ## components in slot 1 ##
 INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
