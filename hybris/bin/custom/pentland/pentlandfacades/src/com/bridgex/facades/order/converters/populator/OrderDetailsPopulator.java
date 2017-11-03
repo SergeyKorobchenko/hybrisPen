@@ -1,28 +1,36 @@
 package com.bridgex.facades.order.converters.populator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.BiFunction;
+
+import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.facades.order.data.OrderDetailsData;
 import com.bridgex.facades.order.data.OrderItemData;
 import com.bridgex.facades.order.data.ShipmentData;
 import com.bridgex.integration.domain.OrderDetailsResponse;
 import com.bridgex.integration.domain.OrderEntryDto;
-import com.bridgex.integration.domain.ShipmentDto;
 import com.bridgex.integration.domain.SizeVariantDto;
 
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.converters.Populator;
+import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 /**
  * @author Goncharenko Mikhail, created on 02.11.2017.
  */
 public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, OrderDetailsData> {
 
-  Converter<ShipmentDto,ShipmentData> shipmentConverter;
+  private ProductService productService;
+
+  private BiFunction<ShipmentData, ShipmentData, ShipmentData> shipmentDataMerger = (shipment1,shipment2) -> {
+    shipment1.setQty(shipment1.getQty() + shipment2.getQty());
+    return shipment1;
+  };
 
   @Override
   public void populate(OrderDetailsResponse source, OrderDetailsData target) throws ConversionException {
@@ -36,7 +44,47 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     target.setOrderTotal(source.getTotalPrice());
 
     populateItems(source, target);
+    populateAddress(source, target);
+  }
 
+  private void populateItems(OrderDetailsResponse source, OrderDetailsData target) {
+    List<OrderItemData> items = new ArrayList<>();
+
+    for (OrderEntryDto dto : source.getOrderEntries()) {
+      OrderItemData item = new OrderItemData();
+      item.setNumber(dto.getEntryNumber());
+      item.setItemStatus(dto.getEntryStatus());
+      item.setQty(Integer.parseInt(dto.getQuantity()));
+      populateNameAndImage(dto, item);
+      populateShipments(dto, item);
+      items.add(item);
+    }
+
+    target.setOrderItems(items);
+  }
+
+  private void populateShipments(OrderEntryDto dto, OrderItemData item) {
+    Map<Date, ShipmentData> shipments = new HashMap<>();
+    for(SizeVariantDto size : dto.getSizeVariants()) {
+      ShipmentData shipment = new ShipmentData();
+      shipment.setShipmentStatus(size.getShipStatus());
+      shipment.setShipDate(size.getShipDate());
+      shipment.setQty(Integer.parseInt(size.getShipQty()));
+      shipments.merge(size.getShipDate(), shipment, shipmentDataMerger);
+
+    }
+    item.setShipments(shipments);
+  }
+
+  private void populateNameAndImage(OrderEntryDto dto, OrderItemData item) {
+    ProductModel product = productService.getProductForCode(dto.getProduct());
+    item.setName(product.getName());
+    Optional.of(product.getPicture())
+            .map(MediaModel::getURL)
+            .ifPresent(item::setImageUrl);
+  }
+
+  private void populateAddress(OrderDetailsResponse source, OrderDetailsData target) {
     AddressData address = new AddressData();
     address.setCompanyName(source.getDeliveryAddressMarkFor());
 
@@ -45,31 +93,15 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     address.setCountry(country);
 
     address.setPostalCode(source.getDeliveryAddressPostcode());
-    address.setLine1(source.getDeliveryAddressState());
+    address.setState(source.getDeliveryAddressState());
     address.setTown(source.getDeliveryAddressCity());
-    address.setLine2(source.getDeliveryAddressStreet());
+    address.setLine1(source.getDeliveryAddressStreet());
 
     target.setShipTo(address);
-
-
-
   }
 
-  private void populateItems(OrderDetailsResponse source, OrderDetailsData target) {
-    List<OrderItemData> items = new ArrayList<>();
-    for (OrderEntryDto dto : source.getOrderEntries()) {
-      for(SizeVariantDto size : dto.getSizeVariants()) {
-        OrderItemData item = new OrderItemData();
-        item.setImage("url");
-        item.setItemStatus(dto.getEntryStatus());
-        item.setName(dto.getProduct());
-        item.setNumber(dto.getEntryNumber());
-        item.setQty(Integer.parseInt(dto.getQuantity()));
-        item.setShipments(shipmentConverter.convertAll(size.getShipments()));
-        items.add(item);
-      }
-    }
-    target.setOrderItems(items);
-
+  @Required
+  public void setProductService(ProductService productService) {
+    this.productService = productService;
   }
 }
