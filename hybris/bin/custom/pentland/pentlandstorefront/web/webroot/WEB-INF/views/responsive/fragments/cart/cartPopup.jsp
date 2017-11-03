@@ -53,7 +53,7 @@
 												<c:if test="${baseOptionQualifier.qualifier eq 'style' and not empty baseOptionQualifier.image.url}">
 													<div class="itemColor">
 														<span class="label"><spring:theme code="product.variants.colour"/></span>
-														<img src="${baseOptionQualifier.image.url}" alt="${fn:escapeXml(baseOptionQualifier.value)}" title="${fn:escapeXml(baseOptionQualifier.value)}"/>
+														${fn:escapeXml(baseOptionQualifier.value)}
 													</div>
 												</c:if>
 												<c:if test="${baseOptionQualifier.qualifier eq 'size'}">

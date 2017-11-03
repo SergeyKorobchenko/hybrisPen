@@ -273,4 +273,7 @@
 		<property name="pentlandCommerceCheckoutService" ref="pentlandCommerceCheckoutService"/>
 	</bean>
 
+	<alias name="pentlandGroupOrderEntryPopulator" alias="groupOrderEntryPopulator"/>
+	<bean id="pentlandGroupOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandGroupOrderEntryPopulator" parent="defaultGroupOrderEntryPopulator"/>
+
 </beans>
