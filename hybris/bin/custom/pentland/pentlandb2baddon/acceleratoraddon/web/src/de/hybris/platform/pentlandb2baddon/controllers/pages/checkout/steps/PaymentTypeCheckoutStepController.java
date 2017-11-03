@@ -37,10 +37,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,7 +86,7 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 	{
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 		model.addAttribute("cartData", cartData);
-		model.addAttribute("paymentTypeForm", preparePaymentTypeForm(cartData));
+		model.addAttribute("paymentTypeForm", preparePaymentTypeForm(cartData, model));
 		prepareDataForPage(model);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
@@ -155,18 +155,18 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 		return getCheckoutStep().previousStep();
 	}
 
-	protected PaymentTypeForm preparePaymentTypeForm(final CartData cartData)
+	protected PaymentTypeForm preparePaymentTypeForm(final CartData cartData, final Model model)
 	{
+		List<B2BPaymentTypeData> paymentTypes = b2bCheckoutFacade.getPaymentTypes();
 		final PaymentTypeForm paymentTypeForm = new PaymentTypeForm();
 
 		// set payment type
-		if (cartData.getPaymentType() != null && StringUtils.isNotBlank(cartData.getPaymentType().getCode()))
-		{
+		if (cartData.getPaymentType() != null && StringUtils.isNotBlank(cartData.getPaymentType().getCode())) {
 			paymentTypeForm.setPaymentType(cartData.getPaymentType().getCode());
-		}
-		else
-		{
-			paymentTypeForm.setPaymentType(CheckoutPaymentType.ACCOUNT.getCode());
+		}else {
+			if(CollectionUtils.isNotEmpty(paymentTypes)) {
+				paymentTypeForm.setPaymentType(paymentTypes.get(0).getCode());
+			}
 		}
 
 		return paymentTypeForm;

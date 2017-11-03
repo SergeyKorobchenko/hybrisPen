@@ -48,7 +48,6 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
           orderModel.setSalesApplication(parameter.getSalesApplication());
         }
 
-        orderModel.setMarkFor(cartModel.getMarkFor());
 
         getModelService().saveAll(customer, orderModel);
 
