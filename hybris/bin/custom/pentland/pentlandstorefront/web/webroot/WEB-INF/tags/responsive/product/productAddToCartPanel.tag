@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="qty">
+<%--<div class="qty">
 	<c:if test="${product.purchasable}">
 		<label for="qtyInput">
 			<spring:theme code="basket.page.quantity"/>
@@ -39,7 +39,7 @@
 	
 	<product:productFutureAvailability product="${product}" futureStockEnabled="${futureStockEnabled}" />
 	
-</div>
+</div>--%>
 
 
 

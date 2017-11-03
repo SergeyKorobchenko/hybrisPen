@@ -7,7 +7,7 @@
 		-->
 
 		<path dir="${HYBRIS_BIN_DIR}" autoload="false" />
-		<path dir="${HYBRIS_BIN_DIR}/ext-integration/sap" autoload="false" />
+<!--		<path dir="${HYBRIS_BIN_DIR}/ext-integration/sap" autoload="false" />-->
 
 		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpay" />
 		<path autoload="true" dir="${HYBRIS_BIN_DIR}/custom/worldpay/ext-worldpayfulfilment" />
@@ -28,7 +28,7 @@
 		<extension name="erpintegration" />
 
 		<!--SAP exts-->
-		<extension name="sapcore" />
+		<!-- <extension name="sapcore" />
 		<extension name="sapcoreaddon" />
 		<extension name="sapcorebol" />
 		<extension name="sapcoreconfiguration" />
@@ -41,7 +41,7 @@
 		<extension name="sapinvoicebol" />
 		<extension name="sapinvoiceservices" />
 		<extension name="sapinvoicefacades" />
-		<extension name="sapcoretest" />
+		<extension name="sapcoretest" /> -->
 
 
 		<!--<extension name="powertoolsstore" />-->

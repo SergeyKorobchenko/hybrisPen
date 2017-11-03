@@ -129,6 +129,9 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; FooterCol3NavNode ; ; Footer Column Three; FooterNavNode ; ; FooterCol3NavNode
 ; FooterCol4NavNode ; ; Footer Column Four ; FooterNavNode ; ; FooterCol4NavNode
 
+# to define columns order
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; children(uid, $contentCV)
+; FooterNavNode     ; ; FooterCol1NavNode,FooterCol2NavNode,FooterCol3NavNode,FooterCol4NavNode
 
 ##----- level 5. children of FooterCol1NavNode -----##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
@@ -249,14 +252,10 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 # CMS tabs components
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ; ; ProductDetailsTabComponent ; Product Details Tab       ; /WEB-INF/views/responsive/pages/product/productDetailsTab.jsp ; ; ProductDetailsTabComponent
-; ; ProductSpecsTabComponent   ; Product Specification Tab ; /WEB-INF/views/responsive/pages/product/productSpecsTab.jsp   ; ; ProductSpecsTabComponent
-; ; ProductReviewsTabComponent ; Product Reviews Tab       ; /WEB-INF/views/responsive/pages/product/productReviewsTab.jsp ; ; ProductReviewsTabComponent
-
-INSERT_UPDATE CMSTabParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; visible; &componentRef
-; ; deliveryTab ; Delivery tab ; true ; deliveryTab
+#; ; ProductSizeChartTabComponent ; Product Size Chart Tab       ; /WEB-INF/views/responsive/pages/product/productDetailsTab.jsp ; ; ProductDetailsTabComponent
 
 INSERT_UPDATE CMSTabParagraphContainer; $contentCV[unique = true]; uid[unique = true]; name; visible; simpleCMSComponents(uid, $contentCV); &componentRef
-; ; TabPanelContainer ; Tab container ; true ; ProductDetailsTabComponent,ProductSpecsTabComponent,ProductReviewsTabComponent,deliveryTab ; TabPanelContainer
+; ; TabPanelContainer ; Tab container ; true ; ProductDetailsTabComponent ; TabPanelContainer
 
 
 ## footer slot ##
@@ -293,16 +292,16 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; AddToCartSlot ; AddToCart
 
 INSERT_UPDATE ProductAddToCartComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(&actionRef); &componentRef
-; ; AddToCart ; Product Add To Cart ; AddToCartAction,PickUpInStoreAction,ShareOnSocialNetworkAction ; AddToCart
+; ; AddToCart ; Product Add To Cart ; AddToCartAction ; AddToCart
 
 INSERT_UPDATE AddToCartAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
 ; ; AddToCartAction ; /cart/add ; Product Add To Cart Action ; ActionRestriction ; AddToCartAction
 
-INSERT_UPDATE PickUpInStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
-; ; PickUpInStoreAction ; /store-pickup/{productCode}/pointOfServices ; Pickup in Store Action ; ActionRestriction ; PickUpInStoreAction
+#INSERT_UPDATE PickUpInStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+#; ; PickUpInStoreAction ; /store-pickup/{productCode}/pointOfServices ; Pickup in Store Action ; ActionRestriction ; PickUpInStoreAction
 
-INSERT_UPDATE ShareOnSocialNetworkAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
-; ; ShareOnSocialNetworkAction ; / ; Share On Social Network Action ; ActionRestriction ; ShareOnSocialNetworkAction
+#INSERT_UPDATE ShareOnSocialNetworkAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+#; ; ShareOnSocialNetworkAction ; / ; Share On Social Network Action ; ActionRestriction ; ShareOnSocialNetworkAction
 
 ## upselling slot ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
@@ -445,8 +444,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[un
 
 ## components in slot 3 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
-; ; PentlandHomepageNewProductCarouselComponent ; What's New Pentland Homepage Product Carousel ; 45572,300046592,300044323,300047199,M27160_B,300020465,300050255                          ; allVisible ; false ; PentlandHomepageNewProductCarouselComponent
-; ; PentlandHomepageProductCarouselComponent    ; Pentland Homepage Product Carousel            ; 300050257,102277_trench_green,104668_red,111159_white,94374_ink,95430_risque,102278_white ; allVisible ; false ; PentlandHomepageProductCarouselComponent
+; ; PentlandHomepageProductCarouselComponent    ; Pentland Homepage Product Carousel            ; 300050257,300453365,300466682,300689176,300398347,300412221,300453397,300453379 ; allVisible ; false ; PentlandHomepageProductCarouselComponent
 
 ## This component is not used currently, but still import for future use ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; searchQuery; categoryCode; &componentRef
