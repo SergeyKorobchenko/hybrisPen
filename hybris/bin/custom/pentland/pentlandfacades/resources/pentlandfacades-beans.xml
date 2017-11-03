@@ -61,13 +61,17 @@
 		<property name="name" type="String"/>
 		<property name="qty" type="Integer"/>
 		<property name="itemStatus" type="String"/>
-		<property name="shipments" type="java.util.List&lt;com.bridgex.facades.order.data.ShipmentData>"/>
+		<property name="shipments" type="java.util.Map&lt;java.util.Date,com.bridgex.facades.order.data.ShipmentData>"/>
 	</bean>
 	
 	<bean class="com.bridgex.facades.order.data.ShipmentData">
 		<property name="shipDate" type="java.util.Date"/>
 		<property name="qty" type="Integer"/>
 		<property name="shipmentStatus" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="state" type="String"/>
 	</bean>
 
 </beans>
