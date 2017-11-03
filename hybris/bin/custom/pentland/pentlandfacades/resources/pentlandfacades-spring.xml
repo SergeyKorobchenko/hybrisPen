@@ -276,4 +276,7 @@
 	<alias name="pentlandGroupOrderEntryPopulator" alias="groupOrderEntryPopulator"/>
 	<bean id="pentlandGroupOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandGroupOrderEntryPopulator" parent="defaultGroupOrderEntryPopulator"/>
 
+	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
+	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
+
 </beans>
