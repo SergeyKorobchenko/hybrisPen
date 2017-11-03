@@ -44,7 +44,8 @@ public class OrderDetailsFacade {
     this.storeSessionFacade = storeSessionFacade;
   }
 
-  public OrderData requestOrderDetails(String orderCode) {
+
+  public OrderData getOrderDetails(String orderCode) {
     OrderDetailsResponse response = orderDetailsService.requestOrderDetails(createRequestDto(orderCode));
     return orderDetailsConverter.convert(response);
   }

@@ -33,6 +33,7 @@
 	<alias name="pentlandOrderFacade" alias="orderFacade"/>
 	<bean id="pentlandOrderFacade" class="com.bridgex.facades.order.impl.DefaultPentlandOrderFacade" parent="defaultOrderFacade">
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
+		<property name="orderDetailsFacade" ref="orderDetailsFacade"/>
 	</bean>
 
 	<bean id="orderDetailsFacade" class="com.bridgex.facades.integration.OrderDetailsFacade">
@@ -48,6 +49,10 @@
 				<ref bean="orderDetailsPopulator"/>
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="orderDetailsPopulator" class="com.bridgex.facades.order.converters.populator.OrderDetailsPopulator">
+		<property name="productService" ref="productService"/>
 	</bean>
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">

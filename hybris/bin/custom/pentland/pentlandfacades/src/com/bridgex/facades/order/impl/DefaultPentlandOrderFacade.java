@@ -3,8 +3,8 @@ package com.bridgex.facades.order.impl;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
+import com.bridgex.facades.integration.OrderDetailsFacade;
 import com.bridgex.facades.order.PentlandOrderFacade;
-import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
@@ -21,7 +21,9 @@ import de.hybris.platform.store.BaseStoreModel;
  */
 public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements PentlandOrderFacade {
 
-  PentlandCustomerAccountService pentlandCustomerAccountService;
+  private PentlandCustomerAccountService pentlandCustomerAccountService;
+
+  private OrderDetailsFacade orderDetailsFacade;
 
   @Override
   public SearchPageData<OrderHistoryData> getPagedB2BOrderHistoryForStatuses(final PageableData pageableData, final OrderStatus... statuses)
@@ -35,8 +37,7 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
 
   @Override
   public OrderData getOrderDetailsForCode(String code) {
-
-    return super.getOrderDetailsForCode(code);
+    return orderDetailsFacade.getOrderDetails(code);
   }
 
   protected PentlandCustomerAccountService getPentlandCustomerAccountService() {
@@ -48,4 +49,12 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
     this.pentlandCustomerAccountService = pentlandCustomerAccountService;
   }
 
+  public OrderDetailsFacade getOrderDetailsFacade() {
+    return orderDetailsFacade;
+  }
+
+  @Required
+  public void setOrderDetailsFacade(OrderDetailsFacade orderDetailsFacade) {
+    this.orderDetailsFacade = orderDetailsFacade;
+  }
 }

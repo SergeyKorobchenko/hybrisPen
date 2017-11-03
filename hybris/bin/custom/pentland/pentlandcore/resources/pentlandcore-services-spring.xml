@@ -70,4 +70,9 @@
 	<bean name="pentlandCommercePriceService" class="com.bridgex.core.price.impl.PentlandDefaultCommercePriceService" parent="defaultCommercePriceService">
 		<property name="pentlandPriceDao" ref="pentlandPriceDao"/>
 	</bean>
+
+	<bean id="orderDetailsService" class="com.bridgex.core.integration.OrderDetailsService">
+		<property name="integrationService" ref="orderDetailsIntegrationService"/>
+	</bean>
+
 </beans>
