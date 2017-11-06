@@ -378,6 +378,10 @@
                         <persistence type="property" />
                         <description>Attribute is used in batch import process for avoiding multiple imports.</description>
                     </attribute>
+                    <attribute qualifier="markFor" type="Address">
+                        <description>Mark For Address</description>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
         </typegroup>

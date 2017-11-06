@@ -58,24 +58,24 @@
             <map merge="true">
                 <entry key="previous" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
                 <entry key="current" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
-                <entry key="next" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+                <entry key="next" value-ref="REDIRECT_TO_MARKFOR_ADDRESS"/>
             </map>
         </property>
         <property name="progressBarId" value="deliveryAddress.noPickup"/>
     </bean>
 
-    <alias name="defaultWorldpayB2BDeliveryMethodCheckoutStep" alias="worldpayB2BDeliveryMethodCheckoutStep" />
-    <bean id="defaultWorldpayB2BDeliveryMethodCheckoutStep"  parent="checkoutStep">
+    <alias name="defaultWorldpayB2BMarkForAddressCheckoutStep" alias="worldpayB2BMarkForAddressCheckoutStep" />
+    <bean id="defaultWorldpayB2BMarkForAddressCheckoutStep"  parent="checkoutStep">
         <property name="checkoutGroup" ref="worldpayB2BCheckoutGroup"/>
-        <property name="checkoutStepValidator" ref="deliveryMethodCheckoutValidator"/>
+        <property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/>
         <property name="transitions">
             <map merge="true">
                 <entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
-                <entry key="current" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+                <entry key="current" value-ref="REDIRECT_TO_MARKFOR_ADDRESS"/>
                 <entry key="next" value-ref="REDIRECT_TO_CHOOSE_PAYMENT_METHOD"/>
             </map>
         </property>
-        <property name="progressBarId" value="deliveryMethod"/>
+        <property name="progressBarId" value="deliveryAddress.markFor"/>
     </bean>
 
     <alias name="defaultWorldpayB2BPickupLocationCheckoutStep" alias="worldpayB2BPickupLocationCheckoutStep" />
@@ -84,7 +84,7 @@
         <property name="checkoutStepValidator" ref="defaultPickupCheckoutValidator"/>
         <property name="transitions">
             <map merge="true">
-                <entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+                <entry key="previous" value-ref="REDIRECT_TO_MARKFOR_ADDRESS"/>
                 <entry key="current" value-ref="REDIRECT_TO_PICKUP_LOCATION"/>
                 <entry key="next" value-ref="REDIRECT_TO_CHOOSE_PAYMENT_METHOD"/>
             </map>
@@ -98,7 +98,7 @@
         <property name="checkoutStepValidator" ref="defaultPaymentMethodCheckoutValidator"/>
         <property name="transitions">
             <map merge="true">
-                <entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+                <entry key="previous" value-ref="REDIRECT_TO_MARKFOR_ADDRESS"/>
                 <entry key="current" value-ref="REDIRECT_TO_CHOOSE_PAYMENT_METHOD"/>
                 <entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
             </map>
@@ -147,7 +147,7 @@
                 <entry key="multi" value-ref="worldpayB2BMultiStepCheckout"/>
                 <entry key="payment-type" value-ref="worldpayB2BPaymentTypeCheckoutStep"/>
                 <entry key="delivery-address" value-ref="worldpayB2BDeliveryAddressCheckoutStep"/>
-                <entry key="delivery-method" value-ref="worldpayB2BDeliveryMethodCheckoutStep"/>
+                <entry key="mark-for" value-ref="worldpayB2BMarkForAddressCheckoutStep"/>
                 <entry key="pickup-location" value-ref="worldpayB2BPickupLocationCheckoutStep"/>
                 <entry key="choose-payment-method" value-ref="worldpayB2BChoosePaymentCheckoutStep"/>
                 <entry key="payment-method" value-ref="worldpayB2BPaymentMethodCheckoutStep"/>
@@ -162,7 +162,7 @@
                 <entry key="REDIRECT_TO_PICKUP_LOCATION" value-ref="REDIRECT_TO_PICKUP_LOCATION"/>
                 <entry key="REDIRECT_TO_CART" value-ref="REDIRECT_TO_CART"/>
                 <entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_CHOOSE_PAYMENT_METHOD"/>
-                <entry key="REDIRECT_TO_DELIVERY_METHOD" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+                <entry key="REDIRECT_TO_MARKFOR_ADDRESS" value-ref="REDIRECT_TO_MARKFOR_ADDRESS"/>
                 <entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY"/>
             </map>
         </property>
@@ -170,7 +170,7 @@
             <map merge="true">
                 <entry key="1" value-ref="worldpayB2BPaymentTypeCheckoutStep"/>
                 <entry key="2" value-ref="worldpayB2BDeliveryAddressCheckoutStep"/>
-                <entry key="3" value-ref="worldpayB2BDeliveryMethodCheckoutStep"/>
+                <entry key="3" value-ref="worldpayB2BMarkForAddressCheckoutStep"/>
                 <entry key="4" value-ref="worldpayB2BChoosePaymentCheckoutStep"/>
                 <entry key="5" value-ref="worldpayB2BSummaryCheckoutStep"/>
             </map>
@@ -187,4 +187,9 @@
     <alias alias="b2bCheckoutFlowStrategy" name="b2bMultiStepCheckoutFlowStrategy"/>
 
     <alias name="b2bMultiStepCheckoutFlowFacade" alias="checkoutFlowFacade"/>
+
+    <bean id="REDIRECT_TO_MARKFOR_ADDRESS" class="java.lang.String">
+        <constructor-arg value="redirect:/checkout/multi/mark-for/choose"/>
+    </bean>
+
 </beans>

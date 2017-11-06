@@ -234,10 +234,6 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
             return false;
         }
 
-        if (getCheckoutFlowFacade().hasNoDeliveryMode()) {
-            addErrorMessage(model, "checkout.deliveryMethod.notSelected");
-            return false;
-        }
 
         if (getCheckoutFlowFacade().hasNoPaymentInfo()) {
             addErrorMessage(model, "checkout.paymentMethod.notSelected");
@@ -249,11 +245,11 @@ public class WorldpaySummaryCheckoutStepController extends AbstractWorldpayDirec
             return false;
         }
 
-        if (!cartData.isCalculated()) {
-            LOGGER.error(format("Cart {0} has a calculated flag of FALSE, placement of order can't continue", cartData.getCode()));
-            addErrorMessage(model, "checkout.error.cart.notcalculated");
-            return false;
-        }
+//        if (!cartData.isCalculated()) {
+//            LOGGER.error(format("Cart {0} has a calculated flag of FALSE, placement of order can't continue", cartData.getCode()));
+//            addErrorMessage(model, "checkout.error.cart.notcalculated");
+//            return false;
+//        }
         return true;
     }
 

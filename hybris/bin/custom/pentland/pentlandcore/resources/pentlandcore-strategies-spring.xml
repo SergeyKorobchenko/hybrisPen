@@ -48,4 +48,19 @@
 		</entry>
 	</util:map>
 
+	<alias name="pentlandB2BDeliveryAddressesLookupStrategy" alias="b2bDeliveryAddressesLookupStrategy"/>
+	<bean id="pentlandB2BDeliveryAddressesLookupStrategy" class="com.bridgex.core.strategies.impl.PentlandB2BDeliveryAddressesLookupStrategy"
+	      parent="defaultB2BDeliveryAddressesLookupStrategy">
+		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
+	</bean>
+
+	<alias name="defaultMarkForAddressStrategy" alias="markForAddressStrategy"/>
+	<bean id="defaultMarkForAddressStrategy" class="com.bridgex.core.order.impl.DefaultMarkForAddressStrategy">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<alias name="pentlandCommercePlaceOrderStrategy" alias="b2bCommercePlaceOrderStrategy"/>
+	<alias name="pentlandCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
+	<bean id="pentlandCommercePlaceOrderStrategy" class="com.bridgex.core.order.impl.PentlandCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy"/>
+
 </beans>

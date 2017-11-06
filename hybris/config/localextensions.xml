@@ -75,6 +75,7 @@
 		<extension name="acceleratorstorefrontcommons" />
 		<extension name="cscockpit" />
 		<extension name="productcockpit" />
+		<extension name="pcmbackoffice" />
 
 		<extension name="hmc" />
 		<extension name="platformhmc" />
