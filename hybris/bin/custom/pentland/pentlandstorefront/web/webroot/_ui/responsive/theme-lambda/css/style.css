@@ -18558,11 +18558,6 @@ select[multiple].input-sm {
     padding-right: 0;
   }
 }
-.account-section .invoiceTopBackBtn {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-}
 .replenishment-cancel-button span {
   color: #0068b3;
   font-size: 21px;

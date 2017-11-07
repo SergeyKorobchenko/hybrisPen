@@ -18,7 +18,7 @@
 		<requires-extension name="worldpaynotifications"/>
 		<requires-extension name="secureportaladdon"/>
 		<requires-extension name="pentlandb2baddon"/>
-		<requires-extension name="sapinvoiceaddon"/>
+	<!--	<requires-extension name="sapinvoiceaddon"/>-->
 		<requires-extension name="commerceorgaddon"/>
 		<requires-extension name="accountsummaryaddon"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
