@@ -1,14 +1,15 @@
 package com.bridgex.core.services.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.PredicateUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
+import com.bridgex.core.address.dao.PentlandAddressDao;
 import com.bridgex.core.constants.PentlandcoreConstants;
 import com.bridgex.core.services.PentlandB2BUnitService;
 
@@ -18,6 +19,7 @@ import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.b2b.services.impl.DefaultB2BUnitService;
 import de.hybris.platform.core.model.enumeration.EnumerationValueModel;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
+import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.europe1.constants.Europe1Constants;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
@@ -28,6 +30,8 @@ import de.hybris.platform.servicelayer.session.SessionExecutionBody;
  * Created by Lenar on 10/13/2017.
  */
 public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService implements PentlandB2BUnitService {
+
+  private PentlandAddressDao addressDao;
 
   @Override
   public void updateBranchInSession(final Session session, final UserModel currentUser)
@@ -103,4 +107,23 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
     throw new ModelNotFoundException("No B2BUnit with sapID " + sapID + " found");
   }
 
+  @Override
+  public List<AddressModel> findDeliveryAddressesForUnits(B2BUnitModel b2bUnit) {
+    List<AddressModel> deliveryAddresses = new ArrayList<>();
+    if(StringUtils.isNotEmpty(b2bUnit.getSapID())){
+      deliveryAddresses.addAll(addressDao.findDeliveryAddressesForSapId(b2bUnit));
+    }
+    return deliveryAddresses;
+  }
+
+  @Override
+  public Collection<B2BUnitModel> getFirstLevelParents(B2BCustomerModel employee) {
+
+    return CollectionUtils.select(employee.getGroups(), PredicateUtils.instanceofPredicate(B2BUnitModel.class));
+  }
+
+  @Required
+  public void setAddressDao(PentlandAddressDao addressDao) {
+    this.addressDao = addressDao;
+  }
 }

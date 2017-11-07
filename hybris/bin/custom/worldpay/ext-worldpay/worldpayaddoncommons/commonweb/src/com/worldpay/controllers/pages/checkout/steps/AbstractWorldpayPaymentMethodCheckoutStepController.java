@@ -140,7 +140,7 @@ public abstract class AbstractWorldpayPaymentMethodCheckoutStepController extend
 
     private void populateAdditionalAuthInfo(final Boolean savePaymentInfo, final String paymentMethod, final AdditionalAuthInfo additionalAuthInfo) {
         additionalAuthInfo.setPaymentMethod(paymentMethod);
-        additionalAuthInfo.setUsingShippingAsBilling(!getWorldpayPaymentCheckoutFacade().hasBillingDetails());
+        additionalAuthInfo.setUsingShippingAsBilling(true);
         additionalAuthInfo.setSaveCard(savePaymentInfo);
     }
 

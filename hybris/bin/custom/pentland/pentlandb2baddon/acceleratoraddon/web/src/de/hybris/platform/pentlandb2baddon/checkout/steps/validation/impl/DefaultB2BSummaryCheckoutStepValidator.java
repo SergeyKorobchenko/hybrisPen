@@ -35,26 +35,12 @@ public class DefaultB2BSummaryCheckoutStepValidator extends AbstractB2BCheckoutS
 			return ValidationResults.REDIRECT_TO_PAYMENT_TYPE;
 		}
 
-		if (CheckoutPaymentType.ACCOUNT.getCode().equals(checkoutPaymentType.getCode())
-				&& checkoutCart.getCostCenter() == null)
-		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
-					"checkout.multi.costCenter.notprovided");
-			return ValidationResults.REDIRECT_TO_PAYMENT_TYPE;
-		}
 
 		if (getCheckoutFlowFacade().hasNoDeliveryAddress())
 		{
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
 					"checkout.multi.deliveryAddress.notprovided");
 			return ValidationResults.REDIRECT_TO_DELIVERY_ADDRESS;
-		}
-
-		if (getCheckoutFlowFacade().hasNoDeliveryMode())
-		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
-					"checkout.multi.deliveryMethod.notprovided");
-			return ValidationResults.REDIRECT_TO_DELIVERY_METHOD;
 		}
 
 		if (getCheckoutFlowFacade().hasNoPaymentInfo())

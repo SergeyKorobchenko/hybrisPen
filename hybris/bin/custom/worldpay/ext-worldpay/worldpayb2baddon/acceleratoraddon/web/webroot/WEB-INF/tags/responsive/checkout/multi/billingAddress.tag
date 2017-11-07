@@ -7,27 +7,27 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:if test="${cartData.deliveryItemsQuantity > 0}">
-    <div class="checkbox">
-        <label for="wpUseDeliveryAddress">
-            <form:checkbox id="wpUseDeliveryAddress" path="useDeliveryAddress"
-                           data-firstname="${fn:escapeXml(deliveryAddress.firstName)}"
-                           data-lastname="${fn:escapeXml(deliveryAddress.lastName)}"
-                           data-line1="${fn:escapeXml(deliveryAddress.line1)}"
-                           data-line2="${fn:escapeXml(deliveryAddress.line2)}"
-                           data-town="${fn:escapeXml(deliveryAddress.town)}"
-                           data-postalcode="${fn:escapeXml(deliveryAddress.postalCode)}"
-                           data-countryisocode="${fn:escapeXml(deliveryAddress.country.isocode)}"
-                           data-regionisocode="${fn:escapeXml(deliveryAddress.region.isocode)}"
-                           data-address-id="${fn:escapeXml(deliveryAddress.id)}"
-                           data-phone="${fn:escapeXml(deliveryAddress.phone)}"
-                           inputCSS="add-address-left-input"
-                           labelCSS="add-address-left-label"/>
+<%--<c:if test="${cartData.deliveryItemsQuantity > 0}">--%>
+    <%--<div class="checkbox">--%>
+        <%--<label for="wpUseDeliveryAddress">--%>
+            <%--<form:checkbox id="wpUseDeliveryAddress" path="useDeliveryAddress"--%>
+                           <%--data-firstname="${fn:escapeXml(deliveryAddress.firstName)}"--%>
+                           <%--data-lastname="${fn:escapeXml(deliveryAddress.lastName)}"--%>
+                           <%--data-line1="${fn:escapeXml(deliveryAddress.line1)}"--%>
+                           <%--data-line2="${fn:escapeXml(deliveryAddress.line2)}"--%>
+                           <%--data-town="${fn:escapeXml(deliveryAddress.town)}"--%>
+                           <%--data-postalcode="${fn:escapeXml(deliveryAddress.postalCode)}"--%>
+                           <%--data-countryisocode="${fn:escapeXml(deliveryAddress.country.isocode)}"--%>
+                           <%--data-regionisocode="${fn:escapeXml(deliveryAddress.region.isocode)}"--%>
+                           <%--data-address-id="${fn:escapeXml(deliveryAddress.id)}"--%>
+                           <%--data-phone="${fn:escapeXml(deliveryAddress.phone)}"--%>
+                           <%--inputCSS="add-address-left-input"--%>
+                           <%--labelCSS="add-address-left-label"/>--%>
 
-            <spring:theme code="checkout.multi.sop.useMyDeliveryAddress"/>
-        </label>
-    </div>
-</c:if>
+            <%--<spring:theme code="checkout.multi.sop.useMyDeliveryAddress"/>--%>
+        <%--</label>--%>
+    <%--</div>--%>
+<%--</c:if>--%>
 
-<wp-address:billAddressFormSelector supportedCountries="${countries}" regions="${regions}"/>
+<%--<wp-address:billAddressFormSelector supportedCountries="${countries}" regions="${regions}"/>--%>
 

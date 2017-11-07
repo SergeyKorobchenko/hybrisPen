@@ -32,9 +32,9 @@ public class PentlandCartForm {
 
   public PentlandCartForm(CartData cartData) {
     List<OrderEntryData> entries = cartData.getEntries();
-    if (CollectionUtils.isNotEmpty(entries)) {
-      entries.stream().forEach(e -> quantities.add(e.getEntryNumber(), e.getQuantity()));
-    }
+//    if (CollectionUtils.isNotEmpty(entries)) {
+//      entries.stream().forEach(e -> quantities.add(e.getEntryNumber(), e.getQuantity()));
+//    }
     purchaseOrderNumber = cartData.getPurchaseOrderNumber();
     requestedDeliveryDate = cartData.getRdd();
     customerNotes = cartData.getCustomerNotes();

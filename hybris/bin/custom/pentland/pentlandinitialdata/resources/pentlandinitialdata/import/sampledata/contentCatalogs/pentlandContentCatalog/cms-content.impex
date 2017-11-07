@@ -1161,7 +1161,7 @@ INSERT_UPDATE WorldpayAPMComponent; uid[unique = true]; $contentCV[unique = true
 
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
-; ; WorldpayPaymentButtonsSlot ;creditCardComponent,payPalComponent
+; ; WorldpayPaymentButtonsSlot ;creditCardComponent
 #,boletoComponent,postepayComponent,poliComponent,polinzComponent,mistercashComponent,nordeaComponent,idealComponent,klarnaComponent
 
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];

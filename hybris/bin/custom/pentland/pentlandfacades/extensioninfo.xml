@@ -16,6 +16,7 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorfacades"/>
 		<requires-extension name="pentlandcore"/>
+		<requires-extension name="b2bacceleratorfacades"/>
 
 		<coremodule generated="true" manager="de.hybris.platform.jalo.extension.GenericManager" packageroot="com.bridgex.facades"/>
 		

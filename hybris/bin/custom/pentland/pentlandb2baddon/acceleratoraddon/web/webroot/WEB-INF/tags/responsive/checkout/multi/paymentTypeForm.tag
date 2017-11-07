@@ -7,16 +7,21 @@
     <div class="step-body-form">
         <div class="radiobuttons_paymentselection">
             <c:forEach items="${paymentTypes}" var="paymentType">
-                <form:radiobutton path="paymentType" id="PaymentTypeSelection_${paymentType.code}" value="${paymentType.code}" label="${paymentType.displayName}" />
+                <c:if test="${not empty user.unit and not empty user.unit.customerType}">
+                    <spring:theme var="paymentTypeLabel" code="checkout.payment.${paymentType.code}.${user.unit.customerType}"/>
+                </c:if>
+
+                <form:radiobutton path="paymentType" id="PaymentTypeSelection_${paymentType.code}" value="${paymentType.code}"
+                                  label="${not empty paymentTypeLabel ? paymentTypeLabel : paymentType.displayName}" />
                 <br>
             </c:forEach>
         </div>
 
-        <formElement:formInputBox idKey="PurchaseOrderNumber" labelKey="checkout.multi.purchaseOrderNumber.label" path="purchaseOrderNumber" inputCSS="text" />
+        <%--<formElement:formInputBox idKey="PurchaseOrderNumber" labelKey="checkout.multi.purchaseOrderNumber.label" path="purchaseOrderNumber" inputCSS="text" />--%>
 
-        <div id="costCenter">
-            <formElement:formSelectBox idKey="costCenterSelect" labelKey="checkout.multi.costCenter.label" path="costCenterId" skipBlank="false" skipBlankMessageKey="checkout.multi.costCenter.title.pleaseSelect" itemValue="code" itemLabel="name" items="${costCenters}" mandatory="true" selectCSSClass="form-control"/>
-        </div>
+        <%--<div id="costCenter">--%>
+            <%--<formElement:formSelectBox idKey="costCenterSelect" labelKey="checkout.multi.costCenter.label" path="costCenterId" skipBlank="false" skipBlankMessageKey="checkout.multi.costCenter.title.pleaseSelect" itemValue="code" itemLabel="name" items="${costCenters}" mandatory="true" selectCSSClass="form-control"/>--%>
+        <%--</div>--%>
     </div>
 
 	<button id="choosePaymentType_continue_button" type="submit" class="btn btn-primary btn-block checkout-next">

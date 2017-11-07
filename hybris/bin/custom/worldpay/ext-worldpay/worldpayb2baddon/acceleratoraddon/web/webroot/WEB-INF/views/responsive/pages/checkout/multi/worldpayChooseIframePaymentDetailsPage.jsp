@@ -90,15 +90,6 @@
                                                 <wp-multi-checkout:paymentButtons/>
                                                 <wp-multi-checkout:bankSelect/>
 
-                                                <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-                                                    <div class="save_payment_details checkbox">
-                                                        <label for="SaveDetails">
-                                                            <form:checkbox id="SaveDetails" path="saveInAccount" tabindex="19"/>
-                                                            <spring:theme code="checkout.multi.paymentMethod.addPaymentDetails.savePaymentDetailsInAccount"/>
-                                                        </label>
-                                                    </div>
-                                                </sec:authorize>
-
                                                 <wp-multi-checkout:billingAddress/>
                                                 <div class="form-additionals">
                                                 </div>

@@ -29,15 +29,6 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 	@Override
 	public ValidationResults validateOnExit()
 	{
-		final B2BPaymentTypeData checkoutPaymentType = getCheckoutFacade().getCheckoutCart().getPaymentType();
-
-		if (checkoutPaymentType != null
-				&& CheckoutPaymentType.ACCOUNT.getCode().equals(checkoutPaymentType.getCode())
-				&& !getCheckoutFlowFacade().hasNoDeliveryAddress())
-		{
-			return ValidationResults.REDIRECT_TO_DELIVERY_METHOD;
-		}
-
 		return ValidationResults.SUCCESS;
 	}
 }
