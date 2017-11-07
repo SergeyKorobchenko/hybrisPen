@@ -290,6 +290,11 @@
                         <modifiers read="true" write="true" optional="true"/>
                         <description>SAP Address ID</description>
                     </attribute>
+                    <attribute qualifier="sapCustomerID" type="java.lang.String" >
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true" />
+                        <description>SAP Customer ID</description>
+                    </attribute>
                     <attribute qualifier="markForAddress" type="java.lang.Boolean">
                         <persistence type="property" />
                         <modifiers read="true" write="true" optional="false"/>
@@ -310,6 +315,15 @@
                         <persistence type="property"/>
                     </attribute>
                 </attributes>
+                <indexes>
+                    <index name="idxCustomerID">
+                        <key attribute="sapCustomerID"/>
+                    </index>
+                    <index name="idxAddressUnq" unique="true">
+                        <key attribute="addressID"/>
+                        <key attribute="sapCustomerID"/>
+                    </index>
+                </indexes>
             </itemtype>
 
             <itemtype code="Division" autocreate="true" generate="true">

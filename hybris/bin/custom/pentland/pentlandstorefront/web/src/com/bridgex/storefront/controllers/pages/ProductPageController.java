@@ -139,7 +139,6 @@ public class ProductPageController extends AbstractPageController
 
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
-		model.addAttribute(new ReviewForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
 
@@ -213,73 +212,6 @@ public class ProductPageController extends AbstractPageController
 		return ControllerConstants.Views.Fragments.Product.QuickViewPopup;
 	}
 
-	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/review", method =
-	{ RequestMethod.GET, RequestMethod.POST })
-	public String postReview(@PathVariable final String productCode, final ReviewForm form, final BindingResult result,
-			final Model model, final HttpServletRequest request, final RedirectAttributes redirectAttrs)
-			throws CMSItemNotFoundException
-	{
-		getReviewValidator().validate(form, result);
-
-		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
-		if (result.hasErrors())
-		{
-			updatePageTitle(productCode, model);
-			GlobalMessages.addErrorMessage(model, "review.general.error");
-			model.addAttribute("showReviewForm", Boolean.TRUE);
-			populateProductDetailForDisplay(productCode, model, request, Collections.emptyList());
-			storeCmsPageInModel(model, getPageForProduct(productCode));
-			return getViewForPage(model);
-		}
-
-		final ReviewData review = new ReviewData();
-		review.setHeadline(XSSFilterUtil.filter(form.getHeadline()));
-		review.setComment(XSSFilterUtil.filter(form.getComment()));
-		review.setRating(form.getRating());
-		review.setAlias(XSSFilterUtil.filter(form.getAlias()));
-		productFacade.postReview(productCode, review);
-		GlobalMessages.addFlashMessage(redirectAttrs, GlobalMessages.CONF_MESSAGES_HOLDER, "review.confirmation.thank.you.title");
-
-		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
-	}
-
-	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/reviewhtml/"
-			+ REVIEWS_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
-	public String reviewHtml(@PathVariable("productCode") final String productCode,
-			@PathVariable("numberOfReviews") final String numberOfReviews, final Model model, final HttpServletRequest request)
-	{
-		final ProductModel productModel = productService.getProductForCode(productCode);
-		final List<ReviewData> reviews;
-		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
-				Arrays.asList(ProductOption.BASIC, ProductOption.REVIEW));
-
-		if ("all".equals(numberOfReviews))
-		{
-			reviews = productFacade.getReviews(productCode);
-		}
-		else
-		{
-			final int reviewCount = Math.min(Integer.parseInt(numberOfReviews),
-					productData.getNumberOfReviews() == null ? 0 : productData.getNumberOfReviews().intValue());
-			reviews = productFacade.getReviews(productCode, Integer.valueOf(reviewCount));
-		}
-
-		getRequestContextData(request).setProduct(productModel);
-		model.addAttribute("reviews", reviews);
-		model.addAttribute("reviewsTotal", productData.getNumberOfReviews());
-		model.addAttribute(new ReviewForm());
-
-		return ControllerConstants.Views.Fragments.Product.ReviewsTab;
-	}
-
-	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/writeReview", method = RequestMethod.GET)
-	public String writeReview(@PathVariable final String productCode, final Model model) throws CMSItemNotFoundException
-	{
-		model.addAttribute(new ReviewForm());
-		setUpReviewPage(model, productCode);
-		return ControllerConstants.Views.Pages.Product.WriteReview;
-	}
-
 	protected void setUpReviewPage(final Model model, final String productCode) throws CMSItemNotFoundException
 	{
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
@@ -289,34 +221,6 @@ public class ProductPageController extends AbstractPageController
 		storeCmsPageInModel(model, getPageForProduct(productCode));
 		model.addAttribute("product", productFacade.getProductForCodeAndOptions(productCode, Arrays.asList(ProductOption.BASIC)));
 		updatePageTitle(productCode, model);
-	}
-
-	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/writeReview", method = RequestMethod.POST)
-	public String writeReview(@PathVariable final String productCode, final ReviewForm form, final BindingResult result,
-			final Model model, final HttpServletRequest request, final RedirectAttributes redirectAttrs)
-			throws CMSItemNotFoundException
-	{
-		getReviewValidator().validate(form, result);
-
-		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
-
-		if (result.hasErrors())
-		{
-			GlobalMessages.addErrorMessage(model, "review.general.error");
-			populateProductDetailForDisplay(productCode, model, request, Collections.emptyList());
-			setUpReviewPage(model, productCode);
-			return ControllerConstants.Views.Pages.Product.WriteReview;
-		}
-
-		final ReviewData review = new ReviewData();
-		review.setHeadline(XSSFilterUtil.filter(form.getHeadline()));
-		review.setComment(XSSFilterUtil.filter(form.getComment()));
-		review.setRating(form.getRating());
-		review.setAlias(XSSFilterUtil.filter(form.getAlias()));
-		productFacade.postReview(productCode, review);
-		GlobalMessages.addFlashMessage(redirectAttrs, GlobalMessages.CONF_MESSAGES_HOLDER, "review.confirmation.thank.you.title");
-
-		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
 	}
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/futureStock", method = RequestMethod.GET)
@@ -468,14 +372,7 @@ public class ProductPageController extends AbstractPageController
 					images.add(image);
 				}
 			}
-			Collections.sort(images, new Comparator<ImageData>()
-			{
-				@Override
-				public int compare(final ImageData image1, final ImageData image2)
-				{
-					return image1.getGalleryIndex().compareTo(image2.getGalleryIndex());
-				}
-			});
+			Collections.sort(images, (image1, image2) -> image1.getGalleryIndex().compareTo(image2.getGalleryIndex()));
 
 			if (CollectionUtils.isNotEmpty(images))
 			{
@@ -487,15 +384,15 @@ public class ProductPageController extends AbstractPageController
 
 	protected void addFormatsToGalleryImages(final List<Map<String, ImageData>> galleryImages, final List<ImageData> images)
 	{
-		int currentIndex = images.get(0).getGalleryIndex().intValue();
+		int currentIndex = images.get(0).getGalleryIndex();
 		Map<String, ImageData> formats = new HashMap<String, ImageData>();
 		for (final ImageData image : images)
 		{
-			if (currentIndex != image.getGalleryIndex().intValue())
+			if (currentIndex != image.getGalleryIndex())
 			{
 				galleryImages.add(formats);
 				formats = new HashMap<>();
-				currentIndex = image.getGalleryIndex().intValue();
+				currentIndex = image.getGalleryIndex();
 			}
 			formats.put(image.getFormat(), image);
 		}
