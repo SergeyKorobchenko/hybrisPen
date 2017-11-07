@@ -37,10 +37,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,7 +86,7 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 	{
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 		model.addAttribute("cartData", cartData);
-		model.addAttribute("paymentTypeForm", preparePaymentTypeForm(cartData));
+		model.addAttribute("paymentTypeForm", preparePaymentTypeForm(cartData, model));
 		prepareDataForPage(model);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
@@ -103,7 +103,7 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 	public String choose(@ModelAttribute final PaymentTypeForm paymentTypeForm, final BindingResult bindingResult,
 			final Model model) throws CMSItemNotFoundException, CommerceCartModificationException
 	{
-		paymentTypeFormValidator.validate(paymentTypeForm, bindingResult);
+//		paymentTypeFormValidator.validate(paymentTypeForm, bindingResult);
 
 		if (bindingResult.hasErrors())
 		{
@@ -136,18 +136,6 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 
 		cartData.setPaymentType(paymentTypeData);
 
-		// set cost center
-		if (CheckoutPaymentType.ACCOUNT.getCode().equals(cartData.getPaymentType().getCode()))
-		{
-			final B2BCostCenterData costCenter = new B2BCostCenterData();
-			costCenter.setCode(paymentTypeForm.getCostCenterId());
-
-			cartData.setCostCenter(costCenter);
-		}
-
-		// set purchase order number
-		cartData.setPurchaseOrderNumber(paymentTypeForm.getPurchaseOrderNumber());
-
 		b2bCheckoutFacade.updateCheckoutCart(cartData);
 	}
 
@@ -167,32 +155,20 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 		return getCheckoutStep().previousStep();
 	}
 
-	protected PaymentTypeForm preparePaymentTypeForm(final CartData cartData)
+	protected PaymentTypeForm preparePaymentTypeForm(final CartData cartData, final Model model)
 	{
+		List<B2BPaymentTypeData> paymentTypes = b2bCheckoutFacade.getPaymentTypes();
 		final PaymentTypeForm paymentTypeForm = new PaymentTypeForm();
 
 		// set payment type
-		if (cartData.getPaymentType() != null && StringUtils.isNotBlank(cartData.getPaymentType().getCode()))
-		{
+		if (cartData.getPaymentType() != null && StringUtils.isNotBlank(cartData.getPaymentType().getCode())) {
 			paymentTypeForm.setPaymentType(cartData.getPaymentType().getCode());
-		}
-		else
-		{
-			paymentTypeForm.setPaymentType(CheckoutPaymentType.ACCOUNT.getCode());
-		}
-
-		// set cost center
-		if (cartData.getCostCenter() != null && StringUtils.isNotBlank(cartData.getCostCenter().getCode()))
-		{
-			paymentTypeForm.setCostCenterId(cartData.getCostCenter().getCode());
-		}
-		else if (!CollectionUtils.isEmpty(getVisibleActiveCostCenters()) && getVisibleActiveCostCenters().size() == 1)
-		{
-			paymentTypeForm.setCostCenterId(getVisibleActiveCostCenters().get(0).getCode());
+		}else {
+			if(CollectionUtils.isNotEmpty(paymentTypes)) {
+				paymentTypeForm.setPaymentType(paymentTypes.get(0).getCode());
+			}
 		}
 
-		// set purchase order number
-		paymentTypeForm.setPurchaseOrderNumber(cartData.getPurchaseOrderNumber());
 		return paymentTypeForm;
 	}
 

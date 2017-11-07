@@ -11,12 +11,14 @@
 -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+			http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
 		
 	<context:annotation-config/> 
 
@@ -54,6 +56,9 @@
 	<bean id="orderDetailsPopulator" class="com.bridgex.facades.order.converters.populator.OrderDetailsPopulator">
 		<property name="productService" ref="productService"/>
 	</bean>
+
+	<alias name="pentlandCartFacade" alias="cartFacade"/>
+	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade" />
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
@@ -244,5 +249,54 @@
 
 	<alias name="pentlandOrderHistoryPopulator" alias="orderHistoryPopulator"/>
 	<bean id="pentlandOrderHistoryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderHistoryPopulator" parent="defaultOrderHistoryPopulator"/>
+
+	<alias name="pentlandCartPopulator" alias="cartPopulator"/>
+	<bean id="pentlandCartPopulator" class="com.bridgex.facades.order.converters.populator.PentlandCartPopulator" parent="defaultCartPopulator"/>
+
+	<alias name="pentlandB2BUnitPopulator" alias="b2bUnitPopulator"/>
+	<bean id="pentlandB2BUnitPopulator" class="com.bridgex.facades.populators.PentlandB2BUnitPopulator" parent="defaultB2BUnitPopulator"/>
+
+	<alias name="pentlandB2BCustomerPopulator" alias="b2bCustomerPopulator"/>
+	<bean id="pentlandB2BCustomerPopulator" class="com.bridgex.facades.populators.PentlandB2BCustomerPopulator">
+		<property name="b2bUnitService" ref="b2bUnitService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="currencyConverter" ref="currencyConverter"/>
+		<property name="b2BUserGroupsLookUpStrategy" ref="b2bUserGroupsLookUpStrategy"/>
+	</bean>
+
+	<alias name="pentlandB2BCheckoutFacade" alias="b2bCheckoutFacade"/>
+	<bean id="pentlandB2BCheckoutFacade" class="com.bridgex.facades.order.impl.DefaultPentlandB2BCheckoutFacade" parent="defaultB2BCheckoutFacade">
+		<property name="b2bPaymentTypeMapping">
+			<map>
+				<entry key="ACCOUNT" value-ref="accountPayment"/>
+				<entry key="CREDITCARD" value-ref="creditPayment"/>
+				<entry key="PROFORMA" value-ref="proformaPayment"/>
+			</map>
+		</property>
+		<property name="b2bUnitService" ref="b2bUnitService"/>
+	</bean>
+
+	<util:list id="accountPayment">
+		<value>ACCOUNT</value>
+	</util:list>
+	<util:list id="creditPayment">
+		<value>CARD</value>
+	</util:list>
+	<util:list id="proformaPayment">
+		<value>CARD</value>
+		<value>ACCOUNT</value>
+	</util:list>
+
+	<alias name="defaultPentlandB2BAcceleratorCheckoutFacade" alias="pentlandB2BAcceleratorCheckoutFacade"/>
+	<bean id="defaultPentlandB2BAcceleratorCheckoutFacade" class="com.bridgex.facades.order.impl.DefaultPentlandB2BAcceleratorCheckoutFacade" parent="defaultB2BCheckoutFacade">
+		<property name="acceleratorCheckoutFacade" ref="defaultAcceleratorCheckoutFacade"/>
+		<property name="pentlandCommerceCheckoutService" ref="pentlandCommerceCheckoutService"/>
+	</bean>
+
+	<alias name="pentlandGroupOrderEntryPopulator" alias="groupOrderEntryPopulator"/>
+	<bean id="pentlandGroupOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandGroupOrderEntryPopulator" parent="defaultGroupOrderEntryPopulator"/>
+
+	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
+	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
 
 </beans>

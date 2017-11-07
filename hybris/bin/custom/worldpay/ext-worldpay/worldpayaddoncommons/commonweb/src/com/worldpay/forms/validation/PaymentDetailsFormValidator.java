@@ -62,9 +62,6 @@ public class PaymentDetailsFormValidator implements Validator {
     public void validate(final Object object, final Errors errors) {
         final PaymentDetailsForm form = (PaymentDetailsForm) object;
 
-        if (isDeliveryAddressIsNull(form)) {
-            errors.reject(GLOBAL_MISSING_DELIVERY_ADDRESS);
-        }
 
         if (StringUtils.isBlank(form.getPaymentMethod())) {
             errors.reject(WORLDPAY_PAYMENT_METHOD_INVALID);
@@ -83,14 +80,6 @@ public class PaymentDetailsFormValidator implements Validator {
         validateTermsCheck(errors, form);
         // only base property files are resolved - if your property key is in your bundle folder this is will not be found
 
-        if (FALSE.equals(form.getUseDeliveryAddress())) {
-            validateField(errors, FIELD_BILLING_ADDRESS_FIRST_NAME, "address.firstName.invalid");
-            validateField(errors, FIELD_BILLING_ADDRESS_LAST_NAME, "address.lastName.invalid");
-            validateField(errors, FIELD_BILLING_ADDRESS_LINE1, "address.line1.invalid");
-            validateField(errors, FIELD_BILLING_ADDRESS_TOWN_CITY, "address.townCity.invalid");
-            validateField(errors, FIELD_BILLING_ADDRESS_POSTCODE, "address.postcode.invalid");
-            validateField(errors, FIELD_BILLING_ADDRESS_COUNTRY_ISO, "address.country.invalid");
-        }
     }
 
     protected void validateTermsCheck(final Errors errors, final PaymentDetailsForm form) {

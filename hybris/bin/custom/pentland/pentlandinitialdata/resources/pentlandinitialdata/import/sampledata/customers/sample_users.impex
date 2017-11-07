@@ -16,6 +16,9 @@ INSERT_UPDATE UserPriceGroup;code[unique=true]
 ;pronto
 ;pronto-services
 
+UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID
+;TestB2BUnit;pronto-services;CREDITCARD;testB2B
+
 $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
 ;SuperAccountMangers;;
@@ -35,19 +38,19 @@ INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code)
 ;Monthly15KAlert3K;CURRENCY:B2BRateType;3000;15000;GBP;MONTH:B2BPeriodRange;;
 
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(&addId);&B2BUnitID;accountManager(uid);creditLimit(code);approvalProcessCode;
-;Hierarchical;Rustic;Rustic;Rustic;;Rustic;RusticAddrID1;RusticID1;acctmgra;Monthly40KAlert10Percent;accApproval;
+;Hierarchical;Rustic;Rustic;Rustic;;Rustic;RusticAddrID1;RusticID1;acctmgra;Monthly40KAlert10Percent;;
 ;Unit A;Rustic Retail;Rustic Retail;Rustic Retail;Rustic;Rustic;RusticAddrID2;RusticID3;;;
 ;Unit B;Rustic Services;Rustic Services;Rustic Services;Rustic;Rustic;;RusticID2;acctmgrb;Monthly15KAlert3K
 ;Unit C;Custom Retail;Custom Retail;Custom Retail;Rustic Retail;Rustic;RusticAddrID5;RusticID4;
 ;Unit D;Services East;Services East;Services East;Rustic Services;Rustic;RusticAddrID3;RusticID5;
 ;Unit E;Services West;Services West;Services West;Rustic Services;Rustic;RusticAddrID4;RusticID6;acctmgrc;
 
-INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];
-;999 South Wacker Drive;60606;Chicago;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@rustic-hw.com;mr;RusticAddrID1;RusticID1;
-;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Anil;Gupta;anil.gupta@rustic-hw.com;mr;RusticAddrID2;RusticID3;
-;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Mingmei;Wang;mingmei.wang@rustic-hw.com;ms;RusticAddrID3;RusticID5;
-;3000 Canyon Lake Drive;90068;Los Angeles;US;TRUE;TRUE;TRUE;TRUE;Matheu;Silva;matheu.silva@rustic-hw.com;mr;RusticAddrID4;RusticID6;
-;1000 Bagby Street;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;Carla;Torres;carla.torres@rustic-hw.com;ms;RusticAddrID5;RusticID4;
+INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];sapCustomerID
+;999 South Wacker Drive;60606;Chicago;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@rustic-hw.com;mr;RusticAddrID1;RusticID1;testB2B
+;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Anil;Gupta;anil.gupta@rustic-hw.com;mr;RusticAddrID2;RusticID3;testB2B
+;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Mingmei;Wang;mingmei.wang@rustic-hw.com;ms;RusticAddrID3;RusticID5;pronto-goods
+;3000 Canyon Lake Drive;90068;Los Angeles;US;TRUE;TRUE;TRUE;TRUE;Matheu;Silva;matheu.silva@rustic-hw.com;mr;RusticAddrID4;RusticID6;testB2B
+;1000 Bagby Street;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;Carla;Torres;carla.torres@rustic-hw.com;ms;RusticAddrID5;RusticID4;testB2B
 
 INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
 ;premiumPermissions;Premium Permissions;Rustic;Rustic 7K GBP ORDER:Rustic,Rustic 25K GBP MONTH:Rustic;
@@ -134,15 +137,15 @@ UPDATE B2BCustomer;originalUid[unique=true];uid[unique=true];permissions(code,Un
 INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code));alertThreshold;amount;currency(isocode);dateRange(code,itemtype(code));datePeriod[dateformat=dd.MM.yyyy hh:mm:ss];
 ;Monthly30KAlert3K;CURRENCY:B2BRateType;3000;30000;GBP;MONTH:B2BPeriodRange;;
 
-INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(&addId);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;userPriceGroup(code)
-;KIS;Pronto;Pronto;Pronto;;Pronto;ProntoAddrID1;ProntoID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;accApproval;pronto
-;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;
-;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto-services
+INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(&addId);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;userPriceGroup(code);customerType(code);sapID
+;KIS;Pronto;Pronto;Pronto;;Pronto;ProntoAddrID1;ProntoID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;;pronto;
+;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto-services;ACCOUNT;pronto-goods
+;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto-services;PROFORMA;pronto-services
 
-INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];
-;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;
-;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;
-;11000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;
+INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(&addId)
+;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true
+;11000 Bagby Street Houston;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;pronto-services;true
+;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;ProntoAddrID2,ProntoAddrID3
 
 INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
 ;enhancedPermissions;Enhanced Permissions;Pronto;Pronto 12K GBP ORDER:Pronto,Pronto 15K GBP MONTH:Pronto;
@@ -150,7 +153,7 @@ INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='GBP'];password[default=$defaultPassword]
 ;Admin A;linda.wolf@pronto-hw.com;linda.wolf@pronto-hw.com;Linda Wolf;ms;Pronto, b2badmingroup, TestB2BUnit;
-;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto, b2bapprovergroup, b2bcustomergroup;
+;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bapprovergroup, b2bcustomergroup;
 ;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;b2bapprovergroup, TestB2BUnit, b2bcustomergroup;
 ;Customer A;mark.rivers@pronto-hw.com;mark.rivers@pronto-hw.com;Mark Rivers;mr;Pronto Goods, b2bcustomergroup,enhancedPermissions, TestB2BUnit;;
 ;Customer B;mingmei.wang@pronto-hw.com;mingmei.wang@pronto-hw.com;Mingmei Wang;ms;Pronto Goods, b2bcustomergroup, commonPermissions, TestB2BUnit;;

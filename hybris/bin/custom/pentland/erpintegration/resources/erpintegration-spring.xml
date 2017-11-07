@@ -49,8 +49,7 @@
 		<bean id="orderSimulateServiceMock" class="com.bridgex.integration.service.mock.OrderSimulateServiceMock" parent="abstractIntegrationService" />
 
 		<alias name="orderDetailsServiceMock" alias="orderDetailsIntegrationService" />
-		<bean id="orderDetailsServiceMock" class="com.bridgex.integration.service.impl.OrderDetailsIntegrationService" parent="abstractIntegrationService"/>
-
+		<bean id="orderDetailsServiceMock" class="com.bridgex.integration.service.mock.OrderDetailsServiceMock" parent="abstractIntegrationService"/>
 	</beans>
 
 

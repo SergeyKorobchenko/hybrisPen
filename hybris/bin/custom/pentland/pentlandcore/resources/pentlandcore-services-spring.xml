@@ -32,6 +32,7 @@
 
 	<bean id="pentlandB2BUnitService"
 	      class="com.bridgex.core.services.impl.DefaultPentlandB2BUnitService" parent="defaultB2BUnitService">
+		<property name="addressDao" ref="addressDao"/>
 	</bean>
 
 	<alias alias="b2bUnitService" name="pentlandB2bUnitServiceProxy"/>
@@ -73,6 +74,16 @@
 
 	<bean id="orderDetailsService" class="com.bridgex.core.integration.OrderDetailsService">
 		<property name="integrationService" ref="orderDetailsIntegrationService"/>
+	</bean>
+
+	<alias name="defaultPentlandCommerceCheckoutService" alias="pentlandCommerceCheckoutService"/>
+	<bean id="defaultPentlandCommerceCheckoutService" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCheckoutService" parent="defaultCommerceCheckoutService">
+		<property name="orderService" ref="b2bOrderService"/>
+		<property name="deliveryService" ref="b2bDeliveryService"/>
+		<property name="commercePlaceOrderStrategy" ref="b2bCommercePlaceOrderStrategy"/>
+		<property name="commerceDeliveryAddressStrategy" ref="b2bCommerceDeliveryAddressStrategy"/>
+		<property name="generateMerchantTransactionCodeStrategy" ref="generateMerchantTransactionCodeStrategy"/>
+		<property name="markForAddressStrategy" ref="markForAddressStrategy"/>
 	</bean>
 
 </beans>

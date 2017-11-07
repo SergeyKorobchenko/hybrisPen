@@ -30,4 +30,7 @@
 	<alias name="pentlandDefaultPriceDao" alias="pentlandPriceDao"/>
 	<bean id="pentlandDefaultPriceDao" class="com.bridgex.core.price.dao.impl.PentlandDefaultPriceDao" parent="abstractItemDao"/>
 
+	<alias name="defaultPentlandAddressDao" alias="addressDao"/>
+	<bean id="defaultPentlandAddressDao" class="com.bridgex.core.address.dao.impl.DefaultPentlandAddressDao"/>
+
 </beans>

@@ -7,14 +7,6 @@
 
 <div id="cardDetailsFieldSet">
     <fieldset class="cardForm">
-        <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-            <div class="save_payment_details checkbox">
-                <label for="SaveDetails">
-                    <form:checkbox id="SaveDetails" path="saveInAccount" tabindex="19"/>
-                    <spring:theme code="checkout.multi.paymentMethod.addPaymentDetails.savePaymentDetailsInAccount"/>
-                </label>
-            </div>
-        </sec:authorize>
 
         <wp-multi-checkout:cseInputBox idKey="nameOnCard" formPath="nameOnCard" mandatory="true" labelKey="payment.nameOnCard"/>
         <wp-multi-checkout:cseInputBox idKey="number" mandatory="true" labelKey="payment.cardNumber"/>

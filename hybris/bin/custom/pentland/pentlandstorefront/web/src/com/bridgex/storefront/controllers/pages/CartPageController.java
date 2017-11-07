@@ -47,15 +47,15 @@ import de.hybris.platform.core.enums.QuoteState;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
+
+import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
+import com.bridgex.storefront.forms.PentlandCartForm;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +64,8 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
@@ -126,6 +128,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "cartEntryActionFacade")
 	private CartEntryActionFacade cartEntryActionFacade;
+
+	@Resource(name = "pentlandCartFacade")
+	private PentlandCartFacade pentlandCartFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -285,43 +290,70 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
-			@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-		if (bindingResult.hasErrors())
+		public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
+		@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
+		final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 		{
-			for (final ObjectError error : bindingResult.getAllErrors())
+			if (bindingResult.hasErrors())
 			{
-				if ("typeMismatch".equals(error.getCode()))
+				for (final ObjectError error : bindingResult.getAllErrors())
 				{
-					GlobalMessages.addErrorMessage(model, "basket.error.quantity.invalid");
-				}
-				else
-				{
-					GlobalMessages.addErrorMessage(model, error.getDefaultMessage());
+					if ("typeMismatch".equals(error.getCode()))
+					{
+						GlobalMessages.addErrorMessage(model, "basket.error.quantity.invalid");
+					}
+					else
+					{
+						GlobalMessages.addErrorMessage(model, error.getDefaultMessage());
+					}
 				}
 			}
-		}
-		else if (getCartFacade().hasEntries())
-		{
-			try
+			else if (getCartFacade().hasEntries())
 			{
-				final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
-						form.getQuantity().longValue());
-				addFlashMessage(form, request, redirectModel, cartModification);
+				try
+				{
+					final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
+					                                                                              form.getQuantity().longValue());
+					addFlashMessage(form, request, redirectModel, cartModification);
 
-				// Redirect to the cart page on update success so that the browser doesn't re-post again
-				return getCartPageRedirectUrl();
+					// Redirect to the cart page on update success so that the browser doesn't re-post again
+					return getCartPageRedirectUrl();
+				}
+				catch (final CommerceCartModificationException ex)
+				{
+					LOG.warn("Couldn't update product with the entry number: " + entryNumber + ".", ex);
+				}
 			}
-			catch (final CommerceCartModificationException ex)
-			{
-				LOG.warn("Couldn't update product with the entry number: " + entryNumber + ".", ex);
-			}
-		}
 
 		// if could not update cart, display cart/quote page again with error
 		return prepareCartUrl(model);
+	}
+
+	@RequestMapping(value = "/update-all", method = RequestMethod.POST)
+	public ResponseEntity<String> updateCartQuantitiesAll(final Model model, final PentlandCartForm cartForm, final BindingResult bindingResult, final HttpServletRequest request,
+	                                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		if (bindingResult.hasErrors()){
+			//TODO add error messages
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} else {
+			CartData cart = getCartFacade().getSessionCart();
+			cart.setPurchaseOrderNumber(cartForm.getPurchaseOrderNumber());
+			cart.setRdd(cartForm.getRequestedDeliveryDate());
+			cart.setCustomerNotes(cartForm.getCustomerNotes());
+			pentlandCartFacade.saveB2BCartData(cart);
+			if (getCartFacade().hasEntries()) {
+				for (int i = 0; i < cartForm.getQuantities().size(); ++i) {
+					try {
+						final CartModificationData cartModification = getCartFacade().updateCartEntry(i, cartForm.getQuantities().get(i));
+					}
+					catch (final CommerceCartModificationException ex) {
+						LOG.warn("Couldn't update product with the entry number: " + i + ".", ex);
+					}
+				}
+			}
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
 	}
 
 	@Override
@@ -340,6 +372,13 @@ public class CartPageController extends AbstractCartPageController
 		model.addAttribute("siteQuoteEnabled", Config.getBoolean(siteQuoteProperty, Boolean.FALSE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs("breadcrumb.cart"));
 		model.addAttribute("pageType", PageType.CART.name());
+		model.addAttribute("b2bCartForm", newCartForm());
+	}
+
+	protected PentlandCartForm newCartForm() {
+		PentlandCartForm cartForm = new PentlandCartForm(getCartFacade().getSessionCart());
+		cartForm.setBankHolidays(getMessageSource().getMessage("text.cart.bankHolidays", null, getI18nService().getCurrentLocale()));
+		return cartForm;
 	}
 
 	protected void addFlashMessage(final UpdateQuantityForm form, final HttpServletRequest request,
@@ -621,6 +660,33 @@ public class CartPageController extends AbstractCartPageController
 	{
 		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
 		return quoteData != null ? String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode())) : REDIRECT_CART_URL;
+	}
+
+	@Override
+	protected boolean validateCart(final RedirectAttributes redirectModel)
+	{
+		//Validate the cart
+		List<CartModificationData> modifications = new ArrayList<>();
+		try
+		{
+			modifications = getCartFacade().validateCartData();
+		}
+		catch (final CommerceCartModificationException e)
+		{
+			LOG.error("Failed to validate cart", e);
+		}
+		if (!modifications.isEmpty())
+		{
+			redirectModel.addFlashAttribute("validationData", modifications);
+
+			// Invalid cart. Bounce back to the cart page.
+			return true;
+		}
+		CartData cartData = getCartFacade().getSessionCart();
+		if (StringUtils.isEmpty(cartData.getPurchaseOrderNumber())) {
+			return false;
+		}
+		return false;
 	}
 
 }

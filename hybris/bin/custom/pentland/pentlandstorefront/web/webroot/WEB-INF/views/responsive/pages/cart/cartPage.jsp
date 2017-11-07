@@ -13,20 +13,6 @@
 	<cart:cartValidation/>
 	<cart:cartPickupValidation/>
 
-	<div class="cart-top-bar">
-        <div class="text-right">
-            <a href="" class="help js-cart-help" data-help="<spring:theme code="text.help" />"><spring:theme code="text.help" />
-                <span class="glyphicon glyphicon-info-sign"></span>
-            </a>
-            <div class="help-popup-content-holder js-help-popup-content">
-                <div class="help-popup-content">
-                    <strong>${fn:escapeXml(cartData.code)}</strong>
-                    <spring:theme code="basket.page.cartHelpContent" htmlEscape="false" />
-                </div>
-            </div>
-		</div>
-	</div>
-
 	<div>
 		<div>
             <cms:pageSlot position="TopContent" var="feature">

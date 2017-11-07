@@ -31,19 +31,19 @@ ACC.cartitem = {
 			cartEntryActionForm.attr('action', entryActionUrl).submit();
 		});
 
-		$('.js-update-entry-quantity-input').on("blur", function (e)
-		{
-			ACC.cartitem.handleUpdateQuantity(this, e);
-
-		}).on("keyup", function (e)
-		{
-			return ACC.cartitem.handleKeyEvent(this, e);
-		}
-		).on("keydown", function (e)
-		{
-			return ACC.cartitem.handleKeyEvent(this, e);
-		}
-		);
+		// $('.js-update-entry-quantity-input').on("blur", function (e)
+		// {
+		// 	ACC.cartitem.handleUpdateQuantity(this, e);
+        //
+		// }).on("keyup", function (e)
+		// {
+		// 	return ACC.cartitem.handleKeyEvent(this, e);
+		// }
+		// ).on("keydown", function (e)
+		// {
+		// 	return ACC.cartitem.handleKeyEvent(this, e);
+		// }
+		// );
 	},
 
 	handleKeyEvent: function (elementRef, event)

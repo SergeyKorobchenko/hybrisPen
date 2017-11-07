@@ -21,7 +21,9 @@
 		
 		<%-- bootstrap --%>
 		<script type="text/javascript" src="${commonResourcePath}/bootstrap/dist/js/bootstrap.min.js"></script>
-		
+		<script type="text/javascript" src="${commonResourcePath}/bootstrap/js/collapse.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/bootstrap/js/transition.js"></script>
+
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/Imager.min.js"></script>
@@ -87,7 +89,10 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
-		
+
+		<script type="text/javascript" src="${commonResourcePath}/js/moment.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/bootstrap-datetimepicker.js"></script>
+
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>

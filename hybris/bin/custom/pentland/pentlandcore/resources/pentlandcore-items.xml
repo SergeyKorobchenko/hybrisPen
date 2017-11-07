@@ -369,10 +369,18 @@
                         <description>Requested delivery date</description>
                         <persistence type="property" />
                     </attribute>
+                    <attribute qualifier="customerNotes" type="java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                    </attribute>
                     <attribute type="java.lang.Long" qualifier="sequenceId">
                         <modifiers optional="true" />
                         <persistence type="property" />
                         <description>Attribute is used in batch import process for avoiding multiple imports.</description>
+                    </attribute>
+                    <attribute qualifier="markFor" type="Address">
+                        <description>Mark For Address</description>
+                        <persistence type="property"/>
                     </attribute>
                 </attributes>
             </itemtype>

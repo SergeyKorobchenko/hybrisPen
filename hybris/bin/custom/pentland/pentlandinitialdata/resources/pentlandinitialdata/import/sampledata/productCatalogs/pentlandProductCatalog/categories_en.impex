@@ -515,3 +515,47 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang];description[l
 ;kickers;;Kickers
 ;mitre;;Mitre
 ;speedo;;Speedo
+
+;teamwear;;Teamwear
+;trainingwear;;Training wear
+;balls;;Balls
+;equipment;;Equipment
+
+;jersey;;Jersey
+;shorts;;Shorts
+;socks;;Socks
+;goalkeeper;;Goalkeeper
+;referees;;Referees
+;baseLayers;;Base Layers
+;smallSided;;Small Sided
+;bags;;Bags
+
+;jacketsTrousers;;Jackets & Trousers
+;rainwear;;Rainwear
+;tshirts;;T-Shirts & Polo's
+;sweatshirts;;Sweatshirts & Hoodies
+;compression;;Compression & Base Layers
+;shorts;;Shorts
+
+;professional;;Professional Footballs
+;match;;Match Footballs
+;training;;Training Footballs
+;recreation;;Recreation Footballs
+;specialist;;Specialist Footballs
+;netballs;;Netballs
+;rugby;;Rugby Balls
+;otherBalls;;Other Balls
+;hyperseam;;Hyperseam Footballs
+;deltaCapsule;;Delta Capsule Range
+
+;gameDay;;Game Day
+;ballSacks;;Ball Sacks & Kit Bags
+;conesMarkers;;Cones and Markers
+;gloves;;Gloves & Guards
+;goals;;Goals & Arcs
+;ladders;;Ladders & Rings
+;poles;;Poles & Hurdles
+;bottles;;Water Bottles & Crates
+;bibs;;Bibs
+;referee;;Referee
+;others;;Others

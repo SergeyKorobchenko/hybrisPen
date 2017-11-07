@@ -7,6 +7,7 @@ import de.hybris.platform.b2bacceleratorfacades.order.data.TriggerData;
 import de.hybris.platform.b2bacceleratorfacades.order.impl.DefaultB2BAcceleratorCheckoutFacade;
 import de.hybris.platform.b2bacceleratorservices.enums.CheckoutPaymentType;
 import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.dto.TransactionStatus;
 import de.hybris.platform.payment.enums.PaymentTransactionType;
@@ -25,10 +26,15 @@ import static de.hybris.platform.util.localization.Localization.getLocalizedStri
  */
 public class WorldpayB2BAcceleratorCheckoutFacadeDecorator extends DefaultB2BAcceleratorCheckoutFacade {
 
-    protected static final String CART_CHECKOUT_TRANSACTION_NOT_AUTHORIZED = "cart.transation.notAuthorized";
-    protected static final String CART_CHECKOUT_TERM_UNCHECKED = "cart.term.unchecked";
-    protected static final String CART_CHECKOUT_REPLENISHMENT_NO_STARTDATE = "cart.replenishment.no.startdate";
-    protected static final String CART_CHECKOUT_REPLENISHMENT_NO_FREQUENCY = "cart.replenishment.no.frequency";
+    private static final String CART_CHECKOUT_DELIVERYADDRESS_INVALID = "cart.deliveryAddress.invalid";
+    private static final String CART_CHECKOUT_DELIVERYMODE_INVALID = "cart.deliveryMode.invalid";
+    private static final String CART_CHECKOUT_TRANSACTION_NOT_AUTHORIZED = "cart.transation.notAuthorized";
+    private static final String CART_CHECKOUT_PAYMENTINFO_EMPTY = "cart.paymentInfo.empty";
+    private static final String CART_CHECKOUT_NOT_CALCULATED = "cart.not.calculated";
+    private static final String CART_CHECKOUT_TERM_UNCHECKED = "cart.term.unchecked";
+    private static final String CART_CHECKOUT_QUOTE_REQUIREMENTS_NOT_SATISFIED = "cart.quote.requirements.not.satisfied";
+    private static final String CART_CHECKOUT_REPLENISHMENT_NO_STARTDATE = "cart.replenishment.no.startdate";
+    private static final String CART_CHECKOUT_REPLENISHMENT_NO_FREQUENCY = "cart.replenishment.no.frequency";
 
     private L10NService l10NService;
     private DefaultB2BAcceleratorCheckoutFacade b2BAcceleratorCheckoutFacade;
@@ -62,6 +68,32 @@ public class WorldpayB2BAcceleratorCheckoutFacadeDecorator extends DefaultB2BAcc
         }
 
         return null;
+    }
+
+    @Override
+    protected boolean isValidCheckoutCart(final PlaceOrderData placeOrderData) {
+        final CartData cartData = getCheckoutCart();
+        final boolean valid = true;
+
+//        if (!cartData.isCalculated())
+//        {
+//            throw new EntityValidationException(getLocalizedString(CART_CHECKOUT_NOT_CALCULATED));
+//        }
+
+        if (cartData.getDeliveryAddress() == null) {
+            throw new EntityValidationException(getLocalizedString(CART_CHECKOUT_DELIVERYADDRESS_INVALID));
+        }
+
+        final boolean accountPaymentType = CheckoutPaymentType.ACCOUNT.getCode().equals(cartData.getPaymentType().getCode());
+        if (!accountPaymentType && cartData.getPaymentInfo() == null) {
+            throw new EntityValidationException(getLocalizedString(CART_CHECKOUT_PAYMENTINFO_EMPTY));
+        }
+
+        if (Boolean.TRUE.equals(placeOrderData.getNegotiateQuote()) && !cartData.getQuoteAllowed()) {
+            throw new EntityValidationException(getLocalizedString(CART_CHECKOUT_QUOTE_REQUIREMENTS_NOT_SATISFIED));
+        }
+
+        return valid;
     }
 
     protected <T extends AbstractOrderData> T handleReplenishment(final PlaceOrderData placeOrderData) {
