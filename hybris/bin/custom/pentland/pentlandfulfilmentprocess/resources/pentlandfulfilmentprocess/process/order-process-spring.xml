@@ -99,6 +99,7 @@
 	</bean>
 
 	<bean id="exportOrderAction" class="com.bridgex.fulfilmentprocess.actions.order.ExportOrderAction" parent="abstractAction">
+		<property name="pentlandOrderExportService" ref="pentlandOrderExportService"/>
 	</bean>
 
 

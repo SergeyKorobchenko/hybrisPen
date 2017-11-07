@@ -1,6 +1,10 @@
 package com.bridgex.fulfilmentprocess.actions.order;
 
 
+import org.springframework.beans.factory.annotation.Required;
+
+import com.bridgex.core.order.PentlandOrderExportService;
+
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
 
@@ -11,11 +15,15 @@ import de.hybris.platform.task.RetryLaterException;
  */
 public class ExportOrderAction extends AbstractProceduralAction<OrderProcessModel> {
 
-
+  private PentlandOrderExportService pentlandOrderExportService;
 
   @Override
   public void executeAction(OrderProcessModel orderProcessModel) throws RetryLaterException, Exception {
 
   }
 
+  @Required
+  public void setPentlandOrderExportService(PentlandOrderExportService pentlandOrderExportService) {
+    this.pentlandOrderExportService = pentlandOrderExportService;
+  }
 }
