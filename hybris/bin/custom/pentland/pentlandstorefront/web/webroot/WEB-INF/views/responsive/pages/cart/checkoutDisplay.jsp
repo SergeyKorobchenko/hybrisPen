@@ -58,7 +58,6 @@
     </div>
 </div>
 
-
 <c:if test="${showCheckoutStrategies && not empty cartData.entries}" >
     <div class="cart__actions">
         <div class="row">

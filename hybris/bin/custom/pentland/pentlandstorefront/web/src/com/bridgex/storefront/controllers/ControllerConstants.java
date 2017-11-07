@@ -114,6 +114,7 @@ public interface ControllerConstants
 				String HostedOrderPostPage = "pages/checkout/multi/hostedOrderPostPage"; // NOSONAR
 				String SilentOrderPostPage = "pages/checkout/multi/silentOrderPostPage"; // NOSONAR
 				String GiftWrapPage = "pages/checkout/multi/giftWrapPage"; // NOSONAR
+				String MarkForPage = "pages/checkout/multi/addMarkForAddressPage";
 			}
 
 			interface Password // NOSONAR

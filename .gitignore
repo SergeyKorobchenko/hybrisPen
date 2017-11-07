@@ -75,8 +75,8 @@ hybris/bin/custom/**/web/webroot/WEB-INF/tld/addons/*
 hybris/bin/custom/**/web/webroot/WEB-INF/_ui-src/addons/**
 
 
-**/theme-alpha
-**/theme-lambda
+**/theme-alpha/fonts
+**/theme-lambda/fonts
 internationalizationhmc.jar
 internationalizationbackoffice_bof.jar
 pentlandbackoffice_bof.jar

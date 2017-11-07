@@ -21,6 +21,8 @@ import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.payment.CreditCardPaymentInfoModel;
 import de.hybris.platform.order.CartService;
+import de.hybris.platform.payment.methods.PaymentMethod;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -57,6 +59,7 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
     protected static final String CHECKOUT_MULTI_WORLD_PAY_DECLINED_MESSAGE_DEFAULT = "checkout.multi.worldpay.declined.message.default";
 
     protected static final String CHECKOUT_MULTI_TERMS_AND_CONDITIONS = "/checkout/multi/termsAndConditions";
+    public static final String DEFAULT_PAYMENT_METHOD = "ONLINE";
 
     @Resource
     private MessageSource themeSource;
@@ -112,6 +115,7 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
 
     protected void setupPaymentDetailsForm(final Model model) {
         final PaymentDetailsForm paymentDetailsForm = new PaymentDetailsForm();
+        paymentDetailsForm.setPaymentMethod(DEFAULT_PAYMENT_METHOD);
         final AddressForm addressForm = new AddressForm();
 
         if (getCheckoutFacade() instanceof WorldpayCheckoutFacadeDecorator) {
@@ -170,7 +174,7 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
             // For B2B the payment address needs to be set from paymentInfo
             final CartModel sessionCart = cartService.getSessionCart();
             if (sessionCart.getPaymentAddress() == null) {
-                sessionCart.setPaymentAddress(sessionCart.getPaymentInfo().getBillingAddress());
+                sessionCart.setPaymentAddress(sessionCart.getDeliveryAddress());
                 cartService.saveOrder(sessionCart);
             }
         }

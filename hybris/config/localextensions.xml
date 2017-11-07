@@ -75,6 +75,7 @@
 		<extension name="acceleratorstorefrontcommons" />
 		<extension name="cscockpit" />
 		<extension name="productcockpit" />
+		<extension name="pcmbackoffice" />
 
 		<extension name="hmc" />
 		<extension name="platformhmc" />
@@ -154,7 +155,7 @@
 		<extension name="assistedserviceservices" />
 
 		<!--Customer Ticketing AddOn-->
-		<extension name="customerticketingaddon" />
+		<extension name="pentlandsupportticketingaddon" />
 		<extension name="customerticketingfacades" />
 
 		<extension name="adaptivesearch" />

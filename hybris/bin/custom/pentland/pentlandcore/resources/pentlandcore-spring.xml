@@ -58,4 +58,9 @@
 		<property name="retrieveChannelStrategy" ref="retrieveChannelStrategy" />
 	</bean>
 
+	<alias name="pentlandB2BApprovalBusinessProcessCreationPlaceOrderMethodHook" alias="b2bApprovalBusinessProcessCreationPlaceOrderMethodHook"/>
+	<bean id="pentlandB2BApprovalBusinessProcessCreationPlaceOrderMethodHook" class="com.bridgex.core.order.hooks.PentlandB2BApprovalBusinessProcessCreationPlaceOrderMethodHook">
+		<property name="businessProcessCreationStrategy" ref="defaultB2BCreateOrderFromCartStrategy"/>
+	</bean>
+
 </beans>

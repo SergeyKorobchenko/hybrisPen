@@ -33,14 +33,6 @@ public class DefaultB2BDeliveryAddressCheckoutStepValidator extends AbstractB2BC
 			return ValidationResults.REDIRECT_TO_PAYMENT_TYPE;
 		}
 
-		if (CheckoutPaymentType.ACCOUNT.getCode().equals(checkoutPaymentType.getCode())
-				&& getCheckoutFacade().getCheckoutCart().getCostCenter() == null)
-		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
-					"checkout.multi.costCenter.notprovided");
-			return ValidationResults.REDIRECT_TO_PAYMENT_TYPE;
-		}
-
 		return ValidationResults.SUCCESS;
 	}
 }

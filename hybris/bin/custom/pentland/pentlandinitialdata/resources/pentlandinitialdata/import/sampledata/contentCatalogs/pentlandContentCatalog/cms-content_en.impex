@@ -52,11 +52,12 @@ UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];title[lang=e
 
 # CMS Footer Navigation Component
 UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en]
-;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";
+;;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";
 
 # CMS Paragraph Component
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
 ;;QuickOrderInfoParagraphComponent;"You can add up to 25 valid SKUs below and add to cart. Stock is reserved once products are added to cart."
+;;PentlandHomPageParagraphComponent;"Building a family of brands for the world to love generation after generation";
 
 # Dynamic banner for Product grid page
 UPDATE  DynamicBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
@@ -81,86 +82,10 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 
 #UPDATE ImageMapComponent;$contentCV[unique=true];uid[unique=true];imageMapHTML[lang=en];$picture[lang=$lang]
 #;;BrandsImageMapComponent;"<area href=""$storefrontContextRoot/Brands/Vans/c/Vans"" alt=""vans"" coords=""18,18,235,105"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Dainese/c/Dainese"" alt=""dainese"" coords=""18,106,248,173"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Toko/c/Toko"" alt=""toko"" coords=""19,175,236,258"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Dakine/c/Dakine"" alt=""dakine"" coords=""18,261,244,314"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Blue-Tomato/c/Blue Tomato"" alt=""blue tomato"" coords=""18,316,247,403"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Von-Zipper/c/Von Zipper"" alt=""von zipper"" coords=""237,18,477,105"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Playboard/c/Playboard"" alt=""playboard"" coords=""479,18,689,105"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Fox/c/Fox"" alt=""fox"" coords=""251,107,497,169"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Anon/c/Anon"" alt=""anon"" coords=""498,106,692,222"" shape=""rect""><area href=""$storefrontContextRoot/Brands/F2-FTWO/c/F2-FTWO"" alt=""f2"" coords=""499,224,690,313"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Quiksilver/c/Quiksilver"" alt=""quicksilver"" coords=""469,314,691,403"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Rip-Curl/c/Rip Curl"" alt=""ripcurl"" coords=""249,287,468,401"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Roxy/c/Roxy"" alt=""roxy"" coords=""375,171,497,286"" shape=""rect""><area href=""$storefrontContextRoot/Brands/Pro-Tec/c/Pro Tec"" alt=""pro-tec"" coords=""245,173,373,285"" shape=""rect"">";Appa_710x421_GeneralBrands_EN_01.jpg
-#;;ShirtsImageMapComponent;"<area shape='circle' alt='T-Shirt Men Playboard Logo' coords='284,328,98' href='$storefrontContextRoot/Brands/Playboard/T-Shirt-Men-Playboard-Logo/p/300067375' /><area shape='circle' alt='T-Shirt Men Playboard Raster SS' coords='496,66,93' href='$storefrontContextRoot/Brands/Playboard/T-Shirt-Men-Playboard-Raster-SS/p/300046043' /><area shape='circle' alt='T-Shirt Men Playboard Raster SS' coords='652,410,108' href='$storefrontContextRoot/Brands/Playboard/T-Shirt-Men-Playboard-Raster-SS/p/300046028' /><area shape='circle' alt='T-Shirt Men Playboard Logo' coords='687,92,109' href='$storefrontContextRoot/Brands/Playboard/T-Shirt-Men-Playboard-Logo/p/300147511' /><area shape='circle' alt='T-Shirt Men Playboard Raster SS' coords='710,251,94' href='$storefrontContextRoot/Brands/Playboard/T-Shirt-Men-Playboard-Raster-SS/p/300067366' />";Appa_788x467_CaliforniaLook_EN_01.jpg
-#;;StreetImageMapComponent;"<area shape='rect' alt='Vans Old Skool' title='Vans Old Skool' coords='81,272,252,323' href='$storefrontContextRoot/Brands/Vans/Sneakers-Vans-Old-Skool/p/300036394' target='_self' />	<area shape='rect' alt='System Tee' title='System Tee' coords='276,44,449,210' href='$storefrontContextRoot/Categories/Streetwear-men/T-Shirts/System-Tee-SS/p/122312_aquatic_blue' target='_self' />	<area shape='rect' alt='Incision Leather Belt' title='Incision Leather Belt' coords='328,306,484,347' href='$storefrontContextRoot/Categories/Accessories/Belts/Incision-Leather-Belt/p/300608307' target='_self' />	<area shape='rect' alt='Quiksilver' title='Quiksilver' coords='354,400,531,456' href='$storefrontContextRoot/Brands/Quiksilver/Shades-Quiksilver-Dinero-black-white-red-grey/p/300045375' target='_self' />	<area shape='rect' alt='Seizure Satchel' title='Seizure Satchel' coords='570,231,704,356' href='$storefrontContextRoot/Categories/Bags%2BBoardbags/Bags/Seizure-Satchel/p/300613490' target='_self' />	<area shape='rect' alt='Pledge Short' title='Pledge Short' coords='726,68,885,225' href='$storefrontContextRoot/Categories/Streetwear-men/Shorts/Pledge-Short/p/300755976' target='_self' />	<area shape='rect' alt='The Player' title='The Player' coords='812,331,939,391' href='$storefrontContextRoot/Categories/Accessories/Watches/The-Player/p/300555911' target='_self' />	<area shape='rect' alt='Burton' title='Burton' coords='0,524,68,543' href='$storefrontContextRoot/Brands/Burton/c/Burton' target='_self' />	<area shape='rect' alt='Volcom' title='Volcom' coords='74,516,132,551' href='$storefrontContextRoot/Brands/Volcom/c/Volcom' target='_self' />	<area shape='rect' alt='Billabong' title='Billabong' coords='139,514,177,554' href='$storefrontContextRoot/Brands/Billabong/c/Billabong' target='_self' />	<area shape='rect' alt='Fox' title='Fox' coords='183,520,235,546' href='$storefrontContextRoot/Brands/Fox/c/Fox' target='_self' />	<area shape='rect' alt='Roxy' title='Roxy' coords='242,524,297,544' href='$storefrontContextRoot/Brands/Roxy/c/Roxy' target='_self' />	<area shape='rect' alt='DC' title='DC' coords='304,519,330,547' href='$storefrontContextRoot/Brands/DC/c/DC' target='_self' />	<area shape='rect' alt='Element' title='Element' coords='335,522,391,544' href='$storefrontContextRoot/Brands/Element/c/Element' target='_self' />	<area shape='rect' alt='Oakley' title='Oakley' coords='399,518,457,547' href='$storefrontContextRoot/Brands/Oakley/c/Oakley' target='_self' />	<area shape='rect' alt='Quiksilver' title='Quiksilver' coords='469,516,501,551' href='$storefrontContextRoot/Brands/Quiksilver/c/Quiksilver' target='_self' />	<area shape='rect' alt='Nike 6.0' title='Nike 6.0' coords='510,518,556,549' href='$storefrontContextRoot/Brands/Nike/c/Nike' target='_self' />	<area shape='rect' alt='Nixon' title='Nixon' coords='564,529,616,544' href='$storefrontContextRoot/Brands/Nixon/c/Nixon' target='_self' />	<area shape='rect' alt='Hurley' title='Hurley' coords='625,525,676,544' href='$storefrontContextRoot/Brands/Hurley/c/Hurley' target='_self' />	<area shape='rect' alt='Zimtstern' title='Zimtstern' coords='683,525,738,544' href='$storefrontContextRoot/Brands/Zimtstern/c/Zimtstern' target='_self' />	<area shape='rect' alt='Vans' title='Vans' coords='745,525,792,549' href='$storefrontContextRoot/Brands/Vans/c/Vans' target='_self' />	<area shape='rect' alt='Show all' title='Show all' coords='862,527,946,548' href='$storefrontContextRoot/Collections/Streetwear/c/streetwear?q=:topRated' target='_self' />";homepage-street-GBP_en.jpg
-#;;SunglassesImageMapComponent;"<area shape=""rect"" coords=""10,51,256,231"" href=""$storefrontContextRoot/Anon/Sonnenbrille-Anon-Convict-black-fade-gray-gradient/p/300044617"" alt=""Sonnenbrille Anon Convict black fade gray gradient"" title=""Sonnenbrille Anon Convict black fade gray gradient ""/>	<area shape=""rect"" coords=""274,54,520,234"" href=""$storefrontContextRoot/Fox/Sonnenbrille-Fox-The-Median-polished-black-warm-gray/p/300024964"" alt=""Sonnenbrille Fox The Median polished black warm gray"" title=""Sonnenbrille Fox The Median polished black warm gray""/>	<area shape=""rect"" coords=""539,50,763,234"" href=""$storefrontContextRoot/Quiksilver/Sonnenbrille-Quiksilver-Dinero-black-white-red-gray/p/300045375"" alt=""Sonnenbrille Quiksilver Dinero black white red gray"" title=""Sonnenbrille Quiksilver Dinero black white red gray""/>	<area shape=""rect"" coords=""131,250,368,444"" href=""$storefrontContextRoot/Roxy/Damen-Sonnenbrille-Roxy-Tee-Dee-Gee-dark-tortoise-brown-gray/p/300047195"" alt=""Damen Sonnenbrille Roxy Tee Dee Gee dark tortoise brown gray "" title=""Damen Sonnenbrille Roxy Tee Dee Gee dark tortoise brown gray""/>	<area shape=""rect"" coords=""400,265,649,444"" href=""$storefrontContextRoot/Von-Zipper/Shades-Von-Zipper-Fernstein-gold-moss-gradient/p/300015407"" alt=""Shades Von Zipper Fernstein gold moss gradient"" title=""Shades Von Zipper Fernstein gold moss gradient""/>";Appa_788x467_SunglassesBrands_EN_01.jpg
-#;;SurfImageMapComponent;"<area shape='rect' alt='Gusty Tote Ball Bag' title='Gusty Tote Ball Bag' coords='96,301,255,456' href='$storefrontContextRoot/Categories/Accessories-women/Bags-women/Gusty-Tote-Ball-Bag-Women/p/300613859' target='_self' />	<area shape='rect' alt='Control Short' title='Control Short' coords='156,153,340,277' href='$storefrontContextRoot/Categories/Streetwear-men/Shorts/Control-Short/p/300313722' target='_self' />	<area shape='rect' alt='Adapt New Era Cap' title='Adapt New Era Cap' coords='376,397,521,467' href='$storefrontContextRoot/Categories/Accessories/Caps/Adapt-New-Era/p/300398794' target='_self' />	<area shape='rect' alt='Burton Pennant SS' title='Burton Pennant SS' coords='385,143,556,313' href='$storefrontContextRoot/Categories/Streetwear-men/T-Shirts/Pennant-SS/p/300417310' target='_self' />	<area shape='rect' alt='Assortment Web Belt Blue' title='Assortment Web Belt Blue' coords='616,334,743,390' href='$storefrontContextRoot/Categories/Accessories/Belts/Assortment-Web-Belt/p/300785802' target='_self' />	<area shape='rect' alt='SUP 9.0 Bonga Perkins' title='SUP 9.0 Bonga Perkins' coords='785,107,902,462' href='$storefrontContextRoot/Categories/Surf/Long-%2B-Funboards/SUP-9-0-Bonga-Perkins/p/300562200' target='_self' />	<area shape='rect' alt='Burton' title='Burton' coords='0,524,68,543' href='$storefrontContextRoot/Brands/Burton/c/Burton' target='_self' />	<area shape='rect' alt='Volcom' title='Volcom' coords='74,516,132,551' href='$storefrontContextRoot/Brands/Volcom/c/Volcom' target='_self' />	<area shape='rect' alt='Billabong' title='Billabong' coords='139,514,177,554' href='$storefrontContextRoot/Brands/Billabong/c/Billabong' target='_self' />	<area shape='rect' alt='Fox' title='Fox' coords='183,520,235,546' href='$storefrontContextRoot/Brands/Fox/c/Fox' target='_self' />	<area shape='rect' alt='Roxy' title='Roxy' coords='242,524,297,544' href='$storefrontContextRoot/Brands/Roxy/c/Roxy' target='_self' />	<area shape='rect' alt='DC' title='DC' coords='304,519,330,547' href='$storefrontContextRoot/Brands/DC/c/DC' target='_self' />	<area shape='rect' alt='Element' title='Element' coords='335,522,391,544' href='$storefrontContextRoot/Brands/Element/c/Element' target='_self' />	<area shape='rect' alt='Oakley' title='Oakley' coords='399,518,457,547' href='$storefrontContextRoot/Brands/Oakley/c/Oakley' target='_self' />	<area shape='rect' alt='Quiksilver' title='Quiksilver' coords='469,516,501,551' href='$storefrontContextRoot/Brands/Quiksilver/c/Quiksilver' target='_self' />	<area shape='rect' alt='Nike 6.0' title='Nike 6.0' coords='510,518,556,549' href='$storefrontContextRoot/Brands/Nike/c/Nike' target='_self' />	<area shape='rect' alt='Nixon' title='Nixon' coords='564,529,616,544' href='$storefrontContextRoot/Brands/Nixon/c/Nixon' target='_self' />	<area shape='rect' alt='Hurley' title='Hurley' coords='625,525,676,544' href='$storefrontContextRoot/Brands/Hurley/c/Hurley' target='_self' />	<area shape='rect' alt='Zimtstern' title='Zimtstern' coords='683,525,738,544' href='$storefrontContextRoot/Brands/Zimtstern/c/Zimtstern' target='_self' />	<area shape='rect' alt='Vans' title='Vans' coords='745,525,792,549' href='$storefrontContextRoot/Brands/Vans/c/Vans' target='_self' />	<area shape='rect' alt='Show all' title='Show all' coords='862,527,946,548' href='$storefrontContextRoot/Collections/Surf/c/surf?q=:topRated' target='_self' />";homepage-surf-GBP_en.jpg
-
-
-# Apparel UK Homepage
-UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
-;;PentlandHomepageProductCarouselComponent;"Best Selling Products"
-;;PentlandHomepageNewProductCarouselComponent;"What's New"
-
-INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
-;widescreen;Appa_1400x50_Save_EN_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Appa_1400x50_Save_EN_01_1400W.jpg;Appa_1400x50_Save_EN_01_1400W.jpg;"Save Big on Select Streetwear";
-;widescreen;Appa_1400x600_Season_EN_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Appa_1400x600_Season_EN_01_1400W.jpg;Appa_1400x600_Season_EN_01_1400W.jpg;"Start Your Season";
-;widescreen;Appa_1400x80_FreeDel_EN_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Appa_1400x80_FreeDel_EN_01_1400W.jpg;Appa_1400x80_FreeDel_EN_01_1400W.jpg;"Free Shipping on All Orders This Weekend";
-;tablet;Appa_200x200_HomeService_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x200_HomeService_EN_01_200W.jpg;Appa_200x200_HomeService_EN_01_200W.jpg;"Shades Von Zipper Papa G";
-;tablet;Appa_200x200_HomeShipment_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x200_HomeShipment_EN_01_200W.jpg;Appa_200x200_HomeShipment_EN_01_200W.jpg;"Adapt New Era Blacktop";
-;tablet;Appa_200x200_HomeShop_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x200_HomeShop_EN_01_200W.jpg;Appa_200x200_HomeShop_EN_01_200W.jpg;"Airline Bag Bluebird Uni";
-;tablet;Appa_200x200_HomeSmallDiscount_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x200_HomeSmallDiscount_EN_01_200W.jpg;Appa_200x200_HomeSmallDiscount_EN_01_200W.jpg;"Maguro Pu Belt plaid";
-;tablet;Appa_200x240_Brands_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Brands_EN_01_200W.jpg;Appa_200x240_Brands_EN_01_200W.jpg;"Our brand range";
-;tablet;Appa_200x240_Men_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Men_EN_01_200W.jpg;Appa_200x240_Men_EN_01_200W.jpg;"Men";
-;tablet;Appa_200x240_Women_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Women_EN_01_200W.jpg;Appa_200x240_Women_EN_01_200W.jpg;"Women";
-;tablet;Appa_200x240_Youth_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Youth_EN_01_200W.jpg;Appa_200x240_Youth_EN_01_200W.jpg;"Youth";
-;desktop;Appa_240x240_HomeService_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x240_HomeService_EN_01_240W.jpg;Appa_240x240_HomeService_EN_01_240W.jpg;"Shades Von Zipper Papa G";
-;desktop;Appa_240x240_HomeShipment_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x240_HomeShipment_EN_01_240W.jpg;Appa_240x240_HomeShipment_EN_01_240W.jpg;"Adapt New Era Blacktop";
-;desktop;Appa_240x240_HomeShop_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x240_HomeShop_EN_01_240W.jpg;Appa_240x240_HomeShop_EN_01_240W.jpg;"Airline Bag Bluebird Uni";
-;desktop;Appa_240x240_HomeSmallDiscount_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x240_HomeSmallDiscount_EN_01_240W.jpg;Appa_240x240_HomeSmallDiscount_EN_01_240W.jpg;"Maguro Pu Belt plaid";
-;desktop;Appa_240x290_Brands_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Brands_EN_01_240W.jpg;Appa_240x290_Brands_EN_01_240W.jpg;"Our brand range";
-;desktop;Appa_240x290_Men_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Men_EN_01_240W.jpg;Appa_240x290_Men_EN_01_240W.jpg;"Men";
-;desktop;Appa_240x290_Women_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Women_EN_01_240W.jpg;Appa_240x290_Women_EN_01_240W.jpg;"Women";
-;desktop;Appa_240x290_Youth_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Youth_EN_01_240W.jpg;Appa_240x290_Youth_EN_01_240W.jpg;"Youth";
-;widescreen;Appa_350x350_HomeService_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x350_HomeService_EN_01_350W.jpg;Appa_350x350_HomeService_EN_01_350W.jpg;"Shades Von Zipper Papa G";
-;widescreen;Appa_350x350_HomeShipment_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x350_HomeShipment_EN_01_350W.jpg;Appa_350x350_HomeShipment_EN_01_350W.jpg;"Adapt New Era Blacktop";
-;widescreen;Appa_350x350_HomeShop_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x350_HomeShop_EN_01_350W.jpg;Appa_350x350_HomeShop_EN_01_350W.jpg;"Airline Bag Bluebird Uni";
-;widescreen;Appa_350x350_HomeSmallDiscount_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x350_HomeSmallDiscount_EN_01_350W.jpg;Appa_350x350_HomeSmallDiscount_EN_01_350W.jpg;"Maguro Pu Belt plaid";
-;widescreen;Appa_350x430_Brands_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Brands_EN_01_350W.jpg;Appa_350x430_Brands_EN_01_350W.jpg;"Our brand range";
-;widescreen;Appa_350x430_Men_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Men_EN_01_350W.jpg;Appa_350x430_Men_EN_01_350W.jpg;"Men";
-;widescreen;Appa_350x430_Women_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Women_EN_01_350W.jpg;Appa_350x430_Women_EN_01_350W.jpg;"Women";
-;widescreen;Appa_350x430_Youth_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Youth_EN_01_350W.jpg;Appa_350x430_Youth_EN_01_350W.jpg;"Youth";
-;mobile;Appa_480x110_FreeDel_EN_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Appa_480x110_FreeDel_EN_01_480W.jpg;Appa_480x110_FreeDel_EN_01_480W.jpg;"Free Shipping on All Orders This Weekend";
-;mobile;Appa_480x110_Save_EN_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Appa_480x110_Save_EN_01_480W.jpg;Appa_480x110_Save_EN_01_480W.jpg;"Save Big on Select Streetwear";
-;mobile;Appa_480x320_Season_EN_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Appa_480x320_Season_EN_01_480W.jpg;Appa_480x320_Season_EN_01_480W.jpg;"Start Your Season";
-;tablet;Appa_770x350_Season_EN_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Appa_770x350_Season_EN_01_770W.jpg;Appa_770x350_Season_EN_01_770W.jpg;"Start Your Season";
-;tablet;Appa_770x50_Save_EN_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Appa_770x50_Save_EN_01_770W.jpg;Appa_770x50_Save_EN_01_770W.jpg;"Save Big on Select Streetwear";
-;tablet;Appa_770x80_FreeDel_EN_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Appa_770x80_FreeDel_EN_01_770W.jpg;Appa_770x80_FreeDel_EN_01_770W.jpg;"Free Shipping on All Orders This Weekend";
-;desktop;Appa_960x400_Season_EN_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Appa_960x400_Season_EN_01_960W.jpg;Appa_960x400_Season_EN_01_960W.jpg;"Start Your Season";
-;desktop;Appa_960x50_Save_EN_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Appa_960x50_Save_EN_01_960W.jpg;Appa_960x50_Save_EN_01_960W.jpg;"Save Big on Select Streetwear";
-;desktop;Appa_960x80_FreeDel_EN_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Appa_960x80_FreeDel_EN_01_960W.jpg;Appa_960x80_FreeDel_EN_01_960W.jpg;"Free Shipping on All Orders This Weekend";
-
-INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
-;pentland-homepage-brands-en;Appa_200x240_Brands_EN_01_200W.jpg,Appa_240x290_Brands_EN_01_240W.jpg,Appa_350x430_Brands_EN_01_350W.jpg
-;pentland-homepage-discount-en;Appa_480x110_FreeDel_EN_01_480W.jpg,Appa_770x80_FreeDel_EN_01_770W.jpg,Appa_960x80_FreeDel_EN_01_960W.jpg,Appa_1400x80_FreeDel_EN_01_1400W.jpg
-;pentland-homepage-men-en;Appa_200x240_Men_EN_01_200W.jpg,Appa_240x290_Men_EN_01_240W.jpg,Appa_350x430_Men_EN_01_350W.jpg
-;pentland-homepage-save-en;Appa_480x110_Save_EN_01_480W.jpg,Appa_770x50_Save_EN_01_770W.jpg,Appa_960x50_Save_EN_01_960W.jpg,Appa_1400x50_Save_EN_01_1400W.jpg
-;pentland-homepage-service-en;Appa_200x200_HomeService_EN_01_200W.jpg,Appa_240x240_HomeService_EN_01_240W.jpg,Appa_350x350_HomeService_EN_01_350W.jpg
-;pentland-homepage-shipment-en;Appa_200x200_HomeShipment_EN_01_200W.jpg,Appa_240x240_HomeShipment_EN_01_240W.jpg,Appa_350x350_HomeShipment_EN_01_350W.jpg
-;pentland-homepage-shop-en;Appa_200x200_HomeShop_EN_01_200W.jpg,Appa_240x240_HomeShop_EN_01_240W.jpg,Appa_350x350_HomeShop_EN_01_350W.jpg
-;pentland-homepage-sm-discount-en;Appa_200x200_HomeSmallDiscount_EN_01_200W.jpg,Appa_240x240_HomeSmallDiscount_EN_01_240W.jpg,Appa_350x350_HomeSmallDiscount_EN_01_350W.jpg
-;pentland-homepage-spalsh-en;Appa_480x320_Season_EN_01_480W.jpg,Appa_770x350_Season_EN_01_770W.jpg,Appa_960x400_Season_EN_01_960W.jpg,Appa_1400x600_Season_EN_01_1400W.jpg
-;pentland-homepage-women-street-en;Appa_200x240_Women_EN_01_200W.jpg,Appa_240x290_Women_EN_01_240W.jpg,Appa_350x430_Women_EN_01_350W.jpg
-;pentland-homepage-youth-en;Appa_200x240_Youth_EN_01_200W.jpg,Appa_240x290_Youth_EN_01_240W.jpg,Appa_350x430_Youth_EN_01_350W.jpg
-
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;PentlandHomepageBrandsBannerComponent;pentland-homepage-brands-en
-;;PentlandHomepageFreeDelBannerComponent;pentland-homepage-discount-en
-;;PentlandHomepageMenStreetBannerComponent;pentland-homepage-men-en
-;;PentlandHomepageSaveBannerComponent;pentland-homepage-save-en
-;;PentlandHomepageServiceBannerComponent;pentland-homepage-service-en
-;;PentlandHomepageShipmentBannerComponent;pentland-homepage-shipment-en
-;;PentlandHomepageShopBannerComponent;pentland-homepage-shop-en
-;;PentlandHomepageSmDiscountBannerComponent;pentland-homepage-sm-discount-en
-;;PentlandHomepageSplashBannerComponent;pentland-homepage-spalsh-en
-;;PentlandHomepageStreetYouthBannerComponent;pentland-homepage-youth-en
-;;PentlandHomepageWomenStreetBannerComponent;pentland-homepage-women-street-en
-
 
 # Apparel Snow Category Landing Page
+
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
-;desktop;Appa_1400x140_Category10_EN_01_1400W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_1400x140_Category10_EN_01_1400W.jpg;Appa_1400x140_Category10_EN_01_1400W.jpg;"Shop Now";
-;desktop;Appa_1400x440_Category11_EN_01_1400W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_1400x440_Category11_EN_01_1400W.jpg;Appa_1400x440_Category11_EN_01_1400W.jpg;"Shop All";
 ;tablet;Appa_200x200_Category01_EN_01_200W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_200x200_Category01_EN_01_200W.jpg;Appa_200x200_Category01_EN_01_200W.jpg;"View";
 ;tablet;Appa_200x200_Category02_EN_01_200W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_200x200_Category02_EN_01_200W.jpg;Appa_200x200_Category02_EN_01_200W.jpg;"View";
 ;tablet;Appa_200x200_Category03_EN_01_200W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_200x200_Category03_EN_01_200W.jpg;Appa_200x200_Category03_EN_01_200W.jpg;"View";
@@ -173,30 +98,23 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 ;desktop;Appa_350x350_Category04_EN_01_350W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_350x350_Category04_EN_01_350W.jpg;Appa_350x350_Category04_EN_01_350W.jpg;"View";
 ;desktop;Appa_350x350_Category06_EN_01_350W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_350x350_Category06_EN_01_350W.jpg;Appa_350x350_Category06_EN_01_350W.jpg;"View";
 ;desktop;Appa_350x350_Category07_EN_01_350W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_350x350_Category07_EN_01_350W.jpg;Appa_350x350_Category07_EN_01_350W.jpg;"View";
-;mobile;Appa_480x118_Category10_EN_01_480W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_480x118_Category10_EN_01_480W.jpg;Appa_480x118_Category10_EN_01_480W.jpg;"Shop Now";
-;mobile;Appa_480x320_Category11_EN_01_480W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_480x320_Category11_EN_01_480W.jpg;Appa_480x320_Category11_EN_01_480W.jpg;"Shop All";
-;tablet;Appa_770x350_Category11_EN_01_770W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_770x350_Category11_EN_01_770W.jpg;Appa_770x350_Category11_EN_01_770W.jpg;"Shop All";
-;tablet;Appa_770x80_Category10_EN_01_770W.jpg;$siteResource/images/banners/category_banners/responsive/Appa_770x80_Category10_EN_01_770W.jpg;Appa_770x80_Category10_EN_01_770W.jpg;"Shop Now";
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
-;pentland-shop-accessories-banner-en;Appa_480x118_Category10_EN_01_480W.jpg,Appa_770x80_Category10_EN_01_770W.jpg,Appa_1400x140_Category10_EN_01_1400W.jpg
 ;pentland-snow-andover-jckt-banner-en;Appa_200x200_Category03_EN_01_200W.jpg,Appa_350x350_Category03_EN_01_350W.jpg
 ;pentland-snow-beacon-jckt-banner-en;Appa_200x200_Category06_EN_01_200W.jpg,Appa_350x350_Category06_EN_01_350W.jpg
 ;pentland-snow-beanie-banner-en;Appa_200x200_Category01_EN_01_200W.jpg,Appa_350x350_Category01_EN_01_350W.jpg
 ;pentland-snow-krypton-banner-en;Appa_200x200_Category04_EN_01_200W.jpg,Appa_350x350_Category04_EN_01_350W.jpg
 ;pentland-snow-sludge-jckt-banner-en;Appa_200x200_Category07_EN_01_200W.jpg,Appa_350x350_Category07_EN_01_350W.jpg
-;pentland-snow-splash-en;Appa_480x320_Category11_EN_01_480W.jpg,Appa_770x350_Category11_EN_01_770W.jpg,Appa_1400x440_Category11_EN_01_1400W.jpg
 ;pentland-snow-trope-banner-en;Appa_200x200_Category02_EN_01_200W.jpg,Appa_350x350_Category02_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;PentlandSnowAccessoriesBannerComponent;pentland-shop-accessories-banner-en
 ;;PentlandSnowAndoverJcktBannerComponent;pentland-snow-andover-jckt-banner-en
 ;;PentlandSnowBeaconJcktBannerComponent;pentland-snow-beacon-jckt-banner-en
 ;;PentlandSnowBeanieBannerComponent;pentland-snow-beanie-banner-en
 ;;PentlandSnowKryptonBannerComponent;pentland-snow-krypton-banner-en
 ;;PentlandSnowSludgeJcktBannerComponent;pentland-snow-sludge-jckt-banner-en
-;;PentlandSnowSplashBannerComponent;pentland-snow-splash-en
 ;;PentlandSnowTropeBeanieBannerComponent;pentland-snow-trope-banner-en
+
 
 
 # Apparel Not Found Page
@@ -379,22 +297,74 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=en]
 ;;UpdateEmailNavNode;""
 ;;MyCompanyNavNode;"My Company"
 
-###### Mitre page start
 
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;mitreBrandPage;Mitre Brand Home Page;BrandPageTemplate;/Mitre
+# Pentland Homepage Media
 
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Appa_200x240_Brands_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Brands_EN_01_200W.jpg;Appa_200x240_Brands_EN_01_200W.jpg;"Our brand range";
+;tablet;Appa_200x240_Men_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Men_EN_01_200W.jpg;Appa_200x240_Men_EN_01_200W.jpg;"Men";
+;tablet;Appa_200x240_Women_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Women_EN_01_200W.jpg;Appa_200x240_Women_EN_01_200W.jpg;"Women";
+;tablet;Appa_200x240_Youth_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Appa_200x240_Youth_EN_01_200W.jpg;Appa_200x240_Youth_EN_01_200W.jpg;"Youth";
+;desktop;Appa_240x290_Brands_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Brands_EN_01_240W.jpg;Appa_240x290_Brands_EN_01_240W.jpg;"Our brand range";
+;desktop;Appa_240x290_Men_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Men_EN_01_240W.jpg;Appa_240x290_Men_EN_01_240W.jpg;"Men";
+;desktop;Appa_240x290_Women_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Women_EN_01_240W.jpg;Appa_240x290_Women_EN_01_240W.jpg;"Women";
+;desktop;Appa_240x290_Youth_EN_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Appa_240x290_Youth_EN_01_240W.jpg;Appa_240x290_Youth_EN_01_240W.jpg;"Youth";
+;widescreen;Appa_350x430_Brands_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Brands_EN_01_350W.jpg;Appa_350x430_Brands_EN_01_350W.jpg;"Our brand range";
+;widescreen;Appa_350x430_Men_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Men_EN_01_350W.jpg;Appa_350x430_Men_EN_01_350W.jpg;"Men";
+;widescreen;Appa_350x430_Women_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Women_EN_01_350W.jpg;Appa_350x430_Women_EN_01_350W.jpg;"Women";
+;widescreen;Appa_350x430_Youth_EN_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Appa_350x430_Youth_EN_01_350W.jpg;Appa_350x430_Youth_EN_01_350W.jpg;"Youth";
+;desktop;slider-berghaus.jpg   ;$siteResource/images/banners/homepage/slider-berghaus.jpg;slider-berghaus.jpg;"berghaus";
+;desktop;slider-canterbury.jpg ;$siteResource/images/banners/homepage/slider-canterbury.jpg;slider-canterbury.jpg;"canterbury";
+;desktop;slider-speedo.jpg     ;$siteResource/images/banners/homepage/slider-speedo.jpg;slider-speedo.jpg;"speedo";
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mitreBrandPage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section1-mitreBrandPage;Section1;;Section1Slot-mitreBrandPage
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];
+;;PentlandHomepageBerghausBannerComponent;slider-berghaus.jpg
+;;PentlandHomepageCanterburyBannerComponent;slider-canterbury.jpg
+;;PentlandHomepageSpeedoBannerComponent;slider-speedo.jpg
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreParagraphComponent
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;pentland-homepage-brands-en;Appa_200x240_Brands_EN_01_200W.jpg,Appa_240x290_Brands_EN_01_240W.jpg,Appa_350x430_Brands_EN_01_350W.jpg
+;pentland-homepage-men-en;Appa_200x240_Men_EN_01_200W.jpg,Appa_240x290_Men_EN_01_240W.jpg,Appa_350x430_Men_EN_01_350W.jpg
+;pentland-homepage-women-street-en;Appa_200x240_Women_EN_01_200W.jpg,Appa_240x290_Women_EN_01_240W.jpg,Appa_350x430_Women_EN_01_350W.jpg
+;pentland-homepage-youth-en;Appa_200x240_Youth_EN_01_200W.jpg,Appa_240x290_Youth_EN_01_240W.jpg,Appa_350x430_Youth_EN_01_350W.jpg
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;MitreParagraphComponent;Mitre Brand Page Paragraph Component;MitreParagraphComponent
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;PentlandHomepageStreetYouthBannerComponent;pentland-homepage-youth-en
+;;PentlandHomepageWomenStreetBannerComponent;pentland-homepage-women-street-en
+;;PentlandHomepageManStreetBannerComponent;pentland-homepage-men-en
+;;PentlandHomepageBrandsBannerComponent;pentland-homepage-brands-en
 
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;MitreParagraphComponent;"This is Mitre Brand Homepage Text!"
+UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
+;;PentlandHomepageProductCarouselComponent;"Best Selling Products"
 
 ###### Mitre page end
+
+###### Cart page ######
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en];
+;;CartBottomParagraphComponent;"<div class='row'><div class='col-xs-12 col-sm-10 col-md-7 col-lg-6 pull-right cart-actions--print'><div class='express-checkout'><div class='headline'>Express Checkout</div><strong>Benefit from a faster checkout by:</strong><ul><li>setting a default Delivery Address in your account or when you checkout</li><li>setting a default Payment Details when you checkout</li><li>using a default shipping method</li></ul></div></div></div>"
+###### Mitre page media
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;desktop;/mitre-splash-1.jpg;$siteResource/images/banners/mitre/responsive/mitre-splash-1.jpg;mitre-splash-1.jpg;"Shop Now";
+;desktop;/mitre-splash-2.jpg;$siteResource/images/banners/mitre/responsive/mitre-splash-2.jpg;mitre-splash-2.jpg;"Shop All";
+;desktop;/mitre-banner-1.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-1.jpg;mitre-banner-1.jpg;"Shop Now";
+;desktop;/mitre-banner-2.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-2.jpg;mitre-banner-2.jpg;"Shop Now";
+;desktop;/mitre-banner-3.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-3.jpg;mitre-banner-3.jpg;"Shop Now";
+;desktop;/mitre-banner-4.jpg;$siteResource/images/banners/mitre/responsive/mitre-banner-4.jpg;mitre-banner-4.jpg;"Shop Now";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;mitre-banner1-en;/mitre-banner-1.jpg;
+;mitre-banner2-en;/mitre-banner-2.jpg;
+;mitre-banner3-en;/mitre-banner-3.jpg;
+;mitre-banner4-en;/mitre-banner-4.jpg;
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+; ; MitreBrandPageBannerComponent ; /mitre-splash-1.jpg
+; ; MitreBrandPage2BannerComponent ; /mitre-splash-2.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; MitreBrandPageHelmetBannerComponent     ; mitre-banner1-en
+; ; MitreBrandPageProtectionBannerComponent ; mitre-banner2-en
+; ; MitreBrandPageShoesBannerComponent      ; mitre-banner3-en
+; ; MitreBrandPageSurfBannerComponent       ; mitre-banner4-en
+

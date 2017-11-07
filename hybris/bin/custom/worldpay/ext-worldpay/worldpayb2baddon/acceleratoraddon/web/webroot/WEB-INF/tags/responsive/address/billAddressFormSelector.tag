@@ -13,19 +13,19 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 
-<div id="wpBillingCountrySelector" data-address-code="${cartData.deliveryAddress.id}" data-country-iso-code="${cartData.deliveryAddress.country.isocode}" data-display-title="false" class="clearfix">
-    <formElement:formSelectBox idKey="billingAddress.country"
-                               labelKey="address.country"
-                               path="billingAddress.countryIso"
-                               mandatory="true"
-                               skipBlank="false"
-                               skipBlankMessageKey="address.selectCountry"
-                               items="${countries}"
-                               itemValue="isocode"
-                               selectCSSClass="form-control" />
-</div>
-<div id="wpBillingAddress" class="billingAddress i18nAddressForm">
-    <c:if test="${not empty paymentDetailsForm.billingAddress.countryIso}">
-        <wp-address:billingAddressFormElements regions="${regions}" country="${paymentDetailsForm.billingAddress.countryIso}"/>
-    </c:if>
-</div>
+<%--<div id="wpBillingCountrySelector" data-address-code="${cartData.deliveryAddress.id}" data-country-iso-code="${cartData.deliveryAddress.country.isocode}" data-display-title="false" class="clearfix">--%>
+    <%--<formElement:formSelectBox idKey="billingAddress.country"--%>
+                               <%--labelKey="address.country"--%>
+                               <%--path="billingAddress.countryIso"--%>
+                               <%--mandatory="true"--%>
+                               <%--skipBlank="false"--%>
+                               <%--skipBlankMessageKey="address.selectCountry"--%>
+                               <%--items="${countries}"--%>
+                               <%--itemValue="isocode"--%>
+                               <%--selectCSSClass="form-control" />--%>
+<%--</div>--%>
+<%--<div id="wpBillingAddress" class="billingAddress i18nAddressForm">--%>
+    <%--<c:if test="${not empty paymentDetailsForm.billingAddress.countryIso}">--%>
+        <%--<wp-address:billingAddressFormElements regions="${regions}" country="${paymentDetailsForm.billingAddress.countryIso}"/>--%>
+    <%--</c:if>--%>
+<%--</div>--%>

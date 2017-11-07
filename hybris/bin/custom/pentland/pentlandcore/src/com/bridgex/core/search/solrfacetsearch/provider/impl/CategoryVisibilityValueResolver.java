@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 /**
  * @author Created by ekaterina.agievich on 9/25/2017.
  */
-public class CategoryVisibilityValueResolver extends AbstractValueResolver<ProductModel, Object, Object> {
+public class CategoryVisibilityValueResolver extends AbstractBaseProductValueResolver {
   @Override
   protected void addFieldValues(InputDocument inputDocument, IndexerBatchContext indexerBatchContext, IndexedProperty indexedProperty, ProductModel productModel, ValueResolverContext<Object, Object> valueResolverContext) throws FieldValueProviderException {
-    Collection<CategoryModel> supercategories = productModel.getSupercategories();
+    Collection<CategoryModel> supercategories = getBaseProductModel(productModel).getSupercategories();
     CategoryModel categoryModel = supercategories.stream().filter(category ->
                                                                     !(category instanceof ClassificationClassModel) && !(category instanceof VariantCategoryModel)).findFirst().orElse(null);
     if(categoryModel != null){

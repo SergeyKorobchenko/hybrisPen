@@ -319,6 +319,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.checkout.multi.pci-sop;PCI-SOP
 ;checkout.checkout.multi.pci-ws;PCI-Default
 ;checkout.checkout.multi.pci.select;Select a PCI option
+;checkout.multi.deliveryAddress.markFor;Mark For Address
+;checkout.multi.deliveryAddress.markFor.description;Select Mark For address or press Next to skip this step
+;checkout.multi.deliveryAddress.markFor.empty;There are no Mark For addresses for selected shipping address. Press Next to skip this step
+;checkout.multi.deliveryAddress.markFor.breadcrumb;Mark For
 ;checkout.checkout.single;Checkout Single
 ;checkout.deliveryAddress.notSelected;Please provide a delivery address for your order
 ;checkout.deliveryMethod.notSelected;Please select a method of delivery for your order
@@ -2844,3 +2848,21 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.orderType;Order Type
 ;text.account.orderHistory.rdd;Requested delivery date
 ;text.account.orderHistory.totalQty;Total Quantity
+
+;text.account.supporttickets.success;Your ticket successfully sended
+;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
+;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
+
+;text.cart.rdd;Requested Delivery Date
+;text.cart.purchaseOrderNumber;P.O. Number
+;text.cart.customerNotes;Notes
+;checkout.savecart;Save updated cart
+;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
+
+
+;checkout.payment.CARD.CREDITCARD;Online payment
+;checkout.payment.CARD.PROFORMA;Online payment
+;checkout.payment.ACCOUNT.ACCOUNT;Account
+;checkout.payment.ACCOUNT.PROFORMA;Pro-Forma
+
+;checkout.multi.deliveryAddress.noAddress;There are no shipping addresses assigned to current customer.
