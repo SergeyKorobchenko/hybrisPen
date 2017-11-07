@@ -61,6 +61,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
     populateVariantOptionData(productModel, variantOptionData);
     elementData.setVariantOption(variantOptionData);
     elementData.setElements(new ArrayList<>());
+    elementData.setIsLeaf(Boolean.FALSE);
     return elementData;
   }
 
