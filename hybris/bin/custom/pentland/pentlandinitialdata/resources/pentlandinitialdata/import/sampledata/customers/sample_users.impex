@@ -60,11 +60,11 @@ INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];originalUid;email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='GBP'];password[default=$defaultPassword];
 ;Admin A;linda.wolf@rustic-hw.com;linda.wolf@rustic-hw.com;linda.wolf@rustic-hw.com;Linda Wolf;ms;Rustic,b2badmingroup;;;;;
 ;AdminB;lars.bauer@rustic-hw.com;lars.bauer@rustic-hw.com;lars.bauer@rustic-hw.com;Lars Bauer;mr;Rustic Services, b2badmingroup;;;;;;
-;Approver A;hanna.schmidt@rustic-hw.com;hanna.schmidt@rustic-hw.com;hanna.schmidt@rustic-hw.com;Hanna Schmidt;ms;Rustic, b2bapprovergroup;;;;;;
-;Approver B;james.bell@rustic-hw.com;james.bell@rustic-hw.com;james.bell@rustic-hw.com;James Bell;mr;Rustic Services, b2bapprovergroup;;;;;;
-;Approver C;carla.torres@rustic-hw.com;carla.torres@rustic-hw.com;carla.torres@rustic-hw.com;Carla Torres;ms;Custom Retail, b2bapprovergroup;;;;;;
-;Approver D;matheu.silva@rustic-hw.com;matheu.silva@rustic-hw.com;matheu.silva@rustic-hw.com;Matheu Silva;mr;Services West, b2bapprovergroup, b2bcustomergroup, b2bmanagergroup, standardPermissions;;;;;;
-;Approver E;mingmei.wang@rustic-hw.com;mingmei.wang@rustic-hw.com;mingmei.wang@rustic-hw.com;Mingmei Wang;ms;Services East, b2bapprovergroup, b2bcustomergroup;;;;;;
+;Approver A;hanna.schmidt@rustic-hw.com;hanna.schmidt@rustic-hw.com;hanna.schmidt@rustic-hw.com;Hanna Schmidt;ms;Rustic;;;;;;
+;Approver B;james.bell@rustic-hw.com;james.bell@rustic-hw.com;james.bell@rustic-hw.com;James Bell;mr;Rustic Services;;;;;;
+;Approver C;carla.torres@rustic-hw.com;carla.torres@rustic-hw.com;carla.torres@rustic-hw.com;Carla Torres;ms;Custom Retail;;;;;;
+;Approver D;matheu.silva@rustic-hw.com;matheu.silva@rustic-hw.com;matheu.silva@rustic-hw.com;Matheu Silva;mr;Services West, b2bcustomergroup, b2bmanagergroup, standardPermissions;;;;;;
+;Approver E;mingmei.wang@rustic-hw.com;mingmei.wang@rustic-hw.com;mingmei.wang@rustic-hw.com;Mingmei Wang;ms;Services East, b2bcustomergroup;;;;;;
 ;Customer A;mark.rivers@rustic-hw.com;mark.rivers@rustic-hw.com;mark.rivers@rustic-hw.com;Mark Rivers;mr;Custom Retail, b2bcustomergroup, premiumPermissions;;;;;;
 ;Customer B;anthony.lombardi@rustic-hw.com;anthony.lombardi@rustic-hw.com;anthony.lombardi@rustic-hw.com;Anthony Lombardi;mr;Custom Retail, b2bcustomergroup,limitedPermissions;;;;;;
 ;Customer C;william.hunter@rustic-hw.com;william.hunter@rustic-hw.com;william.hunter@rustic-hw.com;William Hunter;mr;Custom Retail, b2bcustomergroup, limitedPermissions, standardPermissions;;;;;;
@@ -153,8 +153,8 @@ INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='GBP'];password[default=$defaultPassword]
 ;Admin A;linda.wolf@pronto-hw.com;linda.wolf@pronto-hw.com;Linda Wolf;ms;Pronto, b2badmingroup, TestB2BUnit;
-;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bapprovergroup, b2bcustomergroup;
-;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;b2bapprovergroup, TestB2BUnit, b2bcustomergroup;
+;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bcustomergroup;
+;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;TestB2BUnit, b2bcustomergroup;
 ;Customer A;mark.rivers@pronto-hw.com;mark.rivers@pronto-hw.com;Mark Rivers;mr;Pronto Goods, b2bcustomergroup,enhancedPermissions, TestB2BUnit;;
 ;Customer B;mingmei.wang@pronto-hw.com;mingmei.wang@pronto-hw.com;Mingmei Wang;ms;Pronto Goods, b2bcustomergroup, commonPermissions, TestB2BUnit;;
 ;Customer C;william.hunter@pronto-hw.com;william.hunter@pronto-hw.com;William Hunter;mr;Pronto Services, b2bcustomergroup, enhancedPermissions, TestB2BUnit;
@@ -188,3 +188,6 @@ UPDATE B2BUnit;uid[unique=true];creditLimit(code);accountManager(uid);approvers(
 UPDATE B2BCustomer;uid[unique=true];permissions(code,unit(uid));
 ;hanna.schmidt@pronto-hw.com;Pronto Unlimited Threshold Timespan:Pronto,Pronto 10K GBP ORDER:Pronto;
 ;james.bell@pronto-hw.com;Pronto 5K GBP ORDER:Pronto;
+
+INSERT_UPDATE Employee;name;groups(uid);password[default=$defaultPassword];uid[unique=true]
+;Sales Rep Agent;salesrepgroup,asagentgroup;;salesrepagent;
