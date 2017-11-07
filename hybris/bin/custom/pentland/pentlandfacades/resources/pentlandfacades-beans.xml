@@ -47,9 +47,9 @@
 		<property name="orderCreationDate" type="java.util.Date"/>
 		<property name="rdd" type="java.util.Date"/>
 		<property name="totalQty" type="Integer"/>
-		<property name="orderNet" type="String"/>
-		<property name="orderTax" type="String"/>
-		<property name="orderTotal" type="String"/>
+		<property name="orderNet" type="Double"/>
+		<property name="orderTax" type="Double"/>
+		<property name="orderTotal" type="Double"/>
 		<property name="soldTo" type="String"/>
 		<property name="shipTo" type="de.hybris.platform.commercefacades.user.data.AddressData"/>
 		<property name="orderItems" type="java.util.List&lt;com.bridgex.facades.order.data.OrderItemData>"/>

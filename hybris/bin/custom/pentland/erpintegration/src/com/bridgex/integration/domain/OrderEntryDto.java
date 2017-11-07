@@ -1,9 +1,12 @@
 package com.bridgex.integration.domain;
 
+import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 
 /**
  * @author Goncharenko Mikhail, created on 01.11.2017.
@@ -38,7 +41,7 @@ public class OrderEntryDto {
 
   @JsonProperty("REQ_DEL_DATE")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-  private String rdd;
+  private Date rdd;
 
   @JsonProperty("ET_SCHEDULE_LINE")
   private List<SizeVariantDto> sizeVariants;
@@ -107,11 +110,11 @@ public class OrderEntryDto {
     this.unit = unit;
   }
 
-  public String getRdd() {
+  public Date getRdd() {
     return rdd;
   }
 
-  public void setRdd(String rdd) {
+  public void setRdd(Date rdd) {
     this.rdd = rdd;
   }
 

@@ -39,9 +39,11 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     target.setOrderStatus(source.getStatus());
     target.setOrderCreationDate(source.getCreationTime());
     target.setRdd(source.getRdd());
-    target.setOrderNet(source.getNetPrice());
-    target.setOrderTax(source.getTaxPrice());
-    target.setOrderTotal(source.getTotalPrice());
+    target.setOrderNet(Double.valueOf(source.getNetPrice()));
+    target.setOrderTax(Double.valueOf(source.getTaxPrice()));
+    target.setOrderTotal(Double.valueOf(source.getTotalPrice()));
+    target.setSoldTo(source.getCustomerId() + " " + source.getCustomerName());
+    target.setTotalQty(Double.valueOf(source.getTotalQuantity()).intValue());
 
     populateItems(source, target);
     populateAddress(source, target);
@@ -54,7 +56,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       OrderItemData item = new OrderItemData();
       item.setNumber(dto.getEntryNumber());
       item.setItemStatus(dto.getEntryStatus());
-      item.setQty(Integer.parseInt(dto.getQuantity()));
+      item.setQty(Double.valueOf(dto.getQuantity()).intValue());
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
       items.add(item);
@@ -69,7 +71,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       ShipmentData shipment = new ShipmentData();
       shipment.setShipmentStatus(size.getShipStatus());
       shipment.setShipDate(size.getShipDate());
-      shipment.setQty(Integer.parseInt(size.getShipQty()));
+      shipment.setQty(Double.valueOf(size.getShipQty()).intValue());
       shipments.merge(size.getShipDate(), shipment, shipmentDataMerger);
 
     }

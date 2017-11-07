@@ -23,7 +23,7 @@ public class OrderDetailsFacade {
 
   private final static String I_SERVICE_CONSUMER = "Hybris_B2B";
   private final static String I_VBTYP = "C";
-  private final static String I_CUSTOMER_VIEW_FLAG = "";
+  private final static String I_CUSTOMER_VIEW_FLAG = "X";
 
   private OrderDetailsService                       orderDetailsService;
   private StoreSessionFacade                        storeSessionFacade;

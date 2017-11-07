@@ -45,6 +45,9 @@ public class OrderDetailsResponse {
   @JsonProperty("E_CUSTOMER_NAME")
   private String customerName;
 
+  @JsonProperty("E_CUSTOMER_ID")
+  private String customerId;
+
   @JsonProperty("E_SHIP_MARK_FOR")
   private String deliveryAddressMarkFor;
 
@@ -150,6 +153,14 @@ public class OrderDetailsResponse {
 
   public void setCustomerName(String customerName) {
     this.customerName = customerName;
+  }
+
+  public String getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
   }
 
   public String getDeliveryAddressMarkFor() {
