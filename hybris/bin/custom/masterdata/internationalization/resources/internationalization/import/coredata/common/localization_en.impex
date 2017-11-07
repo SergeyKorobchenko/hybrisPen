@@ -1578,7 +1578,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.remove;Remove
 ;text.account.quote.status;Status
 ;text.account.quote.status.display.BUYER_ACCEPTED;Accepted
-;text.account.quote.status.display.BUYER_APPROVED;Approved
+;text.account.quote.status.display.BUYER_APPROVED;Ordered
 ;text.account.quote.status.display.BUYER_DRAFT;Draft
 ;text.account.quote.status.display.BUYER_OFFER;Completed
 ;text.account.quote.status.display.BUYER_ORDERED;Ordered
@@ -1586,7 +1586,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.status.display.BUYER_SUBMITTED;Submitted
 ;text.account.quote.status.display.CANCELLED;Cancelled
 ;text.account.quote.status.display.EXPIRED;Expired
-;text.account.quote.status.display.SELLERAPPROVER_APPROVED;Approved
+;text.account.quote.status.display.SELLERAPPROVER_APPROVED;Submitted
 ;text.account.quote.status.display.SELLERAPPROVER_DRAFT;Draft
 ;text.account.quote.status.display.SELLERAPPROVER_PENDING;Pending Approval
 ;text.account.quote.status.display.SELLERAPPROVER_REJECTED;Rejected

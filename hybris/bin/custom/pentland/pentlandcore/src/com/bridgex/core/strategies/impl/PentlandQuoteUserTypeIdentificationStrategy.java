@@ -16,15 +16,13 @@ public class PentlandQuoteUserTypeIdentificationStrategy extends DefaultQuoteUse
   private String b2bCustomerGroup;
   private String b2bManagerGroup;
   private String salesRepGroup;
-  private String b2bApproverGroup;
 
   @Override
   public Optional<QuoteUserType> getCurrentQuoteUserType(UserModel userModel) {
 
     validateParameterNotNullStandardMessage("userModel", userModel);
 
-    if (getUserService().isMemberOfGroup(userModel, getUserService().getUserGroupForUID(getSalesRepGroup())) ||
-        getUserService().isMemberOfGroup(userModel, getUserService().getUserGroupForUID(getB2bApproverGroup())))
+    if (getUserService().isMemberOfGroup(userModel, getUserService().getUserGroupForUID(getSalesRepGroup())))
     {
       return Optional.of(QuoteUserType.SELLER);
     }
@@ -52,14 +50,6 @@ public class PentlandQuoteUserTypeIdentificationStrategy extends DefaultQuoteUse
 
   public void setSalesRepGroup(String salesRepGroup) {
     this.salesRepGroup = salesRepGroup;
-  }
-
-  public String getB2bApproverGroup() {
-    return b2bApproverGroup;
-  }
-
-  public void setB2bApproverGroup(String b2bApproverGroup) {
-    this.b2bApproverGroup = b2bApproverGroup;
   }
 
   public String getB2bManagerGroup() {
