@@ -31,7 +31,6 @@ hybris-dependencies/*
 hybris/bin/ext*/**
 hybris/bin/platform/**
 hybris/config/.externalToolBuilders
-hybris/config/solr/**
 test-reports/*
 *.sublime-*
 hybrisdeps/*
