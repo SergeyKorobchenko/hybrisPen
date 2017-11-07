@@ -17,7 +17,7 @@
 	</action>
 
 	<action id="checkAuthorizeOrderPayment" bean="checkAuthorizeOrderPaymentAction">
-		<transition name="OK" to="reserveAmount"/>
+		<transition name="OK" to="sendOrderPlacedNotification"/>
 		<transition name="NOK" to="authorizationFailedNotification"/>
 	</action>
 
@@ -74,8 +74,12 @@
 	</action>
 	
 	<action id="takePayment" bean="takePaymentAction">
-		<transition name="OK" to="splitOrder"/>
+		<transition name="OK" to="exportOrder"/>
 		<transition name="NOK" to="sendPaymentFailedNotification"/>
+	</action>
+
+	<action id="exportOrder" bean="exportOrderAction">
+		<transition name="OK" to="success" />
 	</action>
 
 	<action id="cancelOrder" bean="cancelWholeOrderAuthorizationAction">
