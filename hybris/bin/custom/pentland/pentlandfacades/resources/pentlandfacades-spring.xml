@@ -45,7 +45,7 @@
 	</bean>
 
 	<bean id="orderDetailsConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.bridgex.facades.order.data.OrderDetailsData"/>
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.OrderData"/>
 		<property name="populators">
 			<list>
 				<ref bean="orderDetailsPopulator"/>
@@ -55,6 +55,7 @@
 	
 	<bean id="orderDetailsPopulator" class="com.bridgex.facades.order.converters.populator.OrderDetailsPopulator">
 		<property name="productService" ref="productService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
 	<alias name="pentlandCartFacade" alias="cartFacade"/>

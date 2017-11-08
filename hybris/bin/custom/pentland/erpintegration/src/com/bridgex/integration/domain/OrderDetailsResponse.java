@@ -48,8 +48,11 @@ public class OrderDetailsResponse {
   @JsonProperty("E_CUSTOMER_ID")
   private String customerId;
 
-  @JsonProperty("E_SHIP_MARK_FOR")
-  private String deliveryAddressMarkFor;
+  @JsonProperty("E_SHIP_MARK_FOR_NAME")
+  private String deliveryAddressMarkForName;
+
+  @JsonProperty("E_SHIP_MARK_FOR_ID")
+  private String deliveryAddressMarkForId;
 
   @JsonProperty("E_SHIP_TO_STREET")
   private String deliveryAddressStreet;
@@ -163,12 +166,20 @@ public class OrderDetailsResponse {
     this.customerId = customerId;
   }
 
-  public String getDeliveryAddressMarkFor() {
-    return deliveryAddressMarkFor;
+  public String getDeliveryAddressMarkForName() {
+    return deliveryAddressMarkForName;
   }
 
-  public void setDeliveryAddressMarkFor(String deliveryAddressMarkFor) {
-    this.deliveryAddressMarkFor = deliveryAddressMarkFor;
+  public void setDeliveryAddressMarkForName(String deliveryAddressMarkForName) {
+    this.deliveryAddressMarkForName = deliveryAddressMarkForName;
+  }
+
+  public String getDeliveryAddressMarkForId() {
+    return deliveryAddressMarkForId;
+  }
+
+  public void setDeliveryAddressMarkForId(String deliveryAddressMarkForId) {
+    this.deliveryAddressMarkForId = deliveryAddressMarkForId;
   }
 
   public String getDeliveryAddressStreet() {

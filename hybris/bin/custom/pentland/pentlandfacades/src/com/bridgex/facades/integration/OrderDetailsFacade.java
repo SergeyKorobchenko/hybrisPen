@@ -1,19 +1,13 @@
 package com.bridgex.facades.integration;
 
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.ResourceAccessException;
 
 import com.bridgex.core.integration.OrderDetailsService;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
-import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
-import de.hybris.platform.converters.Converters;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 /**
@@ -25,8 +19,8 @@ public class OrderDetailsFacade {
   private final static String I_VBTYP = "C";
   private final static String I_CUSTOMER_VIEW_FLAG = "X";
 
-  private OrderDetailsService                       orderDetailsService;
-  private StoreSessionFacade                        storeSessionFacade;
+  private OrderDetailsService                              orderDetailsService;
+  private StoreSessionFacade                               storeSessionFacade;
   private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
 
   @Required

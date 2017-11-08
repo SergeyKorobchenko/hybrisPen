@@ -11,7 +11,6 @@ import com.bridgex.integration.service.impl.AbstractIntegrationService;
 
 import de.hybris.platform.basecommerce.enums.ConsignmentStatus;
 import de.hybris.platform.basecommerce.enums.OrderEntryStatus;
-import de.hybris.platform.sap.sapmodel.enums.SAPOrderStatus;
 
 /**
  * @author Goncharenko Mikhail, created on 07.11.2017.
@@ -31,14 +30,15 @@ public class OrderDetailsServiceMock extends AbstractIntegrationService<OrderDet
     response.setPurshaseOrderNumber("43523");
     response.setCreationTime(new Date());
     response.setRdd(new Date());
-    response.setStatus(SAPOrderStatus.CONFIRMED_FROM_ERP.getCode());
-    response.setCurrency("GRP");
+    response.setStatus("approved");
+    response.setCurrency("GBP");
     response.setCustomerName("Akira Namomuta");
     response.setCustomerId("339982");
 
     response.setDeliveryAddressCity("London");
     response.setDeliveryAddressCountry("GB");
-    response.setDeliveryAddressMarkFor("Akira");
+    response.setDeliveryAddressMarkForName("Akira");
+    response.setDeliveryAddressMarkForId("7735");
     response.setDeliveryAddressStreet("Abbey Road, 4");
     response.setDeliveryAddressPostcode("223610");
     response.setDeliveryAddressState("London");
@@ -65,7 +65,8 @@ public class OrderDetailsServiceMock extends AbstractIntegrationService<OrderDet
   private OrderEntryDto getOrderEntryDto() {
     OrderEntryDto entry = new OrderEntryDto();
     entry.setEntryNumber("0");
-    entry.setEntryStatus(OrderEntryStatus.LIVING.getCode());
+    entry.setProduct("300005449");
+    entry.setEntryStatus("shipped");
     entry.setNetPrice("1000.00");
     entry.setUnitNetPrice("100.00");
     entry.setPrice("1010.00");
