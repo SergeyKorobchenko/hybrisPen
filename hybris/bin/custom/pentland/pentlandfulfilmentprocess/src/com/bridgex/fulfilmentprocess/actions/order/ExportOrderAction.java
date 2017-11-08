@@ -19,7 +19,7 @@ public class ExportOrderAction extends AbstractProceduralAction<OrderProcessMode
 
   @Override
   public void executeAction(OrderProcessModel orderProcessModel) throws RetryLaterException, Exception {
-
+    pentlandOrderExportService.exportOrder(orderProcessModel.getOrder());
   }
 
   @Required

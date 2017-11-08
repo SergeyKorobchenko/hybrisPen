@@ -96,6 +96,13 @@ INSERT_UPDATE WorldpayBankConfiguration; code[unique = true]; name[lang = en]; d
 
 INSERT_UPDATE ServicelayerJob;code[unique=true];springId
 ;exportDataJobPerformable;exportDataJobPerformable
+;orderReExportJobPerformable;orderReExportJobPerformable
 
 INSERT_UPDATE ExportDataCronJob;code[unique=true];job(code);baseStore(uid);cmsSite(uid);language(isocode);currency(isocode);user(uid);thirdPartyHost;thirdPartyUsername;thirdPartyPassword;dataGenerationPipeline;sessionLanguage(isocode)
 ;pentlandProductsExportJob;exportDataJobPerformable;$storeUid;$storeUid;$defaultLanguage;$defaultCurrency;anonymous;;;;exportPentlandProductPipeline;$defaultLanguage
+
+INSERT_UPDATE OrderExportCronJob;code[unique=true];job(code);sessionLanguage(isocode);sessionCurrency(isocode);sessionUser(uid)
+;pentlandOrderExportJob;orderReExportJobPerformable;$defaultLanguage;$defaultCurrency;anonymous
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];cronExpression
+;pentlandOrderExportJob;0 0 0/1 1/1 * ? *

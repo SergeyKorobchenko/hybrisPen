@@ -32,6 +32,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
 
     //TODO fill in all request data in integration task
     MultiBrandCartDto request = new MultiBrandCartDto();
+    request.setDocNumber(orderModel.getCode());
     ResponseEntity<ExportOrderResponse> exportOrderResponseResponseEntity = orderExportService.sendRequest(request, ExportOrderResponse.class);
 
     if(HttpStatus.OK.equals(exportOrderResponseResponseEntity.getStatusCode())){
@@ -39,7 +40,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
       ETReturnDto etReturn = responseBody.getEtReturn();
       if("S".equals(etReturn.getType())){
         List<SapOrderDTO> sapOrderDTOList = responseBody.getSapOrderDTOList();
-        List<OrderModel> sapOrders = new ArrayList<>();
+        List<OrderModel> byBrandOrderList = new ArrayList<>();
         for(SapOrderDTO sapOrderDTO: sapOrderDTOList){
           OrderModel sapOrder = modelService.create(OrderModel.class);
           sapOrder.setCode(sapOrderDTO.getOrderCode());
@@ -50,16 +51,26 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
           sapOrder.setTotalQty(Integer.parseInt(sapOrderDTO.getTotalQty()));
           sapOrder.setRdd(sapOrderDTO.getRequestedDeliveryDate());
           sapOrder.setSapMsg(sapOrderDTO.getSapMessage());
+          sapOrder.setSite(orderModel.getSite());
+          sapOrder.setStore(orderModel.getStore());
+          sapOrder.setSourceOrder(orderModel);
+          sapOrder.setCurrency(orderModel.getCurrency());
+          sapOrder.setDate(orderModel.getDate());
+          sapOrder.setPurchaseOrderNumber(sapOrderDTO.getPoNumber());
+          sapOrder.setUser(orderModel.getUser());
+          sapOrder.setUnit(orderModel.getUnit());
           modelService.save(sapOrder);
-          sapOrders.add(sapOrder);
+          byBrandOrderList.add(sapOrder);
         }
-        orderModel.setByBrandOrderList(sapOrders);
         orderModel.setExportStatus(ExportStatus.EXPORTED);
+        orderModel.setReexportRetries(0);
+        orderModel.setByBrandOrderList(byBrandOrderList);
         modelService.save(orderModel);
         return true;
       }
     }
     orderModel.setExportStatus(ExportStatus.NOTEXPORTED);
+    orderModel.setReexportRetries(orderModel.getReexportRetries() + 1);
     modelService.save(orderModel);
     return false;
   }

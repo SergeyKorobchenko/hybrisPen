@@ -400,6 +400,26 @@
                         <persistence type="property"/>
                         <modifiers read="true" write="true" search="true" optional="true"/>
                     </attribute>
+                    <attribute qualifier="reexportRetries" type="int">
+                        <description>Number of failed attempts to export order</description>
+                        <defaultvalue>0</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="CronJobs">
+            <itemtype code="OrderExportCronJob" extends="CronJob" autocreate="true" generate="true">
+                <attributes>
+                    <attribute qualifier="timeoutMinutes" type="int">
+                        <defaultvalue>60</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="retries" type="int">
+                        <defaultvalue>3</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
         </typegroup>
