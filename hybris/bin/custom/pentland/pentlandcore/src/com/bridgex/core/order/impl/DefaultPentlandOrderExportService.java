@@ -14,6 +14,7 @@ import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.SapOrderDTO;
 import com.bridgex.integration.service.IntegrationService;
 
+import de.hybris.platform.commerceservices.enums.SalesApplication;
 import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -59,6 +60,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
           sapOrder.setPurchaseOrderNumber(sapOrderDTO.getPoNumber());
           sapOrder.setUser(orderModel.getUser());
           sapOrder.setUnit(orderModel.getUnit());
+          sapOrder.setSalesApplication(SalesApplication.SAP);
           modelService.save(sapOrder);
           byBrandOrderList.add(sapOrder);
         }
