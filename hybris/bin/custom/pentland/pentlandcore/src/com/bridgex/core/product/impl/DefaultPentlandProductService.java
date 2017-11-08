@@ -12,11 +12,15 @@ import org.springframework.util.Assert;
 
 import com.bridgex.core.product.PentlandProductService;
 import com.bridgex.core.product.dao.PentlandProductDao;
+import com.bridgex.integration.domain.MultiBrandCartDto;
+import com.bridgex.integration.domain.MultiBrandCartResponse;
+import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.mediaconversion.MediaConversionService;
 import de.hybris.platform.mediaconversion.enums.ConversionStatus;
 import de.hybris.platform.product.impl.DefaultProductService;
@@ -29,8 +33,8 @@ public class DefaultPentlandProductService extends DefaultProductService impleme
 
   private static final String PRIMARY_CONVERSION_GROUP = "productConversionGroup";
 
-  private PentlandProductDao     pentlandProductDao;
-  private MediaConversionService mediaConversionService;
+  private PentlandProductDao                                            pentlandProductDao;
+  private MediaConversionService                                        mediaConversionService;
 
   @Override
   public List<ProductModel> findSMUProductsForSapBrandAndCatalogVersion(String sapBrand, CatalogVersionModel catalogVersion) {
@@ -113,7 +117,6 @@ public class DefaultPentlandProductService extends DefaultProductService impleme
     }
     return value;
   }
-
 
   @Required
   public void setPentlandProductDao(PentlandProductDao pentlandProductDao) {

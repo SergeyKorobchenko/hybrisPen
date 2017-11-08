@@ -47,4 +47,6 @@ public interface PentlandProductService extends ProductService{
    */
   Object getProductAttribute(final ProductModel productModel, final String attribute);
 
+  //void getCustomerPrice(final String productCode);
+
 }
