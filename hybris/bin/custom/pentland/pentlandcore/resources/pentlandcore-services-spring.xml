@@ -20,6 +20,7 @@
 	      class="com.bridgex.core.category.impl.DefaultPentlandCategoryService"
 	      parent="defaultCategoryService">
 		<property name="categoryDao" ref="categoryDao"/>
+		<property name="productService" ref="pentlandProductService" />
 	</bean>
 
 	<alias name="pentlandSSOUserService" alias="ssoUserService"/>

@@ -39,6 +39,8 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
+
+import com.bridgex.facades.utils.ProductUtils;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
@@ -88,7 +90,6 @@ public class ProductPageController extends AbstractPageController
 	 * the issue and future resolution.
 	 */
 	private static final String PRODUCT_CODE_PATH_VARIABLE_PATTERN = "/{productCode:.*}";
-	private static final String REVIEWS_PATH_VARIABLE_PATTERN = "{numberOfReviews:.*}";
 
 	private static final String FUTURE_STOCK_ENABLED = "storefront.products.futurestock.enabled";
 	private static final String STOCK_SERVICE_UNAVAILABLE = "basket.page.viewFuture.unavailable";
@@ -123,8 +124,7 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
-		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL,
-				ProductOption.VARIANT_MATRIX_MEDIA);
+		final List<ProductOption> extraOptions = null;
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
 
@@ -140,7 +140,7 @@ public class ProductPageController extends AbstractPageController
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
 		model.addAttribute("pageType", PageType.PRODUCT.name());
-		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
+		model.addAttribute("futureStockEnabled", true);
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
@@ -210,17 +210,6 @@ public class ProductPageController extends AbstractPageController
 		getRequestContextData(request).setProduct(productModel);
 
 		return ControllerConstants.Views.Fragments.Product.QuickViewPopup;
-	}
-
-	protected void setUpReviewPage(final Model model, final String productCode) throws CMSItemNotFoundException
-	{
-		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
-		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
-		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
-		setUpMetaData(model, metaKeywords, metaDescription);
-		storeCmsPageInModel(model, getPageForProduct(productCode));
-		model.addAttribute("product", productFacade.getProductForCodeAndOptions(productCode, Arrays.asList(ProductOption.BASIC)));
-		updatePageTitle(productCode, model);
 	}
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/futureStock", method = RequestMethod.GET)
@@ -298,19 +287,24 @@ public class ProductPageController extends AbstractPageController
 	}
 
 	protected void populateProductDetailForDisplay(final String productCode, final Model model, final HttpServletRequest request,
-			final List<ProductOption> extraOptions) throws CMSItemNotFoundException
+			final List<ProductOption> extraOptions) throws CMSItemNotFoundException, UnknownIdentifierException
 	{
 		final ProductModel productModel = productService.getProductForCode(productCode);
 
+		if (!ProductUtils.isNotDiscontinued(productModel)) {
+			throw new UnknownIdentifierException("Product with code " + productCode + " discontinued - redirecting to 404 page");
+		}
+
 		getRequestContextData(request).setProduct(productModel);
 
-		final List<ProductOption> options = new ArrayList<>(Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT, ProductOption.BASIC,
-				ProductOption.URL, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION, ProductOption.GALLERY,
-				ProductOption.CATEGORIES, ProductOption.REVIEW, ProductOption.PROMOTIONS, ProductOption.CLASSIFICATION,
-				ProductOption.VARIANT_FULL, ProductOption.STOCK, ProductOption.VOLUME_PRICES, ProductOption.PRICE_RANGE,
-				ProductOption.DELIVERY_MODE_AVAILABILITY));
+		final List<ProductOption> options = new ArrayList<>(Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT, ProductOption.BASIC, ProductOption.URL, ProductOption.PRICE,
+		                                                                  ProductOption.BRAND, ProductOption.FEATURE, ProductOption.PDP,
+		                                                                  ProductOption.DESCRIPTION, ProductOption.GALLERY, ProductOption.CATEGORIES, ProductOption.VARIANT_FULL,
+		                                                                  ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL, ProductOption.VARIANT_MATRIX_MEDIA));
 
-		options.addAll(extraOptions);
+		if (CollectionUtils.isNotEmpty(extraOptions)) {
+			options.addAll(extraOptions);
+		}
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, options);
 
@@ -330,14 +324,6 @@ public class ProductPageController extends AbstractPageController
 	{
 		model.addAttribute("galleryImages", getGalleryImages(productData));
 		model.addAttribute("product", productData);
-		if (productData.getConfigurable())
-		{
-			final List<ConfigurationInfoData> configurations = productFacade.getConfiguratorSettingsForCode(productData.getCode());
-			if (CollectionUtils.isNotEmpty(configurations))
-			{
-				model.addAttribute("configuratorType", configurations.get(0).getConfiguratorType());
-			}
-		}
 	}
 
 	protected void sortVariantOptionData(final ProductData productData)

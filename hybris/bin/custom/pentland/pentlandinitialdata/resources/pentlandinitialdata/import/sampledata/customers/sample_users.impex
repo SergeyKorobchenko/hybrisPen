@@ -153,8 +153,8 @@ INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='GBP'];password[default=$defaultPassword]
 ;Admin A;linda.wolf@pronto-hw.com;linda.wolf@pronto-hw.com;Linda Wolf;ms;Pronto, b2badmingroup, TestB2BUnit;
-;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bapprovergroup, b2bcustomergroup;
-;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;b2bapprovergroup, TestB2BUnit, b2bcustomergroup;
+;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bcustomergroup;
+;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;TestB2BUnit, b2bcustomergroup;
 ;Customer A;mark.rivers@pronto-hw.com;mark.rivers@pronto-hw.com;Mark Rivers;mr;Pronto Goods, b2bcustomergroup,enhancedPermissions, TestB2BUnit;;
 ;Customer B;mingmei.wang@pronto-hw.com;mingmei.wang@pronto-hw.com;Mingmei Wang;ms;Pronto Goods, b2bcustomergroup, commonPermissions, TestB2BUnit;;
 ;Customer C;william.hunter@pronto-hw.com;william.hunter@pronto-hw.com;William Hunter;mr;Pronto Services, b2bcustomergroup, enhancedPermissions, TestB2BUnit;

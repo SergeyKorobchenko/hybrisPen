@@ -279,4 +279,30 @@
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
 	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
 
+	<alias name="pentlandProductBasicPopulator" alias="productBasicPopulator" />
+	<bean name="pentlandProductBasicPopulator" class="com.bridgex.facades.populators.PentlandProductBasicPopulator" parent="defaultProductBasicPopulator"/>
+
+	<alias name="pentlandProductBrandPopulator" alias="productBrandPopulator" />
+	<bean name="pentlandProductBrandPopulator" class="com.bridgex.facades.populators.ProductBrandPopulator" parent="baseProductPopulator">
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<alias name="pentlandProductFeaturePopulator" alias="productFeaturePopulator" />
+	<bean name="pentlandProductFeaturePopulator" class="com.bridgex.facades.populators.ProductFeaturePopulator" parent="baseProductPopulator"/>
+
+	<alias name="pentlandProductPDPPopulator" alias="productPDPPopulator" />
+	<bean name="pentlandProductPDPPopulator" class="com.bridgex.facades.populators.ProductPDPPopulator" parent="baseProductPopulator">
+		<property name="imageConverter" ref="imageConverter"/>
+	</bean>
+
+	<bean id="b2bProductConfiguredPopulator" parent="productVariantConfiguredPopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+				<entry key="BRAND" value-ref="productBrandPopulator"/>
+				<entry key="FEATURE" value-ref="productFeaturePopulator"/>
+				<entry key="PDP" value-ref="productPDPPopulator"/>
+			</map>
+		</property>
+	</bean>
+
 </beans>
