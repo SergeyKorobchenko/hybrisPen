@@ -62,4 +62,7 @@
 	<alias name="pentlandCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
 	<bean id="pentlandCommercePlaceOrderStrategy" class="com.bridgex.core.order.impl.PentlandCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy"/>
 
+	<alias name="pentlandCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+	<bean id="pentlandCommerceAddToCartStrategy" class="com.bridgex.core.order.impl.PentlandCommerceAddToCartStrategy" parent="defaultCommerceAddToCartStrategy"/>
+
 </beans>
