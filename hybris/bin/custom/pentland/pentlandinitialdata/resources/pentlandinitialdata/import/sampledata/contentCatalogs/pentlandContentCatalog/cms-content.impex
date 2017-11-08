@@ -697,7 +697,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-orderdetail ; Side Content Slot for My Account Order Details ; true ;                                                                                                                                                                                                                                                                     ; ; ;
-; ; BodyContent-orderdetail ; Body Content Slot for My Account Order Details ; true ; AccountOrderDetailsHeadlineComponent,AccountOrderDetailsOverviewComponent,AccountOrderDetailsItemsComponent,AccountOrderDetailsShippingComponent,AccountOrderDetailsApprovalDetailsComponent,AccountOrderDetailsTotalsComponent,AccountOrderDetailsReorderComponent ; ; ;
+; ; BodyContent-orderdetail ; Body Content Slot for My Account Order Details ; true ; AccountOrderDetailsHeadlineComponent,AccountOrderDetailsOverviewComponent,AccountOrderDetailsItemsComponent,AccountOrderDetailsTotalsComponent,AccountOrderDetailsReorderComponent ; ; ;
 
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ; ; AccountOrderDetailsHeadlineComponent        ; Account Order Details Headline Component         ; accountOrderDetailHeadline.jsp                                                                           ;               ; AccountOrderDetailsHeadlineComponent
