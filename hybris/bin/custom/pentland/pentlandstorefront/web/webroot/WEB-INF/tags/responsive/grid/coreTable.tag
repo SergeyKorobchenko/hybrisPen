@@ -28,7 +28,7 @@
     <c:set var="inputDisabled" value="disabled"/>
 </c:if>
 
-<tr class="hidden-size">
+<tr class="hidden-size">1
     <th>${fn:escapeXml(firstVariant.parentVariantCategory.name)}
         <c:if test="${firstVariant.elements ne null and firstVariant.elements.size() > 0}">
             /${fn:escapeXml(firstVariant.elements[0].parentVariantCategory.name)}
