@@ -66,6 +66,14 @@
 
     </enumtypes>
 
+    <relations>
+        <relation code="Order2SapOrdersRel" localized="false">
+            <description>Split by brand orders returned from SAP after multibrand order export</description>
+            <sourceElement type="Order" cardinality="one" qualifier="sourceOrder"/>
+            <targetElement type="Order" cardinality="many" qualifier="byBrandOrderList" ordered="false" collectiontype="list"/>
+        </relation>
+    </relations>
+
     <itemtypes>
 
         <!-- Add your item definitions here -->
@@ -394,6 +402,36 @@
                     </attribute>
                     <attribute qualifier="markFor" type="Address">
                         <description>Mark For Address</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="sapBrand" type="java.lang.String">
+                        <description>SAP Brand</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
+                    <attribute qualifier="sapMsg" type="java.lang.String">
+                        <description>Comment from SAP after order export/split</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                    </attribute>
+                    <attribute qualifier="reexportRetries" type="int">
+                        <description>Number of failed attempts to export order</description>
+                        <defaultvalue>0</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="CronJobs">
+            <itemtype code="OrderExportCronJob" extends="CronJob" autocreate="true" generate="true">
+                <attributes>
+                    <attribute qualifier="timeoutMinutes" type="int">
+                        <defaultvalue>60</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="retries" type="int">
+                        <defaultvalue>3</defaultvalue>
                         <persistence type="property"/>
                     </attribute>
                 </attributes>

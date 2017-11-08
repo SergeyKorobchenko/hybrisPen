@@ -41,11 +41,16 @@
 
 	<beans profile="prod">
 		<bean id="orderSimulateService" class="com.bridgex.integration.service.impl.OrderSimulateServiceImpl" parent="abstractIntegrationService" />
+
+		<bean id="orderExportService" class="com.bridgex.integration.service.impl.OrderExportServiceImpl" parent="abstractIntegrationService" />
 	</beans>
 
 	<beans profile="dev">
 		<alias alias="orderSimulateService" name="orderSimulateServiceMock"/>
 		<bean id="orderSimulateServiceMock" class="com.bridgex.integration.service.mock.OrderSimulateServiceMock" parent="abstractIntegrationService" />
+
+		<alias alias="orderExportService" name="orderExportServiceMock"/>
+		<bean id="orderExportServiceMock" class="com.bridgex.integration.service.mock.OrderExportServiceMock" parent="abstractIntegrationService" />
 	</beans>
 
 
