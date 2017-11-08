@@ -35,7 +35,6 @@
 		<property name="b2bCustomerGroup" value="b2bcustomergroup"/>
 		<property name="b2bManagerGroup" value="b2bmanagergroup"/>
 		<property name="salesRepGroup" value="salesrepgroup"/>
-		<property name="b2bApproverGroup" value="b2bapprovergroup"/>
 	</bean>
 
 	<alias name="pentlandRecipientTypeToContextClassMap" alias="recipientTypeToContextClassMap"/>

@@ -8,7 +8,6 @@
 	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 		<div class="name">${fn:escapeXml(product.name)}<span class="sku">ID</span><span class="code">${fn:escapeXml(product.code)}</span></div>
 	</ycommerce:testId>
-	<product:productReviewSummary product="${product}" showLinks="true"/>
 </div>
 <div class="row">
 	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-4">
@@ -20,15 +19,11 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="product-details">
-						<product:productPromotionSection product="${product}"/>
 						<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 							<product:productPricePanel product="${product}" />
 						</ycommerce:testId>
-						<div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
+						<%--<div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>--%>
 					</div>
-				</div>
-
-				<div class="col-sm-12 col-md-9 col-lg-6">
 					<cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
 					</cms:pageSlot>
@@ -36,6 +31,10 @@
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-add-to-cart-component"/>
 					</cms:pageSlot>
 				</div>
+
+<%--				<div class="col-sm-12 col-md-9 col-lg-6">
+
+				</div>--%>
 			</div>
 		</div>
 

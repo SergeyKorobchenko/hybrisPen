@@ -18,7 +18,8 @@
 		separators (e.g. comma) we change the separator to some random string sequence that will not appear
 		in the formatted currency value.
 		 --%>
-		<spring:theme code="product.price.from" arguments="${priceData.formattedValue}" argumentSeparator="#~/@!£$%^"/>
+		<%--<spring:theme code="product.price.from" arguments="${priceData.formattedValue}" argumentSeparator="#~/@!ï¿½$%^"/>--%>
+		${fn:escapeXml(priceData.formattedValue)}
 	</c:when>
 	<c:otherwise>
 		${fn:escapeXml(priceData.formattedValue)}
