@@ -87,4 +87,7 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="orderExportService" ref="orderExportService"/>
 	</bean>
+
+	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
+	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator"/>
 </beans>

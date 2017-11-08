@@ -9,6 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import de.hybris.platform.acceleratorfacades.order.populators.AcceleratorGroupOrderEntryPopulator;
 import de.hybris.platform.commercefacades.order.converters.populator.GroupOrderEntryPopulator;
 import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
@@ -23,7 +24,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 11/3/2017.
  */
-public class PentlandGroupOrderEntryPopulator extends GroupOrderEntryPopulator<AbstractOrderModel, AbstractOrderData> {
+public class PentlandGroupOrderEntryPopulator extends AcceleratorGroupOrderEntryPopulator {
 
   private static final Logger LOG = Logger.getLogger(PentlandGroupOrderEntryPopulator.class);
 
