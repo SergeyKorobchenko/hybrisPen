@@ -106,4 +106,8 @@
 	<util:set id="b2bAcceleratorSiteChannels" value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
 		<ref bean="SiteChannel.B2B"/>
 	</util:set>
+
+	<bean id="customSalesGroupRestrictedPathsListMergeDirective" depends-on="asmAllAgentsRestrictedPathsList" parent="listMergeDirective">
+		<property name="add" value="/checkout/**"/>
+	</bean>
 </beans>
