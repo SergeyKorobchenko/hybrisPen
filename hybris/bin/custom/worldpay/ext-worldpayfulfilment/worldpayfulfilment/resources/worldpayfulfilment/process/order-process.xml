@@ -3,13 +3,17 @@
 
 	<!-- Since worldpay process paymentTransactions asynchronously, it is necessary to add wait-steps to the order process -->
 	<action id="checkOrder" bean="checkOrderAction">
-		<transition name="OK" to="checkAuthorizeOrderPayment"/>
+		<transition name="OK" to="exportOrder"/>
 		<transition name="NOK" to="error"/>
+	</action>
+
+	<action id="exportOrder" bean="exportOrderAction">
+		<transition name="OK" to="checkAuthorizeOrderPayment" />
 	</action>
 
 	<!-- New transition WAIT to wait for authorisation from worldpay -->
 	<action id="checkAuthorizeOrderPayment" bean="checkAuthorizeOrderPaymentAction">
-		<transition name="OK" to="reserveAmount"/>
+		<transition name="OK" to="sendOrderPlacedNotification"/>
 		<transition name="NOK" to="authorizationFailedNotification"/>
 		<transition name="WAIT" to="waitFor_AUTHORIZATION"/>
 	</action>
@@ -73,8 +77,8 @@
 	
 	<!-- New transition WAIT to wait for capture from worldpay -->
 	<action id="takePayment" bean="takePaymentAction">
-		<transition name="OK" to="splitOrder"/>
-		<transition name="NOK" to="sendPaymentFailedNotification"/>
+		<transition name="OK" to="success"/>
+		<transition name="NOK" to="failed"/>
 		<transition name="WAIT" to="waitFor_CAPTURE"/>
 	</action>
 

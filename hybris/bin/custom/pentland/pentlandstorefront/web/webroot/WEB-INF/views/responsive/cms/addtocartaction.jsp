@@ -47,7 +47,7 @@
 </form:form>
 <form:form method="post" id="addToCartForm" class="add_to_cart_form" action="${addToCartUrl}">
 <c:if test="${product.purchasable}">
-	<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="1">
+	<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="0">
 </c:if>
 <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
 

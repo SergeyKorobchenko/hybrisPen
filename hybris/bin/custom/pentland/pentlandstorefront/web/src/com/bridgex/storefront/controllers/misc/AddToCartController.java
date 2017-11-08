@@ -27,6 +27,7 @@ import de.hybris.platform.commerceservices.order.CommerceCartModificationExcepti
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 import com.bridgex.storefront.controllers.ControllerConstants;
+import com.bridgex.storefront.forms.ZeroAddToCartForm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,7 +78,7 @@ public class AddToCartController extends AbstractController
 
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
-			@Valid final AddToCartForm form, final BindingResult bindingErrors)
+	                        @Valid final ZeroAddToCartForm form, final BindingResult bindingErrors)
 	{
 		if (bindingErrors.hasErrors())
 		{
@@ -86,7 +87,7 @@ public class AddToCartController extends AbstractController
 
 		final long qty = form.getQty();
 
-		if (qty <= 0)
+		if (qty < 0)
 		{
 			model.addAttribute(ERROR_MSG_TYPE, "basket.error.quantity.invalid");
 			model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
@@ -101,15 +102,15 @@ public class AddToCartController extends AbstractController
 				model.addAttribute("cartCode", cartModification.getCartCode());
 				model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
 
-				if (cartModification.getQuantityAdded() == 0L)
-				{
-					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
-				}
-				else if (cartModification.getQuantityAdded() < qty)
-				{
-					model.addAttribute(ERROR_MSG_TYPE,
-							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
-				}
+//				if (cartModification.getQuantityAdded() == 0L)
+//				{
+//					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+//				}
+//				else if (cartModification.getQuantityAdded() < qty)
+//				{
+//					model.addAttribute(ERROR_MSG_TYPE,
+//							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+//				}
 			}
 			catch (final CommerceCartModificationException ex)
 			{
