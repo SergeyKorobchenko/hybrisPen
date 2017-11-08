@@ -77,6 +77,8 @@ hybris/bin/custom/**/web/webroot/WEB-INF/_ui-src/addons/**
 
 **/theme-alpha/fonts
 **/theme-lambda/fonts
+**/theme-alpha/css
+**/theme-lambda/css
 internationalizationhmc.jar
 internationalizationbackoffice_bof.jar
 pentlandbackoffice_bof.jar
@@ -90,3 +92,4 @@ hybris/bin/custom/pentland/pentlandfacades/lib/
 hybris/bin/custom/pentland/pentlandstorefront/resources/wro_addons.xml
 hybris/bin/custom/pentland/pentlandstorefront/web/webroot/WEB-INF/_ui-src/responsive/config/**
 
+hybris/config/solr/instances/default/hsperfdata_*/
