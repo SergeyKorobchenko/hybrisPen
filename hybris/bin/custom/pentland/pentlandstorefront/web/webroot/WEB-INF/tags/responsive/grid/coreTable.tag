@@ -28,26 +28,37 @@
     <c:set var="inputDisabled" value="disabled"/>
 </c:if>
 
-<tr class="hidden-size">1
-    <th>${fn:escapeXml(firstVariant.parentVariantCategory.name)}
-        <c:if test="${firstVariant.elements ne null and firstVariant.elements.size() > 0}">
-            /${fn:escapeXml(firstVariant.elements[0].parentVariantCategory.name)}
-        </c:if>
+<c:set var="colspan" value="1"/>
+<c:if test="${firstVariant.maxVariants > firstVariant.elements.size()}">
+    <c:set var="colspan" value="${firstVariant.maxVariants - firstVariant.elements.size() + 1}"/>
+</c:if>
+
+<c:if test="${firstVariant.maxVariants > firstVariant.elements.size()}">
+    <c:set var="colspan" value="${firstVariant.maxVariants - firstVariant.elements.size()}"/>
+</c:if>
+
+<tr class="hidden-size">
+    <th style="width: 300px;">${fn:escapeXml(firstVariant.variantName)}
+        <%--<c:if test="${firstVariant.elements ne null and firstVariant.elements.size() > 0}">--%>
+            <%--/${fn:escapeXml(firstVariant.elements[0].variantName)}--%>
+        <%--</c:if>--%>
     </th>
-    <c:forEach items="${variants}" var="variant">
-        <th>${fn:escapeXml(variant.variantValueCategory.name)}</th>
+    <c:forEach items="${variants}" var="variant" varStatus="loop">
+        <th style="width: 200px;">${fn:escapeXml(variant.variantName)}</th>
     </c:forEach>
+    <th colspan="${colspan}"></th>
+
 </tr>
 
 <tr>
-    <td class="variant-detail" data-variant-property="${fn:escapeXml(variants[0].parentVariantCategory.name)}">
+    <td class="variant-detail" data-variant-property="${fn:escapeXml(variants[0].variantName)}">
         <product:productImage product="${product}" code="${skusId}" format="cartIcon"/>
         <div class="description">
             <c:if test="${showName == true}">
-                <div >${fn:escapeXml(product.name)} - ${fn:escapeXml(firstVariant.variantValueCategory.name)}</div>
+                <div >${fn:escapeXml(product.name)} - ${fn:escapeXml(firstVariant.variantName)}</div>
             </c:if>
             <c:if test="${showName != true}">
-                <div>${fn:escapeXml(firstVariant.variantValueCategory.name)}</div>
+                <div>${fn:escapeXml(firstVariant.variantName)}</div>
             </c:if>
             <c:if test="${showLastDimensionTitle == true}">
                 ${fn:escapeXml(inputTitle)}
@@ -55,41 +66,47 @@
         </div>
     </td>
 
-    <c:forEach items="${variants}" var="variant">
-        <c:set var="cssStockClass" value=""/>
-        <c:if test="${variant.variantOption.stock.stockLevel <= 0}">
-            <c:set var="cssStockClass" value="out-of-stock"/>
+    <c:set var="colspan" value="1"/>
+    <c:forEach items="${variants}" var="variant" varStatus="loop">
+        <c:if test="${loop.last}">
+            <c:if test="${firstVariant.maxVariants > firstVariant.elements.size()}">
+                <c:set var="colspan" value="${firstVariant.maxVariants - firstVariant.elements.size() + 1}"/>
+            </c:if>
         </c:if>
+        <c:set var="cssStockClass" value=""/>
+        <%--<c:if test="${variant.variantOption.stock.stockLevel <= 0}">--%>
+            <%--<c:set var="cssStockClass" value="out-of-stock"/>--%>
+        <%--</c:if>--%>
 
-        <td class="${cssStockClass} widthReference hidden-xs">
+        <td class="${cssStockClass} widthReference hidden-xs" style="width: 200px;>
 
-            <div class="variant-prop hidden-sm hidden-md hidden-lg" data-variant-prop="${fn:escapeXml(variant.variantValueCategory.name)}">
-                <span>${fn:escapeXml(variants[0].parentVariantCategory.name)}:</span>
-                ${fn:escapeXml(variant.variantValueCategory.name)}
-            </div>
+            <%--<div class="variant-prop hidden-sm hidden-md hidden-lg" data-variant-prop="${fn:escapeXml(variant.variantValueCategory.name)}">--%>
+                <%--<span>${fn:escapeXml(variants[0].parentVariantCategory.name)}:</span>--%>
+                <%--${fn:escapeXml(variant.variantValueCategory.name)}--%>
+            <%--</div>--%>
 
-            <span class="price" data-variant-price="${variant.variantOption.priceData.value}">
-                <c:set var="disableForOutOfStock" value="${inputDisabled}"/>
-                <format:price priceData="${variant.variantOption.priceData}"/>
-            </span>
+            <%--<span class="price" data-variant-price="${variant.variantOption.priceData.value}">--%>
+                <%--<c:set var="disableForOutOfStock" value="${inputDisabled}"/>--%>
+                <%--<format:price priceData="${variant.variantOption.priceData}"/>--%>
+            <%--</span>--%>
             <input type=hidden id="productPrice[${loopIndex}]" value="${variant.variantOption.priceData.value}" />
 
-            <c:if test="${variant.variantOption.stock.stockLevel == 0}">
-                <c:set var="disableForOutOfStock" value="disabled"/>
-            </c:if>
+            <%--<c:if test="${variant.variantOption.stock.stockLevel == 0}">--%>
+                <%--<c:set var="disableForOutOfStock" value="disabled"/>--%>
+            <%--</c:if>--%>
 
             <input type="hidden" class="${fn:escapeXml(skusId)} sku" name="cartEntries[${loopIndex}].sku" id="cartEntries[${loopIndex}].sku" value="${fn:escapeXml(variant.variantOption.code)}" />
-            <br/>
             <input type="textbox" maxlength="3" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}" name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' id="cartEntries[${loopIndex}].quantity" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
 
-            <grid:coreTableStockRow variant="${variant}" />
+            <%--<grid:coreTableStockRow variant="${variant}" />--%>
 
-            <span class="data-grid-total" data-grid-total-id="total_value_${loopIndex}"></span>
+            <%--<span class="data-grid-total" data-grid-total-id="total_value_${loopIndex}"></span>--%>
 
             <c:set var="loopIndex" value="${loopIndex +1}"/>
             <c:set var="skuIndex" scope="session" value="${sessionScope.skuIndex + 1}"/>
         </td>
     </c:forEach>
+    <td colspan="${colspan}"></td>
 
     <td class="mobile-cart-actions hide">
         <a href="#" class="btn btn-primary closeVariantModal"><spring:theme code="popup.done"/></a>

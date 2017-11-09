@@ -56,4 +56,9 @@
 		</property>
 	</bean>
 
+	<bean class="de.hybris.platform.commercefacades.product.data.VariantMatrixElementData">
+		<property name="variantName" type="String"/>
+		<property name="maxVariants" type="java.lang.Integer"/>
+	</bean>
+
 </beans>

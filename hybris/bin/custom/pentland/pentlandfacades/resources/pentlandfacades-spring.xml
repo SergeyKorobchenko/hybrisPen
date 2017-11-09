@@ -282,6 +282,11 @@
 	<alias name="pentlandProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>
 	<bean id="pentlandProductVariantMatrixPopulator" class="com.bridgex.facades.populators.PentlandProductVariantMatrixPopulator">
 		<property name="modelService" ref="modelService"/>
+		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
 	</bean>
+
+	<alias name="pentlandConfigVariantMatrixDataPopulator" alias="configVariantMatrixDataPopulator"/>
+	<bean id="pentlandConfigVariantMatrixDataPopulator" class="com.bridgex.facades.populators.PentlandProductVariantOptionDataPopulator"
+	      parent="defaultConfigVariantMatrixDataPopulator"/>
 
 </beans>

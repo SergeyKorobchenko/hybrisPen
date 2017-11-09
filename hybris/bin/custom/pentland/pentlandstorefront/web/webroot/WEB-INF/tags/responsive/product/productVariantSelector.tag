@@ -13,7 +13,7 @@
 
 <c:choose>
     <%-- Verify if products is a multidimensional product --%>
-    <c:when test="${product.multidimensional and not empty product.variantMatrix}">
+    <c:when test="${fasle and product.multidimensional and not empty product.variantMatrix}">
         <c:set var="levels" value="${fn:length(product.categories)}"/>
         <c:set var="selectedIndex" value="0"/>
 

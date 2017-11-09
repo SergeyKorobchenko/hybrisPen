@@ -123,8 +123,7 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
-		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE,
-				ProductOption.VARIANT_MATRIX_MEDIA);
+		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
 
@@ -152,8 +151,7 @@ public class ProductPageController extends AbstractPageController
 	public String productOrderForm(@PathVariable("productCode") final String productCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
-		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE,
-				ProductOption.VARIANT_MATRIX_MEDIA);
+		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
 		updatePageTitle(productCode, model);
