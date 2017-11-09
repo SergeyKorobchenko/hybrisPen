@@ -107,7 +107,27 @@
 		<ref bean="SiteChannel.B2B"/>
 	</util:set>
 
-	<bean id="customSalesGroupRestrictedPathsListMergeDirective" depends-on="asmAllAgentsRestrictedPathsList" parent="listMergeDirective">
+	<bean depends-on="asmAllAgentsRestrictedPathsList" parent="listMergeDirective">
 		<property name="add" value="/checkout/**"/>
 	</bean>
+
+	<!--<bean depends-on="unsecuredUris" parent="listMergeDirective" >-->
+		<!--<property name="add" value="/termsofuse*"/>-->
+	<!--</bean>-->
+
+	<!--<bean depends-on="unsecuredUris" parent="listMergeDirective">-->
+		<!--<property name="add" value="/contactus"/>-->
+	<!--</bean>-->
+
+	<alias name="pentlandUnsecuredUris" alias="unsecuredUris"/>
+	<util:set id="pentlandUnsecuredUris" value-type="java.lang.String">
+		<value>/_s/**</value>
+		<value>/register/**</value>
+		<value>/punchout/**</value>
+		<value>/assisted-service/emulate</value>
+		<value>/cart/rollover/MiniCart</value>
+		<value>/termsofuse</value>
+		<value>/contactus</value>
+	</util:set>
+
 </beans>
