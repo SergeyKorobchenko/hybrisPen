@@ -22,5 +22,15 @@
 			  	extends="SimpleCMSAction" autocreate="true" generate="true">
 			</itemtype>
 		</typegroup>
+
+		<typegroup name="b2b">
+			<itemtype code="B2BDocument" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="sapCustomerID" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
 	</itemtypes>
 </items>
