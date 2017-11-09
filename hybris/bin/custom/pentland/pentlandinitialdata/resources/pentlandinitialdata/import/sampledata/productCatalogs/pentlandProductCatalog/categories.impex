@@ -30,13 +30,14 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;equipment;;mitre
 
 ;jersey;;teamwear
-;shorts;;teamwear
+;shortsTeamwear;;teamwear
 ;socks;;teamwear
 ;goalkeeper;;teamwear
 ;referees;;teamwear
 ;baseLayers;;teamwear
 ;smallSided;;teamwear
 ;bags;;teamwear
+;pos;;teamwear
 
 ;jacketsTrousers;;trainingwear
 ;rainwear;;trainingwear
@@ -74,14 +75,14 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;shoes;;clothes
 ;sandals;;shoes,surf
 ;shirts;;clothes
-;tshirts;;clothes,surf
+#;tshirts;;clothes,surf
 ;helmet;;clothes
-;others;;mitre;;true
-;skigear;;others,snow
-;goggles;;others,snow
-;tools;;others,snow
-;guides;;others,surf
-;backpack;;others
+#;others;;mitre;;true
+#;skigear;;others,snow
+#;goggles;;others,snow
+#;tools;;others,snow
+#;guides;;others,surf
+#;backpack;;others
 #;brands;;;;true
 #;32;;brands
 #;7S;;brands
@@ -783,7 +784,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;252000;250000;
 ;252100;250000;
 ;250100;250000;
-;250100;tshirts;
+#;250100;tshirts;
 ;251600;250000;
 ;252300;250000;
 ;251000;250000;
@@ -809,7 +810,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;262100;260000;
 ;260200;260000;
 ;260100;260000;
-;260100;tshirts;
+#;260100;tshirts;
 ;261800;260000;
 ;261300;260000;
 ;261000;260000;
@@ -824,7 +825,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;270800;270000;
 ;270200;270000;
 ;270100;270000;
-;270100;tshirts;
+#;270100;tshirts;
 ;271000;270000;
 ;350000;mitre;
 ;350400;350000;

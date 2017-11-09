@@ -17,7 +17,7 @@ INSERT_UPDATE UserPriceGroup;code[unique=true]
 ;pronto-services
 
 UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID
-;TestB2BUnit;pronto-services;CREDITCARD;testB2B
+;TestB2BUnit;pronto-services;PROFORMA;testB2B
 
 $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
@@ -140,7 +140,7 @@ INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code)
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(&addId);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;userPriceGroup(code);customerType(code);sapID
 ;KIS;Pronto;Pronto;Pronto;;Pronto;ProntoAddrID1;ProntoID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;;pronto;
 ;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto-services;ACCOUNT;pronto-goods
-;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto-services;PROFORMA;pronto-services
+;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto-services;CREDITCARD;pronto-services
 
 INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(&addId)
 ;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true

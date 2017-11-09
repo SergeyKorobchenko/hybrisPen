@@ -88,8 +88,8 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 ;M25687_W;;M25687;pieces;WHITE;jersey;ApparelSizeVariantProduct
 ;M27160;;M27160_B;pieces;BLACK,SILVER;jersey;ApparelSizeVariantProduct
 ;M28323;;M28323_B;pieces;BLACK,WHITE;jersey;ApparelSizeVariantProduct
-;M32946;;M32946_B;pieces;WHITE;shorts;ApparelSizeVariantProduct
-;M33307;;M33307_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
+;M32946;;M32946_B;pieces;WHITE;shortsTeamwear;ApparelSizeVariantProduct
+;M33307;;M33307_B;pieces;BLACK;shortsTeamwear;ApparelSizeVariantProduct
 ;M33477;;M33477_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
 ;M34130;;M34130_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
 ;M35364_R;;M35364;pieces;RED;socks;ApparelSizeVariantProduct
@@ -879,15 +879,15 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 
 # Create ApparelStyleVariantProduct variants without sizes
 INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];$approved
-;74036_red;;74036;100200;RED;pieces;;
-;21618_-;;21618;100200;;pieces;;
-;135304_neutral;;135304;100200;;pieces;;
-;64389_black+white_marble;;64389;370700;WHITE,BLACK;pieces;;
-;115195_shocking_pink;;115195;370700;PINK;pieces;;
-;111114_black;;111114;370700;BLACK;pieces;;
-;56802_dark_wood;;56802;370700;BROWN;pieces;;
-;74844_purple+pink+goldenrad;;74844;370700;YELLOW,PINK,PURPLE;pieces;;
-;94063_matte_black+gold;;94063;340000;BLACK;pieces;;
+;74036_red;;74036;pos;RED;pieces;;
+;21618_-;;21618;pos;;pieces;;
+;135304_neutral;;135304;pos;;pieces;;
+;64389_black+white_marble;;64389;pos;WHITE,BLACK;pieces;;
+;115195_shocking_pink;;115195;pos;PINK;pieces;;
+;111114_black;;111114;pos;BLACK;pieces;;
+;56802_dark_wood;;56802;pos;BROWN;pieces;;
+;74844_purple+pink+goldenrad;;74844;pos;YELLOW,PINK,PURPLE;pieces;;
+;94063_matte_black+gold;;94063;pos;BLACK;pieces;;
 ;74818_sky_blue;;74818;340000;BLUE;pieces;;
 ;74825_gunship;;74825;340000;BLUE;pieces;;
 ;96502_dark_smoke;;96502;210200;WHITE,GREY;pieces;;

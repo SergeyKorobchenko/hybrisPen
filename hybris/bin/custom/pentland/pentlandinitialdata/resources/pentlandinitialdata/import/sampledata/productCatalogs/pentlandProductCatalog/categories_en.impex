@@ -505,7 +505,7 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang];description[l
 ;sunglasses;;Sunglasses;
 ;surf;;Surf;
 ;tools;;Tools;
-;tshirts;;T-Shirts;
+#;tshirts;;T-Shirts;
 #;Ästhetiker;;Ästhetiker;
 
 
@@ -522,13 +522,14 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang];description[l
 ;equipment;;Equipment
 
 ;jersey;;Jersey
-;shorts;;Shorts
+;shortsTeamwear;;Shorts
 ;socks;;Socks
 ;goalkeeper;;Goalkeeper
 ;referees;;Referees
 ;baseLayers;;Base Layers
 ;smallSided;;Small Sided
 ;bags;;Bags
+;pos;;Point Of Sale (POS)
 
 ;jacketsTrousers;;Jackets & Trousers
 ;rainwear;;Rainwear
