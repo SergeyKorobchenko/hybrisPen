@@ -1,6 +1,6 @@
 $userUid=james.bell@pronto-hw.com
 
 INSERT_UPDATE Order;code[unique=true];date[dateformat=yyyy-MM-dd,forceWrite=true];currency(isocode);user(uid)[default=$userUid];unit(uid);store(uid);site(uid);salesApplication(code);
-;1692657;2017-08-20;GBP;;TestB2BUnit;pentland;pentland;Web;
-;1713121;2017-09-21;GBP;;TestB2BUnit;pentland;pentland;Web;
-;1713209;2017-10-22;GBP;;TestB2BUnit;pentland;pentland;Web;
+;1692657;2017-08-20;GBP;;TestB2BUnit;pentland;pentland;SAP;
+;1713121;2017-09-21;GBP;;TestB2BUnit;pentland;pentland;SAP;
+;1713209;2017-10-22;GBP;;TestB2BUnit;pentland;pentland;SAP;
