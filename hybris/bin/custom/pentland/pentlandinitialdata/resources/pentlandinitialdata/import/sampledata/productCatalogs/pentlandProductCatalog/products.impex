@@ -2006,11 +2006,12 @@ INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseP
 ;300398794;;94415_blacktop;220600;pieces;;;
 ;300398801;;94415_blue_print;220600;pieces;;;
 
+#some actual products from SAP
 INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved
-;BB1089;5;;5;;5000001;;;;
-;G40011;5;;5;;5000004;;;;
-;20859;4;;4;;4000001;;;;
-;00088;8;;8;;SPD0001;;;;
+;BB1089;05;;5;;5000001;;;;
+;G40011;05;;5;;5000004;;;;
+;20859;04;;4;;4000001;;;;
+;00088;08;;8;;SPD0001;;;;
 ;00258;08;;8;;SPD0004;;;;
 ;BB1090;05;;5;;5000001;;;;
 
@@ -2054,3 +2055,11 @@ INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;s
 ;5-BB1090PBB;;5037823906139;;5;pieces;03;;;
 ;5-BB1090PBB;;5037823906122;;4;pieces;03;;;
 ;5-BB1090PBB;;5037823906115;;3;pieces;03;;;
+
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)
+;5-BB1089WP4;;1;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+;5-G40011WBP;;2;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+;4-20859BP6;;1;https://www.youtube.com/embed/XWMs9pQuQqk;https://www.google.ru/;;221600
+;8-000882264;;5;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
+;8-002582846;;3;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
+;5-BB1090PBB;;100;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
