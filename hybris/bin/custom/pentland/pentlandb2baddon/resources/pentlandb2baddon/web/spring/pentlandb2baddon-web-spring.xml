@@ -111,14 +111,6 @@
 		<property name="add" value="/checkout/**"/>
 	</bean>
 
-	<!--<bean depends-on="unsecuredUris" parent="listMergeDirective" >-->
-		<!--<property name="add" value="/termsofuse*"/>-->
-	<!--</bean>-->
-
-	<!--<bean depends-on="unsecuredUris" parent="listMergeDirective">-->
-		<!--<property name="add" value="/contactus"/>-->
-	<!--</bean>-->
-
 	<alias name="pentlandUnsecuredUris" alias="unsecuredUris"/>
 	<util:set id="pentlandUnsecuredUris" value-type="java.lang.String">
 		<value>/_s/**</value>
