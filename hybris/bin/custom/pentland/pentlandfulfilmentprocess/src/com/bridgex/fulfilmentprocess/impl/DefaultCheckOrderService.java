@@ -24,11 +24,6 @@ public class DefaultCheckOrderService implements CheckOrderService
 	@Override
 	public boolean check(final OrderModel order)
 	{
-		if (!order.getCalculated().booleanValue())
-		{
-			// Order must be calculated
-			return false;
-		}
 		if (order.getEntries().isEmpty())
 		{
 			// Order must have some lines
@@ -48,11 +43,6 @@ public class DefaultCheckOrderService implements CheckOrderService
 
 	protected boolean checkDeliveryOptions(final OrderModel order)
 	{
-		if (order.getDeliveryMode() == null)
-		{
-			// Order must have an overall delivery mode 
-			return false;
-		}
 
 		if (order.getDeliveryAddress() == null)
 		{

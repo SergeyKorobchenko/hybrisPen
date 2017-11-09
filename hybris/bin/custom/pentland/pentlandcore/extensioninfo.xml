@@ -21,6 +21,7 @@
 		<requires-extension name="b2bapprovalprocess"/>
 		<requires-extension name="mediaconversion"/>
 		<requires-extension name="b2bacceleratorservices"/>
+		<requires-extension name="erpintegration"/>
 
 		<coremodule generated="true" manager="com.bridgex.core.jalo.PentlandcoreManager" packageroot="com.bridgex.core"/>
 

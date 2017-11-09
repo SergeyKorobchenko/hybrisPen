@@ -106,4 +106,20 @@
 	<util:set id="b2bAcceleratorSiteChannels" value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
 		<ref bean="SiteChannel.B2B"/>
 	</util:set>
+
+	<bean depends-on="asmAllAgentsRestrictedPathsList" parent="listMergeDirective">
+		<property name="add" value="/checkout/**"/>
+	</bean>
+
+	<alias name="pentlandUnsecuredUris" alias="unsecuredUris"/>
+	<util:set id="pentlandUnsecuredUris" value-type="java.lang.String">
+		<value>/_s/**</value>
+		<value>/register/**</value>
+		<value>/punchout/**</value>
+		<value>/assisted-service/emulate</value>
+		<value>/cart/rollover/MiniCart</value>
+		<value>/termsofuse</value>
+		<value>/contactus</value>
+	</util:set>
+
 </beans>
