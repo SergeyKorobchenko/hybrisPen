@@ -28,6 +28,7 @@ import de.hybris.platform.cronjob.model.CronJobModel;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
 import de.hybris.platform.servicelayer.cronjob.TypeAwareJobPerformable;
+import de.hybris.platform.servicelayer.internal.model.ServicelayerJobModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.search.impl.LazyLoadModelList;
@@ -175,7 +176,7 @@ public class OrderReExportJobPerformable extends AbstractJobPerformable<OrderExp
 
   @Override
   public String getType() {
-    return OrderExportCronJobModel._TYPECODE;
+    return ServicelayerJobModel._TYPECODE;
   }
 
   public void setAbortOnError(final boolean abort)

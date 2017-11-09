@@ -60,7 +60,6 @@ INSERT_UPDATE WorldpayCurrencyRange;currency(isocode)[unique=true];min[unique=tr
 ;EUR;1;2000
 ;EUR;1;3000
 ;EUR;1;5000
-;SGD;2;10000
 ;GBP;1;5000
 ;EUR;1;6000
 ;USD;1;8000
@@ -70,7 +69,7 @@ INSERT_UPDATE WorldpayAPMConfiguration; code[unique = true]; name[lang = en]; de
 ; ECMC-SSL           ; MASTERCARD      ; Mastercard      ;      ; GBP                ; GB                         ;                                                 ; true ;
 ; SOFORT-SSL         ; SOFORT          ; Sofort          ;      ; EUR                ; AT, BE, FR, DE             ; EUR:1:2000                                      ; true ;
 ; CHINAUNIONPAY-SSL  ; China Union Pay ; China Union Pay ;      ; GBP, EUR, USD      ;                            ;                                                 ; true ;
-; ALIPAY-SSL         ; Alipay          ; Alipay          ;      ; GBP, EUR, USD, SGD ; CN                         ; GBP:1:5000, EUR:1:6000, USD:1:8000, SGD:2:10000 ; true ;
+; ALIPAY-SSL         ; Alipay          ; Alipay          ;      ; GBP, EUR, USD      ; CN                         ; GBP:1:5000, EUR:1:6000, USD:1:8000,             ; true ;
 ; PAYPAL-EXPRESS     ; PayPal          ; PayPal          ;      ;                    ;                            ;                                                 ; true ;
 ; BANKLINKNORDEA-SSL ; Nordea          ; Nordea          ;      ; EUR, USD, GBP      ;                            ;                                                 ;      ;
 ; POSTEPAY-SSL       ; Postepay        ; Postepay        ;      ; EUR                ;                            ; EUR:1:3000                                      ; true ; true
@@ -78,7 +77,7 @@ INSERT_UPDATE WorldpayAPMConfiguration; code[unique = true]; name[lang = en]; de
 ; POLI-SSL           ; POLi            ; POLi            ;      ;                    ;                            ;                                                 ;      ; true
 ; POLINZ-SSL         ; POLi-NZ         ; POLi-NZ         ;      ;                    ;                            ;                                                 ; true ;
 ; BOLETO-SSL         ; Boleto          ; Boleto          ;      ;                    ;                            ;                                                 ; true ;
-; ENETS-SSL          ; ENETS           ; eNets           ;      ; SGD                ; SG                         ; SGD:2:10000                                     ;      ; true
+#; ENETS-SSL          ; ENETS           ; eNets           ;      ; SGD                ; SG                         ; SGD:2:10000                                     ;      ; true
 ; IDEAL-SSL          ; iDeal           ; iDeal           ; true ;                    ;                            ;                                                 ; true ;
 ; KLARNA-SSL         ; Klarna          ; Klarna          ;      ; EUR, GBP           ; AT, FI, DE, NL, NO, SE, GB ;                                                 ; true ;
 
