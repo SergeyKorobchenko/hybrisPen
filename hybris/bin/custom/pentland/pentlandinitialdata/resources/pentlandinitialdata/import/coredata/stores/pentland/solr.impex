@@ -101,6 +101,7 @@ INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=tru
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameters[map-delimiter=|];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
 ;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
+;$solrIndexedType; materialKey            ;string ;            ;    ;    ;    ;true;true;materialKeyValueResolver                  ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
 #;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
 ;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;productAttributesValueResolver            ;attribute->name|skipVariants->FALSE;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -190,6 +191,7 @@ INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
 ;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;materialKey:$solrIndexedType            ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
 ;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
 #;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;   	   ;  ;
 ;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;

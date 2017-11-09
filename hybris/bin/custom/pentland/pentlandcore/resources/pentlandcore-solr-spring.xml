@@ -189,4 +189,6 @@
 
 	<bean id="genderValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.GenderValueResolver" parent="abstractBaseProductValueResolver"/>
 
+	<bean id="materialKeyValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.MaterialKeyValueResolver" parent="abstractBaseProductValueResolver"/>
+
 </beans>
