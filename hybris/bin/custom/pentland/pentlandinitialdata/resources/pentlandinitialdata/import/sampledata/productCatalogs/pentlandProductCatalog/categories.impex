@@ -17,17 +17,17 @@ $supercategories=source(code, $catalogVersion)[unique=true]
 
 # Create Categories
 INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
-;berghaus;;;Pronto
-;boxfresh;;;Pronto
-;canterbury;;;Pronto
-;kickers;;;TestB2BUnit
-;mitre;;;TestB2BUnit
-;speedo;;;TestB2BUnit
+;04;;;berghausgroup
+;0E;;;boxfreshgroup
+;0Q;;;canterburygroup
+;01;;;kickersgroup
+;05;;;mitregroup
+;08;;;speedogroup
 
-;teamwear;;mitre
-;trainingwear;;mitre
-;balls;;mitre
-;equipment;;mitre
+;teamwear;;05
+;trainingwear;;05
+;balls;;05
+;equipment;;05
 
 ;jersey;;teamwear
 ;shortsTeamwear;;teamwear
@@ -69,7 +69,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;referee;;equipment
 ;others;;equipment
 
-;clothes;;mitre;;true
+;clothes;;05;;true
 ;caps;;clothes
 ;sunglasses;;clothes
 ;shoes;;clothes
@@ -77,7 +77,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 ;shirts;;clothes
 #;tshirts;;clothes,surf
 ;helmet;;clothes
-#;others;;mitre;;true
+#;others;;05;;true
 #;skigear;;others,snow
 #;goggles;;others,snow
 #;tools;;others,snow
@@ -301,10 +301,10 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 #;Zanier;;brands
 #;Zimtstern;;brands
 ;boards;;surf
-;snow;;canterbury
-;surf;;canterbury
-;kids;;canterbury
-;streetwear;;canterbury
+;snow;;0Q
+;surf;;0Q
+;kids;;0Q
+;streetwear;;0Q
 
 
 INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid);hidden
@@ -587,7 +587,7 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;allowedPrincipals(uid);
 ;360700;;;
 
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
-;220000;berghaus;
+;220000;04;
 ;221600;220000;
 ;221200;220000;
 ;220500;220000;
@@ -604,7 +604,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;222000;220000;
 ;220700;220000;
 ;340000;220000;
-;370000;berghaus;
+;370000;04;
 ;160400;370000;
 ;371600;370000;
 ;370800;370000;
@@ -621,13 +621,13 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;371000;370000;
 ;370300;370000;
 ;370700;370000;
-;380000;berghaus;
+;380000;04;
 ;380200;380000;
 ;380300;380000;
 ;380100;380000;
 ;330800;380000;
 ;380400;380000;
-;160000;boxfresh;
+;160000;0E;
 ;160300;160000;
 ;160900;160000;
 ;160700;160000;
@@ -636,33 +636,33 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;170300;160000;
 ;160500;160000;
 ;160600;160000;
-;320000;boxfresh;
+;320000;0E;
 ;321000;320000;
 ;320500;320000;
 ;321100;320000;
 ;320700;320000;
 ;320100;320000;
 ;320800;320000;
-;50000;boxfresh;
+;50000;0E;
 ;50300;50000;
 ;50400;50000;
 ;50100;50000;
 ;50500;50000;
 ;50600;50000;
 ;51700;50000;
-;210000;canterbury;
+;210000;0Q;
 ;210300;210000;
 ;210200;210000;
 ;210100;210000;
 ;210100;surf;
-;240000;canterbury;
+;240000;0Q;
 ;210300;240000;
 ;240200;240000;
 ;240100;240000;
-;290000;canterbury;
+;290000;0Q;
 ;290100;290000;
 ;290200;290000;
-;110000;canterbury;
+;110000;0Q;
 ;111700;110000;
 ;111900;110000;
 ;110100;110000;
@@ -679,14 +679,14 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;111100;110000;
 ;111800;110000;
 ;111600;110000;
-;450000;mitre;
+;450000;05;
 ;450500;450000;
 ;450100;450000;
 ;450600;450000;
 ;450300;450000;
 ;450200;450000;
 ;450700;450000;
-;70000;mitre;
+;70000;05;
 ;450500;70000;
 ;450100;70000;
 ;450600;70000;
@@ -696,28 +696,28 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;70600;70000;
 ;70200;70000;
 ;70700;70000;
-;20000;mitre;
+;20000;05;
 ;20100;20000;
 ;20400;20000;
-;230000;mitre;
+;230000;05;
 ;230400;230000;
 ;230400;sandals;
 ;230200;230000;
 ;230100;230000;
 ;230600;230000;
-;400000;kickers;
+;400000;01;
 ;400400;400000;
 ;400600;400000;
 ;400500;400000;
 ;400300;400000;
 ;400300;sandals;
 ;400100;400000;
-;390000;kickers;
+;390000;01;
 ;390200;390000;
 ;390200;sandals;
 ;390300;390000;
 ;390100;390000;
-;280000;kickers;
+;280000;01;
 ;280500;280000;
 ;280700;280000;
 ;280900;280000;
@@ -728,13 +728,13 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;280200;280000;
 ;280400;280000;
 ;280600;280000;
-;40000;kickers;
+;40000;01;
 ;40500;40000;
 ;40300;40000;
 ;40100;40000;
 ;40400;40000;
 ;40600;40000;
-;10000;kickers;
+;10000;01;
 ;10100;10000;
 ;30300;10000;
 ;20000;10000;
@@ -744,17 +744,17 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;10400;10000;
 ;10600;10000;
 ;30200;10000;
-;30000;speedo;
+;30000;08;
 ;30300;30000;
 ;30400;30000;
 ;30200;30000;
-;190000;speedo;
+;190000;08;
 ;190400;190000;
 ;190700;190000;
 ;190100;190000;
 ;190300;190000;
 ;190800;190000;
-;200000;speedo;
+;200000;08;
 ;200400;200000;
 ;371100;200000;
 ;200100;200000;
@@ -762,12 +762,12 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;200200;200000;
 ;200800;200000;
 ;371000;200000;
-;330000;speedo;
+;330000;08;
 ;270900;330000;
 ;330800;330000;
 ;330100;330000;
 ;330700;330000;
-;250000;speedo;
+;250000;08;
 ;251100;250000;
 ;250800;250000;
 ;251200;250000;
@@ -789,7 +789,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;252300;250000;
 ;251000;250000;
 ;251400;250000;
-;260000;mitre;
+;260000;05;
 ;260800;260000;
 ;262300;260000;
 ;262400;260000;
@@ -815,7 +815,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;261300;260000;
 ;261000;260000;
 ;261500;260000;
-;270000;mitre;
+;270000;05;
 ;460000;270000;
 ;270600;270000;
 ;270500;270000;
@@ -827,7 +827,7 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;270100;270000;
 #;270100;tshirts;
 ;271000;270000;
-;350000;mitre;
+;350000;05;
 ;350400;350000;
 ;350400;boards;
 ;360500;350000;
@@ -851,23 +851,23 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;350700;350000;
 ;360100;350000;
 ;360200;350000;
-;170000;canterbury;
+;170000;0Q;
 ;170100;170000;
 ;170200;170000;
 ;170400;170000;
 ;170300;170000;
-;100000;canterbury;
+;100000;0Q;
 ;100300;100000;
 ;100400;100000;
 ;100200;100000;
 ;100100;100000;
-;420000;canterbury;
+;420000;0Q;
 ;450600;420000;
 ;420100;420000;
 ;420300;420000;
 ;420200;420000;
 ;420600;420000;
-;360000;berghaus;
+;360000;04;
 ;360500;360000;
 ;360300;360000;
 ;360400;360000;
@@ -878,9 +878,9 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 
 #update groups again for interceptors to kick in
 UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
-;berghaus;;;Pronto
-;boxfresh;;;Pronto
-;canterbury;;;Pronto
-;kickers;;;TestB2BUnit
-;mitre;;;TestB2BUnit
-;speedo;;;TestB2BUnit
+;04;;;berghausgroup
+;0E;;;boxfreshgroup
+;0Q;;;canterburygroup
+;01;;;kickersgroup
+;05;;;mitregroup
+;08;;;speedogroup
