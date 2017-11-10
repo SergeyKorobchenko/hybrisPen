@@ -189,4 +189,11 @@
 
 	<bean id="genderValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.GenderValueResolver" parent="abstractBaseProductValueResolver"/>
 
+	<bean id="materialKeyValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.MaterialKeyValueResolver" parent="abstractBaseProductValueResolver"/>
+	<bean id="styleLevelNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.StyleLevelNameValueResolver" parent="abstractBaseProductValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+
+	<bean id="variantProductClassificationAttributesValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.VariantProductClassificationAttributesValueResolver" parent="productClassificationAttributesValueResolver"/>
+
 </beans>

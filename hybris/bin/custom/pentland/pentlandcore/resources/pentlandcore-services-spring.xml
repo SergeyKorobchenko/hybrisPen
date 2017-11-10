@@ -72,6 +72,10 @@
 		<property name="pentlandPriceDao" ref="pentlandPriceDao"/>
 	</bean>
 
+	<bean id="orderDetailsService" class="com.bridgex.core.integration.OrderDetailsService">
+		<property name="integrationService" ref="orderDetailsIntegrationService"/>
+	</bean>
+
 	<alias name="defaultPentlandCommerceCheckoutService" alias="pentlandCommerceCheckoutService"/>
 	<bean id="defaultPentlandCommerceCheckoutService" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCheckoutService" parent="defaultCommerceCheckoutService">
 		<property name="orderService" ref="b2bOrderService"/>
@@ -90,4 +94,5 @@
 
 	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
 	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator"/>
+
 </beans>

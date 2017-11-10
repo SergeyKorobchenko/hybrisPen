@@ -139,7 +139,11 @@
                     </attribute>
                     <attribute qualifier="featureDescription" type="localized:java.lang.String">
                         <description>Features description</description>
-                        <persistence type="property"/>
+                        <persistence type="property">
+                            <columntype>
+                                <value>HYBRIS.LONG_STRING</value>
+                            </columntype>
+                        </persistence>
                     </attribute>
                     <attribute qualifier="packSize" type="int">
                         <defaultvalue>0</defaultvalue>

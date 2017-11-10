@@ -71,6 +71,9 @@ public class PentlandSampleDataImportService extends SampleDataImportService {
 
     //user sample data
     getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/customers/sample_users.impex", extensionName), false);
+
+    //user orders sample data
+    getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/customers/sample_orders.impex", extensionName), false);
   }
 
   @Override
