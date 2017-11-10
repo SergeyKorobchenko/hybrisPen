@@ -135,6 +135,7 @@
 
 	<bean id="additionalFiltersQueryPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.AdditionalFiltersQueryPopulator">
 		<property name="userService" ref="userService"/>
+		<property name="sessionService" ref="sessionService"/>
 	</bean>
 
 	<bean parent="modifyPopulatorList">
