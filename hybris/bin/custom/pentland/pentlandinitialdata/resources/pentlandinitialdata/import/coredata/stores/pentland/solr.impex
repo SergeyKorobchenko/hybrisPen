@@ -103,7 +103,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
 ;$solrIndexedType; materialKey            ;string ;            ;    ;    ;    ;true;true;materialKeyValueResolver                  ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
 #;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
-;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;productAttributesValueResolver            ;attribute->name|skipVariants->FALSE;true;100;true;50 ;true;25;    ;   ;  ;
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;styleLevelNameValueResolver            ;    ;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider              ;              ;true;40 ;true;20 ;true;10;    ;   ;  ;
 ;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
