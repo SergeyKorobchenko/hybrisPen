@@ -52,7 +52,7 @@
                             <c:url value="/assisted-service/logoutasm" var="logoutActionUrl" />
                             <form action="${logoutActionUrl}" method="post" id="asmLogoutForm" class="asmForm">
                                 <fieldset>
-                                    <input type="hidden" name="CSRFToken" value="${CSRFToken}">
+                                    <input type="hidden" name="CSRFToken" value="${CSRFToken.token}">
                                     <button type="submit" class="ASM-btn ASM-btn-logout" disabled><spring:theme code="asm.logout"/></button>
                                 </fieldset>
                             </form>
