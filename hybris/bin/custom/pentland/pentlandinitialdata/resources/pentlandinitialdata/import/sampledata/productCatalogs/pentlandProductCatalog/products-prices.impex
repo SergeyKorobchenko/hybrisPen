@@ -29,7 +29,7 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=piec
 ;M35392;pieces;EUR;77,88;1;1;false;pronto-services
 ;M34704_R;pieces;USD;105,33;1;1;false;pronto-services
 ;M34704_W;pieces;GBP;67,96;1;1;false;pronto-services
-;M34704_B;pieces;EUR;77,88;1;1;false;pronto-services
+;M34704_B;pieces;EUR;22,88;1;1;false;pronto-services
 ;M34704_P;pieces;USD;105,33;1;1;false;pronto-services
 ;M34705_N;pieces;GBP;12,86;1;1;false;pronto-services
 ;M34705_W;pieces;EUR;14,74;1;1;false;pronto-services

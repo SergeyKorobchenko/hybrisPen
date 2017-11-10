@@ -11,19 +11,26 @@
 # ImpEx for SOLR Configuration
 
 # Macros / Replacement Parameter definitions
-$indexedType=__INDEXED_TYPE__
-$facetSearchConfigName=__FACET_SEARCH_CONFIG_NAME__
-$contentCatalogName=__CONTENT_CATALOG_NAME__
+$indexedType=pentlandProductType
+$facetSearchConfigName=pentlandIndex
+$contentCatalogName=pentlandContentCatalog
 
 $solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
-$productCatalog=__PRODUCT_CATALOG_NAME__
+$productCatalog=pentlandProductCatalog
 $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
 
 # Language
 $lang=en
 
-UPDATE SolrIndexedProperty;name[unique=true];$solrIndexedType;displayName[lang=$lang]
+UPDATE SolrIndexedProperty;name[unique=true];displayName[lang=$lang];$solrIndexedType
+;teamwearType;Teamwear Type;
+;trainingwearType;Trainingwear Type;
+;sport;Sport;
+;useageOccasion;Useage Occasion;
+;surface;Surface;
+;accessoryType;Accessory Type;
+;trainingMethod;Training Method;
 
 # Redirect page URL (Must use INSERT_UPDATE here)
 UPDATE SolrURIRedirect;url[unique=true];&redirectRefID

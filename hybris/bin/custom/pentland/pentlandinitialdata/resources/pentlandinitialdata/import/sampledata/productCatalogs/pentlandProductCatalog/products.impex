@@ -108,12 +108,12 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 
 # Create ApparelSizeVariantProduct variants
 INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);primaryColors(code);;discontinuedStatus(code)[default=D03];$approved
-;35099;;M18729;0700053336407;pieces;BLACK;
-;35100;;M18729;0700053336414;pieces;BLACK;
-;35101;;M18729;0700053336421;pieces;BLACK;
-;35102;;M18729;0700053336445;pieces;BLACK;
-;35104;;M18729;0700053336377;pieces;BLACK;
-;35105;;M18729;0700053336384;pieces;BLACK;
+;35099;;M18729;0700053336407;pieces;BLACK;;D01
+;35100;;M18729;0700053336414;pieces;BLACK;;D02
+;35101;;M18729;0700053336421;pieces;BLACK;;D03
+;35102;;M18729;0700053336445;pieces;BLACK;;D04
+;35104;;M18729;0700053336377;pieces;BLACK;;D05
+;35105;;M18729;0700053336384;pieces;BLACK;;
 ;35106;;M18729;0700053336391;pieces;BLACK;;D99
 ;35135;;M18729;0700053336360;pieces;BLACK;;D98
 ;300147490;;M25687_B;4260125824707;pieces;BLACK;
@@ -2056,10 +2056,18 @@ INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;s
 ;5-BB1090PBB;;5037823906122;;4;pieces;03;;;
 ;5-BB1090PBB;;5037823906115;;3;pieces;03;;;
 
-UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;;supercategories(code,$catalogVersion)
 ;5-BB1089WP4;;1;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
 ;5-G40011WBP;;2;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
 ;4-20859BP6;;1;https://www.youtube.com/embed/XWMs9pQuQqk;https://www.google.ru/;;221600
 ;8-000882264;;5;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
 ;8-002582846;;3;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
 ;5-BB1090PBB;;100;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+
+#data for facet search
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;sapBrand;
+;M18729;;05;
+;M34704_B;;05;
+;M25687_B;;05;
+;M27160;;05;
+;M28323;;05;
