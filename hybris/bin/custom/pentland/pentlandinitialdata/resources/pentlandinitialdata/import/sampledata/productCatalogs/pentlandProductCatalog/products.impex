@@ -17,6 +17,7 @@ $productCatalogName=Pentland Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$productCatalog']),version[default='Staged']))
 $approved=approvalstatus(code)[default='approved']
+$lang=en
 #$taxGroup=Europe1PriceFactory_PTG(code)[default=eu-vat-full]
 
 # Apparel products use Variants with a structure:
@@ -26,46 +27,46 @@ $approved=approvalstatus(code)[default='approved']
 # Create products
 INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategories(code,$catalogVersion);varianttype(code);$approved;;ean;gender(code)
 ;300441142;;pieces;caps;;;;1022436212;MALE
-;29531;;pieces;skigear;;;;989514105;FEMALE
-;29532;;pieces;skigear;;;;953539556;MALE
-;29533;;pieces;skigear;;;;836246217;FEMALE
+;29531;;pieces;;;;;989514105;FEMALE
+;29532;;pieces;;;;;953539556;MALE
+;29533;;pieces;;;;;836246217;FEMALE
 ;30404;;pieces;sunglasses;;;;299052695;FEMALE
 ;300047513;;pieces;sunglasses;;;;383203982;MALE
-;45572;;pieces;skigear;;;;886280602;FEMALE
-;45573;;pieces;skigear;;;;586341472;MALE
-;45574;;pieces;skigear;;;;815087779;MALE
-;45576;;pieces;skigear;;;;111644105;MALE
-;45577;;pieces;skigear;;;;548206858;FEMALE
+;45572;;pieces;;;;;886280602;FEMALE
+;45573;;pieces;;;;;586341472;MALE
+;45574;;pieces;;;;;815087779;MALE
+;45576;;pieces;;;;;111644105;MALE
+;45577;;pieces;;;;;548206858;FEMALE
 ;300046592;;pieces;sunglasses;;;;1019425517;MALE
-;300005449;;pieces;goggles;;;;627880620;MALE
-;300013358;;pieces;tools;;;;919294226;MALE
+;300005449;;pieces;;;;;627880620;MALE
+;300013358;;pieces;;;;;919294226;MALE
 ;300015407;;pieces;sunglasses;;;;1033044592;FEMALE
-;300020294;;pieces;goggles;;;;406756884;FEMALE
-;300022348;;pieces;skigear;;;;577158351;MALE
-;300022349;;pieces;skigear;;;;509408267;MALE
-;300022352;;pieces;skigear;;;;449207984;FEMALE
-;300022356;;pieces;skigear;;;;632871132;MALE
+;300020294;;pieces;;;;;406756884;FEMALE
+;300022348;;pieces;;;;;577158351;MALE
+;300022349;;pieces;;;;;509408267;MALE
+;300022352;;pieces;;;;;449207984;FEMALE
+;300022356;;pieces;;;;;632871132;MALE
 ;300024964;;pieces;sunglasses;;;;780746040;MALE
 ;300040462;;pieces;sunglasses;;;;893541837;MALE
-;300044323;;pieces;tools;;;;1032600241;FEMALE
-;300044596;;pieces;skigear;;;;364794161;MALE
-;300044599;;pieces;skigear;;;;619638137;FEMALE
-;300044600;;pieces;skigear;;;;894972010;MALE
-;300044601;;pieces;skigear;;;;665812657;MALE
+;300044323;;pieces;;;;;1032600241;FEMALE
+;300044596;;pieces;;;;;364794161;MALE
+;300044599;;pieces;;;;;619638137;FEMALE
+;300044600;;pieces;;;;;894972010;MALE
+;300044601;;pieces;;;;;665812657;MALE
 ;300044617;;pieces;sunglasses;;;;225522251;MALE
 ;300044623;;pieces;sunglasses;;;;651338417;MALE
 ;300044624;;pieces;sunglasses;;;;475330206;MALE
 ;300045375;;pieces;sunglasses;;;;657195251;MALE
-;300046522;;pieces;guides;;;;646720493;MALE
+;300046522;;pieces;;;;;646720493;MALE
 ;300046587;;pieces;sunglasses;;;;476861583;FEMALE
 ;300051511;;pieces;caps;;;;661773209;MALE
 ;300047195;;pieces;sunglasses;;;;209936540;FEMALE
 ;300047196;;pieces;sunglasses;;;;684262402;MALE
 ;300047199;;pieces;sunglasses;;;;346696791;FEMALE
 ;300047436;;pieces;sunglasses;;;;167296285;MALE
-;300310070;;pieces;backpack;;;;889164390;MALE
-;300310086;;pieces;backpack;;;;986739944;MALE
-;300310163;;pieces;backpack;;;;754612929;MALE
+;300310070;;pieces;;;;;889164390;MALE
+;300310086;;pieces;;;;;986739944;MALE
+;300310163;;pieces;;;;;754612929;MALE
 ;300310180;;pieces;others;;;;1046940957;FEMALE
 ;300310300;;pieces;others;;;;542440755;MALE
 ;M18729_B;;pieces;shoes;ApparelStyleVariantProduct;;;;FEMALE
@@ -76,7 +77,7 @@ INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategori
 ;M32946_B;;pieces;shirts;ApparelStyleVariantProduct;;;;MALE
 ;M33307_B;;pieces;shoes;ApparelStyleVariantProduct;;;;FEMALE
 ;M33477_B;;pieces;helmet;ApparelStyleVariantProduct;;;;MALE
-;M34130_B;;pieces;skigear;ApparelStyleVariantProduct;;;;MALE
+;M34130_B;;pieces;;ApparelStyleVariantProduct;;;;MALE
 ;M34704;;pieces;shirts;ApparelStyleVariantProduct;;;;FEMALE
 ;M34705_B;;pieces;shirts;ApparelStyleVariantProduct;;;;MALE
 ;M35364;;pieces;shirts;ApparelStyleVariantProduct;;;;FEMALE
@@ -88,8 +89,8 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 ;M25687_W;;M25687;pieces;WHITE;jersey;ApparelSizeVariantProduct
 ;M27160;;M27160_B;pieces;BLACK,SILVER;jersey;ApparelSizeVariantProduct
 ;M28323;;M28323_B;pieces;BLACK,WHITE;jersey;ApparelSizeVariantProduct
-;M32946;;M32946_B;pieces;WHITE;shorts;ApparelSizeVariantProduct
-;M33307;;M33307_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
+;M32946;;M32946_B;pieces;WHITE;shortsTeamwear;ApparelSizeVariantProduct
+;M33307;;M33307_B;pieces;BLACK;shortsTeamwear;ApparelSizeVariantProduct
 ;M33477;;M33477_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
 ;M34130;;M34130_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
 ;M35364_R;;M35364;pieces;RED;socks;ApparelSizeVariantProduct
@@ -879,15 +880,15 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 
 # Create ApparelStyleVariantProduct variants without sizes
 INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];$approved
-;74036_red;;74036;100200;RED;pieces;;
-;21618_-;;21618;100200;;pieces;;
-;135304_neutral;;135304;100200;;pieces;;
-;64389_black+white_marble;;64389;370700;WHITE,BLACK;pieces;;
-;115195_shocking_pink;;115195;370700;PINK;pieces;;
-;111114_black;;111114;370700;BLACK;pieces;;
-;56802_dark_wood;;56802;370700;BROWN;pieces;;
-;74844_purple+pink+goldenrad;;74844;370700;YELLOW,PINK,PURPLE;pieces;;
-;94063_matte_black+gold;;94063;340000;BLACK;pieces;;
+;74036_red;;74036;pos;RED;pieces;;
+;21618_-;;21618;pos;;pieces;;
+;135304_neutral;;135304;pos;;pieces;;
+;64389_black+white_marble;;64389;pos;WHITE,BLACK;pieces;;
+;115195_shocking_pink;;115195;pos;PINK;pieces;;
+;111114_black;;111114;pos;BLACK;pieces;;
+;56802_dark_wood;;56802;pos;BROWN;pieces;;
+;74844_purple+pink+goldenrad;;74844;pos;YELLOW,PINK,PURPLE;pieces;;
+;94063_matte_black+gold;;94063;pos;BLACK;pieces;;
 ;74818_sky_blue;;74818;340000;BLUE;pieces;;
 ;74825_gunship;;74825;340000;BLUE;pieces;;
 ;96502_dark_smoke;;96502;210200;WHITE,GREY;pieces;;
@@ -2004,3 +2005,61 @@ INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseP
 ;300417324;;96172_kelly;250100,streetwear;pieces;;;
 ;300398794;;94415_blacktop;220600;pieces;;;
 ;300398801;;94415_blue_print;220600;pieces;;;
+
+#some actual products from SAP
+INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved
+;BB1089;05;;5;;5000001;;;;
+;G40011;05;;5;;5000004;;;;
+;20859;04;;4;;4000001;;;;
+;00088;08;;8;;SPD0001;;;;
+;00258;08;;8;;SPD0004;;;;
+;BB1090;05;;5;;5000001;;;;
+
+INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved
+;BB1089;5-BB1089WP4;ULTIMATCH D32P WHITE/RED/BLUE;5;WP4;WHITE;;;5;;;;5000001;;;;
+;G40011;5-G40011WBP;HYPER ACADEMY WHITE/BLACK/PINK;5;WBP;WHITE;;;5;;;;5000004;;;;
+;20859;4-20859BP6;PACLITE III SHELL JKT AF BLK/BLK;4;BP6;BLACK;;;4;;;;4000001;;;;
+;00088;8-000882264;CLLRY AQUASHORT PNL BOYS RCH/MAJ/APH;8;2264;;;;8;;;;SPD0001;;;;
+;00258;8-002582846;TRICKSTER SANDAL INF ARD/PER/SCA;08;2846;;;;8;;;;SPD0004;;;;
+;BB1090;5-BB1090PBB;MALMO D32P PINK/BLACK/BLUE;05;PBB;PINK;;;5;;;;5000001;;;;
+
+INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+;5-BB1089WP4:;;5037823906047;;5;pieces;3;;;
+;5-BB1089WP4:;;5037823906030;;4;pieces;3;;;
+;5-BB1089WP4;;5037823906023;;3;pieces;3;;;
+;5-G40011WBP;;5037823851040;;4;pieces;3;;;
+;5-G40011WBP;;5037823851057;;4.5;pieces;3;;;
+;5-G40011WBP;;5037823851064;;5;pieces;3;;;
+;5-G40011WBP;;5037823851071;;5.5;pieces;3;;;
+;5-G40011WBP;;5037823851088;;6;pieces;3;;;
+;5-G40011WBP;;5037823851095;;6.5;pieces;3;;;
+;5-G40011WBP;;5037823851101;;7;pieces;3;;;
+;5-G40011WBP;;5037823851118;;7.5;pieces;3;;;
+;5-G40011WBP;;5037823851125;;8;pieces;3;;;
+;4-20859BP6;;5052071653635;;8;pieces;3;;;
+;4-20859BP6;;5052071653581;;10;pieces;3;;;
+;4-20859BP6;;5052071653598;;12;pieces;3;;;
+;4-20859BP6;;5052071653604;;14;pieces;3;;;
+;4-20859BP6;;5052071653611;;16;pieces;3;;;
+;4-20859BP6;;5052071653628;;18;pieces;3;;;
+;8-000882264;;5050995136548;;24;pieces;05;;;
+;8-000882264;;5050995136586;;26;pieces;05;;;
+;8-000882264;;5050995136555;;28;pieces;05;;;
+;8-000882264;;5050995136562;;30;pieces;05;;;
+;8-000882264;;5050995136579;;32;pieces;05;;;
+;8-002582846;;5050995399769;;5;pieces;05;;;
+;8-002582846;;5050995399721;;6;pieces;05;;;
+;8-002582846;;5050995399738;;7;pieces;05;;;
+;8-002582846;;5050995399745;;8;pieces;05;;;
+;8-002582846;;5050995399752;;9;pieces;05;;;
+;5-BB1090PBB;;5037823906139;;5;pieces;03;;;
+;5-BB1090PBB;;5037823906122;;4;pieces;03;;;
+;5-BB1090PBB;;5037823906115;;3;pieces;03;;;
+
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)
+;5-BB1089WP4;;1;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+;5-G40011WBP;;2;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+;4-20859BP6;;1;https://www.youtube.com/embed/XWMs9pQuQqk;https://www.google.ru/;;221600
+;8-000882264;;5;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
+;8-002582846;;3;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
+;5-BB1090PBB;;100;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation

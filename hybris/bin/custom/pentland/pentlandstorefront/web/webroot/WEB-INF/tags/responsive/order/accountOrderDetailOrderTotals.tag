@@ -10,12 +10,8 @@
     <div class="account-orderdetail">
         <div class="account-orderdetail__footer">
             <div class="row">
-                <div class="col-sm-6 col-md-7 col-lg-8">
-                    <order:appliedVouchers order="${order}" />
-                    <order:receivedPromotions order="${order}" />
-                </div>
-                <div class="col-sm-6 col-md-5 col-lg-4">
-                    <order:orderTotalsItem order="${order}" />
+                <div class="col-sm-4 col-sm-offset-8">
+                    <order:orderTotalsItem order="${order}"/>
                 </div>
             </div>
         </div>

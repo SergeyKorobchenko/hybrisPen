@@ -40,6 +40,32 @@
 		<value>B2B_system_issue</value>
 	</enum>
 
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="soldTo" type="String"/>
+		<property name="markFor" type="String"/>
+		<property name="orderItems" type="java.util.List&lt;com.bridgex.facades.order.data.OrderItemData>"/>
+	</bean>
+
+	<bean class="com.bridgex.facades.order.data.OrderItemData">
+		<property name="imageUrl" type="String"/>
+		<property name="number" type="String"/>
+		<property name="name" type="String"/>
+		<property name="qty" type="Integer"/>
+		<property name="itemStatus" type="String"/>
+		<property name="totalPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="shipments" type="java.util.Map&lt;java.util.Date,com.bridgex.facades.order.data.ShipmentData>"/>
+	</bean>
+	
+	<bean class="com.bridgex.facades.order.data.ShipmentData">
+		<property name="shipDate" type="java.util.Date"/>
+		<property name="qty" type="Integer"/>
+		<property name="shipmentStatus" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="state" type="String"/>
+	</bean>
+
 	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
 		<property name="rdd" type="java.util.Date"/>
 		<property name="purchaseOrderNumber" type="String"/>
