@@ -1,0 +1,19 @@
+$lang=en
+$classificationCatalog = pentlandClassificationCatalog
+$systemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
+$catalogVersion=catalogVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
+$productCatalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),version[default='Staged'])[unique=true,default='pentlandProductCatalog:Staged']
+$clAttrModifiers = system = '$classificationCatalog', version = '1.0', lang = $lang, translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+$teamwearType = @teamwearType[$clAttrModifiers];
+$trainingwearType = @trainingwearType[$clAttrModifiers];
+$sport = @sport[$clAttrModifiers];
+$accessoryType = @accessoryType[$clAttrModifiers];
+$useageOccasion = @useageOccasion[$clAttrModifiers];
+$surface = @surface[$clAttrModifiers];
+$trainingMethod = @trainingMethod[$clAttrModifiers];
+UPDATE ApparelStyleVariantProduct;code[unique=true];$productCatalogVersion;$teamwearType;$trainingwearType;$sport;$accessoryType;$useageOccasion;$surface;$trainingMethod;
+;M18729;;Baselayers
+;M34704_B;;Baselayers
+;M25687_B;;Shorts
+;M27160;;Socks
+;M28323;;Socks

@@ -191,4 +191,6 @@
 
 	<bean id="materialKeyValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.MaterialKeyValueResolver" parent="abstractBaseProductValueResolver"/>
 
+	<bean id="variantProductClassificationAttributesValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.VariantProductClassificationAttributesValueResolver" parent="productClassificationAttributesValueResolver"/>
+
 </beans>
