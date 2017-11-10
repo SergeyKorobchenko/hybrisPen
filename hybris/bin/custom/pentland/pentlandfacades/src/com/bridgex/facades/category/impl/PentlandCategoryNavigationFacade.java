@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.category.PentlandCategoryService;
@@ -65,7 +66,7 @@ public class PentlandCategoryNavigationFacade implements CategoryNavigationFacad
 
   private List<CategoryModel> getVisibleChildren(CategoryModel cat) {
     // todo possible place for optimization - create dao method to get not hidden child categories
-    return cat.getCategories().stream().filter(childCat -> ! childCat.isHidden()).collect(Collectors.toList());
+    return cat.getCategories().stream().filter(childCat -> ! childCat.isHidden()).sorted((c1,c2) -> ObjectUtils.compare(c1.getOrder(), c2.getOrder())).collect(Collectors.toList());
   }
 
   public Converter<CategoryModel, CategoryNavigationData> getCategoryNavigationConverter() {
