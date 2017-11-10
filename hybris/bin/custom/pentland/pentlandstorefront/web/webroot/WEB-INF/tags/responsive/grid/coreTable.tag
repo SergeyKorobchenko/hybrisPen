@@ -78,7 +78,7 @@
             <%--<c:set var="cssStockClass" value="out-of-stock"/>--%>
         <%--</c:if>--%>
 
-        <td class="${cssStockClass} widthReference hidden-xs" style="width: 200px;>
+        <td class="${cssStockClass} widthReference hidden-xs" style="width: 200px;">
 
             <%--<div class="variant-prop hidden-sm hidden-md hidden-lg" data-variant-prop="${fn:escapeXml(variant.variantValueCategory.name)}">--%>
                 <%--<span>${fn:escapeXml(variants[0].parentVariantCategory.name)}:</span>--%>
@@ -89,7 +89,7 @@
                 <%--<c:set var="disableForOutOfStock" value="${inputDisabled}"/>--%>
                 <%--<format:price priceData="${variant.variantOption.priceData}"/>--%>
             <%--</span>--%>
-            <input type=hidden id="productPrice[${loopIndex}]" value="${variant.variantOption.priceData.value}" />
+            <input type="hidden" id="productPrice[${loopIndex}]" value="${variant.variantOption.priceData.value}" />
 
             <%--<c:if test="${variant.variantOption.stock.stockLevel == 0}">--%>
                 <%--<c:set var="disableForOutOfStock" value="disabled"/>--%>

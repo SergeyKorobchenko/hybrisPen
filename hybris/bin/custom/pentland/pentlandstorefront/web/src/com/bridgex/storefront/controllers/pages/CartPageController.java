@@ -352,8 +352,49 @@ public class CartPageController extends AbstractCartPageController
 					}
 				}
 			}
+			final Set<String> multidErrorMsgs = new HashSet<String>();
+			final List<CartModificationData> modificationDataList = new ArrayList<CartModificationData>();
+			for (final OrderEntryData cartEntry : cartForm.getCartEntries()) {
+				if (isValidProductEntry(cartEntry)) {
+					if (!isValidQuantity(cartEntry)) {
+						multidErrorMsgs.add("basket.error.quantity.invalid");
+					} else {
+						final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
+						if (StringUtils.isNotEmpty(errorMsg)) {
+							multidErrorMsgs.add(errorMsg);
+						}
+					}
+				}
+			}
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
+	}
+
+	protected String addEntryToCart(final List<CartModificationData> modificationDataList, final OrderEntryData cartEntry,
+									final boolean isReducedQtyError)
+	{
+		String errorMsg = StringUtils.EMPTY;
+		try
+		{
+			final long qty = cartEntry.getQuantity().longValue();
+			final CartModificationData cartModificationData = getCartFacade().addToCart(cartEntry.getProduct().getCode(), qty);
+			if (cartModificationData.getQuantityAdded() == 0L)
+			{
+				errorMsg = "basket.information.quantity.noItemsAdded." + cartModificationData.getStatusCode();
+			}
+			else if (cartModificationData.getQuantityAdded() < qty && isReducedQtyError)
+			{
+				errorMsg = "basket.information.quantity.reducedNumberOfItemsAdded." + cartModificationData.getStatusCode();
+			}
+
+			modificationDataList.add(cartModificationData);
+
+		}
+		catch (final CommerceCartModificationException ex)
+		{
+			errorMsg = "basket.error.occurred";
+		}
+		return errorMsg;
 	}
 
 	@Override
@@ -687,6 +728,16 @@ public class CartPageController extends AbstractCartPageController
 			return false;
 		}
 		return false;
+	}
+
+	protected boolean isValidProductEntry(final OrderEntryData cartEntry)
+	{
+		return cartEntry.getProduct() != null && StringUtils.isNotBlank(cartEntry.getProduct().getCode());
+	}
+
+	protected boolean isValidQuantity(final OrderEntryData cartEntry)
+	{
+		return cartEntry.getQuantity() != null && cartEntry.getQuantity().longValue() >= 1L;
 	}
 
 }
