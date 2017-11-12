@@ -23,6 +23,10 @@ $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
 ;SuperAccountMangers;;
 
+INSERT_UPDATE Employee;UID[unique=true];password[default=1234];description;name;groups(uid);sessionLanguage(isocode);sessionCurrency(isocode)
+;salesrep1@pentland.com;;Sales Rep 1;Sales Rep 1;asagentgroup,salesrepgroup;en;GBP
+;customeropsuser1@pentland.com;;Customer Ops User 1;Customer Ops User 1;asagentgroup,salesrepgroup;en;GBP
+
 INSERT_UPDATE Employee;uid[unique=true];name;groups(uid)[mode=append];password[default=$defaultPassword];
 ;acctmgra;Alistair Thompson;employeegroup,acctmgrgroup,cockpitgroup,SuperAccountMangers,admingroup;
 ;acctmgrb;Elke Vogel;employeegroup,acctmgrgroup,cockpitgroup,admingroup;

@@ -88,7 +88,7 @@
 		<property name="typeService" ref="typeService"/>
 	</bean>
 
-	<bean id="apparelProductPopulator" class="com.bridgex.facades.populators.ApparelProductPopulator" >
+	<bean id="apparelProductPopulator" class="com.bridgex.facades.populators.ApparelProductPopulator" parent="baseProductPopulator">
 		<property name="genderConverter" ref="genderConverter"/>
 	</bean>
 
@@ -295,14 +295,34 @@
 		<property name="imageConverter" ref="imageConverter"/>
 	</bean>
 
-	<bean id="b2bProductConfiguredPopulator" parent="productVariantConfiguredPopulator">
-		<property name="populators">
-			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
-				<entry key="BRAND" value-ref="productBrandPopulator"/>
-				<entry key="FEATURE" value-ref="productFeaturePopulator"/>
-				<entry key="PDP" value-ref="productPDPPopulator"/>
-			</map>
-		</property>
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="BRAND" />
+		<property name="add" ref="productBrandPopulator" />
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="FEATURE" />
+		<property name="add" ref="productFeaturePopulator" />
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="PDP" />
+		<property name="add" ref="productPDPPopulator" />
+	</bean>
+
+	<alias name="pentlandProductFacade" alias="productFacade" />
+	<bean name="pentlandProductFacade" class="com.bridgex.facades.product.impl.PentlandProductFacadeImpl" parent="defaultProductFacade" >
+		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService" />
+		<property name="orderSimulationService" ref="orderSimulationService" />
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="customerService" ref="b2bCustomerService" />
+		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
 </beans>

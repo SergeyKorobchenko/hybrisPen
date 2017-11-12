@@ -40,6 +40,7 @@ import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
+import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.facades.utils.ProductUtils;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
@@ -98,8 +99,8 @@ public class ProductPageController extends AbstractPageController
 	@Resource(name = "productDataUrlResolver")
 	private UrlResolver<ProductData> productDataUrlResolver;
 
-	@Resource(name = "productVariantFacade")
-	private ProductFacade productFacade;
+	@Resource(name = "productFacade")
+	private PentlandProductFacade productFacade;
 
 	@Resource(name = "productService")
 	private ProductService productService;
@@ -135,7 +136,6 @@ public class ProductPageController extends AbstractPageController
 		}
 
 		updatePageTitle(productCode, model);
-
 
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
@@ -308,6 +308,8 @@ public class ProductPageController extends AbstractPageController
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, options);
 
+		productFacade.populateCustomerPrice(productData);
+
 		sortVariantOptionData(productData);
 		storeCmsPageInModel(model, getPageForProduct(productCode));
 		populateProductData(productData, model);
@@ -315,8 +317,7 @@ public class ProductPageController extends AbstractPageController
 
 		if (CollectionUtils.isNotEmpty(productData.getVariantMatrix()))
 		{
-			model.addAttribute(WebConstants.MULTI_DIMENSIONAL_PRODUCT,
-					Boolean.valueOf(CollectionUtils.isNotEmpty(productData.getVariantMatrix())));
+			model.addAttribute(WebConstants.MULTI_DIMENSIONAL_PRODUCT, CollectionUtils.isNotEmpty(productData.getVariantMatrix()));
 		}
 	}
 

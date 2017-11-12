@@ -2,6 +2,9 @@ package com.bridgex.core.product;
 
 import java.util.List;
 
+import com.bridgex.integration.domain.MultiBrandCartDto;
+import com.bridgex.integration.domain.MultiBrandCartResponse;
+
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 
@@ -10,12 +13,6 @@ import de.hybris.platform.core.model.product.ProductModel;
  */
 public interface OrderSimulationService {
 
-  void simulateProduct(final ProductModel product);
-
-  void simulateOrderForm(final List<ProductModel> products);
-
-  void simulateFutureOrderForm(final List<ProductModel> products);
-
-  void simulateCart(final CartModel cart);
+    MultiBrandCartResponse simulateOrder(MultiBrandCartDto request);
 
 }

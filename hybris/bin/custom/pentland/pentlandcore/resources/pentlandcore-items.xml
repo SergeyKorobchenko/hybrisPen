@@ -278,6 +278,10 @@
                         <persistence type="property" />
                         <description>SAP brand (code) assigned to this Customer</description>
                     </attribute>
+                    <attribute qualifier="sapPriceList" type="java.lang.String" >
+                        <persistence type="property" />
+                        <description>SAP Price List assigned to this Customer</description>
+                    </attribute>
                 </attributes>
             </itemtype>
         </typegroup>

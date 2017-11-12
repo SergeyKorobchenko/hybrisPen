@@ -9,6 +9,10 @@ public class ETReturnDto {
   public ETReturnDto() {
   }
 
+  public ETReturnDto(final String type) {
+    this.type = type;
+  }
+
   @JsonProperty("TYPE")
   private String type;
 

@@ -30,4 +30,9 @@ public interface PentlandB2BUnitService extends B2BUnitService<B2BUnitModel, B2B
    * @return the parent
    */
   Collection<B2BUnitModel> getFirstLevelParents(final B2BCustomerModel employee);
+
+  List<B2BUnitModel> getUsersB2BUnits(B2BCustomerModel user);
+
+  List<B2BUnitModel> getCurrentUnits();
+
 }

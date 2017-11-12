@@ -19,7 +19,7 @@ public class ProductUtils {
     if (status == null && product instanceof VariantProductModel) {
       status = (((VariantProductModel) product).getBaseProduct()).getDiscontinuedStatus();
     }
-    return (null != status && (DiscontinuedStatus.D03.equals(status) || DiscontinuedStatus.D04.equals(status) || DiscontinuedStatus.D05.equals(status)) );
+    return (status == null || DiscontinuedStatus.D03.equals(status) || DiscontinuedStatus.D04.equals(status) || DiscontinuedStatus.D05.equals(status));
   }
 
 }

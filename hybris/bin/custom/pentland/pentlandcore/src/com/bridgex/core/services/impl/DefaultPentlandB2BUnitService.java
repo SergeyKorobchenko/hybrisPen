@@ -62,7 +62,7 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
           });
 
           return new Object[]
-            { getRootUnit(unitsOfCustomer.get(0)), getBranch(unitsOfCustomer.get(0)), unitsOfCustomer.get(0), userPriceGroups, parentUserPriceGroups };
+            { getRootUnit(unitsOfCustomer.get(0)), getBranch(unitsOfCustomer.get(0)), unitsOfCustomer.get(0), userPriceGroups, parentUserPriceGroups, unitsOfCustomer };
         }
       });
 
@@ -71,11 +71,18 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
       getSessionService().setAttribute(B2BConstants.CTX_ATTRIBUTE_UNIT, branchInfo[2]);
       getSessionService().setAttribute(Europe1Constants.PARAMS.UPG, branchInfo[3]);
       getSessionService().setAttribute(PentlandcoreConstants.PARENT_UPG, branchInfo[4]);
-
+      getSessionService().setAttribute(PentlandcoreConstants.CTX_ATTRIBUTE_UNITS, branchInfo[5]);
     }
   }
 
+  public List<B2BUnitModel> getUsersB2BUnits(final B2BCustomerModel customer) {
+    return getParents(customer);
+  }
 
+  @Override
+  public List<B2BUnitModel> getCurrentUnits() {
+    return getSessionService().getAttribute(PentlandcoreConstants.CTX_ATTRIBUTE_UNITS);
+  }
 
   protected List<B2BUnitModel> getParents(final B2BCustomerModel employee)
   {

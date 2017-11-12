@@ -24,7 +24,7 @@
 			</c:when>
 			<c:otherwise>
 				<p class="price">
-					<spring:theme code="product.wholesale.price"/><format:fromPrice priceData="${product.price}"/>
+					<spring:theme code="product.wholesale.price"/>:&nbsp;<format:fromPrice priceData="${product.price}"/>
 				</p>
 			</c:otherwise>
 		</c:choose>

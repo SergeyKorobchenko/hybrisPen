@@ -8,6 +8,6 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
  */
 public interface PentlandProductFacade extends ProductFacade {
 
-  void getCustomerPrice(ProductData productData);
+  boolean populateCustomerPrice(ProductData productData);
 
 }

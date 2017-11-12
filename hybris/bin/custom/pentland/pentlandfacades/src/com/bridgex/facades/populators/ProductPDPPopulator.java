@@ -3,6 +3,7 @@ package com.bridgex.facades.populators;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
+import com.bridgex.core.model.ApparelStyleVariantProductModel;
 
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.ImageData;
@@ -24,6 +25,8 @@ public class ProductPDPPopulator<SOURCE extends ProductModel, TARGET extends Pro
   public void populate(final SOURCE source, final TARGET target) throws ConversionException {
     if (source instanceof ApparelSizeVariantProductModel) {
       target.setMaterialKey(((ApparelSizeVariantProductModel) source).getBaseProduct().getCode());
+    } else if (source instanceof ApparelStyleVariantProductModel) {
+      target.setMaterialKey(source.getCode());
     }
 
     target.setVideoURL((String) getProductAttribute(source, ProductModel.VIDEOURL));
