@@ -1440,7 +1440,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.title.details;Order Details
 ;text.account.order.title.inProgressItems;In Progress Order Items
 ;text.account.order.title.storePickUpItems;Store Pick Up Items
-;text.account.order.total;Total
 ;text.account.order.total.includesTax;Total includes {0} in taxes
 ;text.account.order.totalSavings;You saved {0} on your order
 ;text.account.order.tracking;Tracking Number
@@ -1473,7 +1472,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory;Order History
 ;text.account.orderHistory.actions;Actions
 ;text.account.orderHistory.back;Back
-;text.account.orderHistory.datePlaced;Date Placed
 ;text.account.orderHistory.emptyOrderHistory;Order History Empty
 ;text.account.orderHistory.mobile.page.currentPage;{0} of {1}
 ;text.account.orderHistory.mobile.page.currentResults;{0} - {1} of {2} orders
@@ -1578,7 +1576,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.remove;Remove
 ;text.account.quote.status;Status
 ;text.account.quote.status.display.BUYER_ACCEPTED;Accepted
-;text.account.quote.status.display.BUYER_APPROVED;Approved
+;text.account.quote.status.display.BUYER_APPROVED;Ordered
 ;text.account.quote.status.display.BUYER_DRAFT;Draft
 ;text.account.quote.status.display.BUYER_OFFER;Completed
 ;text.account.quote.status.display.BUYER_ORDERED;Ordered
@@ -1586,7 +1584,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.status.display.BUYER_SUBMITTED;Submitted
 ;text.account.quote.status.display.CANCELLED;Cancelled
 ;text.account.quote.status.display.EXPIRED;Expired
-;text.account.quote.status.display.SELLERAPPROVER_APPROVED;Approved
+;text.account.quote.status.display.SELLERAPPROVER_APPROVED;Submitted
 ;text.account.quote.status.display.SELLERAPPROVER_DRAFT;Draft
 ;text.account.quote.status.display.SELLERAPPROVER_PENDING;Pending Approval
 ;text.account.quote.status.display.SELLERAPPROVER_REJECTED;Rejected
@@ -2848,6 +2846,18 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.orderType;Order Type
 ;text.account.orderHistory.rdd;Requested delivery date
 ;text.account.orderHistory.totalQty;Total Quantity
+;text.account.orderHistory.creationDate;Order Creation Date
+;text.account.orderHistory.POnumber;PO Number
+;text.account.order.total;Order Total
+;text.account.order.tax;Order Tax
+;text.account.order.net;Order Net
+;text.account.orderHistory.shipTo;Ship To
+;text.account.orderHistory.soldTo;Sold To
+;text.account.orderHistory.markFor;Mark For
+;text.account.orderHistory.item.status;Status
+;text.account.orderHistory.item.qty;QTY
+;text.account.orderHistory.item.shipments;Shipments
+;text.account.orderHistory.item.shipdate;Ship Date
 
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry

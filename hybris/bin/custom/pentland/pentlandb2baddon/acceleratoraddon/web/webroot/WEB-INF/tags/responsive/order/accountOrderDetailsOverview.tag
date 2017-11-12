@@ -10,22 +10,20 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="row">
-    <div class="col-sm-12 col-md-9 col-no-padding">
+    <div class="col-sm-12 col-md-12 col-no-padding">
         <div class="row">
-            <div class="col-sm-4 item-wrapper">
+            <div class="col-sm-3 item-wrapper">
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_overviewOrderID_label">
                         <span class="item-label"><spring:theme code="text.account.orderHistory.orderNumber"/></span>
-                        <span class="item-value">${fn:escapeXml(orderData.code)}</span>
+                        <span class="item-value">${fn:escapeXml(order.code)}</span>
                     </ycommerce:testId>
                 </div>
                 <div class="item-group">
-                    <c:if test="${orderData.paymentType.code=='ACCOUNT' and not empty orderData.purchaseOrderNumber}">
-                        <ycommerce:testId code="orderDetail_overviewPurchaseOrderNumber_label">
-                            <span class="item-label"><spring:theme code="text.account.order.orderDetails.purchaseOrderNumber"/></span>
-                            <span class="item-value">${fn:escapeXml(orderData.purchaseOrderNumber)}</span>
-                        </ycommerce:testId>
-                    </c:if>
+                    <ycommerce:testId code="orderDetail_PONumber_label">
+                        <span class="item-label"><spring:theme code="text.account.orderHistory.POnumber"/></span>
+                        <span class="item-value">${fn:escapeXml(order.purchaseOrderNumber)}</span>
+                    </ycommerce:testId>
                 </div>
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_overviewOrderStatus_label">
@@ -36,63 +34,53 @@
                     </ycommerce:testId>
                 </div>
             </div>
-            <div class="col-sm-4 item-wrapper">
+            <div class="col-sm-3 col-sm-offset-2 item-wrapper">
                 <div class="item-group">
-                    <ycommerce:testId code="orderDetail_overviewStatusDate_label">
-                        <span class="item-label"><spring:theme code="text.account.orderHistory.datePlaced"/></span>
-                        <span class="item-value"><fmt:formatDate value="${order.created}" dateStyle="medium" timeStyle="short" type="both"/></span>
+                    <ycommerce:testId code="orderDetail_creationDate_label">
+                        <span class="item-label"><spring:theme code="text.account.orderHistory.creationDate"/></span>
+                        <span class="item-value"><fmt:formatDate value="${order.created}" dateStyle="medium" timeStyle="medium" type="both"/></span>
                     </ycommerce:testId>
                 </div>
                 <div class="item-group">
-                    <ycommerce:testId code="orderDetail_overviewPlacedBy_label">
-                        <span class="item-label"><spring:theme code="checkout.multi.summary.orderPlacedBy"/></span>
-                        <span class="item-value"><spring:theme code="text.company.user.${fn:escapeXml(order.b2bCustomerData.titleCode)}.name" text=""/>&nbsp;${fn:escapeXml(order.b2bCustomerData.firstName)}&nbsp;${fn:escapeXml(order.b2bCustomerData.lastName)}</span>
+                    <ycommerce:testId code="orderDetail_RDD_label">
+                        <span class="item-label"><spring:theme code="text.account.orderHistory.rdd"/></span>
+                        <span class="item-value"><fmt:formatDate value="${order.rdd}" dateStyle="medium" type="date"/></span>
                     </ycommerce:testId>
                 </div>
                 <div class="item-group">
-                    <c:if test="${orderData.paymentType.code=='ACCOUNT'}">
-                        <ycommerce:testId code="orderDetail_overviewParentBusinessUnit_label">
-                            <span class="item-label"><spring:theme code="text.account.order.orderDetails.ParentBusinessUnit"/></span>
-                            <span class="item-value">${fn:escapeXml(orderData.costCenter.unit.name)}</span>
-                        </ycommerce:testId>
-                    </c:if>
+                    <ycommerce:testId code="orderDetail_overviewTotalQuantity_label">
+                        <span class="item-label"><spring:theme code="text.account.orderHistory.totalQty"/></span>
+                        <span class="item-value">${fn:escapeXml(order.totalUnitCount)}</span>
+                    </ycommerce:testId>
                 </div>
             </div>
-            <div class="col-sm-4 item-wrapper">
+            <div class="col-sm-2 item-wrapper">
                 <div class="item-group">
-                    <c:if test="${orderData.paymentType.code=='ACCOUNT'}">
-                        <ycommerce:testId code="orderDetail_overviewCostCenter_label">
-                            <span class="item-label"><spring:theme code="text.account.order.orderDetails.CostCenter"/></span>
-                            <span class="item-value">${fn:escapeXml(orderData.costCenter.name)}</span>
-                        </ycommerce:testId>
-                    </c:if>
-                </div>
-                <div class="item-group">
-                    <ycommerce:testId code="orderDetail_overviewOrderTotal_label">
-                        <span class="item-label"><spring:theme code="text.account.order.total"/></span>
+                    <ycommerce:testId code="orderDetail_overviewOrderNet_label">
+                        <span class="item-label"><spring:theme code="text.account.order.net"/></span>
                         <span class="item-value"><format:price priceData="${order.totalPrice}"/></span>
                     </ycommerce:testId>
                 </div>
                 <div class="item-group">
-                	<c:if test="${orderData.quoteCode ne null}">
-							<spring:url htmlEscape="false" value="/my-account/my-quotes/${orderData.quoteCode}" var="quoteDetailUrl"/>
-	                    <ycommerce:testId code="orderDetail_overviewQuoteId_label">
-	                        <span class="item-label"><spring:theme code="text.account.quote.code"/></span>
-	                        <span class="item-value">
-										<a href="${quoteDetailUrl}" >
-											${fn:escapeXml(orderData.quoteCode)}
-										</a>
-	                        </span>
-	                    </ycommerce:testId>
-                    </c:if>
+                    <ycommerce:testId code="orderDetail_overviewOrderTax_label">
+                        <span class="item-label"><spring:theme code="text.account.order.tax"/></span>
+                        <span class="item-value"><format:price priceData="${order.totalTax}"/></span>
+                    </ycommerce:testId>
                 </div>
+                <div class="item-group">
+                    <ycommerce:testId code="orderDetail_overviewOrderTotal_label">
+                        <span class="item-label"><spring:theme code="text.account.order.total"/></span>
+                        <span class="item-value"><format:price priceData="${order.totalPriceWithTax}"/></span>
+                    </ycommerce:testId>
+                </div>
+            </div>
+            <div class="col-sm-2 item-action">
+                <c:set var="orderCode" value="${orderData.code}" scope="request"/>
+                <action:actions element="div" parentComponent="${component}"/>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-12 col-md-3 item-action">
-        <c:set var="orderCode" value="${orderData.code}" scope="request"/>
-        <action:actions element="div" parentComponent="${component}"/>
-    </div>
+
 </div>
 

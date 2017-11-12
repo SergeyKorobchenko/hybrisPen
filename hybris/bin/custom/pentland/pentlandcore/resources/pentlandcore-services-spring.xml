@@ -73,6 +73,10 @@
 		<property name="pentlandPriceDao" ref="pentlandPriceDao"/>
 	</bean>
 
+	<bean id="orderDetailsService" class="com.bridgex.core.integration.OrderDetailsService">
+		<property name="integrationService" ref="orderDetailsIntegrationService"/>
+	</bean>
+
 	<alias name="defaultPentlandCommerceCheckoutService" alias="pentlandCommerceCheckoutService"/>
 	<bean id="defaultPentlandCommerceCheckoutService" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCheckoutService" parent="defaultCommerceCheckoutService">
 		<property name="orderService" ref="b2bOrderService"/>
@@ -82,4 +86,14 @@
 		<property name="generateMerchantTransactionCodeStrategy" ref="generateMerchantTransactionCodeStrategy"/>
 		<property name="markForAddressStrategy" ref="markForAddressStrategy"/>
 	</bean>
+
+	<alias name="defaultPentlandOrderExportService" alias="pentlandOrderExportService"/>
+	<bean id="defaultPentlandOrderExportService" class="com.bridgex.core.order.impl.DefaultPentlandOrderExportService">
+		<property name="modelService" ref="modelService"/>
+		<property name="orderExportService" ref="orderExportService"/>
+	</bean>
+
+	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
+	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator"/>
+
 </beans>

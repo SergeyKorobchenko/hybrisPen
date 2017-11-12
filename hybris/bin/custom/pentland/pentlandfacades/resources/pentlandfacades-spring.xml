@@ -33,8 +33,29 @@
 	</bean>
 
 	<alias name="pentlandOrderFacade" alias="orderFacade"/>
-	<bean id="pentlandOrderFacade" class="com.bridgex.facades.order.impl.DefaultPentalndOrderFacade" parent="defaultOrderFacade">
+	<bean id="pentlandOrderFacade" class="com.bridgex.facades.order.impl.DefaultPentlandOrderFacade" parent="defaultOrderFacade">
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
+		<property name="orderDetailsFacade" ref="orderDetailsFacade"/>
+	</bean>
+
+	<bean id="orderDetailsFacade" class="com.bridgex.facades.integration.OrderDetailsFacade">
+		<property name="orderDetailsService" ref="orderDetailsService"/>
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
+	</bean>
+
+	<bean id="orderDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="populators">
+			<list>
+				<ref bean="orderDetailsPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="orderDetailsPopulator" class="com.bridgex.facades.order.converters.populator.OrderDetailsPopulator">
+		<property name="productService" ref="productService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
 	<alias name="pentlandCartFacade" alias="cartFacade"/>

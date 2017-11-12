@@ -22,6 +22,10 @@ public class DiscontinuedStatusCellDecorator extends AbstractImpExCSVCellDecorat
     if(StringUtils.startsWith(sapCode, "D")){
       return sapCode;
     }
-    return "D" + sapCode;
+    if(sapCode.length() == 1){
+      return "D0" + sapCode;
+    }else {
+      return "D" + sapCode;
+    }
   }
 }

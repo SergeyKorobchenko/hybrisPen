@@ -25,6 +25,19 @@ $others=others(code, $catalogVersion)
 $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
 
+#size charts (random images actually, just for format)
+INSERT_UPDATE Media;code[unique=true];realfilename;mediaFormat(qualifier)[default=sizeChart];$mediaCV;folder(qualifier)[default=product];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;1411353;/1200Wx1200H/29531_1.jpg;;;;$siteResource/images/1200Wx1200H/29531_1.jpg;
+;1234343;/1200Wx1200H/29532_1.jpg;;;;$siteResource/images/1200Wx1200H/29532_1.jpg;
+;1515334;/1200Wx1200H/29533_1.jpg;;;;$siteResource/images/1200Wx1200H/29533_1.jpg;
+
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;sizeChartImage(code,$mediaCV)
+;5-BB1089WP4;;1411353
+;5-G40011WBP;;1411353
+;4-20859BP6;;1234343
+;8-000882264;;1234343
+;8-002582846;;1515334
+;5-BB1090PBB;;1515334
 
 # Create medias
 INSERT_UPDATE Media;mediaFormat(qualifier);;code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)

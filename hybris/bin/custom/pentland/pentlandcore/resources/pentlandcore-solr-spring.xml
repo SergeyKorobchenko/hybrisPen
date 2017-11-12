@@ -135,6 +135,7 @@
 
 	<bean id="additionalFiltersQueryPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.AdditionalFiltersQueryPopulator">
 		<property name="userService" ref="userService"/>
+		<property name="sessionService" ref="sessionService"/>
 	</bean>
 
 	<bean parent="modifyPopulatorList">
@@ -142,7 +143,9 @@
 		<property name="add" ref="additionalFiltersQueryPopulator"/>
 	</bean>
 
-	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider"/>
+	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider">
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+	</bean>
 
 	<bean id="abstractBrandCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBrandCategoryResolver" abstract="true" parent="abstractBaseProductValueResolver">
 		<property name="categoryService" ref="categoryService"/>
@@ -188,5 +191,12 @@
 	<bean id="abstractBaseProductValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBaseProductValueResolver" parent="abstractValueResolver" abstract="true"/>
 
 	<bean id="genderValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.GenderValueResolver" parent="abstractBaseProductValueResolver"/>
+
+	<bean id="materialKeyValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.MaterialKeyValueResolver" parent="abstractBaseProductValueResolver"/>
+	<bean id="styleLevelNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.StyleLevelNameValueResolver" parent="abstractBaseProductValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+
+	<bean id="variantProductClassificationAttributesValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.VariantProductClassificationAttributesValueResolver" parent="productClassificationAttributesValueResolver"/>
 
 </beans>

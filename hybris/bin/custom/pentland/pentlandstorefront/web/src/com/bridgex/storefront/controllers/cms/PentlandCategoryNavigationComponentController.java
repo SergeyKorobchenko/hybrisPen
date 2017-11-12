@@ -22,6 +22,8 @@ public class PentlandCategoryNavigationComponentController extends AbstractAccel
   protected void fillModel(HttpServletRequest request, Model model, PentlandCategoryNavigationComponentModel component) {
 
     model.addAttribute("categoryNavigation", categoryNavigationFacade.getRootCategoryNavigation());
+    Integer wrapAfter = component.getWrapAfter();
+    model.addAttribute("wrapAfter", wrapAfter != null ? wrapAfter : 10);
 
   }
 

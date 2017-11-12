@@ -166,6 +166,11 @@
 	      p:mapping="user"
 	      p:converter-ref="pentlandBatchB2BCustomerConverter"/>
 
+	<bean id="batchInvoiceConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="invoice"
+	      p:converter-ref="pentlandBatchInvoiceConverter"/>
+
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
 	<!-- parent B2BUnit -->
@@ -367,4 +372,16 @@
 			<value>;{+0};{+0};{1};{+2} {+3};{+4};{5};{6};{7};{8};;{S}</value>
 		</property>
 	</bean>
+	<bean id="pentlandBatchInvoiceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#% impex.enableCodeExecution(true)
+				INSERT_UPDATE B2BDocument;documentnumber[unique=true];sapCustomerID;Unit(uid);amount;currency(isocode)[default=GBP];date[dateformat=yyyy-MM-dd];documentType(code)[default=Invoice];dueDate[dateformat=yyyy-MM-dd];openAmount;status(code)[default=open];
+				#%groovy% beforeEach: line.put(3, pentlandB2BUnitService.getUnitBySapID(line.get(3)).getUid());
+			</value>
+		</property>
+			<property name="impexRow">
+				<value>;{+0};{+1};{+1};{+2};{3};{+4};{5};{+6};{+7};{8}</value>
+			</property>
+	</bean>
+
 </beans>
