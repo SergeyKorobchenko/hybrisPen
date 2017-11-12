@@ -230,6 +230,13 @@
                       generate="true" extends="SimpleCMSComponent"
                       jaloclass="com.bridgex.core.jalo.cms.PentlandCategoryNavigationComponent">
                 <description>Pentland custom navigation menu component with 3 levels, the top being brand categories</description>
+                <attributes>
+                    <attribute type="java.lang.Integer" qualifier="wrapAfter">
+                        <persistence type="property" />
+                        <modifiers />
+                        <description>Determines the number of navigation nodes when the following elements will be wrapped.</description>
+                    </attribute>
+                </attributes>
             </itemtype>
         </typegroup>
 
