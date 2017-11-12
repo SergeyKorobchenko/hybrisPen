@@ -71,12 +71,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -330,8 +325,8 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update-all", method = RequestMethod.POST)
-	public ResponseEntity<String> updateCartQuantitiesAll(final Model model, final PentlandCartForm cartForm, final BindingResult bindingResult, final HttpServletRequest request,
-	                                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public ResponseEntity<String> updateCartQuantitiesAll(@RequestBody final PentlandCartForm cartForm,final Model model, final BindingResult bindingResult,
+														  final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		if (bindingResult.hasErrors()){
 			//TODO add error messages

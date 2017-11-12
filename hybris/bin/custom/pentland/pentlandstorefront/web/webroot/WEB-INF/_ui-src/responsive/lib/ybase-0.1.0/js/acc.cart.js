@@ -418,20 +418,34 @@ ACC.cart = {
         if (!$form) {
             return;
         }
-        var updateFormData = $form.serialize();
-        $('input[id^=quantity_][name=quantity]:visible').each(function (index, value) {
-            var $input = $(value);
-            var entryNumber = $input.attr('id').substring('quantity_'.length);
-            updateFormData += '&quantities[' + entryNumber + ']=' + $input.val();
+        var $updateFormData = $($form.serializeArray());
+        var postData = {};
+        $updateFormData.each(function (index, value) {
+            postData[value.name] = value.value;
         });
-        var gridData = $('input[type=hidden][name^=cartEntries]').serialize();
-        if (gridData) {
-            updateFormData += '&' + gridData;
-        }
+        postData.cartEntries = [];
+        $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
+            var $v = $(v);
+            postData.cartEntries.push({
+                'quantity': $v.value,
+                'product': {'code': $v.data().productSelection.product}
+            })
+        });
+
+        // $('input[id^=quantity_][name=quantity]:visible').each(function (index, value) {
+        //     var $input = $(value);
+        //     var entryNumber = $input.attr('id').substring('quantity_'.length);
+        //     updateFormData += '&quantities[' + entryNumber + ']=' + $input.val();
+        // });
+        // var gridData = $('input[type=hidden][name^=cartEntries]').serialize();
+        // if (gridData) {
+        //     updateFormData += '&' + gridData;
+        // }
         $.ajax({
             url: $form.attr("action"),
-            data: updateFormData,
+            data: JSON.stringify(postData),
             type: "POST",
+            dataType: 'json',
             success: function (data) {
                 successFunction();
             },
