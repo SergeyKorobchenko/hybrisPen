@@ -1,10 +1,15 @@
 package com.bridgex.core.customer.impl;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.expression.AccessException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.client.ResourceAccessException;
+
 import com.bridgex.core.customer.PentlandAccountSummaryService;
+import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.AccountSummaryDto;
 import com.bridgex.integration.domain.AccountSummaryResponse;
 import com.bridgex.integration.domain.BrandDto;
@@ -17,13 +22,21 @@ import de.hybris.platform.servicelayer.i18n.CommonI18NService;
  */
 public class DefaultPentlandAccountSummaryService implements PentlandAccountSummaryService {
 
-  public static final String SERVICE_CUSTOMER = "B2B_Hybris";
-  private CommonI18NService  commonI18NService;
+  private static final String SERVICE_CUSTOMER = "B2B_Hybris";
+
+  private CommonI18NService commonI18NService;
   private IntegrationService<AccountSummaryDto,AccountSummaryResponse> integrationService;
 
-
   public AccountSummaryResponse requestAccountSummary(AccountSummaryDto request) {
-    return integrationService.sendRequest(request, AccountSummaryResponse.class).getBody();
+    AccountSummaryResponse response = integrationService.sendRequest(request, AccountSummaryResponse.class).getBody();
+    checkRequestSuccess(response);
+    return response;
+  }
+
+  private void checkRequestSuccess(AccountSummaryResponse response) {
+    if (response.getEtReturn().getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
+      throw new ResourceAccessException("ERP request failed with response: " + response.getEtReturn().getMessage());
+    }
   }
 
   @Override
@@ -49,4 +62,19 @@ public class DefaultPentlandAccountSummaryService implements PentlandAccountSumm
     return dto;
   }
 
+  public CommonI18NService getCommonI18NService() {
+    return commonI18NService;
+  }
+
+  public void setCommonI18NService(CommonI18NService commonI18NService) {
+    this.commonI18NService = commonI18NService;
+  }
+
+  public IntegrationService<AccountSummaryDto, AccountSummaryResponse> getIntegrationService() {
+    return integrationService;
+  }
+
+  public void setIntegrationService(IntegrationService<AccountSummaryDto, AccountSummaryResponse> integrationService) {
+    this.integrationService = integrationService;
+  }
 }

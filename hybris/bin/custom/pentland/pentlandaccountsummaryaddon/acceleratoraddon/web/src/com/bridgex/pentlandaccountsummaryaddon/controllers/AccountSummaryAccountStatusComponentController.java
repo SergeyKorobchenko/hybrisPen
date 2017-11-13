@@ -146,10 +146,8 @@ public class AccountSummaryAccountStatusComponentController extends
 					accountManagerName = accountManager.getDisplayName();
 				}
 			}
-			amountBalance = b2bAccountSummaryFacade.getAmountBalance(b2bUnitModel);
 		}
 
-		model.addAttribute("amountBalanceData", amountBalance);
 		model.addAttribute("b2bUnitData", b2bUnitData);
 		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
 		model.addAttribute("billingAddress", prepareDefaultAddress(b2bUnitData));

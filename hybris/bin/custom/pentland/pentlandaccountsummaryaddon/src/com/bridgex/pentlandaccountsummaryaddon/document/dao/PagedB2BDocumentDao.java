@@ -51,4 +51,6 @@ public interface PagedB2BDocumentDao
 	 * @return result : a SeachPageData<B2BDocumentModel> containing documents of the given unit & criteria.
 	 */
 	SearchPageData<B2BDocumentModel> getAllPagedDocuments(final PageableData pageableData, final List<DefaultCriteria> criteriaList);
+
+	SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
 }

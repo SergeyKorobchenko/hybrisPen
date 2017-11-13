@@ -60,84 +60,84 @@ INSERT_UPDATE DocumentMedia;code[unique=true];@media[translator=de.hybris.platfo
 ;POPG-00006020;$siteResource/documentmedias/POPG-00006020.pdf;application/pdf
 ;STAPG-00010000;$siteResource/documentmedias/STAPG-00010000.pdf;application/pdf
 
-INSERT_UPDATE B2BDocument;documentnumber[unique=true];Unit(uid);amount;currency(isocode);date[dateformat=yyyy-MM-dd];documentType(code);dueDate[dateformat=yyyy-MM-dd];openAmount;status(code,itemtype(code));documentMedia(code, itemtype(code))
-;POCR-0000001;Custom Retail;78515,58;USD;2014-06-10;Purchase Order;;78515,58;open:DocumentStatus;;
-;POCR-0000002;Custom Retail;50945,36;USD;2014-06-10;Purchase Order;;50945,36;open:DocumentStatus;;
-;POCR-0000003;Custom Retail;82005,11;USD;2014-06-10;Purchase Order;;82005,11;open:DocumentStatus;;
-;POCR-0000004;Custom Retail;31751,03;USD;2014-06-10;Purchase Order;;31751,03;open:DocumentStatus;;
-;POCR-0000005;Custom Retail;79077,74;USD;2014-06-12;Purchase Order;;79077,74;closed:DocumentStatus;;
-;POCR-0000006;Custom Retail;69296,63;USD;2014-06-12;Purchase Order;;69296,63;closed:DocumentStatus;;
-;POCR-0000007;Custom Retail;64628,96;USD;2014-14-06;Purchase Order;;64628,96;closed:DocumentStatus;;
-;POCR-0000008;Custom Retail;56781,49;USD;2014-14-06;Purchase Order;;56781,49;closed:DocumentStatus;;
-;POCR-0000009;Custom Retail;37542,63;USD;2014-06-18;Purchase Order;;37542,63;open:DocumentStatus;;
-;POCR-0000010;Custom Retail;38938,37;USD;2014-06-18;Purchase Order;;38938,37;open:DocumentStatus;;
-;POCR-0000011;Custom Retail;25377,17;USD;2014-06-18;Purchase Order;;25377,17;open:DocumentStatus;;
-;POCR-0000012;Custom Retail;77451,97;USD;2014-06-18;Purchase Order;;77451,97;open:DocumentStatus;;
-;POCR-0000013;Custom Retail;76241,05;USD;2014-06-18;Purchase Order;;76241,05;open:DocumentStatus;;
-;POCR-0000014;Custom Retail;33632,01;USD;2014-06-19;Purchase Order;;33632,01;closed:DocumentStatus;;
-;POCR-0000015;Custom Retail;34610,03;USD;2014-06-19;Purchase Order;;34610,03;closed:DocumentStatus;;
-;POCR-0000016;Custom Retail;24693,61;USD;2014-06-19;Purchase Order;;24693,61;closed:DocumentStatus;;
-;POCR-0000017;Custom Retail;11777,15;USD;2014-06-21;Purchase Order;;11777,15;closed:DocumentStatus;;
-;POCR-0000018;Custom Retail;43515,33;USD;2014-06-23;Purchase Order;;43515,33;closed:DocumentStatus;;
-;POCR-0000019;Custom Retail;2964,41;USD;2014-06-24;Purchase Order;;2964,41;closed:DocumentStatus;;
-;POCR-0000020;Custom Retail;78372,43;USD;2014-06-25;Purchase Order;;78372,43;open:DocumentStatus;;
-;POCR-0000021;Custom Retail;26773,57;USD;2014-06-25;Purchase Order;;26773,57;open:DocumentStatus;;
-;POCR-0000022;Custom Retail;717,60;USD;2014-06-25;Purchase Order;;717,60;open:DocumentStatus;;
-;POCR-0000023;Custom Retail;34090,59;USD;2014-06-25;Purchase Order;;34090,59;open:DocumentStatus;;
-;POCR-0000024;Custom Retail;80277,99;USD;2014-06-29;Purchase Order;;80277,99;open:DocumentStatus;;
-;POCR-0000025;Custom Retail;91568,74;USD;2014-06-30;Purchase Order;;91568,74;closed:DocumentStatus;;
-;POCR-0000026;Custom Retail;94698,19;USD;2014-06-30;Purchase Order;;94698,19;closed:DocumentStatus;;
-;POCR-0000027;Custom Retail;56557,58;USD;2014-07-10;Purchase Order;;56557,58;closed:DocumentStatus;;
-;POCR-0000028;Custom Retail;36710,80;USD;2014-07-10;Purchase Order;;36710,80;closed:DocumentStatus;;
-;POCR-0000029;Custom Retail;86181,54;USD;2014-07-12;Purchase Order;;86181,54;closed:DocumentStatus;;
-;POCR-0000030;Custom Retail;50356,24;USD;2014-07-15;Purchase Order;;50356,24;open:DocumentStatus;;
-;POCR-0000031;Custom Retail;47075,33;USD;2014-07-15;Purchase Order;;47075,33;open:DocumentStatus;;
-;POCR-0000032;Custom Retail;78810,87;USD;2014-07-18;Purchase Order;;78810,87;open:DocumentStatus;;
-;POCR-0000033;Custom Retail;60666,78;USD;2014-07-25;Purchase Order;;60666,78;open:DocumentStatus;;
-;POCR-0000034;Custom Retail;21188,07;USD;2014-07-25;Purchase Order;;21188,07;open:DocumentStatus;;
-;POCR-0000035;Custom Retail;44354,40;USD;2014-07-25;Purchase Order;;44354,40;open:DocumentStatus;;
-;CRNCR-0000001;Custom Retail;7963,71;USD;2014-06-10;Invoice;2014-07-10;7963,71;open:DocumentStatus;;
-;CRNCR-0000002;Custom Retail;8953,13;USD;2014-07-15;Invoice;2014-08-14;8953,13;open:DocumentStatus;;
-;CRNCR-0000003;Custom Retail;7186,09;USD;2014-07-18;Invoice;2014-08-17;7186,09;open:DocumentStatus;;
-;CRNCR-0000004;Custom Retail;7509,96;USD;2014-07-25;Invoice;2014-08-24;7509,96;open:DocumentStatus;;
-;CRNCR-0000005;Custom Retail;3634,43;USD;2014-07-27;Invoice;2014-08-26;3634,43;closed:DocumentStatus;;
-;CRNCR-0000006;Custom Retail;7772,91;USD;2014-07-27;Invoice;2014-08-26;7772,91;closed:DocumentStatus;;
-;DBNCR-0000001;Custom Retail;45079,40;USD;2014-08-05;Invoice;2014-09-04;45079,40;open:DocumentStatus;;
-;DBNCR-0000002;Custom Retail;6601,69;USD;2014-08-15;Invoice;2014-09-14;6601,69;open:DocumentStatus;;
-;DBNCR-0000003;Custom Retail;33617,44;USD;2014-09-02;Invoice;2014-10-02;33617,44;open:DocumentStatus;;
-;DBNCR-0000004;Custom Retail;24488,07;USD;2014-09-11;Invoice;2014-10-11;24488,07;open:DocumentStatus;;
-;DBNCR-0000005;Custom Retail;56669,94;USD;2014-10-20;Invoice;2014-11-19;56669,94;open:DocumentStatus;;
-;DBNCR-0000006;Custom Retail;2129,47;USD;2014-10-23;Invoice;2014-11-22;2129,47;open:DocumentStatus;;
-;DBNCR-0000007;Custom Retail;69682,63;USD;2014-11-01;Invoice;2014-12-01;69682,63;open:DocumentStatus;;
-;DBNCR-0000008;Custom Retail;66038,65;USD;2014-11-10;Invoice;2014-12-10;66038,65;open:DocumentStatus;;
-;DBNCR-0000009;Custom Retail;7695,66;USD;2014-11-11;Invoice;2014-12-11;7695,66;closed:DocumentStatus;;
-;DBNCR-0000010;Custom Retail;33342,00;USD;2014-11-11;Invoice;2014-12-11;33342,00;closed:DocumentStatus;;
-;DBNCR-0000011;Custom Retail;83296,37;USD;2014-11-14;Invoice;2014-12-14;83296,37;closed:DocumentStatus;;
-;DBNCR-0000012;Custom Retail;67348,34;USD;2014-11-14;Invoice;2014-12-14;67348,34;closed:DocumentStatus;;
-;STACR-00000001;Custom Retail;966969,24;USD;2014-11-20;Statement;2014-11-20;966969,24;closed:DocumentStatus;;
-;STACR-00000002;Custom Retail;1294146,53;USD;2014-11-25;Statement;2014-11-25;1294146,53;open:DocumentStatus;;
-;POPG-00100006;Pronto Goods;305,99;USD;2014-04-24;Purchase Order;;305,99;open:DocumentStatus;POPG-00100006:DocumentMedia;
-;INPG-00100001;Pronto Goods;351,89;USD;2014-04-26;Invoice;2014-05-26;351,89;open:DocumentStatus;INPG-00100001:DocumentMedia;
-;POPG-00006009;Pronto Goods;171,99;USD;2014-04-24;Purchase Order;;171,99;open:DocumentStatus;POPG-00006009:DocumentMedia;
-;INPG-00100002;Pronto Goods;197,79;USD;2014-04-26;Invoice;2014-05-26;197,79;open:DocumentStatus;INPG-00100002:DocumentMedia;
-;POPG-00006012;Pronto Goods;217,99;USD;2014-04-26;Purchase Order;;217,99;open:DocumentStatus;POPG-00006012:DocumentMedia;
-;INPG-00100003;Pronto Goods;250,69;USD;2014-04-26;Invoice;2014-05-26;250,69;open:DocumentStatus;INPG-00100003:DocumentMedia;
-;POPG-00006015;Pronto Goods;605,38;USD;2014-04-26;Purchase Order;;605,38;open:DocumentStatus;POPG-00006015:DocumentMedia;
-;INPG-00100004;Pronto Goods;717,36;USD;2014-04-26;Invoice;2014-05-26;717,36;open:DocumentStatus;INPG-00100004:DocumentMedia;
-;POPG-00006017;Pronto Goods;52,49;USD;2014-04-26;Purchase Order;;52,49;open:DocumentStatus;POPG-00006017:DocumentMedia;
-;INPG-00100005;Pronto Goods;60,36;USD;2014-04-26;Invoice;2014-05-26;60,36;open:DocumentStatus;INPG-00100005:DocumentMedia;
-;POPG-00006020;Pronto Goods;2363,21;USD;2014-04-26;Purchase Order;;2363,21;open:DocumentStatus;POPG-00006020:DocumentMedia;
-;INPG-00100006;Pronto Goods;2801,39;USD;2014-04-26;Invoice;2014-05-26;2801,39;open:DocumentStatus;INPG-00100006:DocumentMedia;
-;STAPG-00010000;Pronto Goods;6815,47;USD;2014-05-01;Statement;2014-05-01;6815,47;open:DocumentStatus;STAPG-00010000:DocumentMedia;
-;STAPG-00000001;Pronto Goods;4379,48;USD;2014-05-05;Statement;2014-06-04;4379,48;open:DocumentStatus;;
-;POPG-0000001;Pronto Goods;29258,19;USD;2014-06-10;Purchase Order;;29258,19;open:DocumentStatus;;
-;POPG-0000002;Pronto Goods;70101,58;USD;2014-06-10;Purchase Order;;70101,58;open:DocumentStatus;;
-;POPG-0000003;Pronto Goods;82375,13;USD;2014-06-10;Purchase Order;;82375,13;open:DocumentStatus;;
-;POPG-0000004;Pronto Goods;26330,76;USD;2014-06-10;Purchase Order;;26330,76;open:DocumentStatus;;
-;POPG-0000005;Pronto Goods;44252,07;USD;2014-06-11;Purchase Order;;44252,07;closed:DocumentStatus;;
-;POPG-0000006;Pronto Goods;25337,16;USD;2014-06-11;Purchase Order;;25337,16;closed:DocumentStatus;;
-;POPG-0000007;Pronto Goods;18557,88;USD;2014-06-14;Purchase Order;;18557,88;closed:DocumentStatus;;
-;POPG-0000008;Pronto Goods;24955,30;USD;2014-06-14;Purchase Order;;24955,30;closed:DocumentStatus;;
+INSERT_UPDATE B2BDocument;documentnumber[unique=true];Unit(uid);amount;currency(isocode);date[dateformat=yyyy-MM-dd];documentType(code);dueDate[dateformat=yyyy-MM-dd];openAmount;status(code,itemtype(code));documentMedia(code, itemtype(code));sapCustomerID
+;POCR-0000001;Custom Retail;78515,58;USD;2014-06-10;Purchase Order;;78515,58;open:DocumentStatus;;mitreTestB2B
+;POCR-0000002;Custom Retail;50945,36;USD;2014-06-10;Purchase Order;;50945,36;open:DocumentStatus;;mitreTestB2B
+;POCR-0000003;Custom Retail;82005,11;USD;2014-06-10;Purchase Order;;82005,11;open:DocumentStatus;;mitreTestB2B
+;POCR-0000004;Custom Retail;31751,03;USD;2014-06-10;Purchase Order;;31751,03;open:DocumentStatus;;mitreTestB2B
+;POCR-0000005;Custom Retail;79077,74;USD;2014-06-12;Purchase Order;;79077,74;closed:DocumentStatus;;mitreTestB2B
+;POCR-0000006;Custom Retail;69296,63;USD;2014-06-12;Purchase Order;;69296,63;closed:DocumentStatus;;mitreTestB2B
+;POCR-0000007;Custom Retail;64628,96;USD;2014-14-06;Purchase Order;;64628,96;closed:DocumentStatus;;mitreTestB2B
+;POCR-0000008;Custom Retail;56781,49;USD;2014-14-06;Purchase Order;;56781,49;closed:DocumentStatus;;mitreTestB2B
+;POCR-0000009;Custom Retail;37542,63;USD;2014-06-18;Purchase Order;;37542,63;open:DocumentStatus;;mitreTestB2B
+;POCR-0000010;Custom Retail;38938,37;USD;2014-06-18;Purchase Order;;38938,37;open:DocumentStatus;;mitreTestB2B
+;POCR-0000011;Custom Retail;25377,17;USD;2014-06-18;Purchase Order;;25377,17;open:DocumentStatus;;mitreTestB2B
+;POCR-0000012;Custom Retail;77451,97;USD;2014-06-18;Purchase Order;;77451,97;open:DocumentStatus;;mitreTestB2B
+;POCR-0000013;Custom Retail;76241,05;USD;2014-06-18;Purchase Order;;76241,05;open:DocumentStatus;;speedoTestB2B
+;POCR-0000014;Custom Retail;33632,01;USD;2014-06-19;Purchase Order;;33632,01;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000015;Custom Retail;34610,03;USD;2014-06-19;Purchase Order;;34610,03;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000016;Custom Retail;24693,61;USD;2014-06-19;Purchase Order;;24693,61;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000017;Custom Retail;11777,15;USD;2014-06-21;Purchase Order;;11777,15;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000018;Custom Retail;43515,33;USD;2014-06-23;Purchase Order;;43515,33;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000019;Custom Retail;2964,41;USD;2014-06-24;Purchase Order;;2964,41;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000020;Custom Retail;78372,43;USD;2014-06-25;Purchase Order;;78372,43;open:DocumentStatus;;speedoTestB2B
+;POCR-0000021;Custom Retail;26773,57;USD;2014-06-25;Purchase Order;;26773,57;open:DocumentStatus;;speedoTestB2B
+;POCR-0000022;Custom Retail;717,60;USD;2014-06-25;Purchase Order;;717,60;open:DocumentStatus;;speedoTestB2B
+;POCR-0000023;Custom Retail;34090,59;USD;2014-06-25;Purchase Order;;34090,59;open:DocumentStatus;;speedoTestB2B
+;POCR-0000024;Custom Retail;80277,99;USD;2014-06-29;Purchase Order;;80277,99;open:DocumentStatus;;speedoTestB2B
+;POCR-0000025;Custom Retail;91568,74;USD;2014-06-30;Purchase Order;;91568,74;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000026;Custom Retail;94698,19;USD;2014-06-30;Purchase Order;;94698,19;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000027;Custom Retail;56557,58;USD;2014-07-10;Purchase Order;;56557,58;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000028;Custom Retail;36710,80;USD;2014-07-10;Purchase Order;;36710,80;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000029;Custom Retail;86181,54;USD;2014-07-12;Purchase Order;;86181,54;closed:DocumentStatus;;speedoTestB2B
+;POCR-0000030;Custom Retail;50356,24;USD;2014-07-15;Purchase Order;;50356,24;open:DocumentStatus;;speedoTestB2B
+;POCR-0000031;Custom Retail;47075,33;USD;2014-07-15;Purchase Order;;47075,33;open:DocumentStatus;;speedoTestB2B
+;POCR-0000032;Custom Retail;78810,87;USD;2014-07-18;Purchase Order;;78810,87;open:DocumentStatus;;speedoTestB2B
+;POCR-0000033;Custom Retail;60666,78;USD;2014-07-25;Purchase Order;;60666,78;open:DocumentStatus;;speedoTestB2B
+;POCR-0000034;Custom Retail;21188,07;USD;2014-07-25;Purchase Order;;21188,07;open:DocumentStatus;;speedoTestB2B
+;POCR-0000035;Custom Retail;44354,40;USD;2014-07-25;Purchase Order;;44354,40;open:DocumentStatus;;speedoTestB2B
+;CRNCR-0000001;Custom Retail;7963,71;USD;2014-06-10;Invoice;2014-07-10;7963,71;open:DocumentStatus;;speedoTestB2B
+;CRNCR-0000002;Custom Retail;8953,13;USD;2014-07-15;Invoice;2014-08-14;8953,13;open:DocumentStatus;;speedoTestB2B
+;CRNCR-0000003;Custom Retail;7186,09;USD;2014-07-18;Invoice;2014-08-17;7186,09;open:DocumentStatus;;speedoTestB2B
+;CRNCR-0000004;Custom Retail;7509,96;USD;2014-07-25;Invoice;2014-08-24;7509,96;open:DocumentStatus;;speedoTestB2B
+;CRNCR-0000005;Custom Retail;3634,43;USD;2014-07-27;Invoice;2014-08-26;3634,43;closed:DocumentStatus;;canterburyTestB2B
+;CRNCR-0000006;Custom Retail;7772,91;USD;2014-07-27;Invoice;2014-08-26;7772,91;closed:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000001;Custom Retail;45079,40;USD;2014-08-05;Invoice;2014-09-04;45079,40;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000002;Custom Retail;6601,69;USD;2014-08-15;Invoice;2014-09-14;6601,69;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000003;Custom Retail;33617,44;USD;2014-09-02;Invoice;2014-10-02;33617,44;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000004;Custom Retail;24488,07;USD;2014-09-11;Invoice;2014-10-11;24488,07;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000005;Custom Retail;56669,94;USD;2014-10-20;Invoice;2014-11-19;56669,94;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000006;Custom Retail;2129,47;USD;2014-10-23;Invoice;2014-11-22;2129,47;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000007;Custom Retail;69682,63;USD;2014-11-01;Invoice;2014-12-01;69682,63;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000008;Custom Retail;66038,65;USD;2014-11-10;Invoice;2014-12-10;66038,65;open:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000009;Custom Retail;7695,66;USD;2014-11-11;Invoice;2014-12-11;7695,66;closed:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000010;Custom Retail;33342,00;USD;2014-11-11;Invoice;2014-12-11;33342,00;closed:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000011;Custom Retail;83296,37;USD;2014-11-14;Invoice;2014-12-14;83296,37;closed:DocumentStatus;;canterburyTestB2B
+;DBNCR-0000012;Custom Retail;67348,34;USD;2014-11-14;Invoice;2014-12-14;67348,34;closed:DocumentStatus;;canterburyTestB2B
+;STACR-00000001;Custom Retail;966969,24;USD;2014-11-20;Statement;2014-11-20;966969,24;closed:DocumentStatus;;canterburyTestB2B
+;STACR-00000002;Custom Retail;1294146,53;USD;2014-11-25;Statement;2014-11-25;1294146,53;open:DocumentStatus;;canterburyTestB2B
+;POPG-00100006;Pronto Goods;305,99;USD;2014-04-24;Purchase Order;;305,99;open:DocumentStatus;POPG-00100006:DocumentMedia;mitreTestB2B
+;INPG-00100001;Pronto Goods;351,89;USD;2014-04-26;Invoice;2014-05-26;351,89;open:DocumentStatus;INPG-00100001:DocumentMedia;mitreTestB2B
+;POPG-00006009;Pronto Goods;171,99;USD;2014-04-24;Purchase Order;;171,99;open:DocumentStatus;POPG-00006009:DocumentMedia;mitreTestB2B
+;INPG-00100002;Pronto Goods;197,79;USD;2014-04-26;Invoice;2014-05-26;197,79;open:DocumentStatus;INPG-00100002:DocumentMedia;mitreTestB2B
+;POPG-00006012;Pronto Goods;217,99;USD;2014-04-26;Purchase Order;;217,99;open:DocumentStatus;POPG-00006012:DocumentMedia;mitreTestB2B
+;INPG-00100003;Pronto Goods;250,69;USD;2014-04-26;Invoice;2014-05-26;250,69;open:DocumentStatus;INPG-00100003:DocumentMedia;mitreTestB2B
+;POPG-00006015;Pronto Goods;605,38;USD;2014-04-26;Purchase Order;;605,38;open:DocumentStatus;POPG-00006015:DocumentMedia;mitreTestB2B
+;INPG-00100004;Pronto Goods;717,36;USD;2014-04-26;Invoice;2014-05-26;717,36;open:DocumentStatus;INPG-00100004:DocumentMedia;mitreTestB2B
+;POPG-00006017;Pronto Goods;52,49;USD;2014-04-26;Purchase Order;;52,49;open:DocumentStatus;POPG-00006017:DocumentMedia;mitreTestB2B
+;INPG-00100005;Pronto Goods;60,36;USD;2014-04-26;Invoice;2014-05-26;60,36;open:DocumentStatus;INPG-00100005:DocumentMedia;mitreTestB2B
+;POPG-00006020;Pronto Goods;2363,21;USD;2014-04-26;Purchase Order;;2363,21;open:DocumentStatus;POPG-00006020:DocumentMedia;mitreTestB2B
+;INPG-00100006;Pronto Goods;2801,39;USD;2014-04-26;Invoice;2014-05-26;2801,39;open:DocumentStatus;INPG-00100006:DocumentMedia;mitreTestB2B
+;STAPG-00010000;Pronto Goods;6815,47;USD;2014-05-01;Statement;2014-05-01;6815,47;open:DocumentStatus;STAPG-00010000:DocumentMedia;mitreTestB2B
+;STAPG-00000001;Pronto Goods;4379,48;USD;2014-05-05;Statement;2014-06-04;4379,48;open:DocumentStatus;;mitreTestB2B
+;POPG-0000001;Pronto Goods;29258,19;USD;2014-06-10;Purchase Order;;29258,19;open:DocumentStatus;;mitreTestB2B
+;POPG-0000002;Pronto Goods;70101,58;USD;2014-06-10;Purchase Order;;70101,58;open:DocumentStatus;;mitreTestB2B
+;POPG-0000003;Pronto Goods;82375,13;USD;2014-06-10;Purchase Order;;82375,13;open:DocumentStatus;;mitreTestB2B
+;POPG-0000004;Pronto Goods;26330,76;USD;2014-06-10;Purchase Order;;26330,76;open:DocumentStatus;;mitreTestB2B
+;POPG-0000005;Pronto Goods;44252,07;USD;2014-06-11;Purchase Order;;44252,07;closed:DocumentStatus;;mitreTestB2B
+;POPG-0000006;Pronto Goods;25337,16;USD;2014-06-11;Purchase Order;;25337,16;closed:DocumentStatus;;mitreTestB2B
+;POPG-0000007;Pronto Goods;18557,88;USD;2014-06-14;Purchase Order;;18557,88;closed:DocumentStatus;;mitreTestB2B
+;POPG-0000008;Pronto Goods;24955,30;USD;2014-06-14;Purchase Order;;24955,30;closed:DocumentStatus;;mitreTestB2B
 ;POPG-0000009;Pronto Goods;37886,09;USD;2014-06-16;Purchase Order;;37886,09;closed:DocumentStatus;;
 ;POPG-0000010;Pronto Goods;93778,38;USD;2014-06-16;Purchase Order;;93778,38;closed:DocumentStatus;;
 ;POPG-0000011;Pronto Goods;22688,06;USD;2014-06-18;Purchase Order;;22688,06;open:DocumentStatus;;

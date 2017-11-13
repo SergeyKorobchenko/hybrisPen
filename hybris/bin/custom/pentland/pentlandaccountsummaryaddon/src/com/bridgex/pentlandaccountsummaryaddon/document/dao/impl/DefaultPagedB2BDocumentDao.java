@@ -47,6 +47,8 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 
 	private static final String B2B_UNIT_CRITERIA = "{" + B2BUnitModel._TYPECODE + ":" + B2BUnitModel.UID + "} = ?b2bUnitCode";
 
+	private static final String SAP_ID_CRITERIA = "{" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.SAPCUSTOMERID + "} = ?sapCustomerId";
+
 	private static final String FIND_DOCUMENT = "SELECT {" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.PK + "}  FROM { "
 			+ B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + " join " + B2BDocumentTypeModel._TYPECODE + " as "
 			+ B2BDocumentTypeModel._TYPECODE + " on {" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.DOCUMENTTYPE + "} = {"
@@ -241,18 +243,40 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 			final List<DefaultCriteria> criteriaList)
 	{
 		validateParameterNotNull(b2bUnitCode, "b2bUnitCode must not be null");
-		return getPagedDocuments(Optional.of(b2bUnitCode), pageableData, criteriaList);
+		validateParameterNotNull(pageableData, "pageableData must not be null");
+		validateIfAnyResult(criteriaList, "criteria must not be null");
+
+		final StringBuilder queryBuilder = new StringBuilder();
+		final List<String> whereQueryList = new ArrayList<String>();
+		final Map<String, Object> queryParams = new HashMap<String, Object>();
+
+		queryParams.put("b2bUnitCode", b2bUnitCode);
+		queryBuilder.append(FIND_ALL_DOCUMENTS_FOR_UNIT_DOCUMENT_TYPE);
+		whereQueryList.add(B2B_UNIT_CRITERIA);
+
+		return getB2BDocumentModelSearchPageData(pageableData, criteriaList, queryBuilder, whereQueryList, queryParams);
+	}
+
+	@Override
+	public SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> criteriaList) {
+		validateParameterNotNull(sapId, "sapId must not be null");
+		validateParameterNotNull(pageableData, "pageableData must not be null");
+		validateIfAnyResult(criteriaList, "criteria must not be null");
+
+		final StringBuilder queryBuilder = new StringBuilder();
+		final List<String> whereQueryList = new ArrayList<String>();
+		final Map<String, Object> queryParams = new HashMap<String, Object>();
+
+		queryParams.put("sapCustomerId", sapId);
+		queryBuilder.append(FIND_ALL_DOCUMENTS);
+		whereQueryList.add(SAP_ID_CRITERIA);
+
+		return getB2BDocumentModelSearchPageData(pageableData, criteriaList, queryBuilder, whereQueryList, queryParams);
 	}
 
 	@Override
 	public SearchPageData<B2BDocumentModel> getAllPagedDocuments(final PageableData pageableData,
 			final List<DefaultCriteria> criteriaList)
-	{
-		return getPagedDocuments(Optional.empty(), pageableData, criteriaList);
-	}
-
-	protected SearchPageData<B2BDocumentModel> getPagedDocuments(final Optional<String> b2bUnitCode,
-			final PageableData pageableData, final List<DefaultCriteria> criteriaList)
 	{
 		validateParameterNotNull(pageableData, "pageableData must not be null");
 		validateIfAnyResult(criteriaList, "criteria must not be null");
@@ -260,17 +284,17 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 		final StringBuilder queryBuilder = new StringBuilder();
 		final List<String> whereQueryList = new ArrayList<String>();
 		final Map<String, Object> queryParams = new HashMap<String, Object>();
-		if (b2bUnitCode.isPresent())
-		{
-			queryParams.put("b2bUnitCode", b2bUnitCode.get());
-			queryBuilder.append(FIND_ALL_DOCUMENTS_FOR_UNIT_DOCUMENT_TYPE);
-			whereQueryList.add(B2B_UNIT_CRITERIA);
-		}
-		else
-		{
-			queryBuilder.append(FIND_ALL_DOCUMENTS);
-		}
+		queryBuilder.append(FIND_ALL_DOCUMENTS);
 
+		return getB2BDocumentModelSearchPageData(pageableData, criteriaList, queryBuilder, whereQueryList, queryParams);
+	}
+
+	private SearchPageData<B2BDocumentModel> getB2BDocumentModelSearchPageData(PageableData pageableData,
+	                                                                           List<DefaultCriteria> criteriaList,
+	                                                                           StringBuilder queryBuilder,
+	                                                                           List<String> whereQueryList,
+	                                                                           Map<String, Object> queryParams)
+	{
 		criteriaList.forEach(criteria -> criteria.populateCriteriaQueryAndParamsMap(whereQueryList, queryParams));
 
 		final String selectedSortCode = StringUtils.isNotBlank(pageableData.getSort()) ? pageableData.getSort() : DEFAULT_SORT_CODE;
@@ -279,15 +303,12 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 		buildWhereQuery(whereQueryList, queryBuilder);
 		queryBuilder.append(String.format(ORDER_BY_QUERY,
 				(StringUtils.containsIgnoreCase(selectedSortCode, B2BDocumentModel.DOCUMENTTYPE) ? B2BDocumentTypeModel._TYPECODE
-						+ ":" : StringUtils.EMPTY)
-						+ sortValue));
-		if (isDesc)
-		{
+				                                                                                   + ":" : StringUtils.EMPTY) + sortValue));
+		if (isDesc) {
 			queryBuilder.append(DESC);
 		}
 
-		if (LOG.isDebugEnabled())
-		{
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Search Query : " + queryBuilder.toString());
 		}
 

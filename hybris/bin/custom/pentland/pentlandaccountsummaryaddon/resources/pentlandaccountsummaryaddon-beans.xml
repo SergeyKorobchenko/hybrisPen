@@ -55,7 +55,7 @@
 		<property name="pastDueBalance" type="java.lang.String" />
 		<property name="currentBalance" type="java.lang.String" />
 		<property name="dueBalance"
-			type="java.util.Map&lt;com.bridgex.pentlandaccountsummaryaddon.document.data.B2BNumberOfDayRangeData, java.lang.String>" />
+			type="java.util.Map&lt;java.lang.String, java.lang.String>" />
 	</bean>
 
 	<bean class="com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentPaymentInfoData">
@@ -75,12 +75,12 @@
 	</bean>
 	
 	<bean class="com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData">
-		<property name="b2bUnitData" type="de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData" />
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="address" type="de.hybris.platform.commercefacades.user.data.AddressData" />
 		<property name="amountBalanceData" type="com.bridgex.pentlandaccountsummaryaddon.document.data.B2BAmountBalanceData" />
-		<property name="billingAddress" type="de.hybris.platform.commercefacades.user.data.AddressData" />
-		<property name="formattedCreditLimit" type="java.lang.String" />
-		<property name="accountManagerName" type="java.lang.String" />
-		<property name="accountManagerEmail" type="java.lang.String" />
+		<property name="creditReps" type="java.util.List&lt;String>" />
+		<property name="formattedCreditLimits" type="java.util.List&lt;String>"/>
 	</bean>
 
 	<bean class="com.bridgex.pentlandaccountsummaryaddon.document.criteria.FilterByCriteriaData">

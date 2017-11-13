@@ -46,15 +46,6 @@ public interface B2BAccountSummaryFacade
 	SearchPageData<B2BDocumentData> findDocuments(final Map<String, String> queryParameters);
 
 	/**
-	 * Gets the balance for a given B2B Unit.
-	 *
-	 * @param unit
-	 *           the B2BUnit
-	 * @return a B2BAmountBalanceData object.
-	 */
-	B2BAmountBalanceData getAmountBalance(final B2BUnitModel unit);
-
-	/**
 	 * Gets all document types.
 	 *
 	 * @return all document types: SearchResult<B2BDocumentTypeModel>
@@ -92,10 +83,8 @@ public interface B2BAccountSummaryFacade
 
 
 	/**
-	 * Returns account summary for the given unit
+	 * Returns account summary for the current customer
 	 *
-	 * @param sapCustomerId
-	 *           the B2BCustomer SAP id
 	 * @return a {@link AccountSummaryInfoData} object.
 	 */
 	AccountSummaryInfoData getAccountSummaryInfoData();
@@ -112,4 +101,6 @@ public interface B2BAccountSummaryFacade
                                                            final PageableData pageableData,
                                                            final FilterByCriteriaData filterByCriteriaData,
                                                            final DefaultCriteria criteria);
+
+  SearchPageData<B2BDocumentData> getPagedDocuments(PageableData pageableData, FilterByCriteriaData filterByCriteriaData, DefaultCriteria defaultCriteria);
 }

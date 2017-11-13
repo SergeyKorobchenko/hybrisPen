@@ -167,26 +167,6 @@
 		</property>
 	</bean>
 
-	<alias name="defaultB2BAmountBalanceConverter" alias="b2bAmountBalanceConverter" />
-	<bean id="defaultB2BAmountBalanceConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.bridgex.pentlandaccountsummaryaddon.document.data.B2BAmountBalanceData" />
-		<property name="populators">
-			<list>
-				<ref bean="b2bAmountBalancePopulator" />
-			</list>
-		</property>
-	</bean>
-
-	<alias name="defaultB2BAmountBalancePopulator" alias="b2bAmountBalancePopulator" />
-	<bean id="defaultB2BAmountBalancePopulator" class="com.bridgex.pentlandaccountsummaryaddon.document.populators.B2BAmountBalancePopulator" >
-		<property name="b2bDocumentService" ref="b2bDocumentService" />
-		<property name="pastDueBalanceDateRangeService" ref="pastDueBalanceDateRangeService" />
-		<property name="commonI18NService" ref="commonI18NService" />
-		<property name="i18NService" ref="i18NService" />
-		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
-		<property name="amountFormatter" ref="amountFormatter" />
-	</bean>
-	
 	<alias name="defaultB2BDocumentPaymentInfoConverter" alias="b2bDocumentPaymentInfoConverter" />
 	<bean id="defaultB2BDocumentPaymentInfoConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentPaymentInfoData" />
@@ -199,10 +179,7 @@
 		
 	<alias name="defaultAccountSummaryInfoPopulator" alias="accountSummaryInfoPopulator" />
 	<bean id="defaultAccountSummaryInfoPopulator" class="com.bridgex.pentlandaccountsummaryaddon.populators.AccountSummaryInfoPopulator">
-		<property name="b2bUnitConverter" ref="b2bUnitConverter"/>
-		<property name="b2bAmountBalanceConverter" ref="b2bAmountBalanceConverter" />
-		<property name="userService" ref="userService" />
-		<property name="i18NService" ref="i18NService" />
+		<property name="commonI18NService" ref="commonI18NService" />
 		<property name="amountFormatter" ref="amountFormatter" />
 	</bean>
 	
@@ -242,8 +219,10 @@
 		<property name="b2bDocumentTypeService" ref="b2bDocumentTypeService" />
 		<property name="b2bDocumentConverter" ref="b2bDocumentConverter" />
 		<property name="b2bDocumentPaymentInfoConverter" ref="b2bDocumentPaymentInfoConverter" />
-		<property name="b2bAmountBalanceConverter" ref="b2bAmountBalanceConverter"/>
 		<property name="b2BCommerceUnitService" ref="b2bCommerceUnitService"/>
+		<property name="accountSummaryService" ref="pentlandAccountSummaryService"/>
+		<property name="b2BCustomerService" ref="b2bCustomerService"/>
+
 		<property name="accountSummaryInfoConverter" ref="accountSummaryInfoConverter"/>
 	</bean>
 

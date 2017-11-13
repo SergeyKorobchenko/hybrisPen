@@ -81,4 +81,6 @@ public interface B2BDocumentService
 	 * @return result : a SeachPageData< B2BDocumentModel > containing documents from the given unit.
 	 */
 	SearchPageData<B2BDocumentModel> getPagedDocumentsForUnit(final String b2bUnitCode, final PageableData pageableData, final List<DefaultCriteria> criteriaList);
+
+  SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
 }

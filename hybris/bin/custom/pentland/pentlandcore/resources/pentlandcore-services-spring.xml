@@ -93,6 +93,12 @@
 		<property name="orderExportService" ref="orderExportService"/>
 	</bean>
 
+	<alias name="defaultPentlandAccountSummaryService" alias="pentlandAccountSummaryService"/>
+	<bean id="defaultPentlandAccountSummaryService" class="com.bridgex.core.customer.impl.DefaultPentlandAccountSummaryService">
+		<property name="integrationService" ref="accountSummaryService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
 	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
 	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator"/>
 

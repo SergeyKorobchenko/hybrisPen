@@ -10,213 +10,128 @@
  */
 package com.bridgex.pentlandaccountsummaryaddon.populators;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
+import com.bridgex.integration.domain.AccountSummaryDetailsDto;
+import com.bridgex.integration.domain.AccountSummaryResponse;
 import com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData;
 import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BAmountBalanceData;
 import com.bridgex.pentlandaccountsummaryaddon.formatters.AmountFormatter;
 
-import de.hybris.platform.b2b.model.B2BCreditLimitModel;
-import de.hybris.platform.b2b.model.B2BUnitModel;
-import de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
+import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.converters.Populator;
-import de.hybris.platform.core.model.user.AddressModel;
-import de.hybris.platform.core.model.user.EmployeeModel;
-import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.i18n.I18NService;
-import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 
-public class AccountSummaryInfoPopulator implements Populator<B2BUnitModel, AccountSummaryInfoData>
+public class AccountSummaryInfoPopulator implements Populator<AccountSummaryResponse, AccountSummaryInfoData>
 {
 
-	private   Converter<B2BUnitModel, B2BUnitData>          b2bUnitConverter;
-	private   Converter<B2BUnitModel, B2BAmountBalanceData> b2bAmountBalanceConverter;
-	protected UserService                                   userService;
-	private   I18NService                                   i18NService;
-	private   AmountFormatter                               amountFormatter;
+	public static final String DAYS = "1-30 Days";
+	public static final String DAYS1 = "31-60 Days";
+	public static final String DAYS2 = "61-90 Days";
+	public static final String DAYS3 = "91+ Days";
+	private   CommonI18NService commonI18NService;
+	private   AmountFormatter   amountFormatter;
 
-	private static final String COMMA_SEPERATOR = ",";
+	private static final String DASH_SEPERATOR = " — ";
 
 	@Override
-	public void populate(final B2BUnitModel source, final AccountSummaryInfoData target) throws ConversionException
+	public void populate(final AccountSummaryResponse source, final AccountSummaryInfoData target) throws ConversionException
 	{
 		Assert.notNull(source, "Parameter source cannot be null.");
 		Assert.notNull(target, "Parameter target cannot be null.");
 
-		final B2BUnitData b2bUnitData = getB2bUnitConverter().convert(source);
-		target.setB2bUnitData(b2bUnitData);
-		target.setAmountBalanceData(getB2bAmountBalanceConverter().convert(source));
-		target.setBillingAddress(getDefaultAddress(b2bUnitData));
-		target.setFormattedCreditLimit(getFormattedCreditLimit(source.getCreditLimit()));
+		target.setId(source.getSapCustomerId());
+		target.setName(source.getSapCustomerName());
 
-		setAccountManagerDetails(source, target);
+		populateBalanceData(source, target);
+		populateAddressData(source, target);
+		populateCreditData(source, target);
 	}
 
-	protected void setAccountManagerDetails(final B2BUnitModel b2bUnitModel, final AccountSummaryInfoData target)
-	{
-		String accountManagerName = StringUtils.EMPTY;
-		final StringBuilder emailStringBuilder = new StringBuilder();
-		final EmployeeModel employeeModel = b2bUnitModel.getAccountManager();
+	private void populateCreditData(AccountSummaryResponse source, AccountSummaryInfoData target) {
+		CurrencyModel currency = commonI18NService.getCurrency(source.getDetails().iterator().next().getCurrency());
 
-		if (employeeModel != null)
-		{
-			final UserModel accountManager = userService.getUserForUID(employeeModel.getUid());
-
-			if (accountManager != null)
-			{
-				populateEmail(emailStringBuilder, accountManager);
-				accountManagerName = accountManager.getDisplayName();
-			}
+		List<String> creditLines = new ArrayList<>();
+		List<String> creditReps = new ArrayList<>();
+		for (AccountSummaryDetailsDto detail : source.getDetails()) {
+			creditLines.add(detail.getBrandName() + DASH_SEPERATOR + amountFormatter.formatAmount(detail.getCreditLimit(), currency));
+			creditReps.add(detail.getBrandName() + DASH_SEPERATOR + detail.getCreditRep());
 		}
 
-		target.setAccountManagerName(accountManagerName);
-		target.setAccountManagerEmail(emailStringBuilder.toString());
+		target.setCreditReps(creditReps);
+		target.setFormattedCreditLimits(creditLines);
 	}
 
-	protected void populateEmail(final StringBuilder emailStringBuilder, final UserModel accountManager)
-	{
-		final Collection<AddressModel> userAddresses = accountManager.getAddresses();
+	private void populateBalanceData(AccountSummaryResponse source, AccountSummaryInfoData target) {
+		CurrencyModel currency = commonI18NService.getCurrency(source.getDetails().iterator().next().getCurrency());
+		B2BAmountBalanceData balanceData = new B2BAmountBalanceData();
 
-		if (userAddresses != null)
-		{
-			for (final AddressModel userAddress : userAddresses)
-			{
-				if (StringUtils.isEmpty(emailStringBuilder.toString()))
-				{
-					emailStringBuilder.append(userAddress.getEmail());
-				}
-				else
-				{
-					emailStringBuilder.append(COMMA_SEPERATOR).append(userAddress.getEmail());
-				}
-			}
+		double cur = 0, past = 0, open = 0, d1to30 = 0, d30to60 = 0, d60to90 = 0, d90over = 0;
+
+		for (AccountSummaryDetailsDto detail : source.getDetails()) {
+			cur += Double.parseDouble(detail.getCurrentBalance());
+			past += Double.parseDouble(detail.getPastDueBalance());
+			open += Double.parseDouble(detail.getOpenBalance());
+			d1to30 += Double.parseDouble(detail.getDays1to30());
+			d30to60 += Double.parseDouble(detail.getDays31to60());
+			d60to90 += Double.parseDouble(detail.getDays61to90());
+			d90over += Double.parseDouble(detail.getDaysOver90());
 		}
+
+		balanceData.setCurrentBalance(getAmountFormatter().formatAmount(cur, currency));
+		balanceData.setOpenBalance(getAmountFormatter().formatAmount(open, currency));
+		balanceData.setPastDueBalance(getAmountFormatter().formatAmount(past, currency));
+
+		Map<String, String> dueBalance = new HashMap<>();
+		dueBalance.put(DAYS, getAmountFormatter().formatAmount(d1to30, currency));
+		dueBalance.put(DAYS1, getAmountFormatter().formatAmount(d30to60, currency));
+		dueBalance.put(DAYS2, getAmountFormatter().formatAmount(d60to90, currency));
+		dueBalance.put(DAYS3, getAmountFormatter().formatAmount(d90over, currency));
+
+		balanceData.setDueBalance(dueBalance);
+		target.setAmountBalanceData(balanceData);
 	}
 
-	protected String getFormattedCreditLimit(final B2BCreditLimitModel creditLimit)
-	{
-		return creditLimit != null ? getAmountFormatter().formatAmount(creditLimit.getAmount(), creditLimit.getCurrency(),
-				getI18NService().getCurrentLocale()) : StringUtils.EMPTY;
+	private void populateAddressData(AccountSummaryResponse source, AccountSummaryInfoData target) {
+		AddressData address = new AddressData();
+
+		CountryModel country = commonI18NService.getCountry(source.getCountry());
+		CountryData countryData = new CountryData();
+		countryData.setName(country.getName());
+		countryData.setIsocode(country.getIsocode());
+
+		address.setCountry(countryData);
+		address.setState(source.getRegion());
+		address.setPostalCode(source.getPostalCode());
+		address.setTown(source.getCity());
+		address.setLine1(source.getStreetLine1());
+		address.setLine2(source.getStreetLine2());
+		address.setLine3(source.getStreetLine3());
+
+		target.setAddress(address);
 	}
 
-	protected AddressData getDefaultAddress(final B2BUnitData b2bUnitData)
-	{
-		AddressData billingAddress = new AddressData();
-
-		if (b2bUnitData.getAddresses() != null)
-		{
-			final List<AddressData> addresses = b2bUnitData.getAddresses();
-			for (final AddressData addressData : addresses)
-			{
-				if (addressData.isShippingAddress())
-				{
-					billingAddress = addressData;
-				}
-
-				if (addressData.isBillingAddress())
-				{
-					billingAddress = addressData;
-					break;
-				}
-			}
-		}
-		else
-		{
-			billingAddress = null;
-		}
-		return billingAddress;
-	}
-
-	/**
-	 * @return the b2bUnitConverter
-	 */
-	public Converter<B2BUnitModel, B2BUnitData> getB2bUnitConverter()
-	{
-		return b2bUnitConverter;
-	}
-
-	/**
-	 * @param b2bUnitConverter
-	 *           the b2bUnitConverter to set
-	 */
-	public void setB2bUnitConverter(final Converter<B2BUnitModel, B2BUnitData> b2bUnitConverter)
-	{
-		this.b2bUnitConverter = b2bUnitConverter;
-	}
-
-	/**
-	 * @return the b2bAmountBalanceConverter
-	 */
-	public Converter<B2BUnitModel, B2BAmountBalanceData> getB2bAmountBalanceConverter()
-	{
-		return b2bAmountBalanceConverter;
-	}
-
-	/**
-	 * @param b2bAmountBalanceConverter
-	 *           the b2bAmountBalanceConverter to set
-	 */
-	public void setB2bAmountBalanceConverter(final Converter<B2BUnitModel, B2BAmountBalanceData> b2bAmountBalanceConverter)
-	{
-		this.b2bAmountBalanceConverter = b2bAmountBalanceConverter;
-	}
-
-	/**
-	 * @return the amountFormatter
-	 */
 	public AmountFormatter getAmountFormatter()
 	{
 		return amountFormatter;
 	}
 
-	/**
-	 * @param amountFormatter
-	 *           the amountFormatter to set
-	 */
 	public void setAmountFormatter(final AmountFormatter amountFormatter)
 	{
 		this.amountFormatter = amountFormatter;
 	}
 
-	/**
-	 * @return the i18NService
-	 */
-	public I18NService getI18NService()
-	{
-		return i18NService;
+	public CommonI18NService getCommonI18NService() {
+		return commonI18NService;
 	}
 
-	/**
-	 * @param i18nService
-	 *           the i18NService to set
-	 */
-	public void setI18NService(final I18NService i18nService)
-	{
-		i18NService = i18nService;
+	public void setCommonI18NService(CommonI18NService commonI18NService) {
+		this.commonI18NService = commonI18NService;
 	}
-
-	/**
-	 * @return the userService
-	 */
-	public UserService getUserService()
-	{
-		return userService;
-	}
-
-	/**
-	 * @param userService
-	 *           the userService to set
-	 */
-	public void setUserService(final UserService userService)
-	{
-		this.userService = userService;
-	}
-
 }

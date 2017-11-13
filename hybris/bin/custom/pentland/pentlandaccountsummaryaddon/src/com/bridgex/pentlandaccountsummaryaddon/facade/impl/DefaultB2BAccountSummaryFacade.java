@@ -61,288 +61,266 @@ import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 /**
  * Default implementation of the B2BAccountSummary facade
- *
  */
-public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade
-{
-	protected static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.facade.impl.DefaultB2BAccountSummaryFacade.class);
+public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
+  protected static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.facade.impl.DefaultB2BAccountSummaryFacade.class);
 
-	private B2BDocumentPaymentInfoService                                      b2bDocumentPaymentInfoService;
-	private B2BDocumentService                                                 b2bDocumentService;
-	private B2BDocumentTypeService                                             b2bDocumentTypeService;
-	private B2BCommerceUnitService                                             b2BCommerceUnitService;
-	private Converter<B2BDocumentModel, B2BDocumentData>                       b2bDocumentConverter;
-	private Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> b2bDocumentPaymentInfoConverter;
-	private Converter<B2BUnitModel, B2BAmountBalanceData>                      b2bAmountBalanceConverter;
-	private Converter<AccountSummaryResponse, AccountSummaryInfoData>          accountSummaryInfoConverter;
-	private PentlandAccountSummaryService                                      accountSummaryService;
-	private B2BCustomerService<B2BCustomerModel,B2BUnitModel>                  b2BCustomerService;
+  private B2BDocumentPaymentInfoService                                      b2bDocumentPaymentInfoService;
+  private B2BDocumentService                                                 b2bDocumentService;
+  private B2BDocumentTypeService                                             b2bDocumentTypeService;
+  private B2BCommerceUnitService                                             b2BCommerceUnitService;
+  private Converter<B2BDocumentModel, B2BDocumentData>                       b2bDocumentConverter;
+  private Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> b2bDocumentPaymentInfoConverter;
+  private Converter<AccountSummaryResponse, AccountSummaryInfoData>          accountSummaryInfoConverter;
+  private PentlandAccountSummaryService                                      accountSummaryService;
+  private B2BCustomerService<B2BCustomerModel, B2BUnitModel>                 b2BCustomerService;
 
-	@Override
-	public SearchPageData<B2BDocumentData> findDocuments(final Map<String, String> queryParameters)
-	{
-		final Map<String, Object> criteria = validateAndBuildFindDocumentsCriteria(queryParameters);
+  @Override
+  public AccountSummaryInfoData getAccountSummaryInfoData()
+  {
+    List<B2BUnitModel> brands = getB2BUnitModels();
+    String sapId = brands.iterator().next().getSapID();
+    List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).collect(Collectors.toList());
+    AccountSummaryResponse response = accountSummaryService.getAccountSummaryInfo(sapId, sapBrands);
+    return getAccountSummaryInfoConverter().convert(response);
+  }
 
-		final B2BDocumentQueryBuilder queryBuilder = buildDocumentQuery(queryParameters, criteria);
+  private List<B2BUnitModel> getB2BUnitModels() {
+    B2BCustomerModel customer = b2BCustomerService.getCurrentB2BCustomer();
+    List<B2BUnitModel> brands = customer.getAllGroups().stream()
+                                        .filter(B2BUnitModel.class::isInstance)
+                                        .map(B2BUnitModel.class::cast)
+                                        .collect(Collectors.toList());
 
-		return convertPageData(b2bDocumentService.findDocuments(queryBuilder.build()), getB2bDocumentConverter());
-	}
+    ServicesUtil.validateIfAnyResult(brands, "No B2B units found for customer");
+    return brands;
+  }
 
-	protected Map<String, Object> validateAndBuildFindDocumentsCriteria(final Map<String, String> parameters)
-	{
+  @Override
+  public SearchPageData<B2BDocumentData> findDocuments(final Map<String, String> queryParameters)
+  {
+    final Map<String, Object> criteria = validateAndBuildFindDocumentsCriteria(queryParameters);
 
-		final Map<String, Object> criteria = new HashMap<String, Object>();
+    final B2BDocumentQueryBuilder queryBuilder = buildDocumentQuery(queryParameters, criteria);
 
-		if (isDateCriteria(parameters.get("searchBy")) && StringUtils.isNotBlank(parameters.get("searchRangeMin"))
-				&& StringUtils.isNotBlank(parameters.get("searchRangeMax")))
-		{
-			criteria.put(parameters.get("searchBy"), new DateRange(validateAndFormatDate(parameters.get("searchRangeMin")),
-                                                             validateAndFormatDate(parameters.get("searchRangeMax"))));
-		}
-		else if (isAmountCriteria(parameters.get("searchBy"))
-				&& (StringUtils.isNotBlank(parameters.get("searchRangeMin")) || StringUtils.isNotBlank(parameters
-						.get("searchRangeMax"))))
-		{
-			criteria.put(parameters.get("searchBy"), new AmountRange(validateAndFormatAmount(parameters.get("searchRangeMin")),
-                                                               validateAndFormatAmount(parameters.get("searchRangeMax"))));
-		}
-		else if (StringUtils.isNotBlank(parameters.get("searchValue")))
-		{
-			// Uppercase Document Number
-			if (PentlandaccountsummaryaddonConstants.SEARCH_BY_DOCUMENTNUMBER.equalsIgnoreCase(parameters.get("searchBy")))
-			{
-				criteria.put(parameters.get("searchBy"), parameters.get("searchValue").toUpperCase());
-			}
-			else
-			{
-				criteria.put(parameters.get("searchBy"), parameters.get("searchValue"));
-			}
-		}
+    return convertPageData(b2bDocumentService.findDocuments(queryBuilder.build()), getB2bDocumentConverter());
+  }
 
-		criteria.put(B2BDocumentModel.UNIT, parameters.get("unit"));
+  protected Map<String, Object> validateAndBuildFindDocumentsCriteria(final Map<String, String> parameters)
+  {
 
-		return criteria;
-	}
+    final Map<String, Object> criteria = new HashMap<String, Object>();
 
-	protected Date validateAndFormatDate(final String date)
-	{
-		try
-		{
-			return DateUtils.parseDate(date, new String[]
-			{PentlandaccountsummaryaddonConstants.DATE_FORMAT_MM_DD_YYYY });
-		}
-		catch (final ParseException e)
-		{
-			throw new EntityValidationException(String.format("Invalid date [%s]", date), e);
-		}
-	}
+    if (isDateCriteria(parameters.get("searchBy")) && StringUtils.isNotBlank(parameters.get("searchRangeMin")) && StringUtils.isNotBlank(parameters.get("searchRangeMax"))) {
+      criteria.put(parameters.get("searchBy"), new DateRange(validateAndFormatDate(parameters.get("searchRangeMin")), validateAndFormatDate(parameters.get("searchRangeMax"))));
+    }
+    else if (isAmountCriteria(parameters.get("searchBy")) &&
+             (StringUtils.isNotBlank(parameters.get("searchRangeMin")) || StringUtils.isNotBlank(parameters.get("searchRangeMax"))))
+    {
+      criteria.put(parameters.get("searchBy"),
+                   new AmountRange(validateAndFormatAmount(parameters.get("searchRangeMin")), validateAndFormatAmount(parameters.get("searchRangeMax"))));
+    }
+    else if (StringUtils.isNotBlank(parameters.get("searchValue"))) {
+      // Uppercase Document Number
+      if (PentlandaccountsummaryaddonConstants.SEARCH_BY_DOCUMENTNUMBER.equalsIgnoreCase(parameters.get("searchBy"))) {
+        criteria.put(parameters.get("searchBy"), parameters.get("searchValue").toUpperCase());
+      }
+      else {
+        criteria.put(parameters.get("searchBy"), parameters.get("searchValue"));
+      }
+    }
 
-	protected BigDecimal validateAndFormatAmount(final String amount)
-	{
-		try
-		{
-			if (StringUtils.isBlank(amount))
-			{
-				return BigDecimal.ZERO;
-			}
-			else
-			{
-				return new BigDecimal(amount);
-			}
-		}
-		catch (final RuntimeException e)
-		{
-			throw new EntityValidationException(String.format("Invalid amount [%s]", amount), e);
-		}
-	}
+    criteria.put(B2BDocumentModel.UNIT, parameters.get("unit"));
 
-	protected B2BDocumentQueryBuilder buildDocumentQuery(final Map<String, String> params, final Map<String, Object> criteria)
-	{
-		final B2BDocumentQueryBuilder queryBuilder = new B2BDocumentQueryBuilder(Integer.parseInt(params.get("currentPage")),
-                                                                             Integer.parseInt(params.get("pageSize")), params.get("searchBy"), StringUtils.equals(
-      PentlandaccountsummaryaddonConstants.DEFAULT_SORT, params.get("sort")));
+    return criteria;
+  }
 
-		if (PentlandaccountsummaryaddonConstants.SEARCH_STATUS_OPEN.equalsIgnoreCase(params.get("status")))
-		{
-			queryBuilder.addCriteria(B2BDocumentModel.STATUS, DocumentStatus.OPEN);
-		}
-		else if (PentlandaccountsummaryaddonConstants.SEARCH_STATUS_CLOSED.equalsIgnoreCase(params.get("status")))
-		{
-			queryBuilder.addCriteria(B2BDocumentModel.STATUS, DocumentStatus.CLOSED);
-		}
+  protected Date validateAndFormatDate(final String date)
+  {
+    try {
+      return DateUtils.parseDate(date, new String[] {PentlandaccountsummaryaddonConstants.DATE_FORMAT_MM_DD_YYYY});
+    }
+    catch (final ParseException e) {
+      throw new EntityValidationException(String.format("Invalid date [%s]", date), e);
+    }
+  }
 
-		queryBuilder.addAllCriterias(criteria);
+  protected BigDecimal validateAndFormatAmount(final String amount)
+  {
+    try {
+      if (StringUtils.isBlank(amount)) {
+        return BigDecimal.ZERO;
+      }
+      else {
+        return new BigDecimal(amount);
+      }
+    }
+    catch (final RuntimeException e) {
+      throw new EntityValidationException(String.format("Invalid amount [%s]", amount), e);
+    }
+  }
 
-		return queryBuilder;
-	}
+  protected B2BDocumentQueryBuilder buildDocumentQuery(final Map<String, String> params, final Map<String, Object> criteria)
+  {
+    final B2BDocumentQueryBuilder queryBuilder = new B2BDocumentQueryBuilder(Integer.parseInt(params.get("currentPage")),
+                                                                             Integer.parseInt(params.get("pageSize")),
+                                                                             params.get("searchBy"),
+                                                                             StringUtils.equals(PentlandaccountsummaryaddonConstants.DEFAULT_SORT, params.get("sort")));
 
-	protected boolean isAmountCriteria(final String searchType)
-	{
-		return StringUtils.equals(B2BDocumentModel.AMOUNT, searchType)
-				|| StringUtils.equals(B2BDocumentModel.OPENAMOUNT, searchType);
-	}
+    if (PentlandaccountsummaryaddonConstants.SEARCH_STATUS_OPEN.equalsIgnoreCase(params.get("status"))) {
+      queryBuilder.addCriteria(B2BDocumentModel.STATUS, DocumentStatus.OPEN);
+    }
+    else if (PentlandaccountsummaryaddonConstants.SEARCH_STATUS_CLOSED.equalsIgnoreCase(params.get("status"))) {
+      queryBuilder.addCriteria(B2BDocumentModel.STATUS, DocumentStatus.CLOSED);
+    }
 
-	protected boolean isDateCriteria(final String searchType)
-	{
-		return StringUtils.equals(B2BDocumentModel.DATE, searchType) || StringUtils.equals(B2BDocumentModel.DUEDATE, searchType);
-	}
+    queryBuilder.addAllCriterias(criteria);
 
-	@Override
-	public B2BAmountBalanceData getAmountBalance(final B2BUnitModel unit)
-	{
-		return b2bAmountBalanceConverter.convert(unit);
-	}
+    return queryBuilder;
+  }
 
-	@Override
-	public SearchResult<B2BDocumentModel> getOpenDocuments(final MediaModel mediaModel)
-	{
-		return b2bDocumentService.getOpenDocuments(mediaModel);
-	}
+  protected boolean isAmountCriteria(final String searchType)
+  {
+    return StringUtils.equals(B2BDocumentModel.AMOUNT, searchType) || StringUtils.equals(B2BDocumentModel.OPENAMOUNT, searchType);
+  }
 
-	protected <S, T> SearchPageData<T> convertPageData(final SearchPageData<S> source, final Converter<S, T> converter)
-	{
-		final SearchPageData<T> result = new SearchPageData<T>();
-		result.setPagination(source.getPagination());
-		result.setSorts(source.getSorts());
-		result.setResults(Converters.convertAll(source.getResults(), converter));
-		return result;
-	}
+  protected boolean isDateCriteria(final String searchType)
+  {
+    return StringUtils.equals(B2BDocumentModel.DATE, searchType) || StringUtils.equals(B2BDocumentModel.DUEDATE, searchType);
+  }
 
-	@Required
-	public void setB2bDocumentConverter(final Converter<B2BDocumentModel, B2BDocumentData> b2bDocumentConverter)
-	{
-		this.b2bDocumentConverter = b2bDocumentConverter;
-	}
+  @Override
+  public SearchResult<B2BDocumentModel> getOpenDocuments(final MediaModel mediaModel)
+  {
+    return b2bDocumentService.getOpenDocuments(mediaModel);
+  }
 
-	@Required
-	public void setB2bDocumentPaymentInfoConverter(
-			final Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> converter)
-	{
-		this.b2bDocumentPaymentInfoConverter = converter;
-	}
+  protected <S, T> SearchPageData<T> convertPageData(final SearchPageData<S> source, final Converter<S, T> converter)
+  {
+    final SearchPageData<T> result = new SearchPageData<T>();
+    result.setPagination(source.getPagination());
+    result.setSorts(source.getSorts());
+    result.setResults(Converters.convertAll(source.getResults(), converter));
+    return result;
+  }
 
-	public Converter<B2BDocumentModel, B2BDocumentData> getB2bDocumentConverter()
-	{
-		return b2bDocumentConverter;
-	}
+  @Required
+  public void setB2bDocumentPaymentInfoConverter(final Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> converter)
+  {
+    this.b2bDocumentPaymentInfoConverter = converter;
+  }
 
-	@Required
-	public void setB2bDocumentService(final B2BDocumentService b2bDocumentService)
-	{
-		this.b2bDocumentService = b2bDocumentService;
-	}
+  public Converter<B2BDocumentModel, B2BDocumentData> getB2bDocumentConverter()
+  {
+    return b2bDocumentConverter;
+  }
 
+  @Required
+  public void setB2bDocumentConverter(final Converter<B2BDocumentModel, B2BDocumentData> b2bDocumentConverter)
+  {
+    this.b2bDocumentConverter = b2bDocumentConverter;
+  }
 
-	@Required
-	public void setB2bDocumentPaymentInfoService(final B2BDocumentPaymentInfoService service)
-	{
-		this.b2bDocumentPaymentInfoService = service;
-	}
+  @Required
+  public void setB2bDocumentService(final B2BDocumentService b2bDocumentService)
+  {
+    this.b2bDocumentService = b2bDocumentService;
+  }
 
-	public void setB2bDocumentTypeService(final B2BDocumentTypeService b2bDocumentTypeService)
-	{
-		this.b2bDocumentTypeService = b2bDocumentTypeService;
-	}
+  @Required
+  public void setB2bDocumentPaymentInfoService(final B2BDocumentPaymentInfoService service)
+  {
+    this.b2bDocumentPaymentInfoService = service;
+  }
 
-	@Override
-	public SearchResult<B2BDocumentTypeModel> getAllDocumentTypes()
-	{
-		return b2bDocumentTypeService.getAllDocumentTypes();
-	}
+  public void setB2bDocumentTypeService(final B2BDocumentTypeService b2bDocumentTypeService)
+  {
+    this.b2bDocumentTypeService = b2bDocumentTypeService;
+  }
 
-	@Override
-	public List<B2BDocumentPaymentInfoData> getDocumentPaymentInfo(final String documentNumber)
-	{
-		final SearchResult<B2BDocumentPaymentInfoModel> result = b2bDocumentPaymentInfoService
-				.getDocumentPaymentInfo(documentNumber);
-		return Converters.convertAll(result.getResult(), b2bDocumentPaymentInfoConverter);
-	}
+  public PentlandAccountSummaryService getAccountSummaryService() {
+    return accountSummaryService;
+  }
 
-	@Override
-	public void applyDragAndDropActions(final List<B2BDragAndDropData> lstActions)
-	{
-		b2bDocumentPaymentInfoService.applyPayment(lstActions);
+  @Required
+  public void setAccountSummaryService(PentlandAccountSummaryService accountSummaryService) {
+    this.accountSummaryService = accountSummaryService;
+  }
 
-	}
+  public B2BCustomerService<B2BCustomerModel, B2BUnitModel> getB2BCustomerService() {
+    return b2BCustomerService;
+  }
 
-	public Converter<B2BUnitModel, B2BAmountBalanceData> getB2bAmountBalanceConverter()
-	{
-		return b2bAmountBalanceConverter;
-	}
+  @Required
+  public void setB2BCustomerService(B2BCustomerService<B2BCustomerModel, B2BUnitModel> b2BCustomerService) {
+    this.b2BCustomerService = b2BCustomerService;
+  }
 
-	@Required
-	public void setB2bAmountBalanceConverter(final Converter<B2BUnitModel, B2BAmountBalanceData> b2bAmountBalanceConverter)
-	{
-		this.b2bAmountBalanceConverter = b2bAmountBalanceConverter;
-	}
+  @Override
+  public SearchResult<B2BDocumentTypeModel> getAllDocumentTypes()
+  {
+    return b2bDocumentTypeService.getAllDocumentTypes();
+  }
 
-	/**
-	 * @return the b2BCommerceUnitService
-	 */
-	public B2BCommerceUnitService getB2BCommerceUnitService()
-	{
-		return b2BCommerceUnitService;
-	}
+  @Override
+  public List<B2BDocumentPaymentInfoData> getDocumentPaymentInfo(final String documentNumber)
+  {
+    final SearchResult<B2BDocumentPaymentInfoModel> result = b2bDocumentPaymentInfoService.getDocumentPaymentInfo(documentNumber);
+    return Converters.convertAll(result.getResult(), b2bDocumentPaymentInfoConverter);
+  }
 
-	/**
-	 * @param b2bCommerceUnitService
-	 *           the b2BCommerceUnitService to set
-	 */
-	public void setB2BCommerceUnitService(final B2BCommerceUnitService b2bCommerceUnitService)
-	{
-		b2BCommerceUnitService = b2bCommerceUnitService;
-	}
+  @Override
+  public void applyDragAndDropActions(final List<B2BDragAndDropData> lstActions)
+  {
+    b2bDocumentPaymentInfoService.applyPayment(lstActions);
 
-	/**
-	 * @return the accountSummaryInfoConverter
-	 */
-	public Converter<AccountSummaryResponse, AccountSummaryInfoData> getAccountSummaryInfoConverter()
-	{
-		return accountSummaryInfoConverter;
-	}
+  }
 
-	/**
-	 * @param accountSummaryInfoConverter
-	 *           the accountSummaryInfoConverter to set
-	 */
-	public void setAccountSummaryInfoConverter(final Converter<AccountSummaryResponse, AccountSummaryInfoData> accountSummaryInfoConverter)
-	{
-		this.accountSummaryInfoConverter = accountSummaryInfoConverter;
-	}
+  public B2BCommerceUnitService getB2BCommerceUnitService()
+  {
+    return b2BCommerceUnitService;
+  }
 
-	@Override
-	public AccountSummaryInfoData getAccountSummaryInfoData()
-	{
-		B2BCustomerModel customer = b2BCustomerService.getCurrentB2BCustomer();
-		
+  public void setB2BCommerceUnitService(final B2BCommerceUnitService b2bCommerceUnitService)
+  {
+    b2BCommerceUnitService = b2bCommerceUnitService;
+  }
 
-		List<B2BUnitModel> brands = new ArrayList<>(b2BCommerceUnitService.getOrganization());
+  public Converter<AccountSummaryResponse, AccountSummaryInfoData> getAccountSummaryInfoConverter()
+  {
+    return accountSummaryInfoConverter;
+  }
 
-		ServicesUtil.validateIfAnyResult(brands, "No B2B units found for customer");
+  public void setAccountSummaryInfoConverter(final Converter<AccountSummaryResponse, AccountSummaryInfoData> accountSummaryInfoConverter) {
+    this.accountSummaryInfoConverter = accountSummaryInfoConverter;
+  }
 
-		String sapId = brands.get(0).getSapID();
-		List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).collect(Collectors.toList());
+  @Override
+  public SearchPageData<B2BDocumentData> getPagedDocumentsForUnit(final String b2bUnitCode,
+                                                                  final PageableData pageableData,
+                                                                  final FilterByCriteriaData filterByCriteriaData,
+                                                                  final DefaultCriteria criteria)
+  {
+    validateParameterNotNull(b2bUnitCode, "b2bUnitCode must not be null");
+    validateParameterNotNull(pageableData, "pageableData must not be null");
+    validateParameterNotNull(criteria, "criteria must not be null");
 
-		AccountSummaryResponse response = accountSummaryService.getAccountSummaryInfo(sapId, sapBrands);
+    criteria.setCriteriaValues(filterByCriteriaData);
 
-		return getAccountSummaryInfoConverter().convert(response);
-	}
+    final List<DefaultCriteria> filterByCriteriaList = Collections.singletonList(criteria);
 
+    return convertPageData(b2bDocumentService.getPagedDocumentsForUnit(b2bUnitCode, pageableData, filterByCriteriaList), getB2bDocumentConverter());
+  }
 
+  @Override
+  public SearchPageData<B2BDocumentData> getPagedDocuments(PageableData pageableData, FilterByCriteriaData filterByCriteriaData, DefaultCriteria criteria) {
+    validateParameterNotNull(pageableData, "pageableData must not be null");
+    validateParameterNotNull(criteria, "criteria must not be null");
 
-	@Override
-	public SearchPageData<B2BDocumentData> getPagedDocumentsForUnit(final String b2bUnitCode, final PageableData pageableData,
-			final FilterByCriteriaData filterByCriteriaData, final DefaultCriteria criteria)
-	{
-		validateParameterNotNull(b2bUnitCode, "b2bUnitCode must not be null");
-		validateParameterNotNull(pageableData, "pageableData must not be null");
-		validateParameterNotNull(criteria, "criteria must not be null");
-
-		criteria.setCriteriaValues(filterByCriteriaData);
-
-		final List<DefaultCriteria> filterByCriteriaList = Collections.singletonList(criteria);
-
-		return convertPageData(b2bDocumentService.getPagedDocumentsForUnit(b2bUnitCode, pageableData, filterByCriteriaList),
-				getB2bDocumentConverter());
-	}
+    //id is the same for all units
+    String sapId = getB2BUnitModels().iterator().next().getSapID();
+    criteria.setCriteriaValues(filterByCriteriaData);
+    final List<DefaultCriteria> filterByCriteriaList = Collections.singletonList(criteria);
+    return convertPageData(b2bDocumentService.getPagedDocumentsForSapId(sapId, pageableData, filterByCriteriaList), getB2bDocumentConverter());
+  }
 }

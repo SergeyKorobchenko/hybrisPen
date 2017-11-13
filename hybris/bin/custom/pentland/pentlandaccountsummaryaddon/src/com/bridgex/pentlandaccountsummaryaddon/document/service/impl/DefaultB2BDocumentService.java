@@ -120,6 +120,15 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 		return getPagedB2BDocumentDao().getPagedDocumentsForUnit(b2bUnitCode, pageableData, criteriaList);
 	}
 
+	@Override
+	public SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList) {
+		validateParameterNotNull(sapId, "b2bUnitCode must not be null");
+		validateParameterNotNull(pageableData, "pageableData must not be null");
+		validateIfAnyResult(filterByCriteriaList, "criteria list must not be empty or null");
+
+		return getPagedB2BDocumentDao().getPagedDocumentsForSapId(sapId, pageableData, filterByCriteriaList);
+	}
+
 	protected ModelService getModelService()
 	{
 		return modelService;
