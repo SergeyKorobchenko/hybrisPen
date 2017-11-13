@@ -300,4 +300,7 @@
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
 	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
 
+	<alias name="pentlandCsvFacade" alias="csvFacade"/>
+	<bean id="pentlandCsvFacade" class="com.bridgex.facades.csv.impl.PentlandCsvFacade" parent="defaultCsvFacade"/>
+
 </beans>

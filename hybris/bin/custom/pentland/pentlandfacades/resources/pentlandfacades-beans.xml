@@ -14,6 +14,7 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="gender" type="com.bridgex.facades.product.data.GenderData"/>
 		<property name="clearance" type="Boolean"/>
+		<property name="upc" type="String"/>
 	</bean>
 
 	<bean class="com.bridgex.facades.product.data.GenderData">

@@ -525,6 +525,8 @@ public class CartPageController extends AbstractCartPageController
 				headers.add(getMessageSource().getMessage("basket.export.cart.item.name", null, getI18nService().getCurrentLocale()));
 				headers
 						.add(getMessageSource().getMessage("basket.export.cart.item.price", null, getI18nService().getCurrentLocale()));
+				headers
+					.add(getMessageSource().getMessage("basket.export.cart.item.upc", null, getI18nService().getCurrentLocale()));
 
 				final CartData cartData = getCartFacade().getSessionCartWithEntryOrdering(false);
 				csvFacade.generateCsvFromCart(headers, true, cartData, writer);

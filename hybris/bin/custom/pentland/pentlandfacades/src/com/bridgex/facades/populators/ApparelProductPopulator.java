@@ -47,6 +47,7 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 		if (baseProduct.getGender() != null) {
 			target.setGender(getGenderConverter().convert(baseProduct.getGender()));
 		}
+    target.setUpc(source.getUpc());
 	}
 
 	protected ProductModel getBaseProduct(final ProductModel productModel)
