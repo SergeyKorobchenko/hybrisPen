@@ -21,7 +21,8 @@ public class ProductBrandPopulator<SOURCE extends ProductModel, TARGET extends P
   public void populate(SOURCE source, TARGET target) throws ConversionException {
     CategoryModel brand = categoryService.getBrandCategoryForProduct(source);
     if (brand != null) {
-      target.setBrand(brand.getName());
+      target.setBrandCode(brand.getCode());
+      target.setBrandName(brand.getName());
     }
   }
 

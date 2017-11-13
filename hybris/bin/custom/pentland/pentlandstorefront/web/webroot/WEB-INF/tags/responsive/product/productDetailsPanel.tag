@@ -17,10 +17,10 @@
 	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-4">
 		<product:productImagePanel galleryImages="${galleryImages}" />
 		<c:if test="${not empty product.videoURL}">
-			<div class=""><spring:theme code="product.videourl"/>: ${fn:escapeXml(product.videoURL)}</div>
+			<div class=""><spring:theme code="product.videourl"/> :<a href="${fn:escapeXml(product.videoURL)}">${fn:escapeXml(product.videoURL)}</a></div>
 		</c:if>
 		<c:if test="${not empty product.externalURL}">
-			<div class=""><spring:theme code="product.externalurl"/>: ${fn:escapeXml(product.externalURL)}</div>
+			<div class=""><spring:theme code="product.externalurl"/>: <a href="${fn:escapeXml(product.externalURL)}">${fn:escapeXml(product.externalURL)}</a></div>
 		</c:if>
 	</div>
 
@@ -30,8 +30,8 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="product-details">
-						<c:if test="${not empty product.brand}">
-							<div class=""><spring:theme code="product.brand"/>: ${fn:escapeXml(product.brand)}</div>
+						<c:if test="${not empty product.brandName}">
+							<div class=""><spring:theme code="product.brand"/>: ${fn:escapeXml(product.brandName)}</div>
 						</c:if>
 						<p class="price">
 							<spring:theme code="product.customer.price"/>: <format:price priceData="${product.customerPrice}"/>
@@ -56,11 +56,27 @@
 					<cms:pageSlot position="AddToCart" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-add-to-cart-component"/>
 					</cms:pageSlot>
-					<c:if test="${not empty product.description}">
-						<div class="description"><spring:theme code="product.description"/>${ycommerce:sanitizeHTML(product.description)}</div>
-					</c:if>
-					<c:if test="${not empty product.featureDescription}">
-						<div class="description"><spring:theme code="product.features"/>${ycommerce:sanitizeHTML(product.featureDescription)}</div>
+					<c:if test="${not empty product.description or not empty product.featureDescription}" >
+						<div id="tabs">
+							<ul>
+								<c:if test="${not empty product.description}">
+									<li><a href="#tabs-1"><spring:theme code="product.description"/></a></li>
+								</c:if>
+								<c:if test="${not empty product.featureDescription}">
+									<li><a href="#tabs-2"><spring:theme code="product.features"/></a></li>
+								</c:if>
+							</ul>
+							<c:if test="${not empty product.description}">
+								<div id="tabs-1">
+									<p>${ycommerce:sanitizeHTML(product.description)}</p>
+								</div>
+							</c:if>
+							<c:if test="${not empty product.featureDescription}">
+								<div id="tabs-2">
+									<p>${ycommerce:sanitizeHTML(product.featureDescription)}</p>
+								</div>
+							</c:if>
+						</div>
 					</c:if>
 				</div>
 
@@ -73,6 +89,6 @@
 	</div>
 	<div>
 		Product Grid
-		<product:productOrderFormGrid product="${product}" />
+		<%--<product:productOrderFormGrid product="${product}" />--%>
 	</div>
 </div>

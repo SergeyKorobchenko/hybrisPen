@@ -13,7 +13,8 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="materialKey" type="String"/>
-		<property name="brand" type="String" />
+		<property name="brandCode" type="String" />
+		<property name="brandName" type="String" />
 		<property name="season" type="String" />
 		<property name="customerPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
 		<property name="gender" type="com.bridgex.facades.product.data.GenderData"/>

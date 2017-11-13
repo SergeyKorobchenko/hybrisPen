@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.bridgex.integration.domain.*;
 import com.bridgex.integration.service.impl.AbstractIntegrationService;
+import com.bridgex.integration.service.impl.OrderDetailsIntegrationService;
 
 import de.hybris.platform.basecommerce.enums.ConsignmentStatus;
 import de.hybris.platform.basecommerce.enums.OrderEntryStatus;
@@ -15,7 +16,7 @@ import de.hybris.platform.basecommerce.enums.OrderEntryStatus;
 /**
  * @author Goncharenko Mikhail, created on 07.11.2017.
  */
-public class OrderDetailsServiceMock extends AbstractIntegrationService<OrderDetailsDto, OrderDetailsResponse> {
+public class OrderDetailsServiceMock extends OrderDetailsIntegrationService {
 
   @Override
   public String getServiceName() {

@@ -11,7 +11,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
 public class ProductUtils {
 
   public static boolean isNotDiscontinued(DiscontinuedStatus status) {
-    return (null != status && (DiscontinuedStatus.D03.equals(status) || DiscontinuedStatus.D04.equals(status) || DiscontinuedStatus.D05.equals(status)) );
+    return (null == status || DiscontinuedStatus.D03.equals(status) || DiscontinuedStatus.D04.equals(status) || DiscontinuedStatus.D05.equals(status) );
   }
 
   public static boolean isNotDiscontinued(ProductModel product) {

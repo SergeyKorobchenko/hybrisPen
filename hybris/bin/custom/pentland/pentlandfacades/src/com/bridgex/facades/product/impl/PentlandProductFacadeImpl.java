@@ -118,16 +118,20 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   }
 
   private MultiBrandCartInput createMultiBrandCartInput(final ProductData product, Map<String, B2BUnitModel> brandUnitsMap) {
-    final String brandCode = product.getBrand();
+    final String brandCode = product.getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
     reqProduct.setBrandCode(brandCode);
     reqProduct.setMaterialNumber(product.getMaterialKey());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
-      reqProduct.setDistrChannel(targetUnit.getDistCh());
-      reqProduct.setSalesOrg(targetUnit.getSalesOrg());
-      reqProduct.setPriceList(targetUnit.getSapPriceList());
+      if (targetUnit != null) {
+        reqProduct.setDistrChannel(targetUnit.getDistCh());
+        reqProduct.setSalesOrg(targetUnit.getSalesOrg());
+        reqProduct.setPriceList(targetUnit.getSapPriceList());
+      } else {
+        LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + product.getCode());
+      }
     }
 
     final List<SizeDataDto> sizeData = new ArrayList<>();
