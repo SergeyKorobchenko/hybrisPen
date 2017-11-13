@@ -13,6 +13,7 @@
 # Macros / Replacement Parameter definitions
 $productCatalog=pentlandProductCatalog
 $productCatalogName=Pentland Product Catalog
+$mediaCatalog=pentlandMediaCatalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/productCatalogs/$productCatalog
@@ -24,6 +25,7 @@ $normal=normal(code, $catalogVersion)
 $others=others(code, $catalogVersion)
 $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
+$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 
 #size charts (random images actually, just for format)
 INSERT_UPDATE Media;code[unique=true];realfilename;mediaFormat(qualifier)[default=sizeChart];$mediaCV;folder(qualifier)[default=product];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]

@@ -10,6 +10,7 @@
  */
 package com.bridgex.facades.populators;
 
+import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.enums.Gender;
@@ -25,7 +26,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Populates {@link ProductData} with genders
  */
-public class ApparelProductPopulator implements Populator<ProductModel, ProductData>
+public class ApparelProductPopulator<SOURCE extends ProductModel, TARGET extends ProductData> extends AbstractProductPopulator<SOURCE, TARGET>
 {
 	private Converter<Gender, GenderData> genderConverter;
 
@@ -43,21 +44,10 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 	@Override
 	public void populate(final ProductModel source, final ProductData target) throws ConversionException
 	{
-		final ProductModel baseProduct = getBaseProduct(source);
-		if (baseProduct.getGender() != null) {
-			target.setGender(getGenderConverter().convert(baseProduct.getGender()));
+		final Gender gender = (Gender)getProductAttribute(source, ProductModel.GENDER);
+		if (gender != null) {
+			target.setGender(getGenderConverter().convert(gender));
 		}
     target.setUpc(source.getUpc());
-	}
-
-	protected ProductModel getBaseProduct(final ProductModel productModel)
-	{
-		ProductModel currentProduct = productModel;
-		while (currentProduct instanceof VariantProductModel)
-		{
-			final VariantProductModel variant = (VariantProductModel) currentProduct;
-			currentProduct = variant.getBaseProduct();
-		}
-		return currentProduct;
 	}
 }

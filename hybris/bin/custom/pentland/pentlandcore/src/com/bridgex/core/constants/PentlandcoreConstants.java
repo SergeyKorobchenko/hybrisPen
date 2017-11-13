@@ -15,8 +15,7 @@ package com.bridgex.core.constants;
  */
 public final class PentlandcoreConstants extends GeneratedPentlandcoreConstants
 {
-	public static final String EXTENSIONNAME = "pentlandcore";
-
+	public static final String EXTENSIONNAME    = "pentlandcore";
 
 	private PentlandcoreConstants()
 	{
@@ -33,4 +32,6 @@ public final class PentlandcoreConstants extends GeneratedPentlandcoreConstants
 	public static final String QUOTE_POST_CANCELLATION_PROCESS = "quote-post-cancellation-process";
 
 	public static final String PARENT_UPG = "Europe1PriceFactory_Parent_UPG";
+
+	public static final String CTX_ATTRIBUTE_UNITS = "units";
 }

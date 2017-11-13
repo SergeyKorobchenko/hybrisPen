@@ -21,7 +21,9 @@ $setPassword = @password[translator = de.hybris.platform.impex.jalo.translators.
 
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);&B2BUnitID
 ;TestB2BUnit;TestB2BUnit;Test B2B Unit;Test B2B Unit;;TestB2BUnit
-
+;MitreTestB2BUnit;MitreTestB2BUnit;MitreTestB2BUnit;MitreTestB2BUnit;;MitreTestB2BUnit
+;SpeedoTestB2BUnit;SpeedoTestB2BUnit;SpeedoTestB2BUnit;SpeedoTestB2BUnit;;SpeedoTestB2BUnit
+;CanterburyTestB2BUnit;CanterburyTestB2BUnit;CanterburyTestB2BUnit;CanterburyTestB2BUnit;;CanterburyTestB2BUnit
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];originalUid;email;name;title(code);groups(uid);sessionCurrency(isocode)[default='GBP'];sessionLanguage(isocode);$setPassword
 ;Test B2B Customer;test;testb2bcustomer;linda.wolf@test.com;Linda Wolf;ms;TestB2BUnit,b2bcustomergroup,customergroup;;en;

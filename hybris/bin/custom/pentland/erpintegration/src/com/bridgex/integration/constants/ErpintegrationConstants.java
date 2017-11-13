@@ -33,6 +33,15 @@ public final class ErpintegrationConstants extends GeneratedErpintegrationConsta
 	public static class REQUEST {
 		public static final String DEFAULT_DOC_TYPE = "C";
 		public static final String DEFAULT_SERVICE_CONSUMER = "Hybris_B2B";
+		public static final String DEFAULT_ERP_FLAG_TRUE = "X";
+	}
 
+	public static class RESPONSE {
+		public static class ET_RETURN {
+			public static final String SUCCESS_TYPE = "S";
+			public static final String INFO_TYPE = "I";
+			public static final String WARNING_TYPE = "W";
+			public static final String ERROR_TYPE = "E";
+		}
 	}
 }

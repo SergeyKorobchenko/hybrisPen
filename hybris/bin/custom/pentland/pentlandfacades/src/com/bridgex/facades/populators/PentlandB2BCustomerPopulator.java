@@ -9,7 +9,7 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
  */
-public class PentlandB2BCustomerPopulator extends B2BCustomerPopulator{
+public class PentlandB2BCustomerPopulator extends B2BCustomerPopulator {
 
   @Override
   protected void populateUnit(final B2BCustomerModel customer, final CustomerData target)

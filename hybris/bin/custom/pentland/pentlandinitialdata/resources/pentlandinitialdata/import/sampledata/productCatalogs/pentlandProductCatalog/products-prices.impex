@@ -2940,3 +2940,13 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=piec
 ;300398794;pieces;EUR;39,95;1;1;false;
 ;300398801;pieces;GBP;32,36;1;1;false;
 ;300398801;pieces;EUR;39,95;1;1;false;
+
+# Insert Product prices
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net;ug(code)
+;M25687_B;pieces;GBP;18,46;1;1;false;pronto-services
+;5-BB1089WP4;pieces;GBP;28,66;1;1;false;pronto-services
+;5-G40011WBP;pieces;GBP;38,56;1;1;false;pronto-services
+;4-20859BP6;pieces;GBP;48,42;1;1;false;pronto-services
+;8-000882264;pieces;GBP;58,51;1;1;false;pronto-services
+;8-002582846;pieces;GBP;68,5;1;1;false;pronto-services
+;5-BB1090PBB;pieces;GBP;78,46;1;1;false;pronto-services

@@ -63,4 +63,15 @@
 		<property name="businessProcessCreationStrategy" ref="defaultB2BCreateOrderFromCartStrategy"/>
 	</bean>
 
+	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="commerceCartCalculationStrategy"/>
+	<bean id="defaultPentlandCommerceCartCalculationStrategy" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCartCalculationStrategy" parent="defaultCommerceCartCalculationStrategy" />
+
+	<alias name="defaultPentlandCalculationService" alias="calculationService"/>
+	<bean id="defaultPentlandCalculationService" class="com.bridgex.core.order.impl.DefaultPentlandCalculationService" parent="defaultCalculationService" />
+
+	<alias name="defaultPentlandOrderSimulationService" alias="orderSimulationService" />
+	<bean name="defaultPentlandOrderSimulationService" class="com.bridgex.core.product.impl.DefaultPentlandOrderSimulationService" >
+		<property name="integrationService" ref="orderSimulateService" />
+	</bean>
+
 </beans>

@@ -8,11 +8,14 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.bridgex.integration.constants.ErpintegrationConstants;
+import com.bridgex.integration.domain.ETReturnDto;
+import com.bridgex.integration.domain.MultiBrandCartResponse;
 import com.bridgex.integration.rest.RESTClient;
 import com.bridgex.integration.service.IntegrationService;
 import com.bridgex.integration.service.processor.ResponseProcessor;
@@ -82,6 +85,11 @@ public abstract class AbstractIntegrationService<REQUEST, RESPONSE> implements I
     final URI uri = UriComponentsBuilder.fromHttpUrl(getServiceUrl()).build().toUri();
     RequestEntity<REQUEST> request = new RequestEntity<>(requestDto, getHeaders(), getMethod(), uri);
     ResponseEntity<RESPONSE> response = getClient().sendPostRequest(request, responseClass);
+    if (!(response.getStatusCode().is2xxSuccessful() || response.getStatusCode().is1xxInformational())) {
+      RESPONSE body = response.getBody();
+      body = createFailedResponseBody(body);
+      response = new ResponseEntity<>(body, HttpStatus.ACCEPTED);
+    }
     getResponseProcessor().process(response);
     return response;
   }
@@ -100,4 +108,6 @@ public abstract class AbstractIntegrationService<REQUEST, RESPONSE> implements I
 
     getHeaders().add("Authorization", "Basic " + base64ClientCredentials);
   }
+
+  abstract RESPONSE createFailedResponseBody(final RESPONSE body);
 }

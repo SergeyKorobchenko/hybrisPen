@@ -2016,10 +2016,10 @@ INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];seas
 ;BB1090;05;;5;;5000001;;;;
 
 INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved
-;BB1089;5-BB1089WP4;ULTIMATCH D32P WHITE/RED/BLUE;5;WP4;WHITE;;;5;;;;5000001;;;;
-;G40011;5-G40011WBP;HYPER ACADEMY WHITE/BLACK/PINK;5;WBP;WHITE;;;5;;;;5000004;;;;
-;20859;4-20859BP6;PACLITE III SHELL JKT AF BLK/BLK;4;BP6;BLACK;;;4;;;;4000001;;;;
-;00088;8-000882264;CLLRY AQUASHORT PNL BOYS RCH/MAJ/APH;8;2264;;;;8;;;;SPD0001;;;;
+;BB1089;5-BB1089WP4;ULTIMATCH D32P WHITE/RED/BLUE;05;WP4;WHITE;;;5;;;;5000001;;;;
+;G40011;5-G40011WBP;HYPER ACADEMY WHITE/BLACK/PINK;05;WBP;WHITE;;;5;;;;5000004;;;;
+;20859;4-20859BP6;PACLITE III SHELL JKT AF BLK/BLK;04;BP6;BLACK;;;4;;;;4000001;;;;
+;00088;8-000882264;CLLRY AQUASHORT PNL BOYS RCH/MAJ/APH;08;2264;;;;8;;;;SPD0001;;;;
 ;00258;8-002582846;TRICKSTER SANDAL INF ARD/PER/SCA;08;2846;;;;8;;;;SPD0004;;;;
 ;BB1090;5-BB1090PBB;MALMO D32P PINK/BLACK/BLUE;05;PBB;PINK;;;5;;;;5000001;;;;
 
@@ -2056,8 +2056,8 @@ INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;s
 ;5-BB1090PBB;;5037823906122;;4;pieces;03;;;
 ;5-BB1090PBB;;5037823906115;;3;pieces;03;;;
 
-UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;;supercategories(code,$catalogVersion)
-;5-BB1089WP4;;1;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;;supercategories(code,$catalogVersion);
+;5-BB1089WP4;;1;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation;
 ;5-G40011WBP;;2;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
 ;4-20859BP6;;1;https://www.youtube.com/embed/XWMs9pQuQqk;https://www.google.ru/;;221600
 ;8-000882264;;5;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400

@@ -12,24 +12,29 @@ import org.springframework.util.Assert;
 
 import com.bridgex.core.product.PentlandProductService;
 import com.bridgex.core.product.dao.PentlandProductDao;
+import com.bridgex.integration.domain.MultiBrandCartDto;
+import com.bridgex.integration.domain.MultiBrandCartResponse;
+import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.mediaconversion.MediaConversionService;
 import de.hybris.platform.mediaconversion.enums.ConversionStatus;
 import de.hybris.platform.product.impl.DefaultProductService;
+import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/17/2017.
  */
-public class DefaultPentlandProductService extends DefaultProductService implements PentlandProductService{
+public class DefaultPentlandProductService extends DefaultProductService implements PentlandProductService {
 
   private static final String PRIMARY_CONVERSION_GROUP = "productConversionGroup";
 
-  private PentlandProductDao     pentlandProductDao;
-  private MediaConversionService mediaConversionService;
+  private PentlandProductDao                                            pentlandProductDao;
+  private MediaConversionService                                        mediaConversionService;
 
   @Override
   public List<ProductModel> findSMUProductsForSapBrandAndCatalogVersion(String sapBrand, CatalogVersionModel catalogVersion) {
@@ -89,6 +94,28 @@ public class DefaultPentlandProductService extends DefaultProductService impleme
       }
     }
     return false;
+  }
+
+  /**
+   * Get an attribute value from a product.
+   * If the attribute value is null and the product is a variant then the same attribute will be
+   * requested from the base product.
+   *
+   * @param productModel the product
+   * @param attribute    the name of the attribute to lookup
+   *
+   * @return the value of the attribute
+   */
+  public Object getProductAttribute(final ProductModel productModel, final String attribute)
+  {
+    final Object value = getModelService().getAttributeValue(productModel, attribute);
+    if (value == null && productModel instanceof VariantProductModel) {
+      final ProductModel baseProduct = ((VariantProductModel) productModel).getBaseProduct();
+      if (baseProduct != null) {
+        return getProductAttribute(baseProduct, attribute);
+      }
+    }
+    return value;
   }
 
   @Required
