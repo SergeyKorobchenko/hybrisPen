@@ -474,12 +474,12 @@ ACC.productorderform = {
         });
     },
     checkLimitExceed: function (closeVariantModal1) {
-        $('body').on('keyup blur', closeVariantModal1, function (event) {  	
-        	 var input=Number($(this).val());
-             var stock_amt=Number($(this).attr('data-instock'));     
-             if(input>stock_amt)
-             	$(this).val(stock_amt);
-        });
+        // $('body').on('keyup blur', closeVariantModal1, function (event) {
+        // 	 var input=Number($(this).val());
+        //      var stock_amt=Number($(this).attr('data-instock'));
+        //      if(input>stock_amt)
+        //      	$(this).val(stock_amt);
+        // });
     },
 
     resetSelectedVariant: function () {
