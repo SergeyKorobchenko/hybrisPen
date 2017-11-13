@@ -109,7 +109,7 @@
 		<property name="typeService" ref="typeService"/>
 	</bean>
 
-	<bean id="apparelProductPopulator" class="com.bridgex.facades.populators.ApparelProductPopulator" >
+	<bean id="apparelProductPopulator" class="com.bridgex.facades.populators.ApparelProductPopulator" parent="baseProductPopulator">
 		<property name="genderConverter" ref="genderConverter"/>
 	</bean>
 
@@ -299,6 +299,52 @@
 
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
 	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
+
+	<alias name="pentlandProductBasicPopulator" alias="productBasicPopulator" />
+	<bean name="pentlandProductBasicPopulator" class="com.bridgex.facades.populators.PentlandProductBasicPopulator" parent="defaultProductBasicPopulator"/>
+
+	<alias name="pentlandProductBrandPopulator" alias="productBrandPopulator" />
+	<bean name="pentlandProductBrandPopulator" class="com.bridgex.facades.populators.ProductBrandPopulator" parent="baseProductPopulator">
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<alias name="pentlandProductFeaturePopulator" alias="productFeaturePopulator" />
+	<bean name="pentlandProductFeaturePopulator" class="com.bridgex.facades.populators.ProductFeaturePopulator" parent="baseProductPopulator"/>
+
+	<alias name="pentlandProductPDPPopulator" alias="productPDPPopulator" />
+	<bean name="pentlandProductPDPPopulator" class="com.bridgex.facades.populators.ProductPDPPopulator" parent="baseProductPopulator">
+		<property name="imageConverter" ref="imageConverter"/>
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="BRAND" />
+		<property name="add" ref="productBrandPopulator" />
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="FEATURE" />
+		<property name="add" ref="productFeaturePopulator" />
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="PDP" />
+		<property name="add" ref="productPDPPopulator" />
+	</bean>
+
+	<alias name="pentlandProductFacade" alias="productFacade" />
+	<bean name="pentlandProductFacade" class="com.bridgex.facades.product.impl.PentlandProductFacadeImpl" parent="defaultProductFacade" >
+		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService" />
+		<property name="orderSimulationService" ref="orderSimulationService" />
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="customerService" ref="b2bCustomerService" />
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
 
 	<alias name="pentlandProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>
 	<bean id="pentlandProductVariantMatrixPopulator" class="com.bridgex.facades.populators.PentlandProductVariantMatrixPopulator">

@@ -25,12 +25,20 @@ INSERT_UPDATE UserPriceGroup;code[unique=true]
 ;pronto
 ;pronto-services
 
-UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid)
-;TestB2BUnit;pronto-services;PROFORMA;testB2B;mitregroup,speedogroup,canterburygroup
+UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid);sapBrand;
+;TestB2BUnit;pronto-services;PROFORMA;testB2B;mitregroup,speedogroup,canterburygroup;05
+;MitreTestB2BUnit;pronto-services;PROFORMA;mitreTestB2B;mitregroup;05
+;SpeedoTestB2BUnit;pronto-services;PROFORMA;speedoTestB2B;speedogroup;08
+;CanterburyTestB2BUnit;pronto-services;PROFORMA;canterburyTestB2B;canterburygroup;0Q
+
 
 $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
 ;SuperAccountMangers;;
+
+INSERT_UPDATE Employee;UID[unique=true];password[default=1234];description;name;groups(uid);sessionLanguage(isocode);sessionCurrency(isocode)
+;salesrep1@pentland.com;;Sales Rep 1;Sales Rep 1;asagentgroup,salesrepgroup;en;GBP
+;customeropsuser1@pentland.com;;Customer Ops User 1;Customer Ops User 1;asagentgroup,salesrepgroup;en;GBP
 
 INSERT_UPDATE Employee;uid[unique=true];name;groups(uid)[mode=append];password[default=$defaultPassword];
 ;acctmgra;Alistair Thompson;employeegroup,acctmgrgroup,cockpitgroup,SuperAccountMangers,admingroup;
@@ -163,12 +171,12 @@ INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);groups(uid);permissionGroups(uid);sessionCurrency(isocode)[default='GBP'];password[default=$defaultPassword]
 ;Admin A;linda.wolf@pronto-hw.com;linda.wolf@pronto-hw.com;Linda Wolf;ms;Pronto, b2badmingroup, TestB2BUnit;
 ;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bcustomergroup;
-;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;TestB2BUnit, b2bcustomergroup;
+;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;MitreTestB2BUnit,SpeedoTestB2BUnit,CanterburyTestB2BUnit,b2bcustomergroup;
 ;Customer A;mark.rivers@pronto-hw.com;mark.rivers@pronto-hw.com;Mark Rivers;mr;Pronto Goods, b2bcustomergroup,enhancedPermissions, TestB2BUnit;;
 ;Customer B;mingmei.wang@pronto-hw.com;mingmei.wang@pronto-hw.com;Mingmei Wang;ms;Pronto Goods, b2bcustomergroup, commonPermissions, TestB2BUnit;;
 ;Customer C;william.hunter@pronto-hw.com;william.hunter@pronto-hw.com;William Hunter;mr;Pronto Services, b2bcustomergroup, enhancedPermissions, TestB2BUnit;
 ;Customer D;gi.sun@pronto-hw.com;gi.sun@pronto-hw.com;Gi Sun;mr;Pronto Services, b2bcustomergroup, commonPermissions, TestB2BUnit;;
-;Manager A;akiro.nakamura@pronto-hw.com;akiro.nakamura@pronto-hw.com;Akiro Nakamura;mr;Pronto Services, b2bmanagergroup, TestB2BUnit, b2bcustomergroup;
+;Manager A;akiro.nakamura@pronto-hw.com;akiro.nakamura@pronto-hw.com;Akiro Nakamura;mr;Pronto Services, b2bmanagergroup, MitreTestB2BUnit,SpeedoTestB2BUnit,CanterburyTestB2BUnit, b2bcustomergroup;
 ;Manager B;anil.gupta@pronto-hw.com;anil.gupta@pronto-hw.com;Anil Gupta;mr;Pronto Goods, b2bmanagergroup,TestB2BUnit;
 
 INSERT_UPDATE B2BBudget;code[unique=true];Unit(uid);budget;currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=en];

@@ -22,18 +22,7 @@ public abstract class AbstractBrandCategoryResolver extends AbstractBaseProductV
   private PentlandCategoryService categoryService;
 
   protected CategoryModel getBrandCategoryForProduct(ProductModel productModel){
-    ProductModel baseProductModel = getBaseProductModel(productModel);
-    String sapBrand = baseProductModel.getSapBrand();
-    if(StringUtils.isNotEmpty(sapBrand)) {
-      try {
-        return categoryService.getCategoryForCode(productModel.getCatalogVersion(), sapBrand);
-      }catch(UnknownIdentifierException e){
-        LOG.debug("Missing category for sapBrand " + sapBrand);
-      }catch(AmbiguousIdentifierException e){
-        LOG.debug("Mode than one category found for sapBrand " + sapBrand);
-      }
-    }
-    return null;
+    return categoryService.getBrandCategoryForProduct(productModel);
   }
 
   @Required

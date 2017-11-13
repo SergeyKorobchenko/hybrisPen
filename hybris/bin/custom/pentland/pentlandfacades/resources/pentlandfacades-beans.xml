@@ -12,8 +12,19 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="materialKey" type="String"/>
+		<property name="brandCode" type="String" />
+		<property name="brandName" type="String" />
+		<property name="season" type="String" />
+		<property name="customerPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
 		<property name="gender" type="com.bridgex.facades.product.data.GenderData"/>
 		<property name="clearance" type="Boolean"/>
+		<property name="videoURL" type="String" />
+		<property name="externalURL" type="String" />
+		<property name="sizeChartGuide" type="de.hybris.platform.commercefacades.product.data.ImageData" />
+		<property name="unit" type="String" />
+		<property name="moq" type="Integer" />
+		<property name="featureDescription" type="String" />
 	</bean>
 
 	<bean class="com.bridgex.facades.product.data.GenderData">
@@ -81,6 +92,13 @@
 			<description>the Mark For Address</description>
 		</property>
 	</bean>
+
+	<!-- Add pentland facades specific product options -->
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>FEATURE</value>
+		<value>BRAND</value>
+		<value>PDP</value>
+	</enum>
 
 	<bean class="de.hybris.platform.commercefacades.product.data.VariantMatrixElementData">
 		<property name="variantName" type="String"/>

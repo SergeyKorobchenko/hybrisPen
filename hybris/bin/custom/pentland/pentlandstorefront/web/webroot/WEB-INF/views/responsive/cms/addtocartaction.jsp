@@ -53,7 +53,7 @@
 
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
 	<c:set var="buttonType">button</c:set>
-	<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
+	<c:if test="${product.purchasable}">
 		<c:set var="buttonType">submit</c:set>
 	</c:if>
 	<c:choose>

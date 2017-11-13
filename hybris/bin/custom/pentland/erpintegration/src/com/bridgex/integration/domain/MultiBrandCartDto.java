@@ -3,6 +3,7 @@ package com.bridgex.integration.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,16 +15,19 @@ public class MultiBrandCartDto {
   }
 
   @JsonProperty("I_DOCUMENT_TYPE")
-  private String docType;
+  private String docType = ErpintegrationConstants.REQUEST.DEFAULT_DOC_TYPE;
 
   @JsonProperty("SERVICE_CONSUMER")
-  private String serviceConsumer;
+  private String serviceConsumer = ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER;
 
   @JsonProperty("I_LANGUAGE")
   private String lang;
 
   @JsonProperty("I_DOCUMENT_NUMBER")
   private String docNumber;
+
+  @JsonProperty("CUSTOMER_NUMBER")
+  private String sapCustomerID;
 
   //Not used
   @JsonProperty("I_SALES_REP")
@@ -153,5 +157,13 @@ public class MultiBrandCartDto {
 
   public void setCartInput(List<MultiBrandCartInput> cartInput) {
     this.cartInput = cartInput;
+  }
+
+  public String getSapCustomerID() {
+    return sapCustomerID;
+  }
+
+  public void setSapCustomerID(String sapCustomerID) {
+    this.sapCustomerID = sapCustomerID;
   }
 }

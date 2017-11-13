@@ -48,7 +48,7 @@ UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
 
 # JSP include components
 UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
-;;ProductDetailsTabComponent;Product Details
+#;;ProductDetailsTabComponent;Product Details
 
 # CMS Footer Navigation Component
 UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en]
@@ -164,6 +164,7 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 ;;ImportSavedCartLink;"Import Saved Cart"
 ;;OrderHistoryLink;"Order History"
 ;;PersonalDetailsLink;"Personal Details"
+;;OrderFormsLink;"Order Form"
 ;;QuickOrderLink;"Quick Order"
 ;;SavedCartsLink;"Saved Carts"
 ;;TwitterLink;"Twitter"
