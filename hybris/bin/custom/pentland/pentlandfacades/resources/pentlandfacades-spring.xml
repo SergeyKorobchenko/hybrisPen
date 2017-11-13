@@ -346,4 +346,10 @@
 		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
+	<alias name="pentlandProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>
+	<bean id="pentlandProductVariantMatrixPopulator" class="com.bridgex.facades.populators.PentlandProductVariantMatrixPopulator">
+		<property name="modelService" ref="modelService"/>
+		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
+	</bean>
+
 </beans>

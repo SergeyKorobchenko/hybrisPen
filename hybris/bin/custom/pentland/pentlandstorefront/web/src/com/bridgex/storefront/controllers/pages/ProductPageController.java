@@ -152,9 +152,7 @@ public class ProductPageController extends AbstractPageController
 	public String productOrderForm(@PathVariable("productCode") final String productCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
-		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE,
-				ProductOption.VARIANT_MATRIX_PRICE, ProductOption.VARIANT_MATRIX_MEDIA, ProductOption.VARIANT_MATRIX_STOCK,
-				ProductOption.URL);
+		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
 		updatePageTitle(productCode, model);
@@ -300,7 +298,7 @@ public class ProductPageController extends AbstractPageController
 		final List<ProductOption> options = new ArrayList<>(Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT, ProductOption.BASIC, ProductOption.URL, ProductOption.PRICE,
 		                                                                  ProductOption.BRAND, ProductOption.FEATURE, ProductOption.PDP,
 		                                                                  ProductOption.DESCRIPTION, ProductOption.GALLERY, ProductOption.CATEGORIES, ProductOption.VARIANT_FULL,
-		                                                                  ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL, ProductOption.VARIANT_MATRIX_MEDIA));
+		                                                                  ProductOption.VARIANT_MATRIX_BASE));
 
 		if (CollectionUtils.isNotEmpty(extraOptions)) {
 			options.addAll(extraOptions);
