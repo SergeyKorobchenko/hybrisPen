@@ -10,6 +10,9 @@ public class AccountSummaryDetailsDto {
   @JsonProperty("BRAND")
   private String brand;
 
+  @JsonProperty("BRAND_NAME")
+  private String brandName;
+
   @JsonProperty("CREDIT_REP")
   private String creditRep;
 
@@ -126,5 +129,13 @@ public class AccountSummaryDetailsDto {
 
   public void setCurrency(String currency) {
     this.currency = currency;
+  }
+
+  public String getBrandName() {
+    return brandName;
+  }
+
+  public void setBrandName(String brandName) {
+    this.brandName = brandName;
   }
 }

@@ -8,7 +8,7 @@ import com.bridgex.integration.domain.OrderDetailsResponse;
 /**
  * @author Goncharenko Mikhail, created on 01.11.2017.
  */
-public class OrderDetailsIntegrationService extends AbstractIntegrationService<OrderDetailsDto, OrderDetailsResponse> {
+public class OrderDetailsServiceImpl extends AbstractIntegrationService<OrderDetailsDto, OrderDetailsResponse> {
 
   @Override
   public String getServiceName() {
