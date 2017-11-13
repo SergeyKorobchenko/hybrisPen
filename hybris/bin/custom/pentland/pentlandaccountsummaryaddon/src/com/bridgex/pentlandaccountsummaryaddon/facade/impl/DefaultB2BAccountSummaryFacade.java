@@ -15,12 +15,15 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.customer.PentlandAccountSummaryService;
+import com.bridgex.integration.domain.AccountSummaryResponse;
 import com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants;
 import com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData;
 import com.bridgex.pentlandaccountsummaryaddon.document.AmountRange;
@@ -42,7 +45,10 @@ import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentPaymentInfoModel
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel;
 
 import de.hybris.platform.b2b.company.B2BCommerceUnitService;
+import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
+import de.hybris.platform.b2b.services.B2BCustomerService;
+import de.hybris.platform.b2b.services.impl.DefaultB2BCustomerService;
 import de.hybris.platform.b2bacceleratorfacades.exception.EntityValidationException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -51,6 +57,7 @@ import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 /**
  * Default implementation of the B2BAccountSummary facade
@@ -67,7 +74,9 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade
 	private Converter<B2BDocumentModel, B2BDocumentData>                       b2bDocumentConverter;
 	private Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> b2bDocumentPaymentInfoConverter;
 	private Converter<B2BUnitModel, B2BAmountBalanceData>                      b2bAmountBalanceConverter;
-	private Converter<B2BUnitModel, AccountSummaryInfoData>                    accountSummaryInfoConverter;
+	private Converter<AccountSummaryResponse, AccountSummaryInfoData>          accountSummaryInfoConverter;
+	private PentlandAccountSummaryService                                      accountSummaryService;
+	private B2BCustomerService<B2BCustomerModel,B2BUnitModel>                  b2BCustomerService;
 
 	@Override
 	public SearchPageData<B2BDocumentData> findDocuments(final Map<String, String> queryParameters)
@@ -287,7 +296,7 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade
 	/**
 	 * @return the accountSummaryInfoConverter
 	 */
-	public Converter<B2BUnitModel, AccountSummaryInfoData> getAccountSummaryInfoConverter()
+	public Converter<AccountSummaryResponse, AccountSummaryInfoData> getAccountSummaryInfoConverter()
 	{
 		return accountSummaryInfoConverter;
 	}
@@ -296,24 +305,30 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade
 	 * @param accountSummaryInfoConverter
 	 *           the accountSummaryInfoConverter to set
 	 */
-	public void setAccountSummaryInfoConverter(final Converter<B2BUnitModel, AccountSummaryInfoData> accountSummaryInfoConverter)
+	public void setAccountSummaryInfoConverter(final Converter<AccountSummaryResponse, AccountSummaryInfoData> accountSummaryInfoConverter)
 	{
 		this.accountSummaryInfoConverter = accountSummaryInfoConverter;
 	}
 
 	@Override
-	public AccountSummaryInfoData getAccountSummaryInfoData(final String b2bUnitCode)
+	public AccountSummaryInfoData getAccountSummaryInfoData()
 	{
-		validateParameterNotNull(b2bUnitCode, "b2bUnitCode must not be null");
+		B2BCustomerModel customer = b2BCustomerService.getCurrentB2BCustomer();
+		
 
-		final B2BUnitModel b2bUnitModel = getB2BCommerceUnitService().getUnitForUid(b2bUnitCode);
-		if (b2bUnitModel == null)
-		{
-			throw new UnknownIdentifierException("Unit with code " + b2bUnitCode + " not found for current user");
-		}
+		List<B2BUnitModel> brands = new ArrayList<>(b2BCommerceUnitService.getOrganization());
 
-		return getAccountSummaryInfoConverter().convert(b2bUnitModel);
+		ServicesUtil.validateIfAnyResult(brands, "No B2B units found for customer");
+
+		String sapId = brands.get(0).getSapID();
+		List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).collect(Collectors.toList());
+
+		AccountSummaryResponse response = accountSummaryService.getAccountSummaryInfo(sapId, sapBrands);
+
+		return getAccountSummaryInfoConverter().convert(response);
 	}
+
+
 
 	@Override
 	public SearchPageData<B2BDocumentData> getPagedDocumentsForUnit(final String b2bUnitCode, final PageableData pageableData,
