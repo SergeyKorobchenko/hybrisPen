@@ -300,4 +300,10 @@
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
 	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
 
+	<alias name="pentlandProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>
+	<bean id="pentlandProductVariantMatrixPopulator" class="com.bridgex.facades.populators.PentlandProductVariantMatrixPopulator">
+		<property name="modelService" ref="modelService"/>
+		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
+	</bean>
+
 </beans>
