@@ -48,17 +48,6 @@ public class UpdateCartController extends AbstractController
     final Set<String> multidErrorMsgs = new HashSet<String>();
     final List<CartModificationData> modificationDataList = new ArrayList<CartModificationData>();
 
-    if (pentlandCartFacade.hasEntries()) {
-      for (int i = 0; i < cartForm.getQuantities().size(); ++i) {
-        try {
-          final CartModificationData cartModificationData = pentlandCartFacade.updateCartEntry(i, cartForm.getQuantities().get(i));
-          modificationDataList.add(cartModificationData);
-        }
-        catch (final CommerceCartModificationException ex) {
-          LOG.warn("Couldn't update product with the entry number: " + i + ".", ex);
-        }
-      }
-    }
     for (final OrderEntryData cartEntry : cartForm.getCartEntries()) {
       if (isValidProductEntry(cartEntry)) {
         if (!isValidQuantity(cartEntry)) {

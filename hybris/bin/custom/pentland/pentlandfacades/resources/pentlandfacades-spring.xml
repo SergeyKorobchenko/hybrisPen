@@ -306,8 +306,4 @@
 		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
 	</bean>
 
-	<alias name="pentlandConfigVariantMatrixDataPopulator" alias="configVariantMatrixDataPopulator"/>
-	<bean id="pentlandConfigVariantMatrixDataPopulator" class="com.bridgex.facades.populators.PentlandProductVariantOptionDataPopulator"
-	      parent="defaultConfigVariantMatrixDataPopulator"/>
-
 </beans>

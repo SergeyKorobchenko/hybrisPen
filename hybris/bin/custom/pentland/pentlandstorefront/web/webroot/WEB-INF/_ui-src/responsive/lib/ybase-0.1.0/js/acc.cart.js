@@ -445,6 +445,9 @@ ACC.cart = {
                 },
                 400: function (data) {
                     alert("Failed save form");
+                },
+                500: function (data) {
+                    alert("Failed save form");
                 }
             }
         });

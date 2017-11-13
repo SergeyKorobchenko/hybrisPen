@@ -26,16 +26,11 @@ public class PentlandCartForm {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date requestedDeliveryDate;
 
-  private List<Long> quantities = new ArrayList<>();
   private List<OrderEntryData> cartEntries = new ArrayList<>();
 
   public PentlandCartForm() {}
 
   public PentlandCartForm(CartData cartData) {
-//    List<OrderEntryData> entries = cartData.getEntries();
-//    if (CollectionUtils.isNotEmpty(entries)) {
-//      entries.stream().forEach(e -> quantities.add(e.getEntryNumber(), e.getQuantity()));
-//    }
     purchaseOrderNumber = cartData.getPurchaseOrderNumber();
     requestedDeliveryDate = cartData.getRdd();
     customerNotes = cartData.getCustomerNotes();
@@ -63,14 +58,6 @@ public class PentlandCartForm {
 
   public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
     this.requestedDeliveryDate = requestedDeliveryDate;
-  }
-
-  public List<Long> getQuantities() {
-    return quantities;
-  }
-
-  public void setQuantities(List<Long> quantities) {
-    this.quantities = quantities;
   }
 
   public String getMinDate() {

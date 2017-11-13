@@ -655,14 +655,4 @@ public class CartPageController extends AbstractCartPageController
 		return false;
 	}
 
-	protected boolean isValidProductEntry(final OrderEntryData cartEntry)
-	{
-		return cartEntry.getProduct() != null && StringUtils.isNotBlank(cartEntry.getProduct().getCode());
-	}
-
-	protected boolean isValidQuantity(final OrderEntryData cartEntry)
-	{
-		return cartEntry.getQuantity() != null && cartEntry.getQuantity().longValue() >= 1L;
-	}
-
 }
