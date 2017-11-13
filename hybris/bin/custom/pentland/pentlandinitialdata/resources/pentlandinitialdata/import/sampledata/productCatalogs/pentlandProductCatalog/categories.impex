@@ -16,58 +16,58 @@ $categories=target(code, $catalogVersion)[unique=true]
 $supercategories=source(code, $catalogVersion)[unique=true]
 
 # Create Categories
-INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
-;04;;;berghausgroup
-;0E;;;boxfreshgroup
-;0Q;;;canterburygroup
-;01;;;kickersgroup
-;05;;;mitregroup
-;08;;;speedogroup
+INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden;order[default=0]
+;04;;;berghausgroup;;1
+;0E;;;boxfreshgroup;;2
+;0Q;;;canterburygroup;;3
+;01;;;kickersgroup;;4
+;05;;;mitregroup;;5
+;08;;;speedogroup;;6
 
-;teamwear;;05
-;trainingwear;;05
-;balls;;05
-;equipment;;05
+;teamwear;;05;;;0
+;trainingwear;;05;;;1
+;balls;;05;;;2
+;equipment;;05;;;3
 
-;jersey;;teamwear
-;shortsTeamwear;;teamwear
-;socks;;teamwear
-;goalkeeper;;teamwear
-;referees;;teamwear
-;baseLayers;;teamwear
-;smallSided;;teamwear
-;bags;;teamwear
-;pos;;teamwear
+;jersey;;teamwear;;;0
+;shortsTeamwear;;teamwear;;;1
+;socks;;teamwear;;;2
+;goalkeeper;;teamwear;;;3
+;referees;;teamwear;;;4
+;baseLayers;;teamwear;;;5
+;smallSided;;teamwear;;;6
+;bags;;teamwear;;;7
+;pos;;teamwear;;;8
 
-;jacketsTrousers;;trainingwear
-;rainwear;;trainingwear
-;tshirts;;trainingwear
-;sweatshirts;;trainingwear
-;compression;;trainingwear
-;shorts;;trainingwear
+;jacketsTrousers;;trainingwear;;;0
+;rainwear;;trainingwear;;;1
+;tshirts;;trainingwear;;;2
+;sweatshirts;;trainingwear;;;3
+;compression;;trainingwear;;;4
+;shorts;;trainingwear;;;5
 
-;professional;;balls
-;match;;balls
-;training;;balls
-;recreation;;balls
-;specialist;;balls
-;netballs;;balls
-;rugby;;balls
-;otherBalls;;balls
-;hyperseam;;balls
-;deltaCapsule;;balls
+;professional;;balls;;;0
+;match;;balls;;;1
+;training;;balls;;;2
+;recreation;;balls;;;3
+;specialist;;balls;;;4
+;netballs;;balls;;;5
+;rugby;;balls;;;6
+;otherBalls;;balls;;;7
+;hyperseam;;balls;;;8
+;deltaCapsule;;balls;;;9
 
-;gameDay;;equipment
-;ballSacks;;equipment
-;conesMarkers;;equipment
-;gloves;;equipment
-;goals;;equipment
-;ladders;;equipment
-;poles;;equipment
-;bottles;;equipment
-;bibs;;equipment
-;referee;;equipment
-;others;;equipment
+;gameDay;;equipment;;;0
+;ballSacks;;equipment;;;1
+;conesMarkers;;equipment;;;2
+;gloves;;equipment;;;3
+;goals;;equipment;;;4
+;ladders;;equipment;;;5
+;poles;;equipment;;;6
+;bottles;;equipment;;;7
+;bibs;;equipment;;;8
+;referee;;equipment;;;9
+;others;;equipment;;;10
 
 ;clothes;;05;;true
 ;caps;;clothes

@@ -229,8 +229,8 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 INSERT_UPDATE BreadcrumbComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 ; ; breadcrumbComponent ; Breadcrumb CMS Component ; breadcrumbComponent
 
-INSERT_UPDATE PentlandCategoryNavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
-; ; PentlandCategoryNavigationComponent ; Pentland Category Navigation Component ; PentlandCategoryNavigationComponent
+INSERT_UPDATE PentlandCategoryNavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;wrapAfter
+; ; PentlandCategoryNavigationComponent ; Pentland Category Navigation Component ; PentlandCategoryNavigationComponent;11
 
 #INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 #;;PentlandCategoryNavComponent;Category Navigation Component;;PentlandCategoryNavComponent;PentlandCategoryNavNode;10

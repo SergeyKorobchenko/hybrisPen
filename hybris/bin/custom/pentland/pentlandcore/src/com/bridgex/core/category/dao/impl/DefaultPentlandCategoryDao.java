@@ -22,7 +22,8 @@ public class DefaultPentlandCategoryDao extends DefaultCategoryDao implements Pe
                        "JOIN " + CategoryModel._TYPECODE + " AS super ON {rel.source}={super.PK} } " +
                        "WHERE {rel:target}={cat.pk} " + "AND {super." + CategoryModel.CATALOGVERSION + "}={cat." + CategoryModel.CATALOGVERSION + "} }}) " +
                    "AND {cat." + CategoryModel.CATALOGVERSION + "} = ?" + CategoryModel.CATALOGVERSION + " " +
-                   "AND {cat." + CategoryModel.HIDDEN + "} = 0";
+                   "AND {cat." + CategoryModel.HIDDEN + "} = 0 " +
+                    "order by {cat." + CategoryModel.ORDER + "} asc";
 
     final Map<String, Object> params = (Map) Collections.singletonMap(CategoryModel.CATALOGVERSION, catalogVersion);
 
