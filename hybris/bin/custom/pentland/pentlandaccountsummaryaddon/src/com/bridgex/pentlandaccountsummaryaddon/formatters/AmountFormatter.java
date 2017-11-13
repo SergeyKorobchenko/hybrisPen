@@ -18,4 +18,8 @@ import de.hybris.platform.core.model.c2l.CurrencyModel;
 public interface AmountFormatter
 {
 	public String formatAmount(final BigDecimal value, final CurrencyModel currency, final Locale locale);
+
+	public String formatAmount(final Double value, final CurrencyModel currency);
+
+	public String formatAmount(final String value, final CurrencyModel currency);
 }

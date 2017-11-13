@@ -22,6 +22,20 @@ import de.hybris.platform.core.model.c2l.CurrencyModel;
 
 public class DefaultAmountFormatter implements AmountFormatter
 {
+
+	@Override
+	public String formatAmount(String value, CurrencyModel currency) {
+		return formatAmount(Double.parseDouble(value), currency);
+	}
+
+	@Override
+	public String formatAmount(Double value, CurrencyModel currency) {
+		final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+		adjustDigits((DecimalFormat) currencyFormat, currency);
+		adjustSymbol((DecimalFormat) currencyFormat, currency);
+		return currencyFormat.format(value);
+	}
+
 	@Override
 	public String formatAmount(final BigDecimal value, final CurrencyModel currency, final Locale locale)
 	{
