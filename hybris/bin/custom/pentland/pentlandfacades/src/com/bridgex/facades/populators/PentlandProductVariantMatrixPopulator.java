@@ -62,14 +62,11 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   }
 
   protected ProductModel getBaseProduct(ProductModel productModel) {
-    if (productModel instanceof ApparelSizeVariantProductModel) {
-      return ((ApparelStyleVariantProductModel)((ApparelSizeVariantProductModel) productModel).getBaseProduct()).getBaseProduct();
-    } else if (productModel instanceof ApparelStyleVariantProductModel) {
-      return ((ApparelStyleVariantProductModel) productModel).getBaseProduct();
-    } else if (productModel instanceof ProductModel) {
-      return productModel;
+    ProductModel currentProduct = productModel;
+    while (currentProduct instanceof VariantProductModel) {
+      currentProduct = ((VariantProductModel) currentProduct).getBaseProduct();
     }
-    return productModel;
+    return currentProduct;
   }
 
   protected VariantMatrixElementData createNode(ProductModel productModel) {
