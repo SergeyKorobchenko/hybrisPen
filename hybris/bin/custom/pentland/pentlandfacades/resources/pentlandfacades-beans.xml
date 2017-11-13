@@ -25,6 +25,7 @@
 		<property name="unit" type="String" />
 		<property name="moq" type="Integer" />
 		<property name="featureDescription" type="String" />
+		<property name="upc" type="String"/>
 	</bean>
 
 	<bean class="com.bridgex.facades.product.data.GenderData">

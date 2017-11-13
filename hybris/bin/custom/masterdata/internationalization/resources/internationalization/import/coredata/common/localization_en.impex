@@ -158,6 +158,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.export.cart.item.price;Price
 ;basket.export.cart.item.quantity;Quantity
 ;basket.export.cart.item.sku;Sku
+;basket.export.cart.item.upc;UPC
 ;basket.export.csv.file;Export CSV
 ;basket.information.merge.successful;The bag saved against your user account and your current bag have been merged. Click here to visit your bag.
 ;basket.information.quantity.adjusted;Your items have been modified to match available stock levels
