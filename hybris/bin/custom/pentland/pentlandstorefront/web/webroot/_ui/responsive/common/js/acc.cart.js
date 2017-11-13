@@ -427,30 +427,25 @@ ACC.cart = {
         $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
             var $v = $(v);
             postData.cartEntries.push({
-                'quantity': $v.value,
-                'product': {'code': $v.data().productSelection.product}
+                'quantity': $v.val(),
+                'product': {'code': $v.data().productSelection.product},
+                'entryNumber': -1
             })
         });
 
-        // $('input[id^=quantity_][name=quantity]:visible').each(function (index, value) {
-        //     var $input = $(value);
-        //     var entryNumber = $input.attr('id').substring('quantity_'.length);
-        //     updateFormData += '&quantities[' + entryNumber + ']=' + $input.val();
-        // });
-        // var gridData = $('input[type=hidden][name^=cartEntries]').serialize();
-        // if (gridData) {
-        //     updateFormData += '&' + gridData;
-        // }
         $.ajax({
             url: $form.attr("action"),
             data: JSON.stringify(postData),
             type: "POST",
-            dataType: 'json',
-            success: function (data) {
-                successFunction();
-            },
-            error: function () {
-                alert("Failed save form");
+            dataType: "json",
+            contentType: 'application/json',
+            statusCode: {
+                200: function (data) {
+                    successFunction();
+                },
+                400: function (data) {
+                    alert("Failed save form");
+                }
             }
         });
     },

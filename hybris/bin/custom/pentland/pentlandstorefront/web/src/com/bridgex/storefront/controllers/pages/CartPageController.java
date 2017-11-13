@@ -64,8 +64,6 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
@@ -322,74 +320,6 @@ public class CartPageController extends AbstractCartPageController
 
 		// if could not update cart, display cart/quote page again with error
 		return prepareCartUrl(model);
-	}
-
-	@RequestMapping(value = "/update-all", method = RequestMethod.POST)
-	public ResponseEntity<String> updateCartQuantitiesAll(@RequestBody final PentlandCartForm cartForm,final Model model, final BindingResult bindingResult,
-														  final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-		if (bindingResult.hasErrors()){
-			//TODO add error messages
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} else {
-			CartData cart = getCartFacade().getSessionCart();
-			cart.setPurchaseOrderNumber(cartForm.getPurchaseOrderNumber());
-			cart.setRdd(cartForm.getRequestedDeliveryDate());
-			cart.setCustomerNotes(cartForm.getCustomerNotes());
-			pentlandCartFacade.saveB2BCartData(cart);
-			if (getCartFacade().hasEntries()) {
-				for (int i = 0; i < cartForm.getQuantities().size(); ++i) {
-					try {
-						final CartModificationData cartModification = getCartFacade().updateCartEntry(i, cartForm.getQuantities().get(i));
-					}
-					catch (final CommerceCartModificationException ex) {
-						LOG.warn("Couldn't update product with the entry number: " + i + ".", ex);
-					}
-				}
-			}
-			final Set<String> multidErrorMsgs = new HashSet<String>();
-			final List<CartModificationData> modificationDataList = new ArrayList<CartModificationData>();
-			for (final OrderEntryData cartEntry : cartForm.getCartEntries()) {
-				if (isValidProductEntry(cartEntry)) {
-					if (!isValidQuantity(cartEntry)) {
-						multidErrorMsgs.add("basket.error.quantity.invalid");
-					} else {
-						final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
-						if (StringUtils.isNotEmpty(errorMsg)) {
-							multidErrorMsgs.add(errorMsg);
-						}
-					}
-				}
-			}
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-	}
-
-	protected String addEntryToCart(final List<CartModificationData> modificationDataList, final OrderEntryData cartEntry,
-									final boolean isReducedQtyError)
-	{
-		String errorMsg = StringUtils.EMPTY;
-		try
-		{
-			final long qty = cartEntry.getQuantity().longValue();
-			final CartModificationData cartModificationData = getCartFacade().addToCart(cartEntry.getProduct().getCode(), qty);
-			if (cartModificationData.getQuantityAdded() == 0L)
-			{
-				errorMsg = "basket.information.quantity.noItemsAdded." + cartModificationData.getStatusCode();
-			}
-			else if (cartModificationData.getQuantityAdded() < qty && isReducedQtyError)
-			{
-				errorMsg = "basket.information.quantity.reducedNumberOfItemsAdded." + cartModificationData.getStatusCode();
-			}
-
-			modificationDataList.add(cartModificationData);
-
-		}
-		catch (final CommerceCartModificationException ex)
-		{
-			errorMsg = "basket.error.occurred";
-		}
-		return errorMsg;
 	}
 
 	@Override
