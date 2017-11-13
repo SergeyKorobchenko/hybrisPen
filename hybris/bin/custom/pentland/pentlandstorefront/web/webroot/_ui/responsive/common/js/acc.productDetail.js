@@ -74,6 +74,11 @@ ACC.productDetail = {
     },
 
     initPageEvents: function () {
+
+        $( function() {
+            $( "#tabs" ).tabs();
+        } );
+
         $(document).on("click", '.js-qty-selector .js-qty-selector-minus', function () {
             ACC.productDetail.checkQtySelector(this, "minus");
         })
