@@ -16,7 +16,7 @@
 		<requires-extension name="b2bacceleratorfacades"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="addonsupport"/>
-		<requires-extension name="accountsummaryaddon"/>
+		<requires-extension name="pentlandaccountsummaryaddon"/>
 
 		<coremodule generated="true" manager="de.hybris.platform.pentlandb2baddon.jalo.B2bacceleratoraddonManager" packageroot="de.hybris.platform.pentlandb2baddon"/>
 			
