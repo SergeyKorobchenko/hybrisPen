@@ -1,11 +1,8 @@
 package com.bridgex.facades.export.impl;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +21,6 @@ import com.bridgex.facades.export.PentlandExportFacade;
 
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
-import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
@@ -48,13 +44,14 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
     List<OrderEntryData> entries = cartData.getEntries();
     if(CollectionUtils.isNotEmpty(entries)){
       //TODO collect images from style-level entries
-      Set<ProductData> products = entries.stream().map(OrderEntryData::getProduct).collect(Collectors.toSet());
-      exportImages(zipOutputStream, products);
+      Set<String> products = entries.stream().map(entry -> entry.getProduct().getCode()).collect(Collectors.toSet());
+      exportImagesForProductList(zipOutputStream, products);
     }
 
   }
 
-  private void exportImages(final ZipOutputStream zipOutputStream, Set<ProductData> products){
+  @Override
+  public void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products){
     Set<MediaModel> collectedMedia = products.stream().map(this::getPrimaryImageMasterUrl).collect(Collectors.toSet());
 
     String urlPrefix = Config.getString(MEDIA_EXPORT_HTTP, DEFAULT_MEDIA_ROOT);
@@ -88,14 +85,14 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
 
   }
 
-  private MediaModel getPrimaryImageMasterUrl(final ProductData productData) {
+  private MediaModel getPrimaryImageMasterUrl(final String productCode) {
     try {
-      ProductModel productForCode = productService.getProductForCode(productData.getCode());
+      ProductModel productForCode = productService.getProductForCode(productCode);
       //relying on assumption that primary image master is always set to product.picture
       return productForCode.getPicture();
     }catch(UnknownIdentifierException | AmbiguousIdentifierException e){
       //shouldn't ever be possible, but...
-      LOG.error("Unknown product code in cart: " + productData.getCode());
+      LOG.error("Unknown product code in cart: " + productCode);
       return null;
     }
   }

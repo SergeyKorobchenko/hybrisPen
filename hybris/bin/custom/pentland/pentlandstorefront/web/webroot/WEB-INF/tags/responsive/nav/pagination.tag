@@ -41,7 +41,7 @@
                 <div class="helper clearfix hidden-md hidden-lg"></div>
                 <div class="sort-refine-bar">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4">
+                        <div class="col-xs-12 col-sm-4 col-md-2">
                             <div class="form-group">
                                 <label class="control-label " for="sortForm${top ? '1' : '2'}">
                                     <spring:theme code="${themeMsgKey}.sortTitle"/>
@@ -87,6 +87,17 @@
                                     </c:if>
                                 </form>
                             </div>
+                        </div>
+
+                        <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
+                        <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
+                        <div class="col-xs-12 col-md-2 pull-left">
+                            <a href="${exportUrl}" class="export__cart--link">
+                                <spring:theme code="basket.export.csv.file" />
+                            </a>
+                            <a href="${imagesExportUrl}" class="export__images--link">
+                                <spring:theme code="basket.export.images.file" />
+                            </a>
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-5 pagination-wrap">
