@@ -2889,3 +2889,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.sizeChartGuide;Size Chart Guide
 ;product.unit;Base UOM
 ;product.sku;ID
+
+;basket.export.images.file;Download product images

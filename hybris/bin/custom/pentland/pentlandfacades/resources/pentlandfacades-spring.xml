@@ -355,5 +355,10 @@
 	<alias name="pentlandCsvFacade" alias="csvFacade"/>
 	<bean id="pentlandCsvFacade" class="com.bridgex.facades.csv.impl.PentlandCsvFacade" parent="defaultCsvFacade"/>
 
+	<alias name="defaultPentlandExportFacade" alias="pentlandExportFacade"/>
+	<bean id="defaultPentlandExportFacade" class="com.bridgex.facades.export.impl.DefaultPentlandExportFacade">
+		<property name="productService" ref="productService"/>
+	</bean>
+
 
 </beans>

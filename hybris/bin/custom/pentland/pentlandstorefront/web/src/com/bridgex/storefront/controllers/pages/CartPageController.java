@@ -48,14 +48,15 @@ import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
 
+import com.bridgex.facades.export.PentlandExportFacade;
 import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 import com.bridgex.storefront.forms.PentlandCartForm;
 
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.zip.ZipOutputStream;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -124,6 +125,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "pentlandCartFacade")
 	private PentlandCartFacade pentlandCartFacade;
+
+	@Resource(name = "pentlandExportFacade")
+	private PentlandExportFacade pentlandExportFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -507,6 +511,36 @@ public class CartPageController extends AbstractCartPageController
 				return REDIRECT_CART_URL;
 			}
 
+		}
+
+		return null;
+	}
+
+
+	@RequestMapping(value = "/images", method = RequestMethod.GET, produces = "text/csv")
+	public String exportImagesArchive(final HttpServletResponse response, final RedirectAttributes redirectModel) throws IOException {
+
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		ZipOutputStream zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
+
+		final CartData cartData = getCartFacade().getSessionCartWithEntryOrdering(false);
+		pentlandExportFacade.exportImagesFromCart(zipOutputStream, cartData);
+
+		zipOutputStream.finish();
+
+		response.setHeader("Content-Disposition", "attachment;filename=images.zip");
+		response.setContentType("application/zip");
+
+		try{
+			response.getOutputStream().write(byteArrayOutputStream.toByteArray());
+			response.flushBuffer();
+		}catch (IOException e){
+			LOG.error(e.getMessage(), e);
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "basket.export.cart.error", null);
+
+			return REDIRECT_CART_URL;
+		} finally{
+			byteArrayOutputStream.close();
 		}
 
 		return null;
