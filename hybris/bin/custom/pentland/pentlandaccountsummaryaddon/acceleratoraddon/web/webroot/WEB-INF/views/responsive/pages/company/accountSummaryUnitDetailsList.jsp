@@ -9,19 +9,19 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set var="searchUrl" value="/my-company/organization-management/accountsummary-unit/details"/>
+<c:set var="searchUrl" value="/my-company/account-summary/"/>
 <spring:url var="accountSummaryUnitDetailsUrl" value="${searchUrl}" htmlEscape="false"/>
 <c:set var="searchUrlWithParams"
-       value="${searchUrl}?unit=${ycommerce:encodeUrl(accountSummaryInfoData.b2bUnitData.uid)}&sort=${searchPageData.pagination.sort}
+       value="${searchUrl}?unit=${ycommerce:encodeUrl(accountSummaryInfoData)}&sort=${searchPageData.pagination.sort}
 &documentTypeCode=${ycommerce:encodeUrl(criteriaData.documentTypeCode)}&startRange=${ycommerce:encodeUrl(criteriaData.startRange)}&endRange=${ycommerce:encodeUrl(criteriaData.endRange)}
 &documentStatus=${ycommerce:encodeUrl(criteriaData.documentStatus)}&filterByKey=${ycommerce:encodeUrl(filterByKey)}&filterByValue=${ycommerce:encodeUrl(criteriaData.filterByValue)}"/>
 
 <jsp:useBean id="params" class="java.util.HashMap"/>
-<c:set target="${params}" property="unit" value="${fn:escapeXml(accountSummaryInfoData.b2bUnitData.uid)}" />
+<c:set target="${params}" property="unit" value="${fn:escapeXml(accountSummaryInfoData)}" />
 <c:set target="${params}" property="sort" value="${searchPageData.pagination.sort}" />
 
 <jsp:useBean id="additionalParams" class="java.util.HashMap"/>
-<c:set target="${additionalParams}" property="unit" value="${accountSummaryInfoData.b2bUnitData.uid}" />
+<c:set target="${additionalParams}" property="unit" value="${accountSummaryInfoData}" />
 <c:set target="${additionalParams}" property="documentTypeCode" value="${criteriaData.documentTypeCode}" />
 <c:set target="${additionalParams}" property="startRange" value="${criteriaData.startRange}" />
 <c:set target="${additionalParams}" property="endRange" value="${criteriaData.endRange}" />

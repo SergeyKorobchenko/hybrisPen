@@ -18,11 +18,13 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.expression.AccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants;
@@ -96,13 +98,18 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 	{
 		try
 		{
-			final AccountSummaryInfoData accountSummaryInfoData = b2bAccountSummaryFacade.getAccountSummaryInfoData("");
+			final AccountSummaryInfoData accountSummaryInfoData = b2bAccountSummaryFacade.getAccountSummaryInfoData();
 			model.addAttribute("accountSummaryInfoData", accountSummaryInfoData);
 		}
 		catch (final UnknownIdentifierException uie)
 		{
 			LOG.warn("Attempted to load a unit that does not exists");
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "b2bunit.notfound", null);
+			return REDIRECT_PREFIX + "/";
+		}
+		catch (final ResourceAccessException e) {
+			LOG.warn("the ERP server is not available");
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "erp.integration.failed", null);
 			return REDIRECT_PREFIX + "/";
 		}
 
@@ -122,18 +129,16 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 		}
 		else
 		{
-			final boolean valid = validatorMapping.containsKey(filterByKey) ? validatorMapping.get(filterByKey).isValid(
-				encodedStartRange, encodedEndRange, model) : true;
-
-			if (valid)
+			if (!validatorMapping.containsKey(filterByKey) ||
+			    validatorMapping.get(filterByKey).isValid(encodedStartRange, encodedEndRange, model))
 			{
-				// Handle paged search results
 				final PageableData pageableData = createPageableData(page,
-				                                                     Config.getInt("accountsummary.unit.documents.search.page.size", 5), sortCode, showMode);
+				                                                     Config.getInt("accountsummary.unit.documents.search.page.size", 5),
+				                                                     sortCode,
+				                                                     showMode);
 
 				final DefaultCriteria defaultCriteria = filterByList.get(filterByKey);
-				final SearchPageData<B2BDocumentData> searchPageData = b2bAccountSummaryFacade.getPagedDocumentsForUnit(unit,
-				                                                                                                        pageableData, filterByCriteriaData, defaultCriteria);
+				final SearchPageData<B2BDocumentData> searchPageData = b2bAccountSummaryFacade.getPagedDocuments(pageableData, filterByCriteriaData, defaultCriteria);
 				populateModel(model, searchPageData, showMode);
 			}
 		}
@@ -146,7 +151,7 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 		                    getContentPageForLabelOrId(PentlandaccountsummaryaddonConstants.ACCOUNT_SUMMARY_UNIT_DETAILS_LIST_CMS_PAGE));
 		setUpMetaDataForContentPage(model,
 		                            getContentPageForLabelOrId(PentlandaccountsummaryaddonConstants.ACCOUNT_SUMMARY_UNIT_DETAILS_LIST_CMS_PAGE));
-		model.addAttribute("breadcrumbs", myCompanyBreadcrumbBuilder.createAccountSummaryDetailsBreadcrumbs(unit));
+		model.addAttribute("breadcrumbs", myCompanyBreadcrumbBuilder.createAccountSummaryBreadcrumbs());
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

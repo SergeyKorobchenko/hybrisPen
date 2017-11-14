@@ -6,25 +6,27 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<jsp:useBean id="accountSummaryInfoData" scope="request" type="com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData"/>
+
 <div class="account-section-content">
     <div class="well well-lg well-tertiary">
         <div class="col-md-7 col-lg-8 account-summary-detail clearfix">
             <div class="col-sm-4 col-md-6 col-lg-4 item-wrapper">
                 <div class="item-group">
                     <span class="item-label"><spring:theme code="text.company.accountsummary.businessunitid.label"/></span>
-                    <span class="item-value">${fn:escapeXml(accountSummaryInfoData.b2bUnitData.uid)}</span>
+                    <span class="item-value">${fn:escapeXml(accountSummaryInfoData.id)}</span>
                 </div>
                 <div class="item-group">
                     <span class="item-label"><spring:theme code="text.company.accountsummary.b2bunit.label"/></span>
-                    <span class="item-value">${fn:escapeXml(accountSummaryInfoData.b2bUnitData.name)}</span>
+                    <span class="item-value">${fn:escapeXml(accountSummaryInfoData.name)}</span>
                 </div>
                 <div class="item-group">
                 	<span class="item-label"><spring:theme code="text.company.accountsummary.address.label"/></span>
-                    <c:if test="${not empty accountSummaryInfoData.billingAddress}">
+                    <c:if test="${not empty accountSummaryInfoData.address}">
                         <span class="item-value">
-                            ${fn:escapeXml(accountSummaryInfoData.billingAddress.title)},&nbsp;${fn:escapeXml(accountSummaryInfoData.billingAddress.firstName)}&nbsp;${fn:escapeXml(accountSummaryInfoData.billingAddress.lastName)}<br/>
-                            ${fn:escapeXml(accountSummaryInfoData.billingAddress.formattedAddress)}<br/>
-                            ${fn:escapeXml(accountSummaryInfoData.billingAddress.country.name)}
+                            ${fn:escapeXml(accountSummaryInfoData.address.postalCode)}&nbsp;${fn:escapeXml(accountSummaryInfoData.address.town)}<br/>
+                            ${fn:escapeXml(accountSummaryInfoData.address.line1)},&nbsp;${fn:escapeXml(accountSummaryInfoData.address.line2)}<br/>
+                            ${fn:escapeXml(accountSummaryInfoData.address.state)},&nbsp;${fn:escapeXml(accountSummaryInfoData.address.country.name)}
                         </span>
                     </c:if>
                 </div>
@@ -33,35 +35,17 @@
                 <div class="item-group">
 					<span class="item-label"><spring:theme code="text.company.accountsummary.creditrep.label"/></span>
 					<span class="item-value">
-					<c:set var="accountManagerName" value="${accountSummaryInfoData.accountManagerName}"/>
-					<c:set var="accountManagerEmail" value="${accountSummaryInfoData.accountManagerEmail}"/>
-						<c:choose>
-							<c:when test="${not empty accountManagerName}">
-								<c:if test="${not empty accountManagerEmail}">
-	                                <a href="mailto:${fn:escapeXml(accountManagerEmail)}" target="_top">
-	                            </c:if>
-	                            ${fn:escapeXml(accountManagerName)}
-	                            <c:if test="${not empty accountManagerEmail}">
-	                                </a>
-	                            </c:if>
-							</c:when>
-							<c:otherwise>
-								<spring:theme code="text.company.accountsummary.not.applicable"/>
-							</c:otherwise>
-						</c:choose>
+					    <c:forEach var="creditRepLine" items="${accountSummaryInfoData.creditReps}">
+                            ${fn:escapeXml(creditRepLine)}<br/>
+                        </c:forEach>
 					</span>
                 </div>
                 <div class="item-group">
                 	<span class="item-label"><spring:theme code="text.company.accountsummary.creditline.label"/></span>
                     <span class="item-value">
-	                    <c:choose>
-							<c:when test="${not empty accountSummaryInfoData.formattedCreditLimit}">
-								${fn:escapeXml(accountSummaryInfoData.formattedCreditLimit)}
-	                    	</c:when>
-							<c:otherwise>
-								<spring:theme code="text.company.accountsummary.not.applicable"/>
-							</c:otherwise>
-						</c:choose>
+					    <c:forEach var="creditLimitLine" items="${accountSummaryInfoData.formattedCreditLimits}">
+                            ${fn:escapeXml(creditLimitLine)}<br/>
+                        </c:forEach>
 					</span>
                 </div>
             </div>
@@ -98,23 +82,16 @@
 
         <div class="col-md-5 col-lg-4 item-wrapper clearfix">
             <div class="framed">
-                <c:forEach items="${accountSummaryInfoData.amountBalanceData.dueBalance}" var="range">
-                    <c:choose>
-                        <c:when test="${empty range.key.maxBoundery}">
-                            <c:set var="maxBoundery" value="+"/>
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="maxBoundery" value="-${fn:escapeXml(range.key.maxBoundery)}"/>
-                        </c:otherwise>
-                    </c:choose>
                     <span class="item-label">
-                        ${fn:escapeXml(range.key.minBoundery)} ${fn:escapeXml(maxBoundery)}&nbsp;
                         <spring:theme code="text.company.accountsummary.days.label"/>
                     </span>
-                    <span class="item-value">
-                        ${fn:escapeXml(range.value)}
-                    </span>
-                </c:forEach>
+
+                        <c:forEach items="${accountSummaryInfoData.amountBalanceData.dueBalance}" var="range">
+                            <span class="item-value">
+                            ${fn:escapeXml(range.key)} &mdash; ${fn:escapeXml(range.value)}<br/>
+                            </span>
+                        </c:forEach>
+
 
                 <div class="item-group total">
                     <span class="item-label">
