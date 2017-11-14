@@ -19,11 +19,12 @@ import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.util.CookieGenerator;
 
 /**
  * Adds meta tags to help guide the device for the current UI Experience.
@@ -34,6 +35,9 @@ public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 	@Resource(name = "uiExperienceService")
 	private UiExperienceService uiExperienceService;
 
+	@Resource(name = "cookiesDirectiveCookieGenerator")
+	private CookieGenerator cookiesDirectiveCookieGenerator;
+
 	@Override
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
 			throws Exception
@@ -41,6 +45,10 @@ public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 
 		if (modelAndView != null && modelAndView.getModel().containsKey("metatags"))
 		{
+
+			if(isFirstTimeVisitor(request)){
+				modelAndView.addObject("displayCookieDirective", true);
+			}
 
 			final List<MetaElementData> metaelements = (List<MetaElementData>) modelAndView.getModel().get("metatags");
 			final UiExperienceLevel currentUiExperienceLevel = uiExperienceService.getUiExperienceLevel();
@@ -74,5 +82,15 @@ public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 		element.setName(name);
 		element.setContent(content);
 		return element;
+	}
+
+	private boolean isFirstTimeVisitor(HttpServletRequest request) {
+		String cookieDirective = cookiesDirectiveCookieGenerator.getCookieName();
+		for(Cookie cookie: request.getCookies()){
+			if(cookieDirective.equals(cookie.getName())){
+				return false;
+			}
+		}
+		return true;
 	}
 }
