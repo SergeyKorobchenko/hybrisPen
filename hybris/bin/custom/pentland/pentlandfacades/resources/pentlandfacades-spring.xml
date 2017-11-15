@@ -352,4 +352,8 @@
 		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
 	</bean>
 
+	<alias name="pentlandCsvFacade" alias="csvFacade"/>
+	<bean id="pentlandCsvFacade" class="com.bridgex.facades.csv.impl.PentlandCsvFacade" parent="defaultCsvFacade"/>
+
+
 </beans>

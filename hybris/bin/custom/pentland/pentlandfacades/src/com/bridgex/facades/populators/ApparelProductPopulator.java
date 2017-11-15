@@ -48,5 +48,6 @@ public class ApparelProductPopulator<SOURCE extends ProductModel, TARGET extends
 		if (gender != null) {
 			target.setGender(getGenderConverter().convert(gender));
 		}
+    target.setUpc(source.getUpc());
 	}
 }
