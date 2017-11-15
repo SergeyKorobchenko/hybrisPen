@@ -2877,7 +2877,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.payment.ACCOUNT.PROFORMA;Pro-Forma
 
 ;checkout.multi.deliveryAddress.noAddress;There are no shipping addresses assigned to current customer.
-;checkout.multi.deliveryAddress.markFor.noSelection;n/a
+;checkout.multi.deliveryAddress.markFor.noSelection;Don't use markFor
 
 ;product.wholesale.price;Wholesale price
 ;product.videourl;Watch Video
