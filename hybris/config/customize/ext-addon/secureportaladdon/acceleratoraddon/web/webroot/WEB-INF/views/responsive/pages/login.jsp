@@ -3,7 +3,6 @@
 <%@ taglib prefix="sptemplate" tagdir="/WEB-INF/tags/addons/secureportaladdon/responsive/sptemplate" %>
 <%@ taglib prefix="spuser" tagdir="/WEB-INF/tags/addons/secureportaladdon/responsive/spuser" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <sptemplate:page pageTitle="${pageTitle}">
@@ -15,11 +14,6 @@
                     <spuser:login actionNameKey="login.login" action="${loginActionUrl}"/>
                 </div>
             </div>
-        </div>
-        <div class="row branding">
-            <cms:pageSlot position="BrandImageSlot" var="feature" element="div" class="col-md-12">
-                <cms:component component="${feature}"/>
-            </cms:pageSlot>
         </div>
 	</jsp:body>
 </sptemplate:page>
