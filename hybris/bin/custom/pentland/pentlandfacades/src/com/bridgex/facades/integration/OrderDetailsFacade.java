@@ -2,7 +2,7 @@ package com.bridgex.facades.integration;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.bridgex.core.integration.OrderDetailsService;
+import com.bridgex.core.integration.impl.DefaultPentlandOrderDetailsService;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
 
@@ -19,8 +19,8 @@ public class OrderDetailsFacade {
   private final static String I_VBTYP = "C";
   private final static String I_CUSTOMER_VIEW_FLAG = "X";
 
-  private OrderDetailsService                              orderDetailsService;
-  private StoreSessionFacade                               storeSessionFacade;
+  private DefaultPentlandOrderDetailsService        orderDetailsService;
+  private StoreSessionFacade                        storeSessionFacade;
   private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
 
   @Required
@@ -29,7 +29,7 @@ public class OrderDetailsFacade {
   }
 
   @Required
-  public void setOrderDetailsService(OrderDetailsService orderDetailsService) {
+  public void setOrderDetailsService(DefaultPentlandOrderDetailsService orderDetailsService) {
     this.orderDetailsService = orderDetailsService;
   }
 
@@ -40,7 +40,7 @@ public class OrderDetailsFacade {
 
 
   public OrderData getOrderDetails(String orderCode) {
-    OrderDetailsResponse response = orderDetailsService.requestOrderDetails(createRequestDto(orderCode));
+    OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(orderCode));
     return orderDetailsConverter.convert(response);
   }
 

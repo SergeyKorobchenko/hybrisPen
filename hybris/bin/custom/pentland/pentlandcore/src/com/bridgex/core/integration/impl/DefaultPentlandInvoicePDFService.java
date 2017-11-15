@@ -1,8 +1,9 @@
-package com.bridgex.core.integration;
+package com.bridgex.core.integration.impl;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.ResourceAccessException;
 
+import com.bridgex.core.integration.PentlandInvoicePDFService;
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.DocumentDto;
 import com.bridgex.integration.domain.DocumentResponse;

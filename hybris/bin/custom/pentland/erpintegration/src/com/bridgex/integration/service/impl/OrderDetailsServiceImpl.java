@@ -1,5 +1,7 @@
 package com.bridgex.integration.service.impl;
 
+import org.springframework.http.ResponseEntity;
+
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.ETReturnDto;
 import com.bridgex.integration.domain.OrderDetailsDto;
@@ -13,6 +15,13 @@ public class OrderDetailsServiceImpl extends AbstractIntegrationService<OrderDet
   @Override
   public String getServiceName() {
     return "int_sync_06";
+  }
+
+  @Override
+  public ResponseEntity<OrderDetailsResponse> sendRequest(OrderDetailsDto requestDto, Class responseClass) {
+    requestDto.setServiceConsumer(ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER);
+    requestDto.setCustomerViewFlag(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
+    return super.sendRequest(requestDto, responseClass);
   }
 
   @Override

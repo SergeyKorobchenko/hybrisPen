@@ -74,12 +74,12 @@
 	</bean>
 
 	<alias name="defaultOrderDetailsService" alias="orderDetailsService"/>
-	<bean id="defaultOrderDetailsService" class="com.bridgex.core.integration.OrderDetailsService">
+	<bean id="defaultOrderDetailsService" class="com.bridgex.core.integration.impl.DefaultPentlandOrderDetailsService">
 		<property name="integrationService" ref="orderDetailsIntegrationService"/>
 	</bean>
 
 	<alias name="defaultPentlandInvoicePDFService" alias="pentlandInvoicePDFService"/>
-	<bean id="defaultPentlandInvoicePDFService" class="com.bridgex.core.integration.DefaultPentlandInvoicePDFService">
+	<bean id="defaultPentlandInvoicePDFService" class="com.bridgex.core.integration.impl.DefaultPentlandInvoicePDFService">
 		<property name="integrationService" ref="invoicePDFService"/>
 		<property name="mediaService" ref="mediaService"/>
 	</bean>

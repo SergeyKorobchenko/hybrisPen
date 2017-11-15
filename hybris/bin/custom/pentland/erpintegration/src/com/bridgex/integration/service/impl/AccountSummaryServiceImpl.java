@@ -1,5 +1,7 @@
 package com.bridgex.integration.service.impl;
 
+import org.springframework.http.ResponseEntity;
+
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.AccountSummaryDto;
 import com.bridgex.integration.domain.AccountSummaryResponse;
@@ -13,6 +15,12 @@ public class AccountSummaryServiceImpl extends AbstractIntegrationService<Accoun
   @Override
   public String getServiceName() {
     return "int_sync_02";
+  }
+
+  @Override
+  public ResponseEntity<AccountSummaryResponse> sendRequest(AccountSummaryDto requestDto, Class responseClass) {
+    requestDto.setServiceCustomer(ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER);
+    return super.sendRequest(requestDto, responseClass);
   }
 
   @Override

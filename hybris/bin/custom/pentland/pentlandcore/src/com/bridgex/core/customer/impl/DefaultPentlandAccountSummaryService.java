@@ -22,8 +22,6 @@ import de.hybris.platform.servicelayer.i18n.CommonI18NService;
  */
 public class DefaultPentlandAccountSummaryService implements PentlandAccountSummaryService {
 
-  private static final String SERVICE_CUSTOMER = "B2B_Hybris";
-
   private CommonI18NService commonI18NService;
   private IntegrationService<AccountSummaryDto,AccountSummaryResponse> integrationService;
 
@@ -49,7 +47,6 @@ public class DefaultPentlandAccountSummaryService implements PentlandAccountSumm
     AccountSummaryDto dto = new AccountSummaryDto();
     dto.setSapCustomerId(sapCustomerId);
     dto.setLanguage(commonI18NService.getCurrentLanguage().getIsocode().toUpperCase());
-    dto.setServiceCustomer(SERVICE_CUSTOMER);
 
     List<BrandDto> brands = sapBrand.stream().map(br -> {
       BrandDto brand = new BrandDto();
