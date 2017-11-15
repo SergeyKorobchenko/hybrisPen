@@ -19250,3 +19250,6 @@ select[multiple].input-sm {
   padding: 10px;
   cursor: pointer;
 }
+.branding {
+  margin-top: 30px;
+}

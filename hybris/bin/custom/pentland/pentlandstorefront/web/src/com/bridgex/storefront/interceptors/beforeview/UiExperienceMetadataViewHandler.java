@@ -86,6 +86,9 @@ public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 
 	private boolean isFirstTimeVisitor(HttpServletRequest request) {
 		String cookieDirective = cookiesDirectiveCookieGenerator.getCookieName();
+		if(request.getCookies() == null){
+			return true;
+		}
 		for(Cookie cookie: request.getCookies()){
 			if(cookieDirective.equals(cookie.getName())){
 				return false;
