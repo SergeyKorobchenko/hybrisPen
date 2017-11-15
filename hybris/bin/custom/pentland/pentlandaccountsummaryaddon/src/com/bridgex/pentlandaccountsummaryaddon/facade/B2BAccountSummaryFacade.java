@@ -16,10 +16,7 @@ import java.util.Map;
 import com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.DefaultCriteria;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.FilterByCriteriaData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BAmountBalanceData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentPaymentInfoData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDragAndDropData;
+import com.bridgex.pentlandaccountsummaryaddon.document.data.*;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel;
 
@@ -103,4 +100,8 @@ public interface B2BAccountSummaryFacade
                                                            final DefaultCriteria criteria);
 
   SearchPageData<B2BDocumentData> getPagedDocuments(PageableData pageableData, FilterByCriteriaData filterByCriteriaData, DefaultCriteria defaultCriteria);
+
+
+
+  MediaData requestDocumentMedia(String documentNumber);
 }

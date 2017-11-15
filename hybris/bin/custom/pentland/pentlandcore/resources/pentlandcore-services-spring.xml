@@ -73,8 +73,8 @@
 		<property name="pentlandPriceDao" ref="pentlandPriceDao"/>
 	</bean>
 
-	<alias name="defaultOrderDetailsService" alias="orderDetailsService"/>
-	<bean id="defaultOrderDetailsService" class="com.bridgex.core.integration.impl.DefaultPentlandOrderDetailsService">
+	<alias name="defaultPentlandOrderDetailsService" alias="pentlandOrderDetailsService"/>
+	<bean id="defaultPentlandOrderDetailsService" class="com.bridgex.core.integration.impl.DefaultPentlandOrderDetailsService">
 		<property name="integrationService" ref="orderDetailsIntegrationService"/>
 	</bean>
 

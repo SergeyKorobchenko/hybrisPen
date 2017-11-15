@@ -11,12 +11,15 @@
 package com.bridgex.pentlandaccountsummaryaddon.document.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.bridgex.pentlandaccountsummaryaddon.document.AccountSummaryDocumentQuery;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.DefaultCriteria;
 import com.bridgex.pentlandaccountsummaryaddon.enums.DocumentStatus;
+import com.bridgex.pentlandaccountsummaryaddon.jalo.B2BDocument;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel;
+import com.bridgex.pentlandaccountsummaryaddon.model.DocumentMediaModel;
 
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -82,5 +85,7 @@ public interface B2BDocumentService
 	 */
 	SearchPageData<B2BDocumentModel> getPagedDocumentsForUnit(final String b2bUnitCode, final PageableData pageableData, final List<DefaultCriteria> criteriaList);
 
-  SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
+  SearchPageData<B2BDocumentModel> getPagedDocumentsForSapIds(Set<String> sapIds, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
+
+	DocumentMediaModel getDocumentMediaByNumber(String documentNumber);
 }

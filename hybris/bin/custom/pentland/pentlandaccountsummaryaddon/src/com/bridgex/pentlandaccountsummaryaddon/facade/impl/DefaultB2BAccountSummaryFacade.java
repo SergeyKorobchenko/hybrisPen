@@ -23,6 +23,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandAccountSummaryService;
+import com.bridgex.core.integration.PentlandInvoicePDFService;
+import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.integration.domain.AccountSummaryResponse;
 import com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants;
 import com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData;
@@ -31,10 +33,7 @@ import com.bridgex.pentlandaccountsummaryaddon.document.B2BDocumentQueryBuilder;
 import com.bridgex.pentlandaccountsummaryaddon.document.DateRange;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.DefaultCriteria;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.FilterByCriteriaData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BAmountBalanceData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentPaymentInfoData;
-import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDragAndDropData;
+import com.bridgex.pentlandaccountsummaryaddon.document.data.*;
 import com.bridgex.pentlandaccountsummaryaddon.document.service.B2BDocumentPaymentInfoService;
 import com.bridgex.pentlandaccountsummaryaddon.document.service.B2BDocumentService;
 import com.bridgex.pentlandaccountsummaryaddon.document.service.B2BDocumentTypeService;
@@ -43,6 +42,7 @@ import com.bridgex.pentlandaccountsummaryaddon.facade.B2BAccountSummaryFacade;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentPaymentInfoModel;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel;
+import com.bridgex.pentlandaccountsummaryaddon.model.DocumentMediaModel;
 
 import de.hybris.platform.b2b.company.B2BCommerceUnitService;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
@@ -74,35 +74,23 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
   private Converter<AccountSummaryResponse, AccountSummaryInfoData>          accountSummaryInfoConverter;
   private PentlandAccountSummaryService                                      accountSummaryService;
   private B2BCustomerService<B2BCustomerModel, B2BUnitModel>                 b2BCustomerService;
+  private PentlandB2BUnitService                                             b2BUnitService;
 
   @Override
   public AccountSummaryInfoData getAccountSummaryInfoData()
   {
-    List<B2BUnitModel> brands = getB2BUnitModels();
+    List<B2BUnitModel> brands = b2BUnitService.getCurrentUnits();
     String sapId = brands.iterator().next().getSapID();
     List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).collect(Collectors.toList());
     AccountSummaryResponse response = accountSummaryService.getAccountSummaryInfo(sapId, sapBrands);
     return getAccountSummaryInfoConverter().convert(response);
   }
 
-  private List<B2BUnitModel> getB2BUnitModels() {
-    B2BCustomerModel customer = b2BCustomerService.getCurrentB2BCustomer();
-    List<B2BUnitModel> brands = customer.getAllGroups().stream()
-                                        .filter(B2BUnitModel.class::isInstance)
-                                        .map(B2BUnitModel.class::cast)
-                                        .collect(Collectors.toList());
-
-    ServicesUtil.validateIfAnyResult(brands, "No B2B units found for customer");
-    return brands;
-  }
-
   @Override
   public SearchPageData<B2BDocumentData> findDocuments(final Map<String, String> queryParameters)
   {
     final Map<String, Object> criteria = validateAndBuildFindDocumentsCriteria(queryParameters);
-
     final B2BDocumentQueryBuilder queryBuilder = buildDocumentQuery(queryParameters, criteria);
-
     return convertPageData(b2bDocumentService.findDocuments(queryBuilder.build()), getB2bDocumentConverter());
   }
 
@@ -115,10 +103,10 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
       criteria.put(parameters.get("searchBy"), new DateRange(validateAndFormatDate(parameters.get("searchRangeMin")), validateAndFormatDate(parameters.get("searchRangeMax"))));
     }
     else if (isAmountCriteria(parameters.get("searchBy")) &&
-             (StringUtils.isNotBlank(parameters.get("searchRangeMin")) || StringUtils.isNotBlank(parameters.get("searchRangeMax"))))
+             (StringUtils.isNotBlank(parameters.get("searchRangeMin")) ||
+              StringUtils.isNotBlank(parameters.get("searchRangeMax"))))
     {
-      criteria.put(parameters.get("searchBy"),
-                   new AmountRange(validateAndFormatAmount(parameters.get("searchRangeMin")), validateAndFormatAmount(parameters.get("searchRangeMax"))));
+      criteria.put(parameters.get("searchBy"), new AmountRange(validateAndFormatAmount(parameters.get("searchRangeMin")), validateAndFormatAmount(parameters.get("searchRangeMax"))));
     }
     else if (StringUtils.isNotBlank(parameters.get("searchValue"))) {
       // Uppercase Document Number
@@ -276,14 +264,13 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
 
   }
 
-  public B2BCommerceUnitService getB2BCommerceUnitService()
-  {
-    return b2BCommerceUnitService;
+  public PentlandB2BUnitService getB2BUnitService() {
+    return b2BUnitService;
   }
 
-  public void setB2BCommerceUnitService(final B2BCommerceUnitService b2bCommerceUnitService)
-  {
-    b2BCommerceUnitService = b2bCommerceUnitService;
+  @Required
+  public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
+    this.b2BUnitService = b2BUnitService;
   }
 
   public Converter<AccountSummaryResponse, AccountSummaryInfoData> getAccountSummaryInfoConverter()
@@ -318,9 +305,19 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
     validateParameterNotNull(criteria, "criteria must not be null");
 
     //id is the same for all units
-    String sapId = getB2BUnitModels().iterator().next().getSapID();
+    Set<String> sapIds = b2BUnitService.getCurrentUnits().stream().map(B2BUnitModel::getSapID).collect(Collectors.toSet());
     criteria.setCriteriaValues(filterByCriteriaData);
     final List<DefaultCriteria> filterByCriteriaList = Collections.singletonList(criteria);
-    return convertPageData(b2bDocumentService.getPagedDocumentsForSapId(sapId, pageableData, filterByCriteriaList), getB2bDocumentConverter());
+    return convertPageData(b2bDocumentService.getPagedDocumentsForSapIds(sapIds, pageableData, filterByCriteriaList), getB2bDocumentConverter());
   }
+
+  @Override
+  public MediaData requestDocumentMedia(String documentNumber) {
+    DocumentMediaModel mediaModel = b2bDocumentService.getDocumentMediaByNumber(documentNumber);
+    MediaData media = new MediaData();
+    media.setDownloadURL(mediaModel.getDownloadURL());
+    media.setRealFileName(mediaModel.getRealFileName());
+    return media;
+  }
+
 }

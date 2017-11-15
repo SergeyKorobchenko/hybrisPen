@@ -38,6 +38,10 @@ public class DefaultB2BDocumentDao extends DefaultGenericDao<B2BDocumentModel> i
 			+ B2BUnitModel._TYPECODE + " on { " + B2BDocumentModel._TYPECODE + ":unit } = {" + B2BUnitModel._TYPECODE + ":pk}} "
 			+ " where {" + B2BUnitModel._TYPECODE + ":uid} = ?unit and {" + B2BDocumentModel._TYPECODE + ":status} = ?status ";
 
+	private static final String FIND_DOCUMENT_BY_NUMBER = "SELECT {" + B2BDocumentModel._TYPECODE + ":pk}  FROM { "
+	    + B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + "}"
+	    + " where {" + B2BDocumentModel.DOCUMENTNUMBER + " = ?documentNumber";
+
 	private static final String FIND_DOCUMENT_BY_DOCUMENT_MEDIA = "SELECT {" + B2BDocumentModel._TYPECODE + ":pk}  FROM { "
 			+ B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + "} where {" + B2BDocumentModel._TYPECODE
 			+ ":documentMedia} = ?documentMediaPk ";
@@ -120,7 +124,14 @@ public class DefaultB2BDocumentDao extends DefaultGenericDao<B2BDocumentModel> i
 
 	}
 
-    /**
+  @Override
+  public B2BDocumentModel getDocumentByNumber(String documentNumber) {
+    FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_BY_NUMBER);
+    query.addQueryParameter("documentNumber", documentNumber);
+    return getFlexibleSearchService().searchUnique(query);
+  }
+
+  /**
      * Calculates the earliest file date as per the file age
      * for example: today 2000-01-5, numberOfDay is 4, so earliest file date is 2000-01-01
      */

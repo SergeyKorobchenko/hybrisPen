@@ -13,11 +13,16 @@ package com.bridgex.pentlandaccountsummaryaddon.document.service.impl;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfAnyResult;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.integration.PentlandInvoicePDFService;
+import com.bridgex.integration.domain.DocumentDto;
+import com.bridgex.integration.domain.DocumentResponse;
 import com.bridgex.pentlandaccountsummaryaddon.document.AccountSummaryDocumentQuery;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.DefaultCriteria;
 import com.bridgex.pentlandaccountsummaryaddon.document.dao.B2BDocumentDao;
@@ -34,6 +39,7 @@ import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.jalo.media.MediaManager;
 import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
+import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
@@ -43,12 +49,19 @@ import de.hybris.platform.servicelayer.search.SearchResult;
  */
 public class DefaultB2BDocumentService implements B2BDocumentService
 {
-	private PagedB2BDocumentDao pagedB2BDocumentDao;
-	private B2BDocumentDao      b2bDocumentDao;
-	private ModelService        modelService;
+	private   PagedB2BDocumentDao       pagedB2BDocumentDao;
+	private   B2BDocumentDao            b2bDocumentDao;
+	private   ModelService              modelService;
+	private   PentlandInvoicePDFService invoicePDFService;
+	private   MediaService              mediaService;
+
 
 	private static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.document.service.impl.DefaultB2BDocumentService.class.getName());
 
+	@Required
+	public void setMediaService(MediaService mediaService) {
+		this.mediaService = mediaService;
+	}
 
 	@Override
 	public SearchPageData<B2BDocumentModel> findDocuments(final AccountSummaryDocumentQuery query)
@@ -86,6 +99,11 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 		this.modelService = modelService;
 	}
 
+	@Required
+	public void setInvoicePDFService(PentlandInvoicePDFService invoicePDFService) {
+		this.invoicePDFService = invoicePDFService;
+	}
+
 	@Override
 	public void deleteB2BDocumentFiles(final int numberOfDay, final List<B2BDocumentTypeModel> documentTypes,
 			final List<DocumentStatus> documentStatuses)
@@ -121,12 +139,40 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 	}
 
 	@Override
-	public SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList) {
+	public SearchPageData<B2BDocumentModel> getPagedDocumentsForSapIds(Set<String> sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList) {
 		validateParameterNotNull(sapId, "b2bUnitCode must not be null");
 		validateParameterNotNull(pageableData, "pageableData must not be null");
 		validateIfAnyResult(filterByCriteriaList, "criteria list must not be empty or null");
 
-		return getPagedB2BDocumentDao().getPagedDocumentsForSapId(sapId, pageableData, filterByCriteriaList);
+		return getPagedB2BDocumentDao().getPagedDocumentsForSapIds(sapId, pageableData, filterByCriteriaList);
+	}
+
+	@Override
+	public DocumentMediaModel getDocumentMediaByNumber(String documentNumber) {
+		validateParameterNotNull(documentNumber, "document number must not be null");
+		B2BDocumentModel documentModel = b2bDocumentDao.getDocumentByNumber(documentNumber);
+		DocumentMediaModel mediaModel = documentModel.getDocumentMedia();
+
+		if (mediaModel != null) {
+			return mediaModel;
+		}
+		DocumentMediaModel newMedia = requestAndSaveDocumentMedia(documentNumber);
+		documentModel.setDocumentMedia(newMedia);
+		modelService.saveAll();
+		return newMedia;
+	}
+
+	private DocumentMediaModel requestAndSaveDocumentMedia(String documentNumber) {
+		DocumentResponse response = invoicePDFService.requestData(createDocumentDto(documentNumber));
+		DocumentMediaModel newMedia = new DocumentMediaModel();
+		mediaService.setStreamForMedia(newMedia, new ByteArrayInputStream(response.getBinaryData()), documentNumber + ".pdf", "application/pdf");
+		return newMedia;
+	}
+
+	private DocumentDto createDocumentDto(String documentNumber) {
+		DocumentDto request = new DocumentDto();
+		request.setInvoiceCode(documentNumber);
+		return request;
 	}
 
 	protected ModelService getModelService()

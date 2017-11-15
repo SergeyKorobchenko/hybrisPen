@@ -47,7 +47,7 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 
 	private static final String B2B_UNIT_CRITERIA = "{" + B2BUnitModel._TYPECODE + ":" + B2BUnitModel.UID + "} = ?b2bUnitCode";
 
-	private static final String SAP_ID_CRITERIA = "{" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.SAPCUSTOMERID + "} = ?sapCustomerId";
+	private static final String SAP_ID_CRITERIA = "{" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.SAPCUSTOMERID + "} IN ( ?sapCustomerId )";
 
 	private static final String FIND_DOCUMENT = "SELECT {" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.PK + "}  FROM { "
 			+ B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + " join " + B2BDocumentTypeModel._TYPECODE + " as "
@@ -258,7 +258,7 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 	}
 
 	@Override
-	public SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> criteriaList) {
+	public SearchPageData<B2BDocumentModel> getPagedDocumentsForSapIds(Set<String> sapId, PageableData pageableData, List<DefaultCriteria> criteriaList) {
 		validateParameterNotNull(sapId, "sapId must not be null");
 		validateParameterNotNull(pageableData, "pageableData must not be null");
 		validateIfAnyResult(criteriaList, "criteria must not be null");
@@ -271,7 +271,8 @@ public class DefaultPagedB2BDocumentDao extends DefaultPagedGenericDao<B2BDocume
 		queryBuilder.append(FIND_ALL_DOCUMENTS);
 		whereQueryList.add(SAP_ID_CRITERIA);
 
-		return getB2BDocumentModelSearchPageData(pageableData, criteriaList, queryBuilder, whereQueryList, queryParams);
+		return getB2BDocumentModelSearchPageData
+			(pageableData, criteriaList, queryBuilder, whereQueryList, queryParams);
 	}
 
 	@Override

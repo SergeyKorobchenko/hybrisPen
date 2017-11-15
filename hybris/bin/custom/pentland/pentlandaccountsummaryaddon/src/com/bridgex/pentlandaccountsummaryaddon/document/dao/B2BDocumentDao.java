@@ -52,4 +52,7 @@ public interface B2BDocumentDao
      * @return a SearchResult<DocumentMediaModel> containing document media.
 	 */
 	SearchResult<DocumentMediaModel> findOldDocumentMedia(final int numberOfDays, final List<B2BDocumentTypeModel> documentTypes, final List<DocumentStatus> documentStatuses);
+
+	B2BDocumentModel getDocumentByNumber(final String documentNumber);
+
 }

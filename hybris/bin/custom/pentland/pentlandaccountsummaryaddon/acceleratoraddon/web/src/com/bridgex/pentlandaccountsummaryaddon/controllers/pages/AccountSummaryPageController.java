@@ -21,9 +21,7 @@ import org.apache.log4j.Logger;
 import org.springframework.expression.AccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +30,7 @@ import com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.DefaultCriteria;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.FilterByCriteriaData;
 import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentData;
+import com.bridgex.pentlandaccountsummaryaddon.document.data.MediaData;
 import com.bridgex.pentlandaccountsummaryaddon.facade.B2BAccountSummaryFacade;
 import com.bridgex.pentlandaccountsummaryaddon.breadcrumb.impl.AccountSummaryMyCompanyBreadcrumbBuilder;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel;
@@ -108,7 +107,7 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 			return REDIRECT_PREFIX + "/";
 		}
 		catch (final ResourceAccessException e) {
-			LOG.warn("the ERP server is not available");
+			LOG.warn(e.getMessage());
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "erp.integration.failed", null);
 			return REDIRECT_PREFIX + "/";
 		}
@@ -184,4 +183,14 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 
 		return filterByCriteriaData;
 	}
+
+	@RequestMapping(value = ACCOUNTSUMMARY_UNIT_URL + "document/{id}", method = RequestMethod.GET)
+	@RequireHardLogIn
+	@ResponseBody
+	public MediaData requestDocumentMedia(@PathVariable String id,
+	                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		return b2bAccountSummaryFacade.requestDocumentMedia(id);
+	}
+
 }

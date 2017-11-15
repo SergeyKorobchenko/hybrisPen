@@ -11,6 +11,7 @@
 package com.bridgex.pentlandaccountsummaryaddon.document.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import com.bridgex.pentlandaccountsummaryaddon.document.AccountSummaryDocumentQuery;
 import com.bridgex.pentlandaccountsummaryaddon.document.criteria.DefaultCriteria;
@@ -52,5 +53,5 @@ public interface PagedB2BDocumentDao
 	 */
 	SearchPageData<B2BDocumentModel> getAllPagedDocuments(final PageableData pageableData, final List<DefaultCriteria> criteriaList);
 
-	SearchPageData<B2BDocumentModel> getPagedDocumentsForSapId(String sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
+	SearchPageData<B2BDocumentModel> getPagedDocumentsForSapIds(Set<String> sapId, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
 }

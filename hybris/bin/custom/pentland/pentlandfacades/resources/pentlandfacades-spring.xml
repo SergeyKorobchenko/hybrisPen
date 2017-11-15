@@ -39,7 +39,7 @@
 	</bean>
 
 	<bean id="orderDetailsFacade" class="com.bridgex.facades.integration.OrderDetailsFacade">
-		<property name="orderDetailsService" ref="orderDetailsService"/>
+		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="storeSessionFacade" ref="storeSessionFacade"/>
 		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
 	</bean>
