@@ -191,6 +191,7 @@
 	<bean id="loginGuidAuthenticationSuccessHandler" class="com.bridgex.storefront.security.GUIDAuthenticationSuccessHandler" >
 		<property name="authenticationSuccessHandler" ref="loginAuthenticationSuccessHandler" />
 		<property name="guidCookieStrategy" ref="guidCookieStrategy" />
+		<property name="cookiesDirectiveCookieGenerator" ref="cookiesDirectiveCookieGenerator"/>
 	</bean>
 
 	<alias name="defaultLoginAuthenticationSuccessHandler" alias="loginAuthenticationSuccessHandler"/>
@@ -222,6 +223,7 @@
 	<bean id="loginCheckoutGuidAuthenticationSuccessHandler" class="com.bridgex.storefront.security.GUIDAuthenticationSuccessHandler" >
 		<property name="authenticationSuccessHandler" ref="loginCheckoutAuthenticationSuccessHandler" />
 		<property name="guidCookieStrategy" ref="guidCookieStrategy" />
+		<property name="cookiesDirectiveCookieGenerator" ref="cookiesDirectiveCookieGenerator"/>
 	</bean>
 
 	<alias name="defaultLoginCheckoutAuthenticationSuccessHandler" alias="loginCheckoutAuthenticationSuccessHandler"/>

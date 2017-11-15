@@ -35,6 +35,11 @@
 					<cockpit code="RightContentSlot"/>
 				</td>
 			</tr>
+      <tr>
+        <td colspan='4' height='343px' class='structureViewSection'>
+          <cockpit code='BrandImageSlot' />
+        </td>
+      </tr>
 			<tr>
 				<td height="170px" colspan="4" class="structureViewSection">
 					<cockpit code="Footer" />
