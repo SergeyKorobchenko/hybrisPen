@@ -12,6 +12,7 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="stylecode" type="String"/>
 		<property name="materialKey" type="String"/>
 		<property name="brandCode" type="String" />
 		<property name="brandName" type="String" />

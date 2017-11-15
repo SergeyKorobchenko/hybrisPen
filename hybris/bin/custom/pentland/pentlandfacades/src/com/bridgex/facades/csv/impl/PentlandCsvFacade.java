@@ -19,6 +19,8 @@ public class PentlandCsvFacade extends DefaultCsvFacade{
   protected void writeOrderEntry(final Writer writer, final OrderEntryData entry) throws IOException {
     final StringBuilder csvContent = new StringBuilder();
     ProductData product = entry.getProduct();
+    csvContent.append(StringEscapeUtils.escapeCsv(product.getStylecode())).append(DELIMITER);
+    csvContent.append(StringEscapeUtils.escapeCsv(product.getMaterialKey())).append(DELIMITER);
     csvContent.append(StringEscapeUtils.escapeCsv(product.getCode())).append(DELIMITER)
               .append(StringEscapeUtils.escapeCsv(entry.getQuantity().toString())).append(DELIMITER)
               .append(StringEscapeUtils.escapeCsv(product.getName())).append(DELIMITER)

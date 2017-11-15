@@ -489,6 +489,8 @@ public class CartPageController extends AbstractCartPageController
 			try
 			{
 				final List<String> headers = new ArrayList<String>();
+				headers.add(getMessageSource().getMessage("basket.export.cart.item.stylecode", null, getI18nService().getCurrentLocale()));
+				headers.add(getMessageSource().getMessage("basket.export.cart.item.materialKey", null, getI18nService().getCurrentLocale()));
 				headers.add(getMessageSource().getMessage("basket.export.cart.item.sku", null, getI18nService().getCurrentLocale()));
 				headers.add(
 						getMessageSource().getMessage("basket.export.cart.item.quantity", null, getI18nService().getCurrentLocale()));

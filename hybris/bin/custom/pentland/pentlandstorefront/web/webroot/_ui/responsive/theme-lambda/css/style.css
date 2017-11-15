@@ -19254,28 +19254,28 @@ select[multiple].input-sm {
   margin-top: 30px;
 }
 .export__cart--link {
-    width: auto !important;
+  width: auto !important;
 }
 .export__images--link {
-    text-align: left;
-    margin-top: 15px;
-    padding-right: 20px;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 15px;
-    display: inline-block;
-    white-space: nowrap;
-    padding-left: 30px;
-    padding-right: 30px;
+  text-align: left;
+  margin-top: 15px;
+  padding-right: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 15px;
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 @media (max-width: 1024px) {
-    .export__images--link {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .export__images--link {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 @media (max-width: 639px) {
-    .export__images--link {
-        padding-top: 5px;
-    }
+  .export__images--link {
+    padding-top: 5px;
+  }
 }

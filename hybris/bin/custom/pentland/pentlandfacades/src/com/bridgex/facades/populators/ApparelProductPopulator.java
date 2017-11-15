@@ -18,6 +18,9 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.variants.model.VariantProductModel;
+
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
+import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.facades.product.data.GenderData;
 
 import org.springframework.beans.factory.annotation.Required;
@@ -48,6 +51,17 @@ public class ApparelProductPopulator<SOURCE extends ProductModel, TARGET extends
 		if (gender != null) {
 			target.setGender(getGenderConverter().convert(gender));
 		}
-    target.setUpc(source.getUpc());
+		populateAdditionalIdentifiers(source, target);
+	}
+
+	private void populateAdditionalIdentifiers(ProductModel source, ProductData target) {
+		if (source instanceof ApparelSizeVariantProductModel) {
+			ProductModel styleProduct = ((VariantProductModel) source).getBaseProduct();
+			target.setMaterialKey(styleProduct.getCode());
+			target.setStylecode(((VariantProductModel) styleProduct).getBaseProduct().getCode());
+			target.setUpc(source.getUpc());
+		} else if (source instanceof ApparelStyleVariantProductModel) {
+			target.setMaterialKey(source.getCode());
+		}
 	}
 }

@@ -157,6 +157,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.export.cart.item.name;Name
 ;basket.export.cart.item.price;Price
 ;basket.export.cart.item.quantity;Quantity
+;basket.export.cart.item.stylecode;Stylecode
+;basket.export.cart.item.materialKey;materialKey
 ;basket.export.cart.item.sku;Sku
 ;basket.export.cart.item.upc;UPC
 ;basket.export.csv.file;Export CSV
