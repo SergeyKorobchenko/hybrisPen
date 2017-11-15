@@ -48,13 +48,13 @@ public class DefaultPentlandCustomerAccountDao extends DefaultCustomerAccountDao
   private List<SalesApplication> filterSalesApplicationList;
 
   @Override
-  public SearchPageData<OrderModel> findOrdersByB2BUnitsAndStore(final Set<B2BUnitModel> b2bUntis, final BaseStoreModel store, final OrderStatus[] status, final PageableData pageableData)
+  public SearchPageData<OrderModel> findOrdersByB2BUnitsAndStore(final Set<B2BUnitModel> b2bUnits, final BaseStoreModel store, final OrderStatus[] status, final PageableData pageableData)
   {
-    validateParameterNotNull(b2bUntis, "Customer must not be null");
+    validateParameterNotNull(b2bUnits, "B2BUnits must not be null");
     validateParameterNotNull(store, "Store must not be null");
 
     final Map<String, Object> queryParams = new HashMap<String, Object>();
-    queryParams.put("b2bUnitList", b2bUntis);
+    queryParams.put("b2bUnitList", b2bUnits);
     queryParams.put("store", store);
 
     String filterClause = StringUtils.EMPTY;
