@@ -203,10 +203,6 @@
                         <modifiers/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="productSize" type="ProductSize">
-                        <persistence type="property"/>
-                        <modifiers optional="true" search="true" read="true" write="true"/>
-                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -217,11 +213,6 @@
                         <description>Unique identifier</description>
                         <persistence type="property" />
                         <modifiers initial="true" unique="true" optional="false" read="true" write="true" search="true" />
-                    </attribute>
-                    <attribute qualifier="name" type="localized:java.lang.String">
-                        <description>Localized display name for size</description>
-                        <persistence type="property" />
-                        <modifiers initial="false" optional="true" read="true" write="true" search="true" />
                     </attribute>
                     <attribute qualifier="priority" type="int">
                         <description>The ordering of this size in the list. Higher number ordered first.</description>
