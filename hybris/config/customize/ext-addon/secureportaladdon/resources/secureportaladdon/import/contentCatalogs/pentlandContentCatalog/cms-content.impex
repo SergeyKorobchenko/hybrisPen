@@ -11,8 +11,9 @@
 $contentCatalog=pentlandContentCatalog
 $contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])
 $jarResourceCmsImages=jar:de.hybris.platform.secureportaladdon.constants.SecureportaladdonConstants&/secureportaladdon/import/contentCatalogs/cockpits/cmscockpit
-
-
+$siteResource = jar:de.hybris.platform.secureportaladdon.constants.SecureportaladdonConstants&/secureportaladdon/import/contentCatalogs/$contentCatalog
+$picture = media(code, $contentCV);
+$lang=en
 
 # Create PageTemplates
 # These define the layout for pages
@@ -52,6 +53,11 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 				</td>
 			</tr>
 			<tr>
+				<td colspan='4' height='343px' class='structureViewSection'>
+					<cockpit code='BrandImageSlot' />
+				</td>
+			</tr>
+			<tr>
 				<td height='170px' colspan='4' class='structureViewSection'>
 					<cockpit code='Footer' />
 				</td>
@@ -68,7 +74,10 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
 # There are a standard set of slots and a number of specific slots for each template.
-# Standard slots are SiteLogo, HeaderLinks, MiniCart and NavigationBar (that all appear in the Header), and the Footer. 
+# Standard slots are SiteLogo, HeaderLinks, MiniCart and NavigationBar (that all appear in the Header), and the Footer.
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;
+;;BrandImageSlot;Default Brand Image Slot;true;
 
 # Main Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SecureCustomerPortalTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -76,6 +85,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopContent;;;wide
 ;SideContent;;;wide
 ;TopHeaderSlot;;;wide
+;BrandImageSlot;;;wide
 ;Footer;;;footer
 
 # Bind Content Slots to Page Template
@@ -84,7 +94,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Footer-SecureCustomerPortal;Footer;;FooterSlot;true
 ;;SideContent-SecureCustomerPortal;SideContent;;SideContentSlot;true
 ;;TopHeaderSlot-SecureCustomerPortal;TopHeaderSlot;;TopHeaderSlot;true
-
 
 # Functional Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code,$contentCV)
@@ -112,6 +121,19 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;SideContent-SecureCustomerPortalRegisterPage;SideContent Slot for SecureCustomerPortalRegisterPage;true;
 ;;TopContent-SecureCustomerPortalRegisterPage;TopContent Slot for SecureCustomerPortalRegisterPage;true;
 
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpg']; altText; folder(qualifier)[default = 'images']
+; ; loginbanner.jpg ; loginbanner.jpg ; $siteResource/images/loginbanner.jpg
+
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink; $picture[lang=$lang];visible[default=true]
+; ; LoginPageBrandBannerComponent ; Login Image Component ; LoginPageBrandBannerComponent ; "/";loginbanner.jpg;
+
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid,$contentCV)
+; ; BrandImageSlot-login ; Brand Image Slot for Customer Login ; true ; LoginPageBrandBannerComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'login']; contentSlot(uid, $contentCV)[unique = true];
+; ; BrandImageSlot-login ; BrandImageSlot ; ; BrandImageSlot-login ;
+
 
 
 # Bind Content Slots to Pages
@@ -125,6 +147,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;SideContent-SecureCustomerPortalRegisterPage;SideContent;SecureCustomerPortalRegisterPage;SideContent-SecureCustomerPortalRegisterPage
 ;;TopContent-SecureCustomerPortalRegisterPage;TopContent;SecureCustomerPortalRegisterPage;TopContent-SecureCustomerPortalRegisterPage
 ;;NavigationBar-SecureCustomerPortalRegisterPage;NavigationBar;SecureCustomerPortalRegisterPage;NavigationBarSlot
+;;BrandImage-SecureCustomerPortalSecuredLoginPage;BrandImageSlot;SecureCustomerPortalSecuredLoginPage;BrandImageSlot
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;styleAttributes;&linkRef;&componentRef;target(code)[default='sameWindow'];linkName[lang=en];onlyOneRestrictionMustApply[default='false']
 ;;RegisterLink;Register Link;/register;class="js-register-navigation-item";RegisterLink;RegisterLink;;Register;
@@ -140,4 +163,3 @@ INSERT_UPDATE CMSSecurePortalRestriction;$contentCV[unique=true];uid[unique=true
 # CMS HeaderLinks
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)[mode=append]
 ;;HeaderLinksSlot;RegisterLink
-

@@ -365,7 +365,7 @@
                     <index name="idxCustomerID">
                         <key attribute="sapCustomerID"/>
                     </index>
-                    <index name="idxAddressUnq" unique="true">
+                    <index name="idxAddressUnq">
                         <key attribute="addressID"/>
                         <key attribute="sapCustomerID"/>
                     </index>

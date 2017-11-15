@@ -15,28 +15,44 @@ import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrate
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
+import org.springframework.web.util.CookieGenerator;
 
 /**
  * Default implementation of {@link AuthenticationSuccessHandler}
  */
 public class GUIDAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
-	private GUIDCookieStrategy guidCookieStrategy;
+	private GUIDCookieStrategy           guidCookieStrategy;
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	private CookieGenerator              cookiesDirectiveCookieGenerator;
 
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
 			final Authentication authentication) throws IOException, ServletException
 	{
 		getGuidCookieStrategy().setCookie(request, response);
+
+		if (isFirstTimeVisitor(request)) {
+			cookiesDirectiveCookieGenerator.addCookie(response, "1");
+		}
 		getAuthenticationSuccessHandler().onAuthenticationSuccess(request, response, authentication);
+	}
+
+	private boolean isFirstTimeVisitor(HttpServletRequest request) {
+		String cookieDirective = cookiesDirectiveCookieGenerator.getCookieName();
+		for(Cookie cookie: request.getCookies()){
+			if(cookieDirective.equals(cookie.getName())){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	protected GUIDCookieStrategy getGuidCookieStrategy()
@@ -67,5 +83,10 @@ public class GUIDAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	public void setAuthenticationSuccessHandler(final AuthenticationSuccessHandler authenticationSuccessHandler)
 	{
 		this.authenticationSuccessHandler = authenticationSuccessHandler;
+	}
+
+	@Required
+	public void setCookiesDirectiveCookieGenerator(CookieGenerator cookiesDirectiveCookieGenerator) {
+		this.cookiesDirectiveCookieGenerator = cookiesDirectiveCookieGenerator;
 	}
 }
