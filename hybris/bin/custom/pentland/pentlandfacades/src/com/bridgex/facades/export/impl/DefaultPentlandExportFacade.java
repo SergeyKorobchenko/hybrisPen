@@ -2,7 +2,10 @@ package com.bridgex.facades.export.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,8 +46,7 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
 
     List<OrderEntryData> entries = cartData.getEntries();
     if(CollectionUtils.isNotEmpty(entries)){
-      //TODO collect images from style-level entries
-      Set<String> products = entries.stream().map(entry -> entry.getProduct().getCode()).collect(Collectors.toSet());
+      Set<String> products = collectProductCodesFromEntries(entries);
       exportImagesForProductList(zipOutputStream, products);
     }
 
@@ -83,6 +85,20 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
       }
     }
 
+  }
+
+  private Set<String> collectProductCodesFromEntries(final List<OrderEntryData> entries) {
+    Set<String> productCodes = new HashSet<>();
+    for (final OrderEntryData entry : entries) {
+      if (Boolean.TRUE.equals(entry.getProduct().getMultidimensional())) {
+        productCodes.addAll(entry.getEntries().stream().map(subEntry -> subEntry.getProduct().getBaseProduct()).collect(Collectors.toList()));
+      }
+      else
+      {
+        productCodes.add(entry.getProduct().getCode());
+      }
+    }
+    return productCodes;
   }
 
   private MediaModel getPrimaryImageMasterUrl(final String productCode) {
