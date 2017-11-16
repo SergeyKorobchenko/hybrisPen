@@ -211,6 +211,15 @@
 		<property name="httpOnly" value="true"/>
 		<property name="baseSiteService" ref="baseSiteService"/>
 	</bean>
+
+	<alias name="defaultCookiesDirectiveCookieGenerator" alias="cookiesDirectiveCookieGenerator"/>
+	<bean id="defaultCookiesDirectiveCookieGenerator" class="com.bridgex.storefront.security.cookie.EnhancedCookieGenerator">
+		<property name="cookieSecure" value="true"/>
+		<property name="cookieMaxAge" value="-1"/>
+		<property name="cookieName" value="cookiesDirective"/>
+		<property name="httpOnly" value="true"/>
+		<property name="useDefaultPath" value="false"/>
+	</bean>
 	
 	<bean id="importCSVMultipartFilter" class="org.springframework.web.multipart.support.MultipartFilter">
 		<property name="multipartResolverBeanName" value="importCSVMultipartResolver"/>

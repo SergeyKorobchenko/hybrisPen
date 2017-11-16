@@ -9,6 +9,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<c:url var="nextStep" value="${nextStepUrl}"/>
 
 <template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
 
@@ -41,16 +42,21 @@
                                         country="${country}" />
 
                                         <div id="addressbook"  class="long-scrollable ">
-
+                                                <div class="addressEntry">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="${nextStep}"
+                                                               class="btn btn-primary btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.markFor.noSelection"/></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             <c:forEach items="${deliveryAddresses}" var="deliveryAddress" varStatus="status">
                                                 <div class="addressEntry">
                                                     <form action="${request.contextPath}/checkout/multi/mark-for/select" method="GET">
                                                         <input type="hidden" name="selectedAddressCode" value="${fn:escapeXml(deliveryAddress.id)}" />
                                                         <ul>
                                                             <li>
-                                                                <strong>${fn:escapeXml(deliveryAddress.title)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.firstName)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.lastName)}</strong>
+                                                                <strong>${fn:escapeXml(deliveryAddress.displayName)}</strong>
                                                                 <br>
                                                                 ${fn:escapeXml(deliveryAddress.line1)}&nbsp;
                                                                 ${fn:escapeXml(deliveryAddress.line2)}
@@ -74,7 +80,6 @@
                             </div>
                     </div>
 
-                    <c:url var="nextStep" value="${nextStepUrl}"/>
                     <a href="${nextStep}"
                         class="btn btn-primary btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.continue"/></a>
                 </ycommerce:testId>

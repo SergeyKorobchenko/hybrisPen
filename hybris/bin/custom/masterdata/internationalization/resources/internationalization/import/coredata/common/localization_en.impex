@@ -2877,6 +2877,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.payment.ACCOUNT.PROFORMA;Pro-Forma
 
 ;checkout.multi.deliveryAddress.noAddress;There are no shipping addresses assigned to current customer.
+;checkout.multi.deliveryAddress.markFor.noSelection;Don't use markFor
 
 ;product.wholesale.price;Wholesale price
 ;product.videourl;Watch Video
@@ -2889,3 +2890,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.sizeChartGuide;Size Chart Guide
 ;product.unit;Base UOM
 ;product.sku;ID
+
+;cookie.directive.header;Cookies on pentland.com
+;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."

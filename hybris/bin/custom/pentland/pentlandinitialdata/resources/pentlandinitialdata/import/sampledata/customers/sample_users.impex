@@ -31,6 +31,8 @@ UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;gr
 ;SpeedoTestB2BUnit;pronto-services;PROFORMA;jamesTestB2B;speedogroup;08
 ;CanterburyTestB2BUnit;pronto-services;PROFORMA;jamesTestB2B;canterburygroup;0Q
 
+INSERT_UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid);sapBrand;locname[lang=en]
+;AccountTestB2BUnit;pronto-services;ACCOUNT;jamesTestB2B;mitregroup;05;AccountTestB2BUnit
 
 $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
@@ -62,12 +64,12 @@ INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(
 ;Unit D;Services East;Services East;Services East;Rustic Services;Rustic;RusticAddrID3;RusticID5;
 ;Unit E;Services West;Services West;Services West;Rustic Services;Rustic;RusticAddrID4;RusticID6;acctmgrc;
 
-INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID
-;999 South Wacker Drive;60606;Chicago;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@rustic-hw.com;mr;RusticAddrID1;RusticID1;testB2B
-;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Anil;Gupta;anil.gupta@rustic-hw.com;mr;RusticAddrID2;RusticID3;testB2B
-;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Mingmei;Wang;mingmei.wang@rustic-hw.com;ms;RusticAddrID3;RusticID5;pronto-goods
-;3000 Canyon Lake Drive;90068;Los Angeles;US;TRUE;TRUE;TRUE;TRUE;Matheu;Silva;matheu.silva@rustic-hw.com;mr;RusticAddrID4;RusticID6;testB2B
-;1000 Bagby Street;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;Carla;Torres;carla.torres@rustic-hw.com;ms;RusticAddrID5;RusticID4;testB2B
+INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;displayName[lang=en]
+;999 South Wacker Drive;60606;Chicago;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@rustic-hw.com;mr;RusticAddrID1;RusticID1;testB2B;address1
+;3000 Lombard Street;94123;San Francisco;US;TRUE;TRUE;TRUE;TRUE;Anil;Gupta;anil.gupta@rustic-hw.com;mr;RusticAddrID2;RusticID3;testB2B;address2
+;700 E 50th Street;10022;New York;US;TRUE;TRUE;TRUE;TRUE;Mingmei;Wang;mingmei.wang@rustic-hw.com;ms;RusticAddrID3;RusticID5;pronto-goods;address3
+;3000 Canyon Lake Drive;90068;Los Angeles;US;TRUE;TRUE;TRUE;TRUE;Matheu;Silva;matheu.silva@rustic-hw.com;mr;RusticAddrID4;RusticID6;testB2B;address4
+;1000 Bagby Street;Texas;Houston;US;TRUE;TRUE;TRUE;TRUE;Carla;Torres;carla.torres@rustic-hw.com;ms;RusticAddrID5;RusticID4;testB2B;address5
 
 INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
 ;premiumPermissions;Premium Permissions;Rustic;Rustic 7K GBP ORDER:Rustic,Rustic 25K GBP MONTH:Rustic;
@@ -127,11 +129,11 @@ INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(
 ;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto-services;ACCOUNT;pronto-goods
 ;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto-services;CREDITCARD;pronto-services
 
-INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(addressID);
-;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true
-;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;pronto-services;true
-;3000 Lombard Street;94123;San Francisco;GB;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;ProntoAddrID2,ProntoAddrID3
-;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;ProntoAddrID4;ProntoID1;jamesTestB2B;false;ProntoAddrID2,ProntoAddrID3
+INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(addressID);displayName[lang=en]
+;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true;;address6
+;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;pronto-services;true;;address7
+;3000 Lombard Street;94123;San Francisco;GB;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;ProntoAddrID2,ProntoAddrID3;address8
+;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;ProntoAddrID4;ProntoID1;jamesTestB2B;false;ProntoAddrID2,ProntoAddrID3;address9
 
 INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
 ;enhancedPermissions;Enhanced Permissions;Pronto;Pronto 12K GBP ORDER:Pronto,Pronto 15K GBP MONTH:Pronto;
@@ -141,6 +143,7 @@ INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);gr
 ;Admin A;linda.wolf@pronto-hw.com;linda.wolf@pronto-hw.com;Linda Wolf;ms;Pronto, b2badmingroup, TestB2BUnit;
 ;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bcustomergroup;
 ;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;MitreTestB2BUnit,SpeedoTestB2BUnit,CanterburyTestB2BUnit,b2bcustomergroup;
+;Account Type User;john.doe@account.com;john.doe@account.com;John Doe;mr;AccountTestB2BUnit,b2bcustomergroup;
 ;Customer A;mark.rivers@pronto-hw.com;mark.rivers@pronto-hw.com;Mark Rivers;mr;Pronto Goods, b2bcustomergroup,enhancedPermissions, TestB2BUnit;;
 ;Customer B;mingmei.wang@pronto-hw.com;mingmei.wang@pronto-hw.com;Mingmei Wang;ms;Pronto Goods, b2bcustomergroup, commonPermissions, TestB2BUnit;;
 ;Customer C;william.hunter@pronto-hw.com;william.hunter@pronto-hw.com;William Hunter;mr;Pronto Services, b2bcustomergroup, enhancedPermissions, TestB2BUnit;

@@ -76,6 +76,7 @@
 
 	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
 		<property name="state" type="String"/>
+		<property name="displayName" type="String"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
