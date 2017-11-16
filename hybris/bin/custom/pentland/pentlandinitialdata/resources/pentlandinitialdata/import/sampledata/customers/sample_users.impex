@@ -31,6 +31,8 @@ UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;gr
 ;SpeedoTestB2BUnit;pronto-services;PROFORMA;jamesTestB2B;speedogroup;08
 ;CanterburyTestB2BUnit;pronto-services;PROFORMA;jamesTestB2B;canterburygroup;0Q
 
+INSERT_UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid);sapBrand;locname[lang=en]
+;AccountTestB2BUnit;pronto-services;ACCOUNT;jamesTestB2B;mitregroup;05;AccountTestB2BUnit
 
 $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
@@ -141,6 +143,7 @@ INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);gr
 ;Admin A;linda.wolf@pronto-hw.com;linda.wolf@pronto-hw.com;Linda Wolf;ms;Pronto, b2badmingroup, TestB2BUnit;
 ;Approver A;hanna.schmidt@pronto-hw.com;hanna.schmidt@pronto-hw.com;Hanna Schmidt;ms;Pronto Services, b2bcustomergroup;
 ;Approver B;james.bell@pronto-hw.com;james.bell@pronto-hw.com;James Bell;mr;MitreTestB2BUnit,SpeedoTestB2BUnit,CanterburyTestB2BUnit,b2bcustomergroup;
+;Account Type User;john.doe@account.com;john.doe@account.com;John Doe;mr;AccountTestB2BUnit,b2bcustomergroup;
 ;Customer A;mark.rivers@pronto-hw.com;mark.rivers@pronto-hw.com;Mark Rivers;mr;Pronto Goods, b2bcustomergroup,enhancedPermissions, TestB2BUnit;;
 ;Customer B;mingmei.wang@pronto-hw.com;mingmei.wang@pronto-hw.com;Mingmei Wang;ms;Pronto Goods, b2bcustomergroup, commonPermissions, TestB2BUnit;;
 ;Customer C;william.hunter@pronto-hw.com;william.hunter@pronto-hw.com;William Hunter;mr;Pronto Services, b2bcustomergroup, enhancedPermissions, TestB2BUnit;
