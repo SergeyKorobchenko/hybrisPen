@@ -1,5 +1,7 @@
 package com.bridgex.integration.service.impl;
 
+import java.util.Collections;
+
 import org.springframework.http.ResponseEntity;
 
 import com.bridgex.integration.constants.ErpintegrationConstants;
@@ -19,7 +21,6 @@ public class AccountSummaryServiceImpl extends AbstractIntegrationService<Accoun
 
   @Override
   public ResponseEntity<AccountSummaryResponse> sendRequest(AccountSummaryDto requestDto, Class responseClass) {
-    requestDto.setServiceCustomer(ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER);
     return super.sendRequest(requestDto, responseClass);
   }
 
@@ -30,7 +31,7 @@ public class AccountSummaryServiceImpl extends AbstractIntegrationService<Accoun
       result = new AccountSummaryResponse();
     }
     if (result.getEtReturn() == null) {
-      result.setEtReturn(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
+      result.setEtReturn(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)));
     } else {
       result.getEtReturn().setType(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE);
     }

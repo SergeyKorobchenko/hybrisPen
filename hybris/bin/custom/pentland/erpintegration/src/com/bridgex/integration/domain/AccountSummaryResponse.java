@@ -137,7 +137,7 @@ public class AccountSummaryResponse {
     return etReturn;
   }
 
-  public void setEtReturn(ETReturnDto etReturn) {
-    this.etReturn = etReturn;
+  public void setEtReturn(List<ETReturnDto> etReturn) {
+    this.etReturn = etReturn.get(0);
   }
 }

@@ -7,14 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class DocumentDto {
 
-   @JsonProperty("I_DOCUMENT_NO")
-   private String invoiceCode;
-
-   @JsonProperty("I_SERVICE_CUSTOMER")
-   private String serviceCustomer;
-
    @JsonProperty("I_LANGUAGE")
    private String language;
+
+   @JsonProperty("I_DOCUMENT_NO")
+   private String invoiceCode;
 
    @JsonProperty("I_APPL_KEY")
    private String appKey;
@@ -25,14 +22,6 @@ public class DocumentDto {
 
   public void setInvoiceCode(String invoiceCode) {
     this.invoiceCode = invoiceCode;
-  }
-
-  public String getServiceCustomer() {
-    return serviceCustomer;
-  }
-
-  public void setServiceCustomer(String serviceCustomer) {
-    this.serviceCustomer = serviceCustomer;
   }
 
   public String getLanguage() {

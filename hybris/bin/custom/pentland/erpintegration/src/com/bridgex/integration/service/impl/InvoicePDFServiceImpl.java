@@ -1,5 +1,7 @@
 package com.bridgex.integration.service.impl;
 
+import java.util.Collections;
+
 import org.springframework.http.ResponseEntity;
 
 import com.bridgex.integration.constants.ErpintegrationConstants;
@@ -25,7 +27,7 @@ public class InvoicePDFServiceImpl extends AbstractIntegrationService<DocumentDt
       result = new DocumentResponse();
     }
     if (result.getEtReturn() == null) {
-      result.setEtReturn(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
+      result.setEtReturn(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)));
     } else {
       result.getEtReturn().setType(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE);
     }
@@ -34,7 +36,6 @@ public class InvoicePDFServiceImpl extends AbstractIntegrationService<DocumentDt
 
   @Override
   public ResponseEntity<DocumentResponse> sendRequest(DocumentDto requestDto, Class responseClass) {
-    requestDto.setServiceCustomer(ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER);
     requestDto.setAppKey(ErpintegrationConstants.REQUEST.DEFAULT_APPLICATION_KEY);
     return super.sendRequest(requestDto, responseClass);
   }

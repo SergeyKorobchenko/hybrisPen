@@ -37,7 +37,7 @@ public class AccountSummaryServiceMock extends AccountSummaryServiceImpl {
     responseBody.setCity("London");
     responseBody.setCountry("GB");
     responseBody.setHouseNumber("");
-    responseBody.setEtReturn(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE));
+    responseBody.setEtReturn(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE)));
     responseBody.setPostalCode("223610");
     responseBody.setRegion("LO");
 
