@@ -1,8 +1,6 @@
 package com.bridgex.core.strategies.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
@@ -26,7 +24,8 @@ public class PentlandB2BDeliveryAddressesLookupStrategy extends DefaultB2BDelive
   @Override
   public List<AddressModel> getDeliveryAddressesForOrder(final AbstractOrderModel abstractOrder, final boolean visibleAddressesOnly) {
 
-    final List<AddressModel> addressesForOrder = new ArrayList<>();
+    //collect to set to avoid duplicates
+    final Set<AddressModel> addressesForOrder = new HashSet<>();
 
     final UserModel user = abstractOrder.getUser();
     if (user instanceof B2BCustomerModel) {
@@ -41,7 +40,7 @@ public class PentlandB2BDeliveryAddressesLookupStrategy extends DefaultB2BDelive
       }
     }
 
-    return addressesForOrder;
+    return new ArrayList<>(addressesForOrder);
   }
 
   @Required
