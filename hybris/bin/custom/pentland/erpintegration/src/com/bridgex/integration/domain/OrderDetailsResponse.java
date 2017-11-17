@@ -1,5 +1,6 @@
 package com.bridgex.integration.domain;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Goncharenko Mikhail, created on 01.11.2017.
  */
 public class OrderDetailsResponse {
-  public OrderDetailsResponse() {
-  }
 
   @JsonProperty("E_SDOC_NUMBER")
   private String code;
@@ -23,20 +22,20 @@ public class OrderDetailsResponse {
   private String status;
 
   @JsonProperty("E_CREATION_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date creationTime;
 
   @JsonProperty("E_RDD")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
-  @JsonProperty("E_SDOC_NET_PRICE")
+  @JsonProperty("E_SDOC_NET_VALUE")
   private String netPrice;
 
   @JsonProperty("E_SDOC_TAX_AMOUNT")
   private String taxPrice;
 
-  @JsonProperty("E_SDOC_VALUE")
+  @JsonProperty("E_SDOC_TOT_PRICE")
   private String totalPrice;
 
   @JsonProperty("E_SDOC_CURRENCY")
@@ -75,7 +74,7 @@ public class OrderDetailsResponse {
   @JsonProperty("ET_ORDER_ITEMS")
   private List<OrderEntryDto> orderEntries;
 
-  @JsonProperty("E_SHIP_TO_STREET")
+  @JsonProperty("ET_RETURN")
   private ETReturnDto etReturn;
 
   public String getCode() {
@@ -242,7 +241,9 @@ public class OrderDetailsResponse {
     return etReturn;
   }
 
-  public void setEtReturn(ETReturnDto etReturn) {
-    this.etReturn = etReturn;
+  public void setEtReturn(List<ETReturnDto> etReturn) {
+    if (!etReturn.isEmpty()) {
+      this.etReturn = etReturn.get(0);
+    }
   }
 }

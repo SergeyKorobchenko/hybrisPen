@@ -19,17 +19,17 @@ public class SizeVariantDto {
   @JsonProperty("EAN")
   private String ean;
 
-  @JsonProperty("TOTAL_QUANTITY")
+  @JsonProperty("QUANTITY")
   private String totalQuantity;
 
-  @JsonProperty("E_SHIP_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonProperty("SHIPPED_DATE")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date shipDate;
 
-  @JsonProperty("E_SHIP_AMOUNT")
+  @JsonProperty("SHIPPED_QUANTITY")
   private String shipQty;
 
-  @JsonProperty("E_SHIP_STATUS")
+  @JsonProperty("STATUS")
   private String shipStatus;
 
   public String getLineNumber() {

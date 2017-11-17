@@ -77,6 +77,8 @@
 
 	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
 		<property name="state" type="String"/>
+		<property name="houseNumber" type="String"/>
+		<property name="line3" type="String"/>
 		<property name="displayName" type="String"/>
 	</bean>
 

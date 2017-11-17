@@ -31,9 +31,10 @@ public final class ErpintegrationConstants extends GeneratedErpintegrationConsta
 	public static final String ERP_PASSWORD = "erp.integration.password";
 
 	public static class REQUEST {
-		public static final String DEFAULT_DOC_TYPE = "C";
+		public static final String DEFAULT_DOC_TYPE         = "C";
 		public static final String DEFAULT_SERVICE_CONSUMER = "Hybris_B2B";
-		public static final String DEFAULT_ERP_FLAG_TRUE = "X";
+		public static final String DEFAULT_ERP_FLAG_TRUE    = "X";
+		public static final String DEFAULT_APPLICATION_KEY  = "V3";
 	}
 
 	public static class RESPONSE {

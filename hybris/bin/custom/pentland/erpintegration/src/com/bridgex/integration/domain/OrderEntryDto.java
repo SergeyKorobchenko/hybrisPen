@@ -40,10 +40,10 @@ public class OrderEntryDto {
   private String unit;
 
   @JsonProperty("REQ_DEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
-  @JsonProperty("ET_SCHEDULE_LINE")
+  @JsonProperty("ZSCHEDULE")
   private List<SizeVariantDto> sizeVariants;
 
   public String getEntryNumber() {
