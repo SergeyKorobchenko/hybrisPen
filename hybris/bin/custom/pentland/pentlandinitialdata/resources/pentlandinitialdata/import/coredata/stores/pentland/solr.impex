@@ -102,6 +102,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;                                          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
 ;$solrIndexedType; materialKey            ;string ;            ;    ;    ;    ;true;true;materialKeyValueResolver                  ;              ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
+;$solrIndexedType; upc                    ;string ;            ;    ;    ;    ;true;true;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 #;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
 ;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;styleLevelNameValueResolver            ;    ;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -204,6 +205,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
 ;baseProductCode:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;clearance:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;upc:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 
 # Facet search query properties
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]

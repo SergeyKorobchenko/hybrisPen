@@ -28,7 +28,7 @@ public class MultiBrandCartResponse implements Serializable {
   private List<MaterialInfoDto> materialInfo;
 
   @JsonProperty("ET_RETURN")
-  private ETReturnDto etReturn;
+  private List<ETReturnDto> etReturnList;
 
   public String getSubtotalPrice() {
     return subtotalPrice;
@@ -70,11 +70,11 @@ public class MultiBrandCartResponse implements Serializable {
     this.materialInfo = materialInfo;
   }
 
-  public ETReturnDto getEtReturn() {
-    return etReturn;
+  public List<ETReturnDto> getEtReturn() {
+    return etReturnList;
   }
 
-  public void setEtReturn(ETReturnDto etReturn) {
-    this.etReturn = etReturn;
+  public void setEtReturn(List<ETReturnDto> etReturnList) {
+    this.etReturnList = etReturnList;
   }
 }

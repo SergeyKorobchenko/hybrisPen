@@ -127,3 +127,10 @@ INSERT_UPDATE B2BDocumentType;code[unique=true];name[lang=en];includeInOpenBalan
 ;Debit Note;Debit Note;true;true
 ;Statement;Statement;false;true
 
+INSERT_UPDATE SearchRestriction;code[unique=true];active;
+;b2busergroup_restriction;false
+;branch_restriction;false
+;employee_restriction;false
+;costcenter_restriction;false
+;budget_restriction;false
+;b2border_restriction;false

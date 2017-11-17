@@ -42,9 +42,7 @@
                                                         <input type="hidden" name="selectedAddressCode" value="${fn:escapeXml(deliveryAddress.id)}" />
                                                         <ul>
                                                             <li>
-                                                                <strong>${fn:escapeXml(deliveryAddress.title)}&nbsp;
-                                                                        ${fn:escapeXml(deliveryAddress.firstName)}&nbsp;
-                                                                        ${fn:escapeXml(deliveryAddress.lastName)}</strong>
+                                                                <strong>${fn:escapeXml(deliveryAddress.displayName)}</strong>
                                                                 <br>
                                                                     ${fn:escapeXml(deliveryAddress.line1)}&nbsp;
                                                                     ${fn:escapeXml(deliveryAddress.line2)}

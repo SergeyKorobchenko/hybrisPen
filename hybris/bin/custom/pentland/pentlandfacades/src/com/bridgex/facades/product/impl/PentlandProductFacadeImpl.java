@@ -20,6 +20,7 @@ import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.integration.constants.ErpintegrationConstants;
+import com.bridgex.integration.domain.ETReturnDto;
 import com.bridgex.integration.domain.MaterialInfoDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartInput;
@@ -82,7 +83,19 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   }
 
   protected boolean successResponse(final MultiBrandCartResponse response) {
-    return response.getEtReturn() == null || (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(response.getEtReturn().getType())) || (ErpintegrationConstants.RESPONSE.ET_RETURN.INFO_TYPE.equals(response.getEtReturn().getType()));
+    boolean result = true;
+    final List<ETReturnDto> returnList = response.getEtReturn();
+    if (CollectionUtils.isNotEmpty(returnList)) {
+      for (final ETReturnDto returnDto : returnList) {
+        if (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(returnDto.getType())) {
+          return true;
+        }
+        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType()) || ErpintegrationConstants.RESPONSE.ET_RETURN.WARNING_TYPE.equals(returnDto.getType())) {
+          result = false;
+        }
+      }
+    }
+    return result;
   }
 
   private MultiBrandCartDto createSimulateOrderRequest(final List<ProductData> products) {
