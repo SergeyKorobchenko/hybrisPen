@@ -222,9 +222,7 @@
 		<property name="b2bDocumentConverter" ref="b2bDocumentConverter" />
 		<property name="b2bDocumentPaymentInfoConverter" ref="b2bDocumentPaymentInfoConverter" />
 		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
-		<property name="accountSummaryService" ref="pentlandAccountSummaryService"/>
-		<property name="b2BCustomerService" ref="b2bCustomerService"/>
-
+		<property name="pentlandIntegrationService" ref="pentlandAccountSummaryService"/>
 		<property name="accountSummaryInfoConverter" ref="accountSummaryInfoConverter"/>
 	</bean>
 

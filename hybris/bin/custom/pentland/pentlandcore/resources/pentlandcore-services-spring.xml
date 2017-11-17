@@ -74,12 +74,13 @@
 	</bean>
 
 	<alias name="defaultPentlandOrderDetailsService" alias="pentlandOrderDetailsService"/>
-	<bean id="defaultPentlandOrderDetailsService" class="com.bridgex.core.integration.impl.DefaultPentlandOrderDetailsService">
+	<bean id="defaultPentlandOrderDetailsService" class="com.bridgex.core.integration.impl.PentlandOrderDetailsService">
 		<property name="integrationService" ref="orderDetailsIntegrationService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
 	<alias name="defaultPentlandInvoicePDFService" alias="pentlandInvoicePDFService"/>
-	<bean id="defaultPentlandInvoicePDFService" class="com.bridgex.core.integration.impl.DefaultPentlandInvoicePDFService">
+	<bean id="defaultPentlandInvoicePDFService" class="com.bridgex.core.integration.impl.PentlandInvoicePDFService">
 		<property name="integrationService" ref="invoicePDFService"/>
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
@@ -101,8 +102,8 @@
 	</bean>
 
 	<alias name="defaultPentlandAccountSummaryService" alias="pentlandAccountSummaryService"/>
-	<bean id="defaultPentlandAccountSummaryService" class="com.bridgex.core.customer.impl.DefaultPentlandAccountSummaryService">
-		<property name="integrationService" ref="accountSummaryService"/>
+	<bean id="defaultPentlandAccountSummaryService" class="com.bridgex.core.integration.impl.PentlandAccountSummaryService">
+		<property name="integrationService" ref="pentlandIntegrationService"/>
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 

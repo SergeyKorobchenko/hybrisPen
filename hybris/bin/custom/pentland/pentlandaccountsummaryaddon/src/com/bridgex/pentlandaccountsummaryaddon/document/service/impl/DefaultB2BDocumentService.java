@@ -20,7 +20,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.bridgex.core.integration.PentlandInvoicePDFService;
+import com.bridgex.core.integration.PentlandIntegrationService;
 import com.bridgex.integration.domain.DocumentDto;
 import com.bridgex.integration.domain.DocumentResponse;
 import com.bridgex.pentlandaccountsummaryaddon.document.AccountSummaryDocumentQuery;
@@ -49,11 +49,11 @@ import de.hybris.platform.servicelayer.search.SearchResult;
  */
 public class DefaultB2BDocumentService implements B2BDocumentService
 {
-	private PagedB2BDocumentDao       pagedB2BDocumentDao;
-	private B2BDocumentDao            b2bDocumentDao;
-	private ModelService              modelService;
-	private PentlandInvoicePDFService invoicePDFService;
-	private MediaService              mediaService;
+	private PagedB2BDocumentDao        pagedB2BDocumentDao;
+	private B2BDocumentDao             b2bDocumentDao;
+	private ModelService               modelService;
+	private PentlandIntegrationService<DocumentDto,DocumentResponse> invoicePDFService;
+	private MediaService               mediaService;
 
 	private static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.document.service.impl.DefaultB2BDocumentService.class.getName());
 
@@ -99,7 +99,7 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 	}
 
 	@Required
-	public void setInvoicePDFService(PentlandInvoicePDFService invoicePDFService) {
+	public void setInvoicePDFService(PentlandIntegrationService<DocumentDto, DocumentResponse> invoicePDFService) {
 		this.invoicePDFService = invoicePDFService;
 	}
 

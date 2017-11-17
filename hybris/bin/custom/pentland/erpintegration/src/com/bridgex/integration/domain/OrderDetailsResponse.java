@@ -10,8 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Goncharenko Mikhail, created on 01.11.2017.
  */
 public class OrderDetailsResponse {
-  public OrderDetailsResponse() {
-  }
 
   @JsonProperty("E_SDOC_NUMBER")
   private String code;
@@ -242,7 +240,7 @@ public class OrderDetailsResponse {
     return etReturn;
   }
 
-  public void setEtReturn(ETReturnDto etReturn) {
-    this.etReturn = etReturn;
+  public void setEtReturn(List<ETReturnDto> etReturn) {
+    this.etReturn = etReturn.get(0);
   }
 }

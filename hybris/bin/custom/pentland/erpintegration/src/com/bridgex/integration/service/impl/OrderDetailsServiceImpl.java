@@ -21,6 +21,7 @@ public class OrderDetailsServiceImpl extends AbstractIntegrationService<OrderDet
   public ResponseEntity<OrderDetailsResponse> sendRequest(OrderDetailsDto requestDto, Class responseClass) {
     requestDto.setServiceConsumer(ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER);
     requestDto.setCustomerViewFlag(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
+    requestDto.setOrderType(ErpintegrationConstants.REQUEST.DEFAULT_DOC_TYPE);
     return super.sendRequest(requestDto, responseClass);
   }
 

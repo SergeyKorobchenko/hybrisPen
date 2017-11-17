@@ -6,14 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Goncharenko Mikhail, created on 01.11.2017.
  */
 public class OrderDetailsDto {
-  public OrderDetailsDto() {
-  }
 
   @JsonProperty("I_SDOC_NUMBER")
   private String orderCode;
-
-  @JsonProperty("I_SERVICE_CONSUMER")
-  private String serviceConsumer;
 
   @JsonProperty("I_VBTYP")
   private String orderType;
@@ -30,14 +25,6 @@ public class OrderDetailsDto {
 
   public void setOrderCode(String orderCode) {
     this.orderCode = orderCode;
-  }
-
-  public String getServiceConsumer() {
-    return serviceConsumer;
-  }
-
-  public void setServiceConsumer(String serviceConsumer) {
-    this.serviceConsumer = serviceConsumer;
   }
 
   public String getOrderType() {

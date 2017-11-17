@@ -22,10 +22,11 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.bridgex.core.customer.PentlandAccountSummaryService;
-import com.bridgex.core.integration.PentlandInvoicePDFService;
+import com.bridgex.core.integration.PentlandIntegrationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
+import com.bridgex.integration.domain.AccountSummaryDto;
 import com.bridgex.integration.domain.AccountSummaryResponse;
+import com.bridgex.integration.domain.BrandDto;
 import com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants;
 import com.bridgex.pentlandaccountsummaryaddon.data.AccountSummaryInfoData;
 import com.bridgex.pentlandaccountsummaryaddon.document.AmountRange;
@@ -48,16 +49,13 @@ import de.hybris.platform.b2b.company.B2BCommerceUnitService;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.b2b.services.B2BCustomerService;
-import de.hybris.platform.b2b.services.impl.DefaultB2BCustomerService;
 import de.hybris.platform.b2bacceleratorfacades.exception.EntityValidationException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.search.SearchResult;
-import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 /**
  * Default implementation of the B2BAccountSummary facade
@@ -65,16 +63,14 @@ import de.hybris.platform.servicelayer.util.ServicesUtil;
 public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
   protected static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.facade.impl.DefaultB2BAccountSummaryFacade.class);
 
-  private B2BDocumentPaymentInfoService                                      b2bDocumentPaymentInfoService;
-  private B2BDocumentService                                                 b2bDocumentService;
-  private B2BDocumentTypeService                                             b2bDocumentTypeService;
-  private B2BCommerceUnitService                                             b2BCommerceUnitService;
-  private Converter<B2BDocumentModel, B2BDocumentData>                       b2bDocumentConverter;
-  private Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> b2bDocumentPaymentInfoConverter;
-  private Converter<AccountSummaryResponse, AccountSummaryInfoData>          accountSummaryInfoConverter;
-  private PentlandAccountSummaryService                                      accountSummaryService;
-  private B2BCustomerService<B2BCustomerModel, B2BUnitModel>                 b2BCustomerService;
-  private PentlandB2BUnitService                                             b2BUnitService;
+  private B2BDocumentPaymentInfoService                                         b2bDocumentPaymentInfoService;
+  private B2BDocumentService                                                    b2bDocumentService;
+  private B2BDocumentTypeService                                                b2bDocumentTypeService;
+  private Converter<B2BDocumentModel, B2BDocumentData>                          b2bDocumentConverter;
+  private Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData>    b2bDocumentPaymentInfoConverter;
+  private Converter<AccountSummaryResponse, AccountSummaryInfoData>             accountSummaryInfoConverter;
+  private PentlandIntegrationService<AccountSummaryDto, AccountSummaryResponse> pentlandIntegrationService;
+  private PentlandB2BUnitService                                                b2BUnitService;
 
   @Override
   public AccountSummaryInfoData getAccountSummaryInfoData()
@@ -82,8 +78,21 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
     List<B2BUnitModel> brands = b2BUnitService.getCurrentUnits();
     String sapId = brands.iterator().next().getSapID();
     List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).collect(Collectors.toList());
-    AccountSummaryResponse response = accountSummaryService.getAccountSummaryInfo(sapId, sapBrands);
+    AccountSummaryResponse response = pentlandIntegrationService.requestData(createAccountSummaryRequest(sapId, sapBrands));
     return getAccountSummaryInfoConverter().convert(response);
+  }
+
+  private AccountSummaryDto createAccountSummaryRequest(String sapCustomerId, List<String> sapBrand) {
+    AccountSummaryDto dto = new AccountSummaryDto();
+    dto.setSapCustomerId(sapCustomerId);
+
+    dto.setBrands(sapBrand.stream().map(br -> {
+      BrandDto brand = new BrandDto();
+      brand.setBrand(br);
+      return brand;
+    }).collect(Collectors.toList()));
+
+    return dto;
   }
 
   @Override
@@ -192,95 +201,6 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
     return result;
   }
 
-  @Required
-  public void setB2bDocumentPaymentInfoConverter(final Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> converter)
-  {
-    this.b2bDocumentPaymentInfoConverter = converter;
-  }
-
-  public Converter<B2BDocumentModel, B2BDocumentData> getB2bDocumentConverter()
-  {
-    return b2bDocumentConverter;
-  }
-
-  @Required
-  public void setB2bDocumentConverter(final Converter<B2BDocumentModel, B2BDocumentData> b2bDocumentConverter)
-  {
-    this.b2bDocumentConverter = b2bDocumentConverter;
-  }
-
-  @Required
-  public void setB2bDocumentService(final B2BDocumentService b2bDocumentService)
-  {
-    this.b2bDocumentService = b2bDocumentService;
-  }
-
-  @Required
-  public void setB2bDocumentPaymentInfoService(final B2BDocumentPaymentInfoService service)
-  {
-    this.b2bDocumentPaymentInfoService = service;
-  }
-
-  public void setB2bDocumentTypeService(final B2BDocumentTypeService b2bDocumentTypeService)
-  {
-    this.b2bDocumentTypeService = b2bDocumentTypeService;
-  }
-
-  public PentlandAccountSummaryService getAccountSummaryService() {
-    return accountSummaryService;
-  }
-
-  @Required
-  public void setAccountSummaryService(PentlandAccountSummaryService accountSummaryService) {
-    this.accountSummaryService = accountSummaryService;
-  }
-
-  public B2BCustomerService<B2BCustomerModel, B2BUnitModel> getB2BCustomerService() {
-    return b2BCustomerService;
-  }
-
-  @Required
-  public void setB2BCustomerService(B2BCustomerService<B2BCustomerModel, B2BUnitModel> b2BCustomerService) {
-    this.b2BCustomerService = b2BCustomerService;
-  }
-
-  @Override
-  public SearchResult<B2BDocumentTypeModel> getAllDocumentTypes()
-  {
-    return b2bDocumentTypeService.getAllDocumentTypes();
-  }
-
-  @Override
-  public List<B2BDocumentPaymentInfoData> getDocumentPaymentInfo(final String documentNumber)
-  {
-    final SearchResult<B2BDocumentPaymentInfoModel> result = b2bDocumentPaymentInfoService.getDocumentPaymentInfo(documentNumber);
-    return Converters.convertAll(result.getResult(), b2bDocumentPaymentInfoConverter);
-  }
-
-  @Override
-  public void applyDragAndDropActions(final List<B2BDragAndDropData> lstActions)
-  {
-    b2bDocumentPaymentInfoService.applyPayment(lstActions);
-
-  }
-
-  public PentlandB2BUnitService getB2BUnitService() {
-    return b2BUnitService;
-  }
-
-  @Required
-  public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
-    this.b2BUnitService = b2BUnitService;
-  }
-
-  public Converter<AccountSummaryResponse, AccountSummaryInfoData> getAccountSummaryInfoConverter()
-  {
-    return accountSummaryInfoConverter;
-  }
-
-  public void setAccountSummaryInfoConverter(final Converter<AccountSummaryResponse, AccountSummaryInfoData> accountSummaryInfoConverter) {
-    this.accountSummaryInfoConverter = accountSummaryInfoConverter;
-  }
 
   @Override
   public SearchPageData<B2BDocumentData> getPagedDocumentsForUnit(final String b2bUnitCode,
@@ -318,6 +238,86 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
     media.setDownloadURL(mediaModel.getDownloadURL());
     media.setRealFileName(mediaModel.getRealFileName());
     return media;
+  }
+
+  @Override
+  public SearchResult<B2BDocumentTypeModel> getAllDocumentTypes()
+  {
+    return b2bDocumentTypeService.getAllDocumentTypes();
+  }
+
+  @Override
+  public List<B2BDocumentPaymentInfoData> getDocumentPaymentInfo(final String documentNumber)
+  {
+    final SearchResult<B2BDocumentPaymentInfoModel> result = b2bDocumentPaymentInfoService.getDocumentPaymentInfo(documentNumber);
+    return Converters.convertAll(result.getResult(), b2bDocumentPaymentInfoConverter);
+  }
+
+  @Override
+  public void applyDragAndDropActions(final List<B2BDragAndDropData> lstActions) {
+    b2bDocumentPaymentInfoService.applyPayment(lstActions);
+
+  }
+
+
+  @Required
+  public void setB2bDocumentPaymentInfoConverter(final Converter<B2BDocumentPaymentInfoModel, B2BDocumentPaymentInfoData> converter)
+  {
+    this.b2bDocumentPaymentInfoConverter = converter;
+  }
+
+  public Converter<B2BDocumentModel, B2BDocumentData> getB2bDocumentConverter()
+  {
+    return b2bDocumentConverter;
+  }
+
+  @Required
+  public void setB2bDocumentConverter(final Converter<B2BDocumentModel, B2BDocumentData> b2bDocumentConverter)
+  {
+    this.b2bDocumentConverter = b2bDocumentConverter;
+  }
+
+  @Required
+  public void setB2bDocumentService(final B2BDocumentService b2bDocumentService)
+  {
+    this.b2bDocumentService = b2bDocumentService;
+  }
+
+  @Required
+  public void setB2bDocumentPaymentInfoService(final B2BDocumentPaymentInfoService service)
+  {
+    this.b2bDocumentPaymentInfoService = service;
+  }
+
+  public void setB2bDocumentTypeService(final B2BDocumentTypeService b2bDocumentTypeService)
+  {
+    this.b2bDocumentTypeService = b2bDocumentTypeService;
+  }
+
+  public PentlandIntegrationService<AccountSummaryDto, AccountSummaryResponse> getPentlandIntegrationService() {
+    return pentlandIntegrationService;
+  }
+
+  public void setPentlandIntegrationService(PentlandIntegrationService<AccountSummaryDto, AccountSummaryResponse> pentlandIntegrationService) {
+    this.pentlandIntegrationService = pentlandIntegrationService;
+  }
+
+  public PentlandB2BUnitService getB2BUnitService() {
+    return b2BUnitService;
+  }
+
+  @Required
+  public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
+    this.b2BUnitService = b2BUnitService;
+  }
+
+  public Converter<AccountSummaryResponse, AccountSummaryInfoData> getAccountSummaryInfoConverter()
+  {
+    return accountSummaryInfoConverter;
+  }
+
+  public void setAccountSummaryInfoConverter(final Converter<AccountSummaryResponse, AccountSummaryInfoData> accountSummaryInfoConverter) {
+    this.accountSummaryInfoConverter = accountSummaryInfoConverter;
   }
 
 }
