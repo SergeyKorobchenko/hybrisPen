@@ -1,5 +1,6 @@
 package com.bridgex.core.customer.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import de.hybris.platform.b2b.model.B2BUnitModel;
@@ -16,6 +17,6 @@ import de.hybris.platform.store.BaseStoreModel;
  */
 public interface PentlandCustomerAccountDao extends CustomerAccountDao {
 
-  SearchPageData<OrderModel> findOrdersByB2BUnitsAndStore(Set<B2BUnitModel> b2bUntis, BaseStoreModel store, OrderStatus[] status, PageableData pageableData);
+  SearchPageData<OrderModel> findOrdersByB2BUnitsAndStore(List<B2BUnitModel> b2bUntis, BaseStoreModel store, OrderStatus[] status, PageableData pageableData);
 
 }
