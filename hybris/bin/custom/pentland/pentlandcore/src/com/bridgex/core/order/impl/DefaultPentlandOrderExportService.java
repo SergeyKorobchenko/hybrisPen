@@ -22,13 +22,13 @@ import de.hybris.platform.servicelayer.model.ModelService;
  */
 public class DefaultPentlandOrderExportService implements PentlandOrderExportService{
 
-  private IntegrationService<MultiBrandCartDto, ExportOrderResponse> orderExportService;
+  private IntegrationService<OrderExportDto, ExportOrderResponse> orderExportService;
   private ModelService                                               modelService;
 
   @Override
   public boolean exportOrder(OrderModel orderModel) {
 
-    MultiBrandCartDto request = createOrderExportRequest(orderModel);
+    OrderExportDto request = createOrderExportRequest(orderModel);
     ResponseEntity<ExportOrderResponse> exportOrderResponseResponseEntity = orderExportService.sendRequest(request, ExportOrderResponse.class);
 
     if(HttpStatus.OK.equals(exportOrderResponseResponseEntity.getStatusCode())){
@@ -44,7 +44,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     return false;
   }
 
-  private MultiBrandCartDto createOrderExportRequest(OrderModel orderModel) {
+  private OrderExportDto createOrderExportRequest(OrderModel orderModel) {
     OrderExportDto request = new OrderExportDto();
     request.setDocNumber(orderModel.getCode());
     return request;
@@ -82,7 +82,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   }
 
   @Required
-  public void setOrderExportService(IntegrationService<MultiBrandCartDto, ExportOrderResponse> orderExportService) {
+  public void setOrderExportService(IntegrationService<OrderExportDto, ExportOrderResponse> orderExportService) {
     this.orderExportService = orderExportService;
   }
 
