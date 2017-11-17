@@ -40,7 +40,7 @@ public class DefaultB2BDocumentDao extends DefaultGenericDao<B2BDocumentModel> i
 
 	private static final String FIND_DOCUMENT_BY_NUMBER = "SELECT {" + B2BDocumentModel._TYPECODE + ":pk}  FROM { "
 	    + B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + "}"
-	    + " where {" + B2BDocumentModel.DOCUMENTNUMBER + " = ?documentNumber";
+	    + " where {" + B2BDocumentModel.DOCUMENTNUMBER + "} = ?documentNumber";
 
 	private static final String FIND_DOCUMENT_BY_DOCUMENT_MEDIA = "SELECT {" + B2BDocumentModel._TYPECODE + ":pk}  FROM { "
 			+ B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + "} where {" + B2BDocumentModel._TYPECODE

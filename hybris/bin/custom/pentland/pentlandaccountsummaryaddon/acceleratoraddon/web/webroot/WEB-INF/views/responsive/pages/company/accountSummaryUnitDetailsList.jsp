@@ -9,8 +9,14 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<jsp:useBean id="searchPageData" scope="request"
+             type="de.hybris.platform.commerceservices.search.pagedata.SearchPageData<com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentData>"/>
+
 <c:set var="searchUrl" value="/my-company/account-summary/"/>
 <spring:url var="accountSummaryUnitDetailsUrl" value="${searchUrl}" htmlEscape="false"/>
+
+<c:set var="getDocumentUrl" value="document/"/>
+
 <c:set var="searchUrlWithParams"
        value="${searchUrl}?unit=${ycommerce:encodeUrl(accountSummaryInfoData)}&sort=${searchPageData.pagination.sort}
 &documentTypeCode=${ycommerce:encodeUrl(criteriaData.documentTypeCode)}&startRange=${ycommerce:encodeUrl(criteriaData.startRange)}&endRange=${ycommerce:encodeUrl(criteriaData.endRange)}
@@ -32,6 +38,8 @@
 <div class="section-headline">
 	<spring:theme code="text.company.accountsummary.documents.label"/>
 </div>
+
+<%--
 
 <div class="row">
 	<form:form id="filterByCriteriaForm" action="${accountSummaryUnitDetailsUrl}" method="get" class="clearfix account-summary-filter">
@@ -133,6 +141,7 @@
 		</c:if>
 	</form:form>
 </div>
+--%>
 
 <c:choose>
 	<c:when test="${empty searchPageData.results}">
@@ -156,7 +165,6 @@
                             <th><spring:theme code="text.company.accountsummary.date.label"/></th>
                             <th><spring:theme code="text.company.accountsummary.dueDate.label"/></th>
                             <th><spring:theme code="text.company.accountsummary.amount.label"/></th>
-                            <th><spring:theme code="text.company.accountsummary.openAmount.label"/></th>
                             <th><spring:theme code="text.company.accountsummary.status.label"/></th>
                             <th><spring:theme code="text.company.accountsummary.document.attachment.label"/></th>
                         </tr>
@@ -193,12 +201,6 @@
                                         ${fn:escapeXml(result.formattedAmount)}
                                     </td>
                                     <td class="hidden-sm hidden-md hidden-lg">
-                                        <spring:theme code="text.company.accountsummary.openAmount.label"/>
-                                    </td>
-                                    <td class="responsive-table-cell">
-                                        ${fn:escapeXml(result.formattedOpenAmount)}
-                                    </td>
-                                    <td class="hidden-sm hidden-md hidden-lg">
                                         <spring:theme code="text.company.accountsummary.status.label"/>
                                     </td>
                                     <td class="responsive-table-cell">
@@ -208,11 +210,18 @@
                                         <spring:theme code="text.company.accountsummary.document.attachment.label"/>
                                     </td>
                                     <td class="responsive-table-cell">
-                                        <c:if test="${not empty result.documentMedia.downloadURL}">
-                                            <a class="download-lnk" href="${result.documentMedia.downloadURL }" target="_blank">
-                                                <spring:theme code="text.company.accountsummary.document.attachment.view.label"/>
-                                            </a>
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${not empty result.documentMedia.downloadURL}">
+                                                <a class="download-lnk" href="${result.documentMedia.downloadURL}" target="_blank">
+                                                    <spring:theme code="text.company.accountsummary.document.attachment.view.label"/>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="req-doc-link" href="${getDocumentUrl}${result.documentNumber}/">
+                                                    <spring:theme code="text.company.accountsummary.document.attachment.view.label"/>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                             </tr>
                         </c:forEach>

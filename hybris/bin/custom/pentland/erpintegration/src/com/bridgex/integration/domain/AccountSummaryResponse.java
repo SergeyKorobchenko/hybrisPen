@@ -3,6 +3,7 @@ package com.bridgex.integration.domain;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * @author Goncharenko Mikhail, created on 09.11.2017.
@@ -138,6 +139,7 @@ public class AccountSummaryResponse {
   }
 
   public void setEtReturn(List<ETReturnDto> etReturn) {
+    if (etReturn.isEmpty()) return;
     this.etReturn = etReturn.get(0);
   }
 }

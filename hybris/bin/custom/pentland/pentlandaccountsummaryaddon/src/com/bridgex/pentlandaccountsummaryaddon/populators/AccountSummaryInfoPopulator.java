@@ -11,7 +11,9 @@
 package com.bridgex.pentlandaccountsummaryaddon.populators;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
 import com.bridgex.integration.domain.AccountSummaryDetailsDto;
@@ -26,6 +28,7 @@ import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 
 public class AccountSummaryInfoPopulator implements Populator<AccountSummaryResponse, AccountSummaryInfoData>
@@ -49,39 +52,41 @@ public class AccountSummaryInfoPopulator implements Populator<AccountSummaryResp
 		target.setId(source.getSapCustomerId());
 		target.setName(source.getSapCustomerName());
 
-		populateBalanceData(source, target);
+		CurrencyModel currency = getCurrency(source);
+
+		populateBalanceData(source, target, currency);
+		populateCreditData(source, target, currency);
 		populateAddressData(source, target);
-		populateCreditData(source, target);
 	}
 
-	private void populateCreditData(AccountSummaryResponse source, AccountSummaryInfoData target) {
-		CurrencyModel currency = commonI18NService.getCurrency(source.getDetails().iterator().next().getCurrency());
+	private void populateCreditData(AccountSummaryResponse source, AccountSummaryInfoData target, CurrencyModel currency) {
+		Set<String> creditReps = new HashSet<>();
+		Map<String, String> creditLimits = source.getDetails().stream().
+			collect(Collectors.groupingBy(AccountSummaryDetailsDto::getBrandName,
+			                              Collectors.collectingAndThen(Collectors.summingDouble((k -> parseDoubleValue(k.getCreditLimit()))),
+			                                                           v-> amountFormatter.formatAmount(v,currency))));
 
-		List<String> creditLines = new ArrayList<>();
-		List<String> creditReps = new ArrayList<>();
 		for (AccountSummaryDetailsDto detail : source.getDetails()) {
-			creditLines.add(detail.getBrandName() + DASH_SEPERATOR + amountFormatter.formatAmount(detail.getCreditLimit(), currency));
-			creditReps.add(detail.getBrandName() + DASH_SEPERATOR + detail.getCreditRep());
+			if (StringUtils.isNotBlank(detail.getCreditRep())) {
+				creditReps.add(detail.getBrandName() + DASH_SEPERATOR + detail.getCreditRep());
+			}
 		}
-
-		target.setCreditReps(creditReps);
-		target.setFormattedCreditLimits(creditLines);
+		target.setCreditReps(new ArrayList<>(creditReps));
+		target.setFormattedCreditLimits(creditLimits);
 	}
 
-	private void populateBalanceData(AccountSummaryResponse source, AccountSummaryInfoData target) {
-		CurrencyModel currency = commonI18NService.getCurrency(source.getDetails().iterator().next().getCurrency());
+	private void populateBalanceData(AccountSummaryResponse source, AccountSummaryInfoData target, CurrencyModel currency) {
 		B2BAmountBalanceData balanceData = new B2BAmountBalanceData();
 
 		double cur = 0, past = 0, open = 0, d1to30 = 0, d30to60 = 0, d60to90 = 0, d90over = 0;
-
 		for (AccountSummaryDetailsDto detail : source.getDetails()) {
-			cur += Double.parseDouble(detail.getCurrentBalance());
-			past += Double.parseDouble(detail.getPastDueBalance());
-			open += Double.parseDouble(detail.getOpenBalance());
-			d1to30 += Double.parseDouble(detail.getDays1to30());
-			d30to60 += Double.parseDouble(detail.getDays31to60());
-			d60to90 += Double.parseDouble(detail.getDays61to90());
-			d90over += Double.parseDouble(detail.getDaysOver90());
+			cur += parseDoubleValue(detail.getCurrentBalance());
+			past += parseDoubleValue(detail.getPastDueBalance());
+			open += parseDoubleValue(detail.getOpenBalance());
+			d1to30 += parseDoubleValue(detail.getDays1to30());
+			d30to60 += parseDoubleValue(detail.getDays31to60());
+			d60to90 += parseDoubleValue(detail.getDays61to90());
+			d90over += parseDoubleValue(detail.getDaysOver90());
 		}
 
 		balanceData.setCurrentBalance(getAmountFormatter().formatAmount(cur, currency));
@@ -96,6 +101,26 @@ public class AccountSummaryInfoPopulator implements Populator<AccountSummaryResp
 
 		balanceData.setDueBalance(dueBalance);
 		target.setAmountBalanceData(balanceData);
+	}
+
+	private static double parseDoubleValue(String currentBalance) {
+		try {
+			return Double.parseDouble(currentBalance);
+		} catch (NumberFormatException e) {
+			return 0D;
+		}
+	}
+
+	private CurrencyModel getCurrency(AccountSummaryResponse source) {
+		try {
+			return source.getDetails().stream()
+			      .map(AccountSummaryDetailsDto::getCurrency)
+			      .filter(StringUtils::isNotBlank)
+			      .findAny()
+			      .map(s -> commonI18NService.getCurrency(s)).orElseGet(() -> commonI18NService.getCurrentCurrency());
+		} catch (UnknownIdentifierException e) {
+			return commonI18NService.getCurrentCurrency();
+		}
 	}
 
 	private void populateAddressData(AccountSummaryResponse source, AccountSummaryInfoData target) {

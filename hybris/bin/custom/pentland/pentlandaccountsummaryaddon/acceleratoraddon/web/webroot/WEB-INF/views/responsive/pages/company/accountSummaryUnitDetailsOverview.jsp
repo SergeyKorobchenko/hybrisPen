@@ -44,7 +44,7 @@
                 	<span class="item-label"><spring:theme code="text.company.accountsummary.creditline.label"/></span>
                     <span class="item-value">
 					    <c:forEach var="creditLimitLine" items="${accountSummaryInfoData.formattedCreditLimits}">
-                            ${fn:escapeXml(creditLimitLine)}<br/>
+                            ${fn:escapeXml(creditLimitLine.key)} &mdash; ${fn:escapeXml(creditLimitLine.value)}<br/>
                         </c:forEach>
 					</span>
                 </div>
@@ -81,14 +81,17 @@
         </div>
 
         <div class="col-md-5 col-lg-4 item-wrapper clearfix">
-            <div class="framed">
-                    <span class="item-label">
+                            <span class="item-label">
                         <spring:theme code="text.company.accountsummary.days.label"/>
                     </span>
+            <div class="framed">
+                    <c:forEach items="${accountSummaryInfoData.amountBalanceData.dueBalance}" var="range">
+                        <span class="item-label">
+                                ${fn:escapeXml(range.key)}
+                        </span>
 
-                        <c:forEach items="${accountSummaryInfoData.amountBalanceData.dueBalance}" var="range">
-                            <span class="item-value">
-                            ${fn:escapeXml(range.key)} &mdash; ${fn:escapeXml(range.value)}<br/>
+                        <span class="item-value">
+                             ${fn:escapeXml(range.value)}
                             </span>
                         </c:forEach>
 

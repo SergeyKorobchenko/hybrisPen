@@ -60,5 +60,5 @@ INSERT_UPDATE B2BDocument;documentnumber[unique=true];Unit(uid);amount;currency(
 ;POCR-0000002;Custom Retail;50945,36;USD;2014-06-10;Purchase Order;;50945,36;open:DocumentStatus;;mitreTestB2B
 ;POCR-0000003;Custom Retail;82005,11;USD;2014-06-10;Purchase Order;;82005,11;open:DocumentStatus;;mitreTestB2B
 ;POCR-0000004;Custom Retail;31751,03;USD;2014-06-10;Purchase Order;;31751,03;open:DocumentStatus;;mitreTestB2B
-;92143943;Pronto Services;965313,41;USD;2014-11-22;Statement;2014-11-22;965313,41;closed:DocumentStatus;;mitreTestB2B
-;92143942;Pronto Services;1015987,67;USD;2014-11-25;Statement;2014-11-25;1015987,67;open:DocumentStatus;;mitreTestB2B
+;92143943;Pronto Services;965313,41;USD;2014-11-22;Statement;2014-11-22;965313,41;closed:DocumentStatus;;107660
+;92143942;Pronto Services;1015987,67;USD;2014-11-25;Statement;2014-11-25;1015987,67;open:DocumentStatus;;107660

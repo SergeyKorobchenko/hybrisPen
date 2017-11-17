@@ -199,6 +199,7 @@
 		<property name="b2bDocumentDao" ref="b2bDocumentDao" />
 		<property name="modelService" ref="modelService" />
 		<property name="invoicePDFService" ref="pentlandInvoicePDFService" />
+		<property name="mediaService" ref="mediaService"/>
 	</bean>
 	
 	<alias name="defaultB2BDocumentPaymentInfoService" alias="b2bDocumentPaymentInfoService" />

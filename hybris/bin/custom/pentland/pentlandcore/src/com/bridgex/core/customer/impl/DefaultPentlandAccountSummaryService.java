@@ -32,8 +32,10 @@ public class DefaultPentlandAccountSummaryService implements PentlandAccountSumm
   }
 
   private void checkRequestSuccess(AccountSummaryResponse response) {
-    if (response.getEtReturn().getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
-      throw new ResourceAccessException("ERP request failed with response: " + response.getEtReturn().getMessage());
+    if (response.getEtReturn() != null) {
+      if (response.getEtReturn().getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
+        throw new ResourceAccessException("ERP request failed with response: " + response.getEtReturn().getMessage());
+      }
     }
   }
 

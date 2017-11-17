@@ -70,14 +70,8 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 	@Resource(name = "b2bAccountSummaryFacade")
 	protected B2BAccountSummaryFacade b2bAccountSummaryFacade;
 
-	@Resource(name = "b2bUnitFacade")
-	protected B2BUnitFacade b2bUnitFacade;
-
 	@Resource(name = "filterByList")
 	private Map<String, DefaultCriteria> filterByList;
-
-	@Resource(name = "customerFacade")
-	protected CustomerFacade customerFacade;
 
 	@Resource
 	private Map<String, CriteriaValidator> validatorMapping;
@@ -184,7 +178,7 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 		return filterByCriteriaData;
 	}
 
-	@RequestMapping(value = ACCOUNTSUMMARY_UNIT_URL + "document/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = ACCOUNTSUMMARY_UNIT_URL + "document/{id}")
 	@RequireHardLogIn
 	@ResponseBody
 	public MediaData requestDocumentMedia(@PathVariable String id,

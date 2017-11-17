@@ -18,6 +18,25 @@ ACC.accountsummary = {
 			window.location = sUrl;
 		});
 	},
+
+	addDocumentLoaders: function () {
+		$(".req-doc-link").click(function(event) {
+			event.preventDefault();
+			var link = $(this);
+			link.text('load...');
+			$.ajax(link.attr('href'), {
+				success: function (response) {
+					link.attr('href', response.downloadURL);
+					link.off();
+                    link.text('View');
+					window.open(response.downloadURL, '_self');
+                },
+				error: function (response) {
+                    link.text('Try again');
+                }
+            });
+        });
+    },
 	
 	filterByCriteria: function(){
 		$(document).on("change", "select#filterByKey", function(){
@@ -88,9 +107,11 @@ ACC.accountsummary = {
 };
 
 $(document).ready(function (){
+	ACC.accountsummary.addDocumentLoaders();
 	ACC.accountsummary.defaultFilterByKey = $("#filterByKey").find("option:selected").attr('id');
 	if (ACC.accountsummary.defaultFilterByKey != undefined) {
 		ACC.accountsummary.showHideFilterKey();
 		ACC.accountsummary.addRemoveDatePickerClass();
+
 	}
 });

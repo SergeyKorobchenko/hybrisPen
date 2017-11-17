@@ -81,7 +81,7 @@
 	<alias name="defaultPentlandInvoicePDFService" alias="pentlandInvoicePDFService"/>
 	<bean id="defaultPentlandInvoicePDFService" class="com.bridgex.core.integration.impl.DefaultPentlandInvoicePDFService">
 		<property name="integrationService" ref="invoicePDFService"/>
-		<property name="mediaService" ref="mediaService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
 	<alias name="defaultPentlandCommerceCheckoutService" alias="pentlandCommerceCheckoutService"/>

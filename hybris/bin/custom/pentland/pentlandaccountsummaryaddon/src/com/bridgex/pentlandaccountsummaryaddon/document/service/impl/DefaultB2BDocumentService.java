@@ -14,8 +14,11 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfAnyRes
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import java.io.ByteArrayInputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -38,6 +41,7 @@ import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.jalo.media.MediaManager;
+import de.hybris.platform.media.storage.MediaStorageStrategy;
 import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -49,11 +53,13 @@ import de.hybris.platform.servicelayer.search.SearchResult;
  */
 public class DefaultB2BDocumentService implements B2BDocumentService
 {
-	private   PagedB2BDocumentDao       pagedB2BDocumentDao;
-	private   B2BDocumentDao            b2bDocumentDao;
-	private   ModelService              modelService;
-	private   PentlandInvoicePDFService invoicePDFService;
-	private   MediaService              mediaService;
+	private PagedB2BDocumentDao       pagedB2BDocumentDao;
+	private B2BDocumentDao            b2bDocumentDao;
+	private ModelService              modelService;
+	private PentlandInvoicePDFService invoicePDFService;
+	private MediaService              mediaService;
+	@Resource(name = "localFileMediaStorageStrategy")
+	private MediaStorageStrategy      mediaStorageStrategy;
 
 
 	private static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.document.service.impl.DefaultB2BDocumentService.class.getName());
@@ -164,8 +170,10 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 
 	private DocumentMediaModel requestAndSaveDocumentMedia(String documentNumber) {
 		DocumentResponse response = invoicePDFService.requestData(createDocumentDto(documentNumber));
-		DocumentMediaModel newMedia = new DocumentMediaModel();
-		mediaService.setStreamForMedia(newMedia, new ByteArrayInputStream(response.getBinaryData()), documentNumber + ".pdf", "application/pdf");
+		DocumentMediaModel newMedia = modelService.create(DocumentMediaModel.class);
+		newMedia.setCode("invoice-" + documentNumber);
+		modelService.save(newMedia);
+		mediaService.setStreamForMedia(newMedia, new ByteArrayInputStream(response.getEtOutput().getBinaryData()), documentNumber + ".pdf", "application/pdf", mediaService.getFolder("accountsummary"));
 		return newMedia;
 	}
 
