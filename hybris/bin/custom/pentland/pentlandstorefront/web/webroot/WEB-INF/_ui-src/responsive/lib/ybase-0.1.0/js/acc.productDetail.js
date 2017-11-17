@@ -73,11 +73,58 @@ ACC.productDetail = {
         configureQty.val(value);
     },
 
+    populateAndShowEditableGrid: function (element, event) {
+        grid = $("#ajaxGrid");
+
+        var gridEntry = $('#grid');
+
+        $(element).toggleClass('open');
+
+        var targetUrl = gridEntry.data("target-url");
+        var productCode = gridEntry.data("product-code");
+
+        if (grid.children('#cartOrderGridForm').length > 0) {
+            grid.slideToggle("slow");
+        }
+        else {
+            var method = "GET";
+            $.ajax({
+                url: targetUrl,
+                data: {productCode: productCode},
+                type: method,
+                success: function (data) {
+                    grid.html(data);
+                    $("#ajaxGrid").removeAttr('id');
+                    var $gridContainer = grid.find(".product-grid-container");
+                    var numGrids = $gridContainer.length;
+                    //for (var i = 0; i < numGrids; i++) {
+                    //    ACC.cart.getProductQuantity($gridContainer.eq(i), mapCodeQuantity, i);
+                    //}
+
+                    grid.slideDown("slow");
+                    $('html, body').animate({
+                        scrollTop: $("#cartOrderGridForm").offset().top
+                    }, 2000);
+                    //ACC.cart.coreCartGridTableActions(element, mapCodeQuantity);
+                    //ACC.productorderform.coreTableScrollActions(grid.children('#cartOrderGridForm'));
+                },
+                error: function (xht, textStatus, ex) {
+                    alert("Failed to get variant matrix. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
+                }
+
+            });
+        }
+    },
+
     initPageEvents: function () {
 
         $( function() {
             $( "#tabs" ).tabs();
         } );
+
+        $(document).on("click", '.js-show-editable-product-grid', function (event) {
+            ACC.productDetail.populateAndShowEditableGrid(this, event);
+        });
 
         $(document).on("click", '.js-qty-selector .js-qty-selector-minus', function () {
             ACC.productDetail.checkQtySelector(this, "minus");

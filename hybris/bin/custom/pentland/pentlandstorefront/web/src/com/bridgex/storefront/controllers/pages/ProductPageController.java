@@ -272,6 +272,19 @@ public class ProductPageController extends AbstractPageController
 		return result;
 	}
 
+	@RequestMapping(value = "/getProductVariantMatrix", method = RequestMethod.GET)
+	public String getProductVariantMatrix(@RequestParam("productCode") final String productCode, final Model model)
+	{
+
+		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
+		                                                                          Arrays.asList(ProductOption.BASIC, ProductOption.CATEGORIES, ProductOption.VARIANT_MATRIX_BASE));
+
+		model.addAttribute("product", productData);
+		model.addAttribute("readOnly", false);
+
+		return ControllerConstants.Views.Fragments.Cart.ExpandGridInCart;
+	}
+
 	@ExceptionHandler(UnknownIdentifierException.class)
 	public String handleUnknownIdentifierException(final UnknownIdentifierException exception, final HttpServletRequest request)
 	{

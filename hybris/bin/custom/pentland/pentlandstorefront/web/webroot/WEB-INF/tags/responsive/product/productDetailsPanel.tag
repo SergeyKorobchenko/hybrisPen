@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="grid" tagdir="/WEB-INF/tags/responsive/grid" %>
 
 <div class="product-details page-title">
 	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
@@ -87,8 +88,13 @@
 		</div>
 
 	</div>
+	<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
 	<div>
-		<product:productOrderFormGrid product="${product}" />
+		<li>
+			<spring:url value="getProductVariantMatrix" var="targetUrl"/>
+			<grid:productGridWrapper styleClass="add-to-cart-order-form-wrap display-none"
+							  targetUrl="${targetUrl}" product="${product}"/>
+		</li>
 	</div>
 </div>
 
