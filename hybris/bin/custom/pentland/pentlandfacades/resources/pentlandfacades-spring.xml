@@ -353,7 +353,7 @@
 	</bean>
 
 	<alias name="pentlandCsvFacade" alias="csvFacade"/>
-	<bean id="pentlandCsvFacade" class="com.bridgex.facades.csv.impl.PentlandCsvFacade" parent="defaultCsvFacade"/>
+	<bean id="pentlandCsvFacade" class="com.bridgex.facades.csv.impl.DefaultPentlandCsvFacade" parent="defaultCsvFacade"/>
 
 	<alias name="pentlandAddressPopulator" alias="addressPopulator"/>
 	<bean id="pentlandAddressPopulator" class="com.bridgex.facades.populators.PentlandAddressPopulator" parent="defaultAddressPopulator"/>

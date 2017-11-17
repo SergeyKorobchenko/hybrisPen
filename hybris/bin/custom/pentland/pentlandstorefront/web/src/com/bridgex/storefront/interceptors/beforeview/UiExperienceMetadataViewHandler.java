@@ -13,6 +13,7 @@ package com.bridgex.storefront.interceptors.beforeview;
 import de.hybris.platform.acceleratorservices.storefront.data.MetaElementData;
 import de.hybris.platform.acceleratorservices.uiexperience.UiExperienceService;
 import de.hybris.platform.acceleratorstorefrontcommons.interceptors.BeforeViewHandler;
+import de.hybris.platform.assistedservicefacades.AssistedServiceFacade;
 import de.hybris.platform.commerceservices.enums.UiExperienceLevel;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 
@@ -31,6 +32,9 @@ import org.springframework.web.util.CookieGenerator;
  */
 public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 {
+
+	@Resource(name = "assistedServiceFacade")
+	private AssistedServiceFacade assistedServiceFacade;
 
 	@Resource(name = "uiExperienceService")
 	private UiExperienceService uiExperienceService;
@@ -85,6 +89,9 @@ public class UiExperienceMetadataViewHandler implements BeforeViewHandler
 	}
 
 	private boolean isFirstTimeVisitor(HttpServletRequest request) {
+		if(assistedServiceFacade.isAssistedServiceAgentLoggedIn()){
+			return false;
+		}
 		String cookieDirective = cookiesDirectiveCookieGenerator.getCookieName();
 		if(request.getCookies() == null){
 			return true;

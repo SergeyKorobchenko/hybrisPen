@@ -53,8 +53,8 @@
         <button id="placeOrder" type="submit" class="btn btn-primary btn-block btn-place-order btn-block btn-lg checkoutSummaryButton" disabled="disabled">
             <spring:theme code="checkout.summary.placeOrder"/>
         </button>
-        <button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">
-            <spring:theme code="checkout.summary.scheduleReplenishment"/>
-        </button>
+        <%--<button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">--%>
+            <%--<spring:theme code="checkout.summary.scheduleReplenishment"/>--%>
+        <%--</button>--%>
     </form:form>
 </div>

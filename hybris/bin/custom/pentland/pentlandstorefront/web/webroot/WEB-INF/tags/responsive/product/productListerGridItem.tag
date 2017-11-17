@@ -14,11 +14,14 @@
 <c:set value="${not empty product.potentialPromotions}" var="hasPromotion"/>
 <div class="product-item">
 	<ycommerce:testId code="product_wholeProduct">
+		<input type="hidden" name="ean" value="${product.code}"/>
+		<input type="hidden" name="stylecode" value="${product.baseProduct}"/>
+		<input type="hidden" name="materialKey" value="${product.materialKey}"/>
+		<input type="hidden" name="upc" value="${product.upc}"/>
 		<a class="thumb" href="${productUrl}" title="${fn:escapeXml(product.name)}">
 			<product:productPrimaryImage product="${product}" format="product"/>
 		</a>
 		<div class="details">
-
 			<ycommerce:testId code="product_productName">
 				<a class="name" href="${productUrl}">
 					<c:out escapeXml="false" value="${ycommerce:sanitizeHTML(product.name)}" />

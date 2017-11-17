@@ -482,7 +482,8 @@ public class CartPageController extends AbstractCartPageController
 	@RequestMapping(value = "/export", method = RequestMethod.GET, produces = "text/csv")
 	public String exportCsvFile(final HttpServletResponse response, final RedirectAttributes redirectModel) throws IOException
 	{
-		response.setHeader("Content-Disposition", "attachment;filename=cart.csv");
+		String fileName = String.format("product_%d.csv", System.currentTimeMillis());
+		response.setHeader("Content-Disposition", String.format("attachment;filename=%s", fileName));
 
 		try (final StringWriter writer = new StringWriter())
 		{
@@ -492,13 +493,14 @@ public class CartPageController extends AbstractCartPageController
 				headers.add(getMessageSource().getMessage("basket.export.cart.item.stylecode", null, getI18nService().getCurrentLocale()));
 				headers.add(getMessageSource().getMessage("basket.export.cart.item.materialKey", null, getI18nService().getCurrentLocale()));
 				headers.add(getMessageSource().getMessage("basket.export.cart.item.sku", null, getI18nService().getCurrentLocale()));
-				headers.add(
-						getMessageSource().getMessage("basket.export.cart.item.quantity", null, getI18nService().getCurrentLocale()));
 				headers.add(getMessageSource().getMessage("basket.export.cart.item.name", null, getI18nService().getCurrentLocale()));
 				headers
-						.add(getMessageSource().getMessage("basket.export.cart.item.price", null, getI18nService().getCurrentLocale()));
-				headers
 					.add(getMessageSource().getMessage("basket.export.cart.item.upc", null, getI18nService().getCurrentLocale()));
+				headers.add(
+					getMessageSource().getMessage("basket.export.cart.item.quantity", null, getI18nService().getCurrentLocale()));
+				headers
+						.add(getMessageSource().getMessage("basket.export.cart.item.price", null, getI18nService().getCurrentLocale()));
+
 
 				final CartData cartData = getCartFacade().getSessionCartWithEntryOrdering(false);
 				csvFacade.generateCsvFromCart(headers, true, cartData, writer);
@@ -530,7 +532,8 @@ public class CartPageController extends AbstractCartPageController
 
 		zipOutputStream.finish();
 
-		response.setHeader("Content-Disposition", "attachment;filename=images.zip");
+		String fileName = String.format("images_%d.zip", System.currentTimeMillis());
+		response.setHeader("Content-Disposition", String.format("attachment;filename=%s", fileName));
 		response.setContentType("application/zip");
 
 		try{

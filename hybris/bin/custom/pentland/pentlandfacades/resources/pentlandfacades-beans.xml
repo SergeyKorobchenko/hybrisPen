@@ -108,4 +108,13 @@
 		<property name="maxVariants" type="java.lang.Integer"/>
 	</bean>
 
+	<bean class="com.bridgex.facades.order.data.MiniOrderEntry">
+		<property name="stylecode" type="String"/>
+		<property name="materialKey" type="String"/>
+		<property name="sku" type="String"/>
+		<property name="name" type="String"/>
+		<property name="upc" type="String"/>
+		<property name="price" type="String"/>
+	</bean>
+
 </beans>

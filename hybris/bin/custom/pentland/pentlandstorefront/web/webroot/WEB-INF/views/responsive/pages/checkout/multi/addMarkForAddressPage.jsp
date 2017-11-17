@@ -46,7 +46,7 @@
                                                     <ul>
                                                         <li>
                                                             <a href="${nextStep}"
-                                                               class="btn btn-primary btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.markFor.noSelection"/></a>
+                                                               class="btn btn-success btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.markFor.noSelection"/></a>
                                                         </li>
                                                     </ul>
                                                 </div>

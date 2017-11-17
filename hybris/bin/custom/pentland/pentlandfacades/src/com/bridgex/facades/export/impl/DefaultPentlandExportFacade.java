@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.product.PentlandProductService;
 import com.bridgex.facades.export.PentlandExportFacade;
 
@@ -104,6 +105,9 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
   private MediaModel getPrimaryImageMasterUrl(final String productCode) {
     try {
       ProductModel productForCode = productService.getProductForCode(productCode);
+      if(productForCode instanceof ApparelSizeVariantProductModel){
+        productForCode = ((ApparelSizeVariantProductModel) productForCode).getBaseProduct();
+      }
       //relying on assumption that primary image master is always set to product.picture
       return productForCode.getPicture();
     }catch(UnknownIdentifierException | AmbiguousIdentifierException e){
