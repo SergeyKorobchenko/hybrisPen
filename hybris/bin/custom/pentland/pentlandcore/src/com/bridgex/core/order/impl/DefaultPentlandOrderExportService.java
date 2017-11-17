@@ -2,20 +2,32 @@ package com.bridgex.core.order.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.bridgex.core.jalo.ApparelSizeVariantProduct;
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandOrderExportService;
+import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.*;
 import com.bridgex.integration.service.IntegrationService;
 
+import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commerceservices.enums.SalesApplication;
 import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 11/7/2017.
@@ -23,16 +35,16 @@ import de.hybris.platform.servicelayer.model.ModelService;
 public class DefaultPentlandOrderExportService implements PentlandOrderExportService{
 
   private IntegrationService<OrderExportDto, ExportOrderResponse> orderExportService;
-  private ModelService                                               modelService;
+  private ModelService                                            modelService;
 
   @Override
   public boolean exportOrder(OrderModel orderModel) {
 
     OrderExportDto request = createOrderExportRequest(orderModel);
-    ResponseEntity<ExportOrderResponse> exportOrderResponseResponseEntity = orderExportService.sendRequest(request, ExportOrderResponse.class);
+    ResponseEntity<ExportOrderResponse> exportOrderResponseEntity = orderExportService.sendRequest(request, ExportOrderResponse.class);
 
-    if(HttpStatus.OK.equals(exportOrderResponseResponseEntity.getStatusCode())){
-      ExportOrderResponse responseBody = exportOrderResponseResponseEntity.getBody();
+    if(HttpStatus.OK.equals(exportOrderResponseEntity.getStatusCode())){
+      ExportOrderResponse responseBody = exportOrderResponseEntity.getBody();
       ETReturnDto etReturn = responseBody.getEtReturn();
       if("S".equals(etReturn.getType())){
         return processSuccessfulResponse(orderModel, responseBody);
@@ -45,9 +57,94 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   }
 
   private OrderExportDto createOrderExportRequest(OrderModel orderModel) {
+    B2BUnitModel unit = orderModel.getUnit();
+    AddressModel deliveryAddressModel = orderModel.getDeliveryAddress();
     OrderExportDto request = new OrderExportDto();
-    request.setDocNumber(orderModel.getCode());
+
+    fillBaseData(orderModel, unit, deliveryAddressModel, request);
+    populateOrderEntries(orderModel, unit);
+
+    fillAddresses(orderModel, deliveryAddressModel, request);
+
     return request;
+  }
+
+  private void fillAddresses(OrderModel orderModel, AddressModel deliveryAddressModel, OrderExportDto request) {List<UserContactsDto> userContacts = new ArrayList<>();
+    UserContactsDto deliveryAddressDto = new UserContactsDto();
+    deliveryAddressDto.setEmail(orderModel.getUser().getUid());
+    ShipToDto deliveryAddress = populateAddress(deliveryAddressModel, StringUtils.EMPTY);
+    deliveryAddressDto.setShipToAddress(deliveryAddress);
+    userContacts.add(deliveryAddressDto);
+    if(orderModel.getMarkFor() != null){
+      UserContactsDto markForAddressDto = new UserContactsDto();
+      markForAddressDto.setEmail(orderModel.getUser().getUid());
+      ShipToDto markForAddress = populateAddress(deliveryAddressModel, ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
+      markForAddressDto.setShipToAddress(markForAddress);
+      userContacts.add(markForAddressDto);
+    }
+    request.setUserContacts(userContacts);
+  }
+
+  private ShipToDto populateAddress(AddressModel deliveryAddressModel, String markFor) {
+    ShipToDto deliveryAddress = new ShipToDto();
+    deliveryAddress.setId(deliveryAddressModel.getAddressID());
+    deliveryAddress.setMarkForFlag(markFor);
+    deliveryAddress.setStreet(deliveryAddressModel.getStreetname());
+    deliveryAddress.setCity(deliveryAddressModel.getTown());
+    deliveryAddress.setRegion(deliveryAddressModel.getRegion() != null ? deliveryAddressModel.getRegion().getIsocode() : StringUtils.EMPTY);
+    deliveryAddress.setCountry(deliveryAddressModel.getCountry() != null ? deliveryAddressModel.getCountry().getIsocode() : StringUtils.EMPTY);
+    deliveryAddress.setPostalCode(deliveryAddressModel.getPostalcode());
+    return deliveryAddress;
+  }
+
+  private void fillBaseData(OrderModel orderModel, B2BUnitModel unit, AddressModel deliveryAddressModel, OrderExportDto request) {
+    request.setLang(orderModel.getLanguage().getIsocode().toUpperCase());
+    request.setDocNumber(orderModel.getCode());
+    request.setPurchaseOrderNumber(orderModel.getPurchaseOrderNumber());
+
+    //TODO waiting for clarification
+    request.setPoType("");
+
+    request.setRdd(orderModel.getRdd());
+    request.setSapCustomerID(unit.getSapID());
+    request.setShippingAddress(deliveryAddressModel.getAddressID());
+
+    //TODO waiting for clarification
+    request.setTechOrderReason("");
+
+    request.setPaymentType(orderModel.getPaymentType().getCode());
+    request.setCustomerComment(orderModel.getCustomerNotes());
+  }
+
+  private void populateOrderEntries(OrderModel orderModel, B2BUnitModel unit) {
+    //group entries by base product
+    Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle =
+      orderModel.getEntries().stream().filter(entry -> entry.getProduct() instanceof ApparelSizeVariantProductModel)
+                .collect(Collectors.groupingBy(entry -> ((VariantProductModel) entry.getProduct()).getBaseProduct()));
+
+    List<MultiBrandOrderInput> styleEntries = new ArrayList<>();
+    fillOrderEntries(unit, entriesGroupedByStyle, styleEntries);
+  }
+
+  private void fillOrderEntries(B2BUnitModel unit, Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle, List<MultiBrandOrderInput> styleEntries) {
+    entriesGroupedByStyle.forEach((styleProduct, entries) -> {
+      MultiBrandOrderInput groupedEntry = new MultiBrandOrderInput();
+      groupedEntry.setMaterialNumber(styleProduct.getCode());
+      groupedEntry.setBrandCode(styleProduct.getSapBrand());
+      groupedEntry.setSalesOrg(unit.getSalesOrg());
+      groupedEntry.setDistrChannel(unit.getDistCh());
+      groupedEntry.setSalesUnit(styleProduct.getUnit().getCode());
+
+      List<SchedLinesDto> sizeEntries = new ArrayList<>();
+      entries.forEach(size -> {
+        SchedLinesDto sizeEntry = new SchedLinesDto();
+        sizeEntry.setEan(size.getProduct().getCode());
+        sizeEntry.setQuantity(size.getQuantity().intValue());
+        sizeEntries.add(sizeEntry);
+      });
+      groupedEntry.setSchedLines(sizeEntries);
+      styleEntries.add(groupedEntry);
+    });
   }
 
   private boolean processSuccessfulResponse(OrderModel orderModel, ExportOrderResponse responseBody) {List<SapOrderDto> sapOrderDTOList = responseBody.getSapOrderDTOList();

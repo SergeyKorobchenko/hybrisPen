@@ -46,7 +46,7 @@ public class MultiBrandOrderInput {
   private Date cancelDate;
 
   @JsonProperty("IT_SCHED_LINES")
-  private SchedLinesDto schedLines;
+  private List<SchedLinesDto> schedLines;
 
   public String getMaterialNumber() {
     return materialNumber;
@@ -128,11 +128,11 @@ public class MultiBrandOrderInput {
     this.cancelDate = cancelDate;
   }
 
-  public SchedLinesDto getSchedLines() {
+  public List<SchedLinesDto> getSchedLines() {
     return schedLines;
   }
 
-  public void setSchedLines(SchedLinesDto schedLines) {
+  public void setSchedLines(List<SchedLinesDto> schedLines) {
     this.schedLines = schedLines;
   }
 }
