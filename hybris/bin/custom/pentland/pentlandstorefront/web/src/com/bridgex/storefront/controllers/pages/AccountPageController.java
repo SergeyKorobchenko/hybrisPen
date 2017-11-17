@@ -319,7 +319,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		try
 		{
-			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
+			final OrderData orderDetails = orderFacade.requestOrderDetails(orderCode);
 			model.addAttribute("orderData", orderDetails);
 
 			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);

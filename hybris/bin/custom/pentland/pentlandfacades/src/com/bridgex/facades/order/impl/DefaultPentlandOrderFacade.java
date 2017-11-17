@@ -41,7 +41,7 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   }
 
   @Override
-  public OrderData getOrderDetailsForCode(String code) {
+  public OrderData requestOrderDetails(String code) {
     OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(code));
     return orderDetailsConverter.convert(response);
   }
