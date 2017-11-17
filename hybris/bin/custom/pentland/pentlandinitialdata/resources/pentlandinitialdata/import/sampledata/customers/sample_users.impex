@@ -133,7 +133,7 @@ INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;count
 ;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true;;address6
 ;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;pronto-services;true;;address7
 ;3000 Lombard Street;94123;San Francisco;GB;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;ProntoAddrID2,ProntoAddrID3;address8
-;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;ProntoAddrID4;ProntoID1;jamesTestB2B;false;ProntoAddrID2,ProntoAddrID3;address9
+;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;ProntoAddrID4;ProntoID1;107660;false;ProntoAddrID2,ProntoAddrID3;address9
 
 INSERT_UPDATE B2BUserGroup;uid[unique=true];name;unit(uid);permissions(code,unit(uid));
 ;enhancedPermissions;Enhanced Permissions;Pronto;Pronto 12K GBP ORDER:Pronto,Pronto 15K GBP MONTH:Pronto;
