@@ -8,10 +8,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.bridgex.integration.domain.ETReturnDto;
-import com.bridgex.integration.domain.ExportOrderResponse;
-import com.bridgex.integration.domain.MultiBrandCartDto;
-import com.bridgex.integration.domain.SapOrderDTO;
+import com.bridgex.integration.domain.*;
 import com.bridgex.integration.service.impl.OrderExportServiceImpl;
 
 /**
@@ -20,10 +17,10 @@ import com.bridgex.integration.service.impl.OrderExportServiceImpl;
 public class OrderExportServiceMock extends OrderExportServiceImpl {
 
   @Override
-  public ResponseEntity<ExportOrderResponse> sendRequest(MultiBrandCartDto requestDto, Class responseClass) {
+  public ResponseEntity<ExportOrderResponse> sendRequest(OrderExportDto requestDto, Class responseClass) {
     ExportOrderResponse response = new ExportOrderResponse();
 
-    SapOrderDTO order1 = new SapOrderDTO();
+    SapOrderDto order1 = new SapOrderDto();
     order1.setOrderCode(requestDto.getDocNumber() + "_1");
     order1.setOrderType(requestDto.getDocType());
     order1.setRequestedDeliveryDate(new Date());
@@ -32,7 +29,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
     order1.setTotalPrice("1000");
     order1.setTotalQty("2");
 
-    SapOrderDTO order2 = new SapOrderDTO();
+    SapOrderDto order2 = new SapOrderDto();
     order2.setOrderCode(requestDto.getDocNumber() + "_2");
     order2.setOrderType(requestDto.getDocType());
     order2.setRequestedDeliveryDate(DateUtils.addDays(new Date(), 2));
@@ -41,7 +38,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
     order2.setTotalPrice("2000");
     order2.setTotalQty("1");
 
-    List<SapOrderDTO> orders = new ArrayList<>();
+    List<SapOrderDto> orders = new ArrayList<>();
     orders.add(order1);
     orders.add(order2);
     response.setSapOrderDTOList(orders);
