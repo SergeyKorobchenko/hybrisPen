@@ -58,11 +58,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     populateAddress(source, target);
   }
 
-  private PriceData populatePriceData(String price, String currency) {
-    return priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(Double.parseDouble(price)), currency);
-  }
-
-  private void populateItems(OrderDetailsResponse source, OrderData target) {
+    private void populateItems(OrderDetailsResponse source, OrderData target) {
     List<OrderItemData> items = new ArrayList<>();
 
     for (OrderEntryDto dto : source.getOrderEntries()) {
@@ -70,12 +66,11 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       item.setNumber(dto.getEntryNumber());
       item.setItemStatus(dto.getEntryStatus());
       item.setTotalPrice(populatePriceData(dto.getPrice(), source.getCurrency()));
-      item.setQty(Double.valueOf(dto.getQuantity()).intValue());
+      item.setQty(getInt(dto.getQuantity()));
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
       items.add(item);
     }
-
     target.setOrderItems(items);
   }
 
@@ -85,8 +80,8 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       ShipmentData shipment = new ShipmentData();
       shipment.setShipmentStatus(size.getShipStatus());
       shipment.setShipDate(size.getShipDate());
-      shipment.setQty(Double.valueOf(size.getShipQty()).intValue());
-      shipments.merge(ceiling(size.getShipDate(), Calendar.DAY_OF_YEAR), shipment, shipmentDataMerger);
+      shipment.setQty(getInt(size.getShipQty()));
+      shipments.merge(size.getShipDate(), shipment, shipmentDataMerger);
     }
     item.setShipments(shipments);
   }
@@ -94,7 +89,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
   private void populateNameAndImage(OrderEntryDto dto, OrderItemData item) {
     ProductModel product = productService.getProductForCode(dto.getProduct());
     item.setName(product.getName());
-    Optional.of(product.getPicture())
+    Optional.ofNullable(product.getPicture())
             .map(MediaModel::getURL)
             .ifPresent(item::setImageUrl);
   }
@@ -112,6 +107,26 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     address.setLine1(source.getDeliveryAddressStreet());
 
     target.setDeliveryAddress(address);
+  }
+
+  private PriceData populatePriceData(String price, String currency) {
+    return priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(getDouble(price)), currency);
+  }
+
+  private double getDouble(String price) {
+    try {
+      return Double.parseDouble(Optional.ofNullable(price).orElse("0"));
+    } catch (NumberFormatException e) {
+      return 0D;
+    }
+  }
+
+  private int getInt(String value) {
+    try {
+      return Double.valueOf((Optional.ofNullable(value).orElse("0"))).intValue();
+    } catch (NumberFormatException e) {
+      return 0;
+    }
   }
 
   @Required
