@@ -29,13 +29,13 @@ public class OrderDetailsResponse {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
-  @JsonProperty("E_SDOC_NET_PRICE")
+  @JsonProperty("E_SDOC_NET_VALUE")
   private String netPrice;
 
   @JsonProperty("E_SDOC_TAX_AMOUNT")
   private String taxPrice;
 
-  @JsonProperty("E_SDOC_VALUE")
+  @JsonProperty("E_SDOC_TOT_PRICE")
   private String totalPrice;
 
   @JsonProperty("E_SDOC_CURRENCY")
