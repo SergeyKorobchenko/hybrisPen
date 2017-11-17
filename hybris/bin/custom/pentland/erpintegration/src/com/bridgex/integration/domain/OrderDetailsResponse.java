@@ -19,7 +19,7 @@ public class OrderDetailsResponse {
   @JsonProperty("E_PO_NUMBER")
   private String purshaseOrderNumber;
 
-  @JsonProperty("E_PO_NUMBER")
+  @JsonProperty("E_SDOC_STATUS")
   private String status;
 
   @JsonProperty("E_CREATION_DATE")

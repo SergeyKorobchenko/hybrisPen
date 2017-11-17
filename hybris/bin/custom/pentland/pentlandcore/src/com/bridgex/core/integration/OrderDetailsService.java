@@ -17,9 +17,6 @@ public class OrderDetailsService {
 
   public OrderDetailsResponse requestOrderDetails(OrderDetailsDto request) {
     ResponseEntity<OrderDetailsResponse> response = integrationService.sendRequest(request, OrderDetailsResponse.class);
-    if (response.getStatusCodeValue() != 200) {
-      throw new ResourceAccessException("ERP request failed with code " + response.getStatusCodeValue());
-    }
     return response.getBody();
   }
 

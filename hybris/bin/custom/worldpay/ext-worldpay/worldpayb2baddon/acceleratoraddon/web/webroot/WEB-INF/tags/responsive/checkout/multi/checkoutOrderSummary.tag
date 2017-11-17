@@ -23,6 +23,12 @@
         <div class="checkout-summary-headline hidden-xs">
             <spring:theme code="checkout.multi.order.summary"/>
         </div>
+        <c:if test="${cartData.paymentType.code eq 'CARD'}">
+            <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
+        </c:if>
+        <c:if test="${cartData.paymentType.code eq 'ACCOUNT'}">
+            <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
+        </c:if>
 
         <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />
 
@@ -31,13 +37,6 @@
         </c:forEach>
 
         <order:appliedVouchers order="${cartData}" />
-
-        <c:if test="${cartData.paymentType.code eq 'CARD'}">
-            <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
-        </c:if>
-        <c:if test="${cartData.paymentType.code eq 'ACCOUNT'}">
-            <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
-        </c:if>
 
         <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" />
     </ycommerce:testId>
@@ -55,9 +54,9 @@
         <button id="placeOrder" type="submit" class="btn btn-primary btn-block btn-place-order btn-block btn-lg checkoutSummaryButton" disabled="disabled">
             <spring:theme code="checkout.summary.placeOrder"/>
         </button>
-        <button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">
-            <spring:theme code="checkout.summary.scheduleReplenishment"/>
-        </button>
+        <%--<button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">--%>
+            <%--<spring:theme code="checkout.summary.scheduleReplenishment"/>--%>
+        <%--</button>--%>
         <button id="requestQuote" type="button" class="btn btn-default btn-block requestQuoteButton checkoutSummaryButton" disabled="disabled">
             <spring:theme code="checkout.summary.requestQuote"/>
         </button>

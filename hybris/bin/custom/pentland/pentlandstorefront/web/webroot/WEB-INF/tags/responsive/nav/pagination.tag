@@ -17,6 +17,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -41,7 +42,7 @@
                 <div class="helper clearfix hidden-md hidden-lg"></div>
                 <div class="sort-refine-bar">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4">
+                        <div class="col-xs-12 col-sm-4 col-md-2">
                             <div class="form-group">
                                 <label class="control-label " for="sortForm${top ? '1' : '2'}">
                                     <spring:theme code="${themeMsgKey}.sortTitle"/>
@@ -87,6 +88,23 @@
                                     </c:if>
                                 </form>
                             </div>
+                        </div>
+
+                        <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
+                        <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
+                        <div class="col-xs-12 col-md-2 pull-left">
+                            <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP">
+                                <spring:theme code="basket.export.csv.file" />
+                            </a>
+                            <form id="export-csv" action="${exportUrl}" method="get">
+                                <input type="hidden" name="content" value=""/>
+                            </form>
+                            <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
+                                <spring:theme code="basket.export.images.file" />
+                            </a>
+                            <form id="export-images" action="${imagesExportUrl}" method="get">
+                                <input type="hidden" name="content" value=""/>
+                            </form>
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-5 pagination-wrap">

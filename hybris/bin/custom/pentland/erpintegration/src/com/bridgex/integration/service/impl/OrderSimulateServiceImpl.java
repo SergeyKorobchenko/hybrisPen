@@ -1,5 +1,7 @@
 package com.bridgex.integration.service.impl;
 
+import java.util.Collections;
+
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.ETReturnDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
@@ -23,9 +25,9 @@ public class OrderSimulateServiceImpl extends AbstractIntegrationService<MultiBr
       result = new MultiBrandCartResponse();
     }
     if (result.getEtReturn() == null) {
-      result.setEtReturn(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
+      result.setEtReturn(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)));
     } else {
-      result.getEtReturn().setType(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE);
+      result.getEtReturn().add(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
     }
     return result;
   }

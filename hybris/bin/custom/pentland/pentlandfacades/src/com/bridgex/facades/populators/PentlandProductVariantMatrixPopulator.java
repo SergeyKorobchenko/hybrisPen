@@ -1,15 +1,14 @@
 package com.bridgex.facades.populators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
+import com.bridgex.core.product.util.ProductSizeComparator;
 
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.*;
@@ -43,8 +42,11 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
       styleElementData.setIsLeaf(Boolean.FALSE);
       variantMatrixElementDataList.add(styleElementData);
 
-      for (VariantProductModel sizeLevelVariantModel : styleVariantProductModel.getVariants()) {
-        ApparelSizeVariantProductModel sizeVariantProductModel = (ApparelSizeVariantProductModel) sizeLevelVariantModel;
+
+      List<ApparelSizeVariantProductModel> sizeLevelVariants = styleVariantProductModel.getVariants().stream().map(e -> (ApparelSizeVariantProductModel)e)
+                                                                                       .sorted(new ProductSizeComparator()).collect(Collectors.toList());
+
+      for (ApparelSizeVariantProductModel sizeVariantProductModel : sizeLevelVariants) {
         VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
         sizeElementData.setVariantName(sizeVariantProductModel.getSize());
         sizeElementData.setIsLeaf(Boolean.TRUE);

@@ -48,7 +48,7 @@ public class DefaultPentlandCustomerAccountDao extends DefaultCustomerAccountDao
   private List<SalesApplication> filterSalesApplicationList;
 
   @Override
-  public SearchPageData<OrderModel> findOrdersByB2BUnitsAndStore(final Set<B2BUnitModel> b2bUnits, final BaseStoreModel store, final OrderStatus[] status, final PageableData pageableData)
+  public SearchPageData<OrderModel> findOrdersByB2BUnitsAndStore(final List<B2BUnitModel> b2bUnits, final BaseStoreModel store, final OrderStatus[] status, final PageableData pageableData)
   {
     validateParameterNotNull(b2bUnits, "B2BUnits must not be null");
     validateParameterNotNull(store, "Store must not be null");

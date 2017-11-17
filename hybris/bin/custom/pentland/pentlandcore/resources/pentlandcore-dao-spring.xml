@@ -25,6 +25,8 @@
 
 	<util:list value-type="de.hybris.platform.commerceservices.enums.SalesApplication" id="salesApplicationB2BOrderFilterList">
 		<value>HYBRIS</value>
+		<value>WEB</value>
+		<value>WEBMOBILE</value>
 	</util:list>
 
 	<alias name="pentlandDefaultPriceDao" alias="pentlandPriceDao"/>
@@ -32,5 +34,8 @@
 
 	<alias name="defaultPentlandAddressDao" alias="addressDao"/>
 	<bean id="defaultPentlandAddressDao" class="com.bridgex.core.address.dao.impl.DefaultPentlandAddressDao"/>
+
+	<alias name="defaultProductSizeDao" alias="productSizeDao"/>
+	<bean id="defaultProductSizeDao" class="com.bridgex.core.product.dao.impl.DefaultProductSizeDao"/>
 
 </beans>

@@ -23,6 +23,16 @@ public class PentlandCartPopulator<T extends CartData> extends CartPopulator<T> 
     target.setRdd(source.getRdd());
     target.setPurchaseOrderNumber(source.getPurchaseOrderNumber());
     target.setCustomerNotes(source.getCustomerNotes());
+
+    this.addMarkForAddress(source, target);
+  }
+
+  private void addMarkForAddress(final AbstractOrderModel source, final AbstractOrderData target)
+  {
+    if (source.getMarkFor() != null)
+    {
+      target.setMarkForAddress(getAddressConverter().convert(source.getDeliveryAddress()));
+    }
   }
 
 }

@@ -88,7 +88,8 @@
 
 	</div>
 	<div>
-		Product Grid
-		<%--<product:productOrderFormGrid product="${product}" />--%>
+		<product:productOrderFormGrid product="${product}" />
 	</div>
 </div>
+
+<product:productOrderFormJQueryTemplates />

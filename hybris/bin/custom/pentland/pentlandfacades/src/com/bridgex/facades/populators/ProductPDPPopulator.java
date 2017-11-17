@@ -23,11 +23,6 @@ public class ProductPDPPopulator<SOURCE extends ProductModel, TARGET extends Pro
 
   @Override
   public void populate(final SOURCE source, final TARGET target) throws ConversionException {
-    if (source instanceof ApparelSizeVariantProductModel) {
-      target.setMaterialKey(((ApparelSizeVariantProductModel) source).getBaseProduct().getCode());
-    } else if (source instanceof ApparelStyleVariantProductModel) {
-      target.setMaterialKey(source.getCode());
-    }
 
     target.setVideoURL((String) getProductAttribute(source, ProductModel.VIDEOURL));
     target.setExternalURL((String) getProductAttribute(source, ProductModel.EXTERNALURL));

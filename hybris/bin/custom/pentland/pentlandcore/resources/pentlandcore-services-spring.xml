@@ -96,4 +96,9 @@
 	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
 	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator"/>
 
+	<alias name="defaultProductSizeService" alias="productSizeService"/>
+	<bean id="defaultProductSizeService" class="com.bridgex.core.product.impl.DefaultProductSizeService">
+		<property name="productSizeDao" ref="productSizeDao"/>
+	</bean>
+
 </beans>
