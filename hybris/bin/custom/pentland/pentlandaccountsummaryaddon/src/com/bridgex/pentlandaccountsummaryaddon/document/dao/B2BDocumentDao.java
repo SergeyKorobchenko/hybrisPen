@@ -55,4 +55,5 @@ public interface B2BDocumentDao
 
 	B2BDocumentModel getDocumentByNumber(final String documentNumber);
 
+	SearchResult<B2BDocumentModel> findOldDocuments(int numberOfDay, List<DocumentStatus> documentStatusList, List<B2BDocumentTypeModel> documentTypeList);
 }

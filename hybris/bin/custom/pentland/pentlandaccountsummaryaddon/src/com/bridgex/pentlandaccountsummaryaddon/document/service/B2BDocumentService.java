@@ -88,4 +88,6 @@ public interface B2BDocumentService
   SearchPageData<B2BDocumentModel> getPagedDocumentsForSapIds(Set<String> sapIds, PageableData pageableData, List<DefaultCriteria> filterByCriteriaList);
 
 	DocumentMediaModel getDocumentMediaByNumber(String documentNumber);
+
+	void deleteB2BDocuments(int numberOfDay, List<B2BDocumentTypeModel> documentTypeList, List<DocumentStatus> documentStatusList);
 }

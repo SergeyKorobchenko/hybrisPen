@@ -14,11 +14,8 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfAnyRes
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import java.io.ByteArrayInputStream;
-import java.util.Base64;
 import java.util.List;
 import java.util.Set;
-
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -41,7 +38,6 @@ import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.jalo.media.MediaManager;
-import de.hybris.platform.media.storage.MediaStorageStrategy;
 import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -58,9 +54,6 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 	private ModelService              modelService;
 	private PentlandInvoicePDFService invoicePDFService;
 	private MediaService              mediaService;
-	@Resource(name = "localFileMediaStorageStrategy")
-	private MediaStorageStrategy      mediaStorageStrategy;
-
 
 	private static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.document.service.impl.DefaultB2BDocumentService.class.getName());
 
@@ -120,19 +113,26 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 		for (final DocumentMediaModel media : mediaList.getResult())
 		{
 			MediaManager.getInstance().deleteMedia(media.getFolder().getQualifier(), media.getLocation());
-			try
-			{
+			try {
 				LOG.debug("[deleteB2BDocumentFiles] remove " + media.getLocation());
 				getModelService().remove(media);
 			}
-			catch (final ModelRemovalException e)
-			{
+			catch (final ModelRemovalException e) {
 				LOG.error("[deleteB2BDocumentFiles]" + e);
 			}
 		}
-
 	}
 
+
+	@Override
+	public void deleteB2BDocuments(int numberOfDay, List<B2BDocumentTypeModel> documentTypeList, List<DocumentStatus> documentStatusList) {
+		SearchResult<B2BDocumentModel> models = getB2bDocumentDao().findOldDocuments(numberOfDay,documentStatusList, documentTypeList);
+		try {
+			modelService.removeAll(models);
+		} catch (ModelRemovalException e) {
+				LOG.error("[deleteB2BDocuments]" + e);
+		}
+	}
 
 	@Override
 	public SearchPageData<B2BDocumentModel> getPagedDocumentsForUnit(final String b2bUnitCode, final PageableData pageableData,

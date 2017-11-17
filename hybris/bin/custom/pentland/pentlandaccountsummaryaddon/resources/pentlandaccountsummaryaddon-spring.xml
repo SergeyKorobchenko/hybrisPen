@@ -252,6 +252,10 @@
 	<bean id="deleteDocumentFileJobPerformable" class="com.bridgex.pentlandaccountsummaryaddon.cronjob.DeleteDocumentFileJobPerformable"
 		parent="abstractJobPerformable" />
 
+	<bean id="deleteDocumentsJobPerformable" class="com.bridgex.pentlandaccountsummaryaddon.cronjob.DeleteDocumentsJobPerformable"
+	      parent="abstractJobPerformable" />
+
+
 	<!-- uppercase interceptor -->
 	<bean id="b2bDocumentPrepareInterceptor" class="com.bridgex.pentlandaccountsummaryaddon.interceptor.B2BDocumentPrepareInterceptor"
 		autowire="byName" />

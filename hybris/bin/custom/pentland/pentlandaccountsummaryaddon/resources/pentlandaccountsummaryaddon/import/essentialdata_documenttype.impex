@@ -16,3 +16,10 @@ INSERT_UPDATE B2BDocumentType;code[unique=true];name[lang=en];includeInOpenBalan
 ;Credit Note;Credit Note;true;true
 ;Debit Note;Debit Note;true;true
 ;Statement;Statement;false;true
+
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;deleteOldDocumentsCronJob;deleteOldDocumentsJob;false;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run at 0:00 every day
+; deleteOldDocumentsCronJob;0 0 0 * * ?

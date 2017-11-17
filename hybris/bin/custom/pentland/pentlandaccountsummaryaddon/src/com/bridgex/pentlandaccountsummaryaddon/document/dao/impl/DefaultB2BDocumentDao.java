@@ -46,16 +46,24 @@ public class DefaultB2BDocumentDao extends DefaultGenericDao<B2BDocumentModel> i
 			+ B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + "} where {" + B2BDocumentModel._TYPECODE
 			+ ":documentMedia} = ?documentMediaPk ";
 
-	private static final String FIND_DOCUMENT_IGNORE_UNIT = "SELECT {" + DocumentMediaModel._TYPECODE + ":pk}  " + "FROM { "
-			+ B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + " join " + B2BDocumentTypeModel._TYPECODE + " as "
-			+ B2BDocumentTypeModel._TYPECODE + " on {" + B2BDocumentModel._TYPECODE + ":documentType} = {"
-			+ B2BDocumentTypeModel._TYPECODE + ":pk} " + "join " + DocumentMediaModel._TYPECODE + " as "
-			+ DocumentMediaModel._TYPECODE + " on {" + B2BDocumentModel._TYPECODE + ":documentMedia} = {"
-			+ DocumentMediaModel._TYPECODE + ":pk} " + "} ";
+	private static final String FIND_DOCUMENT_MEDIA_IGNORE_UNIT = "SELECT {" + DocumentMediaModel._TYPECODE + ":pk}  " + "FROM { "
+	    + B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + " join " + B2BDocumentTypeModel._TYPECODE + " as "
+	    + B2BDocumentTypeModel._TYPECODE + " on {" + B2BDocumentModel._TYPECODE + ":documentType} = {"
+	    + B2BDocumentTypeModel._TYPECODE + ":pk} " + "join " + DocumentMediaModel._TYPECODE + " as "
+	    + DocumentMediaModel._TYPECODE + " on {" + B2BDocumentModel._TYPECODE + ":documentMedia} = {"
+	    + DocumentMediaModel._TYPECODE + ":pk} " + "} ";
+
+	private static final String FIND_DOCUMENT_IGNORE_UNIT = "SELECT {" + B2BDocumentModel._TYPECODE + ":pk}  " + "FROM { "
+	    + B2BDocumentModel._TYPECODE + " as " + B2BDocumentModel._TYPECODE + " join " + B2BDocumentTypeModel._TYPECODE + " as "
+	    + B2BDocumentTypeModel._TYPECODE + " on {" + B2BDocumentModel._TYPECODE + ":documentType} = {"
+	    + B2BDocumentTypeModel._TYPECODE + ":pk} } ";
 
 	private static final String PARAMETER_CREATION_TIME = "creationtime";
-	private static final String PARAMETER_DOCUMENT_TYPES = "documenttypes";
-	private static final String PARAMETER_DOCUMENT_STATUSES = "documentstatuses";
+	public static final String  BEFORE_DATE_STATEMENT        = "{" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.CREATIONTIME + "} < ?" + PARAMETER_CREATION_TIME;
+	private static final String PARAMETER_DOCUMENT_TYPES     = "documenttypes";
+	public static final String  DOCUMENT_TYPE_IN_STATEMENT   = " and {" + B2BDocumentTypeModel._TYPECODE + ":" + B2BDocumentTypeModel.PK + "} in ( ?" + PARAMETER_DOCUMENT_TYPES + ")";
+	private static final String PARAMETER_DOCUMENT_STATUSES  = "documentstatuses";
+	public static final String  DOCUMENT_STATUS_IN_STATEMENT = " and {" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.STATUS + "} in ( ?" + PARAMETER_DOCUMENT_STATUSES + ")";
 
 	private static final Logger LOG = Logger.getLogger(com.bridgex.pentlandaccountsummaryaddon.document.dao.impl.DefaultB2BDocumentDao.class.getName());
 
@@ -65,9 +73,7 @@ public class DefaultB2BDocumentDao extends DefaultGenericDao<B2BDocumentModel> i
 	}
 
 	@Override
-	public SearchResult<B2BDocumentModel> getOpenDocuments(final B2BUnitModel unit)
-	{
-
+	public SearchResult<B2BDocumentModel> getOpenDocuments(final B2BUnitModel unit) {
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT);
 		query.addQueryParameter(B2BDocumentModel.UNIT, unit.getUid());
 		query.addQueryParameter(B2BDocumentModel.STATUS, DocumentStatus.OPEN);
@@ -75,61 +81,58 @@ public class DefaultB2BDocumentDao extends DefaultGenericDao<B2BDocumentModel> i
 	}
 
 	@Override
-	public SearchResult<B2BDocumentModel> getOpenDocuments(final MediaModel mediaModel)
-	{
-
+	public SearchResult<B2BDocumentModel> getOpenDocuments(final MediaModel mediaModel) {
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_BY_DOCUMENT_MEDIA);
 		query.addQueryParameter(DOCUMENT_MEDIA_PK, mediaModel.getPk());
 		return getFlexibleSearchService().search(query);
 	}
 
 	@Override
-	public SearchResult<DocumentMediaModel> findOldDocumentMedia(final int numberOfDays,
-			final List<B2BDocumentTypeModel> documentTypes, final List<DocumentStatus> documentStatuses)
-	{
-		final StringBuffer whereStatement = new StringBuffer();
-		whereStatement.append(" where ");
+	public B2BDocumentModel getDocumentByNumber(String documentNumber) {
+		FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_BY_NUMBER);
+		query.addQueryParameter("documentNumber", documentNumber);
+		return getFlexibleSearchService().searchUnique(query);
+	}
 
+	@Override
+	public SearchResult<B2BDocumentModel> findOldDocuments(int numberOfDays, List<DocumentStatus> documentStatuses, List<B2BDocumentTypeModel> documentTypes) {
 		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		final String whereStatements = getWhereStatements(numberOfDays, documentTypes, documentStatuses, queryParams);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_IGNORE_UNIT + whereStatements);
+		query.addQueryParameters(queryParams);
+		return getFlexibleSearchService().search(query);
+	}
 
+	@Override
+	public SearchResult<DocumentMediaModel> findOldDocumentMedia(final int numberOfDays, final List<B2BDocumentTypeModel> documentTypes, final List<DocumentStatus> documentStatuses) {
+		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		final String whereStatements = getWhereStatements(numberOfDays, documentTypes, documentStatuses, queryParams);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_MEDIA_IGNORE_UNIT + whereStatements);
+		query.addQueryParameters(queryParams);
+		return getFlexibleSearchService().search(query);
+	}
+
+	private String getWhereStatements(int numberOfDays, List<B2BDocumentTypeModel> documentTypes, List<DocumentStatus> documentStatuses, Map<String, Object> queryParams) {
+		final StringBuilder whereStatement = new StringBuilder();
+		whereStatement.append(" WHERE ");
 		//add criteria for creation date of b2b document
 		final Date earliestFileDate = getEarliestFileDate(numberOfDays);
-		whereStatement.append("{" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.CREATIONTIME + "} < ?"
-				+ PARAMETER_CREATION_TIME);
+		whereStatement.append(BEFORE_DATE_STATEMENT);
 		queryParams.put(PARAMETER_CREATION_TIME, earliestFileDate);
 
 		//add criteria for document type
-		if (!Collections.isEmpty(documentTypes))
-		{
-			whereStatement.append(" and {" + B2BDocumentTypeModel._TYPECODE + ":" + B2BDocumentTypeModel.PK + "} in ( ?"
-					+ PARAMETER_DOCUMENT_TYPES + ")");
+		if (!Collections.isEmpty(documentTypes)) {
+			whereStatement.append(DOCUMENT_TYPE_IN_STATEMENT);
 			queryParams.put(PARAMETER_DOCUMENT_TYPES, documentTypes);
 		}
 
 		//add criteria for document status
-		if (!Collections.isEmpty(documentStatuses))
-		{
-			whereStatement.append(" and {" + B2BDocumentModel._TYPECODE + ":" + B2BDocumentModel.STATUS + "} in ( ?"
-					+ PARAMETER_DOCUMENT_STATUSES + ")");
+		if (!Collections.isEmpty(documentStatuses)) {
+			whereStatement.append(DOCUMENT_STATUS_IN_STATEMENT);
 			queryParams.put(PARAMETER_DOCUMENT_STATUSES, documentStatuses);
 		}
-
-		//search
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_IGNORE_UNIT + whereStatement.toString());
-		query.addQueryParameters(queryParams);
-
-
-
-		return getFlexibleSearchService().search(query);
-
+		return whereStatement.toString();
 	}
-
-  @Override
-  public B2BDocumentModel getDocumentByNumber(String documentNumber) {
-    FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_DOCUMENT_BY_NUMBER);
-    query.addQueryParameter("documentNumber", documentNumber);
-    return getFlexibleSearchService().searchUnique(query);
-  }
 
   /**
      * Calculates the earliest file date as per the file age

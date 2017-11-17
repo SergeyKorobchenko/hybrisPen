@@ -198,20 +198,32 @@
 			jaloclass="com.bridgex.pentlandaccountsummaryaddon.cronjob.DeleteDocumentFileCronJob">
 			<attributes>
 				<attribute type="java.lang.Integer" qualifier="numberOfDay">
-					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+			<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+			<description>number of day to keep files</description>
+			<persistence type="property" />
+			<defaultvalue>Integer.valueOf(730)</defaultvalue>
+		</attribute>
+			<attribute type="DocumentStatusList" qualifier="documentStatusList">
+				<modifiers read="true" write="true" search="true" optional="false" />
+				<persistence type="property" />
+				<defaultvalue>Collections.EMPTY_LIST</defaultvalue>
+			</attribute>
+			<attribute type="DocumentTypeList" qualifier="documentTypeList">
+				<modifiers read="true" write="true" search="true" optional="false" />
+				<persistence type="property" />
+				<defaultvalue>Collections.EMPTY_LIST</defaultvalue>
+			</attribute>
+		</attributes>
+		</itemtype>
+
+		<itemtype code="DeleteOldDocumentsCronJob" extends="CronJob" autocreate="true" generate="true"
+		          jaloclass="com.bridgex.pentlandaccountsummaryaddon.cronjob.DeleteOldDocumentsCronJob">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="numberOfDay">
+					<modifiers read="true" write="true" optional="false" unique="true"/>
 					<description>number of day to keep files</description>
 					<persistence type="property" />
-					<defaultvalue>Integer.valueOf(730)</defaultvalue>
-				</attribute>
-				<attribute type="DocumentStatusList" qualifier="documentStatusList">
-					<modifiers read="true" write="true" search="true" optional="false" />
-					<persistence type="property" />
-					<defaultvalue>Collections.EMPTY_LIST</defaultvalue>
-				</attribute>
-				<attribute type="DocumentTypeList" qualifier="documentTypeList">
-					<modifiers read="true" write="true" search="true" optional="false" />
-					<persistence type="property" />
-					<defaultvalue>Collections.EMPTY_LIST</defaultvalue>
+					<defaultvalue>Integer.valueOf(183)</defaultvalue>
 				</attribute>
 			</attributes>
 		</itemtype>
