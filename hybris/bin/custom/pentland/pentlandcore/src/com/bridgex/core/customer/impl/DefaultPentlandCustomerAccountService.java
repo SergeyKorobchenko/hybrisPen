@@ -3,6 +3,7 @@ package com.bridgex.core.customer.impl;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,7 @@ public class DefaultPentlandCustomerAccountService extends DefaultCustomerAccoun
     validateParameterNotNull(customerModel, "Customer model cannot be null");
     validateParameterNotNull(store, "Store must not be null");
     validateParameterNotNull(pageableData, "PageableData must not be null");
-    Set<B2BUnitModel> b2BUnitModels = getCustomerB2BUnits(customerModel);
+    List<B2BUnitModel> b2BUnitModels = getCustomerB2BUnits(customerModel);
     return getPentlandCustomerAccountDao().findOrdersByB2BUnitsAndStore(b2BUnitModels, store, status, pageableData);
   }
 
@@ -46,8 +47,8 @@ public class DefaultPentlandCustomerAccountService extends DefaultCustomerAccoun
     this.pentlandCustomerAccountDao = pentlandCustomerAccountDao;
   }
 
-  protected Set<B2BUnitModel> getCustomerB2BUnits(CustomerModel customerModel) {
-    return customerModel.getGroups().stream().filter(g -> g instanceof B2BUnitModel).map(g -> (B2BUnitModel)g).collect(Collectors.toSet());
+  protected List<B2BUnitModel> getCustomerB2BUnits(CustomerModel customerModel) {
+    return customerModel.getGroups().stream().filter(g -> g instanceof B2BUnitModel).map(g -> (B2BUnitModel)g).collect(Collectors.toList());
   }
 
 }

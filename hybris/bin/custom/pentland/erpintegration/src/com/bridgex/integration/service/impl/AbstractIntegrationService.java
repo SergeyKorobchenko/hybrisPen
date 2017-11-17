@@ -106,7 +106,7 @@ public abstract class AbstractIntegrationService<REQUEST, RESPONSE> implements I
     String plainClientCredentials = getUsername() + ":" + getPassword();
     String base64ClientCredentials = new String(Base64.encodeBase64(plainClientCredentials.getBytes()));
 
-    getHeaders().add("Authorization", "Basic " + base64ClientCredentials);
+    getHeaders().set("Authorization", "Basic " + base64ClientCredentials);
   }
 
   abstract RESPONSE createFailedResponseBody(final RESPONSE body);
