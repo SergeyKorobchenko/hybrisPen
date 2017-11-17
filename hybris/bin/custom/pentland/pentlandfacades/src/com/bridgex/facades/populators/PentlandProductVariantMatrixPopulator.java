@@ -59,8 +59,10 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
     for (VariantMatrixElementData variantMatrixElementData: variantMatrixElementDataList) {
       variantMatrixElementData.setMaxVariants(maxVariants);
     }
-
-    productData.setVariantMatrix(variantMatrixElementDataList);
+    VariantMatrixElementData root = createNode(baseProductModel);
+    root.setElements(variantMatrixElementDataList);
+    root.setIsLeaf(Boolean.FALSE);
+    productData.setVariantMatrix(Collections.singletonList(root));
   }
 
   protected ProductModel getBaseProduct(ProductModel productModel) {
@@ -84,8 +86,9 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
 
   protected void populateVariantOptionData(ProductModel productModel, VariantOptionData variantOptionData) {
     variantOptionData.setCode(productModel.getCode());
-
-    getVariantOptionDataMediaPopulator().populate((VariantProductModel) productModel, variantOptionData);
+    if (productModel instanceof VariantProductModel) {
+      getVariantOptionDataMediaPopulator().populate((VariantProductModel) productModel, variantOptionData);
+    }
   }
 
   protected VariantOptionData newVariantOptionData() {
