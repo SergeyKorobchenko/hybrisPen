@@ -4,7 +4,9 @@ ACC.product = {
         "bindToAddToCartForm",
         "enableStorePickupButton",
         "enableVariantSelectors",
-        "bindFacets"
+        "bindFacets",
+        "bindExportCsvClick",
+        "bindExportImagesClick"
     ],
 
 
@@ -106,10 +108,45 @@ ACC.product = {
             "productName": cartAnalyticsData.productName
         };
         ACC.track.trackAddToCart(productCode, quantity, cartData);
+    },
+
+    bindExportCsvClick: function(){
+        $(".exportCsvFromPLP").on("click", function(e){
+            e.preventDefault();
+        var productsOnPage = [];
+        $(".product-item").each(function(){
+            var product = {
+                "stylecode": $(this).find("input[name='stylecode']").val(),
+                "materialKey": $(this).find("input[name='materialKey']").val(),
+                "sku": $(this).find("input[name='ean']").val(),
+                "name": $(this).find(".name").text().trim(),
+                "upc": $(this).find("input[name='upc']").val(),
+                "price": $(this).find(".price").text().trim()
+            };
+            productsOnPage.push(product);
+        });
+            var $form = $("#export-csv");
+            $form.find("input[name='content']").val(JSON.stringify(productsOnPage));
+            $form.submit();
+        });
+    },
+
+    bindExportImagesClick: function(){
+        $(".exportImagesFromPLP").on("click", function(e){
+            e.preventDefault();
+            var productsOnPage = [];
+            $(".product-item").each(function(){
+                var product = $(this).find("input[name='ean']").val();
+                productsOnPage.push(product);
+            });
+            var $form = $("#export-images");
+            $form.find("input[name='content']").val(productsOnPage);
+            $form.submit();
+        });
     }
 };
 
 $(document).ready(function () {
-	$ajaxCallEvent = true;
+    $ajaxCallEvent = true;
     ACC.product.enableAddToCartButton();
 });

@@ -157,6 +157,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.export.cart.item.name;Name
 ;basket.export.cart.item.price;Price
 ;basket.export.cart.item.quantity;Quantity
+;basket.export.cart.item.stylecode;Stylecode
+;basket.export.cart.item.materialKey;materialKey
 ;basket.export.cart.item.sku;Sku
 ;basket.export.cart.item.upc;UPC
 ;basket.export.csv.file;Export CSV
@@ -468,7 +470,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.order.summary;Order Summary
 ;checkout.multi.payment;Payment:
 ;checkout.multi.paymentDetails.notprovided;You must provide a payment details in order to go to the next step.
-;checkout.multi.paymentMethod;Payment & Billing Address
+;checkout.multi.paymentMethod;Payment
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddressDiffersFromDeliveryAddress;If your billing address is  different  to your delivery address, please use this form to enter your billing address
 ;checkout.multi.paymentMethod.addPaymentDetails.communicationError;There was an error communicating with the payment provider - please try again later.
@@ -481,7 +483,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.paymentMethod.addPaymentDetails.useSavedCard;Use a saved card
 ;checkout.multi.paymentMethod.addPaymentDetails.useSavedCard.description;Registered customers may select a previously saved card
 ;checkout.multi.paymentMethod.addPaymentDetails.useThesePaymentDetails;Use these payment details
-;checkout.multi.paymentMethod.breadcrumb;Payment & Billing Address
+;checkout.multi.paymentMethod.breadcrumb;Payment
 ;checkout.multi.paymentMethod.continue;Next
 ;checkout.multi.paymentMethod.createSubscription.billingAddress.noneSelectedMsg;Please enter a billing address or enter a delivery address first so that it can be used as billing address.
 ;checkout.multi.paymentMethod.createSubscription.failedMsg;Failed to create subscription. Please check the values entered.
@@ -522,6 +524,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.sop.useThisPaymentInfo;Use this payment info
 ;checkout.multi.summary.breadcrumb;Final Review
 ;checkout.multi.summary.orderPlacedBy;Order placed by
+;checkout.multi.summary.markFor;"Mark For:"
 ;checkout.multi.worldpay.declined.message.12;Please check all your details and try again
 ;checkout.multi.worldpay.declined.message.13;Please check all your details and try again
 ;checkout.multi.worldpay.declined.message.14;Please check all your details and try again
@@ -2877,7 +2880,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.payment.ACCOUNT.PROFORMA;Pro-Forma
 
 ;checkout.multi.deliveryAddress.noAddress;There are no shipping addresses assigned to current customer.
-;checkout.multi.deliveryAddress.markFor.noSelection;Don't use markFor
+;checkout.multi.deliveryAddress.markFor.noSelection;Do not apply Mark For
 
 ;product.wholesale.price;Wholesale price
 ;product.videourl;Watch Video
@@ -2895,3 +2898,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."
 
 ;text.account.orderhistory.dateplaced;Date Placed
+
+
+;basket.export.images.file;Download product images

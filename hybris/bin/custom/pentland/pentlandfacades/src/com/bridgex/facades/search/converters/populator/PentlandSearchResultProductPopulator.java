@@ -39,6 +39,8 @@ public class PentlandSearchResultProductPopulator extends SearchResultVariantOpt
     Assert.notNull(target, "Parameter target cannot be null.");
     // Pull the values directly from the SearchResult object
     target.setCode(this.<String> getValue(source, "code"));
+    target.setMaterialKey(this.<String> getValue(source, "materialKey"));
+    target.setUpc(this.<String> getValue(source, "upc"));
     target.setName(this.<String> getValue(source, "name"));
     target.setBaseProduct(this.<String> getValue(source, "baseProductCode"));
 

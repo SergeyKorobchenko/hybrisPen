@@ -4,6 +4,7 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderStrategy;
@@ -53,11 +54,24 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
 
         if (cartModel.getPaymentInfo() != null && cartModel.getPaymentInfo().getBillingAddress() != null) {
           final AddressModel billingAddress = cartModel.getPaymentInfo().getBillingAddress();
+          billingAddress.setSapCustomerID(StringUtils.EMPTY);
           orderModel.setPaymentAddress(billingAddress);
           orderModel.getPaymentInfo().setBillingAddress(getModelService().clone(billingAddress));
           getModelService().save(orderModel.getPaymentInfo());
         }
         getModelService().save(orderModel);
+
+        //remove sapCustomerId from all addresses to avoid them showing up in address listings
+        AddressModel deliveryAddress = orderModel.getDeliveryAddress();
+        if(deliveryAddress != null){
+          deliveryAddress.setSapCustomerID(StringUtils.EMPTY);
+          getModelService().save(deliveryAddress);
+        }
+        AddressModel markFor = orderModel.getMarkFor();
+        if(markFor != null){
+          markFor.setSapCustomerID(StringUtils.EMPTY);
+          getModelService().save(markFor);
+        }
 
         // Calculate the order now that it has been copied
         try {
