@@ -62,7 +62,7 @@ public class OrderSimulateServiceTest {
     dto.setServiceConsumer("Hybris_B2B");
     ResponseEntity<MultiBrandCartResponse> result = orderSimulateService.sendRequest(dto, MultiBrandCartResponse.class);
     MultiBrandCartResponse body = result.getBody();
-    assertEquals(body.getEtReturn().getType(),"TEST");
+    assertEquals(body.getEtReturn().get(0).getType(),"TEST");
   }
 
 
