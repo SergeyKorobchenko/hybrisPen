@@ -297,16 +297,16 @@ ACC.cart = {
         $('#ajaxCart').html($("#cartTotalsTemplate").tmpl(cartData));
         ACC.quote.bindQuoteDiscount();
     },
-    
+
     updateEntryNumbersForCartMenuData: function (entry) {
-    	var entryNumbers = "";
+        var entryNumbers = "";
         $.each(entry.entries, function(index, subEntry) {
-        	if(index != 0){
-        		entryNumbers = entryNumbers + ";";
-        	}
-        	entryNumbers = entryNumbers + subEntry.entryNumber;
+            if(index != 0){
+                entryNumbers = entryNumbers + ";";
+            }
+            entryNumbers = entryNumbers + subEntry.entryNumber;
         });
-        $('.js-execute-entry-action-button').data('actionEntryNumbers',entryNumbers); 
+        $('.js-execute-entry-action-button').data('actionEntryNumbers',entryNumbers);
     },
 
     getProductQuantity: function (gridContainer, mapData, i) {
@@ -325,6 +325,7 @@ ACC.cart = {
                 var quantity = mapData[skuId];
                 if (quantity != undefined) {
                     quantities[index].value = quantity;
+                    $(quantities[index]).data('initial-quantity', quantity);
 
                     var indexPattern = "[0-9]+";
                     var currentIndex = parseInt(quantities[index].id.match(indexPattern));
@@ -426,11 +427,15 @@ ACC.cart = {
         postData.cartEntries = [];
         $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
             var $v = $(v);
-            postData.cartEntries.push({
-                'quantity': $v.val(),
-                'product': {'code': $v.data().productSelection.product},
-                'entryNumber': -1
-            })
+            var currentInputData = $v.data();
+            var quantity = $v.val();
+            if (currentInputData.initialQuantity > 0 || quantity > 0) {
+                postData.cartEntries.push({
+                    'quantity': quantity,
+                    'product': {'code': currentInputData.productSelection.product},
+                    'entryNumber': -1
+                });
+            }
         });
 
         $.ajax({
