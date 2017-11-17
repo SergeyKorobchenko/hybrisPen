@@ -21,11 +21,13 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
   @Override
   public ResponseEntity<MultiBrandCartResponse> sendRequest(final MultiBrandCartDto requestDto, final Class responseClass) {
     final MultiBrandCartResponse response = new MultiBrandCartResponse();
+    final List<ETReturnDto> etReturnList = new ArrayList<>();
     final ETReturnDto etReturn = new ETReturnDto();
     etReturn.setType(ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE);
     etReturn.setNumber("007");
     etReturn.setMessage("Materials successfully returned");
-    response.setEtReturn(etReturn);
+    etReturnList.add(etReturn);
+    response.setEtReturn(etReturnList);
 
     final List<MaterialInfoDto> matList = new ArrayList<>();
     final MaterialInfoDto materialInfoDto = new MaterialInfoDto();

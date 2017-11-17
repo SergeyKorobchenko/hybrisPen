@@ -353,6 +353,13 @@
 	<alias name="pentlandAddressPopulator" alias="addressPopulator"/>
 	<bean id="pentlandAddressPopulator" class="com.bridgex.facades.populators.PentlandAddressPopulator" parent="defaultAddressPopulator"/>
 
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="VARIANT_MATRIX_BASE" />
+		<property name="add" ref="productVariantMatrixPopulator" />
+	</bean>
+
 	<alias name="defaultPentlandExportFacade" alias="pentlandExportFacade"/>
 	<bean id="defaultPentlandExportFacade" class="com.bridgex.facades.export.impl.DefaultPentlandExportFacade">
 		<property name="productService" ref="productService"/>

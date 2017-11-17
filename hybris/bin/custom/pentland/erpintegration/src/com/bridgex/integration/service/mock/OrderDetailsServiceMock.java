@@ -2,6 +2,7 @@ package com.bridgex.integration.service.mock;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import de.hybris.platform.basecommerce.enums.ConsignmentStatus;
 /**
  * @author Goncharenko Mikhail, created on 07.11.2017.
  */
-public class OrderDetailsServiceImplMock extends OrderDetailsServiceImpl {
+public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
 
   @Override
   public String getServiceName() {
@@ -53,12 +54,12 @@ public class OrderDetailsServiceImplMock extends OrderDetailsServiceImpl {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  private ETReturnDto getEtReturnDto() {
+  private List<ETReturnDto> getEtReturnDto() {
     ETReturnDto etReturn = new ETReturnDto();
     etReturn.setType("S");
     etReturn.setNumber("007");
     etReturn.setMessage("Materials successfully returned");
-    return etReturn;
+    return Collections.singletonList(etReturn);
   }
 
   private OrderEntryDto getOrderEntryDto() {
@@ -81,7 +82,7 @@ public class OrderDetailsServiceImplMock extends OrderDetailsServiceImpl {
     size.setLineNumber("1");
     size.setShipDate(new Date());
     size.setShipQty("10.00");
-    size.setShipStatus(ConsignmentStatus.PICKPACK.getCode());
+    size.setShipStatus("SHIPPED");
     size.setTotalQuantity("10.00");
     return size;
   }

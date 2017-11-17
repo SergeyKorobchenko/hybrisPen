@@ -65,6 +65,7 @@ public class OrderSimulateServiceTest {
     ResponseEntity<MultiBrandCartResponse> result = orderSimulateService.sendRequest(dto, MultiBrandCartResponse.class);
     MultiBrandCartResponse body = result.getBody();
     assertEquals(Optional.of(body.getEtReturn().get(0).getType()).orElse("null"), "TEST");
+    assertEquals(body.getEtReturn().get(0).getType(),"TEST");
   }
 
 
