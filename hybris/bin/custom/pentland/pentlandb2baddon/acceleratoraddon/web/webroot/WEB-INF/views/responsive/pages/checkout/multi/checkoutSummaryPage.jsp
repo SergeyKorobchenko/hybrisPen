@@ -40,13 +40,13 @@
                             <spring:theme code="checkout.summary.placeOrder"/>
                         </button>
                         
-                        <c:if test="${cartData.quoteData eq null}">
-	                        <button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">
-	                            <spring:theme code="checkout.summary.scheduleReplenishment"/>
-	                        </button>
-	
-	                        <b2b-multi-checkout:replenishmentScheduleForm/>
-                        </c:if>
+                        <%--<c:if test="${cartData.quoteData eq null}">--%>
+	                        <%--<button id="scheduleReplenishment" type="button" class="btn btn-default btn-block scheduleReplenishmentButton checkoutSummaryButton" disabled="disabled">--%>
+	                            <%--<spring:theme code="checkout.summary.scheduleReplenishment"/>--%>
+	                        <%--</button>--%>
+	<%----%>
+	                        <%--<b2b-multi-checkout:replenishmentScheduleForm/>--%>
+                        <%--</c:if>--%>
                     </form:form>
                 </div>
 

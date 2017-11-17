@@ -470,7 +470,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.order.summary;Order Summary
 ;checkout.multi.payment;Payment:
 ;checkout.multi.paymentDetails.notprovided;You must provide a payment details in order to go to the next step.
-;checkout.multi.paymentMethod;Payment & Billing Address
+;checkout.multi.paymentMethod;Payment
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddressDiffersFromDeliveryAddress;If your billing address is  different  to your delivery address, please use this form to enter your billing address
 ;checkout.multi.paymentMethod.addPaymentDetails.communicationError;There was an error communicating with the payment provider - please try again later.
@@ -483,7 +483,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.paymentMethod.addPaymentDetails.useSavedCard;Use a saved card
 ;checkout.multi.paymentMethod.addPaymentDetails.useSavedCard.description;Registered customers may select a previously saved card
 ;checkout.multi.paymentMethod.addPaymentDetails.useThesePaymentDetails;Use these payment details
-;checkout.multi.paymentMethod.breadcrumb;Payment & Billing Address
+;checkout.multi.paymentMethod.breadcrumb;Payment
 ;checkout.multi.paymentMethod.continue;Next
 ;checkout.multi.paymentMethod.createSubscription.billingAddress.noneSelectedMsg;Please enter a billing address or enter a delivery address first so that it can be used as billing address.
 ;checkout.multi.paymentMethod.createSubscription.failedMsg;Failed to create subscription. Please check the values entered.
@@ -524,6 +524,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.sop.useThisPaymentInfo;Use this payment info
 ;checkout.multi.summary.breadcrumb;Final Review
 ;checkout.multi.summary.orderPlacedBy;Order placed by
+;checkout.multi.summary.markFor;"Mark For:"
 ;checkout.multi.worldpay.declined.message.12;Please check all your details and try again
 ;checkout.multi.worldpay.declined.message.13;Please check all your details and try again
 ;checkout.multi.worldpay.declined.message.14;Please check all your details and try again
