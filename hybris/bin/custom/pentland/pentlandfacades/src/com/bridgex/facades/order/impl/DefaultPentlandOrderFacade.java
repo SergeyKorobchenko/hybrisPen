@@ -3,8 +3,10 @@ package com.bridgex.facades.order.impl;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
-import com.bridgex.facades.integration.OrderDetailsFacade;
+import com.bridgex.core.integration.PentlandIntegrationService;
 import com.bridgex.facades.order.PentlandOrderFacade;
+import com.bridgex.integration.domain.OrderDetailsDto;
+import com.bridgex.integration.domain.OrderDetailsResponse;
 
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
@@ -14,6 +16,7 @@ import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.store.BaseStoreModel;
 
 /**
@@ -23,7 +26,9 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
 
   private PentlandCustomerAccountService pentlandCustomerAccountService;
 
-  private OrderDetailsFacade orderDetailsFacade;
+  private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
+
+  private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
 
   @Override
   public SearchPageData<OrderHistoryData> getPagedB2BOrderHistoryForStatuses(final PageableData pageableData, final OrderStatus... statuses)
@@ -36,8 +41,15 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   }
 
   @Override
-  public OrderData getOrderDetailsForCode(String code) {
-    return orderDetailsFacade.getOrderDetails(code);
+  public OrderData requestOrderDetails(String code) {
+    OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(code));
+    return orderDetailsConverter.convert(response);
+  }
+
+  private OrderDetailsDto createRequestDto(String code) {
+    OrderDetailsDto request = new OrderDetailsDto();
+    request.setOrderCode(code);
+    return request;
   }
 
   protected PentlandCustomerAccountService getPentlandCustomerAccountService() {
@@ -49,12 +61,12 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
     this.pentlandCustomerAccountService = pentlandCustomerAccountService;
   }
 
-  public OrderDetailsFacade getOrderDetailsFacade() {
-    return orderDetailsFacade;
+  public void setOrderDetailsService(PentlandIntegrationService<OrderDetailsDto, OrderDetailsResponse> orderDetailsService) {
+    this.orderDetailsService = orderDetailsService;
   }
 
   @Required
-  public void setOrderDetailsFacade(OrderDetailsFacade orderDetailsFacade) {
-    this.orderDetailsFacade = orderDetailsFacade;
+  public void setOrderDetailsConverter(Converter<OrderDetailsResponse, OrderData> orderDetailsConverter) {
+    this.orderDetailsConverter = orderDetailsConverter;
   }
 }

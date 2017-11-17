@@ -1,0 +1,64 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the CMS content for account summary page
+# the user of this addon should change the value of "$contentCatalog" accordingly
+#
+
+$contentCatalog=pentlandContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])
+$jarResourceCmsImages=jar:com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants&/pentlandaccountsummaryaddon/import/cockpits/cmscockpit
+$siteResource=jar:com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants&/pentlandaccountsummaryaddon/import
+$narrowContent=ProductFeatureComponent,CategoryFeatureComponent,CMSImageComponent,SimpleBannerComponent,BannerComponent,ImageMapComponent,RotatingImagesComponent,ProductCarouselComponent,CMSParagraphComponent
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CompanyPageTemplate'];validComponentTypes(code)
+;BodyContent;;$narrowContent,AccountSummaryUnitTreeComponent
+;BodyContent;;$narrowContent,AccountSummaryAccountStatusComponent
+
+# Jsp Include Components
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountSummaryUnitDetailsOverviewComponent;Account Summary Unit Details Overview Component;/WEB-INF/views/addons/pentlandaccountsummaryaddon/responsive/pages/company/accountSummaryUnitDetailsOverview.jsp;;AccountSummaryUnitDetailsOverviewComponent
+;;AccountSummaryUnitDetailsListComponent;Account Summary Unit Details List Component;/WEB-INF/views/addons/pentlandaccountsummaryaddon/responsive/pages/company/accountSummaryUnitDetailsList.jsp;;AccountSummaryUnitDetailsListComponent
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;accountsummaryunitdetailslist;Account Summary Unit Details List Page;CompanyPageTemplate;accountsummaryunitdetailslist
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;BodyContent-accountsummaryunitdetailslist;Body Content Slot for Account Summary Unit Details List Page;true;AccountSummaryUnitDetailsOverviewComponent,AccountSummaryUnitDetailsListComponent
+
+# ContentSlotForPage - accountsummaryunitdetailslist
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='accountsummaryunitdetailslist'];contentSlot(uid,$contentCV)[unique=true]
+;;BodyContent-accountsummaryunitdetailslist;BodyContent;;BodyContent-accountsummaryunitdetailslist
+
+INSERT_UPDATE DocumentMedia;code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg']
+;INPG-00100001;$siteResource/documentmedias/INPG-00100001.pdf;application/pdf
+;INPG-00100002;$siteResource/documentmedias/INPG-00100002.pdf;application/pdf
+;INPG-00100003;$siteResource/documentmedias/INPG-00100003.pdf;application/pdf
+;INPG-00100004;$siteResource/documentmedias/INPG-00100004.pdf;application/pdf
+;INPG-00100005;$siteResource/documentmedias/INPG-00100005.pdf;application/pdf
+;INPG-00100006;$siteResource/documentmedias/INPG-00100006.pdf;application/pdf
+;POPG-00100006;$siteResource/documentmedias/POPG-00100001.pdf;application/pdf
+;POPG-00006009;$siteResource/documentmedias/POPG-00006009.pdf;application/pdf
+;POPG-00006012;$siteResource/documentmedias/POPG-00006012.pdf;application/pdf
+;POPG-00006015;$siteResource/documentmedias/POPG-00006015.pdf;application/pdf
+;POPG-00006017;$siteResource/documentmedias/POPG-00006017.pdf;application/pdf
+;POPG-00006020;$siteResource/documentmedias/POPG-00006020.pdf;application/pdf
+;STAPG-00010000;$siteResource/documentmedias/STAPG-00010000.pdf;application/pdf
+
+INSERT_UPDATE B2BDocument;documentnumber[unique=true];Unit(uid);amount;currency(isocode);date[dateformat=yyyy-MM-dd];documentType(code);dueDate[dateformat=yyyy-MM-dd];openAmount;status(code,itemtype(code));documentMedia(code, itemtype(code));sapCustomerID
+;POCR-0000001;Custom Retail;78515,58;USD;2014-06-10;Purchase Order;;78515,58;open:DocumentStatus;;mitreTestB2B
+;POCR-0000002;Custom Retail;50945,36;USD;2014-06-10;Purchase Order;;50945,36;open:DocumentStatus;;mitreTestB2B
+;POCR-0000003;Custom Retail;82005,11;USD;2014-06-10;Purchase Order;;82005,11;open:DocumentStatus;;mitreTestB2B
+;POCR-0000004;Custom Retail;31751,03;USD;2014-06-10;Purchase Order;;31751,03;open:DocumentStatus;;mitreTestB2B
+;92143943;Pronto Services;965313,41;USD;2014-11-22;Statement;2014-11-22;965313,41;closed:DocumentStatus;;107660
+;92143942;Pronto Services;1015987,67;USD;2014-11-25;Statement;2014-11-25;1015987,67;open:DocumentStatus;;107660

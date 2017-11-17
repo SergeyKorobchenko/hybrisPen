@@ -101,10 +101,10 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 ;M35392;;M18729_B;pieces;BLACK;goalkeeper;ApparelSizeVariantProduct
 ;M34704_R;;M34704;pieces;RED;goalkeeper;ApparelSizeVariantProduct
 ;M34704_W;;M34704;pieces;WHITE;goalkeeper;ApparelSizeVariantProduct
-;M34704_B;;M34704;pieces;BLACK;referees;ApparelSizeVariantProduct
-;M34704_P;;M34704;pieces;PURPLE;referees;ApparelSizeVariantProduct
-;M34705_N;;M34705_B;pieces;BLACK;referees;ApparelSizeVariantProduct
-;M34705_W;;M34705_B;pieces;WHITE;referees;ApparelSizeVariantProduct
+;5BB1352CRB;;M34704;pieces;BLACK;referees;ApparelSizeVariantProduct
+;5BB1253PPW;;M34704;pieces;PURPLE;referees;ApparelSizeVariantProduct
+;731SPM0017024;;M34705_B;pieces;BLACK;referees;ApparelSizeVariantProduct
+;914542;;M34705_B;pieces;WHITE;referees;ApparelSizeVariantProduct
 
 # Create ApparelSizeVariantProduct variants
 INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);primaryColors(code);;discontinuedStatus(code)[default=D03];$approved

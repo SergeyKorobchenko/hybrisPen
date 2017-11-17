@@ -35,12 +35,7 @@
 	<alias name="pentlandOrderFacade" alias="orderFacade"/>
 	<bean id="pentlandOrderFacade" class="com.bridgex.facades.order.impl.DefaultPentlandOrderFacade" parent="defaultOrderFacade">
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
-		<property name="orderDetailsFacade" ref="orderDetailsFacade"/>
-	</bean>
-
-	<bean id="orderDetailsFacade" class="com.bridgex.facades.integration.OrderDetailsFacade">
-		<property name="orderDetailsService" ref="orderDetailsService"/>
-		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
 	</bean>
 
@@ -357,6 +352,13 @@
 
 	<alias name="pentlandAddressPopulator" alias="addressPopulator"/>
 	<bean id="pentlandAddressPopulator" class="com.bridgex.facades.populators.PentlandAddressPopulator" parent="defaultAddressPopulator"/>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="VARIANT_MATRIX_BASE" />
+		<property name="add" ref="productVariantMatrixPopulator" />
+	</bean>
 
 	<alias name="defaultPentlandExportFacade" alias="pentlandExportFacade"/>
 	<bean id="defaultPentlandExportFacade" class="com.bridgex.facades.export.impl.DefaultPentlandExportFacade">
