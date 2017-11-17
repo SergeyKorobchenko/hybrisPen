@@ -12,15 +12,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${readOnly != true}">
-    <%--<div class="update-future-stock hidden-xs">--%>
-        <%--<spring:url value="${product.url}/grid/skusFutureStock"	var="skusFutureStockUrl" />--%>
-        <%--<a href="#" class="update_future_stock_button positive" data-skus-id="${skusId}" data-skus-future-stock-url="${skusFutureStockUrl}">--%>
-            <%--<spring:theme code="product.grid.futurestock.updatefuture.availability" />--%>
-        <%--</a>--%>
-        <%--<a href="#" class="hide_future_stock_info positive">--%>
-           <%--<spring:theme code="product.grid.futurestock.hidefuture.availability" />--%>
-        <%--</a>--%>
-    <%--</div>--%>
+    <div class="update-future-stock hidden-xs">
+        <spring:url value="${product.url}/grid/skusFutureStock"	var="skusFutureStockUrl" />
+        <a href="#" class="update_future_stock_button positive" data-skus-id="${skusId}" data-skus-future-stock-url="${skusFutureStockUrl}">
+            <spring:theme code="product.grid.futurestock.updatefuture.availability" />
+        </a>
+        <a href="#" class="hide_future_stock_info positive">
+           <spring:theme code="product.grid.futurestock.hidefuture.availability" />
+        </a>
+    </div>
 </c:if>
 
 <input type="hidden" id="subtotalValue" value="0">

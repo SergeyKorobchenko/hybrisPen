@@ -19,7 +19,6 @@
 
 	<group name="lambda_responsive">
 		<css>/_ui/responsive/theme-lambda/css/style.css</css>
-		<css>/_ui/responsive/theme-lambda/css/bootstrap-datetimepicker.css</css>
 	</group>
 	
 	<group name="all_responsive">
