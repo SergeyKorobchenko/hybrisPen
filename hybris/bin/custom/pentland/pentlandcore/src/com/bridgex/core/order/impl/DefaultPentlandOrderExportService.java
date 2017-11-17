@@ -62,7 +62,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     OrderExportDto request = new OrderExportDto();
 
     fillBaseData(orderModel, unit, deliveryAddressModel, request);
-    populateOrderEntries(orderModel, unit);
+    populateOrderEntries(orderModel, unit, request);
 
     fillAddresses(orderModel, deliveryAddressModel, request);
 
@@ -116,7 +116,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     request.setCustomerComment(orderModel.getCustomerNotes());
   }
 
-  private void populateOrderEntries(OrderModel orderModel, B2BUnitModel unit) {
+  private void populateOrderEntries(OrderModel orderModel, B2BUnitModel unit, OrderExportDto request) {
     //group entries by base product
     Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle =
       orderModel.getEntries().stream().filter(entry -> entry.getProduct() instanceof ApparelSizeVariantProductModel)
@@ -124,6 +124,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
 
     List<MultiBrandOrderInput> styleEntries = new ArrayList<>();
     fillOrderEntries(unit, entriesGroupedByStyle, styleEntries);
+    request.setOrderEntries(styleEntries);
   }
 
   private void fillOrderEntries(B2BUnitModel unit, Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle, List<MultiBrandOrderInput> styleEntries) {
@@ -137,10 +138,12 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
 
       List<SchedLinesDto> sizeEntries = new ArrayList<>();
       entries.forEach(size -> {
-        SchedLinesDto sizeEntry = new SchedLinesDto();
-        sizeEntry.setEan(size.getProduct().getCode());
-        sizeEntry.setQuantity(size.getQuantity().intValue());
-        sizeEntries.add(sizeEntry);
+        if(size.getQuantity() > 0) {
+          SchedLinesDto sizeEntry = new SchedLinesDto();
+          sizeEntry.setEan(size.getProduct().getCode());
+          sizeEntry.setQuantity(size.getQuantity().intValue());
+          sizeEntries.add(sizeEntry);
+        }
       });
       groupedEntry.setSchedLines(sizeEntries);
       styleEntries.add(groupedEntry);
