@@ -32,6 +32,7 @@
 	<import resource="pentlandcore-dao-spring.xml"/>
 	<import resource="pentlandcore-strategies-spring.xml"/>
 	<import resource="pentlandcore-jobs-spring.xml"/>
+	<import resource="pentlandcore-cache-spring.xml"/>
 
 	<!-- SystemSetup for the Pentlandcore -->
 	<bean id="acceleratorCoreSystemSetup" class="com.bridgex.core.setup.CoreSystemSetup"
@@ -72,6 +73,14 @@
 	<alias name="defaultPentlandOrderSimulationService" alias="orderSimulationService" />
 	<bean name="defaultPentlandOrderSimulationService" class="com.bridgex.core.product.impl.DefaultPentlandOrderSimulationService" >
 		<property name="integrationService" ref="orderSimulateService" />
+	</bean>
+
+	<bean name="productSizeUpdateInterceptor" class="com.bridgex.core.product.interceptors.ProductSizeUpdateInterceptor">
+		<property name="productSizeService" ref="productSizeService"/>
+	</bean>
+	<bean id="productSizeUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="productSizeUpdateInterceptor"/>
+		<property name="typeCode" value="ProductSize"/>
 	</bean>
 
 </beans>
