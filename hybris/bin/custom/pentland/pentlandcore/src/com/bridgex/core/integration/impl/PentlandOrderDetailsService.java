@@ -1,5 +1,6 @@
 package com.bridgex.core.integration.impl;
 
+import com.bridgex.integration.domain.ETReturnDto;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -28,8 +29,11 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
   }
 
   private void checkRequestSuccess(OrderDetailsResponse response) {
-    if (response.getEtReturn() != null && response.getEtReturn().getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
-      throw new ResourceAccessException("ERP request failed with response: " + response.getEtReturn().getMessage());
+    if (response.getEtReturn() != null && !response.getEtReturn().isEmpty()) {
+      ETReturnDto etReturn = response.getEtReturn().get(0);
+      if (etReturn.getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
+        throw new ResourceAccessException("ERP request failed with response: " + etReturn.getMessage());
+      }
     }
   }
 

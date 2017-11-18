@@ -50,6 +50,7 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
 
     response.setEtReturn(getEtReturnDto());
     response.setOrderEntries(Collections.singletonList(getOrderEntryDto()));
+    response.setEtReturn(Collections.emptyList());
 
     return new ResponseEntity<>(response, HttpStatus.OK);
   }

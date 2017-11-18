@@ -75,7 +75,7 @@ public class OrderDetailsResponse {
   private List<OrderEntryDto> orderEntries;
 
   @JsonProperty("ET_RETURN")
-  private ETReturnDto etReturn;
+  private List<ETReturnDto> etReturn;
 
   public String getCode() {
     return code;
@@ -237,13 +237,11 @@ public class OrderDetailsResponse {
     this.orderEntries = orderEntries;
   }
 
-  public ETReturnDto getEtReturn() {
+  public List<ETReturnDto> getEtReturn() {
     return etReturn;
   }
 
   public void setEtReturn(List<ETReturnDto> etReturn) {
-    if (!etReturn.isEmpty()) {
-      this.etReturn = etReturn.get(0);
-    }
+      this.etReturn = etReturn;
   }
 }
