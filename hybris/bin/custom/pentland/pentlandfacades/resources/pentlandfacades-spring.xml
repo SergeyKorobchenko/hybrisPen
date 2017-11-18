@@ -35,12 +35,7 @@
 	<alias name="pentlandOrderFacade" alias="orderFacade"/>
 	<bean id="pentlandOrderFacade" class="com.bridgex.facades.order.impl.DefaultPentlandOrderFacade" parent="defaultOrderFacade">
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
-		<property name="orderDetailsFacade" ref="orderDetailsFacade"/>
-	</bean>
-
-	<bean id="orderDetailsFacade" class="com.bridgex.facades.integration.OrderDetailsFacade">
-		<property name="orderDetailsService" ref="orderDetailsService"/>
-		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
 	</bean>
 

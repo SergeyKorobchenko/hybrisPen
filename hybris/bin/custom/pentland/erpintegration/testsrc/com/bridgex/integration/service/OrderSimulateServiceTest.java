@@ -5,6 +5,8 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.validation.constraints.AssertTrue;
 
@@ -62,6 +64,7 @@ public class OrderSimulateServiceTest {
     dto.setServiceConsumer("Hybris_B2B");
     ResponseEntity<MultiBrandCartResponse> result = orderSimulateService.sendRequest(dto, MultiBrandCartResponse.class);
     MultiBrandCartResponse body = result.getBody();
+    assertEquals(Optional.of(body.getEtReturn().get(0).getType()).orElse("null"), "TEST");
     assertEquals(body.getEtReturn().get(0).getType(),"TEST");
   }
 

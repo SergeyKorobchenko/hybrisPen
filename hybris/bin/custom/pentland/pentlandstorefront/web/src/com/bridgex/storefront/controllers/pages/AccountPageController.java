@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
@@ -318,7 +319,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		try
 		{
-			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
+			final OrderData orderDetails = orderFacade.requestOrderDetails(orderCode);
 			model.addAttribute("orderData", orderDetails);
 
 			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
@@ -333,6 +334,11 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			LOG.warn("Attempted to load a order that does not exist or is not visible", e);
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
+			return REDIRECT_TO_ORDER_HISTORY_PAGE;
+		}
+		catch (final ResourceAccessException e) {
+			LOG.warn("[OrderDetails] ERP request failed", e);
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "erp.integration.failed", null);
 			return REDIRECT_TO_ORDER_HISTORY_PAGE;
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));

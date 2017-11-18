@@ -51,7 +51,7 @@
 		<extension name='b2bacceleratorfacades' />
 		<extension name='commerceorgaddon' />
 		<extension name='secureportaladdon' />
-		<extension name="accountsummaryaddon" />
+		<extension name='pentlandaccountsummaryaddon' />
 		<extension name="savedorderforms" />
 		<extension name="voucher" />
 		<extension name="promotions" />
