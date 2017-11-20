@@ -42,6 +42,7 @@ public class AccountSummaryServiceMock extends AccountSummaryServiceImpl {
     responseBody.setRegion("LO");
 
     responseBody.setDetails(generateDetails());
+    responseBody.setEtReturn(Collections.emptyList());
 
     return new ResponseEntity<AccountSummaryResponse>(responseBody, HttpStatus.OK);
   }

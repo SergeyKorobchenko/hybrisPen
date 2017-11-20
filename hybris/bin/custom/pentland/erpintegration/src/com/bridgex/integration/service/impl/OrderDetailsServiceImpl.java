@@ -36,7 +36,7 @@ public class OrderDetailsServiceImpl extends AbstractIntegrationService<OrderDet
     if (result.getEtReturn() == null) {
       result.setEtReturn(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)));
     } else {
-      result.getEtReturn().setType(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE);
+      result.getEtReturn().add(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
     }
     return result;
   }

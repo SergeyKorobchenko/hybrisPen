@@ -45,10 +45,7 @@ import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentPaymentInfoModel
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel;
 import com.bridgex.pentlandaccountsummaryaddon.model.DocumentMediaModel;
 
-import de.hybris.platform.b2b.company.B2BCommerceUnitService;
-import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
-import de.hybris.platform.b2b.services.B2BCustomerService;
 import de.hybris.platform.b2bacceleratorfacades.exception.EntityValidationException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -77,7 +74,7 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
   {
     List<B2BUnitModel> brands = b2BUnitService.getCurrentUnits();
     String sapId = brands.iterator().next().getSapID();
-    List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).collect(Collectors.toList());
+    List<String> sapBrands = brands.stream().map(B2BUnitModel::getSapBrand).filter(Objects::nonNull).collect(Collectors.toList());
     AccountSummaryResponse response = pentlandIntegrationService.requestData(createAccountSummaryRequest(sapId, sapBrands));
     return getAccountSummaryInfoConverter().convert(response);
   }
