@@ -2849,13 +2849,14 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.page.sort.byOrderType;OrderType
 ;text.account.orderHistory.page.sort.byRdd;Requested delivery date
 ;text.account.orderHistory.orderType;Order Type
-;text.account.orderHistory.rdd;Requested delivery date
-;text.account.orderHistory.totalQty;Total Quantity
+;text.account.orderHistory.rdd;RDD
+;text.account.orderHistory.totalQty;Total Qty
 ;text.account.orderHistory.creationDate;Order Creation Date
-;text.account.orderHistory.POnumber;PO Number
+;text.account.orderHistory.POnumber;P.O. Number
 ;text.account.order.total;Order Total
 ;text.account.order.tax;Order Tax
 ;text.account.order.net;Order Net
+;text.account.order.status.display.OPEN;Open
 ;text.account.orderHistory.shipTo;Ship To
 ;text.account.orderHistory.soldTo;Sold To
 ;text.account.orderHistory.markFor;Mark For
