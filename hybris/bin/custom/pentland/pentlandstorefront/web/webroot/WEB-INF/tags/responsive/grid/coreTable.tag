@@ -56,6 +56,9 @@
         <div class="description">
             <div>${fn:escapeXml(firstVariant.variantName)}</div>
         </div>
+        <div class="price">
+            <div>${fn:escapeXml(firstVariant.variantOption.priceData.formattedValue)}</div>
+        </div>
     </td>
 
     <c:set var="colspan" value="1"/>
@@ -81,7 +84,7 @@
                 <%--<c:set var="disableForOutOfStock" value="${inputDisabled}"/>--%>
                 <%--<format:price priceData="${variant.variantOption.priceData}"/>--%>
             <%--</span>--%>
-            <input type="hidden" id="productPrice[${loopIndex}]" value="${variant.variantOption.priceData.value}" />
+            <input type="hidden" id="productPrice[${loopIndex}]" value="${firstVariant.variantOption.priceData.value}" />
 
             <%--<c:if test="${variant.variantOption.stock.stockLevel == 0}">--%>
                 <%--<c:set var="disableForOutOfStock" value="disabled"/>--%>
@@ -92,7 +95,7 @@
                    name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' data-current-value=""
                    id="cartEntries[${loopIndex}].quantity" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
 
-            <%--<grid:coreTableStockRow variant="${variant}" />--%>
+            <grid:coreTableStockRow variant="${variant}" />
 
             <%--<span class="data-grid-total" data-grid-total-id="total_value_${loopIndex}"></span>--%>
 
