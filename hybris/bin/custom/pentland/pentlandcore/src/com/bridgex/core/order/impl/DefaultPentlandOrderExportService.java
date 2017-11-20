@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.bridgex.core.jalo.ApparelSizeVariantProduct;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandOrderExportService;
 import com.bridgex.integration.constants.ErpintegrationConstants;
@@ -78,7 +76,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     if(orderModel.getMarkFor() != null){
       UserContactsDto markForAddressDto = new UserContactsDto();
       markForAddressDto.setEmail(orderModel.getUser().getUid());
-      ShipToDto markForAddress = populateAddress(deliveryAddressModel, ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
+      ShipToDto markForAddress = populateAddress(orderModel.getMarkFor(), ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
       markForAddressDto.setShipToAddress(markForAddress);
       userContacts.add(markForAddressDto);
     }
@@ -88,6 +86,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   private ShipToDto populateAddress(AddressModel deliveryAddressModel, String markFor) {
     ShipToDto deliveryAddress = new ShipToDto();
     deliveryAddress.setId(deliveryAddressModel.getAddressID());
+    deliveryAddress.setName(deliveryAddressModel.getDisplayName());
     deliveryAddress.setMarkForFlag(markFor);
     deliveryAddress.setStreet(deliveryAddressModel.getStreetname());
     deliveryAddress.setCity(deliveryAddressModel.getTown());
