@@ -13,7 +13,7 @@ public class DocumentResponse {
   private ETOutputDto etOutput;
 
   @JsonProperty("ET_RETURN")
-  private ETReturnDto etReturn;
+  private List<ETReturnDto> etReturn;
 
   public ETOutputDto getEtOutput() {
     return etOutput;
@@ -23,11 +23,11 @@ public class DocumentResponse {
     this.etOutput = etOutput;
   }
 
-  public ETReturnDto getEtReturn() {
+  public List<ETReturnDto> getEtReturn() {
     return etReturn;
   }
 
   public void setEtReturn(List<ETReturnDto> etReturn) {
-    this.etReturn = etReturn.get(0);
+    this.etReturn = etReturn;
   }
 }

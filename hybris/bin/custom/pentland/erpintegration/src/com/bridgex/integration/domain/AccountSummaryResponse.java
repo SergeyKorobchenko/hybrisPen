@@ -44,7 +44,7 @@ public class AccountSummaryResponse {
   private List<AccountSummaryDetailsDto> details;
 
   @JsonProperty("ET_RETURN")
-  private ETReturnDto etReturn;
+  private List<ETReturnDto> etReturn;
 
   public String getSapCustomerId() {
     return sapCustomerId;
@@ -134,12 +134,11 @@ public class AccountSummaryResponse {
     this.details = details;
   }
 
-  public ETReturnDto getEtReturn() {
+  public List<ETReturnDto> getEtReturn() {
     return etReturn;
   }
 
   public void setEtReturn(List<ETReturnDto> etReturn) {
-    if (etReturn.isEmpty()) return;
-    this.etReturn = etReturn.get(0);
+    this.etReturn = etReturn;
   }
 }

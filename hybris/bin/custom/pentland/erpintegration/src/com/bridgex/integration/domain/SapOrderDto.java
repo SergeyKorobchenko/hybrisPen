@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 11/7/2017.
  */
-public class SapOrderDTO implements Serializable {
+public class SapOrderDto implements Serializable {
 
-  public SapOrderDTO(){
+  public SapOrderDto(){
   }
 
   @JsonProperty("VBELN")

@@ -2,7 +2,6 @@ package com.bridgex.core.product.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,15 +11,11 @@ import org.springframework.util.Assert;
 
 import com.bridgex.core.product.PentlandProductService;
 import com.bridgex.core.product.dao.PentlandProductDao;
-import com.bridgex.integration.domain.MultiBrandCartDto;
-import com.bridgex.integration.domain.MultiBrandCartResponse;
-import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.mediaconversion.MediaConversionService;
 import de.hybris.platform.mediaconversion.enums.ConversionStatus;
 import de.hybris.platform.product.impl.DefaultProductService;

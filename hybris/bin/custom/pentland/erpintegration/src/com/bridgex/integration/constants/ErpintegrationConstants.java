@@ -35,6 +35,7 @@ public final class ErpintegrationConstants extends GeneratedErpintegrationConsta
 		public static final String DEFAULT_SERVICE_CONSUMER = "Hybris_B2B";
 		public static final String DEFAULT_ERP_FLAG_TRUE    = "X";
 		public static final String DEFAULT_APPLICATION_KEY  = "V3";
+    public static final String DEFAULT_LANGUAGE = "EN";
 	}
 
 	public static class RESPONSE {
