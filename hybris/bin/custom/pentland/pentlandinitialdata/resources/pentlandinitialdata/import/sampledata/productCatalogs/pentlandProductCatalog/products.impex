@@ -87,8 +87,8 @@ INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategori
 INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);primaryColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved
 ;M25687_B;;M25687;pieces;BLACK;jersey;ApparelSizeVariantProduct
 ;M25687_W;;M25687;pieces;WHITE;jersey;ApparelSizeVariantProduct
-;M27160;;M27160_B;pieces;BLACK,SILVER;jersey;ApparelSizeVariantProduct
-;M28323;;M28323_B;pieces;BLACK,WHITE;jersey;ApparelSizeVariantProduct
+;M27160;;M27160_B;pieces;SILVER;jersey;ApparelSizeVariantProduct
+;M28323;;M28323_B;pieces;BLACK;jersey;ApparelSizeVariantProduct
 ;M32946;;M32946_B;pieces;WHITE;shortsTeamwear;ApparelSizeVariantProduct
 ;M33307;;M33307_B;pieces;BLACK;shortsTeamwear;ApparelSizeVariantProduct
 ;M33477;;M33477_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
@@ -101,10 +101,10 @@ INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$base
 ;M35392;;M18729_B;pieces;BLACK;goalkeeper;ApparelSizeVariantProduct
 ;M34704_R;;M34704;pieces;RED;goalkeeper;ApparelSizeVariantProduct
 ;M34704_W;;M34704;pieces;WHITE;goalkeeper;ApparelSizeVariantProduct
-;5BB1352CRB;;M34704;pieces;BLACK;referees;ApparelSizeVariantProduct
-;5BB1253PPW;;M34704;pieces;PURPLE;referees;ApparelSizeVariantProduct
-;731SPM0017024;;M34705_B;pieces;BLACK;referees;ApparelSizeVariantProduct
-;914542;;M34705_B;pieces;WHITE;referees;ApparelSizeVariantProduct
+;M34704_B;;M34704;pieces;BLACK;referees;ApparelSizeVariantProduct
+;M34704_P;;M34704;pieces;PURPLE;referees;ApparelSizeVariantProduct
+;M34705_N;;M34705_B;pieces;BLACK;referees;ApparelSizeVariantProduct
+;M34705_W;;M34705_B;pieces;WHITE;referees;ApparelSizeVariantProduct
 
 # Create ApparelSizeVariantProduct variants
 INSERT_UPDATE ApparelSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);primaryColors(code);;discontinuedStatus(code)[default=D03];$approved

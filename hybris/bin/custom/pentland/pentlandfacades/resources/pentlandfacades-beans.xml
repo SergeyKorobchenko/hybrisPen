@@ -109,6 +109,7 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.VariantMatrixElementData">
 		<property name="variantName" type="String"/>
 		<property name="maxVariants" type="java.lang.Integer"/>
+		<property name="qty" type="java.lang.Integer" />
 	</bean>
 
 	<bean class="com.bridgex.facades.order.data.MiniOrderEntry">
@@ -118,6 +119,10 @@
 		<property name="name" type="String"/>
 		<property name="upc" type="String"/>
 		<property name="price" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.VariantOptionData">
+		<property name="brandCode" type="String" />
 	</bean>
 
 </beans>

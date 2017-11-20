@@ -22,6 +22,7 @@ import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.ETReturnDto;
 import com.bridgex.integration.domain.MaterialInfoDto;
+import com.bridgex.integration.domain.MaterialOutputGridDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartInput;
 import com.bridgex.integration.domain.MultiBrandCartResponse;
@@ -35,6 +36,8 @@ import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.product.data.StockData;
+import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.core.model.user.UserModel;
@@ -76,10 +79,86 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
         } catch (NumberFormatException e) {
           LOG.warn("NumberFormatException on response from Order Simulation");
           LOG.debug(e.getMessage());
+        } catch (NullPointerException npe) {
+          LOG.warn("NullPointerException on response from Order Simulation. Price is empty.");
+          LOG.debug(npe.getMessage());
         }
       }
     }
     return false;
+  }
+
+  @Override
+  public boolean populateOrderForm(final ProductData product) {
+    if (CollectionUtils.isEmpty(product.getVariantMatrix())) {
+      return false;
+    }
+    final VariantMatrixElementData root = product.getVariantMatrix().get(0);
+
+    final List<VariantMatrixElementData> materials = root.getElements();
+    final MultiBrandCartDto request = createOrderFormRequest(materials);
+    final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
+    if (!successResponse(response)) {
+      return false;
+    }
+    final List<MaterialInfoDto> matListResp = response.getMaterialInfo();
+    final List<VariantMatrixElementData> resultMatList = new ArrayList<>();
+    for (final MaterialInfoDto material : matListResp) {
+      final String matCode = material.getMaterialNumber();
+      final VariantMatrixElementData rMat = materials.stream().filter(tm -> tm.getVariantOption().getCode().equals(matCode)).findFirst().orElse(null);
+      if (rMat == null) {
+        continue;
+      }
+      final String price = material.getUnitPrice();
+      if (StringUtils.isNotBlank(price)) {
+        try {
+          final BigDecimal bPrice = BigDecimal.valueOf(Double.valueOf(price));
+          rMat.getVariantOption().setPriceData(getPriceDataFactory().create(PriceDataType.BUY, bPrice, getStoreSessionFacade().getCurrentCurrency().getIsocode()));
+        } catch (NumberFormatException e) {
+          LOG.warn("NumberFormatException on response from Order Simulation");
+          LOG.debug(e.getMessage());
+        } catch (NullPointerException npe) {
+          LOG.warn("NullPointerException on response from Order Simulation. Price is empty.");
+          LOG.debug(npe.getMessage());
+        }
+      }
+
+      final List<VariantMatrixElementData> resultSizeList = new ArrayList<>();
+
+      for(final MaterialOutputGridDto size: material.getMaterialOutputGridList()) {
+        final String ean = size.getEan();
+        final VariantMatrixElementData rSize = rMat.getElements().stream().filter(rs -> rs.getVariantOption().getCode().equals(ean)).findFirst().orElse(null);
+        if (StringUtils.isNotBlank(size.getAvailableQty())) {
+          final StockData stockData = new StockData();
+          stockData.setStockLevel(Long.valueOf(size.getAvailableQty()));
+          // todo remove hardcode
+          stockData.setStockThreshold(100);
+          rSize.getVariantOption().setStock(stockData);
+        }
+        resultSizeList.add(rSize);
+      }
+      rMat.setElements(resultSizeList);
+      resultMatList.add(rMat);
+    }
+
+    product.getVariantMatrix().get(0).setElements(resultMatList);
+    return true;
+  }
+
+  private MultiBrandCartDto createOrderFormRequest(final List<VariantMatrixElementData> materials) {
+    final MultiBrandCartDto requestRoot = createRequestRoot();
+
+    final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
+    final List<MultiBrandCartInput> cartInput = new ArrayList<>();
+
+    for (final VariantMatrixElementData product: materials) {
+      final MultiBrandCartInput reqProduct = createMultiBrandCartInput(product, createBrandUnitsMap(units));
+      cartInput.add(reqProduct);
+    }
+
+    requestRoot.setCartInput(cartInput);
+
+    return requestRoot;
   }
 
   protected boolean successResponse(final MultiBrandCartResponse response) {
@@ -99,6 +178,22 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   }
 
   private MultiBrandCartDto createSimulateOrderRequest(final List<ProductData> products) {
+    final MultiBrandCartDto requestRoot = createRequestRoot();
+
+    final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
+    final List<MultiBrandCartInput> cartInput = new ArrayList<>();
+
+    for (final ProductData product: products) {
+      final MultiBrandCartInput reqProduct = createMultiBrandCartInput(product, createBrandUnitsMap(units));
+      cartInput.add(reqProduct);
+    }
+
+    requestRoot.setCartInput(cartInput);
+
+    return requestRoot;
+  }
+
+  private MultiBrandCartDto createRequestRoot() {
     final MultiBrandCartDto requestRoot = new MultiBrandCartDto();
 
     // Defaults are set in the dto itself
@@ -114,20 +209,45 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
 
     requestRoot.setSapCustomerID(userUnit.getSapID());
 
-    final List<MultiBrandCartInput> cartInput = new ArrayList<>();
-
-    for (final ProductData product: products) {
-      final MultiBrandCartInput reqProduct = createMultiBrandCartInput(product, createBrandUnitsMap(units));
-      cartInput.add(reqProduct);
-    }
-
-    requestRoot.setCartInput(cartInput);
-
     return requestRoot;
   }
 
   private MultiBrandCartDto createSimulateOrderRequest(final ProductData product) {
     return createSimulateOrderRequest(Collections.singletonList(product));
+  }
+  private MultiBrandCartInput createMultiBrandCartInput(final VariantMatrixElementData product, Map<String, B2BUnitModel> brandUnitsMap) {
+    final List<VariantMatrixElementData> sizes = product.getElements();
+    final String brandCode = product.getVariantOption().getBrandCode();
+    final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
+    reqProduct.setBrandCode(brandCode);
+    reqProduct.setMaterialNumber(product.getVariantOption().getCode());
+
+    if(MapUtils.isNotEmpty(brandUnitsMap)) {
+      final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
+      if (targetUnit != null) {
+        reqProduct.setDistrChannel(targetUnit.getDistCh());
+        reqProduct.setSalesOrg(targetUnit.getSalesOrg());
+        reqProduct.setPriceList(targetUnit.getSapPriceList());
+      } else {
+        LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + product.getVariantOption().getCode());
+      }
+    }
+
+    final List<SizeDataDto> sizeData = new ArrayList<>();
+    for (final VariantMatrixElementData size : sizes) {
+      final SizeDataDto sizeReq = new SizeDataDto();
+
+      sizeReq.setEan(size.getVariantOption().getCode());
+      sizeReq.setQuantity(size.getQty() == null ? "0" : String.valueOf(size.getQty()));
+
+      //to check if required
+      //size.setUnit();
+
+      sizeData.add(sizeReq);
+    }
+    reqProduct.setSizeData(sizeData);
+
+    return reqProduct;
   }
 
   private MultiBrandCartInput createMultiBrandCartInput(final ProductData product, Map<String, B2BUnitModel> brandUnitsMap) {
@@ -152,7 +272,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final SizeDataDto size = new SizeDataDto();
 
     size.setEan(product.getCode());
-    size.setQuantity("1");
+    size.setQuantity("0");
 
     //to check if required
     //size.setUnit();

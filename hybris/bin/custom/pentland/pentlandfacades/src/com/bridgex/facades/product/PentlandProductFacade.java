@@ -10,4 +10,5 @@ public interface PentlandProductFacade extends ProductFacade {
 
   boolean populateCustomerPrice(ProductData productData);
 
+  boolean populateOrderForm(ProductData product);
 }

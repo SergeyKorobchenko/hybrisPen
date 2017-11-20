@@ -148,7 +148,7 @@ public class ProductPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/orderForm", method = RequestMethod.GET)
+	//@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/orderForm", method = RequestMethod.GET)
 	public String productOrderForm(@PathVariable("productCode") final String productCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
@@ -270,6 +270,20 @@ public class ProductPageController extends AbstractPageController
 			}
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "/getProductVariantMatrix", method = RequestMethod.GET)
+	public String getProductVariantMatrix(@RequestParam("productCode") final String productCode, final Model model)
+	{
+
+		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
+		                                                                          Arrays.asList(ProductOption.BASIC, ProductOption.VARIANT_MATRIX_BASE));
+
+		productFacade.populateOrderForm(productData);
+
+		model.addAttribute("product", productData);
+
+		return ControllerConstants.Views.Fragments.Product.ExpandGridInCart;
 	}
 
 	@ExceptionHandler(UnknownIdentifierException.class)
