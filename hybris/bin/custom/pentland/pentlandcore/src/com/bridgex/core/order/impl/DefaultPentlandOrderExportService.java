@@ -101,15 +101,9 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     request.setDocNumber(orderModel.getCode());
     request.setPurchaseOrderNumber(orderModel.getPurchaseOrderNumber());
 
-    //TODO waiting for clarification
-    request.setPoType("");
-
     request.setRdd(orderModel.getRdd());
     request.setSapCustomerID(unit.getSapID());
     request.setShippingAddress(deliveryAddressModel.getAddressID());
-
-    //TODO waiting for clarification
-    request.setTechOrderReason("");
 
     request.setPaymentType(orderModel.getPaymentType().getCode());
     request.setCustomerComment(orderModel.getCustomerNotes());

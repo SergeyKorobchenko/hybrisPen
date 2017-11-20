@@ -35,7 +35,7 @@ public class OrderExportDto {
 
   //not used
   @JsonProperty("I_PO_TYPE")
-  private String poType;
+  private String poType = ErpintegrationConstants.REQUEST.DEFAULT_PO_TYPE;
 
   @JsonProperty("I_RDD")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
