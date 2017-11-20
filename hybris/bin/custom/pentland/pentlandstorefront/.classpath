@@ -16,7 +16,7 @@
 	<classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry exported="false" kind="src" path="/platform"/>
 
-<classpathentry combineaccessrules="false" kind="src" path="/accountsummaryaddon"/>
+
 
 <classpathentry combineaccessrules="false" kind="src" path="/commerceorgaddon"/>
 
@@ -29,6 +29,7 @@
 <classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
 <classpathentry combineaccessrules="false" kind="src" path="/pentlandb2baddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/pentlandsupportticketingaddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/pentlandaccountsummaryaddon"/>
 
 
 

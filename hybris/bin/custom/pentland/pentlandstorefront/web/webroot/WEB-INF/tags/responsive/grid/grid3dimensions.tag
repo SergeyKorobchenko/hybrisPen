@@ -30,7 +30,7 @@
                                         inputTitle="${thirdVariant.variantValueCategory.name}"
                                         loopIndex="${loopIndex}"
                                         readOnly="${readOnly}"
-								        firstVariant="${firstVariant}"
+								        firstVariant="${thirdVariant}"
 										product="${product}"
 										skusId="${skusId}"
 										showName="${showName}"

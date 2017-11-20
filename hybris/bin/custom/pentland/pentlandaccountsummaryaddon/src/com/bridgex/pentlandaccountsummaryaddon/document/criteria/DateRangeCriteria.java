@@ -1,0 +1,78 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with SAP.
+ */
+package com.bridgex.pentlandaccountsummaryaddon.document.criteria;
+
+import java.util.Date;
+import java.util.Optional;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.bridgex.pentlandaccountsummaryaddon.utils.PentlandaccountsummaryaddonUtils;
+
+/**
+ *
+ */
+public class DateRangeCriteria extends RangeCriteria
+{
+
+	protected Optional<Date> startRange;
+	protected Optional<Date> endRange;
+
+	public DateRangeCriteria(final String filterByKey)
+	{
+		this(filterByKey, StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
+	}
+
+	public DateRangeCriteria(final String filterByKey, final String startRange, final String endRange, final String documentStatus)
+	{
+		super(filterByKey, documentStatus);
+		this.startRange = PentlandaccountsummaryaddonUtils.parseDateToOptional(startRange);
+		this.endRange = PentlandaccountsummaryaddonUtils.parseDateToOptional(endRange);
+	}
+
+	/**
+	 * @return the startRange
+	 */
+	@Override
+	public Optional<Date> getStartRange()
+	{
+		return this.startRange;
+	}
+
+	/**
+	 * @param startRange
+	 *           the startRange to set
+	 */
+	@Override
+	protected void setStartRange(final String startRange)
+	{
+		this.startRange = PentlandaccountsummaryaddonUtils.parseDateToOptional(startRange);
+	}
+
+	/**
+	 * @return the endRange
+	 */
+	@Override
+	public Optional<Date> getEndRange()
+	{
+		return this.endRange;
+	}
+
+	/**
+	 * @param endRange
+	 *           the endRange to set
+	 */
+	@Override
+	protected void setEndRange(final String endRange)
+	{
+		this.endRange = PentlandaccountsummaryaddonUtils.parseDateToOptional(endRange);
+	}
+}

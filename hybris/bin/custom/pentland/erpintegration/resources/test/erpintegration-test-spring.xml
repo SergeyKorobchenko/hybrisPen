@@ -41,7 +41,7 @@
 
 	<bean id="orderSimulateService" class="com.bridgex.integration.service.impl.OrderSimulateServiceImpl" parent="abstractIntegrationService" />
 
-	<bean id="orderDetailsService" class="com.bridgex.integration.service.impl.OrderDetailsIntegrationService" parent="abstractIntegrationService" />
+	<bean id="orderDetailsService" class="com.bridgex.integration.service.impl.OrderDetailsServiceImpl" parent="abstractIntegrationService" />
 
 	<context:property-placeholder location="classpath:/test/erpintegration-test.properties"/>
 

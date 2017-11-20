@@ -50,11 +50,10 @@ public class OrderDetailsServiceTest {
 
     mockServer.expect(requestTo(Config.getString("erp.integration.int_sync_06.url", "")))
               .andExpect(method(HttpMethod.POST))
-              .andRespond(withSuccess("{\"ET_RETURN\":{\"TYPE\":\"TEST\",\"TTTT\":\"1111\"}}", MediaType.APPLICATION_JSON));
+              .andRespond(withSuccess("{\"ET_RETURN\":[{\"TYPE\":\"TEST\",\"TTTT\":\"1111\"}]}", MediaType.APPLICATION_JSON));
 
     OrderDetailsDto dto = new OrderDetailsDto();
     dto.setOrderCode("00000001");
-    dto.setServiceConsumer("Hybris_B2B");
     dto.setCustomerViewFlag("X");
     dto.setLanguage("EN");
     dto.setOrderType("C");

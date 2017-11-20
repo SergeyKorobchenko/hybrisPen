@@ -33,36 +33,28 @@
     <c:set var="colspan" value="${firstVariant.maxVariants - firstVariant.elements.size() + 1}"/>
 </c:if>
 
-<c:if test="${firstVariant.maxVariants > firstVariant.elements.size()}">
-    <c:set var="colspan" value="${firstVariant.maxVariants - firstVariant.elements.size()}"/>
-</c:if>
-
 <tr class="hidden-size">
-    <th style="width: 300px;">${fn:escapeXml(firstVariant.variantName)}
-        <%--<c:if test="${firstVariant.elements ne null and firstVariant.elements.size() > 0}">--%>
-            <%--/${fn:escapeXml(firstVariant.elements[0].variantName)}--%>
-        <%--</c:if>--%>
+    <th style="width: 200px;">
+        <spring:theme code="order.form.color"/>
     </th>
     <c:forEach items="${variants}" var="variant" varStatus="loop">
-        <th style="width: 200px;">${fn:escapeXml(variant.variantName)}</th>
+        <th style="max-width: 200px;">${fn:escapeXml(variant.variantName)}</th>
     </c:forEach>
     <th colspan="${colspan}"></th>
-
 </tr>
 
 <tr>
     <td class="variant-detail" data-variant-property="${fn:escapeXml(variants[0].variantName)}">
-        <product:productImage product="${product}" code="${skusId}" format="cartIcon"/>
+        <div>
+            <c:forEach items="${firstVariant.variantOption.variantOptionQualifiers}" var="qualifierData">
+                <c:if test="${qualifierData.image.format eq 'thumbnail'}">
+                    <img src="${qualifierData.image.url}" alt="${firstVariant.variantName}" />
+                </c:if>
+            </c:forEach>
+            <br/><br/>
+        </div>
         <div class="description">
-            <c:if test="${showName == true}">
-                <div >${fn:escapeXml(product.name)} - ${fn:escapeXml(firstVariant.variantName)}</div>
-            </c:if>
-            <c:if test="${showName != true}">
-                <div>${fn:escapeXml(firstVariant.variantName)}</div>
-            </c:if>
-            <c:if test="${showLastDimensionTitle == true}">
-                ${fn:escapeXml(inputTitle)}
-            </c:if>
+            <div>${fn:escapeXml(firstVariant.variantName)}</div>
         </div>
     </td>
 
@@ -96,7 +88,9 @@
             <%--</c:if>--%>
 
             <input type="hidden" class="${fn:escapeXml(skusId)} sku" name="cartEntries[${loopIndex}].sku" id="cartEntries[${loopIndex}].sku" value="${fn:escapeXml(variant.variantOption.code)}" />
-            <input type="textbox" maxlength="3" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}" name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' id="cartEntries[${loopIndex}].quantity" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
+            <input type="textbox" maxlength="3" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
+                   name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' data-current-value=""
+                   id="cartEntries[${loopIndex}].quantity" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
 
             <%--<grid:coreTableStockRow variant="${variant}" />--%>
 

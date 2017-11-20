@@ -31,7 +31,7 @@ public class PentlandCartPopulator<T extends CartData> extends CartPopulator<T> 
   {
     if (source.getMarkFor() != null)
     {
-      target.setMarkForAddress(getAddressConverter().convert(source.getDeliveryAddress()));
+      target.setMarkForAddress(getAddressConverter().convert(source.getMarkFor()));
     }
   }
 
