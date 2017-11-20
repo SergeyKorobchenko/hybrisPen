@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.bridgex.core.order.PentlandCartService;
+import com.bridgex.facades.order.PentlandB2BCheckoutFacade;
+import de.hybris.platform.core.model.order.CartModel;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.enums.B2BUnitType;
@@ -25,7 +28,7 @@ import de.hybris.platform.core.model.user.UserModel;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
  */
-public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
+public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade implements PentlandB2BCheckoutFacade {
 
   private Map<B2BUnitType, List<CheckoutPaymentType>> b2bPaymentTypeMapping;
   private B2BUnitService<B2BUnitModel, UserModel>     b2bUnitService;
@@ -80,6 +83,12 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
     return valid;
   }
 
+  @Override
+  public void createCartFromSessionDetails(String orderCode) {
+    //TODO
+    ((PentlandCartService)getCartService()).createCartFromSessionDetails(orderCode);
+  }
+
   @Required
   public void setB2bPaymentTypeMapping(Map<B2BUnitType, List<CheckoutPaymentType>> b2bPaymentTypeMapping) {
     this.b2bPaymentTypeMapping = b2bPaymentTypeMapping;
@@ -93,4 +102,5 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
   public void setB2bUnitService(B2BUnitService<B2BUnitModel, UserModel> b2bUnitService) {
     this.b2bUnitService = b2bUnitService;
   }
+
 }
