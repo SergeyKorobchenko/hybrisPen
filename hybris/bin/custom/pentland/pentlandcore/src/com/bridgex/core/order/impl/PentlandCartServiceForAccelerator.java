@@ -2,6 +2,7 @@ package com.bridgex.core.order.impl;
 
 import java.util.*;
 
+import com.bridgex.core.order.PentlandCartService;
 import org.apache.commons.collections.MapUtils;
 
 import de.hybris.platform.acceleratorservices.order.impl.DefaultCartServiceForAccelerator;
@@ -11,7 +12,7 @@ import de.hybris.platform.core.model.order.CartModel;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 11/8/2017.
  */
-public class PentlandCartServiceForAccelerator extends DefaultCartServiceForAccelerator{
+public class PentlandCartServiceForAccelerator extends DefaultCartServiceForAccelerator implements PentlandCartService{
 
   private static final int APPEND_AS_LAST = -1;
 
@@ -70,4 +71,10 @@ public class PentlandCartServiceForAccelerator extends DefaultCartServiceForAcce
     throw new IllegalArgumentException("no cart entry found with entry number " + entryNumber + " (got " + entries + ")");
   }
 
+  @Override
+  public CartModel createCartFromSessionDetails(String orderCode) {
+    //TODO
+    sessionService.getAttribute("orderDetails:"+orderCode);
+    return modelService.create(CartModel.class);
+  }
 }
