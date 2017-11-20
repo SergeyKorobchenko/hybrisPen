@@ -1,6 +1,7 @@
 package com.bridgex.integration.service.mock;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
     etReturn.setType("S");
     etReturn.setNumber("007");
     etReturn.setMessage("Materials successfully returned");
-    response.setEtReturn(etReturn);
+    response.setEtReturn(Collections.singletonList(etReturn));
     ResponseEntity<ExportOrderResponse> mock = new ResponseEntity<>(response, HttpStatus.OK);
     return mock;
   }

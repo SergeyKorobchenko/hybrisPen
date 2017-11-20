@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
@@ -41,13 +42,12 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     OrderExportDto request = createOrderExportRequest(orderModel);
     ResponseEntity<ExportOrderResponse> exportOrderResponseEntity = orderExportService.sendRequest(request, ExportOrderResponse.class);
 
-    if(HttpStatus.OK.equals(exportOrderResponseEntity.getStatusCode())){
-      ExportOrderResponse responseBody = exportOrderResponseEntity.getBody();
-      ETReturnDto etReturn = responseBody.getEtReturn();
-      if("S".equals(etReturn.getType())){
-        return processSuccessfulResponse(orderModel, responseBody);
-      }
+    ExportOrderResponse responseBody = exportOrderResponseEntity.getBody();
+
+    if(successResponse(responseBody)){
+      return processSuccessfulResponse(orderModel, responseBody);
     }
+
     orderModel.setExportStatus(ExportStatus.NOTEXPORTED);
     orderModel.setReexportRetries(orderModel.getReexportRetries() + 1);
     modelService.save(orderModel);
@@ -178,6 +178,23 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     orderModel.setByBrandOrderList(byBrandOrderList);
     modelService.save(orderModel);
     return true;
+  }
+
+  protected boolean successResponse(final ExportOrderResponse response) {
+    boolean result = true;
+    final List<ETReturnDto> returnList = response.getEtReturn();
+    if (CollectionUtils.isNotEmpty(returnList)) {
+      for (final ETReturnDto returnDto : returnList) {
+        if (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(returnDto.getType())) {
+          return true;
+        }
+        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType())
+            || ErpintegrationConstants.RESPONSE.ET_RETURN.WARNING_TYPE.equals(returnDto.getType())) {
+          result = false;
+        }
+      }
+    }
+    return result;
   }
 
   @Required
