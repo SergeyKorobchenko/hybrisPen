@@ -7,19 +7,43 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<div class="product-action" style="display:none" id="productGridAction">
-    <div class="hidden-xs">
-        <spring:theme code="product.grid.items.selected"/>&nbsp;
-        <span class="js-total-items-count">0</span>
+<div class="js-product-order-form display-none">
+    <div class="back-link product-details">
+            <span class="label"><spring:theme code="order.form"/></span>
     </div>
-    <div class="hidden-sm hidden-md hidden-lg">
-        <spring:theme code="product.grid.formDescription"/>
+    <div class="product-action" id="productGridAction">
+        <div class="hidden-xs">
+            <spring:theme code="product.grid.items.selected"/>&nbsp;
+            <span class="js-total-items-count">0</span>
+        </div>
+        <div class="hidden-sm hidden-md hidden-lg">
+            <spring:theme code="product.grid.formDescription"/>
+        </div>
+        <ol>
+            <product:productFormAddToCartPanel product="${product}"/>
+        </ol>
     </div>
-    <ol>
-        <product:productFormAddToCartPanel product="${product}"/>
-    </ol>
+
+    <div class="add-to-cart-order-form-wrap">
+        <c:url value="/cart/addGrid" var="addToCartGridUrl"/>
+        <spring:theme code="product.grid.confirmQtys.message" var="gridConfirmMessage"/>
+
+        <form:form name="AddToCartOrderForm" id="AddToCartOrderForm" class="add_to_cart_order_form scrollContent visible"
+                   action="${addToCartGridUrl}" method="post"
+                   data-grid-confirm-message="${gridConfirmMessage}">
+            <div id="ajaxGrid" class="${styleClass}"></div>
+        </form:form>
+
+        <div class="order-form-scroll right hidden-xs"><span class="glyphicon glyphicon-chevron-right"></span></div>
+        <div class="order-form-scroll left hidden-xs"><span class="glyphicon glyphicon-chevron-left"></span></div>
+        <div class="order-form-scroll up hidden-xs"><span class="glyphicon glyphicon-chevron-up"></span></div>
+        <div class="order-form-scroll down hidden-xs"><span class="glyphicon glyphicon-chevron-down"></span></div>
+    </div>
+
+
+    <div style="display:none" id="grid" data-target-url="${targetUrl}" data-product-code="${product.code}"></div>
+
+    <product:productOrderFormJQueryTemplates/>
 </div>
-
-<div id="ajaxGrid" class="${styleClass}"></div>
-<div style="display:none" id="grid" data-target-url="${targetUrl}" data-product-code="${product.code}"></div>

@@ -7,7 +7,9 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="grid" tagdir="/WEB-INF/tags/responsive/grid" %>
+<script>
 
+</script>
 <div class="product-details page-title">
 	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 		<div class="name">${fn:escapeXml(product.name)}<span class="sku"><spring:theme code="product.sku"/></span><span class="code">${fn:escapeXml(product.materialKey)}</span></div>
@@ -18,10 +20,10 @@
 	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-4">
 		<product:productImagePanel galleryImages="${galleryImages}" />
 		<c:if test="${not empty product.videoURL}">
-			<div class=""><spring:theme code="product.videourl"/> :<a href="${fn:escapeXml(product.videoURL)}">${fn:escapeXml(product.videoURL)}</a></div>
+			<div class=""><spring:theme code="product.videourl"/>: <span data-toggle="modal" data-target="#videoURLModal"><a href="javascript:void(0);">${fn:escapeXml(product.videoURL)}</a></span></div>
 		</c:if>
 		<c:if test="${not empty product.externalURL}">
-			<div class=""><spring:theme code="product.externalurl"/>: <a href="${fn:escapeXml(product.externalURL)}">${fn:escapeXml(product.externalURL)}</a></div>
+			<div class=""><spring:theme code="product.externalurl"/>: <a target="_blank" href="${fn:escapeXml(product.externalURL)}">${fn:escapeXml(product.externalURL)}</a></div>
 		</c:if>
 	</div>
 
@@ -49,7 +51,8 @@
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
 					</cms:pageSlot>
 					<c:if test="${not empty product.sizeChartGuide}">
-						<div class="name"><spring:theme code="product.sizeChartGuide"/>: ${fn:escapeXml(product.sizeChartGuide.url)}</div>
+						<c:url value="${product.sizeChartGuide.url}" var="sizeChartGuideUrl" />
+						<div class="name" data-toggle="modal" data-target="#sizeChartModal" ><a href="javascript:void(0);"><spring:theme code="product.sizeChartGuide"/></a></div>
 					</c:if>
 					<c:if test="${not empty product.unit}">
 						<div class="name"><spring:theme code="product.unit"/>: ${fn:escapeXml(product.unit)}</div>
@@ -68,12 +71,12 @@
 								</c:if>
 							</ul>
 							<c:if test="${not empty product.description}">
-								<div id="tabs-1">
+								<div id="tabs-1" style="overflow:auto;height:200px">
 									<p>${ycommerce:sanitizeHTML(product.description)}</p>
 								</div>
 							</c:if>
 							<c:if test="${not empty product.featureDescription}">
-								<div id="tabs-2">
+								<div id="tabs-2" style="overflow:auto;height:200px">
 									<p>${ycommerce:sanitizeHTML(product.featureDescription)}</p>
 								</div>
 							</c:if>
@@ -88,14 +91,34 @@
 		</div>
 
 	</div>
-	<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
-	<div>
-		<li>
-			<spring:url value="getProductVariantMatrix" var="targetUrl"/>
-			<grid:productGridWrapper styleClass="add-to-cart-order-form-wrap display-none"
-							  targetUrl="${targetUrl}" product="${product}"/>
-		</li>
-	</div>
+
+</div>
+<div  class="row" >
+	<spring:url value="getProductVariantMatrix" var="targetUrl"/>
+	<grid:productGridWrapper styleClass="add-to-cart-order-form-wrap display-none"
+							 targetUrl="${targetUrl}" product="${product}"/>
 </div>
 
-<product:productOrderFormJQueryTemplates />
+<div class="modal fade" id="videoURLModal" tabindex="-1" role="dialog" aria-labelledby="videoURLModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<iframe id="iframeYoutube" width="560" height="315"  src="${fn:escapeXml(product.videoURL)}" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<c:if test="${not empty product.sizeChartGuide}">
+	<div id="sizeChartModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="sizeChartModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<img src="${sizeChartGuideUrl}" class="img-responsive">
+				</div>
+			</div>
+		</div>
+	</div>
+</c:if>

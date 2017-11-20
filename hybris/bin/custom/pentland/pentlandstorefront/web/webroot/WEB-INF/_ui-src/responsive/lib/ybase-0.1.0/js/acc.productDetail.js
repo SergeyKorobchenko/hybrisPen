@@ -74,17 +74,18 @@ ACC.productDetail = {
     },
 
     populateAndShowEditableGrid: function (element, event) {
-        grid = $("#ajaxGrid");
+        var $grid = $("#ajaxGrid");
+        var $gridEntry = $('#grid');
 
-        var gridEntry = $('#grid');
+        var $orderForm = $('.js-product-order-form');
 
         $(element).toggleClass('open');
 
-        var targetUrl = gridEntry.data("target-url");
-        var productCode = gridEntry.data("product-code");
+        var targetUrl = $gridEntry.data("target-url");
+        var productCode = $gridEntry.data("product-code");
 
-        if (grid.children('#cartOrderGridForm').length > 0) {
-            grid.slideToggle("slow");
+        if ($('.product-grid-container').children().length > 0) {
+            $(window).scrollTo($('#AddToCartOrderForm'), 1000);
         }
         else {
             var method = "GET";
@@ -93,20 +94,12 @@ ACC.productDetail = {
                 data: {productCode: productCode},
                 type: method,
                 success: function (data) {
-                    grid.html(data);
+                    $grid.html(data);
                     $("#ajaxGrid").removeAttr('id');
-                    var $gridContainer = grid.find(".product-grid-container");
-                    var numGrids = $gridContainer.length;
-                    //for (var i = 0; i < numGrids; i++) {
-                    //    ACC.cart.getProductQuantity($gridContainer.eq(i), mapCodeQuantity, i);
-                    //}
-
-                    grid.slideDown("slow");
-                    $('html, body').animate({
-                        scrollTop: $("#cartOrderGridForm").offset().top
-                    }, 2000);
-                    //ACC.cart.coreCartGridTableActions(element, mapCodeQuantity);
-                    //ACC.productorderform.coreTableScrollActions(grid.children('#cartOrderGridForm'));
+                    $grid.slideDown("fast");
+                    $orderForm.slideDown("slow");
+                    $(window).scrollTo($('#AddToCartOrderForm'), 1000);
+                    ACC.productorderform.coreTableActions();
                 },
                 error: function (xht, textStatus, ex) {
                     alert("Failed to get variant matrix. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
@@ -120,6 +113,10 @@ ACC.productDetail = {
 
         $( function() {
             $( "#tabs" ).tabs();
+        } );
+
+        $( function() {
+            $.colorbox.remove();
         } );
 
         $(document).on("click", '.js-show-editable-product-grid', function (event) {

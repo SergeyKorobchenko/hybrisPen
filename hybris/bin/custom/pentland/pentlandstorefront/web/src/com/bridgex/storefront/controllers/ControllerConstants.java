@@ -207,6 +207,7 @@ public interface ControllerConstants
 				String ZoomImagesPopup = "fragments/product/zoomImagesPopup"; // NOSONAR
 				String ReviewsTab = "fragments/product/reviewsTab"; // NOSONAR
 				String StorePickupSearchResults = "fragments/product/storePickupSearchResults"; // NOSONAR
+				String ExpandGridInCart = "fragments/product/expandGridInProduct"; // NOSONAR
 			}
 		}
 	}
