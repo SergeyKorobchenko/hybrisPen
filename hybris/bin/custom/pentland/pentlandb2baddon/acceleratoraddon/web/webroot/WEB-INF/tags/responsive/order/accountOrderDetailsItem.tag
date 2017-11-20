@@ -32,16 +32,18 @@
                 <span class="item-label"><spring:theme code="text.account.orderHistory.item.shipments"/>:</span>
                 <c:forEach items="${item.shipments}" var="shipment">
                     <span class="item-info">
-                        <span class="text-info"><spring:theme code="text.account.orderHistory.item.shipdate"/>: <fmt:formatDate value="${shipment.key}" /></span>
-                        <span class="text-info"><spring:theme code="text.account.orderHistory.item.status"/>: ${shipment.value.shipmentStatus} </span>
-                        <span class="text-info"><spring:theme code="text.account.orderHistory.item.qty"/>: ${shipment.value.qty} </span>
+                        <span class="item-value"><spring:theme code="text.account.orderHistory.item.shipdate"/>: <fmt:formatDate value="${shipment.key}" /></span>
+                        <span class="item-value"><spring:theme code="text.account.orderHistory.item.status"/>: ${shipment.value.shipmentStatus} </span>
+                        <span class="item-value"><spring:theme code="text.account.orderHistory.item.qty"/>: ${shipment.value.qty} </span>
                     </span>
                 </c:forEach>
             </ycommerce:testId>
+            <ycommerce:testId code="orderDetail_ItemPrice_label">
+            <div class="col-xs-2 text-right">
+                <span class="price-info"><format:price priceData="${item.totalPrice}"/></span>
+            </div>
+            </ycommerce:testId>
         </div>
-    </div>
-    <div class="col-xs-2 text-right">
-        <format:price priceData="${item.totalPrice}"/>
     </div>
 </div>
 
