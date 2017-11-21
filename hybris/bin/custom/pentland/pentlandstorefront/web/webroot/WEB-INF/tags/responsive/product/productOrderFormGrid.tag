@@ -10,13 +10,13 @@
 
 <c:set var="categoriesSize" value="${fn:length(product.categories)}" />
 
-<grid:grid2dimensions product="${product}" showName="${showName}" filterSkus="${filterSkus}" readOnly="${readOnly}"/>
+<%--<grid:grid2dimensions product="${product}" showName="${showName}" filterSkus="${filterSkus}" readOnly="${readOnly}"/>--%>
 <%--<c:if test="${isOrderForm}">--%>
 	<%--<c:set var="categoriesSize" value="${categoriesSize -1}" />--%>
 <%--</c:if>--%>
 
 <%--<c:if test="${categoriesSize >= 3}">--%>
-	<%--<grid:grid3dimensions product="${product}" showName="${showName}" filterSkus="${filterSkus}" readOnly="${readOnly}"/>--%>
+	<grid:grid3dimensions product="${product}" showName="${showName}" filterSkus="${filterSkus}" readOnly="${readOnly}"/>
 <%--</c:if>--%>
 <%--<c:if test="${categoriesSize == 2}">--%>
 	<%--<grid:grid2dimensions product="${product}" showName="${showName}" filterSkus="${filterSkus}" readOnly="${readOnly}"/>--%>

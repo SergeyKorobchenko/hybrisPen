@@ -14,6 +14,7 @@ import org.springframework.web.client.UnknownHttpStatusCodeException;
 
 import com.bridgex.integration.rest.RESTClient;
 import com.bridgex.integration.util.IntegrationUtils;
+import com.google.common.base.Stopwatch;
 
 /**
  * @author Created by konstantin.pavlyukov on 10/25/2017.
@@ -29,8 +30,9 @@ public abstract class AbstractRESTClient implements RESTClient {
   }
 
   private ResponseEntity sendPostRequest(RequestEntity requestEntity, Class responseClass, RestTemplate restTemplate) {
+    final Stopwatch stopwatch = Stopwatch.createUnstarted();
+    stopwatch.start();
     try {
-
       LOG.info(IntegrationUtils.toJSON(requestEntity, LOG));
 
       ResponseEntity responseEntity = restTemplate.exchange(requestEntity, responseClass);
@@ -55,6 +57,10 @@ public abstract class AbstractRESTClient implements RESTClient {
     }
     catch (HttpMessageNotReadableException e) {
       LOG.error("json message is corrupted.", e);
+    }
+    finally{
+      stopwatch.stop();
+      LOG.info("Request to " + requestEntity.getUrl() + " took " + stopwatch.toString());
     }
     return ResponseEntity.badRequest().body(null);
   }

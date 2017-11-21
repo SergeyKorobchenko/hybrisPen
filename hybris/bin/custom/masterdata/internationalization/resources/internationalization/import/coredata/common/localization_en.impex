@@ -2852,6 +2852,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.rdd;RDD
 ;text.account.orderHistory.totalQty;Total Qty
 ;text.account.orderHistory.creationDate;Order Creation Date
+;text.account.orderhistory.dateplaced;Date Placed
 ;text.account.orderHistory.POnumber;P.O. Number
 ;text.account.order.total;Order Total
 ;text.account.order.tax;Order Tax
@@ -2865,6 +2866,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.item.shipments;Shipments
 ;text.account.orderHistory.item.shipdate;Ship Date
 
+
+;text.account.order.status.display.SHIPPED;Shipped
+;text.account.order.status.display.OPEN;Open
+
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
@@ -2874,7 +2879,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.cart.customerNotes;Notes
 ;checkout.savecart;Save updated cart
 ;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
-
 
 ;checkout.payment.CARD.CREDITCARD;Online payment
 ;checkout.payment.CARD.PROFORMA;Online payment
@@ -2899,7 +2903,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cookie.directive.header;Cookies on pentland.com
 ;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."
 
-;text.account.orderhistory.dateplaced;Date Placed
-
-
 ;basket.export.images.file;Download product images
+;erp.integration.failed;Error while processing ERP request

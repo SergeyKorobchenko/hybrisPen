@@ -14,24 +14,24 @@ public class ExportOrderResponse implements Serializable {
   }
 
   @JsonProperty("E_DOC_NUMBER_T")
-  private List<SapOrderDTO> sapOrderDTOList;
+  private List<SapOrderDto> sapOrderDTOList;
 
   @JsonProperty("ET_RETURN")
-  private ETReturnDto etReturn;
+  private List<ETReturnDto> etReturn;
 
-  public ETReturnDto getEtReturn() {
-    return etReturn;
-  }
-
-  public void setEtReturn(ETReturnDto etReturn) {
-    this.etReturn = etReturn;
-  }
-
-  public List<SapOrderDTO> getSapOrderDTOList() {
+  public List<SapOrderDto> getSapOrderDTOList() {
     return sapOrderDTOList;
   }
 
-  public void setSapOrderDTOList(List<SapOrderDTO> sapOrderDTOList) {
+  public void setSapOrderDTOList(List<SapOrderDto> sapOrderDTOList) {
     this.sapOrderDTOList = sapOrderDTOList;
+  }
+
+  public List<ETReturnDto> getEtReturn() {
+    return etReturn;
+  }
+
+  public void setEtReturn(List<ETReturnDto> etReturn) {
+    this.etReturn = etReturn;
   }
 }

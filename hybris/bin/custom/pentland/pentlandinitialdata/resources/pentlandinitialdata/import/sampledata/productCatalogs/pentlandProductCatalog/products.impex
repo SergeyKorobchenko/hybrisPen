@@ -87,8 +87,8 @@ INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategori
 INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);primaryColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved
 ;M25687_B;;M25687;pieces;BLACK;jersey;ApparelSizeVariantProduct
 ;M25687_W;;M25687;pieces;WHITE;jersey;ApparelSizeVariantProduct
-;M27160;;M27160_B;pieces;BLACK,SILVER;jersey;ApparelSizeVariantProduct
-;M28323;;M28323_B;pieces;BLACK,WHITE;jersey;ApparelSizeVariantProduct
+;M27160;;M27160_B;pieces;SILVER;jersey;ApparelSizeVariantProduct
+;M28323;;M28323_B;pieces;BLACK;jersey;ApparelSizeVariantProduct
 ;M32946;;M32946_B;pieces;WHITE;shortsTeamwear;ApparelSizeVariantProduct
 ;M33307;;M33307_B;pieces;BLACK;shortsTeamwear;ApparelSizeVariantProduct
 ;M33477;;M33477_B;pieces;BLACK;shorts;ApparelSizeVariantProduct
@@ -2071,3 +2071,10 @@ UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;sapBrand;
 ;M25687_B;;05;
 ;M27160;;05;
 ;M28323;;05;
+
+# Products for Order Details Integration Testing
+INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];varianttype(code);$approved
+;5BB1352CRB;;300441142;baseLayers;BLUE,GREY;pieces;ApparelSizeVariantProduct;
+;5BB1253PPW;;300441142;baseLayers;BLUE;pieces;ApparelSizeVariantProduct;
+;731SPM0017024;;300441142;baseLayers;GREEN;pieces;ApparelSizeVariantProduct;
+;914542;;300441142;baseLayers;RED;pieces;ApparelSizeVariantProduct;
