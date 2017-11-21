@@ -12,7 +12,9 @@
 # Import the CMS content for the Pentland site emails
 #
 $contentCatalog=pentlandContentCatalog
+$mediaCatalog=pentlandMediaCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$mediaCatalog]),CatalogVersion.version[default=1.0])[default=$mediaCatalog:1.0]
 $picture=media(code, $contentCV)
 $wideContent=CMSImageComponent,BannerComponent
 $jarEmailResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/coredata/contentCatalogs/pentlandContentCatalog/emails
@@ -151,7 +153,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 
 
 # Media
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+INSERT_UPDATE Media;$mediaCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
 ;;/images/logo_pentland.png;logo-pentland.png;$jarEmailResource/images/logo_pentland.png;
 
 INSERT_UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];name;$picture[lang=$lang];
