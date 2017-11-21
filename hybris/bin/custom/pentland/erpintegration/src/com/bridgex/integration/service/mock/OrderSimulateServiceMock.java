@@ -32,7 +32,7 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
     etReturn.setNumber("007");
     etReturn.setMessage("Materials successfully returned");
     etReturnList.add(etReturn);
-    response.setEtReturn(etReturnList);
+    response.setEtReturnList(etReturnList);
 
     final List<MaterialInfoDto> matList = new ArrayList<>();
     final List<MultiBrandCartInput> reqCartInputList = requestDto.getCartInput();

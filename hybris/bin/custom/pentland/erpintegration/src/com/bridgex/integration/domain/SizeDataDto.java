@@ -10,6 +10,10 @@ public class SizeDataDto {
   @JsonProperty("EAN")
   private String ean;
 
+  //Not used
+  @JsonProperty("REQUESTED_SIZE")
+  private String size;
+
   @JsonProperty("REQUESTED_QUANTITY")
   private String quantity;
 
@@ -38,5 +42,13 @@ public class SizeDataDto {
 
   public void setUnit(String unit) {
     this.unit = unit;
+  }
+
+  public String getSize() {
+    return size;
+  }
+
+  public void setSize(String size) {
+    this.size = size;
   }
 }

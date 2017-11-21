@@ -168,7 +168,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
 
   protected boolean successResponse(final MultiBrandCartResponse response) {
     boolean result = true;
-    final List<ETReturnDto> returnList = response.getEtReturn();
+    final List<ETReturnDto> returnList = response.getEtReturnList();
     if (CollectionUtils.isNotEmpty(returnList)) {
       for (final ETReturnDto returnDto : returnList) {
         if (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(returnDto.getType())) {
@@ -232,7 +232,6 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
       if (targetUnit != null) {
         reqProduct.setDistrChannel(targetUnit.getDistCh());
         reqProduct.setSalesOrg(targetUnit.getSalesOrg());
-        reqProduct.setPriceList(targetUnit.getSapPriceList());
       } else {
         LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + product.getVariantOption().getCode());
       }
@@ -266,7 +265,6 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
       if (targetUnit != null) {
         reqProduct.setDistrChannel(targetUnit.getDistCh());
         reqProduct.setSalesOrg(targetUnit.getSalesOrg());
-        reqProduct.setPriceList(targetUnit.getSapPriceList());
       } else {
         LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + product.getCode());
       }

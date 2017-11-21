@@ -70,11 +70,12 @@ public class MultiBrandCartResponse implements Serializable {
     this.materialInfo = materialInfo;
   }
 
-  public List<ETReturnDto> getEtReturn() {
+  public List<ETReturnDto> getEtReturnList() {
     return etReturnList;
   }
 
-  public void setEtReturn(List<ETReturnDto> etReturnList) {
+  public void setEtReturnList(List<ETReturnDto> etReturnList) {
     this.etReturnList = etReturnList;
   }
+
 }
