@@ -214,7 +214,7 @@ public class CheckoutController extends AbstractCheckoutController
 
 		List<OrderData> sapOrders = orderFacade.getSapOrdersForOrderCode(orderCode);
 		if(sapOrders == null){
-			GlobalMessages.addErrorMessage(model, "form.global.error");
+			GlobalMessages.addErrorMessage(model, "order.export.global.error");
 		}else{
 			model.addAttribute("sapOrders", sapOrders);
 			model.addAttribute("sapOrderCodes", sapOrders.stream().map(AbstractOrderData::getCode).collect(Collectors.joining(", ")));
