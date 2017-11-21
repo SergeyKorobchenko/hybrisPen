@@ -63,6 +63,15 @@ ACC.productorderform = {
         });
 
         $(skuQuantityClass).on('blur keypress', function (event) {
+            this.value = ACC.productorderform.filterSkuEntry(this.value);
+        });
+
+        $(skuQuantityClass).on('blur', function (event) {
+            var packSize = $(this).data('pack-size');
+            this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
+        });
+
+        $(skuQuantityClass).on('blur keypress', function (event) {
             var code = event.keyCode || event.which || event.charCode;
 
             if (code != 13 && code != undefined) {
@@ -74,8 +83,7 @@ ACC.productorderform = {
             var totalPrice = 0;
             var _this = this;
             var currentPrice = $("input[id='productPrice[" + currentIndex + "]']").val();
-            var packSize = $(this).data('pack-size');
-            this.value = ACC.productorderform.filterSkuEntry(this.value, packSize);
+            this.value = ACC.productorderform.filterSkuEntry(this.value);
             var $currentTotalItems = $('.js-total-items-count');
             var currentTotalItemsValue = $currentTotalItems.html();
             var currentTotalPrice = $('.js-total-price-value').val();
@@ -192,10 +200,7 @@ ACC.productorderform = {
             var totalSibling = $(this).siblings('.data-grid-total');
             var currentVariantId = $(this).data('variant-id');
             var currentBaseInput = $("#AddToCartOrderForm, #cartOrderGridForm").find("[data-variant-id='" + currentVariantId + "']");
-            var packSize = $(this).data('pack-size');
-            alert($(this).data('packSize'));
-            alert($(this).data('pack-size'));
-            this.value = ACC.productorderform.filterSkuEntry(this.value, packSize);
+            this.value = ACC.productorderform.filterSkuEntry(this.value);
 
             // no text allowed || no negative number allowed || no empty string
             if (isNaN(jQuery.trim(this.value)) || this.value < 0 || this.value == "") {
@@ -542,28 +547,34 @@ ACC.productorderform = {
         }
     },
 
-    filterSkuEntry: function(quantityInput, packSize){
+    filterSkuEntry: function(quantityInput){
         var filteredQty = 0;
         if (/\D/g.test(quantityInput)) {
             // Filter non-digits from input value.
             filteredQty = quantityInput.replace(/\D/g, '');
-        }
-        else
-        {
+        } else {
             filteredQty = quantityInput;
         }
-        if (isNaN(jQuery.trim(filteredQty))) {
+
+        filteredQty = parseInt(filteredQty);
+
+        if (isNaN(filteredQty)) {
             filteredQty = 0;
         }
+
+        return filteredQty;
+    },
+
+    correctQuantityToPackSize: function(quantity, packSize) {
         if (packSize) {
-            filteredQty = parseInt(filteredQty);
+            quantity = parseInt(quantity);
             packSize = parseInt(packSize);
-            var mod = filteredQty % packSize;
+            var mod = quantity % packSize;
             if (mod > 0) {
-                filteredQty += packSize - mod;
+                quantity += packSize - mod;
             }
         }
-        return filteredQty;
+        return quantity;
     },
 
     // Order form scroll
