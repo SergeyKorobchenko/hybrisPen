@@ -131,7 +131,7 @@
                     <constructor-arg>
                         <bean
                             class="org.springframework.security.saml.metadata.ExtendedMetadata">
-                                <property name="signingKey" value="ssoIDPCert"/>
+                                <property name="signingKey" value="fs.pentland.com"/>
                         </bean>
                     </constructor-arg>
                     <!-- added section ends-->

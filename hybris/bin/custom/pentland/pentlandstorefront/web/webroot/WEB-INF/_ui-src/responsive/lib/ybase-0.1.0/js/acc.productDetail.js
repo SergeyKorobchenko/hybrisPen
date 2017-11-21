@@ -73,11 +73,55 @@ ACC.productDetail = {
         configureQty.val(value);
     },
 
+    populateAndShowEditableGrid: function (element, event) {
+        var $grid = $("#ajaxGrid");
+        var $gridEntry = $('#grid');
+
+        var $orderForm = $('.js-product-order-form');
+
+        $(element).toggleClass('open');
+
+        var targetUrl = $gridEntry.data("target-url");
+        var productCode = $gridEntry.data("product-code");
+
+        if ($('.product-grid-container').children().length > 0) {
+            $(window).scrollTo($('#AddToCartOrderForm'), 1000);
+        }
+        else {
+            var method = "GET";
+            $.ajax({
+                url: targetUrl,
+                data: {productCode: productCode},
+                type: method,
+                success: function (data) {
+                    $grid.html(data);
+                    $("#ajaxGrid").removeAttr('id');
+                    $grid.slideDown("fast");
+                    $orderForm.slideDown("slow");
+                    $(window).scrollTo($('#AddToCartOrderForm'), 1000);
+                    ACC.productorderform.coreTableActions();
+                },
+                error: function (xht, textStatus, ex) {
+                    alert("Failed to get variant matrix. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
+                }
+
+            });
+        }
+    },
+
     initPageEvents: function () {
 
         $( function() {
             $( "#tabs" ).tabs();
         } );
+
+        $( function() {
+            $.colorbox.remove();
+        } );
+
+        $(document).on("click", '.js-show-editable-product-grid', function (event) {
+            ACC.productDetail.populateAndShowEditableGrid(this, event);
+        });
 
         $(document).on("click", '.js-qty-selector .js-qty-selector-minus', function () {
             ACC.productDetail.checkQtySelector(this, "minus");

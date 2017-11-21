@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.category.PentlandCategoryService;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.core.product.util.ProductSizeComparator;
@@ -40,6 +41,10 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
       VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
       styleElementData.setVariantName(styleVariantProductModel.getStyle());
       styleElementData.setIsLeaf(Boolean.FALSE);
+      final VariantOptionData styleVariantOptionData = Optional.ofNullable(styleElementData.getVariantOption()).orElse(new VariantOptionData());
+      styleVariantOptionData.setCode(styleLevelVariantModel.getCode());
+      styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
+      styleElementData.setVariantOption(styleVariantOptionData);
       variantMatrixElementDataList.add(styleElementData);
 
 
@@ -50,6 +55,9 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
         VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
         sizeElementData.setVariantName(sizeVariantProductModel.getSize());
         sizeElementData.setIsLeaf(Boolean.TRUE);
+        final VariantOptionData sizeVariantOptionData = Optional.ofNullable(sizeElementData.getVariantOption()).orElse(new VariantOptionData());
+        sizeVariantOptionData.setCode(sizeVariantProductModel.getCode());
+        sizeElementData.setVariantOption(sizeVariantOptionData);
         styleElementData.getElements().add(sizeElementData);
       }
       if (maxVariants < styleElementData.getElements().size()) {
@@ -59,8 +67,10 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
     for (VariantMatrixElementData variantMatrixElementData: variantMatrixElementDataList) {
       variantMatrixElementData.setMaxVariants(maxVariants);
     }
-
-    productData.setVariantMatrix(variantMatrixElementDataList);
+    VariantMatrixElementData root = createNode(baseProductModel);
+    root.setElements(variantMatrixElementDataList);
+    root.setIsLeaf(Boolean.FALSE);
+    productData.setVariantMatrix(Collections.singletonList(root));
   }
 
   protected ProductModel getBaseProduct(ProductModel productModel) {
@@ -84,8 +94,9 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
 
   protected void populateVariantOptionData(ProductModel productModel, VariantOptionData variantOptionData) {
     variantOptionData.setCode(productModel.getCode());
-
-    getVariantOptionDataMediaPopulator().populate((VariantProductModel) productModel, variantOptionData);
+    if (productModel instanceof VariantProductModel) {
+      getVariantOptionDataMediaPopulator().populate((VariantProductModel) productModel, variantOptionData);
+    }
   }
 
   protected VariantOptionData newVariantOptionData() {
