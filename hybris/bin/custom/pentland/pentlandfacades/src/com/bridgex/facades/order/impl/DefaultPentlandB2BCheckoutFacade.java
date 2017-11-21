@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.bridgex.core.order.PentlandCartService;
 import com.bridgex.facades.order.PentlandB2BCheckoutFacade;
-import de.hybris.platform.core.model.order.CartModel;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.enums.B2BUnitType;
@@ -32,6 +31,7 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
 
   private Map<B2BUnitType, List<CheckoutPaymentType>> b2bPaymentTypeMapping;
   private B2BUnitService<B2BUnitModel, UserModel>     b2bUnitService;
+  private PentlandCartService pentlandCartService;
 
   private static final String CART_CHECKOUT_DELIVERYADDRESS_INVALID = "cart.deliveryAddress.invalid";
   private static final String CART_CHECKOUT_DELIVERYMODE_INVALID = "cart.deliveryMode.invalid";
@@ -85,8 +85,7 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
 
   @Override
   public void createCartFromSessionDetails(String orderCode) {
-    //TODO
-    ((PentlandCartService)getCartService()).createCartFromSessionDetails(orderCode);
+    pentlandCartService.createCartFromSessionDetails(orderCode);
   }
 
   @Required
@@ -103,4 +102,12 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
     this.b2bUnitService = b2bUnitService;
   }
 
+  public PentlandCartService getPentlandCartService() {
+    return pentlandCartService;
+  }
+
+  @Required
+  public void setPentlandCartService(PentlandCartService pentlandCartService) {
+    this.pentlandCartService = pentlandCartService;
+  }
 }

@@ -112,6 +112,7 @@
 	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
 	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator">
 		<property name="cartFactory" ref="b2bCartFactory"/>
+		<property name="productService" ref="productService"/>
 	</bean>
 
 	<alias name="defaultProductSizeService" alias="productSizeService"/>
