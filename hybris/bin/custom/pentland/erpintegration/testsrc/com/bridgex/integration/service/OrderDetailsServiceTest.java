@@ -59,7 +59,7 @@ public class OrderDetailsServiceTest {
     dto.setOrderType("C");
     ResponseEntity<OrderDetailsResponse> result = orderDetailsService.sendRequest(dto, OrderDetailsResponse.class);
     OrderDetailsResponse body = result.getBody();
-    assertEquals(body.getEtReturn().getType(),"TEST");
+    assertEquals(body.getEtReturn().get(0).getType(),"TEST");
   }
 
 

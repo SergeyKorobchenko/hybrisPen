@@ -2071,3 +2071,10 @@ UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;sapBrand;
 ;M25687_B;;05;
 ;M27160;;05;
 ;M28323;;05;
+
+# Products for Order Details Integration Testing
+INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];varianttype(code);$approved
+;5BB1352CRB;;300441142;baseLayers;BLUE,GREY;pieces;ApparelSizeVariantProduct;
+;5BB1253PPW;;300441142;baseLayers;BLUE;pieces;ApparelSizeVariantProduct;
+;731SPM0017024;;300441142;baseLayers;GREEN;pieces;ApparelSizeVariantProduct;
+;914542;;300441142;baseLayers;RED;pieces;ApparelSizeVariantProduct;
