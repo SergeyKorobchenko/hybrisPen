@@ -74,6 +74,7 @@ ACC.productorderform = {
             var totalPrice = 0;
             var _this = this;
             var currentPrice = $("input[id='productPrice[" + currentIndex + "]']").val();
+            var packSize = $(this).data('packSize');
             this.value = ACC.productorderform.filterSkuEntry(this.value);
             var $currentTotalItems = $('.js-total-items-count');
             var currentTotalItemsValue = $currentTotalItems.html();
