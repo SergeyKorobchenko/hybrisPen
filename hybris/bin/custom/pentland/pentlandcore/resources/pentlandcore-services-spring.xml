@@ -99,6 +99,7 @@
 	<bean id="defaultPentlandOrderExportService" class="com.bridgex.core.order.impl.DefaultPentlandOrderExportService">
 		<property name="modelService" ref="modelService"/>
 		<property name="orderExportService" ref="orderExportService"/>
+		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService"/>
 	</bean>
 
 	<alias name="defaultPentlandAccountSummaryService" alias="pentlandAccountSummaryService"/>

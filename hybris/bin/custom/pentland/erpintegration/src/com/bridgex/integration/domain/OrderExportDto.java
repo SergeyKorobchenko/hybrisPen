@@ -64,6 +64,9 @@ public class OrderExportDto {
   @JsonProperty("ORDER_NOTES")
   private String customerComment;
 
+  @JsonProperty("I_USER_EMAIL")
+  private String email;
+
   @JsonProperty("I_MULTIBRAND_INPUT_T")
   private List<MultiBrandOrderInput> orderEntries;
 
@@ -205,5 +208,13 @@ public class OrderExportDto {
 
   public void setUserContacts(List<UserContactsDto> userContacts) {
     this.userContacts = userContacts;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 }
