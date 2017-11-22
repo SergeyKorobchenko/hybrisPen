@@ -8,7 +8,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:if test="${not empty orderData}">
+<c:if test="${not empty orderData and showBillingInfo}">
     <div class="account-orderdetail well well-tertiary">
         <div class="well-headline">
             <spring:theme code="text.account.order.orderDetails.billingInformtion" />

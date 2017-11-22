@@ -365,4 +365,9 @@
 		<property name="productService" ref="productService"/>
 	</bean>
 
+	<alias name="pentlandOrderPopulator" alias="orderPopulator"/>
+	<bean id="pentlandOrderPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderPopulator" parent="defaultOrderPopulator">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
+
 </beans>

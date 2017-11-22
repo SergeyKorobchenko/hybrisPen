@@ -1,7 +1,5 @@
 package com.bridgex.core.product.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.ResponseEntity;
 
@@ -9,9 +7,6 @@ import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartResponse;
 import com.bridgex.integration.service.IntegrationService;
-
-import de.hybris.platform.core.model.order.CartModel;
-import de.hybris.platform.core.model.product.ProductModel;
 
 /**
  * @author Created by konstantin.pavlyukov on 11/8/2017.

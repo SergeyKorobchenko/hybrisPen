@@ -2899,6 +2899,13 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."
 
 ;text.account.orderhistory.dateplaced;Date Placed
-
+;text.account.order.orderNumberLabel.plural;"Your Order Number(s): "
+;text.account.order.user;Order placed by
+;text.summary.order.total;Total
+;text.summary.order.totalQty;Total Qty
+;text.summary.order.brand;Brand
+;order.export.global.error;Order failed to export.
 
 ;basket.export.images.file;Download product images
+;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
+;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout

@@ -35,7 +35,7 @@ public class OrderExportDto {
 
   //not used
   @JsonProperty("I_PO_TYPE")
-  private String poType;
+  private String poType = ErpintegrationConstants.REQUEST.DEFAULT_PO_TYPE;
 
   @JsonProperty("I_RDD")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -63,6 +63,9 @@ public class OrderExportDto {
 
   @JsonProperty("ORDER_NOTES")
   private String customerComment;
+
+  @JsonProperty("I_USER_EMAIL")
+  private String email;
 
   @JsonProperty("I_MULTIBRAND_INPUT_T")
   private List<MultiBrandOrderInput> orderEntries;
@@ -205,5 +208,13 @@ public class OrderExportDto {
 
   public void setUserContacts(List<UserContactsDto> userContacts) {
     this.userContacts = userContacts;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 }

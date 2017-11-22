@@ -1,21 +1,22 @@
 package com.bridgex.facades.order.impl;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.order.PentlandCommerceCheckoutService;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 
 import de.hybris.platform.b2bacceleratorfacades.order.impl.DefaultB2BAcceleratorCheckoutFacade;
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.PK;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 
@@ -58,6 +59,18 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
     parameter.setMarkFor(deliveryAddress);
     return pentlandCommerceCheckoutService.setMarkForAddress(parameter);
 
+  }
+
+  @Override
+  public void cleanupZeroQuantityEntries() {
+    final CartModel cartModel = getCart();
+    if(CollectionUtils.isNotEmpty(cartModel.getEntries())){
+      Map<Integer, Long> quantities = new HashMap<>();
+      cartModel.getEntries().stream().filter(entry -> entry.getQuantity() == 0).forEach(entry -> quantities.put(entry.getEntryNumber(), null));
+      if(MapUtils.isNotEmpty(quantities)){
+        getCartService().updateQuantities(cartModel, quantities);
+      }
+    }
   }
 
   private AddressModel getAddressModelForID(String addressId) {return getModelService().get(PK.fromLong(Long.parseLong(addressId)));}
