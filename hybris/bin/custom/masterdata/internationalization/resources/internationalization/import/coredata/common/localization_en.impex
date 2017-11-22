@@ -2907,3 +2907,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.export.global.error;Order failed to export.
 
 ;basket.export.images.file;Download product images
+;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
+;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout

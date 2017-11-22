@@ -11,19 +11,36 @@
 package de.hybris.platform.pentlandb2baddon.checkout.steps.validation.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.ValidationResults;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.pentlandb2baddon.checkout.steps.validation.AbstractB2BCheckoutStepValidator;
 
 import de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData;
 import de.hybris.platform.b2bacceleratorservices.enums.CheckoutPaymentType;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheckoutStepValidator
-{
+public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheckoutStepValidator {
 	@Override
-	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes)
-	{
-		return ValidationResults.SUCCESS;
+	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
+		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty()){
+			if(StringUtils.isEmpty(cartData.getPurchaseOrderNumber())){
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+				                               "checkout.error.empty.po");
+				return ValidationResults.FAILED;
+			}
+			if(cartData.getRdd() == null){
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+				                               "checkout.error.empty.rdd");
+				return ValidationResults.FAILED;
+		}
+			return ValidationResults.SUCCESS;
+		}
+
+		return ValidationResults.FAILED;
 	}
 
 	@Override
