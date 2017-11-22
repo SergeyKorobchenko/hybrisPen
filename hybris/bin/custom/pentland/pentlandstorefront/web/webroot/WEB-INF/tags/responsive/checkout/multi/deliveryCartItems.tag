@@ -104,23 +104,7 @@
 				<div class="name"><a href="${productUrl}">${fn:escapeXml(entry.product.name)}</a></div>
 				<div>
                     <span class="label-spacing"><spring:theme code="order.itemPrice" />:</span>
-					<c:if test="${entry.product.multidimensional}">
-						<%-- if product is multidimensional with different prices, show range, else, show unique price --%>
-						<c:choose>
-							<c:when test="${entry.product.priceRange.minPrice.value ne entry.product.priceRange.maxPrice.value}">
-								<format:price priceData="${entry.product.priceRange.minPrice}" /> - <format:price priceData="${entry.product.priceRange.maxPrice}" />
-							</c:when>
-                            <c:when test="${entry.product.priceRange.minPrice.value eq entry.product.priceRange.maxPrice.value}">
-                                <format:price priceData="${entry.product.priceRange.minPrice}" />
-                            </c:when>
-							<c:otherwise>
-								<format:price priceData="${entry.product.price}" />
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-					<c:if test="${! entry.product.multidimensional}">
-						<format:price priceData="${entry.basePrice}" displayFreeForZero="true" />
-					</c:if>
+					<format:price priceData="${entry.product.price}" />
 				</div>
 				<div class="qty"><span><spring:theme code="basket.page.qty"/>:</span>${entry.quantity}</div>
 				<div>
