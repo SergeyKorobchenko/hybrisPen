@@ -19,13 +19,19 @@ import de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData;
 import de.hybris.platform.b2bacceleratorservices.enums.CheckoutPaymentType;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 
 public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheckoutStepValidator {
+
+	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
+
 	@Override
 	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
+		CartData cartData = getCheckoutFacade().getCheckoutCart();
 		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty()){
 			if(StringUtils.isEmpty(cartData.getPurchaseOrderNumber())){
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
@@ -47,5 +53,10 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 	public ValidationResults validateOnExit()
 	{
 		return ValidationResults.SUCCESS;
+	}
+
+	@Required
+	public void setPentlandB2BAcceleratorCheckoutFacade(PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade) {
+		this.pentlandB2BAcceleratorCheckoutFacade = pentlandB2BAcceleratorCheckoutFacade;
 	}
 }
