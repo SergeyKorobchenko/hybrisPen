@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -17,21 +18,22 @@ public class MultiBrandCartDto {
   @JsonProperty("I_DOCUMENT_TYPE")
   private String docType = ErpintegrationConstants.REQUEST.DEFAULT_DOC_TYPE;
 
-  @JsonProperty("SERVICE_CONSUMER")
+  @JsonProperty("I_SERVICE_CONSUMER")
   private String serviceConsumer = ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER;
 
   @JsonProperty("I_LANGUAGE")
-  private String lang;
+  private String lang = ErpintegrationConstants.REQUEST.DEFAULT_LANGUAGE;
 
   @JsonProperty("I_DOCUMENT_NUMBER")
   private String docNumber;
 
-  @JsonProperty("CUSTOMER_NUMBER")
-  private String sapCustomerID;
-
   //Not used
   @JsonProperty("I_SALES_REP")
   private String salesRep;
+
+  @JsonProperty("I_CUSTOMER_NUMBER")
+  private String sapCustomerID;
+
   //Not used
   @JsonProperty("I_SHIP_TO")
   private String shippingAddress;
@@ -40,11 +42,13 @@ public class MultiBrandCartDto {
   private String cancelDate;
 
   @JsonProperty("I_RDD")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
+  //Not used
   @JsonProperty("I_INITIAL_CHECK_FLAG")
   private String initialCheck;
+
   @JsonProperty("I_AVAILABILITY_CHECK_FLAG")
   private String availabilityCheck;
   @JsonProperty("I_PRICING_CHECK_FLAG")
@@ -52,8 +56,25 @@ public class MultiBrandCartDto {
   @JsonProperty("I_CREDIT_CHECK_FLAG")
   private String creditCheck;
 
+  //Not used
+  @JsonProperty("I_UPC_LIST_T")
+  private List upcList;
+  //Not used
+  @JsonProperty("I_ATS_FLAG")
+  private String ats;
+  //Not used
+  @JsonProperty("I_DOC_REASON")
+  private String docReason;
+  //Not used
+  @JsonProperty("I_PO_TYPE")
+  private String poType;
+
   @JsonProperty("I_MULTI_BRAND_CART_INPUT_T")
   private List<MultiBrandCartInput> cartInput;
+
+  //Not used
+  @JsonProperty("IT_PARAMETERS")
+  private List itParams;
 
   public String getDocType() {
     return docType;
@@ -165,5 +186,45 @@ public class MultiBrandCartDto {
 
   public void setSapCustomerID(String sapCustomerID) {
     this.sapCustomerID = sapCustomerID;
+  }
+
+  public List getUpcList() {
+    return upcList;
+  }
+
+  public void setUpcList(List upcList) {
+    this.upcList = upcList;
+  }
+
+  public String getAts() {
+    return ats;
+  }
+
+  public void setAts(String ats) {
+    this.ats = ats;
+  }
+
+  public String getDocReason() {
+    return docReason;
+  }
+
+  public void setDocReason(String docReason) {
+    this.docReason = docReason;
+  }
+
+  public String getPoType() {
+    return poType;
+  }
+
+  public void setPoType(String poType) {
+    this.poType = poType;
+  }
+
+  public List getItParams() {
+    return itParams;
+  }
+
+  public void setItParams(List itParams) {
+    this.itParams = itParams;
   }
 }
