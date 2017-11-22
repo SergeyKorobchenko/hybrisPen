@@ -91,9 +91,9 @@
             <%--</c:if>--%>
 
             <input type="hidden" class="${fn:escapeXml(skusId)} sku" name="cartEntries[${loopIndex}].sku" id="cartEntries[${loopIndex}].sku" value="${fn:escapeXml(variant.variantOption.code)}" />
-            <input type="textbox" maxlength="3" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
+            <input type="textbox" maxlength="9" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
                    name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' data-current-value=""
-                   id="cartEntries[${loopIndex}].quantity" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
+                   id="cartEntries[${loopIndex}].quantity" data-pack-size="${variant.packSize}" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
 
             <grid:coreTableStockRow variant="${variant}" />
 

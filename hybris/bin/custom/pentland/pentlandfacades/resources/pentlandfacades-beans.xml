@@ -110,6 +110,7 @@
 		<property name="variantName" type="String"/>
 		<property name="maxVariants" type="java.lang.Integer"/>
 		<property name="qty" type="java.lang.Long" />
+		<property name="packSize" type="java.lang.Integer" />
 	</bean>
 
 	<bean class="com.bridgex.facades.order.data.MiniOrderEntry">
