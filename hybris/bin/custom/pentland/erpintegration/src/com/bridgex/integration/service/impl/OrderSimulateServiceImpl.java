@@ -24,10 +24,10 @@ public class OrderSimulateServiceImpl extends AbstractIntegrationService<MultiBr
     if (body == null) {
       result = new MultiBrandCartResponse();
     }
-    if (result.getEtReturn() == null) {
-      result.setEtReturn(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)));
+    if (result.getEtReturnList() == null) {
+      result.setEtReturnList(Collections.singletonList(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)));
     } else {
-      result.getEtReturn().add(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
+      result.getEtReturnList().add(new ETReturnDto(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE));
     }
     return result;
   }
