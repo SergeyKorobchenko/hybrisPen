@@ -4,12 +4,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
-<div class="row">
-    <div class="container-lg col-md-10">
-        <p class="lead"><spring:theme code="text.account.hidePrices.notice"/></p>
+<div class="account-section-header">
+    <div class="row">
+        <div class="container-lg col-md-6">
+            <spring:theme code="text.account.hidePrices"/>
+        </div>
     </div>
 </div>
-<div class="row">
+<div class="row padding-top-10">
+    <div class="container-lg col-md-10">
+        <p><spring:theme code="text.account.hidePrices.notice"/></p>
+    </div>
+</div>
+<div class="row ">
     <div class="container-lg col-md-10">
         <div class="account-section-content">
             <div class="account-section-form">
