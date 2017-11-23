@@ -140,6 +140,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String ADD_EDIT_ADDRESS_CMS_PAGE = "add-edit-address";
 	private static final String PAYMENT_DETAILS_CMS_PAGE = "payment-details";
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
+	private static final String HIDE_PRICES_CMS_PAGE = "accountHidePrices";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String CONSENT_MANAGEMENT_CMS_PAGE = "consents";
 
@@ -952,5 +953,16 @@ public class AccountPageController extends AbstractSearchPageController
 					null);
 		}
 		return REDIRECT_TO_CONSENT_MANAGEMENT;
+	}
+
+	@RequestMapping(value = "/show-hide-prices", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String hidePricesPage(final Model model) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(HIDE_PRICES_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(HIDE_PRICES_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.hidePrices"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
 	}
 }
