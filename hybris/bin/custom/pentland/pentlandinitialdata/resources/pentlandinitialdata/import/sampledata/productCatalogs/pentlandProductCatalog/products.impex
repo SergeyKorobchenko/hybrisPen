@@ -2021,7 +2021,7 @@ INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;
 ;20859;4-20859BP6;PACLITE III SHELL JKT AF BLK/BLK;04;BP6;BLACK;;;4;;;;4000001;;;;
 ;00088;8-000882264;CLLRY AQUASHORT PNL BOYS RCH/MAJ/APH;08;2264;;;;8;;;;SPD0001;;;;
 ;00258;8-002582846;TRICKSTER SANDAL INF ARD/PER/SCA;08;2846;;;;8;;;;SPD0004;;;;
-;BB1090;5-BB1090PBB;MALMO D32P PINK/BLACK/BLUE;05;PBB;PINK;;;5;;;;5000001;;;;
+;BB1090;5A38138BCO;MALMO D32P PINK/BLACK/BLUE;05;PBB;PINK;;;5;;;;5000001;;;;
 
 INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 ;5-BB1089WP4:;;5037823906047;;5;pieces;3;;;
@@ -2052,9 +2052,9 @@ INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;s
 ;8-002582846;;5050995399738;;7;pieces;05;;;
 ;8-002582846;;5050995399745;;8;pieces;05;;;
 ;8-002582846;;5050995399752;;9;pieces;05;;;
-;5-BB1090PBB;;5037823906139;;5;pieces;03;;;
-;5-BB1090PBB;;5037823906122;;4;pieces;03;;;
-;5-BB1090PBB;;5037823906115;;3;pieces;03;;;
+;5A38138BCO;;5037823906139;;5;pieces;03;;;
+;5A38138BCO;;5037823784607;;4;pieces;03;;;
+;5A38138BCO;;5037823784713;;3;pieces;03;;;
 
 UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;videoURL;externalURL;;supercategories(code,$catalogVersion);
 ;5-BB1089WP4;;1;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation;
@@ -2062,7 +2062,7 @@ UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;packSize;vid
 ;4-20859BP6;;1;https://www.youtube.com/embed/XWMs9pQuQqk;https://www.google.ru/;;221600
 ;8-000882264;;5;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
 ;8-002582846;;3;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;190400
-;5-BB1090PBB;;100;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
+;5A38138BCO;;100;https://www.youtube.com/embed/DFStzMQY_nc;https://www.google.ru/;;recreation
 
 #data for facet search
 UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;sapBrand;

@@ -10,8 +10,10 @@
  */
 package com.bridgex.storefront.controllers.pages.checkout.steps;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -19,6 +21,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,12 +33,14 @@ import com.bridgex.storefront.controllers.ControllerConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutGroup;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.ValidationResults;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
+import de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
@@ -51,6 +56,28 @@ public class MarkForAddressCheckoutStepController extends AbstractCheckoutStepCo
 
 	@Resource
 	private PentlandAcceleratorCheckoutFacade acceleratorCheckoutFacade;
+
+	@ModelAttribute("checkoutSteps")
+	public List<CheckoutSteps> addCheckoutStepsToModel() {
+		final CheckoutGroup checkoutGroup = getCheckoutGroup();
+		final Map<String, CheckoutStep> progressBarMap = checkoutGroup.getCheckoutProgressBar();
+		final List<CheckoutSteps> checkoutSteps = new ArrayList<CheckoutSteps>(progressBarMap.size());
+		CartData checkoutCart = getCheckoutFacade().getCheckoutCart();
+		B2BPaymentTypeData paymentType = checkoutCart.getPaymentType();
+
+		for (final Map.Entry<String, CheckoutStep> entry : progressBarMap.entrySet()) {
+			final CheckoutStep checkoutStep = entry.getValue();
+			if("paymentMethod".equals(checkoutStep.getProgressBarId()) && "ACCOUNT".equals(paymentType.getCode())){
+				continue;
+			}
+			if (checkoutStep.isEnabled()) {
+				checkoutSteps.add(new CheckoutSteps(checkoutStep.getProgressBarId(), StringUtils.remove(checkoutStep.currentStep(),
+				                                                                                        REDIRECT_PREFIX), Integer.valueOf(entry.getKey())));
+			}
+		}
+
+		return checkoutSteps;
+	}
 
 	@Override
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)

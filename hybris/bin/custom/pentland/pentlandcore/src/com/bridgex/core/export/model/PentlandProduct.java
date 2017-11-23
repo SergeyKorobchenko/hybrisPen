@@ -6,7 +6,7 @@ import de.hybris.platform.acceleratorservices.dataexport.generic.output.csv.Deli
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/24/2017.
  */
-@DelimitedFile(delimiter = ";")
+@DelimitedFile
 public class PentlandProduct {
 
   //product attributes

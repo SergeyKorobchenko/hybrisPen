@@ -1,5 +1,7 @@
 package com.bridgex.facades.order;
 
+import java.util.List;
+
 import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
@@ -16,4 +18,5 @@ public interface PentlandOrderFacade extends OrderFacade {
 
   OrderData requestOrderDetails(String orderCode);
 
+  List<OrderData> getSapOrdersForOrderCode(String orderCode);
 }

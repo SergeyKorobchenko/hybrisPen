@@ -812,7 +812,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-orderConfirmation ; Side Content Slot for Order Confirmation ; true ;                                                                                                                                                                                                                        ; ; ;
-; ; BodyContent-orderConfirmation ; Body Content Slot for Order Confirmation ; true ; OrderConfirmationThankMessageComponent,OrderConfirmationOverviewComponent,OrderConfirmationItemsComponent,OrderConfirmationShippingComponent,OrderConfirmationTotalsComponent,OrderConfirmationContinueButtonComponent ; ; ;
+; ; BodyContent-orderConfirmation ; Body Content Slot for Order Confirmation ; true ; OrderConfirmationThankMessageComponent,OrderConfirmationOverviewComponent,OrderConfirmationItemsComponent,OrderConfirmationShippingComponent,OrderConfirmationContinueButtonComponent ; ; ;
 
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ; ; OrderConfirmationThankMessageComponent   ; Order Confirmaiton Thank You Message Component ; checkoutConfirmationThankMessage.jsp                                                                  ; ; OrderConfirmationThankMessageComponent

@@ -11,33 +11,33 @@ public class MultiBrandCartInput {
 
   //Not used
   @JsonProperty("REFERENCE_DOCUMENT_ITEM")
-  private String refDocNumber;
+  private String refDocNumber = "";
   //Not used
   @JsonProperty("REQUIREMENT_CATEGORY")
-  private String reqCategory;
+  private String reqCategory = "";
 
   @JsonProperty("SALES_ORG")
-  private String salesOrg;
+  private String salesOrg = "";
 
   @JsonProperty("DISTRIBUTION_CHANNEL")
-  private String distrChannel;
+  private String distrChannel = "";
 
   @JsonProperty("BRAND")
-  private String brandCode;
+  private String brandCode = "";
 
   @JsonProperty("MATERIAL_NUMBER")
-  private String materialNumber;
+  private String materialNumber = "";
 
   //Not used
   @JsonProperty("REQUESTED_DATE")
-  private String requestedDate;
+  private String requestedDate = "";
 
   @JsonProperty("IT_SIZE_DATA")
   private List<SizeDataDto> sizeData;
 
   //Not used
   @JsonProperty("SEASON")
-  private String season;
+  private String season = "";
 
   public String getMaterialNumber() {
     return materialNumber;

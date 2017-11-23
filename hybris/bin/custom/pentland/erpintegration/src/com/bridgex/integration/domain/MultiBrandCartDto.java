@@ -1,5 +1,6 @@
 package com.bridgex.integration.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,21 +26,21 @@ public class MultiBrandCartDto {
   private String lang = ErpintegrationConstants.REQUEST.DEFAULT_LANGUAGE;
 
   @JsonProperty("I_DOCUMENT_NUMBER")
-  private String docNumber;
+  private String docNumber = "";
 
   //Not used
   @JsonProperty("I_SALES_REP")
-  private String salesRep;
+  private String salesRep = "";
 
   @JsonProperty("I_CUSTOMER_NUMBER")
-  private String sapCustomerID;
+  private String sapCustomerID = "";
 
   //Not used
   @JsonProperty("I_SHIP_TO")
-  private String shippingAddress;
+  private String shippingAddress = "";
   //Not used
   @JsonProperty("I_CANCEL_DATE")
-  private String cancelDate;
+  private String cancelDate = "";
 
   @JsonProperty("I_RDD")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
@@ -47,34 +48,34 @@ public class MultiBrandCartDto {
 
   //Not used
   @JsonProperty("I_INITIAL_CHECK_FLAG")
-  private String initialCheck;
+  private String initialCheck = "";
 
   @JsonProperty("I_AVAILABILITY_CHECK_FLAG")
-  private String availabilityCheck;
+  private String availabilityCheck = "";
   @JsonProperty("I_PRICING_CHECK_FLAG")
-  private String pricingCheck;
+  private String pricingCheck = "";
   @JsonProperty("I_CREDIT_CHECK_FLAG")
-  private String creditCheck;
+  private String creditCheck = "";
 
   //Not used
   @JsonProperty("I_UPC_LIST_T")
-  private List upcList;
+  private List upcList = new ArrayList<>();
   //Not used
   @JsonProperty("I_ATS_FLAG")
-  private String ats;
+  private String ats = "";
   //Not used
   @JsonProperty("I_DOC_REASON")
-  private String docReason;
+  private String docReason = "";
   //Not used
   @JsonProperty("I_PO_TYPE")
-  private String poType;
+  private String poType = "";
 
   @JsonProperty("I_MULTI_BRAND_CART_INPUT_T")
   private List<MultiBrandCartInput> cartInput;
 
   //Not used
   @JsonProperty("IT_PARAMETERS")
-  private List itParams;
+  private List itParams = new ArrayList<>();
 
   public String getDocType() {
     return docType;

@@ -3,10 +3,11 @@
 
 	<!-- Since worldpay process paymentTransactions asynchronously, it is necessary to add wait-steps to the order process -->
 	<action id="checkOrder" bean="checkOrderAction">
-		<transition name="OK" to="exportOrder"/>
+		<transition name="OK" to="checkAuthorizeOrderPayment"/>
 		<transition name="NOK" to="error"/>
 	</action>
 
+	<!-- excluded atm as order is exported synchronously to display confirmation page -->
 	<action id="exportOrder" bean="exportOrderAction">
 		<transition name="OK" to="checkAuthorizeOrderPayment" />
 	</action>

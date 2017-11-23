@@ -6,6 +6,9 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
+
+import com.bridgex.core.order.PentlandOrderExportService;
 
 import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderStrategy;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
@@ -23,6 +26,9 @@ import de.hybris.platform.order.exceptions.CalculationException;
 public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrderStrategy{
 
   private static final Logger LOG = Logger.getLogger(PentlandCommercePlaceOrderStrategy.class);
+
+  private PentlandOrderExportService pentlandOrderExportService;
+
   @Override
   public CommerceOrderResult placeOrder(final CommerceCheckoutParameter parameter) throws InvalidCartException
   {
@@ -90,6 +96,8 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
         this.beforeSubmitOrder(parameter, result);
 
         getOrderService().submitOrder(orderModel);
+
+        pentlandOrderExportService.exportOrder(orderModel);
       }
       else {
         throw new IllegalArgumentException(String.format("Order was not properly created from cart %s", cartModel.getCode()));
@@ -100,5 +108,10 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
 
     this.afterPlaceOrder(parameter, result);
     return result;
+  }
+
+  @Required
+  public void setPentlandOrderExportService(PentlandOrderExportService pentlandOrderExportService) {
+    this.pentlandOrderExportService = pentlandOrderExportService;
   }
 }

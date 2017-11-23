@@ -13,10 +13,12 @@ import org.springframework.http.ResponseEntity;
 
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandOrderExportService;
+import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.*;
 import com.bridgex.integration.service.IntegrationService;
 
+import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commerceservices.enums.SalesApplication;
 import de.hybris.platform.core.enums.ExportStatus;
@@ -35,6 +37,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
 
   private IntegrationService<OrderExportDto, ExportOrderResponse> orderExportService;
   private ModelService                                            modelService;
+  private PentlandB2BUnitService                                  pentlandB2BUnitService;
 
   @Override
   public boolean exportOrder(OrderModel orderModel) {
@@ -60,7 +63,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     OrderExportDto request = new OrderExportDto();
 
     fillBaseData(orderModel, unit, deliveryAddressModel, request);
-    populateOrderEntries(orderModel, unit, request);
+    populateOrderEntries(orderModel, request);
 
     fillAddresses(orderModel, deliveryAddressModel, request);
 
@@ -101,38 +104,38 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     request.setDocNumber(orderModel.getCode());
     request.setPurchaseOrderNumber(orderModel.getPurchaseOrderNumber());
 
-    //TODO waiting for clarification
-    request.setPoType("");
-
     request.setRdd(orderModel.getRdd());
     request.setSapCustomerID(unit.getSapID());
     request.setShippingAddress(deliveryAddressModel.getAddressID());
 
-    //TODO waiting for clarification
-    request.setTechOrderReason("");
-
     request.setPaymentType(orderModel.getPaymentType().getCode());
     request.setCustomerComment(orderModel.getCustomerNotes());
+    request.setEmail(orderModel.getUser().getUid());
   }
 
-  private void populateOrderEntries(OrderModel orderModel, B2BUnitModel unit, OrderExportDto request) {
+  private void populateOrderEntries(OrderModel orderModel, OrderExportDto request) {
     //group entries by base product
     Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle =
       orderModel.getEntries().stream().filter(entry -> entry.getProduct() instanceof ApparelSizeVariantProductModel)
                 .collect(Collectors.groupingBy(entry -> ((VariantProductModel) entry.getProduct()).getBaseProduct()));
 
     List<MultiBrandOrderInput> styleEntries = new ArrayList<>();
-    fillOrderEntries(unit, entriesGroupedByStyle, styleEntries);
+    fillOrderEntries(orderModel, entriesGroupedByStyle, styleEntries);
     request.setOrderEntries(styleEntries);
   }
 
-  private void fillOrderEntries(B2BUnitModel unit, Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle, List<MultiBrandOrderInput> styleEntries) {
+  private void fillOrderEntries(OrderModel orderModel, Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByStyle, List<MultiBrandOrderInput> styleEntries) {
+    List<B2BUnitModel> usersB2BUnits = pentlandB2BUnitService.getUsersB2BUnits((B2BCustomerModel) orderModel.getUser());
     entriesGroupedByStyle.forEach((styleProduct, entries) -> {
       MultiBrandOrderInput groupedEntry = new MultiBrandOrderInput();
       groupedEntry.setMaterialNumber(styleProduct.getCode());
-      groupedEntry.setBrandCode(styleProduct.getSapBrand());
-      groupedEntry.setSalesOrg(unit.getSalesOrg());
-      groupedEntry.setDistrChannel(unit.getDistCh());
+      String sapBrand = styleProduct.getSapBrand();
+      if(StringUtils.isNotEmpty(sapBrand)) {
+        B2BUnitModel unit = usersB2BUnits.stream().filter(unitModel -> sapBrand.equals(unitModel.getSapBrand())).findFirst().orElse(null);
+        groupedEntry.setBrandCode(sapBrand);
+        groupedEntry.setSalesOrg(unit.getSalesOrg());
+        groupedEntry.setDistrChannel(unit.getDistCh());
+      }
       groupedEntry.setSalesUnit(styleProduct.getUnit().getCode());
 
       List<SchedLinesDto> sizeEntries = new ArrayList<>();
@@ -205,5 +208,10 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   @Required
   public void setModelService(ModelService modelService) {
     this.modelService = modelService;
+  }
+
+  @Required
+  public void setPentlandB2BUnitService(PentlandB2BUnitService pentlandB2BUnitService) {
+    this.pentlandB2BUnitService = pentlandB2BUnitService;
   }
 }
