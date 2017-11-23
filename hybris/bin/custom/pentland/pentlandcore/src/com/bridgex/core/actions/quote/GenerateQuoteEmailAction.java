@@ -53,10 +53,11 @@ public class GenerateQuoteEmailAction extends GenerateEmailAction {
   }
 
   private EmailAddressModel getCustomerRepEmail(B2BCustomerModel b2BCustomer) {
-    String email = Optional.of(b2BCustomer.getDivision())
+    //TODO default values
+    String email = Optional.ofNullable(b2BCustomer.getDivision())
                            .map(DivisionModel::getEmail)
                            .orElse(DEFAULT_CUSTOMERREP_EMAIL);
-    String displayedName = Optional.of(b2BCustomer.getDivision())
+    String displayedName = Optional.ofNullable(b2BCustomer.getDivision())
                            .map(DivisionModel::getName)
                            .orElse(DEFAULT_CUSTOMERREP_NAME);
     return emailService.getOrCreateEmailAddressForEmail(email,displayedName);

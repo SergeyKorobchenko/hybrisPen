@@ -13,6 +13,11 @@
 		processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" onError="error">
 
 	<action id="generateOrderConfirmationEmail" bean="generateOrderConfirmationEmail">
+		<transition name="OK" to="generateOrderConfirmationRepEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+
+	<action id="generateOrderConfirmationRepEmail" bean="generateOrderConfirmationRepEmail">
 		<transition name="OK" to="sendEmail"/>
 		<transition name="NOK" to="error"/>
 	</action>

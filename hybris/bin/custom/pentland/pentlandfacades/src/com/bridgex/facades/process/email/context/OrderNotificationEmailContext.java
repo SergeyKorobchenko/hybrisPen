@@ -41,7 +41,9 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
 	{
 		super.init(orderProcessModel, emailPageModel);
-		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
+		OrderModel order = orderProcessModel.getOrder();
+		orderData = getOrderConverter().convert(order);
+		orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
 
 		giftCoupons = orderData.getAppliedOrderPromotions().stream()
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())

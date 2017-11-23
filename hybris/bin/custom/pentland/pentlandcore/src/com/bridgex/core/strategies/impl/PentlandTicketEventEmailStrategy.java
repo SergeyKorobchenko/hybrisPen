@@ -42,14 +42,6 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
   }
 
   @Override
-  protected Email getPreConfiguredEmail() throws EmailException {
-    Email email = super.getPreConfiguredEmail();
-    //TODO create cfg property
-    email.setFrom("support@pentlandconnect.com");
-    return email;
-  }
-
-  @Override
   protected AbstractTicketContext createContextForEvent(CsTicketEventEmailConfigurationModel config, CsTicketModel ticket, CsTicketEventModel event) {
     String contextClassName = recipientTypeToContextClassMap.get(config.getRecipientType());
 

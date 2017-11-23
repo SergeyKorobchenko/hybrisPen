@@ -40,6 +40,13 @@
 		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
 	</bean>
 
+	<bean id="generateOrderConfirmationRepEmail" class="com.bridgex.core.actions.GenerateSalesRepEmailAction" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationRepEmailTemplate"/>
+		<property name="groupMemberDao" ref="principalGroupMembersDao"/>
+		<property name="emailFetchStrategy" ref="emailAddressFetchStrategy"/>
+	</bean>
+
+
 	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="DeliverySentEmailTemplate"/>
 	</bean>
