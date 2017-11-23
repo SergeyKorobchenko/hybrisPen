@@ -21,8 +21,6 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
  */
 public class DefaultPentlandCsvFacade extends DefaultCsvFacade implements PentlandCsvFacade{
 
-  public static final String DELIMITER = ";";
-
   @Override
   public void generateCsvFromCart(final List<String> headers, final boolean includeHeader, final CartData cartData,
                                   final Writer writer) throws IOException {
