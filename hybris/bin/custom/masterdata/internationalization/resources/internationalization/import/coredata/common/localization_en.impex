@@ -184,7 +184,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.id;Item ID
 ;basket.page.item;Item (style number)
 ;basket.page.itemNumber;Item no.
-;basket.page.itemPrice;Item price
+;basket.page.itemPrice;Trade price
+;basket.page.itemWholesalePrice;Wholesale price
 ;basket.page.message.remove;Product has been removed from your bag.
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
@@ -193,7 +194,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.message.update.reducedNumberOfItemsAdded.noStock;"<a href=""{1}"" style=""text-decoration: underline"">{0}</a> has been removed from the basket due to insufficient stock."
 ;basket.page.needHelp;Need help?
 ;basket.page.number;No.
-;basket.page.price;Price
+;basket.page.price;Trade Price
+;basket.page.wholesalePrice;Wholesale Price
 ;basket.page.product;Product
 ;basket.page.productdetails;Product Details
 ;basket.page.qty;Qty

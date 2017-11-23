@@ -54,7 +54,12 @@
 	</bean>
 
 	<alias name="pentlandCartFacade" alias="cartFacade"/>
-	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade" />
+	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade">
+		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService"/>
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="categoryService" ref="pentlandCategoryService" />
+		<property name="orderSimulationService" ref="orderSimulationService" />
+	</bean>
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
@@ -291,6 +296,9 @@
 
 	<alias name="pentlandGroupOrderEntryPopulator" alias="groupOrderEntryPopulator"/>
 	<bean id="pentlandGroupOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandGroupOrderEntryPopulator" parent="defaultGroupOrderEntryPopulator"/>
+
+	<alias name="pentlandOrderEntryPopulator" alias="orderEntryPopulator"/>
+	<bean id="pentlandOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderEntryPopulator" parent="defaultOrderEntryPopulator"/>
 
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
 	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>

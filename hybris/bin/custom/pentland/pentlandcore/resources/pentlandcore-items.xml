@@ -459,6 +459,15 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="AbstractOrderEntry" abstract="true" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="erpPrice" type="java.lang.Double">
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
         <typegroup name="CronJobs">
