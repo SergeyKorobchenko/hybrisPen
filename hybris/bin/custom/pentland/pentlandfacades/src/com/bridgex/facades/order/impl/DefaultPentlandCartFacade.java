@@ -74,11 +74,11 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
       final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
       if (successResponse(response)) {
         resetCartPrices(cartModel);
-        final List<MaterialInfoDto> materialList = response.getMaterialInfo();
+        final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
         if (CollectionUtils.isNotEmpty(materialList)) {
           materialList.stream().forEach(m -> populatePrices(m, cartModel));
         }
-        cartModel.setTotalPrice(Double.parseDouble(response.getTotalPrice()));
+        cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
         getModelService().save(cartModel);
       }
     }
