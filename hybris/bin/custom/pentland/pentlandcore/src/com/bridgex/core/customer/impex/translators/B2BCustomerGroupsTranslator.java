@@ -26,6 +26,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 public class B2BCustomerGroupsTranslator extends AbstractSpecialValueTranslator {
 
   private static final Logger LOG = Logger.getLogger(B2BCustomerGroupsTranslator.class);
+  public static final String COLLECTION_DELIMITER = "\\|";
 
   private ModelService                  modelService;
   private UserService                   userService;
@@ -45,7 +46,7 @@ public class B2BCustomerGroupsTranslator extends AbstractSpecialValueTranslator 
     if (StringUtils.isNotEmpty(cellValue) && processedItem != null && processedItem instanceof B2BCustomer) {
       B2BCustomerModel customerModel = modelService.get(processedItem);
       try {
-        String[] groups = cellValue.split(",");
+        String[] groups = cellValue.split(COLLECTION_DELIMITER);
         Set<PrincipalGroupModel> principalGroups = new HashSet<>(customerModel.getGroups());
         Arrays.stream(groups).forEach(s -> {
           UserGroupModel userGroupModel = userService.getUserGroupForUID(s);
