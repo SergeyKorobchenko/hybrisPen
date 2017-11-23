@@ -46,6 +46,9 @@
 		<property name="emailFetchStrategy" ref="emailAddressFetchStrategy"/>
 	</bean>
 
+	<bean id="generateOrderStatusChangeEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderStatusChangedEmailTemplate"/>
+	</bean>
 
 	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="DeliverySentEmailTemplate"/>

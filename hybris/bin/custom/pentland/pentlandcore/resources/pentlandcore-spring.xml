@@ -47,9 +47,6 @@
 	<import resource="/pentlandcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/pentlandcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/pentlandcore/processes/quote/quote-seller-approval-process-spring.xml"/>
-	
-	<import resource="/pentlandcore/processes/quote/quote-to-expire-soon-email-process-spring.xml"/>
-	<import resource="/pentlandcore/processes/quote/quote-expired-email-process-spring.xml"/>
 
 	<import resource="/pentlandcore/processes/quote/quote-post-cancellation-process-spring.xml"/>
 
@@ -81,6 +78,15 @@
 	<bean id="productSizeUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor" ref="productSizeUpdateInterceptor"/>
 		<property name="typeCode" value="ProductSize"/>
+	</bean>
+
+	<bean name="pentlandOrderPrepareInterceptor" class="com.bridgex.core.order.interceptor.PentlandOrderPrepareInterceptor" parent="orderPrepareInterceptor">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	<bean id="pentlandOrderPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="pentlandOrderPrepareInterceptor"/>
+		<property name="replacedInterceptors" ref="orderPrepareInterceptor"/>
+		<property name="typeCode" value="Order"/>
 	</bean>
 
 </beans>
