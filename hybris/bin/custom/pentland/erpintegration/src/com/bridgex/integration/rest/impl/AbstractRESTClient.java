@@ -34,7 +34,6 @@ public abstract class AbstractRESTClient implements RESTClient {
     stopwatch.start();
     try {
       LOG.info(IntegrationUtils.toJSON(requestEntity, LOG));
-
       ResponseEntity responseEntity = restTemplate.exchange(requestEntity, responseClass);
 
       LOG.info(IntegrationUtils.toJSON(responseEntity, LOG));

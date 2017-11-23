@@ -24,6 +24,7 @@ import com.bridgex.integration.domain.MaterialInfoDto;
 import com.bridgex.integration.domain.MaterialOutputGridDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartInput;
+import com.bridgex.integration.domain.MultiBrandCartOutput;
 import com.bridgex.integration.domain.MultiBrandCartResponse;
 import com.bridgex.integration.domain.SizeDataDto;
 
@@ -67,10 +68,14 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     if (!successResponse(response)) {
       return false;
     }
-    final List<MaterialInfoDto> materialList = response.getMaterialInfo();
+    final MultiBrandCartOutput multiBrandCartOutput = response.getMultiBrandCartOutput();
+    if (multiBrandCartOutput == null) {
+      return false;
+    }
+    final List<MaterialInfoDto> materialList = multiBrandCartOutput.getMaterialInfo();
     if (CollectionUtils.isNotEmpty(materialList)) {
       final MaterialInfoDto responseProduct = materialList.stream().filter(m -> product.getMaterialKey().equals(m.getMaterialNumber())).findFirst().orElse(new MaterialInfoDto());
-      final String price = responseProduct.getTotalPrice();
+      final String price = responseProduct.getUnitPrice();
       if (StringUtils.isNotBlank(price)) {
         try {
           final BigDecimal bPrice = BigDecimal.valueOf(Double.valueOf(price));
@@ -106,7 +111,14 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     if (!successResponse(response)) {
       return false;
     }
-    final List<MaterialInfoDto> matListResp = response.getMaterialInfo();
+    final MultiBrandCartOutput multiBrandCartOutput = response.getMultiBrandCartOutput();
+    if (multiBrandCartOutput == null) {
+      return false;
+    }
+    final List<MaterialInfoDto> matListResp = multiBrandCartOutput.getMaterialInfo();
+    if (CollectionUtils.isEmpty(matListResp)) {
+      return false;
+    }
     final List<VariantMatrixElementData> resultMatList = new ArrayList<>();
     for (final MaterialInfoDto material : matListResp) {
       final String matCode = material.getMaterialNumber();
@@ -151,7 +163,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   }
 
   private MultiBrandCartDto createOrderFormRequest(final List<VariantMatrixElementData> materials, Date requestedDeliveryDate) {
-    final MultiBrandCartDto requestRoot = createRequestRoot(requestedDeliveryDate);
+    final MultiBrandCartDto requestRoot = createRequestRoot(requestedDeliveryDate, true, false);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
     final List<MultiBrandCartInput> cartInput = new ArrayList<>();
@@ -174,7 +186,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
         if (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(returnDto.getType())) {
           return true;
         }
-        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType()) || ErpintegrationConstants.RESPONSE.ET_RETURN.WARNING_TYPE.equals(returnDto.getType())) {
+        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType())) {
           result = false;
         }
       }
@@ -183,7 +195,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   }
 
   private MultiBrandCartDto createSimulateOrderRequest(final List<ProductData> products, Date requestedDeliveryDate) {
-    final MultiBrandCartDto requestRoot = createRequestRoot(requestedDeliveryDate);
+    final MultiBrandCartDto requestRoot = createRequestRoot(requestedDeliveryDate, true, true);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
     final List<MultiBrandCartInput> cartInput = new ArrayList<>();
@@ -198,7 +210,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     return requestRoot;
   }
 
-  private MultiBrandCartDto createRequestRoot(Date requestedDeliveryDate) {
+  private MultiBrandCartDto createRequestRoot(final Date requestedDeliveryDate, boolean availabilityCheck, boolean creditCheck) {
     final MultiBrandCartDto requestRoot = new MultiBrandCartDto();
 
     // Defaults are set in the dto itself
@@ -208,6 +220,8 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     requestRoot.setLang(getStoreSessionFacade().getCurrentLanguage().getIsocode().toUpperCase());
     requestRoot.setRdd(requestedDeliveryDate);
     requestRoot.setPricingCheck(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
+    requestRoot.setAvailabilityCheck(availabilityCheck ? ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE : StringUtils.EMPTY);
+    requestRoot.setCreditCheck(creditCheck ? ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE : StringUtils.EMPTY);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
     final B2BUnitModel userUnit = units.get(0);

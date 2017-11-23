@@ -13,6 +13,7 @@ import com.bridgex.integration.domain.MaterialInfoDto;
 import com.bridgex.integration.domain.MaterialOutputGridDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartInput;
+import com.bridgex.integration.domain.MultiBrandCartOutput;
 import com.bridgex.integration.domain.MultiBrandCartResponse;
 import com.bridgex.integration.domain.SizeDataDto;
 import com.bridgex.integration.service.impl.OrderSimulateServiceImpl;
@@ -26,6 +27,8 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
   public ResponseEntity<MultiBrandCartResponse> sendRequest(final MultiBrandCartDto requestDto, final Class responseClass) {
     final Random rn = new Random();
     final MultiBrandCartResponse response = new MultiBrandCartResponse();
+    final MultiBrandCartOutput responseOutput = new MultiBrandCartOutput();
+
     final List<ETReturnDto> etReturnList = new ArrayList<>();
     final ETReturnDto etReturn = new ETReturnDto();
     etReturn.setType(ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE);
@@ -55,7 +58,8 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
 
       matList.add(materialInfoDto);
     }
-    response.setMaterialInfo(matList);
+    responseOutput.setMaterialInfo(matList);
+    response.setMultiBrandCartOutput(responseOutput);
 
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
