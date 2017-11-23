@@ -206,7 +206,7 @@
 	<bean id="pentlandBatchAddressConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE Address;owner(B2BUnit.uid);sapCustomerID[unique=true];addressID[unique=true];displayName[lang=en];country(isocode)[default='GB'];state;postalcode;town;streetname;streetnumber;district;building;appartment;department;markForAddresses(addressID);markForAddress[default=false];visibleInAddressBook[default=true];contactAddress[default=false];billingAddress[default=false];unloadingAddress[default=false];shippingAddress[default=true];
+				INSERT_UPDATE Address;owner(B2BUnit.uid);sapCustomerID[unique=true];addressID[unique=true];displayName[lang=en];country(isocode)[default='GB'];state;postalcode;town;streetname;streetnumber;district;building;appartment;department;markForAddresses(addressID)[collection-delimiter=|];markForAddress[default=false];visibleInAddressBook[default=true];contactAddress[default=false];billingAddress[default=false];unloadingAddress[default=false];shippingAddress[default=true];
 				#%groovy% beforeEach: line.put(1, pentlandB2BUnitService.getUnitBySapID(line.get(2)).getUid());
 			</value>
 		</property>
@@ -366,7 +366,7 @@
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
 				$defaultPassword=1000:03e09d25692029426e0c764546156206:7eb171c2523cd785269d3340b2d0546d345aa3394d8ae28c9c580221a3e609b8edc258c3bc75897056d6400c94380697a84d43b67450d86bc4ce0617eb58b68f
-				INSERT_UPDATE B2BCustomer;uid[unique=true];email[unique=true];@b2bGroups[translator=com.bridgex.core.customer.impex.translators.B2BCustomerGroupsTranslator,default=b2bcustomergroup,collection-delimiter=|];name;groups(uid);division(code);sessionCurrency(isocode)[default=GBP];encodedPassword[default=$defaultPassword];passwordEncoding[default=pbkdf2];loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator];sessionLanguage(isocode)[default=en];
+				INSERT_UPDATE B2BCustomer;uid[unique=true];email[unique=true];@b2bGroups[translator=com.bridgex.core.customer.impex.translators.B2BCustomerGroupsTranslator,default=b2bcustomergroup,collection-delimiter=|];name;groups(uid)[collection-delimiter=|];division(code);sessionCurrency(isocode)[default=GBP];encodedPassword[default=$defaultPassword];passwordEncoding[default=pbkdf2];loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator];sessionLanguage(isocode)[default=en];
 			</value>
 		</property>
 		<property name="impexRow">
@@ -376,6 +376,7 @@
 	<bean id="pentlandBatchInvoiceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#% impex.enableCodeExecution(true)
+				#% impex.setLocale(Locale.ENGLISH);
 				INSERT_UPDATE B2BDocument;documentnumber[unique=true];sapCustomerID;Unit(uid);amount;currency(isocode)[default=GBP];date[dateformat=yyyy-MM-dd];documentType(code)[default=Invoice];dueDate[dateformat=yyyy-MM-dd];openAmount;status(code)[default=open];
 				#%groovy% beforeEach: line.put(3, pentlandB2BUnitService.getUnitBySapID(line.get(3)).getUid());
 			</value>
