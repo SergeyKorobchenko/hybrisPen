@@ -10,12 +10,14 @@
         <table class="orderListTable">
             <tr>
                 <c:forEach items="${orderData.orderItems}" var="item">
-                    <td>
-                        <div class="fulfilment-states-${fn:escapeXml(item.itemStatus)}">
-                           <b2b-order:accountOrderDetailsItem order="${orderData}" item="${item}"/>
-                        </div>
-                    </td>
-                </c:forEach>
+            <tr>
+                <td>
+                    <div class="fulfilment-states-${fn:escapeXml(item.itemStatus)}">
+                        <b2b-order:accountOrderDetailsItem order="${orderData}" item="${item}"/>
+                    </div>
+                </td>
+            </tr>
+            </c:forEach>
             </tr>
         </table>
     </ycommerce:testId>
