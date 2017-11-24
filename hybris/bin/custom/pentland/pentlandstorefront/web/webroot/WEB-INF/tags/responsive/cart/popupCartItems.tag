@@ -8,6 +8,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -41,6 +42,8 @@
 			<c:if test="${not empty entry.deliveryPointOfService.name}">
 				<div class="itemPickup"><span class="itemPickupLabel"><spring:theme code="popup.cart.pickup"/></span>&nbsp;${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
 			</c:if>
-			<div class="price"><format:price priceData="${entry.basePrice}"/></div>
+			<common:hidePricesForUser>
+				<div class="price"><format:price priceData="${entry.basePrice}"/></div>
+			</common:hidePricesForUser>
 		</div>
     </div>

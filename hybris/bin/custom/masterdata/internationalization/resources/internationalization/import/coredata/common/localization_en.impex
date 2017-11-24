@@ -871,7 +871,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.button.print;Print Order
 ;order.confirmation.guest.register.description;For a Fast Checkout and Easy Access to Previous Orders
 ;order.form;Order Form
-;order.form.currency;$
+;order.form.currency;£
 ;order.form.subtotal;Subtotal
 ;order.form.total;Order Form Total
 ;order.form.color;Color
