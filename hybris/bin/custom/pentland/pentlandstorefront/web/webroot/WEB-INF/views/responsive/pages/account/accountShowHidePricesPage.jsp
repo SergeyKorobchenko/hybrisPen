@@ -20,12 +20,13 @@
     <div class="container-lg col-md-10">
         <div class="account-section-content">
             <div class="account-section-form">
-                <form id="showHidePrices" >
+                <c:url var="submitForm" value="/my-account/show-hide-prices/set"/>
+                <form id="showHidePrices" method="get" action="${submitForm}">
                     <div class="radio">
-                        <label><input type="radio" name="showHidePrices"><spring:theme code="text.account.hidePrices.show"/></label>
+                        <label><input type="radio" name="hidePrices" value="false" <c:if test="${not hidePricesForUser}">checked</c:if>><spring:theme code="text.account.hidePrices.show"/></label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="showHidePrices"><spring:theme code="text.account.hidePrices.hide"/></label>
+                        <label><input type="radio" name="hidePrices" value="true" <c:if test="${ hidePricesForUser}">checked</c:if>><spring:theme code="text.account.hidePrices.hide"/></label>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <spring:theme code="text.button.save" text="Cancel" />

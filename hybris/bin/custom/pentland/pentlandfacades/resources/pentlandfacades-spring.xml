@@ -370,4 +370,7 @@
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
 
+	<alias name="pentlandCustomerFacade" alias="customerFacade"/>
+	<bean id="pentlandCustomerFacade" class="com.bridgex.facades.customer.impl.DefaultPentlandCustomerFacade" parent="defaultCustomerFacade"/>
+
 </beans>
