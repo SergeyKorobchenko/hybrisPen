@@ -35,6 +35,9 @@ INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;ac
 ;;QuoteBuyerSubmissionEmailTemplate;Quote Buyer Submission Email Template;true;quoteBuyerSubmissionEmail;pentland_Email_Quote_Buyer_Submission_Subject;pentland_Email_Quote_Buyer_Submission_Body;EmailPage
 ;;QuoteSalesRepSubmissionEmailTemplate;Quote SalesRep Submission Email Template;true;quoteSalesRepSubmissionEmail;pentland_Email_Quote_SalesRep_Submission_Subject;pentland_Email_Quote_SalesRep_Submission_Body;EmailPage
 ;;QuoteBuyerCancellationEmailTemplate;Quote Buyer Cancellation Email Template;true;quoteBuyerCancellationEmail;pentland_Email_Quote_Buyer_Cancellation_Subject;pentland_Email_Quote_Buyer_Cancellation_Body;EmailPage
+;;QuoteBuyerSubmissionOpsEmailTemplate;Quote Buyer Submission Ops Email Template;true;quoteBuyerSubmissionOpsEmail;pentland_Email_Quote_Buyer_Submission_Ops_Subject;pentland_Email_Quote_Buyer_Submission_Ops_Body;EmailPage
+;;QuoteSalesRepSubmissionOpsEmailTemplate;Quote SalesRep Submission Ops Email Template;true;quoteSalesRepSubmissionOpsEmail;pentland_Email_Quote_SalesRep_Submission_Ops_Subject;pentland_Email_Quote_SalesRep_Submission_Ops_Body;EmailPage
+;;QuoteBuyerCancellationOpsEmailTemplate;Quote Buyer Cancellation Ops Email Template;true;quoteBuyerCancellationOpsEmail;pentland_Email_Quote_Buyer_Cancellation_Ops_Subject;pentland_Email_Quote_Buyer_Cancellation_Ops_Body;EmailPage
 
 # Templates for CMS Cockpit Page Edit
 UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
@@ -46,6 +49,9 @@ UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTempla
 ;;QuoteBuyerSubmissionEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 ;;QuoteSalesRepSubmissionEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 ;;QuoteBuyerCancellationEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
+;;QuoteBuyerSubmissionOpsEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
+;;QuoteSalesRepSubmissionOpsEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
+;;QuoteBuyerCancellationOpsEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CustomerRegistrationEmailTemplate'];validComponentTypes(code)
@@ -85,6 +91,21 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;BottomContent;;$wideContent;
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteBuyerCancellationEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteBuyerSubmissionOpsEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteSalesRepSubmissionOpsEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteBuyerCancellationOpsEmailTemplate'];validComponentTypes(code)
 ;SiteLogo;;;logo
 ;TopContent;;$wideContent;
 ;BottomContent;;$wideContent;
@@ -150,6 +171,21 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopContent-QuoteBuyerCancellationEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-QuoteBuyerCancellationEmail;BottomContent;;EmailBottomSlot;true
 
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteBuyerSubmissionOpsEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-QuoteBuyerSubmissionOpsEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-QuoteBuyerSubmissionOpsEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-QuoteBuyerSubmissionOpsEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteSalesRepSubmissionOpsEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-QuoteSalesRepSubmissionOpsEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-QuoteSalesRepSubmissionOpsEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-QuoteSalesRepSubmissionOpsEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteBuyerCancellationOpsEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-QuoteBuyerCancellationOpsEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-QuoteBuyerCancellationOpsEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-QuoteBuyerCancellationOpsEmail;BottomContent;;EmailBottomSlot;true
+
 # Email Pages
 INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
 ;;CustomerRegistrationEmail;Customer Registration Email;CustomerRegistrationEmailTemplate;true;;EmailPageModel_preview
@@ -160,6 +196,9 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 ;;QuoteBuyerSubmissionEmail;Quote Buyer Submission Email;QuoteBuyerSubmissionEmailTemplate;true;;EmailPageModel_preview
 ;;QuoteSalesRepSubmissionEmail;Quote SalesRep Submission Email;QuoteSalesRepSubmissionEmailTemplate;true;;EmailPageModel_preview
 ;;QuoteBuyerCancellationEmail;Quote Buyer Cancellation Email;QuoteBuyerCancellationEmailTemplate;true;;EmailPageModel_preview
+;;QuoteBuyerSubmissionOpsEmail;Quote Buyer Submission Ops Email;QuoteBuyerSubmissionOpsEmailTemplate;true;;EmailPageModel_preview
+;;QuoteSalesRepSubmissionOpsEmail;Quote SalesRep Submission Ops Email;QuoteSalesRepSubmissionOpsEmailTemplate;true;;EmailPageModel_preview
+;;QuoteBuyerCancellationOpsEmail;Quote Buyer Cancellation Ops Email;QuoteBuyerCancellationOpsEmailTemplate;true;;EmailPageModel_preview
 
 # CMS components velocity templates
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
@@ -187,3 +226,9 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 ;pentland_Email_Quote_SalesRep_Submission_Body;$emailPackageName.QuoteNotificationEmailContext
 ;pentland_Email_Quote_Buyer_Cancellation_Subject;$emailPackageName.QuoteNotificationEmailContext
 ;pentland_Email_Quote_Buyer_Cancellation_Body;$emailPackageName.QuoteNotificationEmailContext
+;pentland_Email_Quote_Buyer_Submission_Ops_Subject;$emailPackageName.QuoteNotificationOpsEmailContext
+;pentland_Email_Quote_Buyer_Submission_Ops_Body;$emailPackageName.QuoteNotificationOpsEmailContext
+;pentland_Email_Quote_SalesRep_Submission_Ops_Subject;$emailPackageName.QuoteNotificationOpsEmailContext
+;pentland_Email_Quote_SalesRep_Submission_Ops_Body;$emailPackageName.QuoteNotificationOpsEmailContext
+;pentland_Email_Quote_Buyer_Cancellation_Ops_Subject;$emailPackageName.QuoteNotificationOpsEmailContext
+;pentland_Email_Quote_Buyer_Cancellation_Ops_Body;$emailPackageName.QuoteNotificationOpsEmailContext

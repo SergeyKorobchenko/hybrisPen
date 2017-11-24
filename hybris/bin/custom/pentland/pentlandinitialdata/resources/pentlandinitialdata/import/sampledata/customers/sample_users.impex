@@ -180,5 +180,9 @@ UPDATE B2BCustomer;uid[unique=true];permissions(code,unit(uid));
 ;hanna.schmidt@pronto-hw.com;Pronto Unlimited Threshold Timespan:Pronto,Pronto 10K GBP ORDER:Pronto;
 ;james.bell@pronto-hw.com;Pronto 5K GBP ORDER:Pronto;
 
-INSERT_UPDATE Employee;name;groups(uid);password[default=$defaultPassword];uid[unique=true]
-;Sales Rep Agent;salesrepgroup,asagentgroup;;salesrepagent;
+INSERT_UPDATE Employee;name;groups(uid);password[default=$defaultPassword];uid[unique=true];
+;Sales Rep Agent;salesrepgroup,asagentgroup                      ;;salesrepagent;
+;Sales Rep Agent2;salesrepgroup,asagentgroup,MitreTestB2BUnit     ;;salesrep2@pentland.com;
+;Sales Rep Agent3;salesrepgroup,asagentgroup,SpeedoTestB2BUnit    ;;salesrep3@pentland.com;
+;Sales Rep Agent4;salesrepgroup,asagentgroup,CanterburyTestB2BUnit;;salesrep4@pentland.com;
+;Sales Rep Agent5;salesrepgroup,asagentgroup,MitreTestB2BUnit     ;;salesrep5@pentland.com;

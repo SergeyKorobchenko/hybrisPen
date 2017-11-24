@@ -45,6 +45,12 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;pentland_Email_Quote_Buyer_Submission_Subject;"Quote Buyer Submission Email Subject";$emailResource/email-quoteBuyerSubmissionSubject.vm
  ;pentland_Email_Quote_SalesRep_Submission_Body;"Quote SalesRep Submission Email Body";$emailResource/email-quoteSalesRepSubmissionBody.vm
  ;pentland_Email_Quote_SalesRep_Submission_Subject;"Quote SalesRep Submission Email Subject";$emailResource/email-quoteSalesRepSubmissionSubject.vm
+ ;pentland_Email_Quote_Buyer_Cancellation_Ops_Body;"Quote Buyer Cancellation Ops Email Body";$emailResource/email-quoteBuyerCancellationBody.vm
+ ;pentland_Email_Quote_Buyer_Cancellation_Ops_Subject;"Quote Buyer Cancellation Ops Email Subject";$emailResource/email-quoteBuyerCancellationSubject.vm
+ ;pentland_Email_Quote_Buyer_Submission_Ops_Body;"Quote Buyer Submission Ops Email Body";$emailResource/email-quoteBuyerSubmissionBody.vm
+ ;pentland_Email_Quote_Buyer_Submission_Ops_Subject;"Quote Buyer Submission Ops Email Subject";$emailResource/email-quoteBuyerSubmissionSubject.vm
+ ;pentland_Email_Quote_SalesRep_Submission_Ops_Body;"Quote SalesRep Submission Ops Email Body";$emailResource/email-quoteSalesRepSubmissionBody.vm
+ ;pentland_Email_Quote_SalesRep_Submission_Ops_Subject;"Quote SalesRep Submission Ops Email Subject";$emailResource/email-quoteSalesRepSubmissionSubject.vm
 
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
@@ -56,3 +62,6 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;QuoteBuyerCancellationEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;QuoteBuyerSubmissionEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;QuoteSalesRepSubmissionEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;QuoteBuyerCancellationOpsEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;QuoteBuyerSubmissionOpsEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;QuoteSalesRepSubmissionOpsEmail;"customerservices@pentland.com";"Pentland Customer Service"
