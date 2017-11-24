@@ -14,5 +14,4 @@ import de.hybris.platform.store.BaseStoreModel;
 public interface PentlandCustomerAccountService extends CustomerAccountService {
 
   SearchPageData<OrderModel> getB2BOrderList(final CustomerModel customerModel, final BaseStoreModel store, final OrderStatus[] status, final PageableData pageableData);
-
 }

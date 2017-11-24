@@ -81,6 +81,7 @@ import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
+import com.bridgex.facades.customer.PentlandCustomerFacade;
 import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
@@ -111,6 +112,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String TEXT_ACCOUNT_CONSENT_WITHDRAWN = "text.account.consent.withdrawn";
 	private static final String TEXT_ACCOUNT_CONSENT_NOT_FOUND = "text.account.consent.notFound";
 	private static final String TEXT_ACCOUNT_CONSENT_TEMPLATE_NOT_FOUND = "text.account.consent.template.notFound";
+	private static final String TEXT_ACCOUNT_CHANGES_SAVED = "text.account.changes.saved";
 
 	// Internal Redirects
 	private static final String REDIRECT_TO_ADDRESS_BOOK_PAGE = REDIRECT_PREFIX + MY_ACCOUNT_ADDRESS_BOOK_URL;
@@ -121,6 +123,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String REDIRECT_TO_PASSWORD_UPDATE_PAGE = REDIRECT_PREFIX + "/my-account/update-password";
 	private static final String REDIRECT_TO_ORDER_HISTORY_PAGE = REDIRECT_PREFIX + "/my-account/orders";
 	private static final String REDIRECT_TO_CONSENT_MANAGEMENT = REDIRECT_PREFIX + "/my-account/consents";
+	private static final String REDIRECT_TO_SHOW_HIDE_PRICES = REDIRECT_PREFIX + "/my-account/show-hide-prices";
 
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
@@ -140,10 +143,11 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String ADD_EDIT_ADDRESS_CMS_PAGE = "add-edit-address";
 	private static final String PAYMENT_DETAILS_CMS_PAGE = "payment-details";
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
+	private static final String HIDE_PRICES_CMS_PAGE = "accountHidePrices";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String CONSENT_MANAGEMENT_CMS_PAGE = "consents";
 
-	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
+	private static final Logger LOG                       = Logger.getLogger(AccountPageController.class);
 
 	@Resource(name = "orderFacade")
 	private PentlandOrderFacade orderFacade;
@@ -155,7 +159,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private UserFacade userFacade;
 
 	@Resource(name = "customerFacade")
-	private CustomerFacade customerFacade;
+	private PentlandCustomerFacade customerFacade;
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -953,4 +957,29 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 		return REDIRECT_TO_CONSENT_MANAGEMENT;
 	}
+
+	@RequestMapping(value = "/show-hide-prices", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String hidePricesPage(final Model model) throws CMSItemNotFoundException
+	{
+    return getHidePricesPage(model);
+	}
+
+  @RequestMapping(value = "/show-hide-prices/set", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String hidePricesSubmit(@RequestParam final boolean hidePrices, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+    customerFacade.setCustomerHidePricesOption(hidePrices);
+		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, TEXT_ACCOUNT_CHANGES_SAVED);
+    return REDIRECT_TO_SHOW_HIDE_PRICES;
+	}
+
+  private String getHidePricesPage(Model model) throws CMSItemNotFoundException {
+    storeCmsPageInModel(model, getContentPageForLabelOrId(HIDE_PRICES_CMS_PAGE));
+    setUpMetaDataForContentPage(model, getContentPageForLabelOrId(HIDE_PRICES_CMS_PAGE));
+    model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.hidePrices"));
+    model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+    return getViewForPage(model);
+  }
+
 }

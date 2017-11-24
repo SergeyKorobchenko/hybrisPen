@@ -871,7 +871,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.button.print;Print Order
 ;order.confirmation.guest.register.description;For a Fast Checkout and Easy Access to Previous Orders
 ;order.form;Order Form
-;order.form.currency;$
+;order.form.currency;£
 ;order.form.subtotal;Subtotal
 ;order.form.total;Order Form Total
 ;order.form.color;Color
@@ -2909,3 +2909,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.export.images.file;Download product images
 ;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
+
+;text.account.hidePrices;Show/Hide prices
+;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
+;text.account.hidePrices.show;Show Prices
+;text.account.hidePrices.hide;Hide Prices

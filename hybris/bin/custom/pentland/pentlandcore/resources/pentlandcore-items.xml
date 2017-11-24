@@ -408,6 +408,11 @@
                         <persistence type="property" />
                         <description>Attribute is used in batch import process for avoiding multiple imports.</description>
                     </attribute>
+                    <attribute qualifier="hidePrices" type="boolean">
+                        <description>Setting used to hide prices everywhere except cart/checkout</description>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
