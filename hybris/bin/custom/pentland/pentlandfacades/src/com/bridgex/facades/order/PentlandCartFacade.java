@@ -13,4 +13,6 @@ public interface PentlandCartFacade extends CartFacade {
 
   void populateVariantMatrixQuantity(ProductData productData);
 
+  void populateCart();
+
 }

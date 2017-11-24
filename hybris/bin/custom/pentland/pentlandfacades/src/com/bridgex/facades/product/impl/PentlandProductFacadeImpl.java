@@ -353,4 +353,5 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   public void setPriceDataFactory(PriceDataFactory priceDataFactory) {
     this.priceDataFactory = priceDataFactory;
   }
+
 }

@@ -39,6 +39,7 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
 
     final List<MaterialInfoDto> matList = new ArrayList<>();
     final List<MultiBrandCartInput> reqCartInputList = requestDto.getCartInput();
+    int orderTotalPrice = 0;
     for (final MultiBrandCartInput cartInput : reqCartInputList) {
       final MaterialInfoDto materialInfoDto = new MaterialInfoDto();
       int unitPrice;
@@ -47,18 +48,24 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
 
       final List<MaterialOutputGridDto> resMatGridList = new ArrayList<>();
       int qtySum = 0;
+      int totalPrice = 0;
       for (final SizeDataDto sizeData : cartInput.getSizeData()) {
         final MaterialOutputGridDto resMatGrid = new MaterialOutputGridDto();
-        resMatGrid.setAvailableQty(String.valueOf(qtySum += rn.nextInt(200)));
+        resMatGrid.setAvailableQty(String.valueOf(rn.nextInt(200)));
         resMatGrid.setEan(sizeData.getEan());
         resMatGridList.add(resMatGrid);
+        resMatGrid.setUserRequestedQty(sizeData.getQuantity());
+        qtySum += Integer.valueOf(sizeData.getQuantity());
       }
-      materialInfoDto.setTotalPrice(String.valueOf(unitPrice * qtySum));
+      totalPrice = unitPrice * qtySum;
+      orderTotalPrice += totalPrice;
+      materialInfoDto.setTotalPrice(String.valueOf(totalPrice));
       materialInfoDto.setMaterialOutputGridList(resMatGridList);
 
       matList.add(materialInfoDto);
     }
     responseOutput.setMaterialInfo(matList);
+    responseOutput.setTotalPrice(String.valueOf(orderTotalPrice));
     response.setMultiBrandCartOutput(responseOutput);
 
     return new ResponseEntity<>(response, HttpStatus.OK);
