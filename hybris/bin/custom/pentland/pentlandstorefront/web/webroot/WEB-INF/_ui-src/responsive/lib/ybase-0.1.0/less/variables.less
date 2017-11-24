@@ -7,10 +7,7 @@
 
 @pager-border-radius:0;
 
-// @font-family-sans-serif:  "Roboto", Helvetica, Arial, sans-serif;
-// @font-family-sans-serif:  "Cabin", Helvetica, Arial, sans-serif;
 @font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif;
-
 
 //== Pagination
 //
@@ -27,7 +24,6 @@
 @pagination-font-size:				@font-size-base;
 @pagination-font-weight:			400;
 
-
 @pagination-active-color: 			@btn-primary-color;
 @pagination-active-font-weight:		400;
 
@@ -39,12 +35,9 @@
 @pagination-prev-next-hover-bg:		@btn-primary-bg;
 @pagination-prev-next-hover-color:	@btn-primary-color;
 
-
-
 //== Form states and alerts
 //
 //## Define colors for form feedback states and, by default, alerts.
-
 
 @state-success-text: 			 #3e5983;
 @state-success-bg:               #dff0d8;
@@ -61,7 +54,6 @@
 @state-danger-text:              @text-color;
 @state-danger-bg:                #f2dede;
 @state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
-
 
 //== Forms
 //
@@ -86,9 +78,6 @@
 @input-padding-vertical-small:  9px;
 @input-height-small:             (ceil(@font-size-base * @line-height-base) + (@input-padding-vertical-small * 2)+1);
 
-
-
-
 //== Panels
 //
 //##
@@ -96,70 +85,51 @@
 @panel-default-border:        #ddd;
 @panel-default-heading-bg:    @grayblue;
 
-
-
-
-
-
 //== Media queries breakpoints
 //
 //## Define the breakpoints at which your layout will change, adapting to different screen sizes.
 
-
-@screen-xs:                  480px;
-@screen-sm:                  640px;
-@screen-md:                  1024px;
-@screen-lg:                  1400px;
-
+@screen-xs: 480px;
+@screen-sm: 640px;
+@screen-md: 1024px;
+@screen-lg: 1400px;
 
 // Small screen / tablet
-@container-tablet:            @screen-sm;
-// Medium screen / desktop
-@container-desktop:            @screen-md;
-// Large screen / wide desktop
-@container-large-desktop:      @screen-lg;
-
-
+@container-tablet: @screen-sm;
 @container-sm: 100%;
 
+// Medium screen / desktop
+@container-desktop: @screen-md;
 
-
+// Large screen / wide desktop
+@container-large-desktop: @screen-lg;
 
 @left-offcanvas-width: 380px;
 @left-offcanvas-rightside-width: 70px;
 
-
-
-
-
-
-
-
 //** Background color of the whole progress component
 @progress-bg:                 #f5f5f5;
+
 //** Progress bar text color
 @progress-bar-color:          #fff;
 
 //** Default progress bar color
 @progress-bar-bg:             @brand-primary;
+
 //** Success progress bar color
 @progress-bar-success-bg:     @brand-success;
+
 //** Warning progress bar color
 @progress-bar-warning-bg:     @brand-warning;
+
 //** Danger progress bar color
 @progress-bar-danger-bg:      @brand-danger;
+
 //** Info progress bar color
 @progress-bar-info-bg:        @brand-info;
 
-
 //Width Variables
 @full-width: 100%;
-
-
-
-
-
-
 
 //************************************************************
 //************************************************************
@@ -173,26 +143,22 @@
 //************************************************************
 //************************************************************
 
-
-
 @brand-primary:         #000000;
-
 @brand-info: 			#000000;
-
 @grayblue: 				#000000;
 
-
 //*********Typography Colors*********
+
 @text-color:            #000000;
 @text-color-secondary:	#000000;
 @link-color: 			#000000;
+@link-color-hover: 			#000000;
 @headline-color:		#000000;
 
 //== Borders
 @border-color: 			#000000;
 @border-color-2:			#000000;
 @border-color-3:			#000000;
-
 
 //*********form colors*********
 @label-color: #000000;
@@ -243,9 +209,8 @@
 @nav-subcat-border-color: #000000;
 @nav-subcat-hover-background: #ffffff;
 
+//********* Offcanvas navigation colors *********
 
-
-//*********Offcanvas navigation colors*********
 @offcanvas-nav-header-color: #000000;
 @offcanvas-nav-header-background: #ffffff;
 @offcanvas-nav-disabled: #ffffff;
@@ -260,15 +225,24 @@
 @offcanvas-nav-cat-border-color: #ffffff;
 @offcanvas-nav-cat-hover-background: #ffffff;
 
+//********* Footer *********
 
+@footer-padding-top: 30px;
+@footer-padding-bottom: @footer-padding-top;
 
-//*********Footer colors*********
+//== Typography
+@footer-font-family: @font-family-sans-serif;
+
+//== Colors
 @footer-background: #000000;
 @footer-text-color: #ffffff;
+@footer-link-color: #ffffff;
+@footer-link-hover: #ffffff;
 @footer-border-color: #ffffff;
 @copyright-background: #ffffff;
 
-//*********Well colors*********
+//********* Well colors *********
+
 @well-secondary-bg: @brand-secondary;
 @well-quaternary-bg: #ffffff;
 
@@ -276,8 +250,6 @@
 @item-promo-color: #0000000;
 @item-sale-color: #0000000;
 @item-sale-price-color: #0000000;
-
-
 
 //== Tables
 @table-2n-line-bg:				#ffffff;
@@ -346,28 +318,28 @@
 
 @btn-link-disabled-color:        @gray-light;
 
-
-
-
 //*********Breadcrumbs Colors*********
+
 @breadcrumb-padding-vertical:    @grid-gutter-width/2;
 @breadcrumb-padding-horizontal: 0;
+
 //** Breadcrumb background color
 @breadcrumb-bg:                 #ffffff;
+
 //** Breadcrumb text color
 @breadcrumb-color:              @text-color;
+
 //** Text color of current page in the breadcrumb
 @breadcrumb-active-color:       @text-color;
+
 //** Textual separator for between breadcrumb elements
 @breadcrumb-separator:          "/";
-
 
 //*********Accordion Colors*********
 @accordion-bg: #000000;
 
 //*********Carousel Style*********
 @carousel-font-style: uppercase;
-
 
 //*********Modal Colors*********
 @modal-close-btn-color: #000000;
@@ -376,7 +348,6 @@
 
 @import "../../../../shared/less/generatedVariables.less";
 @import "../../../../shared/less/variableMapping.less";
-
 
 //** ADDONS
 
