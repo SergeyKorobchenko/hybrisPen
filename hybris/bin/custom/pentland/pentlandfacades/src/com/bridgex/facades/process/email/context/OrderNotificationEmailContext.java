@@ -44,6 +44,7 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 		OrderModel order = orderProcessModel.getOrder();
 		orderData = getOrderConverter().convert(order);
 		orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
+		put("customer",getCustomer(orderProcessModel));
 
 		giftCoupons = orderData.getAppliedOrderPromotions().stream()
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())
