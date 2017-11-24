@@ -76,16 +76,21 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
         resetCartPrices(cartModel);
         final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
         if (CollectionUtils.isNotEmpty(materialList)) {
-          materialList.stream().forEach(m -> populatePrices(m, cartModel));
+          materialList.forEach(m -> populatePrices(m, cartModel));
         }
         cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+        cartModel.setSubtotal(cartModel.getTotalPrice());
+        cartModel.setTotalTax(Double.parseDouble(response.getMultiBrandCartOutput().getTotalTaxPrice()));
         getModelService().save(cartModel);
       }
     }
   }
 
   private void resetCartPrices(CartModel cartModel) {
-    cartModel.getEntries().stream().forEach(e -> {e.setErpPrice(0d); e.setTotalPrice(0d);});
+    cartModel.getEntries().forEach(e -> {
+      e.setErpPrice(0d);
+      e.setTotalPrice(0d);
+    });
   }
 
   private void populatePrices(MaterialInfoDto material, CartModel cart) {

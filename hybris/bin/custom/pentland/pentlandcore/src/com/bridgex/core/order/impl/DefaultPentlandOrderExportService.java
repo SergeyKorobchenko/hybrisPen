@@ -179,6 +179,13 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     orderModel.setExportStatus(ExportStatus.EXPORTED);
     orderModel.setReexportRetries(0);
     orderModel.setByBrandOrderList(byBrandOrderList);
+
+    ETReturnDto creditMessage = responseBody.getEtReturn().stream().filter(etReturnDto -> "023".equals(etReturnDto.getNumber())).findFirst().orElse(null);
+    if(creditMessage != null){
+      orderModel.setCreditCheckPassed(false);
+    }else{
+      orderModel.setCreditCheckPassed(true);
+    }
     modelService.save(orderModel);
     return true;
   }

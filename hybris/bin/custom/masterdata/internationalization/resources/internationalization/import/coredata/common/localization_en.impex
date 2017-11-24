@@ -2916,3 +2916,4 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
 ;text.account.hidePrices.show;Show Prices
 ;text.account.hidePrices.hide;Hide Prices
+;order.export.credit.check.failed;"Your account is nearing the available credit limit, please contact your account representative."

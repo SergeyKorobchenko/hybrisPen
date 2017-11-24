@@ -14,11 +14,11 @@ public class SchedLinesDto {
   }
 
   @JsonProperty("REQUESTED_DELIVERY_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
   @JsonProperty("EAN")
-  private String ean;
+  private String ean = "";
 
   @JsonProperty("REQUESTED_QUANTITY")
   private int quantity;

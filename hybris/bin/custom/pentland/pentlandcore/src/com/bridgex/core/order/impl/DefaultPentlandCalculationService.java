@@ -1,9 +1,11 @@
 package com.bridgex.core.order.impl;
 
 import java.util.Collection;
+import java.util.Date;
 
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
+import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.exceptions.CalculationException;
 import de.hybris.platform.order.impl.DefaultCalculationService;
 import de.hybris.platform.util.PriceValue;
@@ -28,4 +30,23 @@ public class DefaultPentlandCalculationService extends DefaultCalculationService
       entry.setBasePrice(0d);
     }
   }
+
+  @Override
+  public void calculate(final AbstractOrderModel order) throws CalculationException
+  {
+    //disable calculation
+  }
+
+  @Override
+  public void calculate(final AbstractOrderModel order, final Date date) throws CalculationException
+  {
+    //disable calculation
+  }
+
+  @Override
+  public void calculateTotals(final AbstractOrderModel order, final boolean recalculate) throws CalculationException
+  {
+    //disable calculation
+  }
+
 }

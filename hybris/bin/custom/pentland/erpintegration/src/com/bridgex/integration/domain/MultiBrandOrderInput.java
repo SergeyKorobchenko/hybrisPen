@@ -12,28 +12,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class MultiBrandOrderInput {
 
   @JsonProperty("MATERIAL_NUMBER")
-  private String materialNumber;
+  private String materialNumber = "";
 
   @JsonProperty("SALES_ORG")
-  private String salesOrg;
+  private String salesOrg = "";
 
   @JsonProperty("DISTRIBUTION_CHANNEL")
-  private String distrChannel;
+  private String distrChannel = "";
 
   @JsonProperty("BRAND")
-  private String brandCode;
+  private String brandCode = "";
 
   @JsonProperty("SALES_UNIT")
-  private String salesUnit;
+  private String salesUnit = "";
 
   //not used
   @JsonProperty("REQUESTED_DELIVERY_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
   //not used
   @JsonProperty("CANCEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date cancelDate;
 
   @JsonProperty("IT_SCHED_LINES")

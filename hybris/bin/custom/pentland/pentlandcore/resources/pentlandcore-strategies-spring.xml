@@ -67,4 +67,7 @@
 	<alias name="pentlandCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
 	<bean id="pentlandCommerceAddToCartStrategy" class="com.bridgex.core.order.impl.PentlandCommerceAddToCartStrategy" parent="defaultCommerceAddToCartStrategy"/>
 
+	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="commerceDeliveryAddressStrategy"/>
+	<bean id="pentlandCommerceDeliveryAddressStrategy" class="com.bridgex.core.order.impl.PentlandCommerceDeliveryAddressStrategy" parent="defaultCommerceDeliveryAddressStrategy"/>
+
 </beans>

@@ -23,14 +23,17 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
+import com.bridgex.facades.order.PentlandCartFacade;
 
 public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheckoutStepValidator {
 
 	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
+	private PentlandCartFacade                cartFacade;
 
 	@Override
 	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
+		cartFacade.populateCart();
 		CartData cartData = getCheckoutFacade().getCheckoutCart();
 		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty()){
 			if(StringUtils.isEmpty(cartData.getPurchaseOrderNumber())){
@@ -58,5 +61,10 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 	@Required
 	public void setPentlandB2BAcceleratorCheckoutFacade(PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade) {
 		this.pentlandB2BAcceleratorCheckoutFacade = pentlandB2BAcceleratorCheckoutFacade;
+	}
+
+	@Required
+	public void setCartFacade(PentlandCartFacade cartFacade) {
+		this.cartFacade = cartFacade;
 	}
 }
