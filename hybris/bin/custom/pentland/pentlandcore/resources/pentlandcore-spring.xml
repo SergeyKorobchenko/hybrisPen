@@ -65,6 +65,7 @@
 	</bean>
 
 	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="commerceCartCalculationStrategy"/>
+	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="checkoutCartCalculationStrategy"/>
 	<bean id="defaultPentlandCommerceCartCalculationStrategy" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCartCalculationStrategy" parent="defaultCommerceCartCalculationStrategy" />
 
 	<alias name="defaultPentlandCalculationService" alias="calculationService"/>

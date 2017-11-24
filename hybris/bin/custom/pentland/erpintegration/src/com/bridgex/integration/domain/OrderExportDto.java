@@ -24,48 +24,48 @@ public class OrderExportDto {
   private String serviceConsumer = ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER;
 
   @JsonProperty("I_CHANNEL_DOC_NO")
-  private String docNumber;
+  private String docNumber = "";
 
   //not used
   @JsonProperty("I_REFERENCE_USER")
-  private String referenceUser;
+  private String referenceUser = "";
 
   @JsonProperty("I_PO_NUMBER")
-  private String purchaseOrderNumber;
+  private String purchaseOrderNumber = "";
 
   //not used
   @JsonProperty("I_PO_TYPE")
   private String poType = ErpintegrationConstants.REQUEST.DEFAULT_PO_TYPE;
 
   @JsonProperty("I_RDD")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
   @JsonProperty("I_CANCEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date cancelDate;
 
   @JsonProperty("I_CUSTOMER_NUMBER")
-  private String sapCustomerID;
+  private String sapCustomerID = "";
 
   @JsonProperty("I_SHIP_TO")
-  private String shippingAddress;
+  private String shippingAddress = "";
 
   //not used
   @JsonProperty("I_REF_DOC_NO")
-  private String refDocNo;
+  private String refDocNo = "";
 
   @JsonProperty("I_DOC_REASON")
-  private String techOrderReason;
+  private String techOrderReason = "";
 
   @JsonProperty("PAYMENT_TYPE")
-  private String paymentType;
+  private String paymentType = "";
 
   @JsonProperty("ORDER_NOTES")
-  private String customerComment;
+  private String customerComment = "";
 
   @JsonProperty("I_USER_EMAIL")
-  private String email;
+  private String email = "";
 
   @JsonProperty("I_MULTIBRAND_INPUT_T")
   private List<MultiBrandOrderInput> orderEntries;
