@@ -70,20 +70,26 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   public void populateCart() {
     if (hasSessionCart()) {
       final CartModel cartModel = getCartService().getSessionCart();
-      final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
-      final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
-      if (successResponse(response)) {
-        resetCartPrices(cartModel);
-        final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
-        if (CollectionUtils.isNotEmpty(materialList)) {
-          materialList.forEach(m -> populatePrices(m, cartModel));
+      if (isCartNotEmpty(cartModel)) {
+        final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
+        final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
+        if (successResponse(response)) {
+          resetCartPrices(cartModel);
+          final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
+          if (CollectionUtils.isNotEmpty(materialList)) {
+            materialList.forEach(m -> populatePrices(m, cartModel));
+          }
+          cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+          cartModel.setSubtotal(cartModel.getTotalPrice());
+          cartModel.setTotalTax(Double.parseDouble(response.getMultiBrandCartOutput().getTotalTaxPrice()));
+          getModelService().save(cartModel);
         }
-        cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
-        cartModel.setSubtotal(cartModel.getTotalPrice());
-        cartModel.setTotalTax(Double.parseDouble(response.getMultiBrandCartOutput().getTotalTaxPrice()));
-        getModelService().save(cartModel);
       }
     }
+  }
+
+  private boolean isCartNotEmpty(CartModel cartModel) {
+    return cartModel.getEntries().size() > 0;
   }
 
   private void resetCartPrices(CartModel cartModel) {

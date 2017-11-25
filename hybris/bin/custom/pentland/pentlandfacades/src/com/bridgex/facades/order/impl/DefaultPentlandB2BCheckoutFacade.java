@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.bridgex.core.order.PentlandCartService;
+import com.bridgex.facades.order.PentlandB2BCheckoutFacade;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.enums.B2BUnitType;
@@ -27,10 +29,11 @@ import de.hybris.platform.core.model.user.UserModel;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
  */
-public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
+public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade implements PentlandB2BCheckoutFacade {
 
   private Map<B2BUnitType, List<CheckoutPaymentType>> b2bPaymentTypeMapping;
   private B2BUnitService<B2BUnitModel, UserModel>     b2bUnitService;
+  private PentlandCartService pentlandCartService;
 
   private static final String CART_CHECKOUT_DELIVERYADDRESS_INVALID = "cart.deliveryAddress.invalid";
   private static final String CART_CHECKOUT_DELIVERYMODE_INVALID = "cart.deliveryMode.invalid";
@@ -84,6 +87,11 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
   }
 
   @Override
+  public void createCartFromSessionDetails(String orderCode) {
+    pentlandCartService.createCartFromSessionDetails(orderCode);
+  }
+
+    
   protected void setPaymentTypeForCart(final String paymentType, final CartModel cartModel)
   {
     final List<CheckoutPaymentType> checkoutPaymentTypes = getEnumerationService()
@@ -140,7 +148,6 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
 
     getModelService().save(cartModel);
     return getCheckoutCart();
-
   }
 
   @Required
@@ -155,5 +162,14 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade {
   @Required
   public void setB2bUnitService(B2BUnitService<B2BUnitModel, UserModel> b2bUnitService) {
     this.b2bUnitService = b2bUnitService;
+  }
+
+  public PentlandCartService getPentlandCartService() {
+    return pentlandCartService;
+  }
+
+  @Required
+  public void setPentlandCartService(PentlandCartService pentlandCartService) {
+    this.pentlandCartService = pentlandCartService;
   }
 }
