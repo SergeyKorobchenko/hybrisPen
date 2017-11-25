@@ -60,6 +60,7 @@
 		<property name="orderType" type="com.bridgex.core.enums.OrderType"/>
 		<property name="brand" type="String"/>
 		<property name="subOrders" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderData>"/>
+		<property name="creditCheckPassed" type="boolean"/>
 	</bean>
 
 	<bean class="com.bridgex.facades.order.data.OrderItemData">

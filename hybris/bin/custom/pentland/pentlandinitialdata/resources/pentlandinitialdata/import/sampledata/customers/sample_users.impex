@@ -112,13 +112,6 @@ INSERT_UPDATE B2BOrderThresholdTimespanPermission;code[unique=true];Unit(uid);th
 INSERT_UPDATE B2BBudgetExceededPermission;code[unique=true];Unit(uid);
 ;Rustic Budget Exceeded;Rustic;
 
-UPDATE B2BUnit;uid[unique=true];approvers(uid);
-;Rustic;hanna.schmidt@rustic-hw.com;
-;Rustic Retail;james.bell@rustic-hw.com;
-;Custom Retail;carla.torres@rustic-hw.com;
-;Services West;matheu.silva@rustic-hw.com,mingmei.wang@rustic-hw.com;
-;Services East;mingmei.wang@rustic-hw.com;
-
 ###############################
 #  Pronto Hardware ORGANIZATION (KIS)
 

@@ -66,6 +66,7 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
     }
     responseOutput.setMaterialInfo(matList);
     responseOutput.setTotalPrice(String.valueOf(orderTotalPrice));
+    responseOutput.setTotalTaxPrice(String.valueOf(orderTotalPrice * 0.1));
     response.setMultiBrandCartOutput(responseOutput);
 
     return new ResponseEntity<>(response, HttpStatus.OK);

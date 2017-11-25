@@ -239,6 +239,7 @@
 			</map>
 		</property>
 		<property name="b2bUnitService" ref="b2bUnitService"/>
+		<property name="pentlandCartService" ref="cartService"/>
 	</bean>
 
 	<util:list id="accountPayment">

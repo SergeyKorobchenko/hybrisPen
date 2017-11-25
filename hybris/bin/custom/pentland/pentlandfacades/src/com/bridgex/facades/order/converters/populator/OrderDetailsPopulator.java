@@ -1,7 +1,5 @@
 package com.bridgex.facades.order.converters.populator;
 
-import static org.apache.commons.lang3.time.DateUtils.ceiling;
-
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BiFunction;
@@ -25,11 +23,14 @@ import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
 /**
  * @author Goncharenko Mikhail, created on 02.11.2017.
  */
 public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, OrderData> {
+
+  private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrderDetailsPopulator.class);
 
   private ProductService productService;
   private PriceDataFactory priceDataFactory;
@@ -65,7 +66,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       OrderItemData item = new OrderItemData();
       item.setNumber(dto.getEntryNumber());
       item.setItemStatus(dto.getEntryStatus());
-      item.setTotalPrice(populatePriceData(dto.getPrice(), source.getCurrency()));
+      item.setTotalPrice(populatePriceData(dto.getNetPrice(), source.getCurrency()));
       item.setQty(getInt(dto.getQuantity()));
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
@@ -87,11 +88,15 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
   }
 
   private void populateNameAndImage(OrderEntryDto dto, OrderItemData item) {
-    ProductModel product = productService.getProductForCode(dto.getProduct());
-    item.setName(product.getName());
-    Optional.ofNullable(product.getPicture())
-            .map(MediaModel::getURL)
-            .ifPresent(item::setImageUrl);
+    try {
+      ProductModel product = productService.getProductForCode(dto.getProduct());
+      item.setName(product.getName());
+      Optional.ofNullable(product.getPicture())
+              .map(MediaModel::getURL)
+              .ifPresent(item::setImageUrl);
+    } catch (UnknownIdentifierException e) {
+      LOG.warn("Error while loading image: " + e.getMessage());
+    }
   }
 
   private void populateAddress(OrderDetailsResponse source, OrderData target) {

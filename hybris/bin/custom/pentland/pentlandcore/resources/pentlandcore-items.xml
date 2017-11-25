@@ -462,6 +462,11 @@
                         <defaultvalue>0</defaultvalue>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="creditCheckPassed" type="boolean">
+                        <description>Available credit check passed in SAP</description>
+                        <defaultvalue>Boolean.TRUE</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 

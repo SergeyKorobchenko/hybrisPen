@@ -11,7 +11,7 @@ public class UserContactsDto {
   }
 
   @JsonProperty("EMAIL")
-  private String email;
+  private String email = "";
 
   @JsonProperty("I_SHIP_TO_ADDRESS")
   private ShipToDto shipToAddress;

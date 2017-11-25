@@ -230,6 +230,10 @@ public class CheckoutController extends AbstractCheckoutController
 		model.addAttribute("paymentInfo", orderDetails.getPaymentInfo());
 		model.addAttribute("pageType", PageType.ORDERCONFIRMATION.name());
 
+		if(!orderDetails.isCreditCheckPassed()){
+			GlobalMessages.addInfoMessage(model, "order.export.credit.check.failed");
+		}
+
 		final List<CouponData> giftCoupons = orderDetails.getAppliedOrderPromotions().stream()
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())
 				.collect(Collectors.toList());

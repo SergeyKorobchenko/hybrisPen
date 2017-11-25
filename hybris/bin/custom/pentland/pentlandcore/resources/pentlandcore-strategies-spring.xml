@@ -70,4 +70,8 @@
 	<alias name="pentlandTicketEventEmailStrategy" alias="ticketEventEmailStrategy"/>
 	<bean id="pentlandTicketEventEmailStrategy" class="com.bridgex.core.strategies.impl.PentlandTicketEventEmailStrategy" parent="defaultTicketEventEmailStrategy"/>
 
+	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="commerceDeliveryAddressStrategy"/>
+	<bean id="pentlandCommerceDeliveryAddressStrategy" class="com.bridgex.core.order.impl.PentlandCommerceDeliveryAddressStrategy" parent="defaultCommerceDeliveryAddressStrategy"/>
+
+
 </beans>
