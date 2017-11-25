@@ -19,6 +19,11 @@
     </action>
 
     <action id="generateBuyerQuoteSubmissionEmail" bean="generateBuyerQuoteSubmissionEmail">
+        <transition name="OK" to="generateBuyerQuoteSubmissionOpsEmail"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="generateBuyerQuoteSubmissionOpsEmail" bean="generateBuyerQuoteSubmissionOpsEmail">
         <transition name="OK" to="sendEmail"/>
         <transition name="NOK" to="error"/>
     </action>

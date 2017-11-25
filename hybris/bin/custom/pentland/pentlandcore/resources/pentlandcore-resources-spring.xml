@@ -17,64 +17,25 @@
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/orderConfirmationEmailProcess.xml"/>
 	</bean>
-	<bean id="sendDeliveryEmailProcessDefinitionResource"
+	<bean id="sendOrderStatusChangeEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendDeliveryEmailProcess.xml"/>
+		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderStatusChangeEmailProcess.xml"/>
 	</bean>
-	<bean id="sendReadyForPickupEmailProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendReadyForPickupEmailProcess.xml"/>
-	</bean>
-	<bean id="sendOrderCancelledEmailProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderCancelledEmailProcess.xml"/>
-	</bean>
-	<bean id="sendOrderRefundEmailProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderRefundEmailProcess.xml"/>
-	</bean>
-	<bean id="sendOrderPartiallyCanceledEmailProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderPartiallyCanceledEmailProcess.xml"/>
-	</bean>
-	<bean id="sendOrderPartiallyRefundedEmailProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderPartiallyRefundedEmailProcess.xml"/>
-	</bean>
-	<bean id="sendNotPickedUpConsignmentCanceledEmailProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/sendNotPickedUpConsignmentCanceledEmailProcess.xml"/>
-	</bean>
-
 	<bean id="quoteBuyerProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-buyer-process.xml"/>
 	</bean>
-
 	<bean id="quoteSalesRepProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-salesrep-process.xml"/>
 	</bean>
-
-
 	<bean id="quoteSellerApprovalProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-seller-approval-process.xml"/>
 	</bean>
-
 	<bean id="quotePostCancellationProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-post-cancellation-process.xml"/>
-	</bean>
-
-	<bean id="quoteToExpireSoonProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-to-expire-soon-email-process.xml"/>
-	</bean>
-
-	<bean id="quoteExpiredProcessDefinitionResource"
-	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-expired-email-process.xml"/>
 	</bean>
 
 </beans>

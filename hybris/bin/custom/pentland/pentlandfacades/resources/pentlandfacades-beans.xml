@@ -59,6 +59,7 @@
 		<property name="orderItems" type="java.util.List&lt;com.bridgex.facades.order.data.OrderItemData>"/>
 		<property name="orderType" type="com.bridgex.core.enums.OrderType"/>
 		<property name="brand" type="String"/>
+		<property name="subOrders" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderData>"/>
 		<property name="creditCheckPassed" type="boolean"/>
 	</bean>
 

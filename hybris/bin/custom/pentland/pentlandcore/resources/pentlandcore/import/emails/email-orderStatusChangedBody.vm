@@ -1,4 +1,4 @@
-## messageSource=classpath:/pentlandcore/messages/email-orderConfirmation_$lang.properties
+## messageSource=classpath:/pentlandcore/messages/email-orderStatusChanged_$lang.properties
 #macro( genHtmlBoldFont $text )
 <font color="#414a4f" size="2" face="Arial, Helvetica, sans-serif"><b>$text</b></font>
 #end
@@ -103,16 +103,15 @@
                     <a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
                   </td>
                 </tr>
-              #else
+							#else
                 <hr/>
 							#end
               <tr>
 								#if ($ctx.salesRep)
                   <td>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.internalUse</strong></span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</span>
+                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</strong></span>
+                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</strong></span>
+                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</strong></span>
                   </td>
 								#end
               </tr>
