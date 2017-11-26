@@ -42,6 +42,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.waitforimages.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.scrollTo.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/slick.min.js"></script>
 
 		<%-- Custom ACC JS --%>
 		

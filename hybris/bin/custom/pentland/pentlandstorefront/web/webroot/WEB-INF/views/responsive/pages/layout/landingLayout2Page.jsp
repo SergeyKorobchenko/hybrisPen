@@ -5,13 +5,13 @@
 
 <template:page pageTitle="${pageTitle}">
 
-    <!--div class="container b-margin-bottom">
+    <div class="container b-margin-bottom">
         <div class="b-section--full-width">
             <cms:pageSlot position="Section1" var="feature" element="div" class="row">
                 <cms:component component="${feature}" element="div" class="col-xs-12"/>
             </cms:pageSlot>
         </div>
-    </div-->
+    </div>
 
     <div class="c-slogan">
         <div class="container">
