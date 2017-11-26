@@ -6,9 +6,9 @@
 
 <c:if test="${component.visible}">
     <div class="container">
-        <div class="footer__top">
+        <div class="footer__top b-section--full-width">
 	        <div class="row">
-	            <div class="footer__left col-xs-12 col-sm-12 col-md-12">
+	            <div class="footer__left col-sm-12">
 	                <div class="row">
 	                	<c:forEach items="${component.navigationNode.children}" var="childLevel1">
 		                	<c:forEach items="${childLevel1.children}" step="${component.wrapAfter}" varStatus="i">
@@ -44,11 +44,11 @@
 	    </div>
 	</div>
 
-	<div class="footer__bottom">
+	<div class="footer__bottom b-section--full-width">
 		<div class="container">
 	    	<div class="footer__copyright">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">${fn:escapeXml(notice)}</div>
+                    <div class="col-sm-12">${fn:escapeXml(notice)}</div>
                 </div>
             </div>
 	    </div>

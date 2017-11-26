@@ -48,6 +48,12 @@
 	}
 }
 
+.link-focus {
+	color: @link-color-hover;
+	.transition(all 0.3s ease);
+	text-decoration: none;
+}
+
 .flex-display(@value) {
 	display: ~"-webkit-@{value}";
 	display: ~"-moz-@{value}";
@@ -93,8 +99,13 @@
   }
 }
 
-
 // text variants
+.p-home-headline {
+	text-align: center;
+
+	padding-bottom: 30px;
+}
+
 .page-headline {
   color: @headline-color;
   font-size: @font-size-h3;
@@ -128,14 +139,13 @@
 // padding variants
 
 .full-width-padding {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-  @media (max-width: @screen-md) {
-	padding-left: 40px;
-	padding-right: 40px;
+  @media (max-width: @screen-sm) {
+	padding-left: 10px;
+	padding-right: 10px;
   }
-
 }
 
 .half-width-padding {
@@ -146,7 +156,6 @@
 	padding-left: 10px;
 	padding-right: 10px;
   }
-
 }
 
 .form-control-validation(@label-color; @border-color; @background-color; @hint-color) {
