@@ -2923,3 +2923,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;erp.integration.failed;Error while processing ERP request
 ;order.export.credit.check.failed;"Your account is nearing the available credit limit, please contact your account representative."
 
+;basket.error.checkout.empty.ponumber;P.O. Number is required
+;basket.error.checkout.empty.rdd;Requested delivery date is requred
+
