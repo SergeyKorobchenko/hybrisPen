@@ -1,8 +1,13 @@
 package com.bridgex.core.integration.impl;
 
 import com.bridgex.integration.domain.*;
+
+import de.hybris.platform.b2b.services.B2BOrderService;
+import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.jalo.order.AbstractOrderEntry;
 import de.hybris.platform.jalo.order.CartEntry;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.ResourceAccessException;
@@ -25,7 +30,9 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
 
   private IntegrationService<OrderDetailsDto, OrderDetailsResponse> integrationService;
   private CommonI18NService                                         commonI18NService;
-  private SessionService sessionService;
+  private SessionService                                            sessionService;
+  private B2BOrderService                                           b2bOrderService;
+  private ModelService                                              modelService;
 
   @Override
   public OrderDetailsResponse requestData(OrderDetailsDto request) {
@@ -33,7 +40,16 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
     OrderDetailsResponse response = integrationService.sendRequest(request, OrderDetailsResponse.class).getBody();
     checkRequestSuccess(response);
     storeOrderDetailsInSession(response);
+    updateOrderStatus(request.getOrderCode(), response.getStatus());
     return response;
+  }
+
+  private void updateOrderStatus(String code, String status) {
+    OrderModel order = b2bOrderService.getOrderForCode(code);
+    if (!status.equalsIgnoreCase(order.getStatus().getCode())) {
+      order.setStatus(OrderStatus.valueOf(status));
+      modelService.save(order);
+    }
   }
 
   private void checkRequestSuccess(OrderDetailsResponse response) {
@@ -65,5 +81,15 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
   @Required
   public void setCommonI18NService(CommonI18NService commonI18NService) {
     this.commonI18NService = commonI18NService;
+  }
+
+  @Required
+  public void setB2bOrderService(B2BOrderService b2bOrderService) {
+    this.b2bOrderService = b2bOrderService;
+  }
+
+  @Required
+  public void setModelService(ModelService modelService) {
+    this.modelService = modelService;
   }
 }
