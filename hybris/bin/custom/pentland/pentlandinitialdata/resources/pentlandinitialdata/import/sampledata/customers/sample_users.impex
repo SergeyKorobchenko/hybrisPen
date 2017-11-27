@@ -112,13 +112,6 @@ INSERT_UPDATE B2BOrderThresholdTimespanPermission;code[unique=true];Unit(uid);th
 INSERT_UPDATE B2BBudgetExceededPermission;code[unique=true];Unit(uid);
 ;Rustic Budget Exceeded;Rustic;
 
-UPDATE B2BUnit;uid[unique=true];approvers(uid);
-;Rustic;hanna.schmidt@rustic-hw.com;
-;Rustic Retail;james.bell@rustic-hw.com;
-;Custom Retail;carla.torres@rustic-hw.com;
-;Services West;matheu.silva@rustic-hw.com,mingmei.wang@rustic-hw.com;
-;Services East;mingmei.wang@rustic-hw.com;
-
 ###############################
 #  Pronto Hardware ORGANIZATION (KIS)
 
@@ -127,8 +120,8 @@ INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code)
 
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(addressID);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;userPriceGroup(code);customerType(code);sapID
 ;KIS;Pronto;Pronto;Pronto;;Pronto;ProntoAddrID1;ProntoID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;;pronto;
-;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto-services;ACCOUNT;pronto-goods
-;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto-services;CREDITCARD;pronto-services
+;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto;ACCOUNT;pronto-goods
+;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto;CREDITCARD;pronto-services
 
 INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(addressID);displayName[lang=en]
 ;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true;;address6
@@ -180,5 +173,9 @@ UPDATE B2BCustomer;uid[unique=true];permissions(code,unit(uid));
 ;hanna.schmidt@pronto-hw.com;Pronto Unlimited Threshold Timespan:Pronto,Pronto 10K GBP ORDER:Pronto;
 ;james.bell@pronto-hw.com;Pronto 5K GBP ORDER:Pronto;
 
-INSERT_UPDATE Employee;name;groups(uid);password[default=$defaultPassword];uid[unique=true]
-;Sales Rep Agent;salesrepgroup,asagentgroup;;salesrepagent;
+INSERT_UPDATE Employee;name;groups(uid);password[default=$defaultPassword];uid[unique=true];
+;Sales Rep Agent;salesrepgroup,asagentgroup                      ;;salesrepagent;
+;Sales Rep Agent2;salesrepgroup,asagentgroup,MitreTestB2BUnit     ;;salesrep2@pentland.com;
+;Sales Rep Agent3;salesrepgroup,asagentgroup,SpeedoTestB2BUnit    ;;salesrep3@pentland.com;
+;Sales Rep Agent4;salesrepgroup,asagentgroup,CanterburyTestB2BUnit;;salesrep4@pentland.com;
+;Sales Rep Agent5;salesrepgroup,asagentgroup,MitreTestB2BUnit     ;;salesrep5@pentland.com;

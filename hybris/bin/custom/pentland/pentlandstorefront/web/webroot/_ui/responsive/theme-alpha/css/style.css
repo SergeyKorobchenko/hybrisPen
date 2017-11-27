@@ -19093,11 +19093,52 @@ select[multiple].input-sm {
   padding-right: 20px;
   vertical-align: top;
 }
+.orderListTable th .text-info,
+.orderListTable td .text-info {
+  color: #19212b;
+  font-size: 14px;
+  padding: 0px;
+}
+.orderListTable th .item-value,
+.orderListTable td .item-value {
+  font-size: 14px;
+  color: #ec7205;
+  padding: 0px;
+}
+.orderListTable th .item-label,
+.orderListTable td .item-label {
+  font-size: 14px;
+  color: #929292;
+  padding-top: 10px;
+}
+.orderListTable th .item-info,
+.orderListTable td .item-info {
+  display: block;
+}
+.orderListTable th .item-info .item-value,
+.orderListTable td .item-info .item-value {
+  display: inline;
+}
+.orderListTable th .price-info,
+.orderListTable td .price-info {
+  color: #ec7205;
+  font-size: 18px;
+}
 .orderListTable tbody > tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 .orderListTable tbody > tr:nth-child(odd):last-child {
   border-bottom: 1px solid #f2f2f2;
+}
+.account-orderdetail__footer .text-right {
+  color: #ec7205;
+}
+.account-orderdetail__footer .orderTotal {
+  line-height: 22px;
+  font-size: 18px;
+}
+.account-orderdetail__footer .orderTotal .totals {
+  font-size: 22px;
 }
 @media (max-width: 639px) {
   .orderListTable th,

@@ -335,6 +335,7 @@ public class CartPageController extends AbstractCartPageController
 	@Override
 	protected void prepareDataForPage(final Model model) throws CMSItemNotFoundException
 	{
+		pentlandCartFacade.populateCart();
 		super.prepareDataForPage(model);
 
 		if (!model.containsAttribute(VOUCHER_FORM))

@@ -103,7 +103,7 @@ public class AccountSummaryInfoPopulator implements Populator<AccountSummaryResp
 		target.setAmountBalanceData(balanceData);
 	}
 
-	private static double parseDoubleValue(String currentBalance) {
+	private double parseDoubleValue(String currentBalance) {
 		try {
 			return Double.parseDouble(currentBalance);
 		} catch (NumberFormatException e) {

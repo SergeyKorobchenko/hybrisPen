@@ -1,6 +1,6 @@
 package com.bridgex.core.actions.quote;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,31 +32,24 @@ public class GenerateQuoteEmailAction extends GenerateEmailAction {
 
     if (result == Transition.OK) {
       UserModel user = (businessProcessModel.getUser());
-
       if (user instanceof B2BCustomerModel) {
         B2BCustomerModel b2BCustomer = (B2BCustomerModel) user;
-        EmailMessageModel emailMessage = businessProcessModel.getEmails().iterator().next();
-        EmailAddressModel emailAddress = getCustomerRepEmail(b2BCustomer);
-        addToAddress(emailMessage, emailAddress);
+        List<EmailMessageModel> emailMessages = businessProcessModel.getEmails();
+        EmailMessageModel lastMessage = emailMessages.get(emailMessages.size() - 1);
+        EmailAddressModel emailAddress = getCustomerOpsEmail(b2BCustomer);
+        lastMessage.setToAddresses(Collections.singletonList(emailAddress));
         return Transition.OK;
       }
-
     }
     return Transition.NOK;
   }
 
-  private void addToAddress(EmailMessageModel emailMessage, EmailAddressModel emailAddress) {
-    List<EmailAddressModel> toAddresses = new ArrayList<>(emailMessage.getToAddresses());
-    toAddresses.add(emailAddress);
-    emailMessage.setToAddresses(toAddresses);
-    modelService.save(emailMessage);
-  }
-
-  private EmailAddressModel getCustomerRepEmail(B2BCustomerModel b2BCustomer) {
-    String email = Optional.of(b2BCustomer.getDivision())
+  private EmailAddressModel getCustomerOpsEmail(B2BCustomerModel b2BCustomer) {
+    //TODO default values
+    String email = Optional.ofNullable(b2BCustomer.getDivision())
                            .map(DivisionModel::getEmail)
                            .orElse(DEFAULT_CUSTOMERREP_EMAIL);
-    String displayedName = Optional.of(b2BCustomer.getDivision())
+    String displayedName = Optional.ofNullable(b2BCustomer.getDivision())
                            .map(DivisionModel::getName)
                            .orElse(DEFAULT_CUSTOMERREP_NAME);
     return emailService.getOrCreateEmailAddressForEmail(email,displayedName);

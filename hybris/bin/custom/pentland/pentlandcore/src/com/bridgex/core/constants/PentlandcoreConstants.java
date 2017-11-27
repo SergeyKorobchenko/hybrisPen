@@ -22,6 +22,10 @@ public final class PentlandcoreConstants extends GeneratedPentlandcoreConstants
 		//empty
 	}
 
+	public interface SessionParameters {
+		String HIDE_PRICES_FOR_USER = "hidePricesForUser";
+	}
+
 	// implement here constants used by this extension
 	public static final String QUOTE_BUYER_PROCESS = "quote-buyer-process";
 	public static final String QUOTE_SALES_REP_PROCESS = "quote-salesrep-process";

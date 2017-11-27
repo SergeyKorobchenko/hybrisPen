@@ -82,6 +82,38 @@
 		padding-left: @grid-gutter-width;
 		padding-right: @grid-gutter-width;
 		vertical-align: top;
+
+      .text-info {
+        color: @text-color;
+        font-size: 14px;
+        padding: 0px;
+      }
+
+      .item-value {
+        font-size: 14px;
+        color: @link-color;
+        padding: 0px;
+      }
+
+      .item-label {
+        font-size: 14px;
+        color: @text-color-secondary;
+        padding-top: 10px;
+      }
+
+      .item-info {
+        display: block;
+
+        .item-value {
+          display: inline;
+        }
+      }
+
+      .price-info {
+        color: @link-color;
+        font-size: 18px;
+      }
+
 	}
 
 	tbody {
@@ -92,6 +124,24 @@
 			border-bottom: 1px solid @border-color;
 		}
 	}
+}
+
+.account-orderdetail__footer {
+  .text-right {
+    color: @link-color;
+  }
+
+  .orderTotal {
+
+    .totals {
+      font-size: 22px;
+    }
+
+    line-height: 22px;
+    font-size:18px;
+
+  }
+
 }
 
 

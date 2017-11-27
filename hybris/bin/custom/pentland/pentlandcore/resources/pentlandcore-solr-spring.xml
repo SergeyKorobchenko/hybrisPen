@@ -199,4 +199,10 @@
 
 	<bean id="variantProductClassificationAttributesValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.VariantProductClassificationAttributesValueResolver" parent="productClassificationAttributesValueResolver"/>
 
+	<alias name="pentlandFacetSearchQueryFacetsPopulator" alias="facetSearchQueryFacetsPopulator"/>
+	<bean id="pentlandFacetSearchQueryFacetsPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.PentlandFacetSearchQueryFacetsPopulator" parent="abstractFacetSearchQueryPopulator">
+		<property name="defaultFacetSort" value="count" />
+		<property name="userService" ref="userService"/>
+	</bean>
+
 </beans>

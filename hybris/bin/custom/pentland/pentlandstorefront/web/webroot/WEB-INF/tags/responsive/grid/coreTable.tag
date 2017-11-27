@@ -15,6 +15,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -56,9 +57,14 @@
         <div class="description">
             <div>${fn:escapeXml(firstVariant.variantName)}</div>
         </div>
-        <div class="price">
-            <div>${fn:escapeXml(firstVariant.variantOption.priceData.formattedValue)}</div>
-        </div>
+        <common:hidePricesForUser>
+            <div class="price">
+                <div>${fn:escapeXml(firstVariant.variantOption.priceData.formattedValue)}</div>
+            </div>
+        </common:hidePricesForUser>
+        <c:if test="${empty firstVariant.variantOption.priceData}">
+            <c:set var="inputDisabled" value="disabled"/>
+        </c:if>
     </td>
 
     <c:set var="colspan" value="1"/>

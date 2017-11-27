@@ -54,7 +54,12 @@
 	</bean>
 
 	<alias name="pentlandCartFacade" alias="cartFacade"/>
-	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade" />
+	<bean id="pentlandCartFacade" class="com.bridgex.facades.order.impl.DefaultPentlandCartFacade" parent="defaultCartFacade">
+		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService"/>
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="categoryService" ref="pentlandCategoryService" />
+		<property name="orderSimulationService" ref="orderSimulationService" />
+	</bean>
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
@@ -170,45 +175,9 @@
 		<property name="quoteService" ref="quoteService"/>
 		<property name="quoteConverter" ref="quoteConverter"/>
 	</bean>
-	
-	<bean id="deliverySentEmailContext" class="com.bridgex.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-	</bean>
-	
-	<bean id="readyForPickupEmailContext" class="com.bridgex.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-	</bean>
-	
-	<bean id="orderCancelledEmailContext" class="com.bridgex.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	
-	<bean id="orderRefundEmailContext" class="com.bridgex.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	<bean id="consignmentCollectionReminderEmailContext" class="com.bridgex.facades.process.email.context.ConsignmentCollectionReminderEmailContext" parent="abstractEmailContext" scope="prototype">
-        <property name="consignmentConverter" ref="consignmentConverter"/>
-        <property name="formatFactory" ref="formatFactory"/>
-        <property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
-        <property name="orderConverter" ref="orderConverter"/>
-    </bean>
 
-	<bean id="orderPartiallyModifiedEmailContext" class="com.bridgex.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-		<property name="orderEntryConverter" ref="orderEntryConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>		
-	</bean>
-
-	<bean id="orderPartiallyCanceledEmailContext" class="com.bridgex.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
-	</bean>
-
-	<bean id="orderPartiallyRefundedEmailContext" class="com.bridgex.facades.process.email.context.OrderPartiallyRefundedEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
-	</bean>
-
-	<bean id="notPickedUpConsignmentCanceledEmailContext" class="com.bridgex.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>
-	</bean>
+	<bean id="quoteNotificationOpsEmailContext" class="com.bridgex.facades.process.email.context.QuoteNotificationOpsEmailContext" parent="quoteNotificationEmailContext"
+	      scope="prototype"/>
 
 	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
 	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="com.bridgex.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator" >
@@ -270,6 +239,7 @@
 			</map>
 		</property>
 		<property name="b2bUnitService" ref="b2bUnitService"/>
+		<property name="pentlandCartService" ref="cartService"/>
 	</bean>
 
 	<util:list id="accountPayment">
@@ -291,6 +261,9 @@
 
 	<alias name="pentlandGroupOrderEntryPopulator" alias="groupOrderEntryPopulator"/>
 	<bean id="pentlandGroupOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandGroupOrderEntryPopulator" parent="defaultGroupOrderEntryPopulator"/>
+
+	<alias name="pentlandOrderEntryPopulator" alias="orderEntryPopulator"/>
+	<bean id="pentlandOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderEntryPopulator" parent="defaultOrderEntryPopulator"/>
 
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
 	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade"/>
@@ -369,5 +342,14 @@
 	<bean id="pentlandOrderPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderPopulator" parent="defaultOrderPopulator">
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
+
+	<alias name="defaultPentlandFutureStockFacade" alias="futureStockFacade"/>
+	<bean id="defaultPentlandFutureStockFacade" class="com.bridgex.facades.futurestock.impl.DefaultPentlandFutureStockFacade" parent="defaultFutureStockFacade">
+		<property name="orderSimulationService" ref="orderSimulationService" />
+		<property name="pentlandProductFacade" ref="pentlandProductFacade" />
+	</bean>
+
+	<alias name="pentlandCustomerFacade" alias="customerFacade"/>
+	<bean id="pentlandCustomerFacade" class="com.bridgex.facades.customer.impl.DefaultPentlandCustomerFacade" parent="defaultCustomerFacade"/>
 
 </beans>

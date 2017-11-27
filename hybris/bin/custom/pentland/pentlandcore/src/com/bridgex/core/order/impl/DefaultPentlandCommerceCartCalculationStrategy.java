@@ -67,4 +67,22 @@ public class DefaultPentlandCommerceCartCalculationStrategy extends DefaultComme
     }
     return true;
   }
+
+
+  @Deprecated
+  @Override
+  public boolean calculateCart(final CartModel cartModel){
+    //disable
+    return true;
+  }
+
+  /**
+   * @deprecated Since 5.2. Use {@link #recalculateCart(de.hybris.platform.commerceservices.service.data.CommerceCartParameter)}
+   */
+  @Deprecated
+  @Override
+  public boolean recalculateCart(final CartModel cartModel){
+    //disable
+    return true;
+  }
 }
