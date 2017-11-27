@@ -35,7 +35,7 @@ public class PentlandOrderPrepareInterceptor extends DefaultOrderPrepareIntercep
   }
 
   private void submitChangeStatusEvent(OrderModel order) {
-    eventService.publishEvent(new OrderStatusChangedEvent(order));
+    eventService.publishEvent(new OrderStatusChangedEvent(order.getCode()));
   }
 
   private boolean isNotificationNeeded(OrderModel order, InterceptorContext ctx) {

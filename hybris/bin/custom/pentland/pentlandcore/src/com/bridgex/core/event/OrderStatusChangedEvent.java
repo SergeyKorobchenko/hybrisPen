@@ -9,10 +9,10 @@ import de.hybris.platform.servicelayer.event.events.AbstractEvent;
  */
 public class OrderStatusChangedEvent extends AbstractEvent implements ClusterAwareEvent {
 
-  private final OrderModel order;
+  private final String orderCode;
 
-  public OrderStatusChangedEvent(OrderModel order) {
-    this.order = order;
+  public OrderStatusChangedEvent(String orderCode) {
+    this.orderCode = orderCode;
   }
 
   @Override
@@ -20,7 +20,7 @@ public class OrderStatusChangedEvent extends AbstractEvent implements ClusterAwa
     return true;
   }
 
-  public OrderModel getOrder() {
-    return order;
+  public String getOrderCode() {
+    return orderCode;
   }
 }
