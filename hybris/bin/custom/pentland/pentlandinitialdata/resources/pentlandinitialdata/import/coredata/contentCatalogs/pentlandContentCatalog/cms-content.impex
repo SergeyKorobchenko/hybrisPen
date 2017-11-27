@@ -801,15 +801,11 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;quoteEditPage;Quote Edit Page;QuoteEditPageTemplate;quoteEditPage
 ;;accountHidePrices;Account Page;AccountPageTemplate;accountHidePrices
 
+
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;faq;Frequently Asked Questions FAQ Page;ContentPage1Template;/faq
-
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;orderExpired;Order Expired Page;ContentPage1Template;/orderExpired
-
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;termsAndConditions;Terms and Conditions Page;ContentPage1Template;/termsAndConditions
+;;contactUsPage ;Contact Us  ;ContentPage1Template ;/contactUs
+;;termsOfUsePage;Terms of Use;ContentPage1Template ;/termsOfUse
 
 # Product Details Page
 INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
