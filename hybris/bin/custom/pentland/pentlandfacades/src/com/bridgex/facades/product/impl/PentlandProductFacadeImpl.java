@@ -229,7 +229,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final List<VariantMatrixElementData> sizes = product.getElements();
     final String brandCode = product.getVariantOption().getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(brandCode);
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
     reqProduct.setMaterialNumber(product.getVariantOption().getCode());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
@@ -262,7 +262,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   private MultiBrandCartInput createMultiBrandCartInput(final ProductData product, Map<String, B2BUnitModel> brandUnitsMap) {
     final String brandCode = product.getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(brandCode);
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
     reqProduct.setMaterialNumber(product.getMaterialKey());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {

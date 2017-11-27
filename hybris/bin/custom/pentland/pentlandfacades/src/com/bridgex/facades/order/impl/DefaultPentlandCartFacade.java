@@ -150,7 +150,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     ProductModel productModel = entryModel.getProduct();
     final String brandCode = getBrandCodeFor(productModel);
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(brandCode);
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
     reqProduct.setMaterialNumber(getMaterialKeyFor(productModel));
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
