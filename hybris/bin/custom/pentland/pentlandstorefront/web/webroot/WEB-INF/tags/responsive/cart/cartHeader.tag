@@ -20,12 +20,16 @@
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
 				</div>
+				<span style="display:none;" class="help-block" id="requestedDeliveryDateError"><spring:theme code="basket.error.checkout.empty.rdd"/></span>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-2">
 			<strong><spring:theme code="text.cart.purchaseOrderNumber"/></strong>
-			<div>
-				<form:input type="text" class="form-control" style="width: 99%;" path="purchaseOrderNumber" />
+			<div class="form-group">
+				<div>
+					<form:input type="text" class="form-control" style="width: 99%;" path="purchaseOrderNumber" />
+				</div>
+				<span style="display:none;" class="help-block" id="purchaseOrderNumberError"><spring:theme code="basket.error.checkout.empty.ponumber"/></span>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-8">
