@@ -53,6 +53,14 @@ body.offcanvas {
   }
 }
 
+.container-fluid {
+  &--unlimited {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 button {
   font-weight: bold;
 }
@@ -93,7 +101,12 @@ a, button {
   text-decoration: none;
 }
 
+button:hover {
+  .link-focus;
+}
+
 a:hover, a:focus {
+  color: @link-color-hover;
   .link-focus;
 }
 
