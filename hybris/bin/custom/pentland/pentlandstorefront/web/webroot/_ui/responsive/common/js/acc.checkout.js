@@ -95,7 +95,24 @@ ACC.checkout = {
 		$('.js-continue-checkout-button').click(function ()
 		{
 			var checkoutUrl = $(this).data("checkoutUrl");
-			
+
+            var poNumber = $('#purchaseOrderNumber').get(0);
+            var rdd = $('#requestedDeliveryDate').get(0);
+
+            if (!rdd || !rdd.value) {
+                $('#requestedDeliveryDateError').show();
+                return false;
+            } else {
+                $('#requestedDeliveryDateError').hide();
+            }
+
+            if (!poNumber || !poNumber.value) {
+                $('#purchaseOrderNumberError').show();
+                return false;
+            } else {
+                $('#purchaseOrderNumberError').hide();
+            }
+
 			cartEntriesError = ACC.pickupinstore.validatePickupinStoreCartEntires();
 			if (!cartEntriesError)
 			{
