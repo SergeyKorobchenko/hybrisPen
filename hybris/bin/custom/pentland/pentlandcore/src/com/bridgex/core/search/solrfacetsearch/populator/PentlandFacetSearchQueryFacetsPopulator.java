@@ -46,8 +46,8 @@ public class PentlandFacetSearchQueryFacetsPopulator extends FacetSearchQueryFac
       }
       FacetInfo facetInfo = facets.get(facetValue.getField());
       if(facetInfo != null) {
-        if(CollectionUtils.isNotEmpty(facetInfo.getValues())) {
-          facetInfo.getValues().addAll(facetInfo.getValues());
+        if(CollectionUtils.isNotEmpty(facetValue.getValues())) {
+          facetInfo.getValues().addAll(facetValue.getValues());
         }
       } else {
         LOG.warn("Search query contains value for facet but facet was not added [field: " + facetInfo.getField() + "]");
