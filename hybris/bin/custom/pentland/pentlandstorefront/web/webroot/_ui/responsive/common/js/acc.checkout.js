@@ -101,16 +101,20 @@ ACC.checkout = {
 
             if (!rdd || !rdd.value) {
                 $('#requestedDeliveryDateError').show();
+                $('#requestedDeliveryDateError').closest('.form-group').addClass('has-error');
                 return false;
             } else {
                 $('#requestedDeliveryDateError').hide();
+                $('#requestedDeliveryDateError').closest('.form-group').removeClass('has-error');
             }
 
             if (!poNumber || !poNumber.value) {
                 $('#purchaseOrderNumberError').show();
+                $('#purchaseOrderNumberError').closest('.form-group').addClass('has-error');
                 return false;
             } else {
                 $('#purchaseOrderNumberError').hide();
+                $('#purchaseOrderNumberError').closest('.form-group').removeClass('has-error');
             }
 
 			cartEntriesError = ACC.pickupinstore.validatePickupinStoreCartEntires();
