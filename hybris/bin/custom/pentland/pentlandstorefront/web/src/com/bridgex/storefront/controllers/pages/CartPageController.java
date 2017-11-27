@@ -50,6 +50,7 @@ import de.hybris.platform.util.Config;
 
 import com.bridgex.facades.export.PentlandExportFacade;
 import com.bridgex.facades.order.PentlandCartFacade;
+import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 import com.bridgex.storefront.forms.PentlandCartForm;
 
@@ -104,6 +105,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "productVariantFacade")
 	private ProductFacade productFacade;
+
+	@Resource(name = "productFacade")
+	private PentlandProductFacade pentlandProductFacade;
 
 	@Resource(name = "saveCartFacade")
 	private SaveCartFacade saveCartFacade;
@@ -211,9 +215,11 @@ public class CartPageController extends AbstractCartPageController
 	{
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
-				Arrays.asList(ProductOption.BASIC, ProductOption.CATEGORIES, ProductOption.VARIANT_MATRIX_BASE,
-						ProductOption.VARIANT_MATRIX_PRICE, ProductOption.VARIANT_MATRIX_MEDIA, ProductOption.VARIANT_MATRIX_STOCK,
-						ProductOption.VARIANT_MATRIX_URL));
+				Arrays.asList(ProductOption.BASIC, ProductOption.VARIANT_MATRIX_BASE));
+
+		CartData cart = pentlandCartFacade.getSessionCart();
+		pentlandCartFacade.populateVariantMatrixQuantity(productData);
+		pentlandProductFacade.populateOrderForm(productData, Optional.ofNullable(cart.getRdd()).orElse(new Date()));
 
 		model.addAttribute("product", productData);
 		model.addAttribute("readOnly", Boolean.valueOf(readOnly));
@@ -329,6 +335,7 @@ public class CartPageController extends AbstractCartPageController
 	@Override
 	protected void prepareDataForPage(final Model model) throws CMSItemNotFoundException
 	{
+		pentlandCartFacade.populateCart();
 		super.prepareDataForPage(model);
 
 		if (!model.containsAttribute(VOUCHER_FORM))

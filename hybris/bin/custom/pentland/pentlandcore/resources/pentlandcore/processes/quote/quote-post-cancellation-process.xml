@@ -14,6 +14,11 @@
          processClass="de.hybris.platform.commerceservices.model.process.QuoteProcessModel">
 
     <action id="generateBuyerQuoteCancellationEmail" bean="generateBuyerQuoteCancellationEmail">
+        <transition name="OK" to="generateBuyerQuoteCancellationOpsEmail"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="generateBuyerQuoteCancellationOpsEmail" bean="generateBuyerQuoteCancellationOpsEmail">
         <transition name="OK" to="sendEmail"/>
         <transition name="NOK" to="error"/>
     </action>

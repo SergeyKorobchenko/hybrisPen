@@ -12,69 +12,25 @@ public class MultiBrandCartResponse implements Serializable {
   public MultiBrandCartResponse() {
   }
 
-  @JsonProperty("E_TOTAL_NET_PRICE")
-  private String subtotalPrice;
-
-  @JsonProperty("E_TOTAL_NET_CURRENCY")
-  private String subtotalCurrency;
-
-  @JsonProperty("E_TOTAL_NET_VALUE")
-  private String totalPrice;
-
-  @JsonProperty("E_TOTAL_TAX_VALUE")
-  private String totalTaxPrice;
-
-  @JsonProperty("MATERIAL_INFO_LIST")
-  private List<MaterialInfoDto> materialInfo;
+  @JsonProperty("ET_OUTPUT")
+  private MultiBrandCartOutput multiBrandCartOutput;
 
   @JsonProperty("ET_RETURN")
   private List<ETReturnDto> etReturnList;
 
-  public String getSubtotalPrice() {
-    return subtotalPrice;
-  }
-
-  public void setSubtotalPrice(String subtotalPrice) {
-    this.subtotalPrice = subtotalPrice;
-  }
-
-  public String getSubtotalCurrency() {
-    return subtotalCurrency;
-  }
-
-  public void setSubtotalCurrency(String subtotalCurrency) {
-    this.subtotalCurrency = subtotalCurrency;
-  }
-
-  public String getTotalPrice() {
-    return totalPrice;
-  }
-
-  public void setTotalPrice(String totalPrice) {
-    this.totalPrice = totalPrice;
-  }
-
-  public String getTotalTaxPrice() {
-    return totalTaxPrice;
-  }
-
-  public void setTotalTaxPrice(String totalTaxPrice) {
-    this.totalTaxPrice = totalTaxPrice;
-  }
-
-  public List<MaterialInfoDto> getMaterialInfo() {
-    return materialInfo;
-  }
-
-  public void setMaterialInfo(List<MaterialInfoDto> materialInfo) {
-    this.materialInfo = materialInfo;
-  }
-
-  public List<ETReturnDto> getEtReturn() {
+  public List<ETReturnDto> getEtReturnList() {
     return etReturnList;
   }
 
-  public void setEtReturn(List<ETReturnDto> etReturnList) {
+  public void setEtReturnList(List<ETReturnDto> etReturnList) {
     this.etReturnList = etReturnList;
+  }
+
+  public MultiBrandCartOutput getMultiBrandCartOutput() {
+    return multiBrandCartOutput;
+  }
+
+  public void setMultiBrandCartOutput(MultiBrandCartOutput multiBrandCartOutput) {
+    this.multiBrandCartOutput = multiBrandCartOutput;
   }
 }

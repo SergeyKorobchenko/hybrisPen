@@ -58,7 +58,7 @@
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_overviewOrderNet_label">
                         <span class="item-label"><spring:theme code="text.account.order.net"/></span>
-                        <span class="item-value"><format:price priceData="${order.totalPrice}"/></span>
+                        <span class="item-value"><format:price priceData="${order.subTotal}"/></span>
                     </ycommerce:testId>
                 </div>
                 <div class="item-group">

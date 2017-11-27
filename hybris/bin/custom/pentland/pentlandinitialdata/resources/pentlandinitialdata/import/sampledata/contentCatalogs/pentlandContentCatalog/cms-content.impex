@@ -75,6 +75,7 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; SavedCartsNavNode            ; ; Saved Carts             ; MyAccountNavNode ; ; SavedCartsNavNode
 ; OrderQueriesNavNode          ; ; Order Queries           ; MyAccountNavNode ; ; OrderQueriesNavNode
 ; SupportTicketsNavNode        ; ; Support Tickets         ; MyAccountNavNode ; ; SupportTicketsNavNode
+; HidePricesNavNode            ; ; Show/Hide Prices        ; MyAccountNavNode ; ; HidePricesNavNode
 ## entries of the above navigation nodes ##
 
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
@@ -85,6 +86,7 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 ; SavedCartsNavNodeEntry            ; ; SavedCartsNavNodeEntry            ; SavedCartsNavNode            ; SavedCartsLink            ;
 ; OrderQueriesNavNodeEntry          ; ; OrderQueriesNavNodeEntry          ; OrderQueriesNavNode          ; OrderQueriesLink          ;
 ; SupportTicketsNavNodeEntry        ; ; SupportTicketsNavNodeEntry        ; SupportTicketsNavNode        ; SupportTicketsLink        ;
+; HidePricesNavNodeEntry            ; ; HidePricesNavNodeEntry            ; HidePricesNavNode            ; HidePricesLink            ;
 
 ## links of the above navigattion entries ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; target(code)[default = 'sameWindow']
@@ -95,6 +97,7 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; SavedCartsLink            ; SavedCartsLink            ; /my-account/saved-carts        ; SavedCartsLink            ;
 ; ; OrderQueriesLink          ; OrderQueriesLink          ; /my-account/my-quotes          ; OrderQueriesLink          ;
 ; ; SupportTicketsLink        ; SupportTicketsLink        ; /add-support-ticket            ; SupportTicketsLink        ;
+; ; HidePricesLink            ; HidePricesLink            ; /my-account/show-hide-prices   ; HidePricesLink            ;
 
 
 ##---- level 4. children of Order Tools ----##
@@ -804,6 +807,17 @@ INSERT_UPDATE ApproveOrderAction; $contentCV[unique = true]; uid[unique = true];
 ; ; ApproveOrderAction ; /my-account/order/approvalDecision ; Accept Order Action ; ActionRestriction ; ApproveOrderAction
 ###### Account order approval details End ######
 
+###### Account Show/Hide Prices Page Start ######
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+; ; AccountShowHidePricesComponent; Account Show/Hide Prices Component ; /WEB-INF/views/responsive/pages/account/accountShowHidePricesPage.jsp;; AccountShowHidePricesComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accountHidePrices']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-hide-prices ; BodyContent ; ; BodyContent-hide-prices ; ; ;
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-hide-prices ; Body Content Slot for Account show/hide prices ; true ; AccountShowHidePricesComponent
+
+###### Account Show/Hide Prices Page End ######
 
 ###### Order Confirmation Page Start ######
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'orderConfirmationPage']; contentSlot(uid, $contentCV)[unique = true];;;
@@ -812,7 +826,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-orderConfirmation ; Side Content Slot for Order Confirmation ; true ;                                                                                                                                                                                                                        ; ; ;
-; ; BodyContent-orderConfirmation ; Body Content Slot for Order Confirmation ; true ; OrderConfirmationThankMessageComponent,OrderConfirmationOverviewComponent,OrderConfirmationItemsComponent,OrderConfirmationShippingComponent,OrderConfirmationTotalsComponent,OrderConfirmationContinueButtonComponent ; ; ;
+; ; BodyContent-orderConfirmation ; Body Content Slot for Order Confirmation ; true ; OrderConfirmationThankMessageComponent,OrderConfirmationOverviewComponent,OrderConfirmationItemsComponent,OrderConfirmationShippingComponent,OrderConfirmationContinueButtonComponent ; ; ;
 
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ; ; OrderConfirmationThankMessageComponent   ; Order Confirmaiton Thank You Message Component ; checkoutConfirmationThankMessage.jsp                                                                  ; ; OrderConfirmationThankMessageComponent

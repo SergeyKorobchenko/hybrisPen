@@ -14,15 +14,11 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCheckoutController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
-import de.hybris.platform.b2bacceleratorfacades.api.cart.CheckoutFacade;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
-import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
 import de.hybris.platform.order.InvalidCartException;
 
 import java.text.ParseException;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -33,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bridgex.facades.order.PentlandB2BCheckoutFacade;
 
 @Controller
 @RequestMapping(value = "/checkout/summary")
@@ -41,7 +38,7 @@ public class ReorderCheckoutController extends AbstractCheckoutController
 	private static final String REDIRECT_ORDER_LIST_URL = REDIRECT_PREFIX + "/my-account/orders/";
 
 	@Resource(name = "b2bCheckoutFacade")
-	private CheckoutFacade b2bCheckoutFacade;
+	private PentlandB2BCheckoutFacade b2bCheckoutFacade;
 
 	private static final Logger LOG = Logger.getLogger(ReorderCheckoutController.class);
 
@@ -54,27 +51,7 @@ public class ReorderCheckoutController extends AbstractCheckoutController
 		try
 		{
 			// create a cart from the order and set it as session cart.
-			b2bCheckoutFacade.createCartFromOrder(orderCode);
-			// validate for stock and availability
-			final List<CartModificationData> cartModifications = getCartFacade().validateCartData();
-			for (final CartModificationData cartModification : cartModifications)
-			{
-				if (CommerceCartModificationStatus.NO_STOCK.equals(cartModification.getStatusCode()))
-				{
-					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-							"basket.page.message.update.reducedNumberOfItemsAdded.noStock", new Object[]
-							{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()) });
-					break;
-				}
-				else if (cartModification.getQuantity() != cartModification.getQuantityAdded())
-				{
-					// item has been modified to match available stock levels
-					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-							"basket.information.quantity.adjusted");
-					break;
-				}
-				// TODO: handle more specific messaging, i.e. out of stock, product not available
-			}
+			b2bCheckoutFacade.createCartFromSessionDetails(orderCode);
 		}
 		catch (final IllegalArgumentException e)
 		{

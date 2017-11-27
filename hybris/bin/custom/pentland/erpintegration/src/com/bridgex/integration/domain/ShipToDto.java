@@ -11,28 +11,28 @@ public class ShipToDto {
   }
 
   @JsonProperty("ID")
-  private String id;
+  private String id = "";
 
   @JsonProperty("MARK_FOR_FLAG")
-  private String markForFlag;
+  private String markForFlag = "";
 
   @JsonProperty("NAME")
-  private String name;
+  private String name = "";
 
   @JsonProperty("STREET")
-  private String street;
+  private String street = "";
 
   @JsonProperty("CITY")
-  private String city;
+  private String city = "";
 
   @JsonProperty("REGION")
-  private String region;
+  private String region = "";
 
   @JsonProperty("COUNTRY")
-  private String country;
+  private String country = "";
 
   @JsonProperty("POSTL_CODE")
-  private String postalCode;
+  private String postalCode = "";
 
   public String getId() {
     return id;

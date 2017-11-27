@@ -80,4 +80,12 @@ public class PentlandGroupOrderEntryPopulator extends AcceleratorGroupOrderEntry
       return baseProduct;
   }
 
+  @Override
+  protected OrderEntryData createGroupedOrderEntry(final OrderEntryData firstEntry)
+  {
+    OrderEntryData groupedEntry = super.createGroupedOrderEntry(firstEntry);
+    groupedEntry.setErpPrice(firstEntry.getErpPrice());
+    return groupedEntry;
+  }
+
 }

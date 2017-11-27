@@ -7,9 +7,11 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <ycommerce:testId code="searchPage_price_label_${product.code}">
 
+	<common:hidePricesForUser>
 		<%-- if product is multidimensional with different prices, show range, else, show unique price --%>
 		<c:choose>
 			<c:when test="${product.multidimensional and (product.priceRange.minPrice.value ne product.priceRange.maxPrice.value)}">
@@ -19,5 +21,6 @@
 				<format:price priceData="${product.price}"/>
 			</c:otherwise>
 		</c:choose>
+	</common:hidePricesForUser>
 
 </ycommerce:testId>

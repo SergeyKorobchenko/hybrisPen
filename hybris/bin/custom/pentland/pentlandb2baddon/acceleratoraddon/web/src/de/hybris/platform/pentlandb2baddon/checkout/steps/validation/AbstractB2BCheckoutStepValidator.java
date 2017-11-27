@@ -19,13 +19,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 
 /**
  * Abstract checkout step validator for the B2B accelerator.
  */
 public abstract class AbstractB2BCheckoutStepValidator extends AbstractCheckoutStepValidator
 {
-	private B2BUserGroupProvider b2bUserGroupProvider;
+	private B2BUserGroupProvider              b2bUserGroupProvider;
 
 	private static final Logger LOG = Logger.getLogger(AbstractB2BCheckoutStepValidator.class);
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.messaging.Message;
 
@@ -73,20 +74,14 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
   }
 
   private void convertCategories(PentlandProduct pentlandProduct, ProductModel productModel) {
-    String categories = productModel.getSupercategories().stream().map(CategoryModel::getCode).collect(Collectors.joining(","));
+    String categories = productModel.getSupercategories().stream().map(CategoryModel::getCode).collect(Collectors.joining("|"));
     pentlandProduct.setCategories(categories);
   }
 
   //wrap text in "" in case in contains symbols used as delimiters by impex or line breaks and escape every " found inside
   private String wrapTextForReimport(String attribute){
     if(StringUtils.isNotEmpty(attribute)){
-      if(attribute.contains("\"")){
-        attribute = attribute.replaceAll("\"", "\"\"");
-      }
-      if(attribute.contains("&quot;")){
-        attribute = attribute.replaceAll("&quot;", "\"\"");
-      }
-      return "\"" + attribute + "\"";
+      return StringEscapeUtils.escapeCsv(attribute);
     }else{
       return attribute;
     }

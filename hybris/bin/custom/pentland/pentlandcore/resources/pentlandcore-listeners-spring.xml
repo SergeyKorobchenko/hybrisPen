@@ -110,4 +110,10 @@
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 
+	<bean id="orderStatusChangedEventListener" class="com.bridgex.core.event.OrderStatusChangedEventListener"
+	      parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
 </beans>

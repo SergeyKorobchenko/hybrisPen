@@ -184,7 +184,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.id;Item ID
 ;basket.page.item;Item (style number)
 ;basket.page.itemNumber;Item no.
-;basket.page.itemPrice;Item price
+;basket.page.itemPrice;Trade price
+;basket.page.itemWholesalePrice;Wholesale price
 ;basket.page.message.remove;Product has been removed from your bag.
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
@@ -193,7 +194,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.message.update.reducedNumberOfItemsAdded.noStock;"<a href=""{1}"" style=""text-decoration: underline"">{0}</a> has been removed from the basket due to insufficient stock."
 ;basket.page.needHelp;Need help?
 ;basket.page.number;No.
-;basket.page.price;Price
+;basket.page.price;Trade Price
+;basket.page.wholesalePrice;Wholesale Price
 ;basket.page.product;Product
 ;basket.page.productdetails;Product Details
 ;basket.page.qty;Qty
@@ -871,7 +873,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.button.print;Print Order
 ;order.confirmation.guest.register.description;For a Fast Checkout and Easy Access to Previous Orders
 ;order.form;Order Form
-;order.form.currency;$
+;order.form.currency;£
 ;order.form.subtotal;Subtotal
 ;order.form.total;Order Form Total
 ;order.form.color;Color
@@ -2849,13 +2851,11 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.page.sort.byOrderType;OrderType
 ;text.account.orderHistory.page.sort.byRdd;Requested delivery date
 ;text.account.orderHistory.orderType;Order Type
-;text.account.orderHistory.rdd;Requested delivery date
-;text.account.orderHistory.totalQty;Total Quantity
+;text.account.orderHistory.rdd;RDD
+;text.account.orderHistory.totalQty;Total Qty
 ;text.account.orderHistory.creationDate;Order Creation Date
-;text.account.orderHistory.POnumber;PO Number
-;text.account.order.total;Order Total
-;text.account.order.tax;Order Tax
-;text.account.order.net;Order Net
+;text.account.orderhistory.dateplaced;Date Placed
+;text.account.orderHistory.POnumber;P.O. Number
 ;text.account.orderHistory.shipTo;Ship To
 ;text.account.orderHistory.soldTo;Sold To
 ;text.account.orderHistory.markFor;Mark For
@@ -2863,6 +2863,12 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.item.qty;QTY
 ;text.account.orderHistory.item.shipments;Shipments
 ;text.account.orderHistory.item.shipdate;Ship Date
+;text.account.order.total;Order Total
+;text.account.order.tax;Order Tax
+;text.account.order.net;Order Net
+
+;text.account.order.status.display.SHIPPED;Shipped
+;text.account.order.status.display.OPEN;Open
 
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
@@ -2873,7 +2879,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.cart.customerNotes;Notes
 ;checkout.savecart;Save updated cart
 ;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
-
 
 ;checkout.payment.CARD.CREDITCARD;Online payment
 ;checkout.payment.CARD.PROFORMA;Online payment
@@ -2898,7 +2903,23 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cookie.directive.header;Cookies on pentland.com
 ;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."
 
-;text.account.orderhistory.dateplaced;Date Placed
-
+;text.account.order.orderNumberLabel.plural;"Your Order Number(s): "
+;text.account.order.user;Order placed by
+;text.summary.order.total;Total
+;text.summary.order.totalQty;Total Qty
+;text.summary.order.brand;Brand
+;order.export.global.error;Order failed to export.
 
 ;basket.export.images.file;Download product images
+;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
+;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
+
+;text.account.hidePrices;Show/Hide prices
+;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
+;text.account.hidePrices.show;Show Prices
+;text.account.hidePrices.hide;Hide Prices
+
+;basket.export.images.file;Download product images
+;erp.integration.failed;Error while processing ERP request
+;order.export.credit.check.failed;"Your account is nearing the available credit limit, please contact your account representative."
+

@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -16,8 +15,10 @@ import org.apache.log4j.Logger;
 import org.spockframework.util.Nullable;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.constants.PentlandcoreConstants;
 import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
+import com.bridgex.facades.constants.PentlandfacadesConstants;
 import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.ETReturnDto;
@@ -25,23 +26,20 @@ import com.bridgex.integration.domain.MaterialInfoDto;
 import com.bridgex.integration.domain.MaterialOutputGridDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartInput;
+import com.bridgex.integration.domain.MultiBrandCartOutput;
 import com.bridgex.integration.domain.MultiBrandCartResponse;
 import com.bridgex.integration.domain.SizeDataDto;
 
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.b2b.services.B2BCustomerService;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
-import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.product.data.StockData;
 import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
-import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.servicelayer.user.UserService;
 
 /**
  * @author Created by konstantin.pavlyukov on 11/8/2017.
@@ -57,20 +55,29 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   private PriceDataFactory priceDataFactory;
 
   @Override
-  public boolean populateCustomerPrice(final ProductData product) {
+  public boolean populateCustomerPrice(ProductData productData) {
+    return populateCustomerPrice(productData, new Date());
+  }
+
+  @Override
+  public boolean populateCustomerPrice(final ProductData product, Date requestedDeliveryDate) {
     if (product.getMaterialKey() == null)
     {
       return false;
     }
-    final MultiBrandCartDto request = createSimulateOrderRequest(product);
+    final MultiBrandCartDto request = createSimulateOrderRequest(product, requestedDeliveryDate);
     final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
-    if (!successResponse(response)) {
+    if (!getOrderSimulationService().successResponse(response)) {
       return false;
     }
-    final List<MaterialInfoDto> materialList = response.getMaterialInfo();
+    final MultiBrandCartOutput multiBrandCartOutput = response.getMultiBrandCartOutput();
+    if (multiBrandCartOutput == null) {
+      return false;
+    }
+    final List<MaterialInfoDto> materialList = multiBrandCartOutput.getMaterialInfo();
     if (CollectionUtils.isNotEmpty(materialList)) {
       final MaterialInfoDto responseProduct = materialList.stream().filter(m -> product.getMaterialKey().equals(m.getMaterialNumber())).findFirst().orElse(new MaterialInfoDto());
-      final String price = responseProduct.getTotalPrice();
+      final String price = responseProduct.getUnitPrice();
       if (StringUtils.isNotBlank(price)) {
         try {
           final BigDecimal bPrice = BigDecimal.valueOf(Double.valueOf(price));
@@ -89,31 +96,44 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   }
 
   @Override
-  public boolean populateOrderForm(final ProductData product) {
+  public boolean populateOrderForm(ProductData product) {
+    return populateOrderForm(product, new Date());
+  }
+
+  @Override
+  public boolean populateOrderForm(final ProductData product, Date requestedDeliveryDate) {
     if (CollectionUtils.isEmpty(product.getVariantMatrix())) {
       return false;
     }
     final VariantMatrixElementData root = product.getVariantMatrix().get(0);
 
     final List<VariantMatrixElementData> materials = root.getElements();
-    final MultiBrandCartDto request = createOrderFormRequest(materials);
+    final MultiBrandCartDto request = createOrderFormRequest(materials, requestedDeliveryDate);
     final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
-    if (!successResponse(response)) {
+    if (!getOrderSimulationService().successResponse(response)) {
       return false;
     }
-    final List<MaterialInfoDto> matListResp = response.getMaterialInfo();
+    final MultiBrandCartOutput multiBrandCartOutput = response.getMultiBrandCartOutput();
+    if (multiBrandCartOutput == null) {
+      return false;
+    }
+    final List<MaterialInfoDto> matListResp = multiBrandCartOutput.getMaterialInfo();
+    if (CollectionUtils.isEmpty(matListResp)) {
+      return false;
+    }
     final List<VariantMatrixElementData> resultMatList = new ArrayList<>();
-    for (final MaterialInfoDto material : matListResp) {
-      final String matCode = material.getMaterialNumber();
-      final VariantMatrixElementData rMat = materials.stream().filter(tm -> tm.getVariantOption().getCode().equals(matCode)).findFirst().orElse(null);
-      if (rMat == null) {
+    final Map<String, MaterialInfoDto> respMatMap = createMaterialInfosMap(matListResp);
+    for (final VariantMatrixElementData styleVariant : materials) {
+      final MaterialInfoDto material = respMatMap.get(styleVariant.getVariantOption().getCode());
+      if (material == null) {
+        resultMatList.add(styleVariant);
         continue;
       }
       final String price = material.getUnitPrice();
       if (StringUtils.isNotBlank(price)) {
         try {
           final BigDecimal bPrice = BigDecimal.valueOf(Double.valueOf(price));
-          rMat.getVariantOption().setPriceData(getPriceDataFactory().create(PriceDataType.BUY, bPrice, getStoreSessionFacade().getCurrentCurrency().getIsocode()));
+          styleVariant.getVariantOption().setPriceData(getPriceDataFactory().create(PriceDataType.BUY, bPrice, getStoreSessionFacade().getCurrentCurrency().getIsocode()));
         } catch (NumberFormatException e) {
           LOG.warn("NumberFormatException on response from Order Simulation");
           LOG.debug(e.getMessage());
@@ -124,29 +144,32 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
       }
 
       final List<VariantMatrixElementData> resultSizeList = new ArrayList<>();
-
-      for(final MaterialOutputGridDto size: material.getMaterialOutputGridList()) {
-        final String ean = size.getEan();
-        final VariantMatrixElementData rSize = rMat.getElements().stream().filter(rs -> rs.getVariantOption().getCode().equals(ean)).findFirst().orElse(null);
-        if (StringUtils.isNotBlank(size.getAvailableQty())) {
-          final StockData stockData = new StockData();
-          stockData.setStockLevel(Long.valueOf(size.getAvailableQty()));
-          // todo remove hardcode
-          stockData.setStockThreshold(100);
-          rSize.getVariantOption().setStock(stockData);
+      final Map<String, MaterialOutputGridDto> sizeMap = createMaterialGridMap(material.getMaterialOutputGridList());
+      for(final VariantMatrixElementData size : styleVariant.getElements()) {
+        final MaterialOutputGridDto respSize = sizeMap.get(size.getVariantOption().getCode());
+        if (respSize == null) {
+          resultSizeList.add(size);
+          continue;
         }
-        resultSizeList.add(rSize);
+        if (StringUtils.isNotBlank(respSize.getAvailableQty())) {
+          final StockData stockData = new StockData();
+          stockData.setStockLevel(Long.valueOf(respSize.getAvailableQty()));
+          stockData.setStockThreshold(PentlandfacadesConstants.DEFAULT_STOCK_THRESHOLD);
+          size.getVariantOption().setStock(stockData);
+        }
+        resultSizeList.add(size);
       }
-      rMat.setElements(resultSizeList);
-      resultMatList.add(rMat);
+      styleVariant.setElements(resultSizeList);
+      resultMatList.add(styleVariant);
     }
 
     product.getVariantMatrix().get(0).setElements(resultMatList);
     return true;
   }
 
-  private MultiBrandCartDto createOrderFormRequest(final List<VariantMatrixElementData> materials) {
-    final MultiBrandCartDto requestRoot = createRequestRoot();
+  @Override
+  public MultiBrandCartDto createOrderFormRequest(final List<VariantMatrixElementData> materials, Date requestedDeliveryDate) {
+    final MultiBrandCartDto requestRoot = createRequestRoot(requestedDeliveryDate, true, false);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
     final List<MultiBrandCartInput> cartInput = new ArrayList<>();
@@ -161,24 +184,8 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     return requestRoot;
   }
 
-  protected boolean successResponse(final MultiBrandCartResponse response) {
-    boolean result = true;
-    final List<ETReturnDto> returnList = response.getEtReturn();
-    if (CollectionUtils.isNotEmpty(returnList)) {
-      for (final ETReturnDto returnDto : returnList) {
-        if (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(returnDto.getType())) {
-          return true;
-        }
-        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType()) || ErpintegrationConstants.RESPONSE.ET_RETURN.WARNING_TYPE.equals(returnDto.getType())) {
-          result = false;
-        }
-      }
-    }
-    return result;
-  }
-
-  private MultiBrandCartDto createSimulateOrderRequest(final List<ProductData> products) {
-    final MultiBrandCartDto requestRoot = createRequestRoot();
+  private MultiBrandCartDto createSimulateOrderRequest(final List<ProductData> products, Date requestedDeliveryDate) {
+    final MultiBrandCartDto requestRoot = createRequestRoot(requestedDeliveryDate, true, true);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
     final List<MultiBrandCartInput> cartInput = new ArrayList<>();
@@ -193,7 +200,8 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     return requestRoot;
   }
 
-  private MultiBrandCartDto createRequestRoot() {
+  @Override
+  public MultiBrandCartDto createRequestRoot(final Date requestedDeliveryDate, boolean availabilityCheck, boolean creditCheck) {
     final MultiBrandCartDto requestRoot = new MultiBrandCartDto();
 
     // Defaults are set in the dto itself
@@ -201,8 +209,10 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     //requestRoot.setDocType();
 
     requestRoot.setLang(getStoreSessionFacade().getCurrentLanguage().getIsocode().toUpperCase());
-    requestRoot.setRdd(new Date());
+    requestRoot.setRdd(requestedDeliveryDate);
     requestRoot.setPricingCheck(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
+    requestRoot.setAvailabilityCheck(availabilityCheck ? ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE : StringUtils.EMPTY);
+    requestRoot.setCreditCheck(creditCheck ? ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE : StringUtils.EMPTY);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
     final B2BUnitModel userUnit = units.get(0);
@@ -212,8 +222,8 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     return requestRoot;
   }
 
-  private MultiBrandCartDto createSimulateOrderRequest(final ProductData product) {
-    return createSimulateOrderRequest(Collections.singletonList(product));
+  private MultiBrandCartDto createSimulateOrderRequest(final ProductData product, Date requestedDeliveryDate) {
+    return createSimulateOrderRequest(Collections.singletonList(product), requestedDeliveryDate);
   }
   private MultiBrandCartInput createMultiBrandCartInput(final VariantMatrixElementData product, Map<String, B2BUnitModel> brandUnitsMap) {
     final List<VariantMatrixElementData> sizes = product.getElements();
@@ -227,7 +237,6 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
       if (targetUnit != null) {
         reqProduct.setDistrChannel(targetUnit.getDistCh());
         reqProduct.setSalesOrg(targetUnit.getSalesOrg());
-        reqProduct.setPriceList(targetUnit.getSapPriceList());
       } else {
         LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + product.getVariantOption().getCode());
       }
@@ -261,7 +270,6 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
       if (targetUnit != null) {
         reqProduct.setDistrChannel(targetUnit.getDistCh());
         reqProduct.setSalesOrg(targetUnit.getSalesOrg());
-        reqProduct.setPriceList(targetUnit.getSapPriceList());
       } else {
         LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + product.getCode());
       }
@@ -283,11 +291,26 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     return reqProduct;
   }
 
-  @Nullable
   private Map<String, B2BUnitModel> createBrandUnitsMap(final List<B2BUnitModel> units) {
     final Map<String, B2BUnitModel> result = new HashMap<>();
     if (CollectionUtils.isNotEmpty(units)) {
       units.stream().forEach(u -> {result.put(u.getSapBrand(), u);});
+    }
+    return result;
+  }
+
+  private Map<String, MaterialInfoDto> createMaterialInfosMap(final List<MaterialInfoDto> mats) {
+    final Map<String, MaterialInfoDto> result = new HashMap<>();
+    if (CollectionUtils.isNotEmpty(mats)) {
+      mats.stream().forEach(m -> {result.put(m.getMaterialNumber(), m);});
+    }
+    return result;
+  }
+
+  private Map<String, MaterialOutputGridDto> createMaterialGridMap(final List<MaterialOutputGridDto> gridList) {
+    final Map<String, MaterialOutputGridDto> result = new HashMap<>();
+    if (CollectionUtils.isNotEmpty(gridList)) {
+      gridList.stream().forEach(m -> {result.put(m.getEan(), m);});
     }
     return result;
   }
@@ -336,4 +359,5 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   public void setPriceDataFactory(PriceDataFactory priceDataFactory) {
     this.priceDataFactory = priceDataFactory;
   }
+
 }

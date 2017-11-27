@@ -6,6 +6,7 @@
 <%@ taglib prefix="action" tagdir="/WEB-INF/tags/responsive/action" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -18,6 +19,7 @@
 		<input type="hidden" name="stylecode" value="${product.baseProduct}"/>
 		<input type="hidden" name="materialKey" value="${product.materialKey}"/>
 		<input type="hidden" name="upc" value="${product.upc}"/>
+		<input type="hidden" name="price" value="<format:price priceData="${product.price}"/>"/>
 		<a class="thumb" href="${productUrl}" title="${fn:escapeXml(product.name)}">
 			<product:productPrimaryImage product="${product}" format="product"/>
 		</a>

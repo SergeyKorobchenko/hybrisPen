@@ -36,7 +36,7 @@ public class SapOrderDto implements Serializable {
   private String poNumber;
 
   @JsonProperty("REQ_DATE_H")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date requestedDeliveryDate;
 
   @JsonProperty("MSG")

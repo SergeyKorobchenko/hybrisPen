@@ -5,6 +5,7 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 <%@ taglib prefix="component" tagdir="/WEB-INF/tags/shared/component" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -25,12 +26,14 @@
 
 							<c:url value="${product.url}/quickView" var="productQuickViewUrl"/>
 							<div class="carousel__item">
-								<a href="${productQuickViewUrl}" class="js-reference-item">
+								<	 href="${productQuickViewUrl}" class="js-reference-item">
 									<div class="carousel__item--thumb">
 										<product:productPrimaryReferenceImage product="${product}" format="product"/>
 									</div>
 									<div class="carousel__item--name">${fn:escapeXml(product.name)}</div>
-									<div class="carousel__item--price"><format:fromPrice priceData="${product.price}"/></div>
+									<common:hidePricesForUser>
+										<div class="carousel__item--price"><format:fromPrice priceData="${product.price}"/></div>
+									</common:hidePricesForUser>
 								</a>
 							</div>
 						</c:forEach>
@@ -48,7 +51,9 @@
 										<product:productPrimaryImage product="${product}" format="product"/>
 									</div>
 									<div class="carousel__item--name">${fn:escapeXml(product.name)}</div>
-									<div class="carousel__item--price"><format:fromPrice priceData="${product.price}"/></div>
+									<common:hidePricesForUser>
+										<div class="carousel__item--price"><format:fromPrice priceData="${product.price}"/></div>
+									</common:hidePricesForUser>
 								</a>
 							</div>
 						</c:forEach>

@@ -7,6 +7,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="grid" tagdir="/WEB-INF/tags/responsive/grid" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 <script>
 
 </script>
@@ -36,12 +37,14 @@
 						<c:if test="${not empty product.brandName}">
 							<div class=""><spring:theme code="product.brand"/>: ${fn:escapeXml(product.brandName)}</div>
 						</c:if>
-						<p class="price">
-							<spring:theme code="product.customer.price"/>: <format:price priceData="${product.customerPrice}"/>
-						</p>
-						<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
-							<product:productPricePanel product="${product}" />
-						</ycommerce:testId>
+						<common:hidePricesForUser>
+							<p class="price">
+								<spring:theme code="product.customer.price"/>: <format:price priceData="${product.customerPrice}"/>
+							</p>
+							<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
+								<product:productPricePanel product="${product}" />
+							</ycommerce:testId>
+						</common:hidePricesForUser>
 						<c:if test="${not empty product.season}">
 							<div class=""><spring:theme code="product.season"/>: ${fn:escapeXml(product.season)}</div>
 						</c:if>

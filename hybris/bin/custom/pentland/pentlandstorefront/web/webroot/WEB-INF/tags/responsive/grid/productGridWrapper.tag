@@ -12,6 +12,7 @@
 <div class="js-product-order-form display-none">
     <div class="back-link product-details">
             <span class="label"><spring:theme code="order.form"/></span>
+        <span class="glyphicon glyphicon-chevron-right"></span>
     </div>
     <div class="product-action" id="productGridAction">
         <div class="hidden-xs">

@@ -15,6 +15,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -56,9 +57,14 @@
         <div class="description">
             <div>${fn:escapeXml(firstVariant.variantName)}</div>
         </div>
-        <div class="price">
-            <div>${fn:escapeXml(firstVariant.variantOption.priceData.formattedValue)}</div>
-        </div>
+        <common:hidePricesForUser>
+            <div class="price">
+                <div>${fn:escapeXml(firstVariant.variantOption.priceData.formattedValue)}</div>
+            </div>
+        </common:hidePricesForUser>
+        <c:if test="${empty firstVariant.variantOption.priceData}">
+            <c:set var="inputDisabled" value="disabled"/>
+        </c:if>
     </td>
 
     <c:set var="colspan" value="1"/>
@@ -91,9 +97,9 @@
             <%--</c:if>--%>
 
             <input type="hidden" class="${fn:escapeXml(skusId)} sku" name="cartEntries[${loopIndex}].sku" id="cartEntries[${loopIndex}].sku" value="${fn:escapeXml(variant.variantOption.code)}" />
-            <input type="textbox" maxlength="3" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
+            <input type="textbox" maxlength="9" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
                    name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' data-current-value=""
-                   id="cartEntries[${loopIndex}].quantity" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
+                   id="cartEntries[${loopIndex}].quantity" data-pack-size="${variant.packSize}" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
 
             <grid:coreTableStockRow variant="${variant}" />
 

@@ -160,10 +160,16 @@
                 </c:if>
             </div>
 
-            <%-- price --%>
+            <%-- wholesale price --%>
             <div class="item__price">
                 <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>: </span>
                 <format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
+            </div>
+
+            <%-- price --%>
+            <div class="item__price">
+                <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemWholesalePrice"/>: </span>
+                <format:price priceData="${entry.erpPrice}" displayFreeForZero="true"/>
             </div>
 
             <%-- quantity --%>

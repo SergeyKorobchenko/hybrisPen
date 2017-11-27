@@ -77,6 +77,7 @@
 	<bean id="defaultPentlandOrderDetailsService" class="com.bridgex.core.integration.impl.PentlandOrderDetailsService">
 		<property name="integrationService" ref="orderDetailsIntegrationService"/>
 		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="sessionService" ref="sessionService"/>
 	</bean>
 
 	<alias name="defaultPentlandInvoicePDFService" alias="pentlandInvoicePDFService"/>
@@ -99,6 +100,7 @@
 	<bean id="defaultPentlandOrderExportService" class="com.bridgex.core.order.impl.DefaultPentlandOrderExportService">
 		<property name="modelService" ref="modelService"/>
 		<property name="orderExportService" ref="orderExportService"/>
+		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService"/>
 	</bean>
 
 	<alias name="defaultPentlandAccountSummaryService" alias="pentlandAccountSummaryService"/>
@@ -108,7 +110,10 @@
 	</bean>
 
 	<alias name="pentlandCartServiceForAccelerator" alias="cartService"/>
-	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator"/>
+	<bean id="pentlandCartServiceForAccelerator" class="com.bridgex.core.order.impl.PentlandCartServiceForAccelerator" parent="defaultCartServiceForAccelerator">
+		<property name="cartFactory" ref="b2bCartFactory"/>
+		<property name="productService" ref="productService"/>
+	</bean>
 
 	<alias name="defaultProductSizeService" alias="productSizeService"/>
 	<bean id="defaultProductSizeService" class="com.bridgex.core.product.impl.DefaultProductSizeService">
