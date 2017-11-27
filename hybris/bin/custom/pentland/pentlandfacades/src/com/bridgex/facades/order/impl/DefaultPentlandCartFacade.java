@@ -90,14 +90,16 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     cartModel.getEntries().forEach(e -> {
       e.setErpPrice(0d);
       e.setTotalPrice(0d);
+      getModelService().save(e);
     });
   }
 
   private void populatePrices(MaterialInfoDto material, CartModel cart) {
-    Optional<AbstractOrderEntryModel> entry = cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).findFirst();
-    if (entry.isPresent()) {
-      entry.get().setErpPrice(Double.parseDouble(material.getUnitPrice()));
-      entry.get().setTotalPrice(Double.parseDouble(material.getTotalPrice()));
+    AbstractOrderEntryModel entry = cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).findFirst().orElse(null);
+    if (entry != null) {
+      entry.setErpPrice(Double.parseDouble(material.getUnitPrice()));
+      entry.setTotalPrice(Double.parseDouble(material.getTotalPrice()));
+      getModelService().save(entry);
     }
   }
 
