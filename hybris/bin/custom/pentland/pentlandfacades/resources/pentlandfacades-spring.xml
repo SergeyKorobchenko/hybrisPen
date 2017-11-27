@@ -343,6 +343,12 @@
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
 
+	<alias name="defaultPentlandFutureStockFacade" alias="futureStockFacade"/>
+	<bean id="defaultPentlandFutureStockFacade" class="com.bridgex.facades.futurestock.impl.DefaultPentlandFutureStockFacade" parent="defaultFutureStockFacade">
+		<property name="orderSimulationService" ref="orderSimulationService" />
+		<property name="pentlandProductFacade" ref="pentlandProductFacade" />
+	</bean>
+
 	<alias name="pentlandCustomerFacade" alias="customerFacade"/>
 	<bean id="pentlandCustomerFacade" class="com.bridgex.facades.customer.impl.DefaultPentlandCustomerFacade" parent="defaultCustomerFacade"/>
 

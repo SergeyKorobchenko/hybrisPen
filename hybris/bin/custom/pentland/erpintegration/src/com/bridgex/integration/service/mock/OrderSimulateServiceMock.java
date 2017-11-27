@@ -1,14 +1,19 @@
 package com.bridgex.integration.service.mock;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.ETReturnDto;
+import com.bridgex.integration.domain.FutureStocksDto;
 import com.bridgex.integration.domain.MaterialInfoDto;
 import com.bridgex.integration.domain.MaterialOutputGridDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
@@ -53,8 +58,9 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
         final MaterialOutputGridDto resMatGrid = new MaterialOutputGridDto();
         resMatGrid.setAvailableQty(String.valueOf(rn.nextInt(200)));
         resMatGrid.setEan(sizeData.getEan());
-        resMatGridList.add(resMatGrid);
         resMatGrid.setUserRequestedQty(sizeData.getQuantity());
+        resMatGrid.setFutureStocksDtoList(createMockFutureList());
+        resMatGridList.add(resMatGrid);
         qtySum += Integer.valueOf(sizeData.getQuantity());
       }
       totalPrice = unitPrice * qtySum;
@@ -70,6 +76,26 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
     response.setMultiBrandCartOutput(responseOutput);
 
     return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  private List<FutureStocksDto> createMockFutureList() {
+    Date dt = new Date();
+    Calendar c = Calendar.getInstance();
+    c.setTime(dt);
+    c.add(Calendar.DATE, 10);
+    dt = c.getTime();
+    final List<FutureStocksDto> result = new ArrayList<>();
+    final FutureStocksDto future1 = new FutureStocksDto();
+    future1.setFutureDate(dt);
+    future1.setFutureQty("20");
+    result.add(future1);
+    c.add(Calendar.DATE, 10);
+    dt = c.getTime();
+    final FutureStocksDto future2 = new FutureStocksDto();
+    future2.setFutureDate(dt);
+    future2.setFutureQty("170");
+    result.add(future2);
+    return result;
   }
 
 }

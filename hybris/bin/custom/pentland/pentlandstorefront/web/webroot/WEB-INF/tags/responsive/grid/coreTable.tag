@@ -62,6 +62,9 @@
                 <div>${fn:escapeXml(firstVariant.variantOption.priceData.formattedValue)}</div>
             </div>
         </common:hidePricesForUser>
+        <c:if test="${empty firstVariant.variantOption.priceData}">
+            <c:set var="inputDisabled" value="disabled"/>
+        </c:if>
     </td>
 
     <c:set var="colspan" value="1"/>
