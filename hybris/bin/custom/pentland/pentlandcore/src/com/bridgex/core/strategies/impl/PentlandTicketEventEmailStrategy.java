@@ -5,10 +5,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.log4j.Logger;
 
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.ticket.email.context.AbstractTicketContext;
 import de.hybris.platform.ticket.enums.CsEmailRecipients;
@@ -68,8 +71,13 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
   }
 
   private String getLogoUrl() {
-    String urlPrefix = Config.getParameter(MEDIA_EXPORT_HTTP);
-    return urlPrefix + mediaService.getMedia("/images/logo_pentland.png").getDownloadURL();
+    try {
+      String urlPrefix = Config.getParameter(MEDIA_EXPORT_HTTP);
+      return urlPrefix + mediaService.getMedia("/images/logo_pentland.png").getDownloadURL();
+    } catch (UnknownIdentifierException | AmbiguousIdentifierException e) {
+      LOG.error("Error while loading logo image");
+      return StringUtils.EMPTY;
+    }
   }
 
 }
