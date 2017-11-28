@@ -173,12 +173,18 @@
 	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
 
 	<bean id="abstractNavCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractNavCategoryResolver" abstract="true" parent="abstractValueResolver"/>
+	<bean id="abstractProductTypeResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractProductTypeResolver" abstract="true" parent="abstractValueResolver"/>
 
 	<bean id="categoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryCodeValueResolver" parent="abstractNavCategoryResolver"/>
+	<bean id="productTypeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ProductTypeValueResolver" parent="abstractProductTypeResolver"/>
 
 	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver">
 		<property name="qualifierProvider" ref="languageQualifierProvider"/>
 	</bean>
+	<bean id="productTypeNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ProductTypeNameValueResolver"  parent="abstractProductTypeResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+
 
 	<bean id="priceRangeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PriceRangeValueResolver" parent="abstractValueResolver">
 		<property name="commercePriceService" ref="commercePriceService"/>
