@@ -78,7 +78,7 @@
 				color: rgba(255,255,255,0.7);
 				font-size:	120px;
 				overflow: hidden;
-				.transition(~"0.3s ease-out");
+				//.transition(~"0.3s ease-out");
 
 				span.glyphicon{
 					position: absolute;
@@ -88,44 +88,35 @@
 					right: 0;
 					width: auto;
 					height: auto;
-					font-size: 25px;
+					font-size: @font-size-large-3;
 					line-height: 125px;
-					color: @link-color;
-					.transition(~"0.3s ease-in");
+					color: @carousel-arrow-color;
+					//.transition(~"0.3s ease-in");
 				}
 
-
 				&:hover{
-					color: rgba(255,255,255,1);
-
 					span.glyphicon{
-						color: @link-hover-color;
+						.link-focus;
 					}
 				}
 			}
 
 			.owl-prev{
-				left: 3px;
-				.glyphicon-forward;
+				left: 5px;
 			}
 
 			.owl-next{
 				right: 5px;
-				.glyphicon-backward;
 			}
 		}
 	}
-
-
-	
-
 }
 
 
 .carousel,
 .carousel__component--carousel {
 	width: auto; 
-	margin: (@grid-gutter-width/2) -(@grid-gutter-width/2);
+	margin: 10px -(@grid-gutter-width/2) 0px -(@grid-gutter-width/2);
 	text-align: center;
 
 	.item,
@@ -162,14 +153,12 @@
 		.carousel__item--name{
 			margin-top: (@grid-gutter-width/1.5);
 			margin-bottom: 11px;
-			text-transform: uppercase;
 			text-align: center;
 			line-height: 1.2em;
 			overflow: hidden;
 			position: relative;
 			height: 2.4em;
-			font-weight: 600;
-			font-size: 16px;
+			//font-size: @font-size-base;
 			color: @headline-color;
 
           &:before {
@@ -177,11 +166,11 @@
             bottom: 0;
             position: absolute;
             right: 0;
-            content: "…";
+            //content: "…";
           }
 
           &:after {
-            content: "";
+            //content: "";
             background: #FFF none repeat scroll 0% 0%;
             position: absolute;
             height: 50px;
@@ -193,9 +182,9 @@
 		.item__price,
 		.carousel__item--price {
 		  margin: (@grid-gutter-width/2);
-		  color: @text-color;
+		  color: @product-price-color;
 		  text-align: center;
-		  font-size: 24px;
+		  //font-size: @font-size-base;
 		  font-weight: 600;
 		  margin: 0;
 		}
@@ -203,26 +192,15 @@
 	}
 }
 
-
-
 .carousel-component,
 .carousel__component {
   	padding: 0 20px;
-  	margin: @grid-gutter-width+15 0 (@grid-gutter-width - 5);
+  	//margin: @grid-gutter-width+15 0 (@grid-gutter-width - 5);
 	.clearfix;
 
-	.carousel__component--headline {
-	  color: @headline-color;
-      font-size: 28px;
-      margin: 10px 0 20px;
-      text-align: center;
-      font-weight: bold;
-      text-transform: @carousel-font-style;
-	}
-
- 	&:first-child {
+ 	/*&:first-child {
     	margin: 50px 0 22px;
-  	}
+  	}*/
 
 	+ .carousel-component,
 	.carousel__component {
@@ -231,9 +209,6 @@
 		padding-top: @grid-gutter-width + @grid-gutter-width/2;
 	}
 }
-
-
-
 
 .rotating-image-componet{
 	.clearfix;

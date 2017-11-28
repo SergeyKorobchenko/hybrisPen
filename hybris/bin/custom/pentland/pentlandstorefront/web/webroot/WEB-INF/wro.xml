@@ -41,6 +41,7 @@
 		<js>/_ui/responsive/common/js/jquery.tabs.custom.js</js>
 		<js minimize="false">/_ui/responsive/common/js/jquery-ui-1.12.1.min.js</js>
 		<js>/_ui/responsive/common/js/jquery.zoom.custom.js</js>
+		<js>/_ui/responsive/common/js/slick.min.js</js>
 		<js>/_ui/responsive/common/js/owl.carousel.custom.js</js>
 		<js minimize="false">/_ui/responsive/common/js/jquery.tmpl-1.0.0pre.min.js</js>
 		<js minimize="false">/_ui/responsive/common/js/jquery.currencies.min.js</js>
