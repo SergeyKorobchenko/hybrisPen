@@ -10,19 +10,35 @@
 //************************************************************
 //************************************************************
 
-//*********Variables*********
-
-@font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif;
-
-
 //*********General CSS*********
 body {
+  font-weight: @font-weight-base;
+
   overflow-x: hidden;
   position: relative;
 }
 
 body.offcanvas {
   overflow-y: hidden;
+}
+
+.b-section--full-width {
+  .full-width-padding();
+}
+
+.b-margin-top {
+  margin-top: 60px;
+
+  @media (max-width: @screen-lg) {
+    margin-top: 30px;
+  }
+}
+.b-margin-bottom {
+  margin-bottom: 60px;
+
+  @media (max-width: @screen-lg) {
+    margin-bottom: 30px;
+  }
 }
 
 .no-margin{
@@ -34,6 +50,14 @@ body.offcanvas {
     float: none;
     margin: 0 auto !important;
     overflow: hidden;
+  }
+}
+
+.container-fluid {
+  &--unlimited {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -66,16 +90,25 @@ option {
 /*
 General
 *****************************************************************/
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: @headings-letter-spacing;
+  margin-top: @headings-margin-top;
+  margin-bottom: @headings-margin-bottom;
+}
 
 a, button {
   color: @link-color;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: none;
+button:hover {
+  .link-focus;
 }
 
+a:hover, a:focus {
+  color: @link-color-hover;
+  .link-focus;
+}
 
 output {
   display:block;

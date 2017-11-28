@@ -78,6 +78,8 @@
 		<property name="integrationService" ref="orderDetailsIntegrationService"/>
 		<property name="commonI18NService" ref="commonI18NService"/>
 		<property name="sessionService" ref="sessionService"/>
+		<property name="b2bOrderService" ref="b2bOrderService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>
 
 	<alias name="defaultPentlandInvoicePDFService" alias="pentlandInvoicePDFService"/>
