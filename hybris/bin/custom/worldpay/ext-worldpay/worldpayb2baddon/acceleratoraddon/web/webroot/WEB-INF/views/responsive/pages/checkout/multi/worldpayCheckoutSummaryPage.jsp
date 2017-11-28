@@ -24,7 +24,7 @@
                 <ycommerce:testId code="checkoutStepFour">
                     <div class="checkout-review hidden-xs">
                         <div class="checkout-order-summary">
-                            <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" subtotalsCssClasses="dark"/>
+                            <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="true" showTax="true" subtotalsCssClasses="dark"/>
                         </div>
                     </div>
                     <div class="place-order-form hidden-xs">
