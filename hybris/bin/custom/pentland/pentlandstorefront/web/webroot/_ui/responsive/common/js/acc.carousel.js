@@ -64,7 +64,7 @@ ACC.carousel = {
             }
 
             var slick = t.slick(params);
-            t.on('click.slick', function (event) {
+            t.on('click.slick', function(event) {
                 var $target = $(event.target);
                 if ($target.is(':button')) {
                     $(this).slick('slickSetOption', 'autoplay', false);

@@ -32,7 +32,7 @@ INSERT_UPDATE ClassAttributeAssignment; $class[unique = true]; $attribute[unique
 ;clEquipment;trainingMethod;1
 
 INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
-;trainingwear;clTrainingWear
-;teamwear;clTeamwear
-;balls;clBalls
-;equipment;clEquipment
+;5100;clTrainingWear
+;5000;clTeamwear
+;5200;clBalls
+;5300;clEquipment
