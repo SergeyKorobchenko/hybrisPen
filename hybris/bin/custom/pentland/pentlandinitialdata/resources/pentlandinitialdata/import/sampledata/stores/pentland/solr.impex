@@ -34,12 +34,12 @@ INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=tru
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code);facetSort(code);priority;visible;fieldValueProvider;customFacetSortProvider;rangeSets(name);$classAttributeAssignment
 
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=false];fieldValueProvider[default=$fieldValueProvider];$classAttributeAssignment
-;$solrIndexedType;teamwearType;string;;;;clTeamwear:::teamwearType::::
-;$solrIndexedType;trainingwearType;string;;;;clTrainingWear:::trainingwearType::::
+#;$solrIndexedType;teamwearType;string;;;;clTeamwear:::teamwearType::::
+#;$solrIndexedType;trainingwearType;string;;;;clTrainingWear:::trainingwearType::::
 ;$solrIndexedType;sport;string;;;;clBalls:::sport::::
 ;$solrIndexedType;useageOccasion;string;;;;clBalls:::useageOccasion::::
 ;$solrIndexedType;surface;string;;;;clBalls:::surface::::
-;$solrIndexedType;accessoryType;string;;;;clEquipment:::accessoryType::::
+#;$solrIndexedType;accessoryType;string;;;;clEquipment:::accessoryType::::
 ;$solrIndexedType;trainingMethod;string;;;;clEquipment:::trainingMethod::::
 
 # Import Classification Features
@@ -58,10 +58,10 @@ INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[uni
 INSERT_UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
 
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
-;teamwearType:$solrIndexedType;;MultiSelectOr;5000;
-;trainingwearType:$solrIndexedType;;MultiSelectOr;5000;
+#;teamwearType:$solrIndexedType;;MultiSelectOr;5000;
+#;trainingwearType:$solrIndexedType;;MultiSelectOr;5000;
 ;sport:$solrIndexedType;;MultiSelectOr;5000;
 ;useageOccasion:$solrIndexedType;;MultiSelectOr;5000;
 ;surface:$solrIndexedType;;MultiSelectOr;5000;
-;accessoryType:$solrIndexedType;;MultiSelectOr;5000;
+#;accessoryType:$solrIndexedType;;MultiSelectOr;5000;
 ;trainingMethod:$solrIndexedType;;MultiSelectOr;5000;
