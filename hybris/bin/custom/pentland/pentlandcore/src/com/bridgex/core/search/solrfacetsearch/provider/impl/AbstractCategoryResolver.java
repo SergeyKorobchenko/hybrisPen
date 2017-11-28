@@ -18,7 +18,7 @@ import de.hybris.platform.solrfacetsearch.provider.impl.AbstractValueResolver;
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/23/2017.
  */
-public abstract class AbstractNavCategoryResolver extends AbstractValueResolver<ProductModel, Object, Object> {
+public abstract class AbstractCategoryResolver extends AbstractValueResolver<ProductModel, Object, Object> {
   @Override
   protected void addFieldValues(InputDocument inputDocument,
                                 IndexerBatchContext indexerBatchContext,
@@ -32,7 +32,6 @@ public abstract class AbstractNavCategoryResolver extends AbstractValueResolver<
 
       for (CategoryModel category : categories) {
         if (!isCategoryBlocked(category)) {
-          addFieldValue(inputDocument, indexedProperty, valueResolverContext, category);
           Collection<CategoryModel> allSupercategories = category.getAllSupercategories();
           for (CategoryModel cat : allSupercategories) {
             if (!isCategoryBlocked(cat)) {
