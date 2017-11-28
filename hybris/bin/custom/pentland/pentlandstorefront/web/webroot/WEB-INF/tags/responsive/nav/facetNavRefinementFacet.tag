@@ -28,7 +28,7 @@
 									<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
 									<input type="hidden" name="text" value="${searchPageData.freeTextSearch}"/>
 									<label>
-										<input class="facet__list__checkbox" type="checkbox" ${facetValue.selected ? 'checked="checked"' : ''} class="facet-checkbox" />
+										<input class="facet__list__checkbox js-facet-checkbox sr-only" type="checkbox" ${facetValue.selected ? 'checked="checked"' : ''} class="facet-checkbox" />
 										<span class="facet__list__label">
 											<span class="facet__list__mark"></span>
 											<span class="facet__list__text">

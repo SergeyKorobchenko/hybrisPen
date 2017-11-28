@@ -199,7 +199,8 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
-;productTypeName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;productTypeName:$solrIndexedType	 		 ;	 ;	  ;; ;TRUE;20;; ;  ;       ;  ;
+;brandName:$solrIndexedType	 		 ;	 ;	  ;; ;TRUE;20;; ;  ;       ;  ;
 ;baseProductCode:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;clearance:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;upc:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
@@ -217,5 +218,5 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;primaryColors:$solrIndexedType 			;;MultiSelectOr;2000;colorFacetDisplayNameProvider;;;;;true;20
 
 # Category search query facets
-INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;
 ;brand:$solrIndexedType 			;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
