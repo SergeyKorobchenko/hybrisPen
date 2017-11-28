@@ -44,22 +44,6 @@ ACC.carousel = {
 
     },
 
-    // bindJCarousel: function () {
-    //     $(".modal").colorbox({
-    //         onComplete: function () {
-    //             ACC.common.refreshScreenReaderBuffer();
-    //         },
-    //         onClosed: function () {
-    //             ACC.common.refreshScreenReaderBuffer();
-    //         }
-    //     });
-    //     $('.svw').each(function () {
-    //         $(this).waitForImages(function () {
-    //             $(this).slideView({toolTip: true, ttOpacity: 0.6, autoPlay: true, autoPlayTime: 8000});
-    //         });
-    //     });
-    // },
-
     bindJCarousel: function () {
         $('.js-banner-carousel').each(function () {
 

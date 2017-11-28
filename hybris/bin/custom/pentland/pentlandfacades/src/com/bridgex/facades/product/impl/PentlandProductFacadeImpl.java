@@ -211,10 +211,12 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     requestRoot.setCreditCheck(creditCheck ? ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE : StringUtils.EMPTY);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
-    final B2BUnitModel userUnit = units.get(0);
-
-    requestRoot.setSapCustomerID(userUnit.getSapID());
-
+    if (CollectionUtils.isNotEmpty(units)) {
+      final B2BUnitModel userUnit = units.get(0);
+      requestRoot.setSapCustomerID(userUnit.getSapID());
+    } else {
+      LOG.error("B2BCustomer with id - " + getUserService().getCurrentUser().getUid() + " have no B2BUnit assigned");
+    }
     return requestRoot;
   }
 

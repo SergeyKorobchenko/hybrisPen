@@ -3,4 +3,4 @@
 $siteUid=pentland
 
 INSERT_UPDATE CMSSite;uid[unique=true];urlPatterns
-;$siteUid;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$,(?i)^https?://pnt-d-adm.ms.ycs.io.*$,(?i)^https?://pnt-d-www.ms.ycs.io.*$,(?i)^.*pentlandstorefront.*$
+;$siteUid;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$,(?i)^https?://pnt-d-adm.ms.ycs.io.*$,(?i)^https?://pnt-d-www.ms.ycs.io.*$,(?i)^.*pentlandstorefront.*$,(?i)^https?://pnt-s-www.ms.ycs.io.*$,(?i)^https?://pnt-s-adm.ms.ycs.io.*$
