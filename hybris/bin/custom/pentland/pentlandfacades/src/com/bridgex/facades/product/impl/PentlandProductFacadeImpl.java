@@ -204,10 +204,6 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   public MultiBrandCartDto createRequestRoot(final Date requestedDeliveryDate, boolean availabilityCheck, boolean creditCheck) {
     final MultiBrandCartDto requestRoot = new MultiBrandCartDto();
 
-    // Defaults are set in the dto itself
-    //requestRoot.setServiceConsumer();
-    //requestRoot.setDocType();
-
     requestRoot.setLang(getStoreSessionFacade().getCurrentLanguage().getIsocode().toUpperCase());
     requestRoot.setRdd(requestedDeliveryDate);
     requestRoot.setPricingCheck(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
@@ -230,7 +226,8 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final String brandCode = product.getVariantOption().getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
     reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
-    reqProduct.setMaterialNumber(product.getVariantOption().getCode());
+    // todo uncomment after ERP fix
+    //reqProduct.setMaterialNumber(product.getVariantOption().getCode());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
@@ -263,7 +260,8 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final String brandCode = product.getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
     reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
-    reqProduct.setMaterialNumber(product.getMaterialKey());
+    // todo uncomment after ERP fix
+    //reqProduct.setMaterialNumber(product.getMaterialKey());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);

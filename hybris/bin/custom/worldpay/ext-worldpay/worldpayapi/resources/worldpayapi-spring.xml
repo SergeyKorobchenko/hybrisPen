@@ -320,6 +320,7 @@
     <bean id="defaultRecurringGenerateMerchantTransactionCodeStrategy" class="com.worldpay.core.services.strategies.impl.DefaultRecurringGenerateMerchantTransactionCodeStrategy">
         <property name="modelService" ref="modelService"/>
         <property name="cartService" ref="cartService"/>
+        <property name="pentlandB2BUnitService" ref="pentlandB2BUnitService" />
     </bean>
 
     <bean id="defaultWorldpayapiLabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator" lazy-init="false">
