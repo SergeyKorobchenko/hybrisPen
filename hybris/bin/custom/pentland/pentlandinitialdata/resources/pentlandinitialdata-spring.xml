@@ -31,6 +31,7 @@
 
 	<bean id="pentlandSampleDataImportService" class="com.bridgex.initialdata.services.dataimport.impl.PentlandSampleDataImportService"
 	      parent="sampleDataImportService">
+		<property name="environment" value="${environment.id:common}"/>
 	</bean>
 	<bean id="pentlandCoreDataImportService" class="com.bridgex.initialdata.services.dataimport.impl.PentlandCoreDataImportService"
 	      parent="coreDataImportService">
