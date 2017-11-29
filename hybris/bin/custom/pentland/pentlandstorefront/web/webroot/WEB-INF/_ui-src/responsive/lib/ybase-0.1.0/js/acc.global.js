@@ -53,46 +53,48 @@ ACC.global = {
 
             match: function () {
                 // on screens larger or equal screenMdMin (1024px) calculate position for .sub-navigation
-                $(".js-enquire-has-sub").hoverIntent(function () {
-                    var $this = $(this),
-                        itemWidth = $this.width();
-                    var $subNav = $this.find('.js_sub__navigation'),
-                        subNavWidth = $subNav.outerWidth();
-                    var $mainNav = $('.js_navigation--bottom'),
-                        mainNavWidth = $mainNav.width();
+                $(".js-enquire-has-sub").hoverIntent({
+                    interval: 0,
+                    over: function () {
+                        var $this = $(this),
+                            itemWidth = $this.width();
+                        var $subNav = $this.find('.js_sub__navigation'),
+                            subNavWidth = $subNav.outerWidth();
+                        var $mainNav = $('.js_navigation--bottom'),
+                            mainNavWidth = $mainNav.width();
 
-                    console.log($subNav);
+                        // get the left position for sub-navigation to be centered under each <li>
+                        var leftPos = $this.position().left + itemWidth / 2 - subNavWidth / 2;
+                        // get the top position for sub-navigation. this is usually the height of the <li> unless there is more than one row of <li>
+                        var topPos = $this.position().top + $this.height();
 
-                    // get the left position for sub-navigation to be centered under each <li>
-                    var leftPos = $this.position().left + itemWidth / 2 - subNavWidth / 2;
-                    // get the top position for sub-navigation. this is usually the height of the <li> unless there is more than one row of <li>
-                    var topPos = $this.position().top + $this.height();
-
-                    if (leftPos > 0 && leftPos + subNavWidth < mainNavWidth) {
-                        // .sub-navigation is within bounds of the .main-navigation
-                        $subNav.css({
-                            "left": leftPos,
-                            "top": topPos,
-                            "right": "auto"
-                        });
-                    } else if (leftPos < 0) {
-                        // .suv-navigation can't be centered under the <li> because it would exceed the .main-navigation on the left side
-                        $subNav.css({
-                            "left": 0,
-                            "top": topPos,
-                            "right": "auto"
-                        });
-                    } else if (leftPos + subNavWidth > mainNavWidth) {
-                        // .suv-navigation can't be centered under the <li> because it would exceed the .main-navigation on the right side
-                        $subNav.css({
-                            "right": 0,
-                            "top": topPos,
-                            "left": "auto"
-                        });
+                        if (leftPos > 0 && leftPos + subNavWidth < mainNavWidth) {
+                            // .sub-navigation is within bounds of the .main-navigation
+                            $subNav.css({
+                                "left": leftPos,
+                                "top": topPos,
+                                "right": "auto"
+                            });
+                        } else if (leftPos < 0) {
+                            // .suv-navigation can't be centered under the <li> because it would exceed the .main-navigation on the left side
+                            $subNav.css({
+                                "left": 0,
+                                "top": topPos,
+                                "right": "auto"
+                            });
+                        } else if (leftPos + subNavWidth > mainNavWidth) {
+                            // .suv-navigation can't be centered under the <li> because it would exceed the .main-navigation on the right side
+                            $subNav.css({
+                                "right": 0,
+                                "top": topPos,
+                                "left": "auto"
+                            });
+                        }
+                        $this.addClass("show-sub");
+                    },
+                    out: function () {
+                        $(this).removeClass("show-sub")
                     }
-                    $this.addClass("show-sub");
-                }, function () {
-                    $(this).removeClass("show-sub")
                 });
             },
 
