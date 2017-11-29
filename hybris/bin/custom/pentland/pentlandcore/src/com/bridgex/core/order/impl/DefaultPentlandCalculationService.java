@@ -24,13 +24,11 @@ public class DefaultPentlandCalculationService extends DefaultCalculationService
 
   protected void resetAllValues(final AbstractOrderEntryModel entry) throws CalculationException
   {
-    // taxes
-    final Collection<TaxValue> entryTaxes = findTaxValues(entry);
-    entry.setTaxValues(entryTaxes);
+
     try {
       final PriceValue pv = findBasePrice(entry);
       final AbstractOrderModel order = entry.getOrder();
-      final PriceValue basePrice = convertPriceIfNecessary(pv, order.getNet(), order.getCurrency(), entryTaxes);
+      final PriceValue basePrice = convertPriceIfNecessary(pv, order.getNet(), order.getCurrency(), null);
       entry.setBasePrice(basePrice.getValue());
       //TODO this is workaround until integration will be enabled
     } catch (CalculationException e) {
@@ -70,6 +68,13 @@ public class DefaultPentlandCalculationService extends DefaultCalculationService
     if (forceRecalculation || pentlandOrderRequiresCalculationStrategy.requiresCalculation(entry)) {
       resetAllValues(entry);
     }
+  }
+
+  public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException {
+    for (final AbstractOrderEntryModel e : order.getEntries()) {
+      recalculateOrderEntryIfNeeded(e, forceRecalculate);
+    }
+
   }
 
   @Required
