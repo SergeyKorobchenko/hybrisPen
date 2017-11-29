@@ -67,7 +67,7 @@
     <alias name="defaultWorldpayB2BMarkForAddressCheckoutStep" alias="worldpayB2BMarkForAddressCheckoutStep" />
     <bean id="defaultWorldpayB2BMarkForAddressCheckoutStep"  parent="checkoutStep">
         <property name="checkoutGroup" ref="worldpayB2BCheckoutGroup"/>
-        <property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/>
+        <property name="checkoutStepValidator" ref="deliveryAddressCheckoutValidator"/>
         <property name="transitions">
             <map merge="true">
                 <entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
