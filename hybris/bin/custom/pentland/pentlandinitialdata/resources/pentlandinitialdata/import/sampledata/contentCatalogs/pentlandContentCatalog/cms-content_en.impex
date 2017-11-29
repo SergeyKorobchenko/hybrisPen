@@ -57,7 +57,7 @@ UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice
 # CMS Paragraph Component
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
 ;;QuickOrderInfoParagraphComponent;"You can add up to 25 valid SKUs below and add to cart. Stock is reserved once products are added to cart."
-;;PentlandHomPageParagraphComponent;"Building a family of brands for the world to love generation after generation";
+;;PentlandHomPageParagraphComponent;"<h2>Building a family of brands for the world<br/> to love generation after generation</h2>";
 
 # Dynamic banner for Product grid page
 UPDATE  DynamicBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
