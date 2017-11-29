@@ -1055,7 +1055,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.cart.comments;Basket Comments
 ;quote.cart.empty.error;Missing or empty basket
 ;quote.cart.insufficient.access.rights.error;Insufficient access rights for basket {0}.
-;quote.cart.title;This basket is being order queryd
+;quote.cart.title;This basket is being order queried
 ;quote.comment.invalid;Comment cannot be more than 255 characters
 ;quote.create;Request a Order Query
 ;quote.create.error;Error creating order query.
@@ -1075,8 +1075,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.reject.error;Error rejecting order query.
 ;quote.reject.initiate.request;Minimum {0} subtotal to submit a order query.
 ;quote.reject.success;Order Query rejected with success.
-;quote.requote;Requote
-;quote.requote.error;Error requoting.
+;quote.requote;Requery
+;quote.requote.error;Error requerying.
 ;quote.save;Save Order Query
 ;quote.save.cart.error;There was an internal error. Please try again.
 ;quote.save.error;Error saving order query.
@@ -1572,7 +1572,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.page.showAllResults;Show all
 ;text.account.quote.page.showPageResults;Show paginated
 ;text.account.quote.page.sort.byCode;Order Query ID
-;text.account.quote.page.sort.byDate;Updated Date
+;text.account.quote.page.sort.byDate;Date Updated
 ;text.account.quote.page.sort.byName;Name
 ;text.account.quote.page.sort.byState;Status
 ;text.account.quote.page.sortTitle;Sort by
@@ -1743,7 +1743,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.button.select;Select
 ;text.button.showall;Show All
 ;text.button.use;Use
-;text.cart;Cart
+;text.cart;Basket
 ;text.checkout;Checkout
 ;text.checkout.noDeliveryModes;Please check the delivery address. If not selected already, please select the delivery address first and try again.
 ;text.checkout.pickup.in.store;Pickup in Store
