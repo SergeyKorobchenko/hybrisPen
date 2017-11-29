@@ -1,0 +1,51 @@
+$catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),version[default='Staged'])[unique=true,default='pentlandProductCatalog:Staged']
+
+# Language
+$lang=en
+
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang];description[lang=$lang]
+;04;;Berghaus
+;0E;;Boxfresh
+;0Q;;Canterbury
+;01;;Kickers
+;05;;Mitre
+;08;;Speedo
+
+;5000;;Teamwear
+;5100;;Training wear
+;5200;;Balls
+;5300;;Equipment
+
+;5001;;Jersey
+;5002;;Shorts
+;5003;;Socks
+;5004;;Goalkeeper
+;5005;;Referees
+;5006;;Base Layers
+
+;5101;;Jackets & Trousers
+;5102;;Rainwear
+;5103;;T-Shirts & Polo's
+;5104;;Sweatshirts & Hoodies
+;5105;;Bibs
+
+;5201;;Professional Footballs
+;5202;;Match Footballs
+;5203;;Training Footballs
+;5204;;Recreation Footballs
+;5205;;Specialist Footballs
+;5206;;Netballs
+;5207;;Rugby Balls
+;5208;;Other Balls
+
+;5301;;Game Day
+;5302;;Ball Sacks & Kit Bags
+;5303;;Cones and Markers
+;5304;;Gloves & Guards
+;5305;;Goals & Arcs
+;5306;;Ladders & Rings
+;5307;;Poles & Hurdles
+;5308;;Water Bottles & Crates
+;5309;;Referee

@@ -44,22 +44,6 @@ ACC.carousel = {
 
     },
 
-    // bindJCarousel: function () {
-    //     $(".modal").colorbox({
-    //         onComplete: function () {
-    //             ACC.common.refreshScreenReaderBuffer();
-    //         },
-    //         onClosed: function () {
-    //             ACC.common.refreshScreenReaderBuffer();
-    //         }
-    //     });
-    //     $('.svw').each(function () {
-    //         $(this).waitForImages(function () {
-    //             $(this).slideView({toolTip: true, ttOpacity: 0.6, autoPlay: true, autoPlayTime: 8000});
-    //         });
-    //     });
-    // },
-
     bindJCarousel: function () {
         $('.js-banner-carousel').each(function () {
 
@@ -80,7 +64,7 @@ ACC.carousel = {
             }
 
             var slick = t.slick(params);
-            t.on('click.slick', function (event) {
+            t.on('click.slick', function(event) {
                 var $target = $(event.target);
                 if ($target.is(':button')) {
                     $(this).slick('slickSetOption', 'autoplay', false);

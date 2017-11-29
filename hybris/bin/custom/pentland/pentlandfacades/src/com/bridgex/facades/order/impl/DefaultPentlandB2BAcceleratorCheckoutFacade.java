@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.order.PentlandCommerceCheckoutService;
@@ -59,6 +60,14 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
     parameter.setMarkFor(deliveryAddress);
     return pentlandCommerceCheckoutService.setMarkForAddress(parameter);
 
+  }
+
+  @Override
+  public boolean removeMarkForAddressFromCart() {
+    final CartModel cartModel = getCart();
+    final CommerceCheckoutParameter parameter = createCommerceCheckoutParameter(cartModel, true);
+    parameter.setMarkFor(null);
+    return pentlandCommerceCheckoutService.setMarkForAddress(parameter);
   }
 
   @Override

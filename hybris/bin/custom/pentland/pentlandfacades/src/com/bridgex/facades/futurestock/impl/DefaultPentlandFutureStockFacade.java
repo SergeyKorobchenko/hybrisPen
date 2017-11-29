@@ -89,7 +89,7 @@ public class DefaultPentlandFutureStockFacade extends DefaultFutureStockFacade {
     futureStockData.setDate(dto.getFutureDate());
     futureStockData.setFormattedDate(sdf.format(dto.getFutureDate()));
     final StockData stock = new StockData();
-    stock.setStockLevel(Long.parseLong(dto.getFutureQty()));
+    stock.setStockLevel((long)Double.parseDouble(dto.getFutureQty()));
     stock.setStockThreshold(PentlandfacadesConstants.DEFAULT_STOCK_THRESHOLD);
     futureStockData.setStock(stock);
     return futureStockData;

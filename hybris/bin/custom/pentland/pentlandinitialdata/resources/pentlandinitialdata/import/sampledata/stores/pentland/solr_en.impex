@@ -24,12 +24,12 @@ $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=
 $lang=en
 
 UPDATE SolrIndexedProperty;name[unique=true];displayName[lang=$lang];$solrIndexedType
-;teamwearType;Teamwear Type;
-;trainingwearType;Trainingwear Type;
+#;teamwearType;Teamwear Type;
+#;trainingwearType;Trainingwear Type;
 ;sport;Sport;
 ;useageOccasion;Useage Occasion;
 ;surface;Surface;
-;accessoryType;Accessory Type;
+#;accessoryType;Accessory Type;
 ;trainingMethod;Training Method;
 
 # Redirect page URL (Must use INSERT_UPDATE here)

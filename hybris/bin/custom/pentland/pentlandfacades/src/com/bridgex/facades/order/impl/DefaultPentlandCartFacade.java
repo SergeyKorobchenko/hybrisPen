@@ -139,9 +139,12 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     requestRoot.setCreditCheck(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
-    final B2BUnitModel userUnit = units.get(0);
-
-    requestRoot.setSapCustomerID(userUnit.getSapID());
+    if (CollectionUtils.isNotEmpty(units)) {
+      final B2BUnitModel userUnit = units.get(0);
+      requestRoot.setSapCustomerID(userUnit.getSapID());
+    } else {
+      LOG.error("B2BCustomer with id - " + getUserService().getCurrentUser().getUid() + " have no B2BUnit assigned");
+    }
 
     return requestRoot;
   }
@@ -150,8 +153,9 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     ProductModel productModel = entryModel.getProduct();
     final String brandCode = getBrandCodeFor(productModel);
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(brandCode);
-    reqProduct.setMaterialNumber(getMaterialKeyFor(productModel));
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
+    // todo uncomment after ERP fix
+    //reqProduct.setMaterialNumber(getMaterialKeyFor(productModel));
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);

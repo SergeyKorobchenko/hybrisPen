@@ -153,7 +153,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
         }
         if (StringUtils.isNotBlank(respSize.getAvailableQty())) {
           final StockData stockData = new StockData();
-          stockData.setStockLevel(Long.valueOf(respSize.getAvailableQty()));
+          stockData.setStockLevel((long)Double.parseDouble(respSize.getAvailableQty()));
           stockData.setStockThreshold(PentlandfacadesConstants.DEFAULT_STOCK_THRESHOLD);
           size.getVariantOption().setStock(stockData);
         }
@@ -204,10 +204,6 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   public MultiBrandCartDto createRequestRoot(final Date requestedDeliveryDate, boolean availabilityCheck, boolean creditCheck) {
     final MultiBrandCartDto requestRoot = new MultiBrandCartDto();
 
-    // Defaults are set in the dto itself
-    //requestRoot.setServiceConsumer();
-    //requestRoot.setDocType();
-
     requestRoot.setLang(getStoreSessionFacade().getCurrentLanguage().getIsocode().toUpperCase());
     requestRoot.setRdd(requestedDeliveryDate);
     requestRoot.setPricingCheck(ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
@@ -215,10 +211,12 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     requestRoot.setCreditCheck(creditCheck ? ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE : StringUtils.EMPTY);
 
     final List<B2BUnitModel> units = getPentlandB2BUnitService().getCurrentUnits();
-    final B2BUnitModel userUnit = units.get(0);
-
-    requestRoot.setSapCustomerID(userUnit.getSapID());
-
+    if (CollectionUtils.isNotEmpty(units)) {
+      final B2BUnitModel userUnit = units.get(0);
+      requestRoot.setSapCustomerID(userUnit.getSapID());
+    } else {
+      LOG.error("B2BCustomer with id - " + getUserService().getCurrentUser().getUid() + " have no B2BUnit assigned");
+    }
     return requestRoot;
   }
 
@@ -229,8 +227,9 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final List<VariantMatrixElementData> sizes = product.getElements();
     final String brandCode = product.getVariantOption().getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(brandCode);
-    reqProduct.setMaterialNumber(product.getVariantOption().getCode());
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
+    // todo uncomment after ERP fix
+    //reqProduct.setMaterialNumber(product.getVariantOption().getCode());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
@@ -262,8 +261,9 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   private MultiBrandCartInput createMultiBrandCartInput(final ProductData product, Map<String, B2BUnitModel> brandUnitsMap) {
     final String brandCode = product.getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(brandCode);
-    reqProduct.setMaterialNumber(product.getMaterialKey());
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
+    // todo uncomment after ERP fix
+    //reqProduct.setMaterialNumber(product.getMaterialKey());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);

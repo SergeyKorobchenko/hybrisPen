@@ -14,25 +14,25 @@ INSERT_UPDATE ClassificationClass; code[unique = true]; name[lang = $lang]; $cat
 ;clEquipment;Equipment
 
 INSERT_UPDATE ClassificationAttribute; code[unique = true]; name[lang = $lang]; $systemVersion[unique = true];
-;teamwearType;Teamwear Type;
-;trainingwearType;Trainingwear Type;
+#;teamwearType;Teamwear Type;
+#;trainingwearType;Trainingwear Type;
 ;sport;Sport;
 ;useageOccasion;Useage Occasion;
 ;surface;Surface;
-;accessoryType;Accessory Type;
+#;accessoryType;Accessory Type;
 ;trainingMethod;Training Method;
 
 INSERT_UPDATE ClassAttributeAssignment; $class[unique = true]; $attribute[unique = true]; position; attributeType(code[default = string]); multiValued[default = false]; range[default = false]; localized[default = true]; listable[default=true]
-;clTeamwear;teamwearType;0
-;clTrainingWear;trainingwearType;0
+#;clTeamwear;teamwearType;0
+#;clTrainingWear;trainingwearType;0
 ;clBalls;sport;0
 ;clBalls;useageOccasion;1
 ;clBalls;surface;2
-;clEquipment;accessoryType;0
+#;clEquipment;accessoryType;0
 ;clEquipment;trainingMethod;1
 
 INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
-;trainingwear;clTrainingWear
-;teamwear;clTeamwear
-;balls;clBalls
-;equipment;clEquipment
+;5100;clTrainingWear
+;5000;clTeamwear
+;5200;clBalls
+;5300;clEquipment

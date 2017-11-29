@@ -135,6 +135,7 @@
                         </bean>
                     </constructor-arg>
                     <!-- added section ends-->
+                    <property name="metadataTrustCheck" value="false"/>
                 </bean>
             </list>
         </constructor-arg>

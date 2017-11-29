@@ -12,8 +12,8 @@ $useageOccasion = @useageOccasion[$clAttrModifiers];
 $surface = @surface[$clAttrModifiers];
 $trainingMethod = @trainingMethod[$clAttrModifiers];
 UPDATE ApparelStyleVariantProduct;code[unique=true];$productCatalogVersion;$teamwearType;$trainingwearType;$sport;$accessoryType;$useageOccasion;$surface;$trainingMethod;
-;M18729;;Baselayers
-;M34704_B;;Baselayers
-;M25687_B;;Shorts
-;M27160;;Socks
-;M28323;;Socks
+#;M18729;;Baselayers
+#;M34704_B;;Baselayers
+#;M25687_B;;Shorts
+#;M27160;;Socks
+#;M28323;;Socks

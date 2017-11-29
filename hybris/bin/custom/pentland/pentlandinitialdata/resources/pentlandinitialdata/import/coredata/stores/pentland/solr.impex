@@ -111,16 +111,19 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 
 # Category fields
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
-;$solrIndexedType; allCategories   	;string ;	 ;;		;    ;    ;categoryCodeValueResolver			   ;    ;  ;    ;  ;    ;
-;$solrIndexedType; categoryName     ;text   ;true;;		;true;true;categoryNameValueResolver     ;true;40;true;20;true;10
-;$solrIndexedType; brandName        ;text   ;true;false;		;    ;    ;pentlandBrandCategoryNameValueResolver     ;    ;  ;    ;  ;    ;
-
+;$solrIndexedType; allCategories   	;string ;	 ;;		;    ;    ;navCategoryCodeValueResolver			   ;    ;  ;    ;  ;    ;
+;$solrIndexedType; facetCategoryName     ;text   ;true;;		;true;true;categoryNameValueResolver     ;
+;$solrIndexedType; categoryName     ;text   ;true;;		;true;true;navCategoryNameValueResolver     ;true;40;true;20;true;10
+;$solrIndexedType; brandName        ;text   ;true;false;		;    ;    ;pentlandBrandCategoryNameValueResolver     ;    ;  ;true;20;    ;
+;$solrIndexedType; productTypeName  ;text   ;true;;		;    ;    ;productTypeNameValueResolver     ;    ;  ;;;    ;
 
 # Category facets
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
 ;$solrIndexedType; categoryPath  ;string;;;Refine;Alpha;-9999;false;false;categoryPathValueProvider;
-;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;categoryCodeValueResolver;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;false;;navCategoryCodeValueResolver;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; facetCategory      ;string;;;Refine;Alpha; 6000;true;;categoryCodeValueResolver;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 ;$solrIndexedType; brand         ;string;false;;Refine;Alpha; 5000;true;;pentlandBrandCategoryCodeValueResolver     ;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; productType   ;string;;;MultiSelectOr;Alpha; 5000;true;;productTypeValueResolver     ;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 
 
 # Other facet properties
@@ -132,6 +135,11 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; productGroup     ;string ;  ; ; true; ; ;MultiSelectOr; Alpha; 5000; true; ; ; optionalModelPropertyFieldValueProvider;;
 ;$solrIndexedType; season           ;string ; ; ; true; ; ;MultiSelectOr; Alpha; 6000; true; ; ; springELValueProvider;;
 ;$solrIndexedType; gender           ;string;;;;;;Refine;Alpha; 4500;true;false;;genderValueResolver                       ;genderFacetDisplayNameProvider
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
+;$solrIndexedType; primaryColors;;;true;20
+;$solrIndexedType; size;;;true;20
+
 
 
 # Create the queries that will be used to extract data for Solr
@@ -193,21 +201,25 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;productTypeName:$solrIndexedType	 		 ;	 ;	  ;; ;TRUE;20;; ;  ;       ;  ;
+;brandName:$solrIndexedType	 		 ;	 ;	  ;; ;TRUE;20;; ;  ;       ;  ;
 ;baseProductCode:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;clearance:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;upc:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 
 # Facet search query properties
-INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];ftsQuery[default=false];ftsQueryBoost
 ;categoryPath:$solrIndexedType		;	;Refine	 		;-9999	;													;								;							;;
-;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
-;size:$solrIndexedType				;	;Refine	 		;2000	;					;								;defaultTopValuesProvider	;;
+#;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
+;facetCategory:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
+;productType:$solrIndexedType			;;MultiSelectOr;5000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
+;size:$solrIndexedType				;	;Refine	 		;2000	;					;								;defaultTopValuesProvider	;;;true;20
 ;price:$solrIndexedType			;	;MultiSelectOr	;4000	;													;								;defaultTopValuesProvider	;;
 ;productGroup:$solrIndexedType;;MultiSelectOr; 5000;
 ;season:$solrIndexedType;;MultiSelectOr; 6000;
 ;gender:$solrIndexedType 			;;Refine;7000;genderFacetDisplayNameProvider;;
-;primaryColors:$solrIndexedType 			;;MultiSelectOr;2000;colorFacetDisplayNameProvider;;
+;primaryColors:$solrIndexedType 			;;MultiSelectOr;2000;colorFacetDisplayNameProvider;;;;;true;20
 
 # Category search query facets
-INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;
 ;brand:$solrIndexedType 			;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
