@@ -30,7 +30,7 @@
 
 	<!--Security config for checkout - it has its own login page-->
 	<security:http pattern="/checkout/**">
-        <security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+    <security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
 		<security:access-denied-handler error-page="/login"/>
 		<security:session-management session-authentication-strategy-ref="fixation" />
 		<security:intercept-url pattern="/**" requires-channel="https" />
@@ -126,6 +126,23 @@
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider ref="acceleratorAuthenticationProvider" />
 	</security:authentication-manager>
+
+	<security:http pattern="/(termsofuse|contactus)" request-matcher="ciRegex">
+		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+		<security:intercept-url pattern="/termsofuse" access="permitAll"/>
+		<security:intercept-url pattern="/contactus" access="permitAll"/>
+		<security:form-login
+			login-page="/login"
+			authentication-failure-handler-ref="loginAuthenticationFailureHandler"
+			authentication-success-handler-ref="loginGuidAuthenticationSuccessHandler"
+			username-parameter="j_username"
+			password-parameter="j_password"
+			login-processing-url="/j_spring_security_check"
+		/>
+		<security:session-management session-authentication-strategy-ref="fixation" />
+		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
+		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
+	</security:http>
 
 	<bean id="acceleratorAuthenticationProvider" parent="abstractAcceleratorAuthenticationProvider" 
 			class="com.bridgex.storefront.security.AcceleratorAuthenticationProvider">

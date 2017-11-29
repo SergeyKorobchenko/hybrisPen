@@ -118,6 +118,8 @@
 		<value>/punchout/**</value>
 		<value>/assisted-service/emulate</value>
 		<value>/cart/rollover/MiniCart</value>
+		<value>/termsofuse</value>
+		<value>/contactus</value>
 	</util:set>
 
 	<!-- List of control mappings, i.e. those that do not launch a new page but would only change a value on the server side such as language. -->
@@ -127,6 +129,8 @@
 		<value>/cart/rollover/MiniCart</value>
 		<value>/assisted-service/emulate</value>
 		<value>/register/captcha/widget/recaptcha</value>
+		<value>/termsofuse</value>
+		<value>/contactus</value>
 	</util:set>
 
 	<!-- Take the existing exclusions and add this addons' unsecured mappings to it -->

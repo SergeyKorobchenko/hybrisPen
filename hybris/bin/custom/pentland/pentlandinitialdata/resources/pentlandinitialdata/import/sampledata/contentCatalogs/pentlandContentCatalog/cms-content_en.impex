@@ -61,7 +61,11 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 
 # Terms Of Use Page
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;PentlandTermsOfUseParagraphComponent;"<a name=""PentlandTerms""/><div class=""terms""><h2>Terms of Use</h2><h4>Company Information</h4><p>
+;;PentlandTermsOfUseParagraphComponent;"<a name=""PentlandTerms""></a>
+<div class=""terms"">
+<h2>Terms of Use</h2>
+<h4>Company Information</h4>
+<p>
 Pentland Brands Limited<br/>
 Company Registration Number: 09820760<br/>
 Company Registration Address: 8 Manchester Square, London, W1U 3PH, UK<br/>
@@ -498,7 +502,7 @@ The Features
 
 #Contact Us Page
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;PentlandContactUsParagraphComponent ;"<div class=""contact-info""> <h3> We are here </h3> <h5> We are a truly global business with offices in 26 locations worldwide </h5> <h4> Our Global HQ </h4> <p> Pentland Brands Limited<br/> Lakeside, Squires Lane, London, N3 2QL, UK<br/> <a href=""tel:+4402083462600"">+44(0)20 8346 2600</a><br/> <a class=""mail"" href=""mailto:b2binfo@pentland.com?subject=Pentland%20Brands%20-%20Wholesale%20and%20Retail%20Portal%20Enquiry"">b2binfo@pentland.com</a><br/> </p> </div>"
+;;PentlandContactUsParagraphComponent ;"<div class=""contact-info""><h3> We are here </h3> <h5> We are a truly global business with offices in 26 locations worldwide </h5> <h4> Our Global HQ </h4> <p> Pentland Brands Limited<br/> Lakeside, Squires Lane, London, N3 2QL, UK<br/> <a href=""tel:+4402083462600"">+44(0)20 8346 2600</a><br/> <a class=""mail"" href=""mailto:b2binfo@pentland.com?subject=Pentland%20Brands%20-%20Wholesale%20and%20Retail%20Portal%20Enquiry"">b2binfo@pentland.com</a><br/> </p> </div>"
 
 
 

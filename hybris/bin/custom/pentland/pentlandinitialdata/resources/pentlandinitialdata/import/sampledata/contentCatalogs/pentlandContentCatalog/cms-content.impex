@@ -174,9 +174,9 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; TermsOfUseLink        ; Terms Of Use Link    ; "/termsOfUse#PentlandTerms" ; TermsOfUseLink    ; TermsOfUseLink    ; newWindow
-; ; CookiePolicyLink      ; Cookie Policy Link   ; "/termsOfUse#CookiePolicy"  ; CookiePolicyLink  ; CookiePolicyLink  ; newWindow
-; ; PrivacyPolicyLink     ; Privacy Policy Link  ; "/termsOfUse#PrivacyPolicy" ; PrivacyPolicyLink ; PrivacyPolicyLink ; newWindow
+; ; TermsOfUseLink        ; Terms Of Use Link    ; "/termsofuse#PentlandTerms" ; TermsOfUseLink    ; TermsOfUseLink    ;
+; ; CookiePolicyLink      ; Cookie Policy Link   ; "/termsofuse#CookiePolicy"  ; CookiePolicyLink  ; CookiePolicyLink  ;
+; ; PrivacyPolicyLink     ; Privacy Policy Link  ; "/termsofuse#PrivacyPolicy" ; PrivacyPolicyLink ; PrivacyPolicyLink ;
 ; ; ModernSlaveryLink     ; Modern Slavery Link  ; "http://www.pentland.com/downloads/modern-slavery/Pentland-Modern-Slavery-Report.pdf"; ModernSlaveryLink ; ModernSlaveryLink ; newWindow
 
 
@@ -206,7 +206,7 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; ContactUsLink  ; Contact Us Link ; "/contactUs" ; ContactUsLink ; ContactUsLink ; newWindow
+; ; ContactUsLink  ; Contact Us Link ; "/contactus" ; ContactUsLink ; ContactUsLink ;
 ###### Navigation End ######
 
 
@@ -583,7 +583,6 @@ INSERT_UPDATE ViewStoreAction; $contentCV[unique = true]; uid[unique = true]; ur
 ; ; ViewStoreAction ; ; View Store Action ; ActionRestriction ; ViewStoreAction
 ###### Store Finder Page End ######
 
-
 ###### FAQ Page Start ######
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'termsOfUsePage']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Section2A-FAQ ; Section2A ; ; Section2ASlot-FAQ ; ; ;
@@ -929,7 +928,7 @@ INSERT_UPDATE CMSUserRestriction; $contentCV[unique = true]; uid[unique = true];
 ; ; AnonymousUserRestriction ; Anonymous User Restriction ; anonymous ; LoginLink ; AnonymousUserRestriction
 
 INSERT_UPDATE CMSInverseRestriction; $contentCV[unique = true]; name; originalRestriction(&userRestriction)[allownull = true]; uid[unique = true]; components(&componentRef)
-; ; Logged in User ; anonymousUserRestriction ; loggedInUser ; MyAccountComponent
+; ; Logged in User ; anonymousUserRestriction ; loggedInUser ; MyAccountComponent,SearchBox,MiniCart,OrderToolsComponent,PentlandCategoryNavigationComponent
 
 INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&componentRef)
 ; ; MyAccountLinkCustomerGroupRestriction ; My Account Link Customer Group Restriction ; b2bcustomergroup ; true ; MyAccountComponent
