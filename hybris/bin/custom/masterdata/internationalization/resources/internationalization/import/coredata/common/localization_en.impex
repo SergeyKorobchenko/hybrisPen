@@ -1827,8 +1827,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.accountsummary.unit.details.page.sort.byDocumentDateDesc;Document Date Desc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentNumberAsc;Document # Asc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentNumberDesc;Document # Desc
-;text.company.accountsummary.unit.details.page.sort.byDocumentStatusAsc;Document Status Asc
-;text.company.accountsummary.unit.details.page.sort.byDocumentStatusDesc;Document Status Desc
+;text.company.accountsummary.unit.details.page.sort.byDocumentStatusAsc;Status Asc
+;text.company.accountsummary.unit.details.page.sort.byDocumentStatusDesc;Status Desc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentTypeAsc;Document Type Asc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentTypeDesc;Document Type Desc
 ;text.company.accountsummary.unit.details.page.sort.byDueDateAsc;Due Date Asc
