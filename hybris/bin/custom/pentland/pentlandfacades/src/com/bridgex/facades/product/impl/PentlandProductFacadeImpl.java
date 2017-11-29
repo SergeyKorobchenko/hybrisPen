@@ -153,7 +153,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
         }
         if (StringUtils.isNotBlank(respSize.getAvailableQty())) {
           final StockData stockData = new StockData();
-          stockData.setStockLevel(Long.valueOf(respSize.getAvailableQty()));
+          stockData.setStockLevel((long)Double.parseDouble(respSize.getAvailableQty()));
           stockData.setStockThreshold(PentlandfacadesConstants.DEFAULT_STOCK_THRESHOLD);
           size.getVariantOption().setStock(stockData);
         }

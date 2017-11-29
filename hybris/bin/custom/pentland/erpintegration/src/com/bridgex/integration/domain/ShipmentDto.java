@@ -13,7 +13,7 @@ public class ShipmentDto {
   }
 
   @JsonProperty("E_SHIP_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date shipDate;
 
   @JsonProperty("E_SHIP_AMOUNT")
