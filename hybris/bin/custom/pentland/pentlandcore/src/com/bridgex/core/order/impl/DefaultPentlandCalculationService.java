@@ -41,6 +41,8 @@ public class DefaultPentlandCalculationService extends DefaultCalculationService
     //disable calculation, reset base price only
     if (pentlandOrderRequiresCalculationStrategy.requiresCalculation(order)) {
       calculateEntries(order, false);
+      setCalculatedStatus(order);
+      saveOrder(order);
     }
   }
 
