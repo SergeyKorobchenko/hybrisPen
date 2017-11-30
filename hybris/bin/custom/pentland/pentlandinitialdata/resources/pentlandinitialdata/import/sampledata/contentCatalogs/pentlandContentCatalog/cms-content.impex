@@ -153,7 +153,7 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; PentlandLtdLink ; Pentland Ltd Link ; "http://pentland.com/" ; PentlandLtdLink ; PentlandLtdLink ; newWindow
+; ; PentlandLtdLink ; Pentland Ltd Link ; "http://pentland.com/"                         ; PentlandLtdLink ; PentlandLtdLink ; newWindow
 ; ; OurBrandsLink   ; Our Brands Link   ; "http://www.pentland.com/our-brands.html"      ; OurBrandsLink   ; OurBrandsLink   ; newWindow
 ; ; OurNewsLink     ; Our News Link     ; "http://www.pentland.com/our-news.aspx"        ; OurNewsLink     ; OurNewsLink     ; newWindow
 
@@ -167,17 +167,17 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 
 ## entries of the above navigation nodes ##
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
-; TermsOfUseNavNodeEntry        ; ; Terms Of Use Navigation Node Entry     ; TermsOfUseNavNode ; TermsOfUseLink   ;
-; CookiePolicyNavNodeEntry      ; ; Cookie Policy Navigation Node Entry    ; CookiePolicyNavNode ; CookiePolicyLink    ;
-; PrivacyPolicyNavNodeEntry     ; ; Privacy Policy Navigation Node Entry   ; PrivacyPolicyNavNode ; PrivacyPolicyLink      ;
+; TermsOfUseNavNodeEntry        ; ; Terms Of Use Navigation Node Entry     ; TermsOfUseNavNode    ; TermsOfUseLink   ;
+; CookiePolicyNavNodeEntry      ; ; Cookie Policy Navigation Node Entry    ; CookiePolicyNavNode  ; CookiePolicyLink ;
+; PrivacyPolicyNavNodeEntry     ; ; Privacy Policy Navigation Node Entry   ; PrivacyPolicyNavNode ; PrivacyPolicyLink;
 ; ModernSlaveryNavNodeEntry     ; ; Modern Slavery Navigation Node Entry   ; ModernSlaveryNavNode ; ModernSlaveryLink;
 
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; TermsOfUseLink        ; Terms Of Use Link    ; "/termsofuse#1" ; TermsOfUseLink    ; TermsOfUseLink    ; newWindow
-; ; CookiePolicyLink      ; Cookie Policy Link   ; "/termsofuse#2" ; CookiePolicyLink  ; CookiePolicyLink  ; newWindow
-; ; PrivacyPolicyLink     ; Privacy Policy Link  ; "/termsofuse#3" ; PrivacyPolicyLink ; PrivacyPolicyLink ; newWindow
-; ; ModernSlaveryLink     ; Modern Slavery Link  ; "/modernslavery"; ModernSlaveryLink ; ModernSlaveryLink ; newWindow
+; ; TermsOfUseLink        ; Terms Of Use Link    ; "/termsofuse#PentlandTerms" ; TermsOfUseLink    ; TermsOfUseLink    ;
+; ; CookiePolicyLink      ; Cookie Policy Link   ; "/termsofuse#CookiePolicy"  ; CookiePolicyLink  ; CookiePolicyLink  ;
+; ; PrivacyPolicyLink     ; Privacy Policy Link  ; "/termsofuse#PrivacyPolicy" ; PrivacyPolicyLink ; PrivacyPolicyLink ;
+; ; ModernSlaveryLink     ; Modern Slavery Link  ; "http://www.pentland.com/downloads/modern-slavery/Pentland-Modern-Slavery-Report.pdf"; ModernSlaveryLink ; ModernSlaveryLink ; newWindow
 
 
 ##----- level 5. children of FooterCol3NavNode -----##
@@ -206,7 +206,7 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; ContactUsLink  ; Contact Us Link ; "/contactus" ; ContactUsLink ; ContactUsLink ; newWindow
+; ; ContactUsLink  ; Contact Us Link ; "/contactus" ; ContactUsLink ; ContactUsLink ;
 ###### Navigation End ######
 
 
@@ -583,50 +583,33 @@ INSERT_UPDATE ViewStoreAction; $contentCV[unique = true]; uid[unique = true]; ur
 ; ; ViewStoreAction ; ; View Store Action ; ActionRestriction ; ViewStoreAction
 ###### Store Finder Page End ######
 
-
 ###### FAQ Page Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'faq']; contentSlot(uid, $contentCV)[unique = true];;;
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'termsOfUsePage']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Section2A-FAQ ; Section2A ; ; Section2ASlot-FAQ ; ; ;
 ; ; Section2B-FAQ ; Section2B ; ; Section2BSlot-FAQ ; ; ;
 
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; Section2ASlot-FAQ ; Section2A Slot for FAQ Page ; true ; FAQMenuParagraph ; ; ;
-; ; Section2BSlot-FAQ ; Section2B Slot for FAQ Page ; true ; FAQTextParagraph ; ; ;
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; Section2ASlot-FAQ ; Section2A Slot for FAQ Page ; true ; FAQMenuParagraph
+; ; Section2BSlot-FAQ ; Section2B Slot for FAQ Page ; true ; PentlandTermsOfUseParagraphComponent,MitreTermsParagraphComponent,PentlandCookiePolicyParagraphComponent,PentlandPrivacyPolicyParagraphComponent
 
-INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
-; ; faqMenuParagraph ; FAQ Paragraph ; FAQMenuParagraph ; ; ; ;
-; ; faqTextParagraph ; FAQ Paragraph ; FAQTextParagraph ; ; ; ;
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; faqMenuParagraph                       ; FAQ Paragraph                              ; FAQMenuParagraph
+; ; PentlandTermsOfUseParagraphComponent   ; Pentland Terms Of Use Paragraph Component  ; PentlandTermsOfUseParagraphComponent
+; ; MitreTermsParagraphComponent           ; Mitre Terms Paragraph Component            ; MitreTermsParagraphComponent
+; ; PentlandCookiePolicyParagraphComponent ; Pentland Cookie Policy Paragraph Component ; PentlandCookiePolicyParagraphComponent
+; ; PentlandPrivacyPolicyParagraphComponent; Pentland Privacy Policy Paragraph Component; PentlandPrivacyPolicyParagraphComponent
 ###### FAQ Page End ######
 
+###### Contact Page Start ######
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; Section1Slot-contactuspage  ; Section1 Slot for Contact Us Page  ; true ; PentlandContactUsParagraphComponent
 
-###### Order Expired Page Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'orderExpired']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; Section2A-OrderExpired ; Section2A ; ; Section2ASlot-OrderExpired ; ; ;
-; ; Section2B-OrderExpired ; Section2B ; ; Section2BSlot-OrderExpired ; ; ;
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true]
+; ; Section1-contactuspage  ; Section1  ;contactUsPage ; Section1Slot-contactuspage
 
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; Section2ASlot-OrderExpired ; Section2A Slot for Order Expired Page ; true ; OrderExpiredMenuParagraph ; ; ;
-; ; Section2BSlot-OrderExpired ; Section2B Slot for Order Expired Page ; true ; OrderExpiredTextParagraph ; ; ;
-
-INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
-; ; orderExpiredMenuParagraph ; Order Expired Paragraph ; OrderExpiredMenuParagraph ; ; ; ;
-; ; orderExpiredTextParagraph ; Order Expired Paragraph ; OrderExpiredTextParagraph ; ; ; ;
-###### Order Expired Page End ######
-
-
-###### Terms and Conditions Page Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'termsAndConditions']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; Section2A-TermsAndConditions ; Section2A ; ; Section2ASlot-TermsAndConditions ; ; ;
-; ; Section2B-TermsAndConditions ; Section2B ; ; Section2BSlot-TermsAndConditions ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; Section2ASlot-TermsAndConditions ; Section2A Slot for Terms and Conditions Page ; true ; TermsAndConditionsMenuParagraph ; ; ;
-; ; Section2BSlot-TermsAndConditions ; Section2B Slot for Terms and Conditions Page ; true ; TermsAndConditionsTextParagraph ; ; ;
-
-INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
-; ; termsAndConditionsMenuParagraph ; Terms and Conditions Paragraph ; TermsAndConditionsMenuParagraph ; ; ; ;
-; ; termsAndConditionsTextParagraph ; Terms and Conditions Paragraph ; TermsAndConditionsTextParagraph ; ; ; ;
-###### Terms and Conditions Page End ######
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; PentlandContactUsParagraphComponent    ; Pentland Contact Us Paragraph Component    ; PentlandContactUsParagraphComponent
+###### Contact Page End ######
 
 
 ###### Account Add Edit Address Start ######
@@ -773,39 +756,6 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 ; ; QuoteTotalsComponent                 ; Quote Totals Display Component           ; /WEB-INF/views/responsive/pages/quote/quoteTotalsDisplay.jsp  ; ; QuoteTotalsComponent
 ###### Account Quote Details End ######
 
-
-###### Account order approval dashboard Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'order-approval-dashboard']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-order-approval-dashboard ; SideContent ; ; SideContent-order-approval-dashboard ; ; ;
-; ; BodyContent-order-approval-dashboard ; BodyContent ; ; BodyContent-order-approval-dashboard ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-order-approval-dashboard ; Side Content Slot for Account order approval dashbaord ; true ;                                        ; ; ;
-; ; BodyContent-order-approval-dashboard ; Body Content Slot for Account order approval dashbaord ; true ; AccountOrderApprovalDashboardComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; AccountOrderApprovalDashboardComponent ; Account OrderApproval Dashboard Component ; /WEB-INF/views/addons/pentlandb2baddon/responsive/pages/account/accountOrderApprovalDashboardPage.jsp ; ; AccountOrderApprovalDashboardComponent
-###### Account order approval dashboard End ######
-
-
-###### Account order approval details Start ######
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'order-approval-details']; contentSlot(uid, $contentCV)[unique = true];;;
-; ; SideContent-order-approval-details ; SideContent ; ; SideContent-order-approval-details ; ; ;
-; ; BodyContent-order-approval-details ; BodyContent ; ; BodyContent-order-approval-details ; ; ;
-
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
-; ; SideContent-order-approval-details ; Side Content Slot for Account order approval details ; true ;                                                                                                                                                                                                                                                       ; ; ;
-; ; BodyContent-order-approval-details ; Body Content Slot for Account order approval details ; true ; AccountOrderApprovalDetailsHeadlineComponent,AccountOrderApprovalDetailsOverviewComponent,AccountOrderApprovalDetailsComponent,AccountOrderDetailsItemsComponent,AccountOrderDetailsTotalsComponent,AccountOrderApprovalDetailsBottomActionsComponent ; ; ;
-
-INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
-; ; AccountOrderApprovalDetailsHeadlineComponent      ; Account OrderApproval Details Headline Component ; /WEB-INF/views/addons/pentlandb2baddon/responsive/pages/account/accountOrderApprovalDetailHeadline.jsp      ;                    ; AccountOrderApprovalDetailsHeadlineComponent
-; ; AccountOrderApprovalDetailsOverviewComponent      ; Account OrderApproval Details Overview Component ; /WEB-INF/views/addons/pentlandb2baddon/responsive/pages/account/accountOrderDetailOverview.jsp              ; ApproveOrderAction ; AccountOrderApprovalDetailsOverviewComponent
-; ; AccountOrderApprovalDetailsComponent              ; Account OrderApproval Details Component          ; /WEB-INF/views/addons/pentlandb2baddon/responsive/pages/account/accountOrderApprovalDetailsPage.jsp         ;                    ; AccountOrderApprovalDetailsComponent
-; ; AccountOrderApprovalDetailsBottomActionsComponent ; Account OrderApproval Details Component          ; /WEB-INF/views/addons/pentlandb2baddon/responsive/pages/account/accountOrderApprovalDetailBottomActions.jsp ; ApproveOrderAction ; AccountOrderApprovalDetailsBottomActionsComponent
-
-INSERT_UPDATE ApproveOrderAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
-; ; ApproveOrderAction ; /my-account/order/approvalDecision ; Accept Order Action ; ActionRestriction ; ApproveOrderAction
-###### Account order approval details End ######
 
 ###### Account Show/Hide Prices Page Start ######
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
@@ -978,7 +928,7 @@ INSERT_UPDATE CMSUserRestriction; $contentCV[unique = true]; uid[unique = true];
 ; ; AnonymousUserRestriction ; Anonymous User Restriction ; anonymous ; LoginLink ; AnonymousUserRestriction
 
 INSERT_UPDATE CMSInverseRestriction; $contentCV[unique = true]; name; originalRestriction(&userRestriction)[allownull = true]; uid[unique = true]; components(&componentRef)
-; ; Logged in User ; anonymousUserRestriction ; loggedInUser ; MyAccountComponent
+; ; Logged in User ; anonymousUserRestriction ; loggedInUser ; MyAccountComponent,SearchBox,MiniCart,OrderToolsComponent,PentlandCategoryNavigationComponent
 
 INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&componentRef)
 ; ; MyAccountLinkCustomerGroupRestriction ; My Account Link Customer Group Restriction ; b2bcustomergroup ; true ; MyAccountComponent
@@ -988,7 +938,7 @@ INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = t
 ###### Media Start ######
 ## site logo ##
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/svg+xml']; altText; folder(qualifier)[default = 'images']
-; ; /images/theme/logo_pentland.png ; logo_pentland.png ; $siteResource/images/theme/logo_pentland.png ; image/png ; hybris Accelerator ;
+; ; /images/theme/logo_pentland.png ; logo_pentland.png ; $siteResource/images/theme/logo_pentland.png ; image/png ; PentlandConnect ;
 
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; folder(qualifier)[default = 'images']
 ; ; addEditAddressPagePreview            ; text/png ; AddEditAddressPage.png            ; $jarResourceCms/preview-images/pentland/AddEditAddressPage.png
@@ -1028,11 +978,9 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 ###### update contentPage to set previewImage Start ######
 ## set previewImage and linkComponent ##
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(&linkRef)
-; ; termsAndConditions ; termsAndConditionsPage ; TermsAndConditionsLink
 ; ; homepage           ; homepagePreview        ; HomepageNavLink
 
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; TermsAndConditionsLink ; Terms and Conditions Link ; /termsAndConditions ; TermsAndConditionsLink ; TermsAndConditionsLink
 ; ; FAQLink                ; FAQ Link                  ; /faq                ; FAQLink                ; FAQLink
 
 UPDATE ProductPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
@@ -1070,7 +1018,6 @@ UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(
 ###### update contentPage to set previewImage End ######
 
 
-
 ###### Not Found Page Start ######
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; Pentland-MiddleContent-Errorpage ; Pentland Middle Content Slot for Error Page ; true ; PentlandErrorpageBannerComponent ; ; ;
@@ -1087,10 +1034,6 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV);;;;;
 ; ; notFound ; notFoundPagePreview ; ; ; ; ;
 ###### Not Found Page End ######
-
-
-
-
 
 ################### ASM
 
