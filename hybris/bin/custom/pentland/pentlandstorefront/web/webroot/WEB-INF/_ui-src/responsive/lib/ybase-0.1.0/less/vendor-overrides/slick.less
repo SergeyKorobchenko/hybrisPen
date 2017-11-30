@@ -1,4 +1,12 @@
 //== Slider
+.p_slider > .ps-item {
+  display: none;
+
+  &:first-of-type {
+    display: block;
+  }
+}
+
 .slick-list {
   z-index: 1;
 }
@@ -88,12 +96,5 @@
     &.slick-active button {
       background-color: @carousel-dots-active-color;
     }
-  }
-}
-
-.p_slider > .ps-item {
-  display: none;
-  &:first-of-type {
-    display: block;
   }
 }
