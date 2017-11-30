@@ -25,7 +25,9 @@
 	<c:forEach items="${banners}" var="banner" varStatus="status">
 		<c:if test="${ycommerce:evaluateRestrictions(banner)}">
 			<div class="ps-item">
-				<img src="${banner.media.url}" width="100%"/>
+				<img src="${banner.media.url}" width="100%"
+					 alt="${not empty banner.headline ? banner.headline : banner.media.altText}"
+					 title="${not empty banner.headline ? banner.headline : banner.media.altText}"/>
 			</div>
 		</c:if>
 	</c:forEach>
