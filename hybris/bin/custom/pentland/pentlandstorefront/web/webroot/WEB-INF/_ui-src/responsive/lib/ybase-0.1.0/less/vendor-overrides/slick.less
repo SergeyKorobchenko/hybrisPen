@@ -3,45 +3,6 @@
   z-index: 1;
 }
 
-//original selectors
-//.p_slider .slick-dots, .p_related .slick-dots
-.extend_1 {
-  position: absolute;
-  bottom: 11px;
-  width: 100%;
-  text-align: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  z-index: 30;
-}
-
-//original selectors
-//.p_slider .slick-dots >li, .p_related .slick-dots >li
-.extend_2 {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 4px;
-  padding: 0;
-}
-
-//original selectors
-//.p_slider .slick-dots >li button, .p_related .slick-dots >li button
-.extend_3 {
-  width: 10px;
-  height: 10px;
-  background: transparent;
-  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-  border-radius: 20px;
-  cursor: pointer;
-  overflow: hidden;
-  text-indent: -1000px;
-  border: 2px solid #fff;
-  //border: 0;
-  padding: 0;
-}
-
 //== Arrows
 .slick-arrow {
   position: absolute;
@@ -129,40 +90,6 @@
     }
   }
 }
-
-.p_slider {
-  position: relative;
-
-  .slick-arrow {
-    position: absolute;
-    z-index: 20;
-    &.slick-disabled {
-      opacity: 0.7;
-      cursor: default;
-    }
-  }
-  .slick-list {
-    position: relative;
-    z-index: 10;
-  }
-  .slick-dots {
-    .extend_1;
-    > li {
-      .extend_2;
-      button {
-        .extend_3;
-      }
-      &.slick-active button {
-        cursor: default;
-        background: #fff;//@color_green_haze_approx;
-      }
-    }
-  }
-  &._hide-dots .slick-dots {
-    display: none !important;
-  }
-}
-
 
 .p_slider > .ps-item {
   display: none;
