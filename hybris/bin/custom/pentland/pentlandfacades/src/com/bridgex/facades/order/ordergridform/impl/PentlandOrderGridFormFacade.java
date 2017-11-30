@@ -3,6 +3,10 @@ package com.bridgex.facades.order.ordergridform.impl;
 import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Required;
+
+import com.bridgex.core.model.ProductSizeModel;
+import com.bridgex.core.product.ProductSizeService;
 
 import de.hybris.platform.acceleratorfacades.ordergridform.impl.DefaultOrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.LeafDimensionData;
@@ -18,6 +22,8 @@ import de.hybris.platform.commercefacades.product.data.VariantOptionQualifierDat
 public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
 
   public static final String SIZE_VARIANT = "ApparelSizeVariantProduct";
+
+  private ProductSizeService productSizeService;
 
   @Override
   public Map<String, ReadOnlyOrderGridData> getReadOnlyOrderGrid(final List<OrderEntryData> orderEntryDataList) {
@@ -53,7 +59,8 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
             dimensionHeaderMap.put(qualifier.getName(), qualifier.getValue());
             hashKey.append(qualifier.getValue());
           }else {
-            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, qualifier.hashCode());
+            ProductSizeModel productSize = productSizeService.getProductSize(qualifier.getValue());
+            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, productSize != null ? productSize.getPriority() : -qualifier.hashCode());
           }
         }
       }
@@ -77,4 +84,16 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
     leafDimensionData.setSequence(sequence);
   }
 
+  @Required
+  public void setProductSizeService(ProductSizeService productSizeService) {
+    this.productSizeService = productSizeService;
+  }
+
+  protected Set<LeafDimensionData> populateLeafDimensionData(final LeafDimensionData leafDimensionData)
+  {
+    final Set<LeafDimensionData> leafDimensionDataSet = new TreeSet<>((obj1, obj2) -> obj2.getSequence() - obj1.getSequence());
+    leafDimensionDataSet.add(leafDimensionData);
+
+    return leafDimensionDataSet;
+  }
 }

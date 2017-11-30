@@ -84,6 +84,11 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
           cartModel.setTotalTax(Double.parseDouble(response.getMultiBrandCartOutput().getTotalTaxPrice()));
           getModelService().save(cartModel);
         }
+      }else{
+        cartModel.setTotalTax(0d);
+        cartModel.setTotalPrice(0d);
+        cartModel.setSubtotal(0d);
+        getModelService().save(cartModel);
       }
     }
   }
