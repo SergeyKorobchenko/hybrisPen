@@ -161,3 +161,17 @@ INSERT_UPDATE ProductSize;code[unique=true];priority
 ;XL;6
 ;XXL;7
 ;XXXL;8
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;wide;SimpleResponsiveBannerComponent
+;wide;CMSLinkComponent
+;wide;SimpleBannerComponent
+;wide;BannerComponent
+;narrow;SimpleResponsiveBannerComponent
+;narrow;CMSLinkComponent
+;narrow;SimpleBannerComponent
+;narrow;BannerComponent
+;minicart;NavigationComponent
+;headerlinks;NavigationComponent
+;navigation;CategoryNavigationComponent
+;footer;FooterNavigationComponent

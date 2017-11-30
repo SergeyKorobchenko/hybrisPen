@@ -273,9 +273,9 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContentPage1Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;NavigationBar;;;navigation
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
-;NavigationBar;;;navigation
 ;Section1;;;wide
 ;Section2A;;;narrow
 ;Section2B;;;wide
@@ -578,8 +578,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;SiteLogo-ContentPage1;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ContentPage1;HomepageNavLink;;HomepageNavLinkSlot;true
 ;;NavigationBar-ContentPage1;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-ContentPage1;MiniCart;;MiniCartSlot;true
 ;;Footer-ContentPage1;Footer;;FooterSlot;true
+;;MiniCart-ContentPage1;MiniCart;;MiniCartSlot;true
 ;;HeaderLinks-ContentPage1;HeaderLinks;;HeaderLinksSlot;true
 ;;SearchBox-ContentPage1;SearchBox;;SearchBoxSlot;true
 ;;TopHeaderSlot-ContentPage1;TopHeaderSlot;;TopHeaderSlot;true
@@ -801,15 +801,11 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;quoteEditPage;Quote Edit Page;QuoteEditPageTemplate;quoteEditPage
 ;;accountHidePrices;Account Page;AccountPageTemplate;accountHidePrices
 
+
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;faq;Frequently Asked Questions FAQ Page;ContentPage1Template;/faq
-
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;orderExpired;Order Expired Page;ContentPage1Template;/orderExpired
-
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;termsAndConditions;Terms and Conditions Page;ContentPage1Template;/termsAndConditions
+;;contactUsPage ;Contact Us  ;ContentPage1Template ;/contactus
+;;termsOfUsePage;Terms of Use;ContentPage1Template ;/termsofuse
 
 # Product Details Page
 INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
