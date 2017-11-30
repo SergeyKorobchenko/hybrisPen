@@ -36,14 +36,6 @@
         <div><spring:theme code="text.quote.edit.confirmation.message"/></div> 
         <br/>
          <div><b><spring:theme code="text.quote.edit.warning.message"/></b></div>
-        <c:if test="${not empty quoteData.expirationTime}">
-            <div>
-                <fmt:formatDate value="${quoteData.expirationTime}" dateStyle="medium" timeStyle="short" type="both"
-                                var="formattedExpirationTime"/>
-                <spring:theme code="text.quote.validity.message"
-                              arguments="${formattedExpirationTime}" argumentSeparator="$$"/>
-            </div>
-        </c:if>
          <br/>
       
         <form:form action="${editQuoteUrl}" method="get">

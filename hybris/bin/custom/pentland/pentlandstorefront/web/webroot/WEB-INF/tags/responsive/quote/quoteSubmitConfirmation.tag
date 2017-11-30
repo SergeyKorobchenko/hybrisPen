@@ -41,20 +41,6 @@
             </label>
             <p class="modal__top--text js-modal-quote-description">${fn:escapeXml(quoteData.description)}</p>
         </div>
-        <c:choose>
-            <c:when test="${ycommerce:isQuoteUserSellerApprover()}">
-                <p class="modal__bottom--text">
-                    <fmt:formatDate value="${quoteData.expirationTime}" dateStyle="medium" timeStyle="short" type="both"
-                                    var="formattedExpirationTime"/>
-                    <spring:theme code="text.quote.validity.message" arguments="${formattedExpirationTime}" argumentSeparator="$$"/>
-                </p>
-            </c:when>
-            <c:when test="${ycommerce:isQuoteUserSalesRep()}">
-                <p class="modal__bottom--text">
-                    <spring:theme code="text.quote.expiration.time.warning" arguments="${defaultOfferValidityPeriodDays}"/>
-                </p>
-            </c:when>
-        </c:choose>
         <div class="modal__bottom">
             <p class="modal__bottom--text modal__text--bold"><spring:theme code="${ycommerce:isQuoteUserSalesRep() ? 'text.quote.conteroffer.possible.checkout.message' : 'text.quote.submit.not.modifiable.message'}"/></p>
             <p class="modal__bottom--text modal__text--bold"><spring:theme code="${ycommerce:isQuoteUserSalesRep() ? 'text.quote.conteroffer.confirmation.message' : 'text.quote.submit.confirmation.message'}"/></p>
