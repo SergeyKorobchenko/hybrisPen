@@ -14,72 +14,74 @@
 </cms:pageSlot>
 
 <header class="js-mainHeader">
-	<nav class="navigation navigation--top hidden-xs hidden-sm">
-		<div class="row">
-			<div class="col-sm-12 col-md-4">
-				<div class="nav__left js-site-logo">
-					<cms:pageSlot position="SiteLogo" var="logo" limit="1">
-						<cms:component component="${logo}" element="div" class="yComponentWrapper"/>
-					</cms:pageSlot>
+	<div class="container">
+		<nav class="navigation navigation--top hidden-xs hidden-sm b-section--full-width">
+			<div class="row">
+				<div class="col-sm-12 col-md-4">
+					<div class="nav__left js-site-logo">
+						<cms:pageSlot position="SiteLogo" var="logo" limit="1">
+							<cms:component component="${logo}" element="div" class="yComponentWrapper"/>
+						</cms:pageSlot>
+					</div>
 				</div>
-			</div>
-			<div class="col-sm-12 col-md-8">
-				<div class="nav__right">
-					<ul class="nav__links nav__links--account">
-						<c:if test="${empty hideHeaderLinks}">
-							<c:if test="${uiExperienceOverride}">
-								<li class="backToMobileLink"><c:url
-										value="/_s/ui-experience?level=" var="backToMobileStoreUrl" />
-									<a href="${backToMobileStoreUrl}"> <spring:theme
-											code="text.backToMobileStore" />
-									</a>
-								</li>
-							</c:if>
-
-							<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-								<c:set var="maxNumberChars" value="25" />
-								<c:if test="${fn:length(user.firstName) gt maxNumberChars}">
-									<c:set target="${user}" property="firstName"
-										value="${fn:substring(user.firstName, 0, maxNumberChars)}..." />
+				<div class="col-sm-12 col-md-8">
+					<div class="nav__right">
+						<ul class="nav__links nav__links--account">
+							<c:if test="${empty hideHeaderLinks}">
+								<c:if test="${uiExperienceOverride}">
+									<li class="backToMobileLink"><c:url
+											value="/_s/ui-experience?level=" var="backToMobileStoreUrl" />
+										<a href="${backToMobileStoreUrl}"> <spring:theme
+												code="text.backToMobileStore" />
+										</a>
+									</li>
 								</c:if>
 
-								<li class="logged_in js-logged_in">
-									<ycommerce:testId code="header_LoggedUser">
-										<spring:theme code="header.welcome" arguments="${user.firstName},${user.lastName}" htmlEscape="true" />
-									</ycommerce:testId>
-								</li>
-							</sec:authorize>
+								<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+									<c:set var="maxNumberChars" value="25" />
+									<c:if test="${fn:length(user.firstName) gt maxNumberChars}">
+										<c:set target="${user}" property="firstName"
+											value="${fn:substring(user.firstName, 0, maxNumberChars)}..." />
+									</c:if>
 
-							 <cms:pageSlot position="HeaderLinks" var="link">
-								 <cms:component component="${link}" element="li" />
-							 </cms:pageSlot>
+									<li class="logged_in js-logged_in">
+										<ycommerce:testId code="header_LoggedUser">
+											<spring:theme code="header.welcome" arguments="${user.firstName},${user.lastName}" htmlEscape="true" />
+										</ycommerce:testId>
+									</li>
+								</sec:authorize>
 
-							<sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')" >
-								<li class="liOffcanvas">
-									<ycommerce:testId code="header_Login_link">
-										<a href="<c:url value='/login'/>">
-											<spring:theme code="header.link.login" />
-										</a>
-									</ycommerce:testId>
-								</li>
-							</sec:authorize>
+								 <cms:pageSlot position="HeaderLinks" var="link">
+									 <cms:component component="${link}" element="li" />
+								 </cms:pageSlot>
 
-							<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
-								<li class="liOffcanvas">
-									<ycommerce:testId code="header_signOut">
-										<a href="<c:url value='/logout'/>">
-											<spring:theme code="header.link.logout" />
-										</a>
-									</ycommerce:testId>
-								</li>
-							</sec:authorize>
+								<sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')" >
+									<li class="liOffcanvas">
+										<ycommerce:testId code="header_Login_link">
+											<a href="<c:url value='/login'/>">
+												<spring:theme code="header.link.login" />
+											</a>
+										</ycommerce:testId>
+									</li>
+								</sec:authorize>
 
-						</c:if>
-					</ul>
+								<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
+									<li class="liOffcanvas">
+										<ycommerce:testId code="header_signOut">
+											<a href="<c:url value='/logout'/>">
+												<spring:theme code="header.link.logout" />
+											</a>
+										</ycommerce:testId>
+									</li>
+								</sec:authorize>
+
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
 	<%-- a hook for the my account links in desktop/wide desktop--%>
 	<div class="hidden-xs hidden-sm js-secondaryNavAccount collapse" id="accNavComponentDesktopOne">
 		<ul class="nav__links">
