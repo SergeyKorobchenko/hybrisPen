@@ -2862,7 +2862,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.soldTo;Sold To
 ;text.account.orderHistory.markFor;Mark For
 ;text.account.orderHistory.item.status;Status
-;text.account.orderHistory.item.qty;QTY
+;text.account.orderHistory.item.qty;Qty
 ;text.account.orderHistory.item.shipments;Shipments
 ;text.account.orderHistory.item.shipdate;Ship Date
 ;text.account.order.total;Order Total
