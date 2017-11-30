@@ -145,6 +145,9 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; OurBrandsNavNode   ; ; Our Brands   ; FooterCol1NavNode ; ; OurBrandsNavNode
 ; OurNewsNavNode     ; ; Our News     ; FooterCol1NavNode ; ; OurNewsNavNode
 
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; children(uid, $contentCV)
+; FooterCol1NavNode ; ; PentlandLtdNavNode,OurBrandsNavNode,OurNewsNavNode
+
 ## entries of the above navigation nodes ##
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
 ; PentlandLtdNavNodeEntry ; ; Pentland Ltd Navigation Node Entry ; PentlandLtdNavNode ; PentlandLtdLink ;
@@ -153,7 +156,7 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 
 ## links of the above navigation nodes ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']
-; ; PentlandLtdLink ; Pentland Ltd Link ; "http://pentland.com/" ; PentlandLtdLink ; PentlandLtdLink ; newWindow
+; ; PentlandLtdLink ; Pentland Ltd Link ; "http://www.pentland.com/pentland-group.html"  ; PentlandLtdLink ; PentlandLtdLink ; newWindow
 ; ; OurBrandsLink   ; Our Brands Link   ; "http://www.pentland.com/our-brands.html"      ; OurBrandsLink   ; OurBrandsLink   ; newWindow
 ; ; OurNewsLink     ; Our News Link     ; "http://www.pentland.com/our-news.aspx"        ; OurNewsLink     ; OurNewsLink     ; newWindow
 
@@ -164,6 +167,10 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; CookiePolicyNavNode ; ; Cookie Policy ; FooterCol2NavNode ; ; CookiePolicyNavNode
 ; PrivacyPolicyNavNode; ; Privacy Policy; FooterCol2NavNode ; ; PrivacyPolicyNavNode
 ; ModernSlaveryNavNode; ; Modern Slavery; FooterCol2NavNode ; ; ModernSlaveryNavNode
+
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; children(uid, $contentCV)
+; FooterCol2NavNode ; ; TermsOfUseNavNode,CookiePolicyNavNode,PrivacyPolicyNavNode,ModernSlaveryNavNode
+
 
 ## entries of the above navigation nodes ##
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
