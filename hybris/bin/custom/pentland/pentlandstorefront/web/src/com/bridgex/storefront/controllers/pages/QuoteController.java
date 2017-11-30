@@ -302,15 +302,6 @@ public class QuoteController extends AbstractCartPageController
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs("breadcrumb.quote.edit"));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		final double quoteThreshold = getQuoteFacade().getQuoteRequestThreshold(quoteCode);
-		if (quoteThreshold >= 0
-				&& !(GlobalMessages.containsMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_REJECT_INITIATION_REQUEST)))
-		{
-			// Display quote request minimum threshold only if it's set and quote version is equal to 1
-			GlobalMessages.addMessage(model, GlobalMessages.INFO_MESSAGES_HOLDER, QUOTE_REJECT_INITIATION_REQUEST, new Object[]
-			{ getFormattedPriceValue(quoteThreshold) });
-		}
-
 		return getViewForPage(model);
 	}
 
