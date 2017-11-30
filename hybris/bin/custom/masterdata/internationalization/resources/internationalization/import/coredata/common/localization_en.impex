@@ -2932,3 +2932,4 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.nav.facetShowLess_facetCategory;less categories...
 
 ;text.account.changes.saved;Changes saved
+;currency.GBP;£
