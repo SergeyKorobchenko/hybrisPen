@@ -84,10 +84,6 @@
     <div class="cart__quote__edit">
         <div class="quote__head">
             <div class="row">
-                <div class="col-xs-10 col-sm-5">
-                    <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-                    <span class="quote__head--title"><spring:theme code="quote.cart.title" /></span>
-                </div>
                 <div class="col-xs-2 text-right hidden-sm hidden-md hidden-lg">
                     <button class="quote__form--toggle" type="button" data-toggle="collapse" data-target="#quote__form--collapse" aria-expanded="false" aria-controls="quote__form--collapse"></button>
                 </div>
@@ -99,7 +95,7 @@
                         <spring:theme code="text.account.quote.status.display.${fn:escapeXml(cartData.quoteData.state)}"/>
                     </span>
                 </div>
-                <div class="col-xs-7 col-sm-3">
+                <div class="col-xs-7 col-sm-8">
                     <label class="quote__head--label">
                         <spring:theme code="text.quote.code"/>
                     </label>
