@@ -654,6 +654,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 
 UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
 ;;PentlandHomepageProductCarouselComponent;"Best Selling Products"
+;;MitreBrandPageBestSellersCarouselComponent;"Best Selling Products"
 
 ###### Mitre page end
 
