@@ -2,6 +2,7 @@ package com.bridgex.facades.product;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.bridgex.integration.domain.MultiBrandCartDto;
 
@@ -13,6 +14,8 @@ import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
  * @author Created by konstantin.pavlyukov on 11/8/2017.
  */
 public interface PentlandProductFacade extends ProductFacade {
+
+  Optional<String> getAnySizeCodeForColor(String productCode);
 
   boolean populateCustomerPrice(ProductData productData);
 

@@ -45,13 +45,7 @@ import com.bridgex.facades.utils.ProductUtils;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -125,6 +119,11 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
+		final Optional<String> sizeCodeForColorProduct = productFacade.getAnySizeCodeForColor(productCode);
+		if (sizeCodeForColorProduct.isPresent()) {
+			return REDIRECT_PREFIX + "/p/" + sizeCodeForColorProduct.get();
+		}
+
 		final List<ProductOption> extraOptions = null;
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
