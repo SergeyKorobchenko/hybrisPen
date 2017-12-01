@@ -47,10 +47,10 @@
             <div class="modal-actions">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <a class="btn btn-primary btn-block" href="#"><spring:theme code="cart.unsaved.popup.save"/></a>
+                            <a class="btn btn-primary btn-block js-save-cart" href="#"><spring:theme code="cart.unsaved.popup.save"/></a>
                         </div>
                         <div class="col-xs-12 col-sm-6">
-                            <a class="btn btn-default btn-block" href="#"><spring:theme code="cart.unsaved.popup.cancel"/></a>
+                            <a class="btn btn-default btn-block js-close-unsaved-popup" href="#"><spring:theme code="cart.unsaved.popup.cancel"/></a>
                         </div>
                     </div>
             </div>

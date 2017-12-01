@@ -455,8 +455,13 @@ ACC.cart = {
                     onComplete: function ()
                     {
                         $(this).colorbox.resize();
+                        $(".js-save-cart").click(function(){
+                            ACC.cart.submitUpdateAllForm(function() {location.reload()});
+                        });
+                        $(".js-close-unsaved-popup").click(function(){
+                            ACC.colorbox.close();
+                        });
                     }
-
                 });
             }
         });
@@ -510,7 +515,7 @@ ACC.cart = {
         $(document).ready(function () {
             $('.js-savecart-checkout-button').click(function () {
                 ACC.cart.submitUpdateAllForm(function() {location.reload()});
-            })
+            });
         });
     }
 
