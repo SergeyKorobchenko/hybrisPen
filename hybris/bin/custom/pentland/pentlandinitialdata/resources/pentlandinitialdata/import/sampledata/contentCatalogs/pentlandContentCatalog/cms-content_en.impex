@@ -37,10 +37,11 @@ $storefrontContextRoot=$config-storefrontContextRoot
 # Media
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
 ;;/images/theme/logo_pentland.png;logo_pentland.png;$siteResource/images/theme/logo_pentland.png;image/png;;"hybris Accelerator"
+;;/images/theme/logo_pentland_white.svg;logo_pentland_white.svg;$siteResource/images/theme/logo_pentland_white.svg;image/svg+xml;;"Pentland Brands Limited"
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;SiteLogoComponent;/images/theme/logo_pentland.png
+;;SiteLogoComponent;/images/theme/logo_pentland_white.svg
 
 # CMS Mini Cart Component
 UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
