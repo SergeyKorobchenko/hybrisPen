@@ -32,6 +32,11 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 
 	@Override
 	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
+		if(pentlandB2BAcceleratorCheckoutFacade.isCartTotalQuantityZero()){
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+			                               "checkout.error.empty.cart");
+			return ValidationResults.FAILED;
+		}
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
 		cartFacade.populateCart();
 		CartData cartData = getCheckoutFacade().getCheckoutCart();
