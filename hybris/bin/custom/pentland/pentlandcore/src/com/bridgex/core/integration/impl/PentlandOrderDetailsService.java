@@ -46,7 +46,7 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
 
   private void updateOrderStatus(String code, String status) {
     OrderModel order = b2bOrderService.getOrderForCode(code);
-    if (!status.equalsIgnoreCase(order.getStatus().getCode())) {
+    if (order.getStatus() == null || !status.equalsIgnoreCase(order.getStatus().getCode())) {
       order.setStatus(OrderStatus.valueOf(status));
       modelService.save(order);
     }
