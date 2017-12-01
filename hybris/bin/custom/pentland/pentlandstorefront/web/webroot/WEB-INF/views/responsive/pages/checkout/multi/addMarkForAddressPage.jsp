@@ -88,7 +88,7 @@
     </div>
 
     <div class="col-sm-6 hidden-xs">
-		<multi-checkout:checkoutOrderDetails cartData="${cartData}" showDeliveryAddress="true" showPaymentInfo="false" showTaxEstimate="false" showTax="true" />
+		<multi-checkout:checkoutOrderDetails cartData="${cartData}" showDeliveryAddress="true" showPaymentInfo="true" showTaxEstimate="false" showTax="true" />
     </div>
 
     <div class="col-sm-12 col-lg-12">
