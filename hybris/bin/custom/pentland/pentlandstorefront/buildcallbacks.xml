@@ -266,6 +266,9 @@
 			<copy todir="${ext.pentlandstorefront.path}/web/webroot/_ui/responsive/common/bootstrap">
 				<fileset dir="${ext.pentlandstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.3.7" includes="**"/>
 			</copy>
+			<copy todir="${ext.pentlandstorefront.path}/web/webroot/_ui/responsive/common/font-awesome">
+				<fileset dir="${ext.pentlandstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/lib/font-awesome-4.7.0" includes="**"/>
+			</copy>
 			<copy overwrite="true" todir="${ext.pentlandstorefront.path}/web/webroot/_ui/responsive/common/js">
 				<fileset dir="${ext.pentlandstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/lib/common" includes="**"/>
 			</copy>
