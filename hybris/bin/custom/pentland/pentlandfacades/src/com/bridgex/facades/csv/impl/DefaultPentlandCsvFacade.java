@@ -59,6 +59,7 @@ public class DefaultPentlandCsvFacade extends DefaultCsvFacade implements Pentla
   }
 
   private void addHeaders(List<String> headers, boolean includeHeader, Writer writer) throws IOException {
+    writer.write("\ufeff");
     if (includeHeader && CollectionUtils.isNotEmpty(headers)) {
       final StringBuilder csvHeader = new StringBuilder();
       int i = 0;

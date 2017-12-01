@@ -30,8 +30,9 @@
             <c:forEach items="${item.shipments}" var="shipment">
                     <span class="item-info">
                         <span class="item-value"><spring:theme code="text.account.orderHistory.item.shipdate"/>: <fmt:formatDate value="${shipment.key}"/> |</span>
-                        <span class="item-value"> <spring:theme code="text.account.orderHistory.item.status"/>: ${shipment.value.shipmentStatus} |</span>
-                        <span class="item-value"> <spring:theme code="text.account.orderHistory.item.qty"/>: ${shipment.value.qty}</span>
+                        <span class="item-value"> <spring:theme code="text.account.orderHistory.item.qty"/>: ${shipment.value.qty} |</span>
+                        <span class="item-value"> <spring:theme code="text.account.orderHistory.item.status"/>: ${shipment.value.shipmentStatus}</span>
+
                     </span>
             </c:forEach>
         </ycommerce:testId>

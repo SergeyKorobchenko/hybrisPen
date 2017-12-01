@@ -21,29 +21,29 @@
 		</div>
 		<div class="details">
 			<a class="name" href="${entryProductUrl}">${fn:escapeXml(product.name)}</a>
-			<div class="qty"><span><spring:theme code="popup.cart.quantity.added"/></span>&nbsp;${quantity}</div>
-			<c:forEach items="${product.baseOptions}" var="baseOptions">
-				<c:forEach items="${baseOptions.selected.variantOptionQualifiers}" var="baseOptionQualifier">
-					<c:set var="baseOptionQualifierValue" value="${fn:escapeXml(baseOptionQualifier.value)}"/>
-					<c:if test="${baseOptionQualifier.qualifier eq 'style' and not empty baseOptionQualifier.image.url}">
-						<div class="itemColor">
-							<span class="label"><spring:theme code="product.variants.colour"/></span>
-							<img src="${baseOptionQualifier.image.url}"  alt="${baseOptionQualifierValue}" title="${baseOptionQualifierValue}"/>
-						</div>
-					</c:if>
-					<c:if test="${baseOptionQualifier.qualifier eq 'size'}">
-						<div class="itemSize">
-							<span class="label"><spring:theme code="product.variants.size"/></span>
-								${baseOptionQualifierValue}
-						</div>
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-			<c:if test="${not empty entry.deliveryPointOfService.name}">
-				<div class="itemPickup"><span class="itemPickupLabel"><spring:theme code="popup.cart.pickup"/></span>&nbsp;${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
-			</c:if>
-			<common:hidePricesForUser>
-				<div class="price"><format:price priceData="${entry.basePrice}"/></div>
-			</common:hidePricesForUser>
+			<%--<div class="qty"><span><spring:theme code="popup.cart.quantity.added"/></span>&nbsp;${quantity}</div>--%>
+			<%--<c:forEach items="${product.baseOptions}" var="baseOptions">--%>
+				<%--<c:forEach items="${baseOptions.selected.variantOptionQualifiers}" var="baseOptionQualifier">--%>
+					<%--<c:set var="baseOptionQualifierValue" value="${fn:escapeXml(baseOptionQualifier.value)}"/>--%>
+					<%--<c:if test="${baseOptionQualifier.qualifier eq 'style' and not empty baseOptionQualifier.image.url}">--%>
+						<%--<div class="itemColor">--%>
+							<%--<span class="label"><spring:theme code="product.variants.colour"/></span>--%>
+							<%--<img src="${baseOptionQualifier.image.url}"  alt="${baseOptionQualifierValue}" title="${baseOptionQualifierValue}"/>--%>
+						<%--</div>--%>
+					<%--</c:if>--%>
+					<%--<c:if test="${baseOptionQualifier.qualifier eq 'size'}">--%>
+						<%--<div class="itemSize">--%>
+							<%--<span class="label"><spring:theme code="product.variants.size"/></span>--%>
+								<%--${baseOptionQualifierValue}--%>
+						<%--</div>--%>
+					<%--</c:if>--%>
+				<%--</c:forEach>--%>
+			<%--</c:forEach>--%>
+			<%--<c:if test="${not empty entry.deliveryPointOfService.name}">--%>
+				<%--<div class="itemPickup"><span class="itemPickupLabel"><spring:theme code="popup.cart.pickup"/></span>&nbsp;${fn:escapeXml(entry.deliveryPointOfService.name)}</div>--%>
+			<%--</c:if>--%>
+			<%--<common:hidePricesForUser>--%>
+				<%--<div class="price"><format:price priceData="${entry.basePrice}"/></div>--%>
+			<%--</common:hidePricesForUser>--%>
 		</div>
     </div>

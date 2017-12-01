@@ -42,14 +42,6 @@
             <p class="modal__top--text js-modal-quote-description">${fn:escapeXml(quoteData.description)}</p>
         </div>
         <div class="modal__bottom">
-            <c:if test="${(not empty quoteData.expirationTime) && allowedActions['CHECKOUT']}">
-                <p class="modal__bottom--text">
-                    <fmt:formatDate value="${quoteData.expirationTime}" dateStyle="medium" timeStyle="short" type="both"
-                                    var="formattedExpirationTime"/>
-                    <spring:theme code="text.quote.validity.message"
-                                  arguments="${formattedExpirationTime}" argumentSeparator="$$"/>
-                </p>
-            </c:if>
             <p class="modal__bottom--text modal__text--bold"><spring:theme code="text.quote.cancel.confirmation.message"/></p>
         </div>
 		<form:form action="${cancelQuoteUrl}">

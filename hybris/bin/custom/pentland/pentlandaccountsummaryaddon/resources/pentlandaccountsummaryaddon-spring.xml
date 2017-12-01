@@ -83,7 +83,6 @@
 		<entry key="dateRange" value-ref="dateRangeCriteria" />
 		<entry key="dueDateRange" value-ref="dueDateRangeCriteria" />
 		<entry key="amountRange" value-ref="amountRangeCriteria" />
-		<entry key="openAmountRange" value-ref="openAmountRangeCriteria" />
 	</util:map>
 
 	<alias alias="pagedB2BDocumentDao" name="defaultPagedB2BDocumentDao" />
@@ -100,8 +99,6 @@
 		<entry key="byDueDateDesc" value-ref="DUEDATE"/>
 		<entry key="byOriginalAmountAsc" value-ref="AMOUNT"/>
 		<entry key="byOriginalAmountDesc" value-ref="AMOUNT"/>
-		<entry key="byOpenAmountAsc" value-ref="OPENAMOUNT"/>
-		<entry key="byOpenAmountDesc" value-ref="OPENAMOUNT"/>
 		<entry key="byDocumentTypeAsc" value-ref="DOCUMENTTYPECODE"/>
 		<entry key="byDocumentTypeDesc" value-ref="DOCUMENTTYPECODE"/>
 		<entry key="byDocumentStatusAsc" value-ref="STATUS"/>
