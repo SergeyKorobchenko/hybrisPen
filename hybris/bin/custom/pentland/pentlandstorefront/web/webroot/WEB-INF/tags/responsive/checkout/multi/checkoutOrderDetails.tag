@@ -13,6 +13,9 @@
 <div class="checkout-summary-headline"><spring:theme code="checkout.multi.order.summary" /></div>
 
 <div class="checkout-order-summary">
+
+    <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
+
     <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />
 
     <c:forEach items="${cartData.pickupOrderGroups}" var="groupData" varStatus="status">
@@ -20,8 +23,6 @@
     </c:forEach>
 
     <order:appliedVouchers order="${cartData}" />
-
-    <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
 
     <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" />
 </div>

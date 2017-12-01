@@ -4,22 +4,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="b2b-multi-checkout" tagdir="/WEB-INF/tags/addons/pentlandb2baddon/responsive/checkout/multi" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:if test="${not empty paymentInfo && showPaymentInfo}">
-    <ul class="checkout-order-summary-list">
-        <li class="checkout-order-summary-list-heading">
-            <div class="title"><spring:theme code="checkout.multi.payment" text="Payment:" /></div>
-            <div class="address">
-                <c:if test="${not empty paymentInfo.billingAddress}"> ${fn:escapeXml(paymentInfo.billingAddress.title)}</c:if>
-                ${fn:escapeXml(paymentInfo.accountHolderName)}, ${fn:escapeXml(paymentInfo.cardTypeData.name)},
-                ${fn:escapeXml(paymentInfo.cardNumber)}, ${fn:escapeXml(paymentInfo.expiryMonth)}/${fn:escapeXml(paymentInfo.expiryYear)} <br/>
-                <c:if test="${not empty paymentInfo.billingAddress}">${fn:escapeXml(paymentInfo.billingAddress.line1)}, <c:if test="${not empty paymentInfo.billingAddress.line2}">${fn:escapeXml(paymentInfo.billingAddress.line2)},</c:if>
-                ${fn:escapeXml(paymentInfo.billingAddress.town)}, ${fn:escapeXml(paymentInfo.billingAddress.region.name)}&nbsp;${fn:escapeXml(paymentInfo.billingAddress.postalCode)}, ${fn:escapeXml(paymentInfo.billingAddress.country.name)}</c:if>
-                <br/><c:if test="${not empty paymentInfo.billingAddress.phone }">${fn:escapeXml(paymentInfo.billingAddress.phone)}</c:if>
-            </div>
-        </li>
-    </ul>
+<c:if test="${showPaymentInfo}">
+    <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
+    <%--<ul class="checkout-order-summary-list">--%>
+        <%--<li class="checkout-order-summary-list-heading">--%>
+            <%--<div class="title"><spring:theme code="checkout.multi.payment" text="Payment:" /></div>--%>
+            <%--<div class="address">--%>
+                <%--<c:if test="${not empty paymentInfo.billingAddress}"> ${fn:escapeXml(paymentInfo.billingAddress.title)}</c:if>--%>
+                <%--${fn:escapeXml(paymentInfo.accountHolderName)}, ${fn:escapeXml(paymentInfo.cardTypeData.name)},--%>
+                <%--${fn:escapeXml(paymentInfo.cardNumber)}, ${fn:escapeXml(paymentInfo.expiryMonth)}/${fn:escapeXml(paymentInfo.expiryYear)} <br/>--%>
+                <%--<c:if test="${not empty paymentInfo.billingAddress}">${fn:escapeXml(paymentInfo.billingAddress.line1)}, <c:if test="${not empty paymentInfo.billingAddress.line2}">${fn:escapeXml(paymentInfo.billingAddress.line2)},</c:if>--%>
+                <%--${fn:escapeXml(paymentInfo.billingAddress.town)}, ${fn:escapeXml(paymentInfo.billingAddress.region.name)}&nbsp;${fn:escapeXml(paymentInfo.billingAddress.postalCode)}, ${fn:escapeXml(paymentInfo.billingAddress.country.name)}</c:if>--%>
+                <%--<br/><c:if test="${not empty paymentInfo.billingAddress.phone }">${fn:escapeXml(paymentInfo.billingAddress.phone)}</c:if>--%>
+            <%--</div>--%>
+        <%--</li>--%>
+    <%--</ul>--%>
 </c:if>
 

@@ -24,7 +24,8 @@
             <spring:theme code="checkout.multi.order.summary"/>
         </div>
         <c:if test="${cartData.paymentType.code eq 'CARD'}">
-            <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
+            <%--<multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />--%>
+            <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
         </c:if>
         <c:if test="${cartData.paymentType.code eq 'ACCOUNT'}">
             <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />

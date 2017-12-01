@@ -470,7 +470,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.lightbox.redirect.error;There was an error communicating with the payment provider. Please try again later or use an alternative method of payment.
 ;checkout.multi.next;Next &raquo
 ;checkout.multi.order.summary;Order Summary
-;checkout.multi.payment;Payment:
+;checkout.multi.payment;"Payment Type:"
 ;checkout.multi.paymentDetails.notprovided;You must provide a payment details in order to go to the next step.
 ;checkout.multi.paymentMethod;Payment
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
@@ -513,7 +513,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.pickupInStore;Pick Up in Store
 ;checkout.multi.pickupInStore.confirm.and.continue;Simply confirm the information below and continue to the next step of checkout.
 ;checkout.multi.product.unpurchasable;Not purchasable
-;checkout.multi.purchaseOrderNumber.label;P.O. No.
+;checkout.multi.purchaseOrderNumber.label;P.O. Number
 ;checkout.multi.replenishment;Replenishment
 ;checkout.multi.saveAddress;Save Address
 ;checkout.multi.secure.checkout;Secure Checkout
