@@ -9,7 +9,8 @@ ACC.cart = {
         ["bindApplyVoucher", $("#js-voucher-apply-btn").length != 0],
         ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0],
         "bindRddDatetimePicker",
-        "bindUpdateAllFormSubmit"
+        "bindUpdateAllFormSubmit",
+        "scanCartForEdits"
     ],
 
     bindHelp: function () {
@@ -418,6 +419,44 @@ ACC.cart = {
                     allowInputToggle: true,
                     useCurrent: false,
                     disabledDates: [inputData.disableddates.split(',')]
+                });
+            }
+        });
+    },
+
+    scanCartForEdits: function(){
+        $(".js-continue-checkout-button, .export__cart--link, .export__images--link").on("click", function(e){
+            e.preventDefault();
+            var $form = $('#updateAllCartForm');
+            var $updateFormData = $($form.serializeArray());
+            var postData = {};
+            $updateFormData.each(function (index, value) {
+                postData[value.name] = value.value;
+            });
+            postData.cartEntries = [];
+            var foundUnsavedChanges = false;
+
+            $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
+                var $v = $(v);
+                var currentInputData = $v.data();
+                var quantity = $v.val();
+                if (currentInputData.initialQuantity != quantity) {
+                    foundUnsavedChanges = true;
+                    return true;
+                }
+            });
+            if(foundUnsavedChanges){
+                e.stopImmediatePropagation();
+                var popupTitle = $(".unsaved_popup_content").data('popup-title');
+
+                ACC.colorbox.open(popupTitle,{
+                    html: $(".unsaved_popup_content").html(),
+                    width: '500px',
+                    onComplete: function ()
+                    {
+                        $(this).colorbox.resize();
+                    }
+
                 });
             }
         });

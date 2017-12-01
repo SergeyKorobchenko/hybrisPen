@@ -2936,3 +2936,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;text.account.changes.saved;Changes saved
 ;currency.GBP;£
+
+;cart.unsaved.popup.title;You have made edits to the basket
+;cart.unsaved.popup.warning;Do you wish to save the changes?
+;cart.unsaved.popup.save;YES
+;cart.unsaved.popup.cancel;NO
