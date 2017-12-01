@@ -426,7 +426,6 @@ ACC.cart = {
 
     scanCartForEdits: function(){
         $(".js-continue-checkout-button, .export__cart--link, .export__images--link").on("click", function(e){
-            e.preventDefault();
             var $form = $('#updateAllCartForm');
             var $updateFormData = $($form.serializeArray());
             var postData = {};
@@ -446,6 +445,7 @@ ACC.cart = {
                 }
             });
             if(foundUnsavedChanges){
+                e.preventDefault();
                 e.stopImmediatePropagation();
                 var popupTitle = $(".unsaved_popup_content").data('popup-title');
 
