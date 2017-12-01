@@ -3,7 +3,6 @@ package com.bridgex.facades.order;
 import java.util.List;
 
 import de.hybris.platform.b2bacceleratorfacades.api.cart.CheckoutFacade;
-import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 
 /**
@@ -18,4 +17,6 @@ public interface PentlandAcceleratorCheckoutFacade extends CheckoutFacade {
   boolean removeMarkForAddressFromCart();
 
   void cleanupZeroQuantityEntries();
+
+  boolean isCartTotalQuantityZero();
 }

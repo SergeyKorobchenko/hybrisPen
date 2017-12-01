@@ -82,6 +82,15 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
     }
   }
 
+  @Override
+  public boolean isCartTotalQuantityZero() {
+    final CartModel cartModel = getCart();
+    if(CollectionUtils.isNotEmpty(cartModel.getEntries())){
+      return !cartModel.getEntries().stream().filter(entry -> entry.getQuantity() > 0).findAny().isPresent();
+    }
+    return true;
+  }
+
   private AddressModel getAddressModelForID(String addressId) {return getModelService().get(PK.fromLong(Long.parseLong(addressId)));}
 
   @Required
