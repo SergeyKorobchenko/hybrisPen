@@ -70,6 +70,7 @@
 
 @input-color: 			@text-color;
 @input-border-color: 	@border-color;
+@input-border: @input-border-color;
 @placeholder-color: 	@brand-secondary;
 //** Border color for inputs on focus
 @input-border-focus:    @brand-primary;
@@ -86,7 +87,7 @@
 
 //********* Header background *********
 @header-background-color: 	#f4f4f4;
-@nav-border-color: 			@border-color;
+@nav-border-color: 			@border-color-2;
 
 //*********Secondary Navigation colors*********
 //Background color for My Account and My Company dropdowns
@@ -196,18 +197,19 @@
 @pagination-prev-next-hover-bg:		@btn-primary-bg;
 @pagination-prev-next-hover-color:	@btn-primary-color;
 
-//*********Button Colors*********
+//********* Buttons *********
+@btn-font-family: @brand-font-family-georgia-serif;
 
-//Primary Button State
+//== Primary Button State
 @btn-primary-color: @brand-primary-white;
-@btn-primary-bg: @brand-primary;
-@btn-primary-border: @brand-primary;
-@btn-primary-hover-color: @brand-primary;
+@btn-primary-bg: @brand-primary-pantone-blue;
+@btn-primary-border: @brand-primary-pantone-blue;
+@btn-primary-hover-color: @brand-primary-white;
 @btn-primary-hover-border: @brand-primary;
-@btn-primary-hover-background: @brand-primary-white;
-@btn-primary-disabled-bg: #8cbbdd;
+@btn-primary-hover-background: fade(@brand-primary-pantone-blue, 80%);
+@btn-primary-disabled-bg: @brand-primary-zircon-gray;
 
-//Secondary Button State
+//== Secondary Button State
 @btn-default-color: @brand-primary-white;
 @btn-default-bg: @brand-secondary;
 @btn-default-border: @brand-secondary;
@@ -220,7 +222,7 @@
 @accordion-bg: #000000;
 
 //*********Modal Colors*********
-@modal-close-btn-color: @brand-secondary;
+@modal-close-btn-color: @brand-primary-light-gray;
 
 //*********Account Colors*********
 @account-subheadline-bg: @header-background-color;

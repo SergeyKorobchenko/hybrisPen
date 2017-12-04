@@ -2,7 +2,11 @@
 
 header {
   background: @header-background-color;
-  margin-bottom: @grid-gutter-width;
+  margin-bottom: @grid-gutter-width * 3;
+
+  @media (max-width: @screen-lg) {
+    margin-bottom: @grid-gutter-width + 10;
+  }
 
   .page-cartPage &,
   .page-homepage &,

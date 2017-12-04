@@ -1,11 +1,11 @@
 @grid-gutter-width:         20px;
 @padding-large-horizontal:  15px;
 
-@border-radius-base:        0;
-@border-radius-large:       0;
-@border-radius-small:       0;
+@border-radius-base:        2px;
+@border-radius-large:       2px;
+@border-radius-small:       2px;
 
-@pager-border-radius:0;
+@pager-border-radius: 2px;
 
 //== Global typography
 //
@@ -40,6 +40,7 @@
 @font-size-large-5: ceil((@font-size-base * 1.625)); // ~26px
 
 @line-height-base: 1.6; // 20/12
+@line-height-middle: 1.428571429;
 
 //== Pagination
 //
@@ -201,10 +202,11 @@
 //*********form colors*********
 @label-color: #000000;
 @input-color: #000000;
-@input-height-base: 32px;
-@input-height-large: 42px;
+@input-height-base: 42px;
+@input-height-large: 52px;
 @input-background: #ffffff;
 @input-border-color: #000000;
+@input-border: @input-border-color;
 @placeholder-color: #000000;
 
 
@@ -315,12 +317,14 @@
 @list-active-bg:                #ffffff;
 
 //*********Button Colors*********
-//## For each of Bootstrap's buttons, define text, background and border color.
-@btn-box-shadow:				false;
-@btn-border-width:      3px;
+@btn-font-family: @font-family-base;
 
-@btn-font-size:					16px;
-@btn-line-height:				1.375;
+//## For each of Bootstrap's buttons, define text, background and border color.
+@btn-box-shadow:				true;
+@btn-border-width:      0px;
+
+@btn-font-size:					@font-size-large-1;
+@btn-line-height:				@line-height-middle;
 @btn-font-weight:       normal;
 
 @btn-icon-font-size:		25px;
