@@ -18,11 +18,7 @@
             <%--</div>--%>
         <%--</div>--%>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <h1><spring:theme code="text.account.profile.updatePersonalDetails"/></h1>
-            </div>
-        </div>
+        <h1><spring:theme code="text.account.profile.updatePersonalDetails"/></h1>
 
         <div class="row">
             <div class="col-md-6">
