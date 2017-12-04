@@ -1,12 +1,7 @@
 package com.bridgex.facades.product.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -16,6 +11,7 @@ import org.spockframework.util.Nullable;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.constants.PentlandcoreConstants;
+import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.facades.constants.PentlandfacadesConstants;
@@ -40,6 +36,8 @@ import de.hybris.platform.commercefacades.product.data.StockData;
 import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
  * @author Created by konstantin.pavlyukov on 11/8/2017.
@@ -53,6 +51,18 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   private PentlandB2BUnitService pentlandB2BUnitService;
   private B2BCustomerService<B2BCustomerModel, B2BUnitModel>     customerService;
   private PriceDataFactory priceDataFactory;
+
+  @Override
+  public Optional<String> getAnySizeCodeForColor(String productCode) {
+    ProductModel productModel = getProductService().getProductForCode(productCode);
+    if (productModel instanceof ApparelStyleVariantProductModel) {
+      Collection<VariantProductModel> variants = productModel.getVariants();
+      if (CollectionUtils.isNotEmpty(variants)) {
+        return Optional.of(variants.iterator().next().getCode());
+      }
+    }
+    return Optional.empty();
+  }
 
   @Override
   public boolean populateCustomerPrice(ProductData productData) {
