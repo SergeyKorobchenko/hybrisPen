@@ -111,6 +111,8 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     request.setPaymentType(orderModel.getPaymentType().getCode());
     request.setCustomerComment(orderModel.getCustomerNotes());
     request.setEmail(orderModel.getUser().getUid());
+
+    request.setPaymentTransactionCode(orderModel.getWorldpayOrderCode());
   }
 
   private void populateOrderEntries(OrderModel orderModel, OrderExportDto request) {
@@ -142,8 +144,10 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
       entries.forEach(size -> {
         if(size.getQuantity() > 0) {
           SchedLinesDto sizeEntry = new SchedLinesDto();
-          sizeEntry.setEan(size.getProduct().getCode());
+          ApparelSizeVariantProductModel sizeProduct = (ApparelSizeVariantProductModel)size.getProduct();
+          sizeEntry.setEan(sizeProduct.getCode());
           sizeEntry.setQuantity(size.getQuantity().intValue());
+          sizeEntry.setSize(sizeProduct.getSize());
           sizeEntries.add(sizeEntry);
         }
       });

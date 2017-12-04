@@ -13,7 +13,7 @@ public class ExportOrderResponse implements Serializable {
   public ExportOrderResponse(){
   }
 
-  @JsonProperty("E_DOC_NUMBER_T")
+  @JsonProperty("ET_SALES_ORDER_NUMBER")
   private List<SapOrderDto> sapOrderDTOList;
 
   @JsonProperty("ET_RETURN")

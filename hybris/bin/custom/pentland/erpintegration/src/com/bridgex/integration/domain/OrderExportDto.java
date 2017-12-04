@@ -20,30 +20,15 @@ public class OrderExportDto {
   @JsonProperty("I_LANGUAGE")
   private String lang = ErpintegrationConstants.REQUEST.DEFAULT_LANGUAGE;
 
-  @JsonProperty("SERVICE_CONSUMER")
+  @JsonProperty("I_SERVICE_CONSUMER")
   private String serviceConsumer = ErpintegrationConstants.REQUEST.DEFAULT_SERVICE_CONSUMER;
 
   @JsonProperty("I_CHANNEL_DOC_NO")
   private String docNumber = "";
 
   //not used
-  @JsonProperty("I_REFERENCE_USER")
-  private String referenceUser = "";
-
-  @JsonProperty("I_PO_NUMBER")
-  private String purchaseOrderNumber = "";
-
-  //not used
-  @JsonProperty("I_PO_TYPE")
-  private String poType = ErpintegrationConstants.REQUEST.DEFAULT_PO_TYPE;
-
-  @JsonProperty("I_RDD")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date rdd;
-
-  @JsonProperty("I_CANCEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date cancelDate;
+//  @JsonProperty("I_REFERENCE_USER")
+//  private String referenceUser = "";
 
   @JsonProperty("I_CUSTOMER_NUMBER")
   private String sapCustomerID = "";
@@ -51,18 +36,35 @@ public class OrderExportDto {
   @JsonProperty("I_SHIP_TO")
   private String shippingAddress = "";
 
-  //not used
-  @JsonProperty("I_REF_DOC_NO")
-  private String refDocNo = "";
+  @JsonProperty("I_REQUESTED_DELIVERY_DATE")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private Date rdd;
+
+  @JsonProperty("I_CANCEL_DATE")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private Date cancelDate;
+
+  @JsonProperty("I_PURCHASE_ORDER_NUMBER")
+  private String purchaseOrderNumber = "";
+
+  @JsonProperty("I_PURCHASE_ORDER_TYPE")
+  private String poType = ErpintegrationConstants.REQUEST.DEFAULT_PO_TYPE;
 
   @JsonProperty("I_DOC_REASON")
   private String techOrderReason = "";
 
-  @JsonProperty("PAYMENT_TYPE")
+  @JsonProperty("I_PAYMENT_TYPE")
   private String paymentType = "";
 
-  @JsonProperty("ORDER_NOTES")
+  @JsonProperty("I_PAYMENT_TRANSACTION_CODE")
+  private String paymentTransactionCode = "";
+
+  @JsonProperty("I_ORDER_NOTES")
   private String customerComment = "";
+
+  //not used
+  @JsonProperty("I_REFERENCE_DOCUMENT")
+  private String refDocNo = "";
 
   @JsonProperty("I_USER_EMAIL")
   private String email = "";
@@ -70,7 +72,7 @@ public class OrderExportDto {
   @JsonProperty("I_MULTIBRAND_INPUT_T")
   private List<MultiBrandOrderInput> orderEntries;
 
-  @JsonProperty("I_EMAIL_T")
+  @JsonProperty("IT_EMAIL")
   private List<UserContactsDto> userContacts;
 
 
@@ -138,13 +140,13 @@ public class OrderExportDto {
     this.shippingAddress = shippingAddress;
   }
 
-  public String getReferenceUser() {
-    return referenceUser;
-  }
-
-  public void setReferenceUser(String referenceUser) {
-    this.referenceUser = referenceUser;
-  }
+//  public String getReferenceUser() {
+//    return referenceUser;
+//  }
+//
+//  public void setReferenceUser(String referenceUser) {
+//    this.referenceUser = referenceUser;
+//  }
 
   public String getPoType() {
     return poType;
@@ -216,5 +218,13 @@ public class OrderExportDto {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPaymentTransactionCode() {
+    return paymentTransactionCode;
+  }
+
+  public void setPaymentTransactionCode(String paymentTransactionCode) {
+    this.paymentTransactionCode = paymentTransactionCode;
   }
 }

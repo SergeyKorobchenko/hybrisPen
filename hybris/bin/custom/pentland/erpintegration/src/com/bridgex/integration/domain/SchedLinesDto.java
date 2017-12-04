@@ -20,8 +20,15 @@ public class SchedLinesDto {
   @JsonProperty("EAN")
   private String ean = "";
 
+  @JsonProperty("SIZE")
+  private String size = "";
+
   @JsonProperty("REQUESTED_QUANTITY")
   private int quantity;
+
+  //not used
+  @JsonProperty("REFERENCE_DOCUMENT")
+  private String referenceDocument = "";
 
   public Date getRdd() {
     return rdd;
@@ -45,5 +52,21 @@ public class SchedLinesDto {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+
+  public String getSize() {
+    return size;
+  }
+
+  public void setSize(String size) {
+    this.size = size;
+  }
+
+  public String getReferenceDocument() {
+    return referenceDocument;
+  }
+
+  public void setReferenceDocument(String referenceDocument) {
+    this.referenceDocument = referenceDocument;
   }
 }
