@@ -23,6 +23,14 @@
             <spring:theme code="checkout.multi.order.summary"/>
         </div>
 
+        <c:if test="${cartData.paymentType.code eq 'CARD'}">
+            <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
+            <%--<multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />--%>
+        </c:if>
+        <c:if test="${cartData.paymentType.code eq 'ACCOUNT'}">
+            <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
+        </c:if>
+
         <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />
 
         <c:forEach items="${cartData.pickupOrderGroups}" var="groupData" varStatus="status">
@@ -31,12 +39,7 @@
 
         <order:appliedVouchers order="${cartData}" />
 
-        <c:if test="${cartData.paymentType.code eq 'CARD'}">
-            <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
-        </c:if>
-        <c:if test="${cartData.paymentType.code eq 'ACCOUNT'}">
-            <b2b-multi-checkout:accountPaymentInfo cartData="${cartData}" />
-        </c:if>
+
 
         <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" />
     </ycommerce:testId>

@@ -114,7 +114,11 @@ public abstract class AbstractWorldpayPaymentMethodCheckoutStepController extend
         final List<CheckoutSteps> checkoutSteps = new ArrayList<CheckoutSteps>(progressBarMap.size());
         CartData checkoutCart = getCheckoutFacade().getCheckoutCart();
         AddressData deliveryAddress = checkoutCart.getDeliveryAddress();
-        List<AddressData> markForAddressesForShippingAddress = acceleratorCheckoutFacade.findMarkForAddressesForShippingAddress(deliveryAddress.getId());
+        List<AddressData> markForAddressesForShippingAddress = new ArrayList<>();
+        if(deliveryAddress != null){
+            markForAddressesForShippingAddress.addAll(acceleratorCheckoutFacade.findMarkForAddressesForShippingAddress(deliveryAddress.getId()));
+        }
+
         B2BPaymentTypeData paymentType = checkoutCart.getPaymentType();
 
         for (final Map.Entry<String, CheckoutStep> entry : progressBarMap.entrySet()) {

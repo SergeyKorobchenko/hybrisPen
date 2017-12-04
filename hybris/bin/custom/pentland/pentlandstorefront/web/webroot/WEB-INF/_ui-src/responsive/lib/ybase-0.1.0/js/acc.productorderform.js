@@ -671,6 +671,8 @@ ACC.productorderform = {
 
         if (calcHeight > maxHeight) {
             $(scrollContent).parent().find('.order-form-scroll.down').show();
+        } else {
+            $(scrollContent).parent().find('.order-form-scroll.down').hide();
         }
     },
 
