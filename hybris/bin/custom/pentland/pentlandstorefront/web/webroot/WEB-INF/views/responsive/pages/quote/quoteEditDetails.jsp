@@ -47,22 +47,8 @@
                 </div>
             </c:if>
 
-            <c:if test="${ycommerce:isQuoteUserSalesRep()}">
-                <div class="col-xs-12 col-sm-4 col-md-offset-2">
-                    <div class="form-element-icon datepicker quote__expiration" id="js-quote-expiration-time"
-                         data-date-format-for-date-picker="${dateFormatForDatePicker}"
-                         data-expiration-time-url="${expirationTimeUrl}"
-                         data-min-offer-validity-period-days="${fn:escapeXml(minOfferValidityPeriodDays)}">
-                        <formElement:formInputBox idKey="expirationTime"
-                                                  labelKey="text.quote.expiration.time.label" labelCSS="quote__expiration--label" path="expirationTime"
-                                                  inputCSS="text quote__expiration--input" mandatory="true" placeholder="${dateFormatHint}"/>
-                        <i class="glyphicon glyphicon-calendar js-open-datepicker-quote-expiration-time"></i>
-                    </div>
-                </div>
-            </c:if>
-
             <c:if test="${allowedActions['SUBMIT']}">
-                <div class="col-sm-4 col-md-3">
+                <div class="col-sm-4 col-md-3 pull-right">
                     <c:choose>
                         <c:when test="${cartData.totalPrice.value lt 0}">
                             <button type="button" class="btn btn-primary btn-block col-md-4 pull-right js-quote-submit-btn form__actions--submit"

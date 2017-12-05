@@ -13,7 +13,6 @@ ACC.quote = {
 		[ "bindCancelConfirmation", $(".js-quote-cancel-btn").length != 0],
 		[ "bindName" , $("#js-quote-name").length != 0],
 		[ "bindDescription" , $("#js-quote-description").length != 0],
-		[ "bindExpirationTime", $("#js-quote-expiration-time").length != 0],
 		[ "bindCheckoutConfirmation", $(".js-quote-checkout-btn").length != 0],
 		[ "bindEditConfirmation", $(".js-quote-warning-btn").length != 0],
 		[ "bindQuoteDiscount", $(".js-quote-discount-link").length != 0],
@@ -561,84 +560,6 @@ ACC.quote = {
 				nameWrapperElement.addClass("has-error");
 			}
 		}
-	},
-
-	bindExpirationTime: function(e) {
-		var expirationTimeWrapperElement = $("#js-quote-expiration-time");
-		var dateFormatForDatePicker = expirationTimeWrapperElement.data("date-format-for-date-picker");
-		var minOfferValidityPeriodDays = expirationTimeWrapperElement.data("min-offer-validity-period-days");
-
-		var minDate = new Date();
-		minDate.setDate(minDate.getDate() + minOfferValidityPeriodDays);
-
-		$("#expirationTime").datepicker({
-			dateFormat: dateFormatForDatePicker,
-			constrainInput: true,
-			minDate: minDate,
-			onSelect: function() {
-				ACC.quote.handleExpirationTimeUpdate(expirationTimeWrapperElement, dateFormatForDatePicker,
-					minOfferValidityPeriodDays);
-			}
-		});
-
-		$("#expirationTime").change(function() {
-			ACC.quote.handleExpirationTimeUpdate(expirationTimeWrapperElement, dateFormatForDatePicker,
-				minOfferValidityPeriodDays);
-		});
-
-		$(document).on("click", ".js-open-datepicker-quote-expiration-time", function() {
-			$("#expirationTime").datepicker('show');
-		});
-	},
-
-	handleExpirationTimeUpdate: function(expirationTimeWrapperElement, dateFormat, minOfferValidityPeriodDays) {
-		var expirationTimeElement = $("#expirationTime");
-		var expirationTime = expirationTimeElement.val();
-
-		if (ACC.quote.validateExpirationTime(dateFormat, expirationTime, minOfferValidityPeriodDays)) {
-			ACC.quote.updateExpirationTime(expirationTime.trim());
-			expirationTimeWrapperElement.removeClass("has-error");
-		} else {
-			if (!expirationTimeWrapperElement.hasClass("has-error")) {
-				expirationTimeWrapperElement.addClass("has-error");
-			}
-		}
-	},
-
-	validateExpirationTime: function(dateFormat, value, minOfferValidityPeriodDays) {
-		try {
-			if (value) {
-				var selectedDate = $.datepicker.parseDate(dateFormat, value);
-
-				var validDate = new Date();
-				validDate.setHours(0,0,0,0);
-				validDate.setDate(validDate.getDate() + minOfferValidityPeriodDays);
-
-				if (selectedDate >= validDate) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return true;
-			}
-		} catch (error) {
-			return false;
-		}
-	},
-
-	updateExpirationTime: function(expirationTime) {
-		var url = $("#js-quote-expiration-time").data("expiration-time-url");
-		$.ajax({
-			url: url,
-			type: 'POST',
-			data: {expirationTime: expirationTime},
-			error: function (jqXHR) {
-				var expirationTimeWrapperElement = $("#js-quote-expiration-time");
-				if (!expirationTimeWrapperElement.hasClass("has-error")) {
-					expirationTimeWrapperElement.addClass("has-error");
-				}
-			}
-		});
 	}
+
 };
