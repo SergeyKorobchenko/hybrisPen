@@ -2856,7 +2856,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.rdd;RDD
 ;text.account.orderHistory.totalQty;Total Qty
 ;text.account.orderHistory.creationDate;Order Creation Date
-;text.account.orderhistory.dateplaced;Date Placed
+;text.account.orderhistory.datePlaced;Date Placed
 ;text.account.orderHistory.POnumber;P.O. Number
 ;text.account.orderHistory.shipTo;Ship To
 ;text.account.orderHistory.soldTo;Sold To
