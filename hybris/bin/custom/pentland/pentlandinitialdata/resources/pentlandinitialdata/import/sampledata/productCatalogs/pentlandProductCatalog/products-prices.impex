@@ -12,7 +12,7 @@
 #% impex.setLocale( Locale.GERMAN )
 
 # Insert Product prices
-INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net;ug(code)
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net;ug(code)[unique=true]
 ;M25687_B;pieces;GBP;8,46;1;1;false;pronto-services
 ;M25687_W;pieces;GBP;9,7;1;1;false;pronto-services
 ;M27160;pieces;GBP;13,11;1;1;false;pronto-services
@@ -2942,7 +2942,7 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=piec
 ;300398801;pieces;GBP;39,95;1;1;false;
 
 # Insert Product prices
-INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net;ug(code)
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net;ug(code)[unique=true]
 ;M25687_B;pieces;GBP;18,46;1;1;false;pronto-services
 ;5-BB1089WP4;pieces;GBP;28,66;1;1;false;pronto-services
 ;5-G40011WBP;pieces;GBP;38,56;1;1;false;pronto-services
