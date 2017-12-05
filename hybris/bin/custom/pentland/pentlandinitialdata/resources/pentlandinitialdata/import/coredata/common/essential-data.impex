@@ -126,6 +126,7 @@ INSERT_UPDATE B2BDocumentType;code[unique=true];name[lang=en];includeInOpenBalan
 ;Credit Note;Credit Note;true;true
 ;Debit Note;Debit Note;true;true
 ;Statement;Statement;false;true
+;Proforma Invoice;Proforma Invoice;true;true
 
 INSERT_UPDATE SearchRestriction;code[unique=true];active;
 ;b2busergroup_restriction;false
