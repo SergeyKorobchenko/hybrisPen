@@ -36,6 +36,7 @@
 				<entry key="address" value="2" />
 				<entry key="invoice" value="1" />
 				<entry key="order" value="1" />
+				<entry key="sizechart" value="4" />
 			</map>
 		</property>
 	</bean>
@@ -172,6 +173,11 @@
 	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
 	      p:mapping="invoice"
 	      p:converter-ref="pentlandBatchInvoiceConverter"/>
+
+	<bean id="batchSizeChartConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="sizechart"
+	      p:converter-ref="pentlandBatchSizeChartConverter"/>
 
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
@@ -381,6 +387,21 @@
 			<property name="impexRow">
 				<value>;{+0};{+1};{+1};{+2};{3};{+4};{5};{+6};{+7};{8}</value>
 			</property>
+	</bean>
+	<bean id="pentlandBatchSizeChartConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				# Import media from filesystem
+				$mediaCatalog = pentlandMediaCatalog
+				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
+				UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+				$importFolder=$config-mediaremotesource
+				INSERT_UPDATE Media;code[unique=true];realfilename;mediaFormat(qualifier)[default=sizeChart];$mediaCV;folder(qualifier)[default=product];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{+0};;;;$importFolder/{+0}</value>
+		</property>
 	</bean>
 
 </beans>
