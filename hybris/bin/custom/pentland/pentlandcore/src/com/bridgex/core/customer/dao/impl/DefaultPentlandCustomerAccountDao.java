@@ -37,10 +37,10 @@ public class DefaultPentlandCustomerAccountDao extends DefaultCustomerAccountDao
 
   private static final Map<String, String> SORT_QUERIES = new LinkedHashMap<String, String>()
   {{
-    put("byDate", " ORDER BY {" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
     put("byOrderNumber", " ORDER BY {" + OrderModel.CODE + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
     put("byPurchaseOrderNumber", " ORDER BY {" + OrderModel.PURCHASEORDERNUMBER + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
     put("byStatus", " ORDER BY {" + OrderModel.STATUS + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
+    put("byDate", " ORDER BY {" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
     put("byOrderType", " ORDER BY {" + OrderModel.ORDERTYPE + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
     put("byRdd", " ORDER BY {" + OrderModel.RDD + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}");
   }};
