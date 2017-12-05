@@ -8,6 +8,7 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandCommerceCheckoutService;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 
@@ -19,7 +20,9 @@ import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
@@ -87,6 +90,23 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
     final CartModel cartModel = getCart();
     if(CollectionUtils.isNotEmpty(cartModel.getEntries())){
       return !cartModel.getEntries().stream().filter(entry -> entry.getQuantity() > 0).findAny().isPresent();
+    }
+    return true;
+  }
+
+  @Override
+  public boolean cartHasZeroQuantityBaseEntries() {
+    final CartModel cartModel = getCart();
+    if(CollectionUtils.isNotEmpty(cartModel.getEntries())){
+      Map<ProductModel, List<AbstractOrderEntryModel>> entriesGroupedByBaseProduct =
+        cartModel.getEntries().stream().filter(entry -> entry.getProduct() instanceof ApparelSizeVariantProductModel)
+                  .collect(Collectors.groupingBy(entry -> ((VariantProductModel)(((VariantProductModel) entry.getProduct()).getBaseProduct())).getBaseProduct()));
+      for(Map.Entry<ProductModel, List<AbstractOrderEntryModel>> entry: entriesGroupedByBaseProduct.entrySet()){
+        if (entry.getValue().stream().collect(Collectors.summingLong(AbstractOrderEntryModel::getQuantity)) == 0){
+          return true;
+        }
+      }
+      return false;
     }
     return true;
   }

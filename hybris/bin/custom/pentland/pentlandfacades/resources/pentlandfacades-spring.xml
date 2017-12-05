@@ -354,4 +354,9 @@
 	<alias name="pentlandCustomerFacade" alias="customerFacade"/>
 	<bean id="pentlandCustomerFacade" class="com.bridgex.facades.customer.impl.DefaultPentlandCustomerFacade" parent="defaultCustomerFacade"/>
 
+	<alias name="pentlandRemoveCartEntryActionHandler" alias="removeCartEntryActionHandler"/>
+	<bean id="pentlandRemoveCartEntryActionHandler" class="com.bridgex.facades.cart.action.impl.PentlandRemoveCartEntryActionHandler">
+		<property name="cartFacade" ref="cartFacade"/>
+	</bean>
+
 </beans>

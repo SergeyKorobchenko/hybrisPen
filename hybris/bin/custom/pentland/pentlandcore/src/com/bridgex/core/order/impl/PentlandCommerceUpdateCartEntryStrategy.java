@@ -132,4 +132,20 @@ public class PentlandCommerceUpdateCartEntryStrategy extends DefaultCommerceUpda
     }
   }
 
+  protected void validateEntryBeforeModification(final long newQuantity, final AbstractOrderEntryModel entryToUpdate)
+    throws CommerceCartModificationException {
+    if (newQuantity < -1)
+    {
+      throw new CommerceCartModificationException("New quantity must not be less than zero");
+    }
+
+    if (entryToUpdate == null) {
+      throw new CommerceCartModificationException("Unknown entry number");
+    }
+
+    if (!isOrderEntryUpdatable(entryToUpdate)) {
+      throw new CommerceCartModificationException("Entry is not updatable");
+    }
+  }
+
 }
