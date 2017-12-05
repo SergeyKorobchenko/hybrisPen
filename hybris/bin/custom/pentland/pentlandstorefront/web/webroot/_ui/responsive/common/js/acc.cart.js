@@ -413,7 +413,7 @@ ACC.cart = {
             var inputData = $cartRddContainer.find('input').data();
             if ($cartRddContainer.length && inputData) {
                 $cartRddContainer.datetimepicker({
-                    format: ACC.config.dateFormat,
+                    format: 'YYYY-MM-DD',
                     minDate: inputData.mindate,
                     daysOfWeekDisabled: [0, 6],
                     allowInputToggle: true,
