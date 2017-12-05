@@ -2869,8 +2869,12 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.tax;Order Tax
 ;text.account.order.net;Order Net
 
+;text.account.order.status.display.ON_HOLD;On Hold
+;text.account.order.status.display.IN_PROGRESS;In Progress
 ;text.account.order.status.display.SHIPPED;Shipped
 ;text.account.order.status.display.OPEN;Open
+;text.account.order.status.display.CANCELLED;Cancelled
+;text.account.order.status.display.INVOICED;Invoiced
 
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry

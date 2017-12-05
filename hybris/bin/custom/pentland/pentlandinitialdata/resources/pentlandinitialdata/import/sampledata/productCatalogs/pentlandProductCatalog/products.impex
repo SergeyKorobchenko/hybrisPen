@@ -2074,7 +2074,29 @@ UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;sapBrand;
 
 # Products for Order Details Integration Testing
 INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);primaryColors(code);unit(code)[default='pieces'];varianttype(code);$approved
-;5BB1352CRB;;M35364;5006;BLUE,GREY;pieces;ApparelSizeVariantProduct;
-;5BB1253PPW;;M35364;5006;BLUE;pieces;ApparelSizeVariantProduct;
-;731SPM0017024;;M35364;5006;GREEN;pieces;ApparelSizeVariantProduct;
-;914542;;M35364;5006;RED;pieces;ApparelSizeVariantProduct;
+;5BB1352CRB;;M35364;05;BLUE,GREY;pieces;ApparelSizeVariantProduct;
+;5BB1253PPW;;M35364;05;BLUE;pieces;ApparelSizeVariantProduct;
+;731SPM0017024;;M35364;05;GREEN;pieces;ApparelSizeVariantProduct;
+;914542;;M35364;05;RED;pieces;ApparelSizeVariantProduct;
+
+INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+;5BB1352CRB;;5037823906368;;8;pieces;3;;;
+;5BB1352CRB;;5037823906351;;8;pieces;3;;;
+;5BB1352CRB;;5037823906344;;10;pieces;3;;;
+;731SPM0017024;;843875020960;;12;pieces;3;;;
+;731SPM0017024;;843875020977;;14;pieces;3;;;
+;731SPM0017024;;843875020984;;16;pieces;3;;;
+;5BB1253PPW;;5037823918590;;18;pieces;3;;;
+;5BB1253PPW;;5037823918583;;24;pieces;05;;;
+;914542;;842550482604;;26;pieces;05;;;
+;914542;;842550482611;;28;pieces;05;;;
+;914542;;842550482628;;30;pieces;05;;;
+;914542;;842550482635;;32;pieces;05;;;
+;914542;;842550482642;;5;pieces;05;;;
+;914542;;842550482659;;6;pieces;05;;;
+;914542;;842550482666;;7;pieces;05;;;
+;914542;;842550482673;;8;pieces;05;;;
+;914542;;842550482680;;9;pieces;05;;;
+;914542;;842550482697;;5;pieces;03;;;
+;914542;;842550482703;;4;pieces;03;;;
+;914542;;842550482710;;3;pieces;03;;;
