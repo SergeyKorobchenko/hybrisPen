@@ -29,9 +29,9 @@ ACC.productDetail = {
             ACC.productDetail.updateQtyValue(self, 1)
 
         } else if (mode == "plus") {
-        	if(max == "FORCE_IN_STOCK") {
-        		ACC.productDetail.updateQtyValue(self, inputVal + 1)
-        	} else if (inputVal <= max) {
+            if(max == "FORCE_IN_STOCK") {
+                ACC.productDetail.updateQtyValue(self, inputVal + 1)
+            } else if (inputVal <= max) {
                 ACC.productDetail.updateQtyValue(self, inputVal + 1)
                 if (inputVal + 1 == max) {
                     plusBtn.attr("disabled", "disabled")
@@ -43,7 +43,7 @@ ACC.productDetail = {
             if (inputVal == 1) {
                 minusBtn.attr("disabled", "disabled")
             } else if(max == "FORCE_IN_STOCK" && inputVal > 0) {
-            	ACC.productDetail.updateQtyValue(self, inputVal)
+                ACC.productDetail.updateQtyValue(self, inputVal)
             } else if (inputVal == max) {
                 plusBtn.attr("disabled", "disabled")
             } else if (inputVal < 1) {
@@ -54,10 +54,10 @@ ACC.productDetail = {
                 plusBtn.attr("disabled", "disabled")
             }
         } else if (mode == "focusout") {
-        	if (isNaN(inputVal)){
+            if (isNaN(inputVal)){
                 ACC.productDetail.updateQtyValue(self, 1);
                 minusBtn.attr("disabled", "disabled");
-        	} else if(inputVal >= max) {
+            } else if(inputVal >= max) {
                 plusBtn.attr("disabled", "disabled");
             }
         }
@@ -71,6 +71,14 @@ ACC.productDetail = {
         input.val(value);
         addtocartQty.val(value);
         configureQty.val(value);
+    },
+
+    showHideEditableGrid: function (element, event) {
+        $("#productShowGridAction").animate({
+            'height': 'toggle',
+        }, 1000);
+        $(element).find(".glyphicon").toggleClass('glyphicon-chevron-down');
+        $(element).find(".glyphicon").toggleClass('glyphicon-chevron-up');
     },
 
     populateAndShowEditableGrid: function (element, event) {
@@ -94,12 +102,17 @@ ACC.productDetail = {
                 data: {productCode: productCode},
                 type: method,
                 success: function (data) {
+                    var $grid = $("#ajaxGrid");
+                    var $gridEntry = $('#grid');
                     $grid.html(data);
-                    $("#ajaxGrid").removeAttr('id');
+                    $grid.removeAttr('id');
                     $grid.slideDown("fast");
                     $orderForm.slideDown("slow");
                     $(window).scrollTo($('#AddToCartOrderForm'), 1000);
-                    ACC.productorderform.coreTableActions();
+                    setTimeout(function()
+                    {
+                        ACC.productorderform.coreTableActions();
+                    }, 500);
                 },
                 error: function (xht, textStatus, ex) {
                     alert("Failed to get variant matrix. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
@@ -121,6 +134,10 @@ ACC.productDetail = {
 
         $(document).on("click", '.js-show-editable-product-grid', function (event) {
             ACC.productDetail.populateAndShowEditableGrid(this, event);
+        });
+
+        $(document).on("click", '.js-show-editable-product-form-grid', function (event) {
+            ACC.productDetail.showHideEditableGrid(this, event);
         });
 
         $(document).on("click", '.js-qty-selector .js-qty-selector-minus', function () {
@@ -151,7 +168,7 @@ ACC.productDetail = {
             ACC.productDetail.updateQtyValue(this, $(this).val());
 
         })
-        
+
         $(document).on("focusout", '.js-qty-selector .js-qty-selector-input', function (e) {
             ACC.productDetail.checkQtySelector(this, "focusout");
             ACC.productDetail.updateQtyValue(this, $(this).val());

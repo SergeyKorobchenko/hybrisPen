@@ -7,13 +7,13 @@
 
 
 <ul class="checkout-order-summary-list">
-    <li class="checkout-shippingcheckout-order-summary-list-heading">
+    <li class="checkout-shippingcheckout-order-summary-list-heading checkout-order-summary-list-heading">
         <div class="title">
             <spring:theme code="checkout.multi.payment"/>
         </div>
         <div class="address">
-            <c:if test="${not empty cartData.user.unit and not empty cartData.user.unit.customerType}">
-                <spring:theme code="checkout.payment.${cartData.paymentType.code}.${cartData.user.unit.customerType}"/>
+            <c:if test="${not empty cartData.b2bCustomerData.unit and not empty cartData.b2bCustomerData.unit.customerType}">
+                <spring:theme code="checkout.payment.${cartData.paymentType.code}.${cartData.b2bCustomerData.unit.customerType}"/>
             </c:if>
         </div>
         <div class="title">

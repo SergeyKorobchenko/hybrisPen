@@ -19,4 +19,6 @@ public interface PentlandAcceleratorCheckoutFacade extends CheckoutFacade {
   void cleanupZeroQuantityEntries();
 
   boolean isCartTotalQuantityZero();
+
+  boolean cartHasZeroQuantityBaseEntries();
 }

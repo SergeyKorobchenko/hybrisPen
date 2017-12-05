@@ -139,7 +139,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.add.free.gift;Add your free gift to Basket
 ;basket.add.to.basket;Add to bag
 ;basket.add.to.cart;Add
-;basket.added.to.basket;Added to Your Shopping Bag
+;basket.added.to.basket;Added to Your Basket
 ;basket.added.to.mobile.basket;Added Item
 ;basket.configure.product;Configure
 ;basket.confirmation.items.added;Your saved items were added to your bag.
@@ -2915,7 +2915,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.export.images.file;Download product images
 ;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
-;checkout.error.empty.cart;Your shopping bag is empty. Please update entry quantities before proceeding to checkout
+;checkout.error.empty.cart;Your basket does not have any quantity. Please add quantity before proceeding to checkout.
+;checkout.error.empty.entry.cart;Your basket does not have any quantity for one or more products. Please add quantity before proceeding to checkout.
 
 ;text.account.hidePrices;Show/Hide prices
 ;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
@@ -2936,3 +2937,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;text.account.changes.saved;Changes saved
 ;currency.GBP;£
+
+;cart.unsaved.popup.title;You have made edits to the basket
+;cart.unsaved.popup.warning;Do you wish to save the changes?
+;cart.unsaved.popup.save;YES
+;cart.unsaved.popup.cancel;NO

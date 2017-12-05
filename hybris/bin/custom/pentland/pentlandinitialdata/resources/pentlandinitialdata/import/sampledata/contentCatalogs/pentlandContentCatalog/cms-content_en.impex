@@ -44,7 +44,7 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 
 # CMS Mini Cart Component
 UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
-;;MiniCart;"Your Shopping Bag"
+;;MiniCart;"Your Shopping Basket"
 
 # JSP include components
 UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]
@@ -579,7 +579,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 
 # Apparel Cart Page
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;EmptyCartParagraphComponent;"<h2>Your shopping bag is empty</h2><p>Suggestions</p><ul>	<li>Browse our products by selecting a category above</li></ul>"
+;;EmptyCartParagraphComponent;"<h2>Your shopping basket is empty</h2><p>Suggestions</p><ul>	<li>Browse our products by selecting a category above</li></ul>"
 ;;HelpParagraphComponent;"<strong>Need Help with your checkout process?</strong> <span>Contact Us or Call phone number.</span>"
 
 # Apparel Navigation nodes and links
