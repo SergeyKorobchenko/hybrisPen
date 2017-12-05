@@ -42,64 +42,64 @@
                 <div class="helper clearfix hidden-md hidden-lg"></div>
                 <div class="sort-refine-bar">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-2">
-                            <div class="form-group">
-                                <label class="control-label " for="sortForm${top ? '1' : '2'}">
-                                    <spring:theme code="${themeMsgKey}.sortTitle"/>
-                                </label>
+                        <div class="col-xs-12 col-sm-12 col-md-1">
+                            <label class="control-label " for="sortForm${top ? '1' : '2'}">
+                                <spring:theme code="${themeMsgKey}.sortTitle"/>
+                            </label>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get" action="#">
+                                <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control">
+                                    <option disabled><spring:theme code="${themeMsgKey}.sortTitle"/></option>
+                                    <c:forEach items="${searchPageData.sorts}" var="sort">
+                                        <option value="${fn:escapeXml(sort.code)}" ${sort.selected? 'selected="selected"' : ''}>
+                                            <c:choose>
+                                                <c:when test="${not empty sort.name}">
+                                                    ${fn:escapeXml(sort.name)}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <spring:theme code="${themeMsgKey}.sort.${sort.code}"/>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                                <c:catch var="errorException">
+                                    <spring:eval expression="searchPageData.currentQuery.query"
+                                                 var="dummyVar"/><%-- This will throw an exception is it is not supported --%>
+                                    <input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
+                                </c:catch>
 
-                                <form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get"
-                                      action="#">
-                                    <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control">
-                                        <option disabled><spring:theme code="${themeMsgKey}.sortTitle"/></option>
-                                        <c:forEach items="${searchPageData.sorts}" var="sort">
-                                            <option value="${fn:escapeXml(sort.code)}" ${sort.selected? 'selected="selected"' : ''}>
-                                                <c:choose>
-                                                    <c:when test="${not empty sort.name}">
-                                                        ${fn:escapeXml(sort.name)}
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <spring:theme code="${themeMsgKey}.sort.${sort.code}"/>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                    <c:catch var="errorException">
-                                        <spring:eval expression="searchPageData.currentQuery.query"
-                                                     var="dummyVar"/><%-- This will throw an exception is it is not supported --%>
-                                        <input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
-                                    </c:catch>
-										
-                                    <c:if test="${supportShowAll}">
-                                        <ycommerce:testId code="searchResults_showAll_link">
-                                            <input type="hidden" name="show" value="Page"/>
-                                        </ycommerce:testId>
-                                    </c:if>
-                                    <c:if test="${supportShowPaged}">
-                                        <ycommerce:testId code="searchResults_showPage_link">
-                                            <input type="hidden" name="show" value="All"/>
-                                        </ycommerce:testId>
-                                    </c:if>
-                                    <c:if test="${not empty additionalParams}">
-                                        <c:forEach items="${additionalParams}" var="entry">
-                                            <input type="hidden" name="${fn:escapeXml(entry.key)}" value="${fn:escapeXml(entry.value)}"/>
-                                        </c:forEach>
-                                    </c:if>
-                                </form>
-                            </div>
+                                <c:if test="${supportShowAll}">
+                                    <ycommerce:testId code="searchResults_showAll_link">
+                                        <input type="hidden" name="show" value="Page"/>
+                                    </ycommerce:testId>
+                                </c:if>
+                                <c:if test="${supportShowPaged}">
+                                    <ycommerce:testId code="searchResults_showPage_link">
+                                        <input type="hidden" name="show" value="All"/>
+                                    </ycommerce:testId>
+                                </c:if>
+                                <c:if test="${not empty additionalParams}">
+                                    <c:forEach items="${additionalParams}" var="entry">
+                                        <input type="hidden" name="${fn:escapeXml(entry.key)}" value="${fn:escapeXml(entry.value)}"/>
+                                    </c:forEach>
+                                </c:if>
+                            </form>
                         </div>
 
                         <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
                             <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
                             <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
-                            <div class="col-xs-12 col-md-2 pull-left">
-                                <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP">
+                            <div class="col-xs-12 col-sm-12 col-md-2">
+                                <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP media-heading">
                                     <spring:theme code="basket.export.csv.file" />
                                 </a>
                                 <form id="export-csv" action="${exportUrl}" method="get">
                                     <input type="hidden" name="content" value=""/>
                                 </form>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2">
                                 <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
                                     <spring:theme code="basket.export.images.file" />
                                 </a>
@@ -116,7 +116,7 @@
                         </div>
 
                         <c:if test="${not hideRefBtn}">
-                            <div class="col-xs-12 col-sm-2 col-md-4 hidden-md hidden-lg">
+                            <div class="col-xs-12 col-sm-4 col-md-4 hidden-md hidden-lg">
                                 <ycommerce:testId code="searchResults_refine_button">
                                     <product:productRefineButton styleClass="btn btn-default js-show-facets"/>
                                 </ycommerce:testId>
