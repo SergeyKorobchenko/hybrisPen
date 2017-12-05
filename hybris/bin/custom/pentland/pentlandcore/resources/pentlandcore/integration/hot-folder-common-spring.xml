@@ -268,20 +268,17 @@
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				$classificationCatalog = pentlandClassificationCatalog
 				$clAttrModifiers = system = '$classificationCatalog', version = '1.0', lang = $lang, translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
-				$teamwearType = @teamwearType[$clAttrModifiers];
-				$trainingwearType = @trainingwearType[$clAttrModifiers];
 				$sport = @sport[$clAttrModifiers];
-				$accessoryType = @accessoryType[$clAttrModifiers];
 				$useageOccasion = @useageOccasion[$clAttrModifiers];
 				$surface = @surface[$clAttrModifiers];
 				$trainingMethod = @trainingMethod[$clAttrModifiers];
-				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator,collection-delimiter=|];$teamwearType;$trainingwearType;$sport;$accessoryType;$useageOccasion;$surface;$trainingMethod;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator,collection-delimiter=|];$sport;$useageOccasion;$surface;$trainingMethod;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{S}
-				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{S}
+				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{S}
+				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{S}
 			</value>
 		</property>
 	</bean>

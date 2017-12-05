@@ -39,7 +39,7 @@
                         <th id="header1"><spring:theme code="text.account.orderHistory.orderNumber"/></th>
                         <th id="header2"><spring:theme code="text.account.orderHistory.purchaseOrderNumber"/></th>
                         <th id="header3"><spring:theme code="text.account.orderHistory.orderStatus"/></th>
-                        <th id="header4"><spring:theme code="text.account.orderHistory.datePlaced"/></th>
+                        <th id="header4"><spring:theme code="text.account.orderhistory.dateplaced"/></th>
                         <th id="header5"><spring:theme code="text.account.orderHistory.orderType"/></th>
                         <th id="header6"><spring:theme code="text.account.orderHistory.rdd"/></th>
                         <th id="header7"><spring:theme code="text.account.orderHistory.totalQty"/></th>
@@ -66,7 +66,7 @@
                                 <spring:theme code="text.account.order.status.display.${order.statusDisplay}"/>
                             </td>
                             <td class="hidden-sm hidden-md hidden-lg"><spring:theme
-                                    code="text.account.orderHistory.datePlaced"/></td>
+                                    code="text.account.orderhistory.dateplaced"/></td>
                             <td headers="header4" class="responsive-table-cell">
                                 <fmt:formatDate value="${order.placed}" dateStyle="medium" timeStyle="short" type="both"/>
                             </td>
