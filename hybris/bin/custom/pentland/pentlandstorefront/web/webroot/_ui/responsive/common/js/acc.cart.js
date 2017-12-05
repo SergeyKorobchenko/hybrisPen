@@ -413,7 +413,7 @@ ACC.cart = {
             var inputData = $cartRddContainer.find('input').data();
             if ($cartRddContainer.length && inputData) {
                 $cartRddContainer.datetimepicker({
-                    format: 'YYYY-MM-DD',
+                    format: ACC.config.dateFormat,
                     minDate: inputData.mindate,
                     daysOfWeekDisabled: [0, 6],
                     allowInputToggle: true,
@@ -435,15 +435,37 @@ ACC.cart = {
             postData.cartEntries = [];
             var foundUnsavedChanges = false;
 
-            $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
-                var $v = $(v);
-                var currentInputData = $v.data();
-                var quantity = $v.val();
-                if (currentInputData.initialQuantity != quantity) {
+            //check cart header
+            var $rddInput = $form.find("input[name='requestedDeliveryDate']");
+            var initial = $rddInput.data("initial") == undefined ? '' : $rddInput.data("initial");
+            if(initial != $rddInput.val()){
+                foundUnsavedChanges = true;
+            }else{
+                var $poInput = $form.find("input[name='purchaseOrderNumber']");
+                initial = $poInput.data("initial") == undefined ? '' : $poInput.data("initial");
+                if(initial != $poInput.val()){
                     foundUnsavedChanges = true;
-                    return true;
+                }else{
+                    var $commentInput = $form.find("textarea[name='customerNotes']");
+                    initial = $commentInput.data("initial") == undefined ? '' : $commentInput.data("initial");
+                    if($commentInput.data("initial") != $commentInput.val()){
+                        foundUnsavedChanges = true;
+                    }else{
+                        //check quantities
+                        $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
+                            var $v = $(v);
+                            var currentInputData = $v.data();
+                            var quantity = $v.val();
+                            if (currentInputData.initialQuantity != quantity) {
+                                foundUnsavedChanges = true;
+                                return true;
+                            }
+                        });
+                    }
                 }
-            });
+            }
+
+
             if(foundUnsavedChanges){
                 e.preventDefault();
                 e.stopImmediatePropagation();
