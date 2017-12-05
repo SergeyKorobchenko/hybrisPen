@@ -15,11 +15,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.storefront.forms.PentlandCartForm;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
@@ -38,7 +40,7 @@ public class UpdateCartController extends AbstractController
   private PentlandCartFacade pentlandCartFacade;
 
   @PostMapping(value = "/cart/update-all")
-  public ResponseEntity<String> updateCartQuantitiesAll1(@RequestBody final PentlandCartForm cartForm) {
+  public ResponseEntity<String> updateCartQuantitiesAll1(@RequestBody final PentlandCartForm cartForm, final RedirectAttributes redirectModel) {
     CartData cart = pentlandCartFacade.getSessionCart();
     cart.setPurchaseOrderNumber(cartForm.getPurchaseOrderNumber());
     cart.setRdd(cartForm.getRequestedDeliveryDate());
@@ -61,6 +63,8 @@ public class UpdateCartController extends AbstractController
         }
       }
     }
+    GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
+                                   "text.cart.update.success");
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
