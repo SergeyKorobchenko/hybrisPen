@@ -448,7 +448,7 @@ ACC.cart = {
                 }else{
                     var $commentInput = $form.find("textarea[name='customerNotes']");
                     initial = $commentInput.data("initial") == undefined ? '' : $commentInput.data("initial");
-                    if($commentInput.data("initial") != $commentInput.val()){
+                    if(initial != $commentInput.val()){
                         foundUnsavedChanges = true;
                     }else{
                         //check quantities
