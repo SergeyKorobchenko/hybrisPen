@@ -12,7 +12,7 @@
 <c:choose>
 	<c:when test="${not empty productData}">
 		<div class="carousel__component">
-			<div class="carousel__component--headline">${fn:escapeXml(title)}</div>
+			<h2 class="carousel__component--headline">${fn:escapeXml(title)}</h2>
 
 			<c:choose>
 				<c:when test="${component.popup}">

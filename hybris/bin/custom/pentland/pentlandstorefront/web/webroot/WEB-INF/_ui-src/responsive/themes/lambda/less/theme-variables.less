@@ -15,14 +15,18 @@
 
 //********* Brand colors *********
 
-//== Default
-@brand-primary: 	#0068b3;
-@brand-secondary: 	#929292;
+//== Main brand colors
+@brand-primary: 	@brand-primary-pantone-green;
+@brand-secondary: 	@brand-primary-gray;
 
 //== Primary
 @brand-primary-white: #ffffff;
+
 @brand-primary-gray: #999999;
 @brand-primary-light-gray: #cccccc;
+@brand-primary-zircon-gray: #e7e9e9;
+@brand-primary-warm-gray: #f1edea;
+
 @brand-primary-pantone-green: #003a56;
 @brand-primary-pantone-dark-green: #10252c;
 @brand-primary-pantone-blue: #00b5d6;
@@ -57,15 +61,16 @@
 @carousel-dots-active-color: @brand-primary-pantone-blue;
 
 //== Borders
-@border-color: 			#d9d9d9;
-@border-color-2:		#e5e5e5;
-@border-color-3:		#cccccc;
+@border-color:		    @brand-primary-gray;
+@border-color-2: 		@brand-primary-light-gray;
+@border-color-3:		@brand-primary-zircon-gray;
 
 //********* Form colors *********
 @label-color: 			@brand-secondary;
 
 @input-color: 			@text-color;
-@input-border-color: 	@border-color-3;
+@input-border-color: 	@border-color;
+@input-border: @input-border-color;
 @placeholder-color: 	@brand-secondary;
 //** Border color for inputs on focus
 @input-border-focus:    @brand-primary;
@@ -82,7 +87,7 @@
 
 //********* Header background *********
 @header-background-color: 	#f4f4f4;
-@nav-border-color: 			@border-color;
+@nav-border-color: 			@border-color-2;
 
 //*********Secondary Navigation colors*********
 //Background color for My Account and My Company dropdowns
@@ -102,18 +107,24 @@
 @nav-icon-color-secondary: @btn-primary-bg;
 @nav-icon-hover-background: @border-color-2;
 
-//*********Header Navigation-Categories Background*********
+//********* Header navigation-categories *********
+
+//== Typography
+@nav-cat-font-family: @brand-font-family-georgia-serif;
+
+// Colors
 @nav-cat-background: @brand-primary-pantone-dark-green;
-@nav-cat-border: @nav-cat-background;
 @nav-cat-hover-background: #1e3d55;
 @nav-cat-link-color: @brand-primary-white;
+@nav-cat-link-hover-color: @brand-primary-pantone-blue;
+@nav-cat-link-active-color: @nav-cat-link-hover-color;
 @nav-subcat-color: @text-color;
-@nav-subcat-title-color: rgba(0,0,0,0.7);
-@nav-subcat-background: @header-background-color;
+@nav-subcat-title-color: @brand-primary-pantone-dark-green;
+@nav-subcat-background: @brand-primary-warm-gray;
 @nav-subcat-border-color: @border-color-2;
 @nav-subcat-hover-background: @border-color-2;
 
-//*********Offcanvas navigation colors*********
+//********* Offcanvas navigation colors *********
 @offcanvas-nav-header-color: @brand-primary;
 @offcanvas-nav-header-background: @brand-primary-white;
 @offcanvas-nav-disabled: @brand-secondary;
@@ -123,13 +134,18 @@
 @offcanvas-meta-nav-background-open: @meta-nav-background;
 @offcanvas-meta-nav-hover-background: @meta-nav-hover-background;
 @offcanvas-nav-cat-color: @brand-primary;
-@offcanvas-nav-cat-title-color: rgba(0,0,0,0.7);
+@offcanvas-nav-cat-title-color: @brand-primary-pantone-dark-green;
 @offcanvas-nav-cat-background: @brand-primary-white;
 @offcanvas-nav-cat-border-color: @border-color-2;
-@offcanvas-nav-cat-hover-background: @border-color-2;
+@offcanvas-nav-cat-hover-color: @brand-primary-pantone-blue;
 
-//*********Breadcrumbs colors*********
-@breadcrumb-bg: @border-color;
+//********* Breadcrumbs *********
+@breadcrumb-padding-vertical: 15px;
+@breadcrumb-padding-horizontal: 0px;
+
+//== Colors
+@breadcrumb-bg: @brand-primary-white;
+@breadcrumb-border-color: @brand-primary-zircon-gray;
 
 //********* Slogan *********
 
@@ -181,31 +197,32 @@
 @pagination-prev-next-hover-bg:		@btn-primary-bg;
 @pagination-prev-next-hover-color:	@btn-primary-color;
 
-//*********Button Colors*********
+//********* Buttons *********
+@btn-font-family: @brand-font-family-georgia-serif;
 
-//Primary Button State
+//== Primary Button State
 @btn-primary-color: @brand-primary-white;
-@btn-primary-bg: @brand-primary;
-@btn-primary-border: @brand-primary;
-@btn-primary-hover-color: @brand-primary;
-@btn-primary-hover-border: @brand-primary;
-@btn-primary-hover-background: @brand-primary-white;
-@btn-primary-disabled-bg: #8cbbdd;
+@btn-primary-bg: @brand-primary-pantone-blue;
+@btn-primary-border: @brand-primary-pantone-blue;
+@btn-primary-hover-color: @brand-primary-white;
+@btn-primary-hover-border: @brand-primary-pantone-blue;
+@btn-primary-hover-background: fade(@brand-primary-pantone-blue, 80%);
+@btn-primary-disabled-bg: @brand-primary-zircon-gray;
 
-//Secondary Button State
+//== Secondary Button State
 @btn-default-color: @brand-primary-white;
-@btn-default-bg: @brand-secondary;
-@btn-default-border: @brand-secondary;
-@btn-default-hover-color: @brand-secondary;
-@btn-default-hover-border: @brand-secondary;
-@btn-default-hover-background: @brand-primary-white;
-@btn-default-disabled-bg: @border-color-3;
+@btn-default-bg: @brand-primary-pantone-dark-green;
+@btn-default-border: @brand-primary-pantone-dark-green;
+@btn-default-hover-color: @brand-primary-white;
+@btn-default-hover-border: @brand-primary-pantone-blue;
+@btn-default-hover-background: fade(@brand-primary-pantone-dark-green, 80%);
+@btn-default-disabled-bg: @brand-primary-zircon-gray;
 
 //*********Accordion Colors*********
 @accordion-bg: #000000;
 
 //*********Modal Colors*********
-@modal-close-btn-color: @brand-secondary;
+@modal-close-btn-color: @brand-primary-light-gray;
 
 //*********Account Colors*********
 @account-subheadline-bg: @header-background-color;

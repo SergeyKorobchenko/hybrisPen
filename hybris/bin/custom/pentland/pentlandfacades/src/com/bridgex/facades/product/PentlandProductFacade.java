@@ -15,7 +15,7 @@ import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
  */
 public interface PentlandProductFacade extends ProductFacade {
 
-  Optional<String> getAnySizeCodeForColor(String productCode);
+  Optional<String> getSizeUrlForProduct(String productCode);
 
   boolean populateCustomerPrice(ProductData productData);
 

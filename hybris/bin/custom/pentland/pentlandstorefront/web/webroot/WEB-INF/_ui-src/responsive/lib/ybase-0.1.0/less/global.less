@@ -33,6 +33,7 @@ body.offcanvas {
     margin-top: 30px;
   }
 }
+
 .b-margin-bottom {
   margin-bottom: 60px;
 
@@ -41,8 +42,8 @@ body.offcanvas {
   }
 }
 
-.no-margin{
-    margin: 0 !important;
+.no-margin {
+  margin: 0 !important;
 }
 
 .container-lg {
@@ -63,10 +64,6 @@ body.offcanvas {
 
 button {
   font-weight: bold;
-}
-
-.btn{
-  border-radius: 0 !important;
 }
 
 ul, ol {
@@ -91,9 +88,7 @@ option {
 General
 *****************************************************************/
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: @headings-letter-spacing;
-  margin-top: @headings-margin-top;
-  margin-bottom: @headings-margin-bottom;
+  .headline;
 }
 
 a, button {
@@ -111,10 +106,10 @@ a:hover, a:focus {
 }
 
 output {
-  display:block;
-  padding-top:7px;
-  font-size:14px;
-  line-height:1.42857143;
+  display: block;
+  padding-top: 7px;
+  font-size: 14px;
+  line-height: 1.42857143;
   color: @text-color;
 }
 
@@ -155,6 +150,7 @@ output {
     display: block;
   }
 }
+
 @media (max-width: @screen-xs-max) {
   .item-label,
   .item-value {
@@ -163,17 +159,21 @@ output {
     vertical-align: top;
     width: 49%;
   }
+
   .item-value {
     padding-left: @grid-gutter-width/2;
   }
+
   .item-action {
     margin-top: @grid-gutter-width;
   }
 }
+
 .item-label {
   text-transform: uppercase;
   font-weight: 300;
 }
+
 .item-value {
   font-size: @item-value-font-size;
   padding-bottom: @grid-gutter-width/2;
@@ -182,6 +182,7 @@ output {
 }
 
 .alert {
+  margin-bottom: @line-height-computed + 5px;
   .full-width-padding();
 }
 
@@ -208,7 +209,7 @@ output {
     padding-right: 0;
   }
 
-  &.well-xs{
+  &.well-xs {
     padding: 0px 15px 5px;
 
     .well-headline {
@@ -339,6 +340,7 @@ output {
     }
   }
 }
+
 //************************************************************
 //************************************************************
 //************************************************************
@@ -368,7 +370,6 @@ output {
     height: auto
   }
 }
-
 
 //************************************************************
 //************************************************************

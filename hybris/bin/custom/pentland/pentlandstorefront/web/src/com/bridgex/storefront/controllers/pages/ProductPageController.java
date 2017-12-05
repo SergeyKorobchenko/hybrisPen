@@ -17,23 +17,18 @@ import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.FutureStockForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.ReviewForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.ReviewValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.util.MetaSanitizerUtil;
-import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.acceleratorstorefrontcommons.variants.VariantSortStrategy;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
-import de.hybris.platform.commercefacades.order.data.ConfigurationInfoData;
-import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.BaseOptionData;
 import de.hybris.platform.commercefacades.product.data.FutureStockData;
 import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.product.data.ImageDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
-import de.hybris.platform.commercefacades.product.data.ReviewData;
 import de.hybris.platform.commerceservices.url.UrlResolver;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
@@ -57,14 +52,12 @@ import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Maps;
 
@@ -119,9 +112,9 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
-		final Optional<String> sizeCodeForColorProduct = productFacade.getAnySizeCodeForColor(productCode);
-		if (sizeCodeForColorProduct.isPresent()) {
-			return REDIRECT_PREFIX + "/p/" + sizeCodeForColorProduct.get();
+		final Optional<String> sizeUrl = productFacade.getSizeUrlForProduct(productCode);
+		if (sizeUrl.isPresent()) {
+			return REDIRECT_PREFIX + sizeUrl.get();
 		}
 
 		final List<ProductOption> extraOptions = null;

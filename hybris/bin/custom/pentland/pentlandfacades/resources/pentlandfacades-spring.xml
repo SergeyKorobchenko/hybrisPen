@@ -314,6 +314,7 @@
 		<property name="storeSessionFacade" ref="storeSessionFacade" />
 		<property name="customerService" ref="b2bCustomerService" />
 		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="productModelUrlResolver" ref="productModelUrlResolver"/>
 	</bean>
 
 	<alias name="pentlandProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>

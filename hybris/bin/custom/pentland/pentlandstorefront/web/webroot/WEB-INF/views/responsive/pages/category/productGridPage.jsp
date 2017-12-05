@@ -6,21 +6,31 @@
 
 <template:page pageTitle="${pageTitle}">
 
-	<cms:pageSlot position="Section1" var="feature" element="div" class="product-grid-section1-slot">
-		<cms:component component="${feature}" element="div" class="yComponentWrapper map product-grid-section1-component"/>
-	</cms:pageSlot>
-	
-	<div class="row">
-		<div class="col-xs-3">
-			<cms:pageSlot position="ProductLeftRefinements" var="feature" element="div" class="product-grid-left-refinements-slot">
-				<cms:component component="${feature}" element="div" class="yComponentWrapper product-grid-left-refinements-component"/>
-			</cms:pageSlot>
-		</div>
-		<div class="col-sm-12 col-md-9">
-			<cms:pageSlot position="ProductGridSlot" var="feature" element="div" class="product-grid-right-result-slot">
-				<cms:component component="${feature}" element="div" class="product__list--wrapper yComponentWrapper product-grid-right-result-component"/>
-			</cms:pageSlot>
-		</div>
-	</div>
-	<storepickup:pickupStorePopup />
+    <cms:pageSlot position="Section1" var="feature" element="div" class="product-grid-section1-slot">
+        <cms:component component="${feature}" element="div"
+                       class="yComponentWrapper map product-grid-section1-component"/>
+    </cms:pageSlot>
+
+    <div class="container">
+        <div class="b-section--full-width">
+            <div class="row">
+                <div class="col-xs-3">
+                    <cms:pageSlot position="ProductLeftRefinements" var="feature" element="div"
+                                  class="product-grid-left-refinements-slot">
+                        <cms:component component="${feature}" element="div"
+                                       class="yComponentWrapper product-grid-left-refinements-component"/>
+                    </cms:pageSlot>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                    <cms:pageSlot position="ProductGridSlot" var="feature" element="div" class="product-grid-right-result-slot">
+                        <cms:component component="${feature}" element="div"
+                                       class="product__list--wrapper yComponentWrapper product-grid-right-result-component"/>
+                    </cms:pageSlot>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <storepickup:pickupStorePopup/>
+
 </template:page>
