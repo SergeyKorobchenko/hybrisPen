@@ -12,9 +12,7 @@
 <spring:url value="/my-account/saved-carts/" var="savedCartsLink" htmlEscape="false"/>
 <c:set var="searchUrl" value="/my-account/saved-carts?sort=${ycommerce:encodeUrl(searchPageData.pagination.sort)}"/>
 
-<div class="account-section-header">
-    <spring:theme code="text.account.savedCarts"/>
-</div>
+<h1><spring:theme code="text.account.savedCarts"/></h1>
 
 <c:if test="${empty searchPageData.results}">
     <div class="account-section-content content-empty">
