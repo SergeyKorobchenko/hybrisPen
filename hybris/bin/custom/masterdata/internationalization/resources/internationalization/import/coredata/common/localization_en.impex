@@ -139,7 +139,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.add.free.gift;Add your free gift to Basket
 ;basket.add.to.basket;Add to bag
 ;basket.add.to.cart;Add
-;basket.added.to.basket;Added to Your Shopping Basket
+;basket.added.to.basket;Added to Your Basket
 ;basket.added.to.mobile.basket;Added Item
 ;basket.configure.product;Configure
 ;basket.confirmation.items.added;Your saved items were added to your bag.
