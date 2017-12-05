@@ -11,6 +11,7 @@ import org.spockframework.util.Nullable;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.constants.PentlandcoreConstants;
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
@@ -36,6 +37,8 @@ import de.hybris.platform.commercefacades.product.data.StockData;
 import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
+import de.hybris.platform.commerceservices.url.UrlResolver;
+import de.hybris.platform.commerceservices.url.impl.DefaultProductModelUrlResolver;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.variants.model.VariantProductModel;
 
@@ -51,15 +54,25 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   private PentlandB2BUnitService pentlandB2BUnitService;
   private B2BCustomerService<B2BCustomerModel, B2BUnitModel>     customerService;
   private PriceDataFactory priceDataFactory;
+  private UrlResolver<ProductModel> productModelUrlResolver;
 
   @Override
-  public Optional<String> getAnySizeCodeForColor(String productCode) {
+  public Optional<String> getSizeUrlForProduct(String productCode) {
     ProductModel productModel = getProductService().getProductForCode(productCode);
+    if (productModel instanceof ApparelSizeVariantProductModel) {
+      return Optional.empty();
+    }
+    Collection<VariantProductModel> variants;
     if (productModel instanceof ApparelStyleVariantProductModel) {
-      Collection<VariantProductModel> variants = productModel.getVariants();
+      variants = productModel.getVariants();
+    } else {
+      variants = productModel.getVariants();
       if (CollectionUtils.isNotEmpty(variants)) {
-        return Optional.of(variants.iterator().next().getCode());
+        variants = variants.iterator().next().getVariants();
       }
+    }
+    if (CollectionUtils.isNotEmpty(variants)) {
+      return Optional.of(productModelUrlResolver.resolve(variants.iterator().next()));
     }
     return Optional.empty();
   }
@@ -368,6 +381,15 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
   @Required
   public void setPriceDataFactory(PriceDataFactory priceDataFactory) {
     this.priceDataFactory = priceDataFactory;
+  }
+
+  protected UrlResolver<ProductModel> getProductModelUrlResolver() {
+    return productModelUrlResolver;
+  }
+
+  @Required
+  public void setProductModelUrlResolver(UrlResolver<ProductModel> productModelUrlResolver) {
+    this.productModelUrlResolver = productModelUrlResolver;
   }
 
 }

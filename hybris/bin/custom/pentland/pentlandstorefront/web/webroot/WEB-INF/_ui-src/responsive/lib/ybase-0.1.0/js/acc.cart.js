@@ -444,6 +444,7 @@ ACC.cart = {
                     'product': {'code': currentInputData.productSelection.product},
                     'entryNumber': -1
                 });
+                ACC.track.trackUpdateCart(currentInputData.productSelection.product, currentInputData.initialQuantity, quantity);
             }
         });
 
@@ -453,16 +454,11 @@ ACC.cart = {
             type: "POST",
             dataType: "json",
             contentType: 'application/json',
-            statusCode: {
-                200: function (data) {
-                    successFunction();
-                },
-                400: function (data) {
-                    alert("Failed save form");
-                },
-                500: function (data) {
-                    alert("Failed save form");
-                }
+            success: function() {
+                successFunction();
+            },
+            error: function() {
+                alert("Failed to save form");
             }
         });
     },
