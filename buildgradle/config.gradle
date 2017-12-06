@@ -53,4 +53,4 @@ apply from: "buildgradle/deployment.gradle"
 
 defaultTasks 'all'
 all.dependsOn 'customize'
-deploy_file.dependsOn 'production'
+// deploy_file.dependsOn 'production'

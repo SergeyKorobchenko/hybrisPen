@@ -22,13 +22,59 @@ task deploy_file {
 		def environment = new main.groovy.Environment(project)
         def filename = environment.getAttribute("filename") + '_' + version
 
-        def tempFolder = new File(hybris_temp + '/' + filename)
+        def tempfolderPath = hybris_temp + '/' + filename
+        def tempFolder = new File(tempfolderPath)
         tempFolder.mkdir();
+        def tempHybrisBinPath = tempfolderPath + '/hybris/bin'
+        def tempHybrisBin = new File(tempHybrisBinPath)
+        tempHybrisBin.mkdirs();
+
+   //      copy {
+   //          from(hybris_temp + "/hybris/hybrisServer/hybrisServer-AllExtensions.zip")
+			// from(hybris_temp + "/hybris/hybrisServer/hybrisServer-Platform.zip")
+   //          into tempHybrisBinPath
+   //      }
 
         def metadata = file(hybris_temp + '/' + filename + '/metadata.properties')
         metadata.text = "package_version = 2.3"
 
+        def devEnvPath = tempfolderPath + '/hybris/config/dev';
+        def stageEnvPath = tempfolderPath + '/hybris/config/stag';
+        def prodEnvPath = tempfolderPath + '/hybris/config/prod';
+        def hybrisEnvConfig = hybris_config + '/env';
 
+        new File(devEnvPath).mkdirs();
+        new File(stageEnvPath).mkdirs();
+        new File(prodEnvPath).mkdirs();
 
+        //dev properties
+        copy {
+        	from(hybrisEnvConfig + "/dev")
+        	into devEnvPath
+        }
+        //stage properties
+        def commonStag = file("${hybrisEnvConfig}/stag/common.properties")
+        def admStag = file("${hybrisEnvConfig}/stag/customer.adm.properties")
+        def appStag = file("${hybrisEnvConfig}/stag/customer.app.properties")
+        def targetAdmStag = file("${stageEnvPath}/customer.adm.properties")
+        def targetAppStag = file("${stageEnvPath}/customer.app.properties")
+        copyProperties(commonStag, admStag, appStag, targetAdmStag, targetAppStag)
+         //prod properties
+        def commonProd = file("${hybrisEnvConfig}/prod/common.properties")
+        def admProd = file("${hybrisEnvConfig}/prod/customer.adm.properties")
+        def appProd = file("${hybrisEnvConfig}/prod/customer.app.properties")
+        def targetAdmProd = file("${prodEnvPath}/customer.adm.properties")
+        def targetAppProd = file("${prodEnvPath}/customer.app.properties")
+        copyProperties(commonProd, admProd, appProd, targetAdmProd, targetAppProd)
+        
 	}
+}
+def copyProperties(common, admSource, appSource, admTarget, appTarget){
+	 if(common.exists()){
+			admTarget.text = common.text + admSource.text
+			appTarget.text = common.text + appSource.text
+        }else{
+        	admTarget.text = admSource.text
+			appTarget.text = appSource.text
+        }
 }
