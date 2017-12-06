@@ -4,9 +4,7 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 
 <div class="product__list--wrapper">
-    <div class="results">
-        <h1><spring:theme code="search.page.searchText" arguments="${searchPageData.freeTextSearch}"/></h1>
-    </div>
+    <h1><spring:theme code="search.page.searchText" arguments="${searchPageData.freeTextSearch}"/></h1>
 
     <nav:searchSpellingSuggestion spellingSuggestion="${searchPageData.spellingSuggestion}" />
 
