@@ -98,32 +98,14 @@
             <div class="quote__form--section">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4" id="js-quote-name-wrapper">
-                        <c:choose>
-                            <c:when test="${ycommerce:isQuoteUserSalesRep()}">
-                                <formElement:formInputBox idKey="js-quote-name"
-                                                          labelKey="text.quote.name.label" path="name"
-                                                          inputCSS="text" mandatory="true" disabled="true" maxlength="255"/>
-                            </c:when>
-                            <c:otherwise>
-                                <formElement:formInputBox idKey="js-quote-name"
-                                                          labelKey="text.quote.name.label" path="name"
-                                                          inputCSS="text" mandatory="true" maxlength="255"/>
-                            </c:otherwise>
-                        </c:choose>
+                        <formElement:formInputBox idKey="js-quote-name"
+                                                  labelKey="text.quote.name.label" path="name"
+                                                  inputCSS="text" mandatory="true" maxlength="255"/>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-1">
-                        <c:choose>
-                            <c:when test="${ycommerce:isQuoteUserSalesRep()}">
-                                <formElement:formInputBox idKey="js-quote-description"
-                                                          labelKey="text.quote.description.label" path="description"
-                                                          inputCSS="text" mandatory="false" disabled="true" maxlength="255"/>
-                            </c:when>
-                            <c:otherwise>
-                                <formElement:formInputBox idKey="js-quote-description"
-                                                          labelKey="text.quote.description.label" path="description"
-                                                          inputCSS="text" mandatory="false" maxlength="255"/>
-                            </c:otherwise>
-                        </c:choose>
+                        <formElement:formInputBox idKey="js-quote-description"
+                                                  labelKey="text.quote.description.label" path="description"
+                                                  inputCSS="text" mandatory="false" maxlength="255"/>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-5 col-sm-offset-6">
                         <div class="quote__estimate">

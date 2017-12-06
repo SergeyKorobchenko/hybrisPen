@@ -588,11 +588,9 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=en]
 ;;ImportSavedCartLink;"Import Saved Cart"
 ;;OrderHistoryLink;"Order History"
-;;PersonalDetailsLink;"Personal Details"
 ;;OrderFormsLink;"Order Form"
 ;;QuickOrderLink;"Quick Order"
-;;SavedCartsLink;"Saved Carts"
-;;TwitterLink;"Twitter"
+;;SavedCartsLink;"Saved Baskets"
 ;;UpdateEmailLink;"Email Address"
 ;;UpdatePasswordLink;"Password"
 ;;PersonalDetailsLink;"Personal Details"

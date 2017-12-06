@@ -186,7 +186,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.itemNumber;Item no.
 ;basket.page.itemPrice;Trade price
 ;basket.page.itemWholesalePrice;Wholesale price
-;basket.page.message.remove;Product has been removed from your bag.
+;basket.page.message.remove;Product has been removed from your basket.
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
 ;basket.page.message.update.pickupinstoreitem.toship;Pickup in store item was updated to shipping.
@@ -289,7 +289,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;brands.group.show;Show all
 ;brands.search.placeholder;Enter brand name
 ;breadcrumb.brands;Brands
-;breadcrumb.cart;Bag
+;breadcrumb.cart;Basket
 ;breadcrumb.home;Home
 ;breadcrumb.login;Login
 ;breadcrumb.mnn;Active substances
@@ -2883,7 +2883,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.cart.rdd;Requested Delivery Date
 ;text.cart.purchaseOrderNumber;P.O. Number
 ;text.cart.customerNotes;Notes
-;checkout.savecart;Save updated cart
+;checkout.savecart;Save updated basket
 ;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
 ;text.cart.update.success;Basket was successfully saved
 

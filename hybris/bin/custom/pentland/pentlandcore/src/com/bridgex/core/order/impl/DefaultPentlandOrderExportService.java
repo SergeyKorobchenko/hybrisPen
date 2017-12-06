@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandOrderExportService;
 import com.bridgex.core.services.PentlandB2BUnitService;
@@ -20,6 +22,7 @@ import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
+import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.enums.SalesApplication;
 import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.enums.OrderStatus;
@@ -27,6 +30,8 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.variants.model.VariantProductModel;
 
@@ -35,9 +40,12 @@ import de.hybris.platform.variants.model.VariantProductModel;
  */
 public class DefaultPentlandOrderExportService implements PentlandOrderExportService{
 
+  private static final Logger LOG = Logger.getLogger(DefaultPentlandOrderExportService.class);
+
   private IntegrationService<OrderExportDto, ExportOrderResponse> orderExportService;
   private ModelService                                            modelService;
   private PentlandB2BUnitService                                  pentlandB2BUnitService;
+  private PentlandCustomerAccountService                          customerAccountService;
 
   @Override
   public boolean exportOrder(OrderModel orderModel) {
@@ -159,7 +167,22 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   private boolean processSuccessfulResponse(OrderModel orderModel, ExportOrderResponse responseBody) {List<SapOrderDto> sapOrderDTOList = responseBody.getSapOrderDTOList();
     List<OrderModel> byBrandOrderList = new ArrayList<>();
     for(SapOrderDto sapOrderDTO: sapOrderDTOList){
-      OrderModel sapOrder = modelService.create(OrderModel.class);
+      OrderModel sapOrder = null;
+      try {
+        sapOrder = customerAccountService.getOrderForCode(sapOrderDTO.getOrderCode(), orderModel.getStore());
+      } catch(ModelNotFoundException e){
+        //this is ok, no order with this code was previously created
+      } catch(AmbiguousIdentifierException e){
+        //corrupted data
+        LOG.error("Multiple orders found for code #" + sapOrderDTO.getOrderCode() + ", parent order #" + orderModel.getCode());
+        orderModel.setReexportRetries(orderModel.getReexportRetries() + 1);
+        orderModel.setExportStatus(ExportStatus.NOTEXPORTED);
+        modelService.save(orderModel);
+        return false;
+      }
+      if(sapOrder == null) {
+        sapOrder = modelService.create(OrderModel.class);
+      }
       sapOrder.setCode(sapOrderDTO.getOrderCode());
       sapOrder.setSapBrand(sapOrderDTO.getSapBrand());
       OrderStatus newStatus = OrderStatus.valueOf(sapOrderDTO.getStatus());
@@ -224,5 +247,10 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   @Required
   public void setPentlandB2BUnitService(PentlandB2BUnitService pentlandB2BUnitService) {
     this.pentlandB2BUnitService = pentlandB2BUnitService;
+  }
+
+  @Required
+  public void setCustomerAccountService(PentlandCustomerAccountService customerAccountService) {
+    this.customerAccountService = customerAccountService;
   }
 }
