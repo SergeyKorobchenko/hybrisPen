@@ -56,10 +56,10 @@
 				<img style="width: 32px; height: 32px;" src="${imageUrl}" title="${variantName}" alt="${variantName}"/>
 			</c:forEach>
 			<c:if test="${product.variantOptions.size() > 5}">
-				<p><spring:theme code="product.grid.variants.more"/></p>
+				<div class="variants"><spring:theme code="product.grid.variants.more"/></div>
 			</c:if>
 			<c:if test="${product.clearance}">
-				<p><spring:theme code="product.grid.variants.clearance"/></p>
+				<div class="variants"><spring:theme code="product.grid.variants.clearance"/></div>
 			</c:if>
 		</div>
 
@@ -68,10 +68,10 @@
 		<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
 		<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
 		<c:set var="isGrid" value="true" scope="request"/>
-		<div class="addtocart">
-			<div class="actions-container-for-${fn:escapeXml(component.uid)} <c:if test="${ycommerce:checkIfPickupEnabledForStore() and product.availableForPickup}"> pickup-in-store-available</c:if>">
-				<action:actions element="div" parentComponent="${component}"/>
-			</div>
-		</div>
+		<%--<div class="addtocart">--%>
+			<%--<div class="actions-container-for-${fn:escapeXml(component.uid)} <c:if test="${ycommerce:checkIfPickupEnabledForStore() and product.availableForPickup}"> pickup-in-store-available</c:if>">--%>
+				<%--<action:actions element="div" parentComponent="${component}"/>--%>
+			<%--</div>--%>
+		<%--</div>--%>
 	</ycommerce:testId>
 </div>

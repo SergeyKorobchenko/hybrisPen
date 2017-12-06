@@ -45,7 +45,7 @@
                     <div class="row">
 
                         <c:if test="${top}">
-                            <div class="col-xs-12 col-sm-4 col-md-2">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label " for="sortForm${top ? '1' : '2'}">
                                         <spring:theme code="${themeMsgKey}.sortTitle"/>
@@ -93,26 +93,30 @@
                                         </c:if>
                                     </form>
                                 </div>
-                            </div>
 
-                            <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
-                                <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
-                                <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
-                                <div class="col-xs-12 col-md-2 pull-left">
-                                    <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP">
-                                        <spring:theme code="basket.export.csv.file"/>
-                                    </a>
-                                    <form id="export-csv" action="${exportUrl}" method="get">
-                                        <input type="hidden" name="content" value=""/>
-                                    </form>
-                                    <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
-                                        <spring:theme code="basket.export.images.file"/>
-                                    </a>
-                                    <form id="export-images" action="${imagesExportUrl}" method="get">
-                                        <input type="hidden" name="content" value=""/>
-                                    </form>
-                                </div>
-                            </c:if>
+                                <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
+                                    <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
+                                    <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
+
+                                    <div class="export">
+                                        <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP">
+                                            <spring:theme code="basket.export.csv.file"/>
+                                        </a>
+                                        <form id="export-csv" action="${exportUrl}" method="get">
+                                            <input type="hidden" name="content" value=""/>
+                                        </form>
+                                    </div>
+
+                                    <div class="export">
+                                        <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
+                                            <spring:theme code="basket.export.images.file"/>
+                                        </a>
+                                        <form id="export-images" action="${imagesExportUrl}" method="get">
+                                            <input type="hidden" name="content" value=""/>
+                                        </form>
+                                    </div>
+                                </c:if>
+                            </div>
                         </c:if>
 
                         <c:if test="${!top}">
@@ -127,7 +131,7 @@
                         <c:if test="${not hideRefBtn}">
                             <div class="col-xs-12 col-sm-2 col-md-4 hidden-md hidden-lg">
                                 <ycommerce:testId code="searchResults_refine_button">
-                                    <product:productRefineButton styleClass="btn btn-default js-show-facets"/>
+                                    <product:productRefineButton styleClass="btn btn-default btn-small js-show-facets"/>
                                 </ycommerce:testId>
                             </div>
                         </c:if>
