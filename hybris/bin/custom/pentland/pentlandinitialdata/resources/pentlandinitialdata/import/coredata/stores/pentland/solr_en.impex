@@ -22,7 +22,7 @@ $lang=en
 # Solr Indexed Property
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
 ;$solrIndexedType;brand;"Brand"
-;$solrIndexedType;category;"Category"
+;$solrIndexedType;facetCategory;"Category"
 ;$solrIndexedType;productType;"Product Type"
 #;$solrIndexedType;description;"Description"
 ;$solrIndexedType;code;"Code"
