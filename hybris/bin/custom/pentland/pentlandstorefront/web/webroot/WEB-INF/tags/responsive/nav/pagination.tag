@@ -89,23 +89,25 @@
                         </div>
 
                         <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
-                            <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
-                            <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
-                            <div class="col-xs-12 col-sm-12 col-md-2">
-                                <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP media-heading">
-                                    <spring:theme code="basket.export.csv.file" />
-                                </a>
-                                <form id="export-csv" action="${exportUrl}" method="get">
-                                    <input type="hidden" name="content" value=""/>
-                                </form>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-2">
-                                <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
-                                    <spring:theme code="basket.export.images.file" />
-                                </a>
-                                <form id="export-images" action="${imagesExportUrl}" method="get">
-                                    <input type="hidden" name="content" value=""/>
-                                </form>
+                            <div class="hidden js-export-block">
+                                <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
+                                <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
+                                <div class="col-xs-12 col-sm-12 col-md-2">
+                                    <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP media-heading">
+                                        <spring:theme code="basket.export.csv.file" />
+                                    </a>
+                                    <form id="export-csv" action="${exportUrl}" method="get">
+                                        <input type="hidden" name="content" value=""/>
+                                    </form>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-2">
+                                    <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
+                                        <spring:theme code="basket.export.images.file" />
+                                    </a>
+                                    <form id="export-images" action="${imagesExportUrl}" method="get">
+                                        <input type="hidden" name="content" value=""/>
+                                    </form>
+                                </div>
                             </div>
                         </c:if>
 
