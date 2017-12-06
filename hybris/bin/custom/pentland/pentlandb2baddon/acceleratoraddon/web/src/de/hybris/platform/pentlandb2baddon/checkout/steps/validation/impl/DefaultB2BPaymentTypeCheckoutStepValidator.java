@@ -15,9 +15,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.pentlandb2baddon.checkout.steps.validation.AbstractB2BCheckoutStepValidator;
 
-import de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData;
-import de.hybris.platform.b2bacceleratorservices.enums.CheckoutPaymentType;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,6 +32,11 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 		if(pentlandB2BAcceleratorCheckoutFacade.isCartTotalQuantityZero()){
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 			                               "checkout.error.empty.cart");
+			return ValidationResults.FAILED;
+		}
+		if(pentlandB2BAcceleratorCheckoutFacade.cartHasZeroQuantityBaseEntries()){
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+			                               "checkout.error.empty.entry.cart");
 			return ValidationResults.FAILED;
 		}
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();

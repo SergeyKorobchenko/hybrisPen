@@ -314,6 +314,7 @@
 		<property name="storeSessionFacade" ref="storeSessionFacade" />
 		<property name="customerService" ref="b2bCustomerService" />
 		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="productModelUrlResolver" ref="productModelUrlResolver"/>
 	</bean>
 
 	<alias name="pentlandProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>
@@ -353,5 +354,10 @@
 
 	<alias name="pentlandCustomerFacade" alias="customerFacade"/>
 	<bean id="pentlandCustomerFacade" class="com.bridgex.facades.customer.impl.DefaultPentlandCustomerFacade" parent="defaultCustomerFacade"/>
+
+	<alias name="pentlandRemoveCartEntryActionHandler" alias="removeCartEntryActionHandler"/>
+	<bean id="pentlandRemoveCartEntryActionHandler" class="com.bridgex.facades.cart.action.impl.PentlandRemoveCartEntryActionHandler">
+		<property name="cartFacade" ref="cartFacade"/>
+	</bean>
 
 </beans>

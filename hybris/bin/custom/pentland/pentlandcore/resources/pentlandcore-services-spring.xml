@@ -103,6 +103,7 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="orderExportService" ref="orderExportService"/>
 		<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService"/>
+		<property name="customerAccountService" ref="pentlandCustomerAccountService"/>
 	</bean>
 
 	<alias name="defaultPentlandAccountSummaryService" alias="pentlandAccountSummaryService"/>

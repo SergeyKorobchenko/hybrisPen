@@ -36,6 +36,7 @@
 				<entry key="address" value="2" />
 				<entry key="invoice" value="1" />
 				<entry key="order" value="1" />
+				<entry key="sizechart" value="4" />
 			</map>
 		</property>
 	</bean>
@@ -173,6 +174,11 @@
 	      p:mapping="invoice"
 	      p:converter-ref="pentlandBatchInvoiceConverter"/>
 
+	<bean id="batchSizeChartConverterMapping"
+	      class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+	      p:mapping="sizechart"
+	      p:converter-ref="pentlandBatchSizeChartConverter"/>
+
 	<!-- Converters -->
 	<!-- B2BUnit converters -->
 	<!-- parent B2BUnit -->
@@ -268,20 +274,17 @@
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				$classificationCatalog = pentlandClassificationCatalog
 				$clAttrModifiers = system = '$classificationCatalog', version = '1.0', lang = $lang, translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
-				$teamwearType = @teamwearType[$clAttrModifiers];
-				$trainingwearType = @trainingwearType[$clAttrModifiers];
 				$sport = @sport[$clAttrModifiers];
-				$accessoryType = @accessoryType[$clAttrModifiers];
 				$useageOccasion = @useageOccasion[$clAttrModifiers];
 				$surface = @surface[$clAttrModifiers];
 				$trainingMethod = @trainingMethod[$clAttrModifiers];
-				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator,collection-delimiter=|];$teamwearType;$trainingwearType;$sport;$accessoryType;$useageOccasion;$surface;$trainingMethod;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator,collection-delimiter=|];$sport;$useageOccasion;$surface;$trainingMethod;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{S}
-				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{S}
+				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{S}
+				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{S}
 			</value>
 		</property>
 	</bean>
@@ -384,6 +387,21 @@
 			<property name="impexRow">
 				<value>;{+0};{+1};{+1};{+2};{3};{+4};{5};{+6};{+7};{8}</value>
 			</property>
+	</bean>
+	<bean id="pentlandBatchSizeChartConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{pentlandImpexProductHeader}
+				# Import media from filesystem
+				$mediaCatalog = pentlandMediaCatalog
+				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
+				UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+				$importFolder=$config-mediaremotesource
+				INSERT_UPDATE Media;code[unique=true];realfilename;mediaFormat(qualifier)[default=sizeChart];$mediaCV;folder(qualifier)[default=product];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{+0};;;;$importFolder/{+0}</value>
+		</property>
 	</bean>
 
 </beans>

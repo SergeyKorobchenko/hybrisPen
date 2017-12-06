@@ -61,6 +61,11 @@
 		<property name="businessProcessCreationStrategy" ref="defaultB2BCreateOrderFromCartStrategy"/>
 	</bean>
 
+	<alias name="pentlandQuoteCommerceCartMetadataUpdateValidationHook" alias="quoteCommerceCartMetadataUpdateValidationHook"/>
+	<bean id="pentlandQuoteCommerceCartMetadataUpdateValidationHook"
+	      class="com.bridgex.core.order.hooks.PentlandQuoteCommerceCartMetadataUpdateValidationHook" parent="defaultQuoteCommerceCartMetadataUpdateValidationHook">
+	</bean>
+
 	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="commerceCartCalculationStrategy"/>
 	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="checkoutCartCalculationStrategy"/>
 	<bean id="defaultPentlandCommerceCartCalculationStrategy" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCartCalculationStrategy" parent="defaultCommerceCartCalculationStrategy" />

@@ -139,7 +139,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.add.free.gift;Add your free gift to Basket
 ;basket.add.to.basket;Add to bag
 ;basket.add.to.cart;Add
-;basket.added.to.basket;Added to Your Shopping Bag
+;basket.added.to.basket;Added to Your Basket
 ;basket.added.to.mobile.basket;Added Item
 ;basket.configure.product;Configure
 ;basket.confirmation.items.added;Your saved items were added to your bag.
@@ -186,7 +186,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.itemNumber;Item no.
 ;basket.page.itemPrice;Trade price
 ;basket.page.itemWholesalePrice;Wholesale price
-;basket.page.message.remove;Product has been removed from your bag.
+;basket.page.message.remove;Product has been removed from your basket.
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
 ;basket.page.message.update.pickupinstoreitem.toship;Pickup in store item was updated to shipping.
@@ -289,7 +289,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;brands.group.show;Show all
 ;brands.search.placeholder;Enter brand name
 ;breadcrumb.brands;Brands
-;breadcrumb.cart;Bag
+;breadcrumb.cart;Basket
 ;breadcrumb.home;Home
 ;breadcrumb.login;Login
 ;breadcrumb.mnn;Active substances
@@ -1498,7 +1498,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.page.linkPreviousPage;Previous Page
 ;text.account.orderHistory.page.showAllResults;Show all
 ;text.account.orderHistory.page.showPageResults;Show paginated
-;text.account.orderHistory.page.sort.byDate;Date
+;text.account.orderHistory.page.sort.byDate;Date Placed
 ;text.account.orderHistory.page.sort.byOrderNumber;Order Number
 ;text.account.orderHistory.page.sortTitle;Sort by
 ;text.account.orderHistory.page.totalResults;of {0} Orders
@@ -2848,10 +2848,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;product.grid.variants.more;More colors available
 
-;text.account.orderHistory.page.sort.byPurchaseOrderNumber;Purchase Order Number
-;text.account.orderHistory.page.sort.byStatus;Status
-;text.account.orderHistory.page.sort.byOrderType;OrderType
-;text.account.orderHistory.page.sort.byRdd;Requested delivery date
+;text.account.orderHistory.page.sort.byPurchaseOrderNumber;P.O. Number
+;text.account.orderHistory.page.sort.byStatus;Order Status
+;text.account.orderHistory.page.sort.byOrderType;Order Type
+;text.account.orderHistory.page.sort.byRdd;RDD
 ;text.account.orderHistory.orderType;Order Type
 ;text.account.orderHistory.rdd;RDD
 ;text.account.orderHistory.totalQty;Total Qty
@@ -2869,8 +2869,12 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.tax;Order Tax
 ;text.account.order.net;Order Net
 
+;text.account.order.status.display.ON_HOLD;On Hold
+;text.account.order.status.display.IN_PROGRESS;In Progress
 ;text.account.order.status.display.SHIPPED;Shipped
 ;text.account.order.status.display.OPEN;Open
+;text.account.order.status.display.CANCELLED;Cancelled
+;text.account.order.status.display.INVOICED;Invoiced
 
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
@@ -2879,8 +2883,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.cart.rdd;Requested Delivery Date
 ;text.cart.purchaseOrderNumber;P.O. Number
 ;text.cart.customerNotes;Notes
-;checkout.savecart;Save updated cart
+;checkout.savecart;Save updated basket
 ;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
+;text.cart.update.success;Basket was successfully saved
 
 ;checkout.payment.CARD.CREDITCARD;Online payment
 ;checkout.payment.CARD.PROFORMA;Online payment
@@ -2912,10 +2917,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.summary.order.brand;Brand
 ;order.export.global.error;Order failed to export.
 
-;basket.export.images.file;Download product images
 ;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
-;checkout.error.empty.cart;Your shopping bag is empty. Please update entry quantities before proceeding to checkout
+;checkout.error.empty.cart;Your basket does not have any quantity. Please add quantity before proceeding to checkout.
+;checkout.error.empty.entry.cart;Your basket does not have any quantity for one or more products. Please add quantity before proceeding to checkout.
 
 ;text.account.hidePrices;Show/Hide prices
 ;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
@@ -2936,3 +2941,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;text.account.changes.saved;Changes saved
 ;currency.GBP;£
+
+;cart.unsaved.popup.title;You have made edits to the basket
+;cart.unsaved.popup.warning;Do you wish to save the changes?
+;cart.unsaved.popup.save;YES
+;cart.unsaved.popup.cancel;NO

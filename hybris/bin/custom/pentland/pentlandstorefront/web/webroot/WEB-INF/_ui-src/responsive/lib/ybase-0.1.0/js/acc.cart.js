@@ -9,7 +9,8 @@ ACC.cart = {
         ["bindApplyVoucher", $("#js-voucher-apply-btn").length != 0],
         ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0],
         "bindRddDatetimePicker",
-        "bindUpdateAllFormSubmit"
+        "bindUpdateAllFormSubmit",
+        "scanCartForEdits"
     ],
 
     bindHelp: function () {
@@ -417,7 +418,72 @@ ACC.cart = {
                     daysOfWeekDisabled: [0, 6],
                     allowInputToggle: true,
                     useCurrent: false,
-                    disabledDates: [inputData.disableddates.split(',')]
+                    disabledDates: inputData.disableddates.split(',')
+                });
+            }
+        });
+    },
+
+    scanCartForEdits: function(){
+        $(".js-continue-checkout-button, .export__cart--link, .export__images--link").on("click", function(e){
+            var $form = $('#updateAllCartForm');
+            var $updateFormData = $($form.serializeArray());
+            var postData = {};
+            $updateFormData.each(function (index, value) {
+                postData[value.name] = value.value;
+            });
+            postData.cartEntries = [];
+            var foundUnsavedChanges = false;
+
+            //check cart header
+            var $rddInput = $form.find("input[name='requestedDeliveryDate']");
+            var initial = $rddInput.data("initial") == undefined ? '' : $rddInput.data("initial");
+            if(initial != $rddInput.val()){
+                foundUnsavedChanges = true;
+            }else{
+                var $poInput = $form.find("input[name='purchaseOrderNumber']");
+                initial = $poInput.data("initial") == undefined ? '' : $poInput.data("initial");
+                if(initial != $poInput.val()){
+                    foundUnsavedChanges = true;
+                }else{
+                    var $commentInput = $form.find("textarea[name='customerNotes']");
+                    initial = $commentInput.data("initial") == undefined ? '' : $commentInput.data("initial");
+                    if(initial != $commentInput.val()){
+                        foundUnsavedChanges = true;
+                    }else{
+                        //check quantities
+                        $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
+                            var $v = $(v);
+                            var currentInputData = $v.data();
+                            var quantity = $v.val();
+                            if (currentInputData.initialQuantity != quantity) {
+                                foundUnsavedChanges = true;
+                                return true;
+                            }
+                        });
+                    }
+                }
+            }
+
+
+            if(foundUnsavedChanges){
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                var popupTitle = $(".unsaved_popup_content").data('popup-title');
+
+                ACC.colorbox.open(popupTitle,{
+                    html: $(".unsaved_popup_content").html(),
+                    width: '500px',
+                    onComplete: function ()
+                    {
+                        $(this).colorbox.resize();
+                        $(".js-save-cart").click(function(){
+                            ACC.cart.submitUpdateAllForm(function() {location.reload()});
+                        });
+                        $(".js-close-unsaved-popup").click(function(){
+                            ACC.colorbox.close();
+                        });
+                    }
                 });
             }
         });
@@ -444,6 +510,7 @@ ACC.cart = {
                     'product': {'code': currentInputData.productSelection.product},
                     'entryNumber': -1
                 });
+                ACC.track.trackUpdateCart(currentInputData.productSelection.product, currentInputData.initialQuantity, quantity);
             }
         });
 
@@ -453,16 +520,11 @@ ACC.cart = {
             type: "POST",
             dataType: "json",
             contentType: 'application/json',
-            statusCode: {
-                200: function (data) {
-                    successFunction();
-                },
-                400: function (data) {
-                    alert("Failed save form");
-                },
-                500: function (data) {
-                    alert("Failed save form");
-                }
+            success: function() {
+                successFunction();
+            },
+            error: function() {
+                alert("Failed to save form");
             }
         });
     },
@@ -471,7 +533,7 @@ ACC.cart = {
         $(document).ready(function () {
             $('.js-savecart-checkout-button').click(function () {
                 ACC.cart.submitUpdateAllForm(function() {location.reload()});
-            })
+            });
         });
     }
 
