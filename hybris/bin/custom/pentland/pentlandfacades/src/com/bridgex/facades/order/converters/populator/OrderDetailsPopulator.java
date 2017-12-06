@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BiFunction;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.facades.order.data.OrderItemData;
@@ -91,11 +92,9 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     try {
       ProductModel product = productService.getProductForCode(dto.getProduct());
       item.setName(product.getName());
-      Optional.ofNullable(product.getPicture())
-              .map(MediaModel::getURL)
-              .ifPresent(item::setImageUrl);
-    } catch (UnknownIdentifierException e) {
-      LOG.warn("Error while loading image: " + e.getMessage());
+      } catch (UnknownIdentifierException e) {
+        LOG.warn("Error while loading image: " + e.getMessage());
+        item.setName(StringUtils.EMPTY);
     }
   }
 

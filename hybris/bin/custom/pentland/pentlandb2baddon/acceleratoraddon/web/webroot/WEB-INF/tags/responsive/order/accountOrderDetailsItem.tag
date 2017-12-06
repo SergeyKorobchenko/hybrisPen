@@ -9,10 +9,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="row">
-    <div class="col-xs-1">
-        <img class="img-thumbnail" src="${item.imageUrl}" title="${item.name}"/>
-    </div>
-    <div class="col-xs-11">
+    <div class="col-xs-12">
         <ycommerce:testId code="orderDetail_itemNumber_label">
             <span class="item-value">${fn:escapeXml(item.number)}</span>
         </ycommerce:testId>
