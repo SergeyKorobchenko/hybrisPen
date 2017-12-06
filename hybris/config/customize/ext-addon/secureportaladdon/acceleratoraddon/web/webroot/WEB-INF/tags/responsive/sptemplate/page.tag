@@ -10,7 +10,9 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true"/>
+
 <template:master pageTitle="${pageTitle}">
+
     <jsp:attribute name="pageCss">
         <jsp:invoke fragment="pageCss"/>
     </jsp:attribute>
@@ -21,16 +23,24 @@
 
     <jsp:body>
         <spheader:header/>
+
         <a id="skip-to-content"></a>
+
         <div class="container">
             <common:globalMessages/>
             <jsp:doBody/>
-         </div>
-        <div class="row branding">
-            <cms:pageSlot position="BrandImageSlot" var="feature" element="div" class="col-md-12">
-                <cms:component component="${feature}"/>
-            </cms:pageSlot>
         </div>
-         <footer:footer/>
+
+        <div class="c-brand-banner">
+            <div class="container-fluid--unlimited b-margin-top">
+                <div class="row">
+                    <cms:pageSlot position="BrandImageSlot" var="feature" element="div" class="col-md-12">
+                        <cms:component component="${feature}"/>
+                    </cms:pageSlot>
+                </div>
+            </div>
+        </div>
+
+        <footer:footer/>
     </jsp:body>
 </template:master>
