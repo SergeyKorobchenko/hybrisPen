@@ -64,6 +64,7 @@
 @border-color:		    @brand-primary-gray;
 @border-color-2: 		@brand-primary-light-gray;
 @border-color-3:		@brand-primary-zircon-gray;
+@border-color-4:		@brand-primary-pantone-blue;
 
 //********* Form colors *********
 @label-color: 			@brand-secondary;
@@ -188,11 +189,21 @@
 @list-active-bg:                #e6f0fb;
 
 //== Pagination
-@pagination-active-color: 		#a6a6a6;
-@pagination-font-weight: 		600;
+@pagination-font-family: @brand-font-family-arial-sans-serif;
 
-@pagination-disabled-color:     @pagination-active-color;
-@pagination-hover-color:		@pagination-active-color;
+@pagination-border:					@border-color-4;
+
+@pagination-active-bg:				@btn-primary-bg;
+@pagination-active-border:          @btn-primary-bg;
+@pagination-active-color: 			@btn-primary-color;
+
+@pagination-hover-bg:				@btn-primary-bg;
+@pagination-hover-border:           @btn-primary-bg;
+@pagination-hover-color:			@btn-primary-color;
+
+@pagination-disabled-bg:            transparent;
+@pagination-disabled-border:        @border-color-3;
+@pagination-disabled-color:     	@border-color-3;
 
 @pagination-prev-next-hover-bg:		@btn-primary-bg;
 @pagination-prev-next-hover-color:	@btn-primary-color;

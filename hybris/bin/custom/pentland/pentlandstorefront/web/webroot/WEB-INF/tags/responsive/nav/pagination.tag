@@ -119,8 +119,8 @@
                             </div>
                         </c:if>
 
-                        <c:if test="${!top}">
-                            <div class="col-xs-12 col-sm-6 col-md-5 pagination-wrap">
+                        <c:if test="${not top}">
+                            <div class="col-xs-12 col-sm-6 col-md-6 pagination-wrap">
                                 <pagination:pageSelectionPagination searchUrl="${searchUrl}"
                                                                     searchPageData="${searchPageData}"
                                                                     numberPagesShown="${numberPagesShown}"
@@ -128,7 +128,7 @@
                             </div>
                         </c:if>
 
-                        <c:if test="${not hideRefBtn}">
+                        <c:if test="${not hideRefBtn && top}">
                             <div class="col-xs-12 col-sm-2 col-md-4 hidden-md hidden-lg">
                                 <ycommerce:testId code="searchResults_refine_button">
                                     <product:productRefineButton styleClass="btn btn-default btn-small js-show-facets"/>

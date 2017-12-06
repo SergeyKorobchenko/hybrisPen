@@ -73,7 +73,7 @@
 		}
 		.export {
 			width: 100%;
-			margin-top: @grid-gutter-width - 5;
+			margin-top: @grid-gutter-width / 2;
 			padding-left: 0;
 		}
 
@@ -81,7 +81,7 @@
 	.pagination-bar {
 		.pagination,
 		button {
-			margin-top: @grid-gutter-width * 1.5;
+			margin-top: @grid-gutter-width / 2;
 			width: 100%;
 		}
 	}
@@ -93,7 +93,7 @@
 
 		.pagination,
 		button {
-			margin-top: @grid-gutter-width + 10;
+			margin-top: @grid-gutter-width / 2;
 		}
 	}
 }
@@ -109,7 +109,7 @@
 	.pagination-bar {
 		.pagination,
 		button {
-			margin-top: @grid-gutter-width + 10;
+			margin-top: @grid-gutter-width / 2;
 		}
 	}
 }
@@ -117,11 +117,11 @@
 
 .pagination-bar-borders() when (@pagination-bar-framed) {
 	.pagination-bar {
-		//.pagination-toolbar,
-		//.pagination-wrap {
-		//	padding-left: 0;
-		//	padding-right: 0;
-		//}
+		.pagination-toolbar,
+		.pagination-wrap {
+			padding-left: 0;
+			padding-right: 0;
+		}
 
 		.pagination {
 			padding-top: @grid-gutter-width - 5;
