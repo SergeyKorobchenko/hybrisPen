@@ -56,6 +56,13 @@
 		<property name="categorySource" ref="pentlandCategorySource"/>
 	</bean>
 
+	<alias name="pentlandImageValueProvider" alias="abstractImageValueProvider"/>
+	<bean id="pentlandImageValueProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandImageValueProvider" abstract="true">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
 	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
 		<property name="mediaFormat" value="515Wx515H"/>
 	</bean>

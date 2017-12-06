@@ -149,4 +149,5 @@ ACC.product = {
 $(document).ready(function () {
     $ajaxCallEvent = true;
     ACC.product.enableAddToCartButton();
+    $(".js-export-block").removeClass("hidden");
 });
