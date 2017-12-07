@@ -1,141 +1,126 @@
 .sort-refine-bar {
 
-	.form-group {
-		display: inline-block;
+  .form-group {
+    display: inline-block;
 
-		select {
-			width: auto;
-		}
-	}
-	.export {
-		display: inline-block;
+    select {
+      width: auto;
+    }
+  }
+  .export {
+    display: inline-block;
+    font-size: @font-size-base;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
 
-		font-size: @font-size-base;
-		text-align: left;
-		vertical-align: middle;
-		white-space: nowrap;
-
-		padding-left: @grid-gutter-width - 5;
-	}
+    .export__link {
+      display: inherit;
+      padding-left: @grid-gutter-width - 5;
+    }
+  }
 }
 
 .paginationBar {
-	.search-empty {
-		.totalResults {
-			margin-top: @grid-gutter-width + 10;
-		}
-	}
+  .search-empty {
+    .totalResults {
+      margin-top: @grid-gutter-width + 10;
+    }
+  }
 }
 
-.pagination-bar{
-	//margin:  (@grid-gutter-width + 10) 0 0 0;
+.pagination-bar {
+  .form-group {
+    margin: 0;
+  }
 
-	//.pagination-toolbar {
-		//padding-bottom: (@grid-gutter-width - 5);
-		//padding-left: 20px;
-	  	//padding-right: 30px;
-		//border-bottom: 1px solid @border-color-3;
-
-	  //@media (max-width: @screen-md) {
-		//padding-left: 20px;
-		//padding-right: 20px;
-	  //}
-	//}
-
-	.form-group {
-		margin: 0;
-	}
-
-	.pagination-bar-results {
-		padding: (@grid-gutter-width + 10) 0 (@grid-gutter-width - 5) 0;
-		color: @text-color-secondary;
-	}
-
-	&.bottom {
-		.pagination-toolbar {
-			//padding-top: (@grid-gutter-width * 1.5);
-			//border-top: 1px solid @border-color-3;
-			//border-bottom-width: 1px;
-		}
-	}
-}
-
-@media (max-width: @screen-sm-max)  {
-	.pagination-bar {
-		button {
-			width: 100%;
-			padding-left: 0;
-			padding-right: 0;
-		}
-	}
+  .pagination-bar-results {
+    padding: (@grid-gutter-width + 10) 0 (@grid-gutter-width - 5) 0;
+    color: @text-color-secondary;
+  }
 }
 
 @media (max-width: @screen-sm-max) {
-	.sort-refine-bar {
-		.form-group {
-			width: 100%;
+  .pagination-bar {
+    button {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
 
-			select {
-				width: 100%;
-			}
-		}
-		.export {
-			width: 100%;
-			margin-top: @grid-gutter-width / 2;
-			padding-left: 0;
-		}
+@media (max-width: @screen-sm-max) {
+  .sort-refine-bar {
+    .form-group {
+      width: 100%;
 
-	}
-	.pagination-bar {
-		.pagination,
-		button {
-			margin-top: @grid-gutter-width / 2;
-			width: 100%;
-		}
-	}
-	.pagination-bar-borders();
+      select {
+        width: 100%;
+      }
+    }
+    .export {
+      .export__link {
+        display: block;
+
+        width: 100%;
+        margin-top: @grid-gutter-width / 2;
+        padding-left: 0;
+      }
+    }
+  }
+
+  .pagination-bar {
+    .pagination,
+    button {
+      margin-top: @grid-gutter-width / 2;
+      width: 100%;
+    }
+  }
+
+  .pagination-bar-borders();
 }
 
 @media (min-width: @screen-sm-min) {
-	.pagination-bar {
+  .pagination-bar {
 
-		.pagination,
-		button {
-			margin-top: @grid-gutter-width / 2;
-		}
-	}
+    .pagination,
+    button {
+      margin-top: @grid-gutter-width / 2;
+    }
+  }
 }
 
 @media (max-width: @screen-sm-max) and (min-width: @screen-sm-min) {
-	.sort-refine-bar {
-		.form-group {
-			select {
-				height: ceil((@padding-large-vertical * 2) + (@btn-font-size * @line-height-base) + (@btn-border-width * 2)) - 1;
-			}
-		}
-	}
-	.pagination-bar {
-		.pagination,
-		button {
-			margin-top: @grid-gutter-width / 2;
-		}
-	}
+  .sort-refine-bar {
+    .form-group {
+      select {
+        height: ceil((@padding-large-vertical * 2) + (@btn-font-size * @line-height-base) + (@btn-border-width * 2)) - 1;
+      }
+    }
+  }
+
+  .pagination-bar {
+    .pagination,
+    button {
+      margin-top: @grid-gutter-width / 2;
+    }
+  }
 }
 
-
 .pagination-bar-borders() when (@pagination-bar-framed) {
-	.pagination-bar {
-		.pagination-toolbar,
-		.pagination-wrap {
-			padding-left: 0;
-			padding-right: 0;
-		}
+  .pagination-bar {
+    .pagination-toolbar,
+    .pagination-wrap {
+      padding-left: 0;
+      padding-right: 0;
+    }
 
-		.pagination {
-			padding-top: @grid-gutter-width - 5;
-			padding-bottom: @grid-gutter-width - 5;
-			border-top: 1px solid @border-color-3;
-			border-bottom: 1px solid @border-color-3;
-		}
-	}
+    .pagination {
+      padding-top: @grid-gutter-width - 5;
+      padding-bottom: @grid-gutter-width - 5;
+      border-top: 1px solid @border-color-3;
+      border-bottom: 1px solid @border-color-3;
+    }
+  }
 }

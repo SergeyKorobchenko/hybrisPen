@@ -55,7 +55,8 @@
                                         <spring:theme code="${themeMsgKey}.sortTitle"/>
                                     </label>
 
-                                    <form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get" action="#">
+                                    <form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get"
+                                          action="#">
                                         <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control">
                                             <option disabled><spring:theme code="${themeMsgKey}.sortTitle"/></option>
                                             <c:forEach items="${searchPageData.sorts}" var="sort">
@@ -74,7 +75,8 @@
                                         <c:catch var="errorException">
                                             <spring:eval expression="searchPageData.currentQuery.query"
                                                          var="dummyVar"/><%-- This will throw an exception is it is not supported --%>
-                                            <input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
+                                            <input type="hidden" name="q"
+                                                   value="${searchPageData.currentQuery.query.value}"/>
                                         </c:catch>
 
                                         <c:if test="${supportShowAll}">
@@ -89,27 +91,30 @@
                                         </c:if>
                                         <c:if test="${not empty additionalParams}">
                                             <c:forEach items="${additionalParams}" var="entry">
-                                                <input type="hidden" name="${fn:escapeXml(entry.key)}" value="${fn:escapeXml(entry.value)}"/>
+                                                <input type="hidden" name="${fn:escapeXml(entry.key)}"
+                                                       value="${fn:escapeXml(entry.value)}"/>
                                             </c:forEach>
                                         </c:if>
                                     </form>
                                 </div>
 
                                 <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
-                                    <div class="hidden js-export-block">
+                                    <div class="hidden export js-export-block">
                                         <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
                                         <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
-                                        <div class="export">
-                                            <a href="${exportUrl}" class="export__cart--link exportCsvFromPLP media-heading">
-                                                <spring:theme code="basket.export.csv.file" />
+                                        <div class="export__link">
+                                            <a href="${exportUrl}"
+                                               class="export__cart--link exportCsvFromPLP media-heading">
+                                                <spring:theme code="basket.export.csv.file"/>
                                             </a>
                                             <form id="export-csv" action="${exportUrl}" method="get">
                                                 <input type="hidden" name="content" value=""/>
                                             </form>
                                         </div>
-                                        <div class="export">
-                                            <a href="${imagesExportUrl}" class="export__images--link exportImagesFromPLP">
-                                                <spring:theme code="basket.export.images.file" />
+                                        <div class="export__link">
+                                            <a href="${imagesExportUrl}"
+                                               class="export__images--link exportImagesFromPLP">
+                                                <spring:theme code="basket.export.images.file"/>
                                             </a>
                                             <form id="export-images" action="${imagesExportUrl}" method="get">
                                                 <input type="hidden" name="content" value=""/>
