@@ -39,6 +39,9 @@ ext{
             ],
             'stag'    : [
             		'filename': 'pnt-pnt'
+            ],
+            'prod'    : [
+            		'filename': 'pnt-pnt'
             ]
 
     ]
@@ -47,10 +50,10 @@ ext{
 
 
 }
+
 apply from: "buildgradle/hybris.gradle"
 apply from: "buildgradle/internationalization.gradle"
 apply from: "buildgradle/deployment.gradle"
 
 defaultTasks 'all'
 all.dependsOn 'customize'
-// deploy_file.dependsOn 'production'
