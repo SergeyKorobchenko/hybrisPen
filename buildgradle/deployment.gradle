@@ -1,0 +1,127 @@
+task deployfile {
+	description = 'Creates deployment zip for specified environment and version'
+	group = 'Environment'
+	doLast {
+		def environment_name = System.properties['environment']
+		if(environment_name == null){
+			println "You have to specify a deployment environment. Options: [dev], stag, prod"
+			environment_name = System.in.newReader().readLine()
+			if(environment_name == ''){
+				environment_name = 'dev'
+			}
+		}
+		def version = System.properties['version']
+		if(version == null){
+			println "You have to specify a deployment version. E.g.: v00.25"
+			version = System.in.newReader().readLine()
+		}
+
+		logger.quiet("Environment: " + environment_name)
+		logger.quiet("Version: " + version)
+
+		production.execute()
+
+		def environment = new main.groovy.Environment(project)
+        def filename = environment.getAttribute("filename") + '_' + version
+
+        def tempfolderPath = "${hybris_temp}/${filename}"
+        def tempFolder = new File(tempfolderPath)
+        tempFolder.mkdir();
+        def tempHybrisBinPath = "${tempfolderPath}/hybris/bin"
+        def tempHybrisBin = new File(tempHybrisBinPath)
+        tempHybrisBin.mkdirs();
+
+        copy {
+            from( "${hybris_temp}/hybris/hybrisServer/hybrisServer-AllExtensions.zip")
+			from("${hybris_temp}/hybris/hybrisServer/hybrisServer-Platform.zip")
+            into tempHybrisBinPath
+        }
+
+
+		logger.lifecycle("Creating build environment configs...")
+
+        def metadata = file("${hybris_temp}/${filename}/metadata.properties")
+        metadata.text = "package_version = 2.3"
+
+        def devEnvPath = "${tempfolderPath}/hybris/config/dev";
+        def stageEnvPath = "${tempfolderPath}/hybris/config/stag";
+        def prodEnvPath = "${tempfolderPath}/hybris/config/prod";
+        def hybrisEnvConfig = "${hybris_config}/env";
+        def commonPath = "${environment_base_dir}/${environment_base}"
+		def common_properties = file("${commonPath}/common.properties")
+
+        new File(devEnvPath).mkdirs();
+        new File(stageEnvPath).mkdirs();
+        new File(prodEnvPath).mkdirs();
+
+        def devProperties = file("${devEnvPath}/customer.properties")
+        devProperties.text = common_properties.text + "\n\n" + file("${hybrisEnvConfig}/dev/customer.properties").text
+
+        copy {
+        	from(hybris_config)
+        	include("localextensions.xml")
+        	include("customize/**")
+        	include("languages/**")
+        	into devEnvPath
+        }
+        //stage properties
+        def commonStag = file("${hybrisEnvConfig}/stag/common.properties")
+        def admStag = file("${hybrisEnvConfig}/stag/customer.adm.properties")
+        def appStag = file("${hybrisEnvConfig}/stag/customer.app.properties")
+        def targetAdmStag = file("${stageEnvPath}/customer.adm.properties")
+        def targetAppStag = file("${stageEnvPath}/customer.app.properties")
+        copyProperties(common_properties, commonStag, admStag, appStag, targetAdmStag, targetAppStag,stageEnvPath)
+         //prod properties
+        def commonProd = file("${hybrisEnvConfig}/prod/common.properties")
+        def admProd = file("${hybrisEnvConfig}/prod/customer.adm.properties")
+        def appProd = file("${hybrisEnvConfig}/prod/customer.app.properties")
+        def targetAdmProd = file("${prodEnvPath}/customer.adm.properties")
+        def targetAppProd = file("${prodEnvPath}/customer.app.properties")
+        copyProperties(common_properties, commonProd, admProd, appProd, targetAdmProd, targetAppProd,prodEnvPath)
+        
+
+		logger.lifecycle("Creating deployment zip ${filename}.zip...")
+
+		task makezip(type: Zip){
+			from(tempfolderPath)
+			include '*'
+   			include '**/*'
+   			archiveName "${filename}.zip"
+   			destinationDir(file("${hybris_temp}"))
+		}
+		makezip.execute()
+
+		//generate md5
+		// if(!"dev".equals(environment_name)){
+		// 	ant.checksum(file: "${hybris_temp}/${filename}.zip", format: "MD5SUM", fileext: ".md5")
+		// }
+
+	}
+}
+
+def copyProperties(common_properties, common, admSource, appSource, admTarget, appTarget,envPath){
+		if(common.exists()){
+			admTarget.text = common_properties.text + "\n\n" + common.text + "\n\n" + admSource.text
+			appTarget.text = common_properties.text + "\n\n" + common.text + "\n\n" + appSource.text
+        }else{
+        	admTarget.text = common_properties.text + "\n\n" + admSource.text
+			appTarget.text = common_properties.text + "\n\n" + appSource.text
+        }
+        copy{
+        	from(hybris_config)
+        	include("customize/**")
+        	include("languages/**")
+        	into envPath
+        }
+        copy{
+        	from("${hybris_config}/localextensions.xml")
+        	into envPath
+        	rename("localextensions.xml", "localextensions.adm.xml")
+        }
+        copy{
+        	from("${hybris_config}/localextensions.xml")
+        	into envPath
+        	rename("localextensions.xml", "localextensions.app.xml")
+        }
+
+}
