@@ -54,11 +54,6 @@ task deployfile {
         new File(stageEnvPath).mkdirs();
         new File(prodEnvPath).mkdirs();
 
-        //dev properties
-        // copy {
-        // 	from("${hybrisEnvConfig}/dev")
-        // 	into devEnvPath
-        // }
         def devProperties = file("${devEnvPath}/customer.properties")
         devProperties.text = common_properties.text + "\n\n" + file("${hybrisEnvConfig}/dev/customer.properties").text
 
