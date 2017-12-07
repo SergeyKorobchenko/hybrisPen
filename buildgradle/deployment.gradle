@@ -60,7 +60,7 @@ task deployfile {
         // 	into devEnvPath
         // }
         def devProperties = file("${devEnvPath}/customer.properties")
-        devProperties.text = common_properties.text + "\n" + file("${hybrisEnvConfig}/dev/customer.properties").text
+        devProperties.text = common_properties.text + "\n\n" + file("${hybrisEnvConfig}/dev/customer.properties").text
 
         copy {
         	from(hybris_config)
@@ -85,7 +85,7 @@ task deployfile {
         copyProperties(common_properties, commonProd, admProd, appProd, targetAdmProd, targetAppProd,prodEnvPath)
         
 
-		logger.lifecycle("Creating deployment zip...")
+		logger.lifecycle("Creating deployment zip ${filename}.zip...")
 
 		task makezip(type: Zip){
 			from(tempfolderPath)
@@ -106,11 +106,11 @@ task deployfile {
 
 def copyProperties(common_properties, common, admSource, appSource, admTarget, appTarget,envPath){
 		if(common.exists()){
-			admTarget.text = common_properties.text + "\n" + common.text + "\n" + admSource.text
-			appTarget.text = common_properties.text + "\n" + common.text + "\n" + appSource.text
+			admTarget.text = common_properties.text + "\n\n" + common.text + "\n\n" + admSource.text
+			appTarget.text = common_properties.text + "\n\n" + common.text + "\n\n" + appSource.text
         }else{
-        	admTarget.text = common_properties.text + "\n" + admSource.text
-			appTarget.text = common_properties.text + "\n" + appSource.text
+        	admTarget.text = common_properties.text + "\n\n" + admSource.text
+			appTarget.text = common_properties.text + "\n\n" + appSource.text
         }
         copy{
         	from(hybris_config)
