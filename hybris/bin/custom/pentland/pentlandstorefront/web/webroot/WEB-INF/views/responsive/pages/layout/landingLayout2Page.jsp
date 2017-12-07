@@ -25,7 +25,7 @@
         <div class="container">
             <div class="b-section--full-width">
                 <cms:pageSlot position="Section3" var="feature" element="div" class="row">
-                    <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-4 col-md-3 col-lg-3"/>
+                    <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 col-md-3 col-lg-3"/>
                 </cms:pageSlot>
             </div>
         </div>
