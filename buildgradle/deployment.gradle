@@ -83,9 +83,9 @@ task deployfile {
 		logger.lifecycle("Creating deployment zip ${filename}.zip...")
 
 		task makezip(type: Zip){
-			from(tempfolderPath)
-			include '*'
-   			include '**/*'
+			from(hybris_temp)
+			include filename
+   			include "${filename}/**"
    			archiveName "${filename}.zip"
    			destinationDir(file("${hybris_temp}"))
 		}
