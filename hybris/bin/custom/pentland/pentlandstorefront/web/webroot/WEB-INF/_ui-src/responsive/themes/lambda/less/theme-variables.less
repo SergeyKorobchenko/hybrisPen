@@ -54,16 +54,17 @@
 
 @headline-color:		@text-color;
 
-@product-price-color: @brand-primary-pantone-blue;
+@product-price-color: @text-color;
 
 //== Colors carousel
-@carousel-arrow-color: @brand-primary-light-gray;
+@carousel-arrow-color: @brand-primary-zircon-gray;
 @carousel-dots-active-color: @brand-primary-pantone-blue;
 
 //== Borders
 @border-color:		    @brand-primary-gray;
 @border-color-2: 		@brand-primary-light-gray;
 @border-color-3:		@brand-primary-zircon-gray;
+@border-color-4:		@brand-primary-pantone-blue;
 
 //********* Form colors *********
 @label-color: 			@brand-secondary;
@@ -166,7 +167,7 @@
 @copyright-background: @brand-primary-white;
 @copyright-color: @brand-primary-gray;
 
-//*********Well colors*********
+//********* Well colors *********
 @well-secondary-bg: lighten(@brand-primary, 60%);//#e6f0fa;
 @well-quaternary-bg: #f2f2f2;
 
@@ -176,23 +177,33 @@
 @item-sale-price-color: @brand-secondary;
 
 //== Tables
-@table-2n-line-bg:				#f4f4f4;
+@table-2n-line-bg:				@brand-primary-zircon-gray;
 @table-head-bg:					@nav-cat-background;
-@table-head-color:				#7f919e;
-@table-head-border-color:		#334b5c;
-@table-border-color:			@border-color-2;
-@table-expand-bg:				#e4e4e4;
+@table-head-color:				@brand-primary-white;
+@table-head-border-color:		@nav-cat-background;
+@table-border-color:			@brand-primary-white;
+@table-expand-bg:				@brand-primary-zircon-gray;
 @cart-product-table-head-color:				@table-expand-bg;
 
 //== List
 @list-active-bg:                #e6f0fb;
 
 //== Pagination
-@pagination-active-color: 		#a6a6a6;
-@pagination-font-weight: 		600;
+@pagination-font-family: @brand-font-family-arial-sans-serif;
 
-@pagination-disabled-color:     @pagination-active-color;
-@pagination-hover-color:		@pagination-active-color;
+@pagination-border:					@border-color-4;
+
+@pagination-active-bg:				@btn-primary-bg;
+@pagination-active-border:          @btn-primary-bg;
+@pagination-active-color: 			@btn-primary-color;
+
+@pagination-hover-bg:				@btn-primary-bg;
+@pagination-hover-border:           @btn-primary-bg;
+@pagination-hover-color:			@btn-primary-color;
+
+@pagination-disabled-bg:            transparent;
+@pagination-disabled-border:        @border-color-3;
+@pagination-disabled-color:     	@border-color-3;
 
 @pagination-prev-next-hover-bg:		@btn-primary-bg;
 @pagination-prev-next-hover-color:	@btn-primary-color;
@@ -222,7 +233,7 @@
 @accordion-bg: #000000;
 
 //*********Modal Colors*********
-@modal-close-btn-color: @brand-primary-light-gray;
+@modal-close-btn-color: @brand-primary-zircon-gray;
 
 //*********Account Colors*********
 @account-subheadline-bg: @header-background-color;

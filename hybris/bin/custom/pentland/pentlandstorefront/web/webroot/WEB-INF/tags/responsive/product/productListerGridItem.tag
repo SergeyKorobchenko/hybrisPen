@@ -56,10 +56,10 @@
 				<img style="width: 32px; height: 32px;" src="${imageUrl}" title="${variantName}" alt="${variantName}"/>
 			</c:forEach>
 			<c:if test="${product.variantOptions.size() > 5}">
-				<p><spring:theme code="product.grid.variants.more"/></p>
+				<div class="variants"><spring:theme code="product.grid.variants.more"/></div>
 			</c:if>
 			<c:if test="${product.clearance}">
-				<p><spring:theme code="product.grid.variants.clearance"/></p>
+				<div class="variants"><spring:theme code="product.grid.variants.clearance"/></div>
 			</c:if>
 		</div>
 

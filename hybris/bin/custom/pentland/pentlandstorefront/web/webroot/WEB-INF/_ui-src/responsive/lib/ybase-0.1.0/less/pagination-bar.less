@@ -1,42 +1,53 @@
 .sort-refine-bar {
 
 	.form-group {
+		display: inline-block;
+
 		select {
 			width: auto;
 		}
 	}
+	.export {
+		display: inline-block;
+
+		font-size: @font-size-base;
+		text-align: left;
+		vertical-align: middle;
+		white-space: nowrap;
+
+		padding-left: @grid-gutter-width - 5;
+	}
 }
 
 .pagination-bar{
-	margin:  (@grid-gutter-width + 10) 0;
+	//margin:  (@grid-gutter-width + 10) 0 0 0;
 
-	.pagination-toolbar {
-		padding-bottom: (@grid-gutter-width * 1.5);
-		padding-left: 20px;
-	  	padding-right: 30px;
-		border-bottom: 1px solid @border-color-3;
+	//.pagination-toolbar {
+		//padding-bottom: (@grid-gutter-width - 5);
+		//padding-left: 20px;
+	  	//padding-right: 30px;
+		//border-bottom: 1px solid @border-color-3;
 
-	  @media (max-width: @screen-md) {
-		padding-left: 20px;
-		padding-right: 20px;
-	  }
-	}
+	  //@media (max-width: @screen-md) {
+		//padding-left: 20px;
+		//padding-right: 20px;
+	  //}
+	//}
 
 	.form-group {
 		margin: 0;
 	}
 
 	.pagination-bar-results {
-		margin-top: (@grid-gutter-width + 5);
-		padding: 0 20px;
+		padding: (@grid-gutter-width + 10) 0 (@grid-gutter-width - 5) 0;
 		color: @text-color-secondary;
 	}
 
 	&.bottom {
 		.pagination-toolbar {
-			padding-top: (@grid-gutter-width * 1.5);
-			border-top: 1px solid @border-color-3;
-			border-bottom-width: 1px;
+			//padding-top: (@grid-gutter-width * 1.5);
+			//border-top: 1px solid @border-color-3;
+			//border-bottom-width: 1px;
 		}
 	}
 }
@@ -51,19 +62,26 @@
 	}
 }
 
-@media (max-width: @screen-xs-max) {
+@media (max-width: @screen-sm-max) {
 	.sort-refine-bar {
 		.form-group {
+			width: 100%;
+
 			select {
 				width: 100%;
 			}
+		}
+		.export {
+			width: 100%;
+			margin-top: @grid-gutter-width / 2;
+			padding-left: 0;
 		}
 
 	}
 	.pagination-bar {
 		.pagination,
 		button {
-			margin-top: @grid-gutter-width * 1.5;
+			margin-top: @grid-gutter-width / 2;
 			width: 100%;
 		}
 	}
@@ -72,13 +90,10 @@
 
 @media (min-width: @screen-sm-min) {
 	.pagination-bar {
-		.pagination-toolbar {
-			border-bottom-width: 1px;
-		}
 
 		.pagination,
 		button {
-			margin-top: @grid-gutter-width + 5;
+			margin-top: @grid-gutter-width / 2;
 		}
 	}
 }
@@ -94,7 +109,7 @@
 	.pagination-bar {
 		.pagination,
 		button {
-			margin-top: @grid-gutter-width + 4;
+			margin-top: @grid-gutter-width / 2;
 		}
 	}
 }
@@ -102,11 +117,11 @@
 
 .pagination-bar-borders() when (@pagination-bar-framed) {
 	.pagination-bar {
-		//.pagination-toolbar,
-		//.pagination-wrap {
-		//	padding-left: 0;
-		//	padding-right: 0;
-		//}
+		.pagination-toolbar,
+		.pagination-wrap {
+			padding-left: 0;
+			padding-right: 0;
+		}
 
 		.pagination {
 			padding-top: @grid-gutter-width - 5;

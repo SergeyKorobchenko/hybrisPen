@@ -1,11 +1,11 @@
 @grid-gutter-width:         20px;
 @padding-large-horizontal:  15px;
 
-@border-radius-base:        2px;
-@border-radius-large:       2px;
+@border-radius-base:        @border-radius-small;
 @border-radius-small:       2px;
+@border-radius-large:       5px;
 
-@pager-border-radius: 2px;
+@pager-border-radius: @border-radius-small;
 
 //== Global typography
 //
@@ -45,25 +45,34 @@
 //== Pagination
 //
 //##
+@pagination-font-family: @font-family-base;
+
 @pagination-bar-framed:				false;
 
-@pagination-border-width: 			1px;
+@pagination-border-width: 			2px;
 @pagination-height-base: 			@input-height-base - (@pagination-border-width * 2);
 @pagination-height-large: 			@input-height-large - (@pagination-border-width * 2);
 @pagination-width-base: 			@pagination-height-base;
 @pagination-width-large:			40px;
 
 @pagination-border:					@border-color-3;
-@pagination-font-size:				@font-size-base;
-@pagination-font-weight:			400;
+@pagination-border-radius:			@border-radius-large;
 
+@pagination-font-size:				@font-size-small;
+@pagination-font-weight:			700;
+
+@pagination-active-bg:				@btn-primary-bg;
+@pagination-active-border:          @btn-primary-bg;
 @pagination-active-color: 			@btn-primary-color;
-@pagination-active-font-weight:		400;
+@pagination-active-font-weight:		700;
 
-@pagination-hover-bg:				transparent;
-@pagination-hover-color:			@pagination-active-color;
+@pagination-hover-bg:				@btn-primary-bg;
+@pagination-hover-border:           @btn-primary-bg;
+@pagination-hover-color:			@btn-primary-color;
 
-@pagination-disabled-color:     	@pagination-active-color;
+@pagination-disabled-bg:            transparent;
+@pagination-disabled-border:        @border-color-3;
+@pagination-disabled-color:     	@border-color-3;
 
 @pagination-prev-next-hover-bg:		@btn-primary-bg;
 @pagination-prev-next-hover-color:	@btn-primary-color;
@@ -196,8 +205,9 @@
 
 //== Borders
 @border-color: 			#000000;
-@border-color-2:			#000000;
-@border-color-3:			#000000;
+@border-color-2:		#000000;
+@border-color-3:		#000000;
+@border-color-4:		#000000;
 
 //*********form colors*********
 @label-color: #000000;

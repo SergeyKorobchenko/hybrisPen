@@ -9,20 +9,14 @@
 <spring:htmlEscape defaultHtmlEscape="true"/>
 <c:set var="searchUrl" value="/my-account/my-quotes?sort=${ycommerce:encodeUrl(searchPageData.pagination.sort)}"/>
 
-<div class="account-section-header">
-    <spring:theme code="text.account.quote.myquotes"/>
-</div>
+<h1><spring:theme code="text.account.quote.myquotes"/></h1>
 
 <c:if test="${empty searchPageData.results}">
-    <div class="row">
-        <div class="col-md-6 col-md-push-3">
-            <div class="account-section-content	content-empty">
-                <ycommerce:testId code="quoteHistory_noQuotes_label">
-                    <spring:theme code="text.account.quotes.noQuotes"/>
-                </ycommerce:testId>
-            </div>
-        </div>
-    </div>
+	<div class="account-section-content	content-empty">
+		<ycommerce:testId code="quoteHistory_noQuotes_label">
+			<spring:theme code="text.account.quotes.noQuotes"/>
+		</ycommerce:testId>
+	</div>
 </c:if>
 
 <c:if test="${not empty searchPageData.results}">

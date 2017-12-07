@@ -8,8 +8,6 @@
 
 <c:set var="searchUrl" value="/my-account/orders?sort=${ycommerce:encodeUrl(searchPageData.pagination.sort)}"/>
 
-<div class="account-section-header">
-	<spring:theme code="text.account.orderHistory" />
-</div>
+<h1><spring:theme code="text.account.orderHistory" /></h1>
 
 <b2b-order:orderListing searchUrl="${searchUrl}" messageKey="text.account.orderHistory.page"></b2b-order:orderListing>

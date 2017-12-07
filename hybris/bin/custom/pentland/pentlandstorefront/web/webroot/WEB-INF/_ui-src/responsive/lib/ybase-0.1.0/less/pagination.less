@@ -4,12 +4,11 @@
 
 
 .pagination-wrap {
-	float: right;
-	text-align: right;
+	float: left;
+	text-align: left;
 }
 
 .pagination {
-	border: @pagination-border-width solid @pagination-border;
 	font-weight: @pagination-font-weight;
 	margin: 0;
 
@@ -19,8 +18,15 @@
 
 		> a,
 		> span {
+			&:not(.pagination-prev, .pagination-next) {
+				font-family: @pagination-font-family;
+			}
+
 			position: static;
-			border: none;
+
+			border: @pagination-border-width solid @pagination-border;
+			border-radius: @pagination-border-radius;
+
 			margin: 0;
 			float: none;
 			display: inline-block;
@@ -29,7 +35,7 @@
 		&.pagination-prev,
 		&.pagination-next {
 			> a, > span {
-				font-size: 11px;
+				font-size: @pagination-font-size;
 
 				&:hover,
 				&:focus {
@@ -43,7 +49,6 @@
 					&:focus {
 						color: @pagination-disabled-color;
 						background-color: transparent;
-						border-color: @pagination-border;
 					}
 				}
 			}
@@ -51,16 +56,9 @@
 
 		&.pagination-prev {
 			text-align: left;
-			> a, > span {
-				border-right: @pagination-border-width solid @pagination-border;
-
-			}
 		}
 		&.pagination-next {
 			text-align: right;
-			> a, > span {
-				border-left: @pagination-border-width solid @pagination-border;
-			}
 		}
 	}
 
@@ -69,8 +67,8 @@
 		&,
 		&:hover,
 		&:focus {
-			background-color: transparent;
-			border: none;
+			color: @btn-primary-color;
+			background-color: @pagination-active-bg;
 			font-weight: @pagination-active-font-weight;
 		}
 	}
@@ -108,10 +106,15 @@
   }
 }
 
-
 // Pagination size
 .pagination-size(@pagination-height; @pagination-width; @font-size; @next-prev-offset) {
 	> li {
+		margin-top: @grid-gutter-width - 5;
+		margin-right: @grid-gutter-width / 4;
+
+		&:last-child {
+			margin-right: 0;
+		}
 		> a,
 		> span {
 			line-height: @pagination-height;
@@ -123,18 +126,16 @@
 		&.pagination-prev {
 			> a,
 			> span {
-				margin-right: @pagination-width/3;
 				width: @pagination-width + @next-prev-offset;
-				.border-left-radius(0);
+				.border-left-radius(@pagination-border-radius);
 			}
 		}
 
 		&.pagination-next {
 			> a,
 			> span {
-				margin-left: @pagination-width/3;
 				width: @pagination-width + @next-prev-offset;
-				.border-right-radius(0);
+				.border-right-radius(@pagination-border-radius);
 			}
 	  	}
 	}
