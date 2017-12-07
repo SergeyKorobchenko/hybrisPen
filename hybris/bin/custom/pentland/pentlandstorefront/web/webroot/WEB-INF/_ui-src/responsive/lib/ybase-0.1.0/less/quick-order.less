@@ -1,18 +1,7 @@
-
 .quick-order__introduction {
-  padding-top: @padding-large-vertical + @btn-border-width;
-  margin-top: @grid-gutter-width/2;
-  line-height: @btn-line-height * @btn-font-size;
-  .full-width-padding();
-
-  @media (max-width: @screen-sm-max) {
-    margin-bottom: @grid-gutter-width/2;
-  }
+  margin-bottom: @grid-gutter-width - 5;
 }
-
 .quick-order__actions {
-  .full-width-padding();
-
   @media (max-width: @screen-xs-max) {
     .pull-right {
       float: none!important;
@@ -20,8 +9,6 @@
   }
 }
 .quick-order__add-to-cart-btn {
-  margin-top: @grid-gutter-width/2;
-
   .btn {
     width: 100%;
   }
