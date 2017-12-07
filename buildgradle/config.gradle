@@ -21,7 +21,7 @@ ext{
     /**
      * environment specific configuration
      */
-    environment_base_dir = '${hybris_config}/env'
+    environment_base_dir = "${hybris_config}/env"
     environment_base = 'common'
     environment_customization_task = 'customize_environment'
     // if environment hostname file is configured the hostname to be used for determine environment is read from this file
@@ -54,6 +54,7 @@ ext{
 apply from: "buildgradle/hybris.gradle"
 apply from: "buildgradle/internationalization.gradle"
 apply from: "buildgradle/deployment.gradle"
+apply from: "buildgradle/environment.gradle"
 
 defaultTasks 'all'
-all.dependsOn 'customize'
+all.dependsOn 'customize', 'prepare_local_env'

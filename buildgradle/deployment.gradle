@@ -47,16 +47,21 @@ task deployfile {
         def stageEnvPath = "${tempfolderPath}/hybris/config/stag";
         def prodEnvPath = "${tempfolderPath}/hybris/config/prod";
         def hybrisEnvConfig = "${hybris_config}/env";
+        def commonPath = "${environment_base_dir}/${environment_base}"
+		def common_properties = file("${commonPath}/common.properties")
 
         new File(devEnvPath).mkdirs();
         new File(stageEnvPath).mkdirs();
         new File(prodEnvPath).mkdirs();
 
         //dev properties
-        copy {
-        	from("${hybrisEnvConfig}/dev")
-        	into devEnvPath
-        }
+        // copy {
+        // 	from("${hybrisEnvConfig}/dev")
+        // 	into devEnvPath
+        // }
+        def devProperties = file("${devEnvPath}/customer.properties")
+        devProperties.text = common_properties.text + "\n" + file("${hybrisEnvConfig}/dev/customer.properties").text
+
         copy {
         	from(hybris_config)
         	include("localextensions.xml")
@@ -70,14 +75,14 @@ task deployfile {
         def appStag = file("${hybrisEnvConfig}/stag/customer.app.properties")
         def targetAdmStag = file("${stageEnvPath}/customer.adm.properties")
         def targetAppStag = file("${stageEnvPath}/customer.app.properties")
-        copyProperties(commonStag, admStag, appStag, targetAdmStag, targetAppStag,stageEnvPath)
+        copyProperties(common_properties, commonStag, admStag, appStag, targetAdmStag, targetAppStag,stageEnvPath)
          //prod properties
         def commonProd = file("${hybrisEnvConfig}/prod/common.properties")
         def admProd = file("${hybrisEnvConfig}/prod/customer.adm.properties")
         def appProd = file("${hybrisEnvConfig}/prod/customer.app.properties")
         def targetAdmProd = file("${prodEnvPath}/customer.adm.properties")
         def targetAppProd = file("${prodEnvPath}/customer.app.properties")
-        copyProperties(commonProd, admProd, appProd, targetAdmProd, targetAppProd,prodEnvPath)
+        copyProperties(common_properties, commonProd, admProd, appProd, targetAdmProd, targetAppProd,prodEnvPath)
         
 
 		logger.lifecycle("Creating deployment zip...")
@@ -99,13 +104,13 @@ task deployfile {
 	}
 }
 
-def copyProperties(common, admSource, appSource, admTarget, appTarget,envPath){
+def copyProperties(common_properties, common, admSource, appSource, admTarget, appTarget,envPath){
 		if(common.exists()){
-			admTarget.text = common.text + admSource.text
-			appTarget.text = common.text + appSource.text
+			admTarget.text = common_properties.text + "\n" + common.text + "\n" + admSource.text
+			appTarget.text = common_properties.text + "\n" + common.text + "\n" + appSource.text
         }else{
-        	admTarget.text = admSource.text
-			appTarget.text = appSource.text
+        	admTarget.text = common_properties.text + "\n" + admSource.text
+			appTarget.text = common_properties.text + "\n" + appSource.text
         }
         copy{
         	from(hybris_config)

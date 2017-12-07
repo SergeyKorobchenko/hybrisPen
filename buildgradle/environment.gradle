@@ -1,0 +1,13 @@
+task prepare_local_env{
+	description = 'Merges local environment before build'
+	group = 'Environment'
+	doLast {
+		def commonPath = "${environment_base_dir}/${environment_base}"
+		def hybris_properties = file("${hybris_config}/local.properties")
+
+		def common_properties = file("${commonPath}/common.properties")
+		def local_properties = file("${commonPath}/local.properties")
+		//replace local properties with common + local properties from env
+		hybris_properties.text = common_properties.text + "\n" + local_properties.text
+	}
+}
