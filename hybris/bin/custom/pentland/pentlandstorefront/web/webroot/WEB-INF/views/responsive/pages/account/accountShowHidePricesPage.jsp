@@ -18,9 +18,13 @@
             <div class="radio">
                 <label><input type="radio" name="hidePrices" value="true" <c:if test="${ hidePricesForUser}">checked</c:if>><spring:theme code="text.account.hidePrices.hide"/></label>
             </div>
-            <button type="submit" class="btn btn-primary">
-                <spring:theme code="text.button.save" text="Cancel" />
-            </button>
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <spring:theme code="text.button.save" text="Cancel" />
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
