@@ -29,8 +29,12 @@
 <c:if test="${searchPageData.pagination.totalNumberOfResults == 0 && top && showTotals}">
     <div class="paginationBar top clearfix">
         <ycommerce:testId code="searchResults_productsFound_label">
-            <div class="totalResults"><spring:theme code="${themeMsgKey}.totalResults"
-                                                    arguments="${searchPageData.pagination.totalNumberOfResults}"/></div>
+            <div class="search-empty">
+                <div class="totalResults headline">
+                    <spring:theme code="${themeMsgKey}.totalResults"
+                                  arguments="${searchPageData.pagination.totalNumberOfResults}"/>
+                </div>
+            </div>
         </ycommerce:testId>
     </div>
 </c:if>
