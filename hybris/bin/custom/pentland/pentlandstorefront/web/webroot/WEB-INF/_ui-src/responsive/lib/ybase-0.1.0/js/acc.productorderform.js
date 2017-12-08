@@ -62,21 +62,11 @@ ACC.productorderform = {
             }
         });
 
-        $(skuQuantityClass).on('blur keypress', function (event) {
+        $(skuQuantityClass).on('keypress', function (event) {
             this.value = ACC.productorderform.filterSkuEntry(this.value);
         });
 
         $(skuQuantityClass).on('blur', function (event) {
-            var packSize = $(this).data('pack-size');
-            this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
-        });
-
-        $(skuQuantityClass).on('blur keypress', function (event) {
-            var code = event.keyCode || event.which || event.charCode;
-
-            if (code != 13 && code != undefined) {
-                return;
-            }
 
             var indexPattern = "[0-9]+";
             var currentIndex = parseInt($(this).attr("id").match(indexPattern));
@@ -84,6 +74,8 @@ ACC.productorderform = {
             var _this = this;
             var currentPrice = $("input[id='productPrice[" + currentIndex + "]']").val();
             this.value = ACC.productorderform.filterSkuEntry(this.value);
+            var packSize = $(this).data('pack-size');
+            this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
             var $currentTotalItems = $('.js-total-items-count');
             var currentTotalItemsValue = $currentTotalItems.html();
             var currentTotalPrice = $('.js-total-price-value').val();
@@ -235,7 +227,7 @@ ACC.productorderform = {
             ACC.productorderform.selectedVariants = [];
         }
 
-         if (_this.value != quantityBefore) {
+        if (_this.value != quantityBefore) {
             var newVariant = true;
             ACC.productorderform.selectedVariants.forEach(function(item, index) {
                 if(item.id === currentSkuId){
@@ -504,9 +496,9 @@ ACC.productorderform = {
         $("#AddToCartOrderForm").keypress(
             function(event){
                 if (event.which == '13') {
-                event.preventDefault();
-            }
-        });
+                    event.preventDefault();
+                }
+            });
 
         ACC.productorderform.$addToCartBtn.click(function () {
             ACC.productorderform.$addToCartBtn.attr('disabled', 'disabled');
