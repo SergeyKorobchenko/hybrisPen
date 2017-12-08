@@ -1,6 +1,7 @@
 package com.bridgex.facades.populators;
 
 import com.bridgex.core.enums.DiscontinuedStatus;
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.facades.utils.ProductUtils;
 
 import de.hybris.platform.commercefacades.product.converters.populator.ProductBasicPopulator;
@@ -17,8 +18,6 @@ public class PentlandProductBasicPopulator<SOURCE extends ProductModel, TARGET e
   @Override
   public void populate(final SOURCE productModel, final TARGET productData) throws ConversionException
   {
-    productData.setName((String) getProductAttribute(productModel, ProductModel.NAME));
-
     if (productModel.getVariantType() != null)
     {
       productData.setVariantType(productModel.getVariantType().getCode());
@@ -27,6 +26,11 @@ public class PentlandProductBasicPopulator<SOURCE extends ProductModel, TARGET e
     {
       final VariantProductModel variantProduct = (VariantProductModel) productModel;
       productData.setBaseProduct(variantProduct.getBaseProduct() != null ? variantProduct.getBaseProduct().getCode() : null);
+    }
+    if (productModel instanceof ApparelSizeVariantProductModel) {
+      productData.setName(((ApparelSizeVariantProductModel) productModel).getBaseProduct().getName());
+    } else {
+      productData.setName((String) getProductAttribute(productModel, ProductModel.NAME));
     }
     productData.setPurchasable(isApproved(productModel) && ProductUtils.isNotDiscontinued((DiscontinuedStatus)getProductAttribute(productModel, ProductModel.DISCONTINUEDSTATUS)));
   }
