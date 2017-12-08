@@ -44,19 +44,34 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 	{
 		super.populate(source, target);
 
+		final ComposedTypeModel productType = getTypeService().getComposedTypeForClass(source.getClass());
 		final MediaContainerModel mediaContainer = getPrimaryImageMediaContainer(source);
-		if (mediaContainer != null)
-		{
-			final ComposedTypeModel productType = getTypeService().getComposedTypeForClass(source.getClass());
-			for (final VariantOptionQualifierData variantOptionQualifier : target.getVariantOptionQualifiers())
-			{
+
+		for (final VariantOptionQualifierData variantOptionQualifier : target.getVariantOptionQualifiers()) {
+			if (mediaContainer != null) {
 				final MediaModel media = getMediaWithImageFormat(mediaContainer, lookupImageFormat(productType, variantOptionQualifier.getQualifier()));
-				if (media != null)
-				{
+				if (media != null) {
 					variantOptionQualifier.setImage(getImageConverter().convert(media));
 				}
 			}
+
+			final String sizeNoProperty = lookupSizeNo(productType, variantOptionQualifier.getQualifier());
+			if (sizeNoProperty != null) {
+				final Object value = getVariantsService().getVariantAttributeValue(source, sizeNoProperty);
+				variantOptionQualifier.setSizeNo(((Integer) value));
+			}
+
 		}
+
+	}
+
+	protected String lookupSizeNo(final ComposedTypeModel productType, final String attributeQualifier) {
+		if (productType == null)
+		{
+			return null;
+		}
+		final String key = productType.getCode() + "." + attributeQualifier;
+		return getVariantAttributeMapping().get(key);
 	}
 
 	protected MediaModel getMediaWithImageFormat(final MediaContainerModel mediaContainer, final String imageFormat)

@@ -3,17 +3,12 @@ package com.bridgex.facades.order.ordergridform.impl;
 import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Required;
-
-import com.bridgex.core.model.ProductSizeModel;
-import com.bridgex.core.product.ProductSizeService;
 
 import de.hybris.platform.acceleratorfacades.ordergridform.impl.DefaultOrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.LeafDimensionData;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.data.BaseOptionData;
-import de.hybris.platform.commercefacades.product.data.CategoryData;
 import de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData;
 
 /**
@@ -23,7 +18,7 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
 
   public static final String SIZE_VARIANT = "ApparelSizeVariantProduct";
 
-  private ProductSizeService productSizeService;
+//  private ProductSizeService productSizeService;
 
   @Override
   public Map<String, ReadOnlyOrderGridData> getReadOnlyOrderGrid(final List<OrderEntryData> orderEntryDataList) {
@@ -59,8 +54,10 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
             dimensionHeaderMap.put(qualifier.getName(), qualifier.getValue());
             hashKey.append(qualifier.getValue());
           }else {
-            ProductSizeModel productSize = productSizeService.getProductSize(qualifier.getValue());
-            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, productSize != null ? productSize.getPriority() : -qualifier.hashCode());
+//            ProductSizeModel productSize = productSizeService.getProductSize(qualifier.getValue());
+//            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, productSize != null ? productSize.getPriority() : -qualifier.hashCode());
+            Integer sizeNo = qualifier.getSizeNo();
+            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, sizeNo != null ? sizeNo : -qualifier.hashCode());
           }
         }
       }
@@ -82,11 +79,6 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
     leafDimensionData.setLeafDimensionData(dimensionEntry.getQuantity().toString());
     leafDimensionData.setPrice(dimensionEntry.getTotalPrice());
     leafDimensionData.setSequence(sequence);
-  }
-
-  @Required
-  public void setProductSizeService(ProductSizeService productSizeService) {
-    this.productSizeService = productSizeService;
   }
 
   protected Set<LeafDimensionData> populateLeafDimensionData(final LeafDimensionData leafDimensionData)

@@ -89,6 +89,7 @@
 		<property name="variantAttributeMapping">
 			<map>
 				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch"/>
+				<entry key="ApparelSizeVariantProduct.size" value="sizeNo"/>
 			</map>
 		</property>
 	</bean>
@@ -266,9 +267,7 @@
 	<bean id="pentlandOrderEntryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderEntryPopulator" parent="defaultOrderEntryPopulator"/>
 
 	<alias name="pentlandOrderGridFormFacade" alias="orderGridFormFacade"/>
-	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade">
-		<property name="productSizeService" ref="productSizeService"/>
-	</bean>
+	<bean id="pentlandOrderGridFormFacade" class="com.bridgex.facades.order.ordergridform.impl.PentlandOrderGridFormFacade" parent="defaultOrderGridFormFacade" />
 
 	<alias name="pentlandProductBasicPopulator" alias="productBasicPopulator" />
 	<bean name="pentlandProductBasicPopulator" class="com.bridgex.facades.populators.PentlandProductBasicPopulator" parent="defaultProductBasicPopulator"/>

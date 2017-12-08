@@ -35,8 +35,8 @@
 	<alias name="defaultPentlandAddressDao" alias="addressDao"/>
 	<bean id="defaultPentlandAddressDao" class="com.bridgex.core.address.dao.impl.DefaultPentlandAddressDao"/>
 
-	<alias name="defaultProductSizeDao" alias="productSizeDao"/>
-	<bean id="defaultProductSizeDao" class="com.bridgex.core.product.dao.impl.DefaultProductSizeDao"/>
+	<!--<alias name="defaultProductSizeDao" alias="productSizeDao"/>-->
+	<!--<bean id="defaultProductSizeDao" class="com.bridgex.core.product.dao.impl.DefaultProductSizeDao"/>-->
 
 	<alias alias="principalGroupMembersDao" name="pentlandPrincipalGroupMembersDao"/>
 	<bean id="pentlandPrincipalGroupMembersDao"

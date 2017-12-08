@@ -9,7 +9,6 @@
 
 	<alias name="defaultCacheManagerList" alias="cacheManagerList"/>
 	<utils:list id="defaultCacheManagerList">
-		<ref bean="productSizeCacheManager"/>
 		<ref bean="localizationCacheManager"/>
 	</utils:list>
 
@@ -17,16 +16,6 @@
 	<bean id="defaultCompositeCacheManager" class="org.springframework.cache.support.CompositeCacheManager">
 		<property name="cacheManagers">
 			<ref bean="cacheManagerList"/>
-		</property>
-	</bean>
-
-	<bean id="productSizeCacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-		<property name="caches">
-			<set>
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
-					<property name="name" value="PRODUCT_SIZES"/>
-				</bean>
-			</set>
 		</property>
 	</bean>
 
