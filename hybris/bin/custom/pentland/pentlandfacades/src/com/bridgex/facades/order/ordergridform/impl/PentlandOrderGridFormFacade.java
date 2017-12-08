@@ -18,8 +18,6 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
 
   public static final String SIZE_VARIANT = "ApparelSizeVariantProduct";
 
-//  private ProductSizeService productSizeService;
-
   @Override
   public Map<String, ReadOnlyOrderGridData> getReadOnlyOrderGrid(final List<OrderEntryData> orderEntryDataList) {
     final Map<String, ReadOnlyOrderGridData> readOnlyMultiDMap = new LinkedHashMap<>();
@@ -54,10 +52,8 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
             dimensionHeaderMap.put(qualifier.getName(), qualifier.getValue());
             hashKey.append(qualifier.getValue());
           }else {
-//            ProductSizeModel productSize = productSizeService.getProductSize(qualifier.getValue());
-//            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, productSize != null ? productSize.getPriority() : -qualifier.hashCode());
             Integer sizeNo = qualifier.getSizeNo();
-            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, sizeNo != null ? sizeNo : -qualifier.hashCode());
+            populateLeafDimensionData(qualifier, dimensionEntry, leafDimensionData, sizeNo != null ? sizeNo : qualifier.hashCode());
           }
         }
       }
@@ -83,7 +79,7 @@ public class PentlandOrderGridFormFacade extends DefaultOrderGridFormFacade{
 
   protected Set<LeafDimensionData> populateLeafDimensionData(final LeafDimensionData leafDimensionData)
   {
-    final Set<LeafDimensionData> leafDimensionDataSet = new TreeSet<>((obj1, obj2) -> obj2.getSequence() - obj1.getSequence());
+    final Set<LeafDimensionData> leafDimensionDataSet = new TreeSet<>(Comparator.comparingInt(LeafDimensionData::getSequence));
     leafDimensionDataSet.add(leafDimensionData);
 
     return leafDimensionDataSet;

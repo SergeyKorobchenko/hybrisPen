@@ -38,6 +38,7 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 	private MediaContainerService mediaContainerService;
 	private ImageFormatMapping imageFormatMapping;
 	private Map<String, String> variantAttributeMapping;
+	private Map<String, String> sizeVariantAttributeMapping;
 
 	@Override
 	public void populate(final VariantProductModel source, final VariantOptionData target)
@@ -71,7 +72,7 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 			return null;
 		}
 		final String key = productType.getCode() + "." + attributeQualifier;
-		return getVariantAttributeMapping().get(key);
+		return getSizeVariantAttributeMapping().get(key);
 	}
 
 	protected MediaModel getMediaWithImageFormat(final MediaContainerModel mediaContainer, final String imageFormat)
@@ -170,5 +171,14 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 	public void setVariantAttributeMapping(final Map<String, String> variantAttributeMapping)
 	{
 		this.variantAttributeMapping = variantAttributeMapping;
+	}
+
+	protected Map<String, String> getSizeVariantAttributeMapping() {
+		return sizeVariantAttributeMapping;
+	}
+
+	@Required
+	public void setSizeVariantAttributeMapping(Map<String, String> sizeVariantAttributeMapping) {
+		this.sizeVariantAttributeMapping = sizeVariantAttributeMapping;
 	}
 }

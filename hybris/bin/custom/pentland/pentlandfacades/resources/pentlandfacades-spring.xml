@@ -89,6 +89,10 @@
 		<property name="variantAttributeMapping">
 			<map>
 				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch"/>
+			</map>
+		</property>
+		<property name="sizeVariantAttributeMapping">
+			<map>
 				<entry key="ApparelSizeVariantProduct.size" value="sizeNo"/>
 			</map>
 		</property>
