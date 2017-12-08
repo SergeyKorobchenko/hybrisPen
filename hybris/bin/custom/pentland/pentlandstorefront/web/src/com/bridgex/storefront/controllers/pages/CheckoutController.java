@@ -36,11 +36,13 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.util.Config;
 
 import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -214,7 +216,7 @@ public class CheckoutController extends AbstractCheckoutController
 
 		List<OrderData> sapOrders = orderFacade.getSapOrdersForOrderCode(orderCode);
 		if(sapOrders == null){
-			GlobalMessages.addErrorMessage(model, "order.export.global.error");
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "order.export.global.error", new Object[]{Config.getString("storefrontContextRoot", "") + "/contactus"});
 		}else{
 			model.addAttribute("sapOrders", sapOrders);
 			model.addAttribute("sapOrderCodes", sapOrders.stream().map(AbstractOrderData::getCode).collect(Collectors.joining(", ")));

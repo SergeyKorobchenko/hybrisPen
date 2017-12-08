@@ -28,7 +28,9 @@ public class PentlandOrderPopulator extends OrderPopulator {
 
     target.setOrderType(source.getOrderType());
     target.setRdd(source.getRdd());
-    target.setTotalUnitCount(source.getTotalQty());
+    if(source.getTotalQty() != null) {
+      target.setTotalUnitCount(source.getTotalQty());
+    }
     target.setCreditCheckPassed(source.isCreditCheckPassed());
 
     populateSapBrand(source, target);
