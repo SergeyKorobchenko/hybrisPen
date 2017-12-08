@@ -38,7 +38,7 @@
                     </button>
                 </div>
             </c:if>
-            
+
             <c:if test="${allowedActions['CANCEL']}">
                 <div class="col-sm-4 col-md-3 col-md-offset-3">
                     <button type="button" class="btn btn-default btn-block js-quote-cancel-btn form__actions--cancel">
