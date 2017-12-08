@@ -5,14 +5,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<br/>
-<br/>
-<br/>
+
 <c:url value="/cart/update-all" var="updateAllCartFormAction" />
+
 <form:form method="post" id="updateAllCartForm" action="${updateAllCartFormAction}" commandName="b2bCartForm">
 	<div class="row">
 		<div class="col-xs-12 col-md-2">
-			<strong><spring:theme code="text.cart.rdd"/></strong>
+			<label><spring:theme code="text.cart.rdd"/></label>
 			<div class="form-group">
 				<div class="input-group date" id="cartrdddatetimepicker">
                     <fmt:formatDate value="${b2bCartForm.requestedDeliveryDate}" pattern="yyyy-MM-dd" var="initialDate"/>
@@ -26,7 +25,7 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-2">
-			<strong><spring:theme code="text.cart.purchaseOrderNumber"/></strong>
+			<label><spring:theme code="text.cart.purchaseOrderNumber"/></label>
 			<div class="form-group">
 				<div>
 					<form:input type="text" class="form-control" style="width: 99%;" path="purchaseOrderNumber" data-initial="${b2bCartForm.purchaseOrderNumber}"/>
@@ -35,7 +34,7 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-8">
-			<strong><spring:theme code="text.cart.customerNotes"/></strong>
+			<label><spring:theme code="text.cart.customerNotes"/></label>
 			<div>
 				<form:textarea class="form-control" style="width: 400px; min-height: 100px;" path="customerNotes" data-initial="${b2bCartForm.customerNotes}"/>
 			</div>

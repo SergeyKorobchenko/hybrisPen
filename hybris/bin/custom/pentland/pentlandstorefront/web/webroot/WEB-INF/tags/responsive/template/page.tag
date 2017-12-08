@@ -41,11 +41,7 @@
             <a id="skip-to-content"></a>
 
             <div>
-                <div class="container">
-                    <div class="b-section--full-width">
-                        <common:globalMessages/>
-                    </div>
-                </div>
+                <common:globalMessages/>
 
                 <cart:cartRestoration/>
 

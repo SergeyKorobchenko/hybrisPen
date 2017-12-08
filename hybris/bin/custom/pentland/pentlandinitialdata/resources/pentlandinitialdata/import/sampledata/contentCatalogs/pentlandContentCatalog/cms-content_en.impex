@@ -660,7 +660,7 @@ UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[l
 
 ###### Cart page ######
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en];
-;;CartBottomParagraphComponent;"<div class='row'><div class='col-xs-12 col-sm-10 col-md-7 col-lg-6 pull-right cart-actions--print'><div class='express-checkout'><div class='headline'>Express Checkout</div><strong>Benefit from a faster checkout by:</strong><ul><li>setting a default Delivery Address in your account or when you checkout</li><li>setting a default Payment Details when you checkout</li><li>using a default shipping method</li></ul></div></div></div>"
+;;CartBottomParagraphComponent;"<div class='row'><div class='col-xs-12 col-sm-10 col-md-7 col-lg-6 pull-right cart-actions--print'><div class='express-checkout'><h3 class='title'>Express Checkout</h3>Benefit from a faster checkout by:<ul><li>setting a default Delivery Address in your account or when you checkout</li><li>setting a default Payment Details when you checkout</li><li>using a default shipping method</li></ul></div></div></div>"
 ###### Mitre page media
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
