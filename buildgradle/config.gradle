@@ -3,9 +3,58 @@ repositories.mavenCentral()
 configurations { cxf }
 
 ext{
-     hybris_dir = 'hybris'
+    ant_version = '1.9.1'
+    cxf_version = '2.7.10'
+
+    // setting the enviroment variables when running ant e.g. ANT_OPTS or JAVA_OPTS
+    ant_environment_variables = ['ANT_OPTS': '-XX:MaxPermSize=768m']
+
+    hybris_dir = 'hybris'
     hybris_bin = 'hybris/bin'
     hybris_config = 'hybris/config'
-     hybris_custom_ext_dir = "${hybris_bin}/custom"
+    hybris_temp = "hybris/temp"
+    hybris_custom_ext_dir = "${hybris_bin}/custom"
+
+     // the path the the local extensions xml which is used to determine the used dependencies
+    hybris_localextensions = "environment/common/${hybris_config}/localextensions.xml"
+
+    /**
+     * environment specific configuration
+     */
+    environment_base_dir = "${hybris_config}/env"
+    environment_base = 'common'
+    environment_customization_task = 'customize_environment'
+    // if environment hostname file is configured the hostname to be used for determine environment is read from this file
+    //environment_hostname_file = 'jenkins.novardis.com'
+    environment_hostname_to_environments = [
+            'dev'      : ['dev'],
+            'stag'    : ['stag'],
+            'prod'     : ['prod']
+    ]
+    environment_purge_configfolder = false
+    // for some config settings it is necessary to specifiy value according to environment. The most specific enviroment will provide value
+    environment_specific_attributes = [
+            'dev'     : [
+            		'filename': 'pnt-cepb2b'
+            ],
+            'stag'    : [
+            		'filename': 'pnt-pnt'
+            ],
+            'prod'    : [
+            		'filename': 'pnt-pnt'
+            ]
+
+    ]
+
+    env = System.properties['environment'] ?: "dev"
+
+
 }
+
+apply from: "buildgradle/hybris.gradle"
 apply from: "buildgradle/internationalization.gradle"
+apply from: "buildgradle/deployment.gradle"
+apply from: "buildgradle/environment.gradle"
+
+defaultTasks 'all'
+all.dependsOn 'customize', 'prepare_local_env'

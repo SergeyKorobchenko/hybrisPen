@@ -242,13 +242,13 @@
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
 				$approved=approvalstatus(code)[default='check']
-				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];secColor[lang=$lang];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
-				;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{9};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
+				;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
+				;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
 			</value>
 		</property>
 	</bean>
@@ -256,13 +256,13 @@
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
 				$approved=approvalstatus(code)[default='check']
-				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sizeNo;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+1}:$catalog:Staged;{2};{+3};{4};{10};{11};{15};$catalog:Staged;;{S}
-				;{+1}:$catalog:Online;{2};{+3};{4};{10};{11};{15};$catalog:Online;;{S}
+				;{+1}:$catalog:Staged;{2};{+3};{4};{9};{10};{11};{15};$catalog:Staged;;{S}
+				;{+1}:$catalog:Online;{2};{+3};{4};{9};{10};{11};{15};$catalog:Online;;{S}
 			</value>
 		</property>
 	</bean>

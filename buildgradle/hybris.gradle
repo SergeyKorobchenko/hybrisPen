@@ -1,0 +1,30 @@
+/**
+ * will be executed directly after loading the script
+ * reads the hybris build.xml and registers all tasks
+ */
+create_hybris_targets();
+
+//ant.importBuild 'build.xml';
+
+def create_hybris_targets() {
+    get_hybris_targets().each {
+        String target = "${it}"
+        logger.debug("Creating gradle task for ant target ${target}")
+
+        task "${target}"(type: main.groovy.AntHybrisTask) {
+            group = "Hybris Build"
+            description = "Runs the ant target ${target}"
+            targets = [target]
+        }
+    }
+}
+
+def get_hybris_targets() {
+    List targets = [];
+    def hybris = new XmlParser().parse(file("${hybris_bin}/platform/build.xml"));
+    for (target in hybris.target) {
+        targets.add(target.'@name');
+    }
+
+    return targets;
+}
