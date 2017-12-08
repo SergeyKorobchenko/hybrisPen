@@ -8,18 +8,30 @@
 <spring:htmlEscape defaultHtmlEscape="true"/>
 
 <div class="checkout-success">
-    <div class="checkout-success-body">
-        <div class="checkout-success-body-headline">
-            <c:choose>
-                <c:when test="${orderData.isApmOpen}">
-                    <spring:theme code="checkout.orderConfirmation.pending.thankYouForOrder" text="Your order is pending!"/>
-                </c:when>
-                <c:otherwise>
-                    <spring:theme code="checkout.orderConfirmation.thankYouForOrder" text="Thank you for your order"/>
-                </c:otherwise>
-            </c:choose>
+    <div class="checkout-success-body text-center">
+        <div class="checkout-success-body-headline text-uppercase">
+            <h3>
+                <strong>
+                    <c:choose>
+                        <c:when test="${orderData.isApmOpen}">
+                            <spring:theme code="checkout.orderConfirmation.pending.thankYouForOrder" text="Your order is pending!"/>
+                        </c:when>
+                        <c:otherwise>
+                            <spring:theme code="checkout.orderConfirmation.thankYouForOrder" text="Thank you for your order"/>
+                        </c:otherwise>
+                    </c:choose>
+                </strong>
+            </h3>
         </div>
-        <p><spring:theme code="text.account.order.orderNumberLabel"/><b> ${orderData.code}</b></p>
+        <c:choose>
+            <c:when test="${empty sapOrderCodes}">
+                <p><spring:theme code="text.account.order.orderNumberLabel"/><b> ${orderCode}</b></p>
+            </c:when>
+            <c:otherwise>
+                <p><spring:theme code="text.account.order.orderNumberLabel.plural"/><b> ${sapOrderCodes}</b></p>
+            </c:otherwise>
+        </c:choose>
+
         <p><spring:theme code="checkout.orderConfirmation.copySentToShort"/><b> ${email}</b></p>
     </div>
 
@@ -64,10 +76,4 @@
             </form:form>
         </div>
     </c:if>
-</div>
-
-<div class="well well-tertiary well-single-headline">
-    <div class="well-headline">
-        <spring:theme code="checkout.multi.order.summary"/>
-    </div>
 </div>

@@ -8,14 +8,11 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
     <div id="global-alerts" class="global-alerts"></div>
-    <div class="back-link border">
-        <div class="row">
-            <span class="label"><spring:theme code="text.account.supporttickets.addSupportTicket" text="Add Support Ticket" /></span>
-         </div>
-    </div>
+
+    <h1><spring:theme code="text.account.supporttickets.addSupportTicket" text="Add Support Ticket" /></h1>
 
     <div class="row">
-        <div class="container-lg col-md-6">
+        <div class="col-md-6">
             <div class="account-section-content">
                 <div class="account-section-form">
                     <div id="customer-ticketing-alerts"></div>
@@ -76,7 +73,7 @@
                         <div id="customer-ticketing-buttons" class="form-actions">
                             <div class="accountActions">
                                 <div class="row">
-                                    <div class="col-sm-6 col-sm-push-3 accountButtons">
+                                    <div class="col-sm-6 col-sm-push-6 accountButtons">
                                         <ycommerce:testId code="supportTicket_create_button">
                                             <button class="btn btn-primary btn-block" type="submit" id="addTicket">
                                             <spring:theme code="text.account.supporttickets.createTicket.submit" text="Submit"/>

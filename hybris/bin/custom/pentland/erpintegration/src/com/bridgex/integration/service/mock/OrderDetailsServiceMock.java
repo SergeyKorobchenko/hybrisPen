@@ -1,5 +1,6 @@
 package com.bridgex.integration.service.mock;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -73,18 +74,32 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     entry.setPrice("1010.00");
     entry.setQuantity("10.00");
     entry.setRdd(new Date());
-    entry.setSizeVariants(Collections.singletonList(getSizeVariantDto()));
+    entry.setSizeVariants(getSizeVariantsDto());
     return entry;
   }
 
-  private SizeVariantDto getSizeVariantDto() {
+  private List<SizeVariantDto> getSizeVariantsDto() {
     SizeVariantDto size = new SizeVariantDto();
-    size.setEan("10908");
+    size.setEan("300147490");
     size.setLineNumber("1");
     size.setShipDate(new Date());
     size.setShipQty("10.00");
     size.setShipStatus("SHIPPED");
     size.setTotalQuantity("10.00");
-    return size;
+
+    SizeVariantDto size2 = new SizeVariantDto();
+    size2.setEan("300020465");
+    size2.setLineNumber("2");
+    size2.setShipDate(new Date());
+    size2.setShipQty("5.00");
+    size2.setShipStatus("SHIPPED");
+    size2.setTotalQuantity("5.00");
+
+    List<SizeVariantDto> list = new ArrayList<>();
+    list.add(size);
+    list.add(size2);
+
+    return list;
   }
+
 }

@@ -139,7 +139,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.add.free.gift;Add your free gift to Basket
 ;basket.add.to.basket;Add to bag
 ;basket.add.to.cart;Add
-;basket.added.to.basket;Added to Your Shopping Bag
+;basket.added.to.basket;Added to Your Basket
 ;basket.added.to.mobile.basket;Added Item
 ;basket.configure.product;Configure
 ;basket.confirmation.items.added;Your saved items were added to your bag.
@@ -184,8 +184,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.id;Item ID
 ;basket.page.item;Item (style number)
 ;basket.page.itemNumber;Item no.
-;basket.page.itemPrice;Item price
-;basket.page.message.remove;Product has been removed from your bag.
+;basket.page.itemPrice;Trade price
+;basket.page.itemWholesalePrice;Wholesale price
+;basket.page.message.remove;Product has been removed from your basket.
 ;basket.page.message.update;Product quantity has been updated.
 ;basket.page.message.update.pickupinstoreitem;Pickup in store item was updated.
 ;basket.page.message.update.pickupinstoreitem.toship;Pickup in store item was updated to shipping.
@@ -193,7 +194,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.message.update.reducedNumberOfItemsAdded.noStock;"<a href=""{1}"" style=""text-decoration: underline"">{0}</a> has been removed from the basket due to insufficient stock."
 ;basket.page.needHelp;Need help?
 ;basket.page.number;No.
-;basket.page.price;Price
+;basket.page.price;Trade Price
+;basket.page.wholesalePrice;Wholesale Price
 ;basket.page.product;Product
 ;basket.page.productdetails;Product Details
 ;basket.page.qty;Qty
@@ -287,7 +289,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;brands.group.show;Show all
 ;brands.search.placeholder;Enter brand name
 ;breadcrumb.brands;Brands
-;breadcrumb.cart;Bag
+;breadcrumb.cart;Basket
 ;breadcrumb.home;Home
 ;breadcrumb.login;Login
 ;breadcrumb.mnn;Active substances
@@ -468,7 +470,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.lightbox.redirect.error;There was an error communicating with the payment provider. Please try again later or use an alternative method of payment.
 ;checkout.multi.next;Next &raquo
 ;checkout.multi.order.summary;Order Summary
-;checkout.multi.payment;Payment:
+;checkout.multi.payment;"Payment Type:"
 ;checkout.multi.paymentDetails.notprovided;You must provide a payment details in order to go to the next step.
 ;checkout.multi.paymentMethod;Payment
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
@@ -511,7 +513,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.pickupInStore;Pick Up in Store
 ;checkout.multi.pickupInStore.confirm.and.continue;Simply confirm the information below and continue to the next step of checkout.
 ;checkout.multi.product.unpurchasable;Not purchasable
-;checkout.multi.purchaseOrderNumber.label;P.O. No.
+;checkout.multi.purchaseOrderNumber.label;P.O. Number
 ;checkout.multi.replenishment;Replenishment
 ;checkout.multi.saveAddress;Save Address
 ;checkout.multi.secure.checkout;Secure Checkout
@@ -871,7 +873,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.button.print;Print Order
 ;order.confirmation.guest.register.description;For a Fast Checkout and Easy Access to Previous Orders
 ;order.form;Order Form
-;order.form.currency;$
+;order.form.currency;£
 ;order.form.subtotal;Subtotal
 ;order.form.total;Order Form Total
 ;order.form.color;Color
@@ -1053,7 +1055,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.cart.comments;Basket Comments
 ;quote.cart.empty.error;Missing or empty basket
 ;quote.cart.insufficient.access.rights.error;Insufficient access rights for basket {0}.
-;quote.cart.title;This basket is being order queryd
+;quote.cart.title;This basket is being order queried
 ;quote.comment.invalid;Comment cannot be more than 255 characters
 ;quote.create;Request a Order Query
 ;quote.create.error;Error creating order query.
@@ -1073,8 +1075,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.reject.error;Error rejecting order query.
 ;quote.reject.initiate.request;Minimum {0} subtotal to submit a order query.
 ;quote.reject.success;Order Query rejected with success.
-;quote.requote;Requote
-;quote.requote.error;Error requoting.
+;quote.requote;Requery
+;quote.requote.error;Error requerying.
 ;quote.save;Save Order Query
 ;quote.save.cart.error;There was an internal error. Please try again.
 ;quote.save.error;Error saving order query.
@@ -1496,7 +1498,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.page.linkPreviousPage;Previous Page
 ;text.account.orderHistory.page.showAllResults;Show all
 ;text.account.orderHistory.page.showPageResults;Show paginated
-;text.account.orderHistory.page.sort.byDate;Date
+;text.account.orderHistory.page.sort.byDate;Date Placed
 ;text.account.orderHistory.page.sort.byOrderNumber;Order Number
 ;text.account.orderHistory.page.sortTitle;Sort by
 ;text.account.orderHistory.page.totalResults;of {0} Orders
@@ -1570,7 +1572,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.page.showAllResults;Show all
 ;text.account.quote.page.showPageResults;Show paginated
 ;text.account.quote.page.sort.byCode;Order Query ID
-;text.account.quote.page.sort.byDate;Updated Date
+;text.account.quote.page.sort.byDate;Date Updated
 ;text.account.quote.page.sort.byName;Name
 ;text.account.quote.page.sort.byState;Status
 ;text.account.quote.page.sortTitle;Sort by
@@ -1741,7 +1743,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.button.select;Select
 ;text.button.showall;Show All
 ;text.button.use;Use
-;text.cart;Cart
+;text.cart;Basket
 ;text.checkout;Checkout
 ;text.checkout.noDeliveryModes;Please check the delivery address. If not selected already, please select the delivery address first and try again.
 ;text.checkout.pickup.in.store;Pickup in Store
@@ -1825,8 +1827,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.accountsummary.unit.details.page.sort.byDocumentDateDesc;Document Date Desc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentNumberAsc;Document # Asc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentNumberDesc;Document # Desc
-;text.company.accountsummary.unit.details.page.sort.byDocumentStatusAsc;Document Status Asc
-;text.company.accountsummary.unit.details.page.sort.byDocumentStatusDesc;Document Status Desc
+;text.company.accountsummary.unit.details.page.sort.byDocumentStatusAsc;Status Asc
+;text.company.accountsummary.unit.details.page.sort.byDocumentStatusDesc;Status Desc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentTypeAsc;Document Type Asc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentTypeDesc;Document Type Desc
 ;text.company.accountsummary.unit.details.page.sort.byDueDateAsc;Due Date Asc
@@ -2683,16 +2685,18 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quickOrder.product.quantity.max;Quantity reduced due to insufficient stock
 ;text.quote.cancel.button.label;Cancel
 ;text.quote.cancel.confirmation.message;Are you sure you want to cancel this order query?
-;text.quote.cancel.confirmation.modal.title;Cancel Order Query {0}
+;text.quote.cancel.confirmation.modal.title;Cancel Order Query?
 ;text.quote.cancel.success;Order Query {0} has been canceled
-;text.quote.checkout.confirmation.modal.title;Confirm Accept and Checkout Order Query {0}?
-;text.quote.checkout.warning.message;Modifying the basket may result in voiding the vendor order query.
+;text.quote.checkout.confirmation.modal.title;Accept and Checkout Order Query?
+;text.quote.checkout.notice.message;Accept and Checkout will take you to the Checkout page to place the order.
+;text.quote.checkout.warning.message;You will not be able to modify the basket on the checkout page.
+;text.quote.checkout.confirmation.message;Do you wish to continue?
 ;text.quote.code;Order Query ID:
 ;text.quote.comment.label;Negotiation Comment
 ;text.quote.comments.label;Comments
-;text.quote.conteroffer.confirmation.message;Are you sure you want to offer this vendor order query?
-;text.quote.conteroffer.confirmation.modal.title;Confirm Vendor Order Query {0}?
-;text.quote.conteroffer.possible.checkout.message;This is a binding vendor order query. The buyer may check out immediately.
+;text.quote.conteroffer.confirmation.message;Do you wish to continue?
+;text.quote.conteroffer.confirmation.modal.title;Submit Order Query?
+;text.quote.conteroffer.possible.checkout.message;The buyer can accept and checkout, once this query is submitted.
 ;text.quote.dateformat;MM/dd/yyyy
 ;text.quote.dateformat.datepicker.selection;mm/dd/yy
 ;text.quote.dateformat.datepicker.selection.hint;mm/dd/yyyy
@@ -2708,7 +2712,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quote.discount.type.null.error;The discount type is null.
 ;text.quote.done.button.label;Done
 ;text.quote.edit.confirmation.message;This order query has been approved, Editing this order query will prevent checkout until the new edits are approved.
-;text.quote.edit.confirmation.modal.title;Edit Order Query Warning
+;text.quote.edit.confirmation.modal.title;Edit Order Query?
 ;text.quote.edit.warning.message;Are you sure you want to edit this approved order query?
 ;text.quote.expiration.time.invalid;Please enter a valid expiry date
 ;text.quote.expiration.time.label;Expiry Date
@@ -2721,9 +2725,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quote.not.submitable;Order Query cannot be submitted since total is negative
 ;text.quote.previous.estimated.total.display;Previous Estimated Total
 ;text.quote.state.label;Status
-;text.quote.submit.confirmation.message;Are you sure you want to submit this order query?
-;text.quote.submit.confirmation.modal.title;Confirm Requested Order Query {0}?
-;text.quote.submit.not.modifiable.message;Once a request for order query is submitted it cannot be modified.
+;text.quote.submit.confirmation.message;Do you wish to continue?
+;text.quote.submit.confirmation.modal.title;Submit Order Query?
+;text.quote.submit.not.modifiable.message;This query will be submitted to Customer Ops, and cannot be modified until they process this query.
 ;text.quote.validity.message;This order query is valid until {0}
 ;text.quote.yes.button.label;Yes
 ;text.quotes.enterSecurityCode;Card Verification Number
@@ -2844,26 +2848,34 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;product.grid.variants.more;More colors available
 
-;text.account.orderHistory.page.sort.byPurchaseOrderNumber;Purchase Order Number
-;text.account.orderHistory.page.sort.byStatus;Status
-;text.account.orderHistory.page.sort.byOrderType;OrderType
-;text.account.orderHistory.page.sort.byRdd;Requested delivery date
+;text.account.orderHistory.page.sort.byPurchaseOrderNumber;P.O. Number
+;text.account.orderHistory.page.sort.byStatus;Order Status
+;text.account.orderHistory.page.sort.byOrderType;Order Type
+;text.account.orderHistory.page.sort.byRdd;RDD
 ;text.account.orderHistory.orderType;Order Type
 ;text.account.orderHistory.rdd;RDD
 ;text.account.orderHistory.totalQty;Total Qty
 ;text.account.orderHistory.creationDate;Order Creation Date
 ;text.account.orderhistory.dateplaced;Date Placed
 ;text.account.orderHistory.POnumber;P.O. Number
-;text.account.order.total;Order Total
-;text.account.order.tax;Order Tax
-;text.account.order.net;Order Net
 ;text.account.orderHistory.shipTo;Ship To
 ;text.account.orderHistory.soldTo;Sold To
 ;text.account.orderHistory.markFor;Mark For
 ;text.account.orderHistory.item.status;Status
-;text.account.orderHistory.item.qty;QTY
+;text.account.orderHistory.item.qty;Qty
 ;text.account.orderHistory.item.shipments;Shipments
 ;text.account.orderHistory.item.shipdate;Ship Date
+;text.account.orderHistory.item.number;Item Number
+;text.account.order.total;Order Total
+;text.account.order.tax;Order Tax
+;text.account.order.net;Order Net
+
+;text.account.order.status.display.ON_HOLD;On Hold
+;text.account.order.status.display.IN_PROGRESS;In Progress
+;text.account.order.status.display.SHIPPED;Shipped
+;text.account.order.status.display.OPEN;Open
+;text.account.order.status.display.CANCELLED;Cancelled
+;text.account.order.status.display.INVOICED;Invoiced
 
 
 ;text.account.order.status.display.SHIPPED;Shipped
@@ -2876,8 +2888,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.cart.rdd;Requested Delivery Date
 ;text.cart.purchaseOrderNumber;P.O. Number
 ;text.cart.customerNotes;Notes
-;checkout.savecart;Save updated cart
+;checkout.savecart;Save updated basket
 ;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
+;text.cart.update.success;Basket was successfully saved
 
 ;checkout.payment.CARD.CREDITCARD;Online payment
 ;checkout.payment.CARD.PROFORMA;Online payment
@@ -2902,5 +2915,39 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cookie.directive.header;Cookies on pentland.com
 ;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."
 
+;text.account.order.orderNumberLabel.plural;"Your Order Number(s): "
+;text.account.order.user;Order placed by
+;text.summary.order.total;Total
+;text.summary.order.totalQty;Total Qty
+;text.summary.order.brand;Brand
+;order.export.global.error;Order failed to export.
+
+;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
+;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
+;checkout.error.empty.cart;Your basket does not have any quantity. Please add quantity before proceeding to checkout.
+;checkout.error.empty.entry.cart;Your basket does not have any quantity for one or more products. Please add quantity before proceeding to checkout.
+
+;text.account.hidePrices;Show/Hide prices
+;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
+;text.account.hidePrices.show;Show Prices
+;text.account.hidePrices.hide;Hide Prices
+
 ;basket.export.images.file;Download product images
 ;erp.integration.failed;Error while processing ERP request
+;order.export.credit.check.failed;"Your account is nearing the available credit limit, please contact your account representative."
+
+;basket.error.checkout.empty.ponumber;P.O. Number is required
+;basket.error.checkout.empty.rdd;Requested delivery date is requred
+
+;search.nav.facetShowMore_productType;more product types...
+;search.nav.facetShowLess_productType;less product types...
+;search.nav.facetShowMore_facetCategory;more categories...
+;search.nav.facetShowLess_facetCategory;less categories...
+
+;text.account.changes.saved;Changes saved
+;currency.GBP;£
+
+;cart.unsaved.popup.title;You have made edits to the basket
+;cart.unsaved.popup.warning;Do you wish to save the changes?
+;cart.unsaved.popup.save;YES
+;cart.unsaved.popup.cancel;NO

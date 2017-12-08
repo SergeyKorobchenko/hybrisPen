@@ -47,9 +47,6 @@
 	<import resource="/pentlandcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/pentlandcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/pentlandcore/processes/quote/quote-seller-approval-process-spring.xml"/>
-	
-	<import resource="/pentlandcore/processes/quote/quote-to-expire-soon-email-process-spring.xml"/>
-	<import resource="/pentlandcore/processes/quote/quote-expired-email-process-spring.xml"/>
 
 	<import resource="/pentlandcore/processes/quote/quote-post-cancellation-process-spring.xml"/>
 
@@ -64,11 +61,19 @@
 		<property name="businessProcessCreationStrategy" ref="defaultB2BCreateOrderFromCartStrategy"/>
 	</bean>
 
+	<alias name="pentlandQuoteCommerceCartMetadataUpdateValidationHook" alias="quoteCommerceCartMetadataUpdateValidationHook"/>
+	<bean id="pentlandQuoteCommerceCartMetadataUpdateValidationHook"
+	      class="com.bridgex.core.order.hooks.PentlandQuoteCommerceCartMetadataUpdateValidationHook" parent="defaultQuoteCommerceCartMetadataUpdateValidationHook">
+	</bean>
+
 	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="commerceCartCalculationStrategy"/>
+	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="checkoutCartCalculationStrategy"/>
 	<bean id="defaultPentlandCommerceCartCalculationStrategy" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCartCalculationStrategy" parent="defaultCommerceCartCalculationStrategy" />
 
 	<alias name="defaultPentlandCalculationService" alias="calculationService"/>
-	<bean id="defaultPentlandCalculationService" class="com.bridgex.core.order.impl.DefaultPentlandCalculationService" parent="defaultCalculationService" />
+	<bean id="defaultPentlandCalculationService" class="com.bridgex.core.order.impl.DefaultPentlandCalculationService" parent="defaultCalculationService" >
+		<property name="pentlandOrderRequiresCalculationStrategy" ref="orderRequiresCalculationStrategy"/>
+	</bean>
 
 	<alias name="defaultPentlandOrderSimulationService" alias="orderSimulationService" />
 	<bean name="defaultPentlandOrderSimulationService" class="com.bridgex.core.product.impl.DefaultPentlandOrderSimulationService" >
@@ -81,6 +86,15 @@
 	<bean id="productSizeUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor" ref="productSizeUpdateInterceptor"/>
 		<property name="typeCode" value="ProductSize"/>
+	</bean>
+
+	<bean name="pentlandOrderPrepareInterceptor" class="com.bridgex.core.order.interceptor.PentlandOrderPrepareInterceptor" parent="orderPrepareInterceptor">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	<bean id="pentlandOrderPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="pentlandOrderPrepareInterceptor"/>
+		<property name="replacedInterceptors" ref="orderPrepareInterceptor"/>
+		<property name="typeCode" value="Order"/>
 	</bean>
 
 </beans>

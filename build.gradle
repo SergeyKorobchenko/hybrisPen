@@ -3,3 +3,11 @@ if (file("buildgradle/config.gradle").exists()) {
     logger.lifecycle("Loading config from config.gradle")
     apply from: "buildgradle/config.gradle";
 }
+
+// Some task grouping to make the listing more readable
+['run_unittests', 'run_alltests', 'run_integrationtests', 'run_performancetests', 'run_manualtests', 'run_demotests', 'unittests', 'integrationtests', 'performancetests', 'manualtests', 'demotests', 'alltests', 'yunit',
+ 'yunitall', 'yunitweb', 'yunitweball', 'yunitinit', 'bugprooftests'].each {
+    if (tasks.findByPath(it)) {
+        tasks[it].group = 'Testing'
+    }
+}

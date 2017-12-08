@@ -41,6 +41,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
       VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
       styleElementData.setVariantName(styleVariantProductModel.getStyle());
       styleElementData.setIsLeaf(Boolean.FALSE);
+      styleElementData.setPackSize(styleVariantProductModel.getPackSize());
       final VariantOptionData styleVariantOptionData = Optional.ofNullable(styleElementData.getVariantOption()).orElse(new VariantOptionData());
       styleVariantOptionData.setCode(styleLevelVariantModel.getCode());
       styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
@@ -55,6 +56,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
         VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
         sizeElementData.setVariantName(sizeVariantProductModel.getSize());
         sizeElementData.setIsLeaf(Boolean.TRUE);
+        sizeElementData.setPackSize(styleVariantProductModel.getPackSize());
         final VariantOptionData sizeVariantOptionData = Optional.ofNullable(sizeElementData.getVariantOption()).orElse(new VariantOptionData());
         sizeVariantOptionData.setCode(sizeVariantProductModel.getCode());
         sizeElementData.setVariantOption(sizeVariantOptionData);

@@ -79,7 +79,7 @@
         <constructor-arg type="java.lang.String" value="${sso.keystore.password:changeit}"/>
         <constructor-arg>
             <map>
-                <entry key="${sso.keystore.privatekey.alias:hybris}" value="${sso.keystore.privatekey.password:changeit}"/>
+<!--                <entry key="${sso.keystore.privatekey.alias:hybris}" value="${sso.keystore.privatekey.password:changeit}"/>-->
             </map>
         </constructor-arg>
         <constructor-arg type="java.lang.String" value="${sso.keystore.default.certificate.alias:hybris}"/>
@@ -135,6 +135,7 @@
                         </bean>
                     </constructor-arg>
                     <!-- added section ends-->
+                    <property name="metadataTrustCheck" value="false"/>
                 </bean>
             </list>
         </constructor-arg>

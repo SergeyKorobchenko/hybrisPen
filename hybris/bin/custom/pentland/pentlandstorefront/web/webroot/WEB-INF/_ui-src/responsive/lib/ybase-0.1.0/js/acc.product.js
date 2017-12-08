@@ -121,7 +121,7 @@ ACC.product = {
                 "sku": $(this).find("input[name='ean']").val(),
                 "name": $(this).find(".name").text().trim(),
                 "upc": $(this).find("input[name='upc']").val(),
-                "price": $(this).find(".price").text().trim()
+                "price": $(this).find("input[name='price']").val().trim()
             };
             productsOnPage.push(product);
         });
@@ -149,4 +149,5 @@ ACC.product = {
 $(document).ready(function () {
     $ajaxCallEvent = true;
     ACC.product.enableAddToCartButton();
+    $(".js-export-block").removeClass("hidden");
 });

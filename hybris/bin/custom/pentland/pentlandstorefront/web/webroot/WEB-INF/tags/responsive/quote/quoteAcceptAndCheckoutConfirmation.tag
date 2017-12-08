@@ -42,17 +42,14 @@
             </label>
             <p class="modal__top--text">${fn:escapeXml(quoteData.description)}</p>
         </div>
-        <c:if test="${not empty quoteData.expirationTime}">
+
             <p class="modal__bottom--text">
-                <fmt:formatDate value="${quoteData.expirationTime}" dateStyle="medium" timeStyle="short" type="both"
-                                var="formattedExpirationTime"/>
-                <spring:theme code="text.quote.validity.message"
-                              arguments="${formattedExpirationTime}" argumentSeparator="$$"/>
+                <spring:theme code="text.quote.checkout.notice.message"/>
             </p>
-        </c:if>
 
         <div class="modal__bottom">
             <p class="modal__bottom--text modal__text--bold"><spring:theme code="text.quote.checkout.warning.message"/></p>
+            <p class="modal__bottom--text modal__text--bold"><spring:theme code="text.quote.checkout.confirmation.message"/></p>
         </div>
 
         <form:form action="${checkoutQuoteUrl}">

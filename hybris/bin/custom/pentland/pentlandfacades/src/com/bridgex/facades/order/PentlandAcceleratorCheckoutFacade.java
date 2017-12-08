@@ -13,4 +13,12 @@ public interface PentlandAcceleratorCheckoutFacade extends CheckoutFacade {
   List<AddressData> findMarkForAddressesForShippingAddress(String addressId);
 
   boolean setMarkForAddressForCart(String addressId);
+
+  boolean removeMarkForAddressFromCart();
+
+  void cleanupZeroQuantityEntries();
+
+  boolean isCartTotalQuantityZero();
+
+  boolean cartHasZeroQuantityBaseEntries();
 }

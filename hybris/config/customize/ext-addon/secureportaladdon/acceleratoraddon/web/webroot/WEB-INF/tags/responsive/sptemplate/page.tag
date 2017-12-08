@@ -26,10 +26,14 @@
             <common:globalMessages/>
             <jsp:doBody/>
          </div>
-        <div class="row branding">
-            <cms:pageSlot position="BrandImageSlot" var="feature" element="div" class="col-md-12">
-                <cms:component component="${feature}"/>
-            </cms:pageSlot>
+        <div class="c-brand-banner">
+            <div class="container-fluid--unlimited b-margin-top">
+                <div class="row">
+                    <cms:pageSlot position="BrandImageSlot" var="feature" element="div" class="col-md-12">
+                        <cms:component component="${feature}"/>
+                    </cms:pageSlot>
+                </div>
+            </div>
         </div>
          <footer:footer/>
     </jsp:body>

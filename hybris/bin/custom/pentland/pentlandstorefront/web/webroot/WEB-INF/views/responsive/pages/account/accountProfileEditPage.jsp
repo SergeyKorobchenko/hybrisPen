@@ -7,15 +7,18 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
-<div class="account-section-header">
-    <div class="row">
-        <div class="container-lg col-md-6">
-            <spring:theme code="text.account.profile.updatePersonalDetails"/>
-        </div>
-    </div>
-</div>
+<%--<div class="account-section-header">--%>
+    <%--<div class="row">--%>
+        <%--<div class="container-lg col-md-6">--%>
+            <%--<spring:theme code="text.account.profile.updatePersonalDetails"/>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<h1><spring:theme code="text.account.profile.updatePersonalDetails"/></h1>
+
 <div class="row">
-    <div class="container-lg col-md-6">
+    <div class="col-md-6">
         <div class="account-section-content">
             <div class="account-section-form">
                 <form:form action="update-profile" method="post" commandName="updateProfileForm">

@@ -91,3 +91,5 @@ hybris/bin/custom/pentland/pentlandstorefront/resources/wro_addons.xml
 hybris/bin/custom/pentland/pentlandstorefront/web/webroot/WEB-INF/_ui-src/responsive/config/**
 
 hybris/config/solr/instances/default/hsperfdata_*/
+
+hybris/config/local.properties

@@ -1,50 +1,61 @@
 $lang='en'
 
-REMOVE CsTicketEventEmailConfiguration;code[unique=true];
-;1
-;2
-;3
-;4
-;5
-;6
-;7
-;8
-;9
-;10
-;11
-;12
-;13
-;14
-;15
-;16
-;17
-;18
-;19
-
+INSERT_UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);alteredAttributes(qualifier,enclosingType(ComposedType.code));eventType(code);subject;plainTextTemplate(code);htmlTemplate(code);
+#Ticket Creation
+;1;Customer;;ticketCreationEvent;Pentland Brands — Support Ticket #${ctx.ticket.ticketID};TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
+;2;CustomerRep;;ticketCreationEvent;Pentland Brands — Support Ticket #${ctx.ticket.ticketID};TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
 
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$lang];rendererType(code)[default='velocity'];templateScript[lang=$lang];
 
-;TickSystem_Customer_TicketCreated_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
+;TickSystem_Customer_TicketCreated_Text;com.bridgex.core.ticket.PentlandCustomerTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
 	Dear ${ctx.name}
 
-	A customer support ticket with the following reference number was created ${ctx.ticketId}.
+	Thank you for raising a ticket. We will contact you shortly.
 
-	Please quote this reference number in all emails or phone calls with us.
+  Here is the summary of your ticket.
 
-	Thank you
+  Subject:
+  ${ctx.subject}
 
-	Your Customer Service Team
+  Message:
+  ${ctx.text}
+
+  Associated to: ${ctx.ticket.assignedAgent}
+
+  Category: ${ctx.ticket.category}
+
+  Alternatively, if you have any further queries or require assistance – please contact us: https://pentlandconnect.com/contactus.
+  Kind Regards,
+  Pentland Connect
 	";
-;TickSystem_Customer_TicketCreated_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer HTML Email;;"
+;TickSystem_Customer_TicketCreated_HTML;com.bridgex.core.ticket.PentlandCustomerTicketContext;Ticket System Ticket Created Customer HTML Email;;"
 	<html>
 		<head></head>
-		<body>
-			<div>
+		<body style=""line-height:18px"">
+		<table width=""610"" align=""center"" bgcolor=""#fefefe"">
+			<tr><td><img src=""${ctx.logo}""/></td></tr>
+			<tr><td>
+		<table width=""570"" border=""0"" align=""center"">
+		<tr><td>
 				<p>Dear ${ctx.name}</p>
-				<p>A customer support ticket with the following reference number was created ${ctx.ticketId}.</p>
-				<p>Please quote this reference number in all emails or phone calls with us.</p>
-  			<p>Thank you</p>
-				<p>Your Customer Service Team</p>
+				<p>Thank you for raising a ticket. We will contact you shortly.</p>
+				<p>Here is the summary of your ticket.</p>
+				<p><b>Subject:</b> $ctx.ticket.getHeadline()</p>
+				<p><b>Message:</b><br/>$ctx.htmlText</p>
+        #if ($ctx.ticket.getOrder())
+				<p><b>Associated to:</b> ${ctx.ticket.getOrder().getCode()}</p>
+				#end
+				<p><b>Category:</b> ${ctx.ticket.category}</p>
+
+  			<p>Alternatively, if you have any further queries or require assistance – please <a href=""${ctx.siteUrl}/contactus"">contact us</a>.</p>
+        <p>Kind Regards,<br/>
+        Pentland Connect</p>
+        </td></tr>
+        <tr><td align=""center"">
+        Pentland Brands Limited<br/>Lakeside, Squires Lane, London, N32QL, UK<br/>${ctx.siteUrl}
+        </td></tr>
+        </table>
+        </td></tr>
 			</div>
 		</body>
 	</html>
@@ -53,7 +64,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 ##
 ## Email sent to CS Agent Manager when a new ticket is created
 ##
-;TickSystem_CustomerRep_TicketCreated_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
+;TickSystem_CustomerRep_TicketCreated_Text;com.bridgex.core.ticket.PentlandCustomerRepTicketContext;Ticket System Ticket Created Customer Rep Plain Text Email;;"
 	Dear Customer Service Agent Manager
 
 	The following customer support ticket ${ctx.ticketId} was created with the following message:
@@ -63,7 +74,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 	Thank you
 	Your Customer Service Team
 	";
-;TickSystem_CustomerRep_TicketCreated_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer HTML Email;;"
+;TickSystem_CustomerRep_TicketCreated_HTML;com.bridgex.core.ticket.PentlandCustomerRepTicketContext;Ticket System Ticket Created Customer Rep HTML Email;;"
 	<html>
 		<head></head>
 		<body>
@@ -76,9 +87,3 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 		</body>
 	</html>
 	";
-
-INSERT_UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);alteredAttributes(qualifier,enclosingType(ComposedType.code));eventType(code);subject;plainTextTemplate(code);htmlTemplate(code);
-#Ticket Creation
-;1;Customer;;ticketCreationEvent;${ctx.ticket.ticketID} - ${ctx.ticket.headline};TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
-;2;CustomerRep;;ticketCreationEvent;${ctx.ticket.ticketID} - ${ctx.ticket.headline};TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
-

@@ -18,6 +18,8 @@ public class PentlandfacadesConstants extends GeneratedPentlandfacadesConstants
 {
 	public static final String EXTENSIONNAME = "pentlandfacades";
 
+	public static final int DEFAULT_STOCK_THRESHOLD = 100;
+
 	private PentlandfacadesConstants()
 	{
 		//empty

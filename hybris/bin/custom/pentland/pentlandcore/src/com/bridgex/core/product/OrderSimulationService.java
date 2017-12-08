@@ -15,4 +15,5 @@ public interface OrderSimulationService {
 
     MultiBrandCartResponse simulateOrder(MultiBrandCartDto request);
 
+    boolean successResponse(MultiBrandCartResponse response);
 }

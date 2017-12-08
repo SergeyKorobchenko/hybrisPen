@@ -93,7 +93,7 @@ public class AccountSummaryInfoPopulator implements Populator<AccountSummaryResp
 		balanceData.setOpenBalance(getAmountFormatter().formatAmount(open, currency));
 		balanceData.setPastDueBalance(getAmountFormatter().formatAmount(past, currency));
 
-		Map<String, String> dueBalance = new HashMap<>();
+		Map<String, String> dueBalance = new LinkedHashMap<>();
 		dueBalance.put(DAYS, getAmountFormatter().formatAmount(d1to30, currency));
 		dueBalance.put(DAYS1, getAmountFormatter().formatAmount(d30to60, currency));
 		dueBalance.put(DAYS2, getAmountFormatter().formatAmount(d60to90, currency));

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.storefront.forms.PentlandCartForm;
@@ -38,7 +39,8 @@ public class UpdateCartController extends AbstractController
   private PentlandCartFacade pentlandCartFacade;
 
   @PostMapping(value = "/cart/update-all")
-  public ResponseEntity<String> updateCartQuantitiesAll1(@RequestBody final PentlandCartForm cartForm) {
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void updateCartQuantitiesAll(@RequestBody final PentlandCartForm cartForm) {
     CartData cart = pentlandCartFacade.getSessionCart();
     cart.setPurchaseOrderNumber(cartForm.getPurchaseOrderNumber());
     cart.setRdd(cartForm.getRequestedDeliveryDate());
@@ -61,7 +63,6 @@ public class UpdateCartController extends AbstractController
         }
       }
     }
-    return new ResponseEntity<>(HttpStatus.OK);
   }
 
   protected String updateEntry(final List<CartModificationData> modificationDataList, final OrderEntryData cartEntry)

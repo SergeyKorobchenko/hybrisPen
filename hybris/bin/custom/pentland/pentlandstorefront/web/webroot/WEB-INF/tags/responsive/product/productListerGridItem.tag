@@ -6,6 +6,7 @@
 <%@ taglib prefix="action" tagdir="/WEB-INF/tags/responsive/action" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -18,6 +19,7 @@
 		<input type="hidden" name="stylecode" value="${product.baseProduct}"/>
 		<input type="hidden" name="materialKey" value="${product.materialKey}"/>
 		<input type="hidden" name="upc" value="${product.upc}"/>
+		<input type="hidden" name="price" value="<format:price priceData="${product.price}"/>"/>
 		<a class="thumb" href="${productUrl}" title="${fn:escapeXml(product.name)}">
 			<product:productPrimaryImage product="${product}" format="product"/>
 		</a>
@@ -54,10 +56,10 @@
 				<img style="width: 32px; height: 32px;" src="${imageUrl}" title="${variantName}" alt="${variantName}"/>
 			</c:forEach>
 			<c:if test="${product.variantOptions.size() > 5}">
-				<p><spring:theme code="product.grid.variants.more"/></p>
+				<div class="variants"><spring:theme code="product.grid.variants.more"/></div>
 			</c:if>
 			<c:if test="${product.clearance}">
-				<p><spring:theme code="product.grid.variants.clearance"/></p>
+				<div class="variants"><spring:theme code="product.grid.variants.clearance"/></div>
 			</c:if>
 		</div>
 

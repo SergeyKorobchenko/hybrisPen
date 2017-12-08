@@ -5,10 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:if test="${component.visible}">
-	<div class="container-fluid">
-	    <div class="footer__top">
+    <div class="container">
+        <div class="footer__top b-section--full-width">
 	        <div class="row">
-	            <div class="footer__left col-xs-12 col-sm-12 col-md-9">
+	            <div class="footer__left col-sm-12">
 	                <div class="row">
 	                	<c:forEach items="${component.navigationNode.children}" var="childLevel1">
 		                	<c:forEach items="${childLevel1.children}" step="${component.wrapAfter}" varStatus="i">
@@ -28,7 +28,7 @@
 	                	</c:forEach>
 	               </div>
 	           </div>
-	           <div class="footer__right col-xs-12 col-md-3">
+	           <!--div class="footer__right col-xs-12 col-md-3">
 	               <c:if test="${showLanguageCurrency}">
 	                   <div class="row">
 	                       <div class="col-xs-6 col-md-6 footer__dropdown">
@@ -39,14 +39,18 @@
 	                       </div>
 	                   </div>
 	               </c:if>
-	            </div>
+	            </div-->
 	        </div>
 	    </div>
 	</div>
-	
-	<div class="footer__bottom">
-	    <div class="footer__copyright">
-	        <div class="container">${fn:escapeXml(notice)}</div>
+
+	<div class="footer__bottom b-section--full-width">
+		<div class="container">
+	    	<div class="footer__copyright">
+                <div class="row">
+                    <div class="col-sm-12">${fn:escapeXml(notice)}</div>
+                </div>
+            </div>
 	    </div>
 	</div>
 </c:if>

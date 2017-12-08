@@ -1,12 +1,12 @@
 //
 // Load core variables
 // --------------------------------------------------
-
+@import "../../../lib/font-awesome-4.7.0/less/font-awesome.less";
 @import "../../../lib/ybase-0.1.0/less/ybase.less";
 @import "../../../lib/ybase-0.1.0/less/addons.less";
 @import "variables.less";
 
-.long-scrollable{
+.long-scrollable {
   max-height: 700px;
   overflow-y: scroll;
 }
@@ -22,38 +22,18 @@
   height: 150px;
   position: fixed;
 }
+
 .cookie-disclaimer .container {
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.cookie-disclaimer .cookie-close{
+.cookie-disclaimer .cookie-close {
   float: right;
   padding: 10px;
   cursor: pointer;
 }
 
-.branding {
-  margin-top: 30px;
-}
-
-
-.export__cart--link {
-  width: auto !important;
-}
-
-.export__images--link {
-  text-align: left;
-  margin-top: 15px;
-  padding-right: @grid-gutter-width;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 15px;
-  display: inline-block;
-  white-space: nowrap;
-  .full-width-padding();
-
-  @media (max-width: @screen-xs-max) {
-    padding-top: 5px;
-  }
+.padding-top-10 {
+  padding-top: 10px;
 }

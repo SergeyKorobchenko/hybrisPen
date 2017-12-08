@@ -16,6 +16,7 @@
             <li class="item__toggle"></li>
             <li class="item__image"></li>
             <li class="item__info"><spring:theme code="basket.page.item"/></li>
+            <li class="item__price"><spring:theme code="basket.page.wholesalePrice"/></li>
             <li class="item__price"><spring:theme code="basket.page.price"/></li>
             <li class="item__quantity"><spring:theme code="basket.page.qty"/></li>
             <%--<li class="item__delivery"><spring:theme code="basket.page.delivery"/></li>--%>

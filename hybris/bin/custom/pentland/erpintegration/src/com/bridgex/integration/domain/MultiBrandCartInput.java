@@ -9,26 +9,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class MultiBrandCartInput {
 
-  @JsonProperty("MATERIAL_NUMBER")
-  private String materialNumber;
-
-  @JsonProperty("CUSTOMER_NUMBER")
-  private String customerSapId;
+  //Not used
+  @JsonProperty("REFERENCE_DOCUMENT_ITEM")
+  private String refDocNumber = "";
+  //Not used
+  @JsonProperty("REQUIREMENT_CATEGORY")
+  private String reqCategory = "";
 
   @JsonProperty("SALES_ORG")
-  private String salesOrg;
+  private String salesOrg = "";
 
   @JsonProperty("DISTRIBUTION_CHANNEL")
-  private String distrChannel;
-
-  @JsonProperty("PRICE_LIST")
-  private String priceList;
+  private String distrChannel = "";
 
   @JsonProperty("BRAND")
-  private String brandCode;
+  private String brandCode = "";
+
+  @JsonProperty("MATERIAL_NUMBER")
+  private String materialNumber = "";
+
+  //Not used
+  @JsonProperty("REQUESTED_DATE")
+  private String requestedDate = "";
 
   @JsonProperty("IT_SIZE_DATA")
   private List<SizeDataDto> sizeData;
+
+  //Not used
+  @JsonProperty("SEASON")
+  private String season = "";
 
   public String getMaterialNumber() {
     return materialNumber;
@@ -36,14 +45,6 @@ public class MultiBrandCartInput {
 
   public void setMaterialNumber(String materialNumber) {
     this.materialNumber = materialNumber;
-  }
-
-  public String getCustomerSapId() {
-    return customerSapId;
-  }
-
-  public void setCustomerSapId(String customerSapId) {
-    this.customerSapId = customerSapId;
   }
 
   public String getSalesOrg() {
@@ -62,14 +63,6 @@ public class MultiBrandCartInput {
     this.distrChannel = distrChannel;
   }
 
-  public String getPriceList() {
-    return priceList;
-  }
-
-  public void setPriceList(String priceList) {
-    this.priceList = priceList;
-  }
-
   public String getBrandCode() {
     return brandCode;
   }
@@ -84,5 +77,37 @@ public class MultiBrandCartInput {
 
   public void setSizeData(List<SizeDataDto> sizeData) {
     this.sizeData = sizeData;
+  }
+
+  public String getRefDocNumber() {
+    return refDocNumber;
+  }
+
+  public void setRefDocNumber(String refDocNumber) {
+    this.refDocNumber = refDocNumber;
+  }
+
+  public String getReqCategory() {
+    return reqCategory;
+  }
+
+  public void setReqCategory(String reqCategory) {
+    this.reqCategory = reqCategory;
+  }
+
+  public String getRequestedDate() {
+    return requestedDate;
+  }
+
+  public void setRequestedDate(String requestedDate) {
+    this.requestedDate = requestedDate;
+  }
+
+  public String getSeason() {
+    return season;
+  }
+
+  public void setSeason(String season) {
+    this.season = season;
   }
 }

@@ -1,14 +1,21 @@
 package com.bridgex.facades.product;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import com.bridgex.integration.domain.MultiBrandCartDto;
 
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
 
 /**
  * @author Created by konstantin.pavlyukov on 11/8/2017.
  */
 public interface PentlandProductFacade extends ProductFacade {
+
+  Optional<String> getSizeUrlForProduct(String productCode);
 
   boolean populateCustomerPrice(ProductData productData);
 
@@ -18,4 +25,7 @@ public interface PentlandProductFacade extends ProductFacade {
 
   boolean populateOrderForm(ProductData product, Date requestedDeliveryDate);
 
+  MultiBrandCartDto createOrderFormRequest(List<VariantMatrixElementData> materials, Date requestedDeliveryDate);
+
+  MultiBrandCartDto createRequestRoot(Date requestedDeliveryDate, boolean availabilityCheck, boolean creditCheck);
 }

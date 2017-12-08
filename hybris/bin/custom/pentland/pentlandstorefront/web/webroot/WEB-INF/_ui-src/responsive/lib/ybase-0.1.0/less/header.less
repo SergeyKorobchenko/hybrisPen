@@ -2,15 +2,31 @@
 
 header {
   background: @header-background-color;
-  margin-bottom: @grid-gutter-width;
+  margin-bottom: @grid-gutter-width * 3;
+
+  @media (max-width: @screen-lg) {
+    margin-bottom: @grid-gutter-width + 10;
+  }
+
+  .page-update-profile &,
+  .page-update-email &,
+  .page-updatePassword &,
+  .page-add-support-ticket &,
+  .page-orders &,
+  .page-saved-carts &,
+  .page-my-quotes &,
+  .page-accountHidePrices &,
+  .page-productGrid &,
+  .page-searchGrid &,
+  .pageType-CategoryPage & {
+    margin-bottom: @grid-gutter-width + 10;
+  }
 
   .page-cartPage &,
   .page-homepage &,
-  .page-productGrid &,
-  .page-searchGrid &,
   .page-search &,
   .page-cartPage &,
-  .pageType-CategoryPage & {
-	margin-bottom: 0;
+  [class*="BrandPage"] & {
+    margin-bottom: 0;
   }
 }

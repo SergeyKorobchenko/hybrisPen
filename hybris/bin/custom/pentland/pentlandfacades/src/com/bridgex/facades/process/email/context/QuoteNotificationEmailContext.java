@@ -40,8 +40,8 @@ public class QuoteNotificationEmailContext extends AbstractEmailContext<QuotePro
     public void init(final QuoteProcessModel quoteProcessModel, final EmailPageModel emailPageModel)
     {
         super.init(quoteProcessModel, emailPageModel);
-
         quoteData = getQuoteConverter().convert(getQuote(quoteProcessModel));
+        put("customer",getCustomer(quoteProcessModel));
     }
 
     public QuoteData getQuote()

@@ -63,6 +63,15 @@ ACC.productorderform = {
         });
 
         $(skuQuantityClass).on('blur keypress', function (event) {
+            this.value = ACC.productorderform.filterSkuEntry(this.value);
+        });
+
+        $(skuQuantityClass).on('blur', function (event) {
+            var packSize = $(this).data('pack-size');
+            this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
+        });
+
+        $(skuQuantityClass).on('blur keypress', function (event) {
             var code = event.keyCode || event.which || event.charCode;
 
             if (code != 13 && code != undefined) {
@@ -543,12 +552,29 @@ ACC.productorderform = {
         if (/\D/g.test(quantityInput)) {
             // Filter non-digits from input value.
             filteredQty = quantityInput.replace(/\D/g, '');
-        }
-        else
-        {
+        } else {
             filteredQty = quantityInput;
         }
+
+        filteredQty = parseInt(filteredQty);
+
+        if (isNaN(filteredQty)) {
+            filteredQty = 0;
+        }
+
         return filteredQty;
+    },
+
+    correctQuantityToPackSize: function(quantity, packSize) {
+        if (packSize) {
+            quantity = parseInt(quantity);
+            packSize = parseInt(packSize);
+            var mod = quantity % packSize;
+            if (mod > 0) {
+                quantity += packSize - mod;
+            }
+        }
+        return quantity;
     },
 
     // Order form scroll
@@ -645,6 +671,8 @@ ACC.productorderform = {
 
         if (calcHeight > maxHeight) {
             $(scrollContent).parent().find('.order-form-scroll.down').show();
+        } else {
+            $(scrollContent).parent().find('.order-form-scroll.down').hide();
         }
     },
 

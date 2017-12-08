@@ -7,23 +7,25 @@
 
 
 <ul class="checkout-order-summary-list">
-    <li class="checkout-order-summary-list-heading">
+    <li class="checkout-shippingcheckout-order-summary-list-heading checkout-order-summary-list-heading">
         <div class="title">
             <spring:theme code="checkout.multi.payment"/>
         </div>
         <div class="address">
-            <spring:theme code="text.company.user.${cartData.b2bCustomerData.titleCode}.name" text="N/A"/>&nbsp;${fn:escapeXml(cartData.b2bCustomerData.firstName)}&nbsp;${fn:escapeXml(cartData.b2bCustomerData.lastName)}
-            <c:if test="${(not empty cartData.costCenter) and (not empty cartData.costCenter.code)}">
-                <br>
-                <spring:theme code="checkout.multi.costCenter.label" htmlEscape="false"/>:&nbsp;${fn:escapeXml(cartData.costCenter.name)}
+            <c:if test="${not empty cartData.b2bCustomerData.unit and not empty cartData.b2bCustomerData.unit.customerType}">
+                <spring:theme code="checkout.payment.${cartData.paymentType.code}.${cartData.b2bCustomerData.unit.customerType}"/>
             </c:if>
-            <br>
+        </div>
+        <div class="title">
+            <spring:theme code="checkout.multi.purchaseOrderNumber.label" htmlEscape="false"/>:&nbsp;
+        </div>
+        <div class="address">
             <c:choose>
                 <c:when test="${not empty cartData.purchaseOrderNumber}">
-                    <spring:theme code="checkout.multi.purchaseOrderNumber.label" htmlEscape="false"/>:&nbsp;${fn:escapeXml(cartData.purchaseOrderNumber)}
+                    ${fn:escapeXml(cartData.purchaseOrderNumber)}
                 </c:when>
                 <c:otherwise>
-                    <spring:theme code="checkout.multi.purchaseOrderNumber.label" htmlEscape="false"/>:&nbsp;-
+                    -
                 </c:otherwise>
             </c:choose>
         </div>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -27,20 +28,21 @@
 			<span class="glyphicon glyphicon-shopping-cart "></span>
 		</div>
 		<ycommerce:testId code="miniCart_items_label">
+			<common:hidePricesForUser>
+				<div class="mini-cart-price js-mini-cart-price hidden-xs hidden-sm">
+					<c:if test="${totalDisplay == 'TOTAL'}">
+						<format:price priceData="${totalPrice}" />
+					</c:if>
 
-			<div class="mini-cart-price js-mini-cart-price hidden-xs hidden-sm">
-				<c:if test="${totalDisplay == 'TOTAL'}">
-					<format:price priceData="${totalPrice}" />
-				</c:if>
+					<c:if test="${totalDisplay == 'SUBTOTAL'}">
+						<format:price priceData="${subTotal}" />
+					</c:if>
 
-				<c:if test="${totalDisplay == 'SUBTOTAL'}">
-					<format:price priceData="${subTotal}" />
-				</c:if>
-
-				<c:if test="${totalDisplay == 'TOTAL_WITHOUT_DELIVERY'}">
-					<format:price priceData="${totalNoDelivery}" />
-				</c:if>
-			</div>
+					<c:if test="${totalDisplay == 'TOTAL_WITHOUT_DELIVERY'}">
+						<format:price priceData="${totalNoDelivery}" />
+					</c:if>
+				</div>
+			</common:hidePricesForUser>
 			<div class="mini-cart-count js-mini-cart-count"><span class="nav-items-total">${totalItems lt 100 ? totalItems : "99+"}<span class="items-desktop hidden-xs">&nbsp;<spring:theme code="basket.items"/></span></span></div>
 		</ycommerce:testId>
 

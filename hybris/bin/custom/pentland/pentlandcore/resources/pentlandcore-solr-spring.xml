@@ -56,6 +56,13 @@
 		<property name="categorySource" ref="pentlandCategorySource"/>
 	</bean>
 
+	<alias name="pentlandImageValueProvider" alias="abstractImageValueProvider"/>
+	<bean id="pentlandImageValueProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandImageValueProvider" abstract="true">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
 	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
 		<property name="mediaFormat" value="515Wx515H"/>
 	</bean>
@@ -173,12 +180,23 @@
 	<bean id="pentlandSolrDocumentFactory" class="com.bridgex.core.search.solrfacetsearch.indexer.impl.PentlandSolrDocumentFactory" parent="defaultSolrDocumentFactory"/>
 
 	<bean id="abstractNavCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractNavCategoryResolver" abstract="true" parent="abstractValueResolver"/>
+	<bean id="abstractCategoryResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractCategoryResolver" abstract="true" parent="abstractValueResolver"/>
+	<bean id="abstractProductTypeResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractProductTypeResolver" abstract="true" parent="abstractValueResolver"/>
 
-	<bean id="categoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryCodeValueResolver" parent="abstractNavCategoryResolver"/>
+	<bean id="navCategoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.NavCategoryCodeValueResolver" parent="abstractNavCategoryResolver"/>
+	<bean id="categoryCodeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryCodeValueResolver" parent="abstractCategoryResolver"/>
+	<bean id="productTypeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ProductTypeValueResolver" parent="abstractProductTypeResolver"/>
 
-	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver"  parent="abstractNavCategoryResolver">
+	<bean id="navCategoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.NavCategoryNameValueResolver" parent="abstractNavCategoryResolver">
 		<property name="qualifierProvider" ref="languageQualifierProvider"/>
 	</bean>
+	<bean id="categoryNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.CategoryNameValueResolver" parent="abstractCategoryResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+	<bean id="productTypeNameValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ProductTypeNameValueResolver"  parent="abstractProductTypeResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider"/>
+	</bean>
+
 
 	<bean id="priceRangeValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PriceRangeValueResolver" parent="abstractValueResolver">
 		<property name="commercePriceService" ref="commercePriceService"/>
@@ -198,5 +216,11 @@
 	</bean>
 
 	<bean id="variantProductClassificationAttributesValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.VariantProductClassificationAttributesValueResolver" parent="productClassificationAttributesValueResolver"/>
+
+	<alias name="pentlandFacetSearchQueryFacetsPopulator" alias="facetSearchQueryFacetsPopulator"/>
+	<bean id="pentlandFacetSearchQueryFacetsPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.PentlandFacetSearchQueryFacetsPopulator" parent="abstractFacetSearchQueryPopulator">
+		<property name="defaultFacetSort" value="count" />
+		<property name="userService" ref="userService"/>
+	</bean>
 
 </beans>

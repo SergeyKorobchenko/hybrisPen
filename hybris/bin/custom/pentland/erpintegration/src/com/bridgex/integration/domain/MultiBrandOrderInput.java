@@ -11,30 +11,46 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class MultiBrandOrderInput {
 
-  @JsonProperty("MATERIAL_NUMBER")
-  private String materialNumber;
-
   @JsonProperty("SALES_ORG")
-  private String salesOrg;
+  private String salesOrg = "";
 
   @JsonProperty("DISTRIBUTION_CHANNEL")
-  private String distrChannel;
+  private String distrChannel = "";
 
   @JsonProperty("BRAND")
-  private String brandCode;
+  private String brandCode = "";
+
+  @JsonProperty("MATERIAL_NUMBER")
+  private String materialNumber = "";
 
   @JsonProperty("SALES_UNIT")
-  private String salesUnit;
-
-  //not used
-  @JsonProperty("REQUESTED_DELIVERY_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-  private Date rdd;
+  private String salesUnit = "";
 
   //not used
   @JsonProperty("CANCEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date cancelDate;
+
+  //not used
+  @JsonProperty("REQUESTED_DELIVERY_DATE")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private Date rdd;
+
+  //not used
+  @JsonProperty("DIM1")
+  private String dim1 = "";
+
+  //not used
+  @JsonProperty("REFERENCE_DOCUMENT")
+  private String referenceDocument = "";
+
+  //not used
+  @JsonProperty("REFERENCE_DOCUMENT_ITEM")
+  private String referenceDocumentItem = "000000";
+
+  //not used
+  @JsonProperty("DLV_GROUP")
+  private String dlvGroup = "000";
 
   @JsonProperty("IT_SCHED_LINES")
   private List<SchedLinesDto> schedLines;
@@ -101,5 +117,37 @@ public class MultiBrandOrderInput {
 
   public void setSchedLines(List<SchedLinesDto> schedLines) {
     this.schedLines = schedLines;
+  }
+
+  public String getDim1() {
+    return dim1;
+  }
+
+  public void setDim1(String dim1) {
+    this.dim1 = dim1;
+  }
+
+  public String getReferenceDocument() {
+    return referenceDocument;
+  }
+
+  public void setReferenceDocument(String referenceDocument) {
+    this.referenceDocument = referenceDocument;
+  }
+
+  public String getReferenceDocumentItem() {
+    return referenceDocumentItem;
+  }
+
+  public void setReferenceDocumentItem(String referenceDocumentItem) {
+    this.referenceDocumentItem = referenceDocumentItem;
+  }
+
+  public String getDlvGroup() {
+    return dlvGroup;
+  }
+
+  public void setDlvGroup(String dlvGroup) {
+    this.dlvGroup = dlvGroup;
   }
 }

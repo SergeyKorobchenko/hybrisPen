@@ -7,10 +7,18 @@
 
 <div class="account-orderdetail account-consignment">
     <ycommerce:testId code="orderDetail_itemList_section">
-        <c:forEach items="${orderData.orderItems}" var="item">
-            <div class="fulfilment-states-${fn:escapeXml(item.itemStatus)}">
-               <b2b-order:accountOrderDetailsItem order="${orderData}" item="${item}"/>
-            </div>
-        </c:forEach>
+        <table class="orderListTable">
+            <tr>
+                <c:forEach items="${orderData.orderItems}" var="item">
+            <tr>
+                <td>
+                    <div class="fulfilment-states-${fn:escapeXml(item.itemStatus)}">
+                        <b2b-order:accountOrderDetailsItem order="${orderData}" item="${item}"/>
+                    </div>
+                </td>
+            </tr>
+            </c:forEach>
+            </tr>
+        </table>
     </ycommerce:testId>
 </div>

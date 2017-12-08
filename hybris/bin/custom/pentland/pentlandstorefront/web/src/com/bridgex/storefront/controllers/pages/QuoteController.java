@@ -94,7 +94,6 @@ public class QuoteController extends AbstractCartPageController
 	private static final String QUOTE_EDIT_CMS_PAGE = "quoteEditPage";
 	private static final String VOUCHER_FORM = "voucherForm";
 	private static final String ALLOWED_ACTIONS = "allowedActions";
-	private static final String DATE_FORMAT_KEY = "text.quote.dateformat";
 
 	// localization properties
 	private static final String PAGINATION_NUMBER_OF_COMMENTS = "quote.pagination.numberofcomments";
@@ -111,7 +110,6 @@ public class QuoteController extends AbstractCartPageController
 	private static final String QUOTE_SAVE_CART_ERROR = "quote.save.cart.error";
 	private static final String QUOTE_SUBMIT_ERROR = "quote.submit.error";
 	private static final String QUOTE_SUBMIT_SUCCESS = "quote.submit.success";
-	private static final String QUOTE_EXPIRED = "quote.state.expired";
 	private static final String QUOTE_REJECT_INITIATION_REQUEST = "quote.reject.initiate.request";
 	private static final String QUOTE_CART_INSUFFICIENT_ACCESS_RIGHTS = "quote.cart.insufficient.access.rights.error";
 
@@ -302,15 +300,6 @@ public class QuoteController extends AbstractCartPageController
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs("breadcrumb.quote.edit"));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		final double quoteThreshold = getQuoteFacade().getQuoteRequestThreshold(quoteCode);
-		if (quoteThreshold >= 0
-				&& !(GlobalMessages.containsMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_REJECT_INITIATION_REQUEST)))
-		{
-			// Display quote request minimum threshold only if it's set and quote version is equal to 1
-			GlobalMessages.addMessage(model, GlobalMessages.INFO_MESSAGES_HOLDER, QUOTE_REJECT_INITIATION_REQUEST, new Object[]
-			{ getFormattedPriceValue(quoteThreshold) });
-		}
-
 		return getViewForPage(model);
 	}
 
@@ -318,14 +307,9 @@ public class QuoteController extends AbstractCartPageController
 	{
 		if (!model.containsAttribute("quoteForm"))
 		{
-			final Locale currentLocale = getI18nService().getCurrentLocale();
-			final String expirationTimePattern = getMessageSource().getMessage(DATE_FORMAT_KEY, null, currentLocale);
-
 			final QuoteForm quoteForm = new QuoteForm();
 			quoteForm.setName(data.getName());
 			quoteForm.setDescription(data.getDescription());
-			quoteForm.setExpirationTime(QuoteExpirationTimeConverter.convertDateToString(data.getExpirationTime(),
-					expirationTimePattern, currentLocale));
 			model.addAttribute("quoteForm", quoteForm);
 		}
 		model.addAttribute("quoteDiscountForm", new QuoteDiscountForm());
@@ -350,14 +334,6 @@ public class QuoteController extends AbstractCartPageController
 		model.addAttribute("disableUpdate", Boolean.valueOf(!updatable));
 	}
 
-	protected void setExpirationTimeAttributes(final Model model)
-	{
-		model.addAttribute("defaultOfferValidityPeriodDays",
-				Integer.valueOf(QuoteExpirationTimeUtils.getDefaultOfferValidityPeriodDays()));
-		model.addAttribute("minOfferValidityPeriodDays",
-				Integer.valueOf(QuoteExpirationTimeUtils.getMinOfferValidityPeriodInDays()));
-	}
-
 	protected void prepareQuotePageElements(final Model model, final CartData cartData, final boolean updatable)
 	{
 		fillQuoteForm(model, cartData);
@@ -367,8 +343,6 @@ public class QuoteController extends AbstractCartPageController
 
 		model.addAttribute("savedCartCount", saveCartFacade.getSavedCartsCountForCurrentUser());
 		model.addAttribute("quoteCount", quoteFacade.getQuotesCountForCurrentUser());
-
-		setExpirationTimeAttributes(model);
 	}
 
 	@RequestMapping(value = "/{quoteCode}/cancel", method = RequestMethod.POST)
@@ -554,26 +528,16 @@ public class QuoteController extends AbstractCartPageController
 
 		try
 		{
-			CommerceCartMetadata cartMetadata;
-			if (isSeller)
-			{
-				final Optional<Date> expirationTime = Optional.ofNullable(getExpirationDateFromString(quoteForm.getExpirationTime()));
-				cartMetadata = CommerceCartMetadataUtils.metadataBuilder().expirationTime(expirationTime)
-						.removeExpirationTime(!expirationTime.isPresent()).build();
-			}
-			else
-			{
-				cartMetadata = CommerceCartMetadataUtils.metadataBuilder().name(Optional.ofNullable(quoteForm.getName()))
-						.description(Optional.ofNullable(quoteForm.getDescription())).build();
-			}
-
+			CommerceCartMetadata cartMetadata = CommerceCartMetadataUtils.metadataBuilder()
+			                                                             .name(Optional.ofNullable(quoteForm.getName()))
+			                                                             .description(Optional.ofNullable(quoteForm.getDescription()))
+			                                                             .build();
 			getCartFacade().updateCartMetadata(cartMetadata);
 		}
 		catch (final IllegalArgumentException e)
 		{
 			LOG.warn(String.format("Invalid metadata input field(s) for quote %s", quoteCode), e);
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					isSeller ? "text.quote.expiration.time.invalid" : "text.quote.name.description.invalid", null);
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "text.quote.name.description.invalid", null);
 			return Optional.of(String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteCode)));
 		}
 
@@ -622,12 +586,6 @@ public class QuoteController extends AbstractCartPageController
 		{
 			getQuoteFacade().acceptAndPrepareCheckout(quoteCode);
 		}
-		catch (final CommerceQuoteExpirationTimeException e)
-		{
-			LOG.warn(String.format("Quote has Expired. Quote Code : [%s]", quoteCode), e);
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_EXPIRED, null);
-			return String.format(REDIRECT_QUOTE_DETAILS_URL, urlEncode(quoteCode));
-		}
 		catch (final UnknownIdentifierException e)
 		{
 			LOG.warn(String.format("Attempted to place order with a quote that does not exist or is not visible: %s", quoteCode), e);
@@ -641,44 +599,6 @@ public class QuoteController extends AbstractCartPageController
 		}
 		return getCheckoutRedirectUrl();
 	}
-
-	@ResponseBody
-	@RequestMapping(value = "/{quoteCode}/expiration", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public ResponseEntity<String> setQuoteExpiration(@PathVariable("quoteCode") final String quoteCode, final QuoteForm quoteForm,
-			final BindingResult bindingResult)
-	{
-		smartValidator.validate(quoteForm, bindingResult, QuoteForm.Seller.class);
-
-		if (bindingResult.hasErrors())
-		{
-			final String errorMessage = getMessageSource().getMessage(bindingResult.getAllErrors().get(0).getCode(), null,
-					getI18nService().getCurrentLocale());
-			return new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
-		}
-
-		try
-		{
-			final Optional<Date> expirationTime = Optional.ofNullable(getExpirationDateFromString(quoteForm.getExpirationTime()));
-			final CommerceCartMetadata cartMetadata = CommerceCartMetadataUtils.metadataBuilder().expirationTime(expirationTime)
-					.removeExpirationTime(!expirationTime.isPresent()).build();
-
-			getCartFacade().updateCartMetadata(cartMetadata);
-		}
-		catch (final IllegalArgumentException e)
-		{
-			LOG.warn(String.format("Invalid expiration time input for quote %s", quoteCode), e);
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-		}
-		catch (final IllegalStateException | IllegalQuoteStateException | UnknownIdentifierException | ModelSavingException e)
-		{
-			LOG.error(String.format("Failed to update expiration time for quote %s", quoteCode), e);
-			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		return new ResponseEntity<String>(HttpStatus.OK);
-	}
-
 	/**
 	 * Update quote name and description
 	 *
@@ -724,14 +644,6 @@ public class QuoteController extends AbstractCartPageController
 		}
 
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	protected Date getExpirationDateFromString(final String expirationTime)
-	{
-		final Locale currentLocale = getI18nService().getCurrentLocale();
-		final String expirationTimePattern = getMessageSource().getMessage(DATE_FORMAT_KEY, null, currentLocale);
-
-		return QuoteExpirationTimeConverter.convertStringToDate(expirationTime, expirationTimePattern, currentLocale);
 	}
 
 	/**

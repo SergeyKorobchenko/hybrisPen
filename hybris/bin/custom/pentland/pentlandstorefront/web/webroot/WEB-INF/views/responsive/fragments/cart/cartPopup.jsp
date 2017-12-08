@@ -6,6 +6,7 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -68,7 +69,9 @@
 											<div class="itemPickup"><span class="itemPickupLabel"><spring:theme code="popup.cart.pickup"/></span>&nbsp;${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
 										</c:if>
 									</div>
-									<div class="price"><format:price priceData="${entry.basePrice}"/></div>
+									<common:hidePricesForUser>
+										<div class="price"><format:price priceData="${entry.basePrice}"/></div>
+									</common:hidePricesForUser>
 								</li>
 							</c:forEach>
 						</ol>
@@ -77,10 +80,13 @@
 							<cms:component component="${lightboxBannerComponent}" evaluateRestriction="true"  />
 						</c:if>
 
-						<div class="mini-cart-totals">
-							<div class="key"><spring:theme code="popup.cart.total"/></div>
-							<div class="value"><format:price priceData="${cartData.totalPrice}"/></div>
-						</div>
+						<common:hidePricesForUser>
+							<div class="mini-cart-totals">
+								<div class="key"><spring:theme code="popup.cart.total"/></div>
+								<div class="value"><format:price priceData="${cartData.totalPrice}"/></div>
+							</div>
+						</common:hidePricesForUser>
+
 						<a href="${cartUrl}" class="btn btn-primary btn-block mini-cart-checkout-button">
 							<spring:theme code="${miniCartProceed }" />
 						</a>

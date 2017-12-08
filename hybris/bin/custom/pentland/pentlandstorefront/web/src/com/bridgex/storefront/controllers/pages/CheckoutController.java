@@ -26,6 +26,7 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
+import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
@@ -35,6 +36,8 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+
+import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
@@ -80,8 +83,8 @@ public class CheckoutController extends AbstractCheckoutController
 	@Resource(name = "productFacade")
 	private ProductFacade productFacade;
 
-	@Resource(name = "orderFacade")
-	private OrderFacade orderFacade;
+	@Resource
+	private PentlandOrderFacade orderFacade;
 
 	@Resource(name = "checkoutFacade")
 	private CheckoutFacade checkoutFacade;
@@ -209,6 +212,16 @@ public class CheckoutController extends AbstractCheckoutController
 			}
 		}
 
+		List<OrderData> sapOrders = orderFacade.getSapOrdersForOrderCode(orderCode);
+		if(sapOrders == null){
+			GlobalMessages.addErrorMessage(model, "order.export.global.error");
+		}else{
+			model.addAttribute("sapOrders", sapOrders);
+			model.addAttribute("sapOrderCodes", sapOrders.stream().map(AbstractOrderData::getCode).collect(Collectors.joining(", ")));
+		}
+
+		model.addAttribute("showBillingInfo", Boolean.FALSE);
+
 		model.addAttribute("orderCode", orderCode);
 		model.addAttribute("orderData", orderDetails);
 		model.addAttribute("allItems", orderDetails.getEntries());
@@ -216,6 +229,10 @@ public class CheckoutController extends AbstractCheckoutController
 		model.addAttribute("deliveryMode", orderDetails.getDeliveryMode());
 		model.addAttribute("paymentInfo", orderDetails.getPaymentInfo());
 		model.addAttribute("pageType", PageType.ORDERCONFIRMATION.name());
+
+		if(!orderDetails.isCreditCheckPassed()){
+			GlobalMessages.addInfoMessage(model, "order.export.credit.check.failed");
+		}
 
 		final List<CouponData> giftCoupons = orderDetails.getAppliedOrderPromotions().stream()
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())

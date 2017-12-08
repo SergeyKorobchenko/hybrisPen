@@ -95,7 +95,28 @@ ACC.checkout = {
 		$('.js-continue-checkout-button').click(function ()
 		{
 			var checkoutUrl = $(this).data("checkoutUrl");
-			
+
+            var poNumber = $('#purchaseOrderNumber').get(0);
+            var rdd = $('#requestedDeliveryDate').get(0);
+
+            if (!rdd || !rdd.value) {
+                $('#requestedDeliveryDateError').show();
+                $('#requestedDeliveryDateError').closest('.form-group').addClass('has-error');
+                return false;
+            } else {
+                $('#requestedDeliveryDateError').hide();
+                $('#requestedDeliveryDateError').closest('.form-group').removeClass('has-error');
+            }
+
+            if (!poNumber || !poNumber.value) {
+                $('#purchaseOrderNumberError').show();
+                $('#purchaseOrderNumberError').closest('.form-group').addClass('has-error');
+                return false;
+            } else {
+                $('#purchaseOrderNumberError').hide();
+                $('#purchaseOrderNumberError').closest('.form-group').removeClass('has-error');
+            }
+
 			cartEntriesError = ACC.pickupinstore.validatePickupinStoreCartEntires();
 			if (!cartEntriesError)
 			{

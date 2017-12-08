@@ -7,14 +7,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SizeDataDto {
 
+  //Not used
+  @JsonProperty("REQUESTED_SIZE")
+  private String size = "";
+
   @JsonProperty("EAN")
-  private String ean;
+  private String ean = "";
 
   @JsonProperty("REQUESTED_QUANTITY")
-  private String quantity;
+  private String quantity = "";
 
   @JsonProperty("UOM")
-  private String unit;
+  private String unit = "";
 
   public String getEan() {
     return ean;
@@ -38,5 +42,13 @@ public class SizeDataDto {
 
   public void setUnit(String unit) {
     this.unit = unit;
+  }
+
+  public String getSize() {
+    return size;
+  }
+
+  public void setSize(String size) {
+    this.size = size;
   }
 }

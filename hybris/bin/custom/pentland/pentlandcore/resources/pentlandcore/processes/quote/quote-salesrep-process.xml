@@ -23,8 +23,13 @@
     </action>
 
     <action id="generateSalesRepQuoteSubmissionEmail" bean="generateSalesRepQuoteSubmissionEmail">
-        <transition name="OK" to="sendEmail"/>
+        <transition name="OK" to="generateSalesRepQuoteSubmissionOpsEmail"/>
         <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="generateSalesRepQuoteSubmissionOpsEmail" bean="generateSalesRepQuoteSubmissionOpsEmail">
+    <transition name="OK" to="sendEmail"/>
+    <transition name="NOK" to="error"/>
     </action>
 
     <action id="sendEmail" bean="sendEmail">

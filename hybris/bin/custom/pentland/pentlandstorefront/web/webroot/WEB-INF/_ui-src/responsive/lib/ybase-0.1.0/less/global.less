@@ -10,13 +10,10 @@
 //************************************************************
 //************************************************************
 
-//*********Variables*********
-
-@font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif;
-
-
 //*********General CSS*********
 body {
+  font-weight: @font-weight-base;
+
   overflow-x: hidden;
   position: relative;
 }
@@ -25,8 +22,28 @@ body.offcanvas {
   overflow-y: hidden;
 }
 
-.no-margin{
-    margin: 0 !important;
+.b-section--full-width {
+  .full-width-padding();
+}
+
+.b-margin-top {
+  margin-top: 60px;
+
+  @media (max-width: @screen-lg) {
+    margin-top: 30px;
+  }
+}
+
+.b-margin-bottom {
+  margin-bottom: 60px;
+
+  @media (max-width: @screen-lg) {
+    margin-bottom: 30px;
+  }
+}
+
+.no-margin {
+  margin: 0 !important;
 }
 
 .container-lg {
@@ -37,12 +54,16 @@ body.offcanvas {
   }
 }
 
-button {
-  font-weight: bold;
+.container-fluid {
+  &--unlimited {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-.btn{
-  border-radius: 0 !important;
+button {
+  font-weight: bold;
 }
 
 ul, ol {
@@ -66,22 +87,29 @@ option {
 /*
 General
 *****************************************************************/
+h1, h2, h3, h4, h5, h6 {
+  .headline;
+}
 
 a, button {
   color: @link-color;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: none;
+.btn, button:hover {
+  .link-focus;
 }
 
+a:hover, a:focus {
+  color: @link-color-hover;
+  .link-focus;
+}
 
 output {
-  display:block;
-  padding-top:7px;
-  font-size:14px;
-  line-height:1.42857143;
+  display: block;
+  padding-top: 7px;
+  font-size: 14px;
+  line-height: 1.42857143;
   color: @text-color;
 }
 
@@ -122,6 +150,7 @@ output {
     display: block;
   }
 }
+
 @media (max-width: @screen-xs-max) {
   .item-label,
   .item-value {
@@ -130,17 +159,21 @@ output {
     vertical-align: top;
     width: 49%;
   }
+
   .item-value {
     padding-left: @grid-gutter-width/2;
   }
+
   .item-action {
     margin-top: @grid-gutter-width;
   }
 }
+
 .item-label {
   text-transform: uppercase;
   font-weight: 300;
 }
+
 .item-value {
   font-size: @item-value-font-size;
   padding-bottom: @grid-gutter-width/2;
@@ -149,6 +182,7 @@ output {
 }
 
 .alert {
+  margin-bottom: @line-height-computed + 5px;
   .full-width-padding();
 }
 
@@ -175,7 +209,7 @@ output {
     padding-right: 0;
   }
 
-  &.well-xs{
+  &.well-xs {
     padding: 0px 15px 5px;
 
     .well-headline {
@@ -306,6 +340,7 @@ output {
     }
   }
 }
+
 //************************************************************
 //************************************************************
 //************************************************************
@@ -335,7 +370,6 @@ output {
     height: auto
   }
 }
-
 
 //************************************************************
 //************************************************************

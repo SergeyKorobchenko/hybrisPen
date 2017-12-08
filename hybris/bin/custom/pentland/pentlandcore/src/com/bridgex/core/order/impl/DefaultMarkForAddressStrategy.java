@@ -23,6 +23,12 @@ public class DefaultMarkForAddressStrategy implements CommerceDeliveryAddressStr
 
     modelService.refresh(cartModel);
 
+    if(addressModel == null){
+      cartModel.setMarkFor(null);
+      modelService.save(cartModel);
+      return true;
+    }
+
     if(BooleanUtils.isTrue(addressModel.getMarkForAddress())){
       cartModel.setMarkFor(addressModel);
       modelService.save(cartModel);

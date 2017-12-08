@@ -4,7 +4,10 @@
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
 .button-box-shadow() when (@btn-box-shadow) {
-	.box-shadow(0 2px 2px 0 darken(@background,25%));
+	.box-shadow(0 3px 0 darken(@background, 10%));
+}
+.button-box-shadow-disabled() when (@btn-box-shadow) {
+	.box-shadow(0 3px 0 darken(@disabledBackground, 10%));
 }
 .button-variant(@color; @background; @border; @hoverColor; @hoverBorder; @hoverBackground; @disabledBackground) {
 	color: @color;
@@ -16,11 +19,11 @@
 	&:focus,
 	&:active,
 	&.active,
+	&:active:focus,
 	.open .dropdown-toggle& {
 		color: @hoverColor;
 		background-color: @hoverBackground;
 		border-color: @hoverBorder;
-		.box-shadow(none)
 	}
 	&:active,
 	&.active,
@@ -35,10 +38,10 @@
 		&:focus,
 		&:active,
 		&.active {
-			color: @color;
+			color: @text-color;
 			background-color: @disabledBackground;
 			border-color: @disabledBackground;
-			.button-box-shadow();
+			.button-box-shadow-disabled();
 		}
 	}
 
@@ -46,6 +49,11 @@
 		color: @background;
 		background-color: @color;
 	}
+}
+
+.link-focus {
+	.transition(all 0.3s ease);
+	text-decoration: none;
 }
 
 .flex-display(@value) {
@@ -93,8 +101,19 @@
   }
 }
 
-
 // text variants
+.headline {
+	letter-spacing: @headings-letter-spacing;
+	margin-top: @headings-margin-top;
+	margin-bottom: @headings-margin-bottom;
+}
+
+.p-home-headline {
+	text-align: center;
+
+	padding-bottom: 30px;
+}
+
 .page-headline {
   color: @headline-color;
   font-size: @font-size-h3;
@@ -128,14 +147,13 @@
 // padding variants
 
 .full-width-padding {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-  @media (max-width: @screen-md) {
-	padding-left: 20px;
-	padding-right: 20px;
+  @media (max-width: @screen-sm) {
+	padding-left: 10px;
+	padding-right: 10px;
   }
-
 }
 
 .half-width-padding {
@@ -146,7 +164,6 @@
 	padding-left: 10px;
 	padding-right: 10px;
   }
-
 }
 
 .form-control-validation(@label-color; @border-color; @background-color; @hint-color) {
@@ -160,8 +177,8 @@
   }
 
   .help-block {
-    font-weight: 600;
-    color:@hint-color;
+    font-weight: 400;
+    color: @hint-color;
   }
 }
 

@@ -26,6 +26,8 @@
                         </td>
                     </tr>
                     <tr>
+                        <c:set var="subtotal" value="${0}"/>
+                        <c:set var="currencyIso" value="GBP"/>
                         <c:forEach items="${readonlyGridData.value.leafDimensionDataSet}" var="leafDimensionData">
                             <td class="grid-prod-info">
                                 <span class="grid-size">
@@ -37,11 +39,21 @@
                                     <span class="grid-qty-label"><spring:theme code="product.grid.readonly.qty" />&nbsp;</span>
                                     ${fn:escapeXml(leafDimensionData.leafDimensionData)}
                                 </span>
-                                <span class="grid-price">
-                                    <format:price priceData="${leafDimensionData.price}"/>
-                                </span>
+                                <c:set var="subtotal" value="${subtotal + leafDimensionData.price.value}"/>
+                                <c:set var="currencyIso" value="${leafDimensionData.price.currencyIso}"/>
+                                <%--<span class="grid-price">--%>
+                                    <%--<format:price priceData="${leafDimensionData.price}"/>--%>
+                                <%--</span>--%>
                             </td>
                         </c:forEach>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                <spring:theme code="currency.${currencyIso}"/>${subtotal}
+                            </strong>
+
+                        </td>
                     </tr>
                 </table>
             </td>

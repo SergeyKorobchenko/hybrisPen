@@ -11,8 +11,12 @@
 
 <div class="js-product-order-form display-none">
     <div class="back-link product-details">
-            <span class="label"><spring:theme code="order.form"/></span>
+            <div class="js-show-editable-product-form-grid" data-read-only-multid-grid="false">
+                <span class="label"><spring:theme code="order.form"/>&nbsp;</span>
+                <span class="glyphicon no-border glyphicon-chevron-down"></span>
+            </div>
     </div>
+    <div id="productShowGridAction">
     <div class="product-action" id="productGridAction">
         <div class="hidden-xs">
             <spring:theme code="product.grid.items.selected"/>&nbsp;
@@ -42,7 +46,7 @@
         <div class="order-form-scroll down hidden-xs"><span class="glyphicon glyphicon-chevron-down"></span></div>
     </div>
 
-
+    </div>
     <div style="display:none" id="grid" data-target-url="${targetUrl}" data-product-code="${product.code}"></div>
 
     <product:productOrderFormJQueryTemplates/>

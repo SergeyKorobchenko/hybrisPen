@@ -47,22 +47,8 @@
                 </div>
             </c:if>
 
-            <c:if test="${ycommerce:isQuoteUserSalesRep()}">
-                <div class="col-xs-12 col-sm-4 col-md-offset-2">
-                    <div class="form-element-icon datepicker quote__expiration" id="js-quote-expiration-time"
-                         data-date-format-for-date-picker="${dateFormatForDatePicker}"
-                         data-expiration-time-url="${expirationTimeUrl}"
-                         data-min-offer-validity-period-days="${fn:escapeXml(minOfferValidityPeriodDays)}">
-                        <formElement:formInputBox idKey="expirationTime"
-                                                  labelKey="text.quote.expiration.time.label" labelCSS="quote__expiration--label" path="expirationTime"
-                                                  inputCSS="text quote__expiration--input" mandatory="true" placeholder="${dateFormatHint}"/>
-                        <i class="glyphicon glyphicon-calendar js-open-datepicker-quote-expiration-time"></i>
-                    </div>
-                </div>
-            </c:if>
-
             <c:if test="${allowedActions['SUBMIT']}">
-                <div class="col-sm-4 col-md-3">
+                <div class="col-sm-4 col-md-3 pull-right">
                     <c:choose>
                         <c:when test="${cartData.totalPrice.value lt 0}">
                             <button type="button" class="btn btn-primary btn-block col-md-4 pull-right js-quote-submit-btn form__actions--submit"
@@ -84,10 +70,6 @@
     <div class="cart__quote__edit">
         <div class="quote__head">
             <div class="row">
-                <div class="col-xs-10 col-sm-5">
-                    <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-                    <span class="quote__head--title"><spring:theme code="quote.cart.title" /></span>
-                </div>
                 <div class="col-xs-2 text-right hidden-sm hidden-md hidden-lg">
                     <button class="quote__form--toggle" type="button" data-toggle="collapse" data-target="#quote__form--collapse" aria-expanded="false" aria-controls="quote__form--collapse"></button>
                 </div>
@@ -99,7 +81,7 @@
                         <spring:theme code="text.account.quote.status.display.${fn:escapeXml(cartData.quoteData.state)}"/>
                     </span>
                 </div>
-                <div class="col-xs-7 col-sm-3">
+                <div class="col-xs-7 col-sm-8">
                     <label class="quote__head--label">
                         <spring:theme code="text.quote.code"/>
                     </label>
@@ -116,32 +98,14 @@
             <div class="quote__form--section">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4" id="js-quote-name-wrapper">
-                        <c:choose>
-                            <c:when test="${ycommerce:isQuoteUserSalesRep()}">
-                                <formElement:formInputBox idKey="js-quote-name"
-                                                          labelKey="text.quote.name.label" path="name"
-                                                          inputCSS="text" mandatory="true" disabled="true" maxlength="255"/>
-                            </c:when>
-                            <c:otherwise>
-                                <formElement:formInputBox idKey="js-quote-name"
-                                                          labelKey="text.quote.name.label" path="name"
-                                                          inputCSS="text" mandatory="true" maxlength="255"/>
-                            </c:otherwise>
-                        </c:choose>
+                        <formElement:formInputBox idKey="js-quote-name"
+                                                  labelKey="text.quote.name.label" path="name"
+                                                  inputCSS="text" mandatory="true" maxlength="255"/>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-1">
-                        <c:choose>
-                            <c:when test="${ycommerce:isQuoteUserSalesRep()}">
-                                <formElement:formInputBox idKey="js-quote-description"
-                                                          labelKey="text.quote.description.label" path="description"
-                                                          inputCSS="text" mandatory="false" disabled="true" maxlength="255"/>
-                            </c:when>
-                            <c:otherwise>
-                                <formElement:formInputBox idKey="js-quote-description"
-                                                          labelKey="text.quote.description.label" path="description"
-                                                          inputCSS="text" mandatory="false" maxlength="255"/>
-                            </c:otherwise>
-                        </c:choose>
+                        <formElement:formInputBox idKey="js-quote-description"
+                                                  labelKey="text.quote.description.label" path="description"
+                                                  inputCSS="text" mandatory="false" maxlength="255"/>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-5 col-sm-offset-6">
                         <div class="quote__estimate">
