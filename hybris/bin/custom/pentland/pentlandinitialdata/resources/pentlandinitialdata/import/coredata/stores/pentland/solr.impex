@@ -96,7 +96,6 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 #;$solrIndexedType; description            ;text   ;            ;    ;    ;    ;    ;    ;springELValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;true;   ;  ;
 ;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;styleLevelNameValueResolver            ;    ;true;100;true;50 ;true;25;    ;   ;  ;
 ;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;wholesalePriceValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; priceForSort           ;double ;            ;true;    ;    ;    ;    ;priceRangeValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider              ;              ;true;40 ;true;20 ;true;10;    ;   ;  ;
 ;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-300Wx300H          ;string ;            ;    ;    ;    ;    ;    ;image300ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -176,8 +175,8 @@ INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[uniq
 INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
 ;$solrIndexedType:name-asc;name;true
 ;$solrIndexedType:name-desc;name;false
-;$solrIndexedType:price-asc;priceForSort;true
-;$solrIndexedType:price-desc;priceForSort;false
+;$solrIndexedType:price-asc;priceValue;true
+;$solrIndexedType:price-desc;priceValue;false
 
  #Search query template
 INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder;group[default=true];groupFacets[default=true];groupLimit[default=-1];groupProperty(name, solrIndexedType(identifier))
@@ -191,7 +190,6 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
 #;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;   	   ;  ;
 ;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-;priceForSort:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;keywords:$solrIndexedType               ;	 ;    ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
 ;img-515Wx515H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;img-300Wx300H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
