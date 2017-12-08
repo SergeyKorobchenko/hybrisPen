@@ -156,6 +156,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
           sizeEntry.setEan(sizeProduct.getCode());
           sizeEntry.setQuantity(size.getQuantity().intValue());
           sizeEntry.setSize(sizeProduct.getSize());
+          sizeEntry.setRdd(orderModel.getRdd());
           sizeEntries.add(sizeEntry);
         }
       });
