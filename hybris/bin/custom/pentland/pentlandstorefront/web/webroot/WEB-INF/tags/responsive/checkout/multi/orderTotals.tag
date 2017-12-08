@@ -48,7 +48,7 @@
 			</span>
 		</div>
 	</c:if>
-	<c:if test="${cartData.net && cartData.totalTax.value > 0 && showTax}">
+	<c:if test="${cartData.net && showTax}">
 		<div class="tax">
 			<spring:theme code="basket.page.totals.netTax"/>
 			<span>
