@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-xs-12">
         <ycommerce:testId code="orderDetail_itemNumber_label">
-            <span class="item-value">${fn:escapeXml(item.number)}</span>
+            <span class="item-value"><spring:theme code="text.account.orderHistory.item.number"/>: ${fn:escapeXml(item.number)}</span>
         </ycommerce:testId>
         <ycommerce:testId code="orderDetail_itemName_label">
             <span class="item-value">${fn:escapeXml(item.name)}</span>
