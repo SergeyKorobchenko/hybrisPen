@@ -63,7 +63,7 @@
                             </td>
                             <td class="hidden-sm hidden-md hidden-lg"><spring:theme code="text.account.orderHistory.orderStatus"/></td>
                             <td headers="header3" class="responsive-table-cell">
-                                <spring:theme code="text.account.order.status.display.${order.statusDisplay}"/>
+                                <spring:theme code="text.account.order.status.display.${order.status}"/>
                             </td>
                             <td class="hidden-sm hidden-md hidden-lg"><spring:theme
                                     code="text.account.orderhistory.dateplaced"/></td>
