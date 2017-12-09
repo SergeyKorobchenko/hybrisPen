@@ -10,7 +10,5 @@
 	<a href="${url}">
 		<span class="glyphicon glyphicon-chevron-left"></span>
 	</a>
-	<span class="label">
-		<spring:theme code="${labelKey}" arguments="${labelArguments}"/>
-	</span>
+	<h1 class="back-link__title"><spring:theme code="${labelKey}" arguments="${labelArguments}"/></h1>
 </div>

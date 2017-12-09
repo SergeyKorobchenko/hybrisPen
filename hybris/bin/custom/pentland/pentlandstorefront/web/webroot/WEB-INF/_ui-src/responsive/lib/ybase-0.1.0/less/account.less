@@ -294,8 +294,6 @@
     }
 
     form {
-      .full-width-padding();
-
       .accountActions-bottom {
         padding: 0;
       }
@@ -549,7 +547,8 @@
   }
 
   .account-consignment {
-    margin-top: @grid-gutter-width;
+    margin-top: @grid-gutter-width - 5;
+    border-radius: @border-radius-base;
   }
 
   //////////////////////////////////////////////////
@@ -884,32 +883,22 @@
   //	END deprecated
 
   .account-orderdetail__footer {
-    padding-top: 55px;
-
-    > div {
-      .full-width-padding();
-    }
+    padding-top: @grid-gutter-width + 10;
   }
 
   .order-savings__headline {
     font-size: @font-size-large-2;
     color: @text-color;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .orderTotal {
-    font-size: @font-size-large;
-    line-height: 38px;
-    margin-bottom: @grid-gutter-width;
-
-    .text-right {
-      font-weight: 700;
-    }
+    font-size: @font-size-large-2;
+    margin-bottom: @grid-gutter-width + 10;
 
     .totals {
-      font-size: @font-size-large-3;
-      line-height: 1.2em;
-      font-weight: 700;
+      font-size: @font-size-large-2;
+      font-weight: 600;
       text-transform: uppercase;
       padding-top: 15px;
     }
@@ -974,13 +963,9 @@
     clear: both;
     margin-bottom: @grid-gutter-width;
 
-    .order-total__taxes {
-      .text-right;
-    }
-
     .order-savings__info {
       color: @item-promo-color;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
     }
   }

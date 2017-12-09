@@ -34,7 +34,7 @@
                     </ycommerce:testId>
                 </div>
             </div>
-            <div class="col-sm-3 col-sm-offset-2 item-wrapper">
+            <div class="col-sm-3 item-wrapper">
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_creationDate_label">
                         <span class="item-label"><spring:theme code="text.account.orderHistory.creationDate"/></span>
@@ -54,7 +54,7 @@
                     </ycommerce:testId>
                 </div>
             </div>
-            <div class="col-sm-2 item-wrapper">
+            <div class="col-sm-3 item-wrapper">
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_overviewOrderNet_label">
                         <span class="item-label"><spring:theme code="text.account.order.net"/></span>
@@ -74,7 +74,7 @@
                     </ycommerce:testId>
                 </div>
             </div>
-            <div class="col-sm-2 item-action">
+            <div class="col-sm-3 item-action">
                 <c:set var="orderCode" value="${orderData.code}" scope="request"/>
                 <action:actions element="div" parentComponent="${component}"/>
             </div>
