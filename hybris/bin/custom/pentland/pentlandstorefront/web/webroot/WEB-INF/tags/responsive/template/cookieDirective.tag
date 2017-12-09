@@ -6,7 +6,7 @@
     <div class="cookie-disclaimer">
         <div class="container">
             <div class="b-section--full-width">
-                <div class="cookie-close accept-cookie"><i class="fa fa-times"></i></div>
+                <div class="cookie-close accept-cookie"><span class="glyphicon glyphicon-remove"></span></div>
 
                 <h4><spring:theme code="cookie.directive.header"/></h4>
 
