@@ -28,13 +28,13 @@ public class MultiBrandOrderInput {
 
   //not used
   @JsonProperty("CANCEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date cancelDate;
+//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private String cancelDate = "00000000";
 
   //not used
   @JsonProperty("REQUESTED_DELIVERY_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date rdd;
+//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private String rdd = "00000000";
 
   //not used
   @JsonProperty("DIM1")
@@ -60,7 +60,9 @@ public class MultiBrandOrderInput {
   }
 
   public void setMaterialNumber(String materialNumber) {
-    this.materialNumber = materialNumber;
+    if(materialNumber != null) {
+      this.materialNumber = materialNumber;
+    }
   }
 
   public String getSalesOrg() {
@@ -68,7 +70,9 @@ public class MultiBrandOrderInput {
   }
 
   public void setSalesOrg(String salesOrg) {
-    this.salesOrg = salesOrg;
+    if(salesOrg != null) {
+      this.salesOrg = salesOrg;
+    }
   }
 
   public String getDistrChannel() {
@@ -76,7 +80,9 @@ public class MultiBrandOrderInput {
   }
 
   public void setDistrChannel(String distrChannel) {
-    this.distrChannel = distrChannel;
+    if(distrChannel != null) {
+      this.distrChannel = distrChannel;
+    }
   }
 
   public String getBrandCode() {
@@ -84,7 +90,9 @@ public class MultiBrandOrderInput {
   }
 
   public void setBrandCode(String brandCode) {
-    this.brandCode = brandCode;
+    if(brandCode != null) {
+      this.brandCode = brandCode;
+    }
   }
 
   public String getSalesUnit() {
@@ -92,23 +100,29 @@ public class MultiBrandOrderInput {
   }
 
   public void setSalesUnit(String salesUnit) {
-    this.salesUnit = salesUnit;
+    if(salesUnit != null) {
+      this.salesUnit = salesUnit;
+    }
   }
 
-  public Date getRdd() {
+  public String getRdd() {
     return rdd;
   }
 
-  public void setRdd(Date rdd) {
-    this.rdd = rdd;
+  public void setRdd(String rdd) {
+    if(rdd != null) {
+      this.rdd = rdd;
+    }
   }
 
-  public Date getCancelDate() {
+  public String getCancelDate() {
     return cancelDate;
   }
 
-  public void setCancelDate(Date cancelDate) {
-    this.cancelDate = cancelDate;
+  public void setCancelDate(String cancelDate) {
+    if(cancelDate != null) {
+      this.cancelDate = cancelDate;
+    }
   }
 
   public List<SchedLinesDto> getSchedLines() {

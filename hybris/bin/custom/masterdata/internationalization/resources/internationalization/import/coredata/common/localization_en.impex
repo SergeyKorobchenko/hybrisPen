@@ -2916,7 +2916,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.summary.order.total;Total
 ;text.summary.order.totalQty;Total Qty
 ;text.summary.order.brand;Brand
-;order.export.global.error;Order failed to export.
+;order.export.global.error;"We are unable to process this order at this time. We will re-process this request. In the meantime, the Order Number displayed below is a temporary number assigned to it.
+<br>We apologize for the inconvenience. If you have any further queries or require assistance – please <a href=""{0}"">contact us.</a>"
 
 ;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
