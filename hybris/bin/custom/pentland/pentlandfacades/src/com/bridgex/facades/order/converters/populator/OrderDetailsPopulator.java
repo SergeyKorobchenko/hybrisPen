@@ -93,7 +93,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       ProductModel product = productService.getProductForCode(dto.getProduct());
       item.setName(product.getName());
       } catch (UnknownIdentifierException e) {
-        LOG.warn("Error while loading image: " + e.getMessage());
+        LOG.warn("Error while loading product: " + e.getMessage());
         item.setName(StringUtils.EMPTY);
     }
   }
