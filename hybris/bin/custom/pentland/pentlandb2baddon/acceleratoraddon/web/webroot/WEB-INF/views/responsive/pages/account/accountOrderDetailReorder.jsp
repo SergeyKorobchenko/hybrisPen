@@ -7,9 +7,9 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="cancel-panel">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-8 col-lg-offset-4">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pull-right">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 col-md-6 col-lg-6">
                     <ycommerce:testId code="orderDetails_backToOrderHistory_button">
                         <spring:url value="/my-account/orders" var="orderHistoryUrl"/>
                         <div class="orderBackBtn">
@@ -19,7 +19,7 @@
                         </div>
                     </ycommerce:testId>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 col-md-6 col-lg-6">
                     <c:set var="orderCode" value="${orderData.code}" scope="request"/>
                     <action:actions element="div" parentComponent="${component}"/>
                 </div>
