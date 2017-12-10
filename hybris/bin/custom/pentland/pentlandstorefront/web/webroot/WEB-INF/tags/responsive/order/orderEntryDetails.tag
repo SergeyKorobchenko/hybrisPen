@@ -131,7 +131,7 @@
         </c:forEach>
 
         <ycommerce:testId code="orderDetails_productQuantity_label">
-            <label class="visible-xs visible-sm"><spring:theme code="text.account.order.qty"/>:</label>
+            <span class="visible-xs visible-sm"><spring:theme code="text.account.order.qty"/>:</span>
             <span class="qtyValue">
                 <c:choose>
                     <c:when test="${consignmentEntry ne null }">
@@ -163,7 +163,7 @@
         <div class="details ${showEditableGridClass}" data-index="${itemIndex}">
             <div class="qty">
                 <ycommerce:testId code="orderDetails_productQuantity_label">
-                    <label><spring:theme code="text.account.order.qty"/>:</label>
+                    <span><spring:theme code="text.account.order.qty"/>:</span>
                         <span class="qtyValue">
                             <c:choose>
                                 <c:when test="${consignmentEntry ne null }">

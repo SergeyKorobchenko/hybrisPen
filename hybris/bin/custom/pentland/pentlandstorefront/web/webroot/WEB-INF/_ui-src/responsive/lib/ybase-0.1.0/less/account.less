@@ -366,10 +366,8 @@
     .enable-link {
       display: inline-block;
       text-align: right;
-      margin: 25px 0;
-      font-weight: 600;
+      margin: 30px 0;
       text-transform: uppercase;
-      font-size: 16px;
 
       @media (max-width: @screen-xs-max) {
         text-align: center;
@@ -439,29 +437,35 @@
         right: -4px;
         top: 50px;
         width: auto;
+        padding-right: 0;
       }
     }
 
     .restore-item-link {
-      text-transform: uppercase;
-      font-weight: 700;
-
       .glyphicon-share-alt {
-        font-size: 24px;
-        padding: 13px;
         transform: scale(-1, 1);
-        margin-right: 13px;
+        font-size: @font-size-large-3;
+        padding: 0 14px;
+
+        @media (max-width: @screen-xs-max) {
+          padding: 14px;
+          margin-right: 20px;
+        }
       }
     }
 
-    .edit-item-link {
-      margin-top: @grid-gutter-width/2;
+    .edit-item-link,
+    .remove-item-link {
       display: block;
+
+      @media (max-width: @screen-sm-max) {
+        margin-top: @grid-gutter-width/2;
+      }
     }
 
     .remove-item-link {
       .glyphicon-remove {
-        font-size: 21px;
+        font-size: @font-size-large-3;
         padding: 0 14px;
 
         @media (max-width: @screen-xs-max) {
@@ -515,8 +519,8 @@
 
   .accountActions-bottom {
     clear: both;
-    margin-top: 35px;
-    .full-width-padding();
+    margin-top: 30px;
+    padding: 0;
 
     @media (max-width: @screen-xs-max) {
       .btn-primary {
@@ -981,7 +985,7 @@
 ///////////////////////////////////
 .savedcart_restore_confirm_modal {
   .restore-current-cart-form {
-    margin-top: @grid-gutter-width*2;
+    margin-top: @grid-gutter-width + 10;
   }
 }
 
