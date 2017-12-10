@@ -205,32 +205,9 @@
                     </attribute>
                     <attribute qualifier="sizeNo" type="java.lang.Integer">
                         <description>size priority</description>
-                        <defaultvalue>0</defaultvalue>
                         <persistence type="property"/>
                     </attribute>
                 </attributes>
-            </itemtype>
-
-            <itemtype code="ProductSize" autocreate="true" generate="true">
-                <deployment table="ProductSize" typecode="10102" />
-                <attributes>
-                    <attribute qualifier="code" type="java.lang.String">
-                        <description>Unique identifier</description>
-                        <persistence type="property" />
-                        <modifiers initial="true" unique="true" optional="false" read="true" write="true" search="true" />
-                    </attribute>
-                    <attribute qualifier="priority" type="int">
-                        <description>The ordering of this size in the list. Higher number ordered first.</description>
-                        <persistence type="property" />
-                        <modifiers initial="false" optional="true" read="true" write="true" search="true" />
-                        <defaultvalue>Integer.valueOf(0)</defaultvalue>
-                    </attribute>
-                </attributes>
-                <indexes>
-                    <index name="productSizeCode">
-                        <key attribute="code"/>
-                    </index>
-                </indexes>
             </itemtype>
 
         </typegroup>
