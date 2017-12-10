@@ -60,7 +60,7 @@
 
     <c:if test="${not disabled}">
         <div class="row">
-            <div class="col-sm-7 col-sm-offset-5">
+            <div class="col-sm-6">
                 <label for="comment">
                     <spring:theme code="text.quote.comments.label"/>&nbsp;<spring:theme code="login.optional" htmlEscape="false" />
                 </label>

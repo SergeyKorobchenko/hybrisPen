@@ -140,24 +140,6 @@
                             </button>
                         </form:form>
                     </c:if>
-                    <c:if test="${allowedActions['EDIT']}">
-                        <button type="button" class="btn btn-primary btn-block item__btn ${allowedActions['CHECKOUT'] ? 'js-quote-warning-btn':'js-quote-edit-btn'}" 
-                            id="editQuoteButton" data-quote-edit-url="${editQuoteUrl}">
-                            <spring:theme code="quote.edit" />
-                        </button>    
-                    </c:if>
-                    <c:if test="${allowedActions['REQUOTE']}">
-                        <form:form action="${requoteUrl}" id="requoteForm" method="POST">
-                            <button type="submit" class="btn btn-primary btn-block re-order item__btn">
-                                <spring:theme code="quote.requote" />
-                            </button>
-                        </form:form>
-                    </c:if>
-                    <c:if test="${allowedActions['CANCEL']}">
-                        <button type="button" class="btn btn-default btn-block item__btn js-quote-cancel-btn">
-                            <spring:theme code="quote.cancel" />
-                        </button>
-                    </c:if>
                     <c:if test="${allowedActions['SUBMIT']}">
                         <form:form action="${submitQuoteUrl}" id="submitQuoteForm" method="POST">
                             <c:choose>
@@ -173,6 +155,24 @@
                                 </c:otherwise>
                             </c:choose>
                         </form:form>
+                    </c:if>
+                    <c:if test="${allowedActions['EDIT']}">
+                        <button type="button" class="btn btn-gray btn-block item__btn ${allowedActions['CHECKOUT'] ? 'js-quote-warning-btn':'js-quote-edit-btn'}"
+                            id="editQuoteButton" data-quote-edit-url="${editQuoteUrl}">
+                            <spring:theme code="quote.edit" />
+                        </button>    
+                    </c:if>
+                    <c:if test="${allowedActions['REQUOTE']}">
+                        <form:form action="${requoteUrl}" id="requoteForm" method="POST">
+                            <button type="submit" class="btn btn-primary btn-block re-order item__btn">
+                                <spring:theme code="quote.requote" />
+                            </button>
+                        </form:form>
+                    </c:if>
+                    <c:if test="${allowedActions['CANCEL']}">
+                        <button type="button" class="btn btn-red btn-block item__btn js-quote-cancel-btn">
+                            <spring:theme code="quote.cancel" />
+                        </button>
                     </c:if>
                     <c:if test="${allowedActions['APPROVE']}">
                         <form:form action="${approveQuoteUrl}" id="approveQuoteForm" method="POST">

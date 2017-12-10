@@ -136,10 +136,13 @@ output {
   display: block;
   padding: 3px 25px;
   clear: both;
-  font-weight: 400;
-  line-height: 1.42857;
   color: @text-color;
   white-space: nowrap;
+
+  &:hover, &:focus {
+    background-color: white !important;
+    color: @link-color !important;
+  }
 }
 
 .display-none {

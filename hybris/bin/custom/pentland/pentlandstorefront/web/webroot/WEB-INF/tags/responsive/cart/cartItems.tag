@@ -27,7 +27,6 @@
 
 	<c:forEach items="${cartData.rootGroups}" var="group" varStatus="loop">
     	<cart:rootEntryGroup cartData="${cartData}" entryGroup="${group}"/>
-        <p></p>
     </c:forEach>
 </ul>
 

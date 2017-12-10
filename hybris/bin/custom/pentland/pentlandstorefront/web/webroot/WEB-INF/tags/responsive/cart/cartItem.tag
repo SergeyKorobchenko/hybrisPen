@@ -235,9 +235,9 @@
             <div class="item__menu">
                 <c:if test="${entry.updateable}" >
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
+                        <span type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
                             <span class="glyphicon glyphicon-option-vertical"></span>
-                        </button>
+                        </span>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <c:if test="${not empty cartData.quoteData}">
                                 <c:choose>
