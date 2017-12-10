@@ -9,11 +9,7 @@
 <c:url value="/quote/create" var="createQuoteUrl" scope="session"/>
 <c:url value="${continueUrl}" var="continueShoppingUrl" scope="session"/>
 <div class="row">
-    <div class="col-sm-4 col-md-3">
-        <button class="btn btn-primary btn-block btn--savecart-checkout js-savecart-checkout-button">
-            <spring:theme code="checkout.savecart"/>
-        </button>
-    </div>
+
     <div class="col-sm-4 col-md-3 pull-right">
         <ycommerce:testId code="checkoutButton">
             <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">
@@ -21,6 +17,7 @@
             </button>
         </ycommerce:testId>
     </div>
+
     <c:if test="${not empty siteQuoteEnabled and siteQuoteEnabled eq 'true'}">
         <div class="col-sm-4 col-md-3 pull-right">
             <button class="btn btn-default btn-block btn-create-quote js-create-quote-button" data-create-quote-url="${createQuoteUrl}">
@@ -29,9 +26,15 @@
         </div>
     </c:if>
 
-    <div class="col-sm-4 col-md-3">
-        <button class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button" data-continue-shopping-url="${continueShoppingUrl}">
-            <spring:theme code="cart.page.continue"/>
+    <div class="col-sm-4 col-md-3 pull-right">
+        <button class="btn btn-default btn-block btn--savecart-checkout js-savecart-checkout-button">
+            <spring:theme code="checkout.savecart"/>
         </button>
     </div>
+
+    <%--<div class="col-sm-4 col-md-3">--%>
+        <%--<button class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button" data-continue-shopping-url="${continueShoppingUrl}">--%>
+            <%--<spring:theme code="cart.page.continue"/>--%>
+        <%--</button>--%>
+    <%--</div>--%>
 </div>

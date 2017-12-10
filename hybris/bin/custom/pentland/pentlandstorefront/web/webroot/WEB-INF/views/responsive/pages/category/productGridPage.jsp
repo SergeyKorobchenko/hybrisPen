@@ -3,6 +3,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 <%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/responsive/storepickup" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <template:page pageTitle="${pageTitle}">
 
@@ -13,20 +14,32 @@
 
     <div class="container">
         <div class="b-section--full-width">
+
+            <c:choose>
+                <c:when test="${searchPageData.pagination.totalNumberOfResults > 0}">
+                    <c:set var="isResultEmpty" value="false"/>
+                    <c:set var="productGridClass" value="col-sm-12 col-md-9"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="isResultEmpty" value="true"/>
+                    <c:set var="productGridClass" value="col-sm-12"/>
+                </c:otherwise>
+            </c:choose>
+
             <div class="row">
-                <div class="col-xs-3">
+                <c:if test="${!isResultEmpty}">
                     <cms:pageSlot position="ProductLeftRefinements" var="feature" element="div"
-                                  class="product-grid-left-refinements-slot">
+                                  class="product-grid-left-refinements-slot col-xs-3">
                         <cms:component component="${feature}" element="div"
                                        class="yComponentWrapper product-grid-left-refinements-component"/>
                     </cms:pageSlot>
-                </div>
-                <div class="col-sm-12 col-md-9">
-                    <cms:pageSlot position="ProductGridSlot" var="feature" element="div" class="product-grid-right-result-slot">
-                        <cms:component component="${feature}" element="div"
-                                       class="product__list--wrapper yComponentWrapper product-grid-right-result-component"/>
-                    </cms:pageSlot>
-                </div>
+                </c:if>
+
+                <cms:pageSlot position="ProductGridSlot" var="feature" element="div"
+                              class="product-grid-right-result-slot ${productGridClass}">
+                    <cms:component component="${feature}" element="div"
+                                   class="product__list--wrapper yComponentWrapper product-grid-right-result-component"/>
+                </cms:pageSlot>
             </div>
         </div>
     </div>

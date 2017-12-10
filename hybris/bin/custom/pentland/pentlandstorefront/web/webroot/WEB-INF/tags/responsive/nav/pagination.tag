@@ -92,10 +92,10 @@
                                 </div>
 
                                 <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
-                                    <div class="hidden js-export-block">
+                                    <div class="hidden export js-export-block">
                                         <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
                                         <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
-                                        <div class="export">
+                                        <div class="export__link">
                                             <a href="${exportUrl}" class="exportCsvFromPLP media-heading">
                                                 <spring:theme code="basket.export.csv.file" />
                                             </a>
@@ -103,7 +103,7 @@
                                                 <input type="hidden" name="content" value=""/>
                                             </form>
                                         </div>
-                                        <div class="export">
+                                        <div class="export__link">
                                             <a href="${imagesExportUrl}" class="exportImagesFromPLP">
                                                 <spring:theme code="basket.export.images.file" />
                                             </a>

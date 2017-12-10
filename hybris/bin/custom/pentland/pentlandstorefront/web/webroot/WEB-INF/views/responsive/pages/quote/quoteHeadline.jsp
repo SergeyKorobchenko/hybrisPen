@@ -22,10 +22,10 @@
 	<spring:param name="quotecode"  value="${cartData.quoteData.code}"/>
 </spring:url>
 
-<div class="cart-header border">
+<div class="cart-header">
     <div class="row">
         <div class="col-xs-12 col-sm-5">
-            <h1 class="cart-headline">
+            <h1>
                 <spring:theme code="text.cart"/>
                 <c:if test="${not empty cartData.code}">
                     <span class="cart__id--label">

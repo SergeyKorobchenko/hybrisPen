@@ -3,6 +3,6 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="alert positive forgotten-password" id="validEmail" tabindex="0">
+<p class="positive forgotten-password" id="validEmail" tabindex="0">
 	<spring:theme code="account.confirmation.forgotten.password.link.sent"/>
-</div>
+</p>

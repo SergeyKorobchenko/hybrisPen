@@ -62,6 +62,13 @@ body.offcanvas {
   }
 }
 
+input,
+button,
+select,
+textarea {
+  outline: none;
+}
+
 button {
   font-weight: bold;
 }
@@ -143,7 +150,6 @@ output {
   margin-bottom: 30px;
 }
 
-@item-value-font-size: 18px;
 @media (min-width: @screen-sm-min) {
   .item-label,
   .item-value {
@@ -170,13 +176,11 @@ output {
 }
 
 .item-label {
-  text-transform: uppercase;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .item-value {
-  font-size: @item-value-font-size;
-  padding-bottom: @grid-gutter-width/2;
+  padding-bottom: @grid-gutter-width - 5;
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -226,15 +230,12 @@ output {
   }
 
   &.well-md {
-    padding-top: @grid-gutter-width - 5;
-    padding-bottom: @grid-gutter-width - 5;
-    .full-width-padding();
+    padding: (@grid-gutter-width - 5) 45px (@grid-gutter-width - 5) 45px;
   }
 
   &.well-lg {
-    padding-top: 45px;
-    padding-bottom: 35px;
-    .full-width-padding();
+    padding: (@grid-gutter-width + 10) (@grid-gutter-width + 10) 15px;
+    border-radius: @border-radius-base;
   }
 
   &.well-primary {
@@ -266,9 +267,7 @@ output {
 
   &.well-quaternary {
     background-color: @well-quaternary-bg;
-    color: @text-color;
-    border-top: 1px solid @border-color-2;
-    border-bottom: 1px solid @border-color-2;
+    border: 0;
   }
 
   &.well-quinary {
@@ -330,16 +329,16 @@ output {
   }
 }
 
-@media (max-width: @screen-xs-max) {
-  .well {
-
-    &,
-    &.well-lg {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
-}
+//@media (max-width: @screen-xs-max) {
+//  .well {
+//
+//    &,
+//    &.well-lg {
+//      padding-left: 20px;
+//      padding-right: 20px;
+//    }
+//  }
+//}
 
 //************************************************************
 //************************************************************

@@ -422,6 +422,7 @@ ACC.cart = {
                     daysOfWeekDisabled: [0, 6],
                     allowInputToggle: true,
                     useCurrent: false,
+                    debug: false,
                     disabledDates: inputData.disableddates.split(',')
                 });
             }

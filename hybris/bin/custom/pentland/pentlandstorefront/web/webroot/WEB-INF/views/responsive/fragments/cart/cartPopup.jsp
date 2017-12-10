@@ -100,7 +100,7 @@
 						<cms:component component="${lightboxBannerComponent}" evaluateRestriction="true"  />
 					</c:if>
 
-					<button class="btn btn-block" disabled="disabled">
+					<button class="btn btn-primary btn-block" disabled="disabled">
 						<spring:theme code="${miniCartProceed }" />
 					</button>
 					<a href="" class="btn btn-default btn-block js-mini-cart-close-button">

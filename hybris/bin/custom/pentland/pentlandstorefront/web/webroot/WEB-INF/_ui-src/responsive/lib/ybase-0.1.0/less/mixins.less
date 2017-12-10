@@ -1,88 +1,89 @@
-
 // Button variants
 // -------------------------
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
 .button-box-shadow() when (@btn-box-shadow) {
-	.box-shadow(0 3px 0 darken(@background, 10%));
+  .box-shadow(0 3px 0 darken(@background, 10%));
 }
+
 .button-box-shadow-disabled() when (@btn-box-shadow) {
-	.box-shadow(0 3px 0 darken(@disabledBackground, 10%));
+  .box-shadow(0 3px 0 darken(@disabledBackground, 10%));
 }
+
 .button-variant(@color; @background; @border; @hoverColor; @hoverBorder; @hoverBackground; @disabledBackground) {
-	color: @color;
-	background-color: @background;
-	border-color: @border;
-	.button-box-shadow();
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+  .button-box-shadow();
 
-	&:hover,
-	&:focus,
-	&:active,
-	&.active,
-	&:active:focus,
-	.open .dropdown-toggle& {
-		color: @hoverColor;
-		background-color: @hoverBackground;
-		border-color: @hoverBorder;
-	}
-	&:active,
-	&.active,
-	.open .dropdown-toggle& {
-		background-image: none;
-	}
-	&.disabled,
-	&[disabled],
-	fieldset[disabled] & {
-		&,
-		&:hover,
-		&:focus,
-		&:active,
-		&.active {
-			color: @text-color;
-			background-color: @disabledBackground;
-			border-color: @disabledBackground;
-			.button-box-shadow-disabled();
-		}
-	}
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &:active:focus,
+  .open .dropdown-toggle& {
+    color: @hoverColor;
+    background-color: @hoverBackground;
+    border-color: @hoverBorder;
+  }
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: @text-color;
+      background-color: @disabledBackground;
+      border-color: @disabledBackground;
+      .button-box-shadow-disabled();
+    }
+  }
 
-	.badge {
-		color: @background;
-		background-color: @color;
-	}
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
 }
 
 .link-focus {
-	.transition(all 0.3s ease);
-	text-decoration: none;
+  .transition(all 0.3s ease);
+  text-decoration: none;
 }
 
 .flex-display(@value) {
-	display: ~"-webkit-@{value}";
-	display: ~"-moz-@{value}";
-	display: ~"-ms-@{value}box";
-	display: ~"-ms-@{value}";
-	display: @value;
+  display: ~"-webkit-@{value}";
+  display: ~"-moz-@{value}";
+  display: ~"-ms-@{value}box";
+  display: ~"-ms-@{value}";
+  display: @value;
 }
 
 .flex-wrap(@value) {
-	-webkit-flex-wrap: @value;
-	-moz-flex-wrap: @value;
-	-ms-flex-wrap: @value;
-	flex-wrap: @value;
+  -webkit-flex-wrap: @value;
+  -moz-flex-wrap: @value;
+  -ms-flex-wrap: @value;
+  flex-wrap: @value;
 }
 
 .flex-direction(@value) {
-	-webkit-flex-direction: @value;
-	-moz-flex-direction: @value;
-	-ms-flex-direction: @value;
-	flex-direction: @value;
+  -webkit-flex-direction: @value;
+  -moz-flex-direction: @value;
+  -ms-flex-direction: @value;
+  flex-direction: @value;
 }
 
 .flex (@value) {
-	-webkit-flex: @value;
-	-moz-flex: @value;
-	-ms-flex: @value;
-	flex: @value;
+  -webkit-flex: @value;
+  -moz-flex: @value;
+  -ms-flex: @value;
+  flex: @value;
 }
 
 .accordion-bg (@n, @i: 1) when (@i =< @n) {
@@ -103,15 +104,15 @@
 
 // text variants
 .headline {
-	letter-spacing: @headings-letter-spacing;
-	margin-top: @headings-margin-top;
-	margin-bottom: @headings-margin-bottom;
+  letter-spacing: @headings-letter-spacing;
+  margin-top: @headings-margin-top;
+  margin-bottom: @headings-margin-bottom;
 }
 
 .p-home-headline {
-	text-align: center;
+  text-align: center;
 
-	padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .page-headline {
@@ -151,8 +152,8 @@
   padding-right: 20px;
 
   @media (max-width: @screen-sm) {
-	padding-left: 10px;
-	padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -161,13 +162,13 @@
   padding-right: 20px;
 
   @media (max-width: @screen-md) {
-	padding-left: 10px;
-	padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
 .form-control-validation(@label-color; @border-color; @background-color; @hint-color) {
-  .control-label{
+  .control-label {
     color: @label-color;
   }
 
@@ -177,12 +178,13 @@
   }
 
   .help-block {
-    font-weight: 400;
+    font-size: @font-size-base;
+    font-weight: 300;
     color: @hint-color;
   }
 }
 
-.cart-voucher-placeholder(){
+.cart-voucher-placeholder() {
   font-size: @font-size-small;
   font-weight: 600;
   color: @text-color;

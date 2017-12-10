@@ -7,7 +7,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="forgotten-password">
-	<div class="description"><spring:theme code="forgottenPwd.description"/></div>
+	<p><spring:theme code="forgottenPwd.description"/></p>
 	<form:form method="post" commandName="forgottenPwdForm">
 		<div class="control-group">
 			<ycommerce:testId code="login_forgotPasswordEmail_input">
