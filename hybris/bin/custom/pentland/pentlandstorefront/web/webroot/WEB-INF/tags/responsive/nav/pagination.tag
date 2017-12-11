@@ -50,7 +50,7 @@
                                     <label class="control-label " for="sortForm${top ? '1' : '2'}">
                                         <spring:theme code="${themeMsgKey}.sortTitle"/>
                                     </label>
-${sort}
+
                                     <form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get" action="#">
                                         <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control">
                                             <option disabled <c:if test="${'relevance' eq searchPageData.pagination.sort}">selected="selected"</c:if>><spring:theme code="${themeMsgKey}.defaultSort"/></option>
