@@ -37,7 +37,7 @@ public class DefaultPentlandFutureStockFacade extends DefaultFutureStockFacade {
   private PentlandProductFacade pentlandProductFacade;
   private OrderSimulationService orderSimulationService;
 
-  private SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+  private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
   @Override
   @Nullable
