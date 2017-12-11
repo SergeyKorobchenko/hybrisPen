@@ -227,7 +227,7 @@ ACC.productorderform = {
             ACC.productorderform.selectedVariants = [];
         }
 
-         if (_this.value != quantityBefore) {
+        if (_this.value != quantityBefore) {
             var newVariant = true;
             ACC.productorderform.selectedVariants.forEach(function(item, index) {
                 if(item.id === currentSkuId){
@@ -496,9 +496,9 @@ ACC.productorderform = {
         $("#AddToCartOrderForm").keypress(
             function(event){
                 if (event.which == '13') {
-                event.preventDefault();
-            }
-        });
+                    event.preventDefault();
+                }
+            });
 
         ACC.productorderform.$addToCartBtn.click(function () {
             ACC.productorderform.$addToCartBtn.attr('disabled', 'disabled');
