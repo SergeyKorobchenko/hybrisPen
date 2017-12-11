@@ -451,10 +451,10 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 
 ## components in slot 3 ##
 INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-;;PentlandHomepageStreetYouthBannerComponent;Pentland Homepage Street Youth Banner Component;/youth;PentlandHomepageStreetYouthBannerComponent
-;;PentlandHomepageWomenStreetBannerComponent;Pentland Homepage Women Street Banner Component;/women;PentlandHomepageWomenStreetBannerComponent
-;;PentlandHomepageManStreetBannerComponent;Pentland Homepage Man Street Banner Component;/men;PentlandHomepageManStreetBannerComponent
-;;PentlandHomepageBrandsBannerComponent;Pentland Homepage Brands Banner Component;/brands;PentlandHomepageBrandsBannerComponent
+;;PentlandHomepageStreetYouthBannerComponent;Pentland Homepage Section-3 Component-1;/youth;PentlandHomepageStreetYouthBannerComponent
+;;PentlandHomepageWomenStreetBannerComponent;Pentland Homepage Section-3 Component-2;/women;PentlandHomepageWomenStreetBannerComponent
+;;PentlandHomepageManStreetBannerComponent;Pentland Homepage Section-3 Component-3;/men;PentlandHomepageManStreetBannerComponent
+;;PentlandHomepageBrandsBannerComponent;Pentland Homepage Section-3 Component-4;/brands;PentlandHomepageBrandsBannerComponent
 
 ## components in slot 4 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
@@ -914,10 +914,10 @@ INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; na
 
 ## components in slot 2 ##
 INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; MitreBrandPageHelmetBannerComponent     ; Mitre Brand Page Helmet Banner Component    ; ; MitreBrandPageHelmetBannerComponent
-; ; MitreBrandPageProtectionBannerComponent ; Mitre Brand Page Protection Banner Component; ; MitreBrandPageProtectionBannerComponent
-; ; MitreBrandPageShoesBannerComponent      ; Mitre Brand Page Shoes Banner Component     ; ; MitreBrandPageShoesBannerComponent
-; ; MitreBrandPageSurfBannerComponent       ; Mitre Brand Page Surf Banner Component      ; ; MitreBrandPageSurfBannerComponent
+; ; MitreBrandPageHelmetBannerComponent     ; Pentland Brandpage Section-2 Component-1    ; ; MitreBrandPageHelmetBannerComponent
+; ; MitreBrandPageProtectionBannerComponent ; Pentland Brandpage Section-2 Component-2    ; ; MitreBrandPageProtectionBannerComponent
+; ; MitreBrandPageShoesBannerComponent      ; Pentland Brandpage Section-2 Component-3    ; ; MitreBrandPageShoesBannerComponent
+; ; MitreBrandPageSurfBannerComponent       ; Pentland Brandpage Section-2 Component-4    ; ; MitreBrandPageSurfBannerComponent
 
 ## components in slot 3 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef
