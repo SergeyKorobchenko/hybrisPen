@@ -99,6 +99,7 @@
                                         <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
                                         <div class="export__link">
                                             <a href="${exportUrl}" class="exportCsvFromPLP media-heading">
+                                                <span class="glyphicon glyphicon-download-alt"></span>
                                                 <spring:theme code="basket.export.csv.file" />
                                             </a>
                                             <form id="export-csv" action="${exportUrl}" method="get">
@@ -107,6 +108,7 @@
                                         </div>
                                         <div class="export__link">
                                             <a href="${imagesExportUrl}" class="exportImagesFromPLP">
+                                                <span class="glyphicon glyphicon-download-alt"></span>
                                                 <spring:theme code="basket.export.images.file" />
                                             </a>
                                             <form id="export-images" action="${imagesExportUrl}" method="get">
