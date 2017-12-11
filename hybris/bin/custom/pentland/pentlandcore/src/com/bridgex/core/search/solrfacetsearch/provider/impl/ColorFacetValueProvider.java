@@ -64,7 +64,7 @@ public class ColorFacetValueProvider extends AbstractPropertyFieldValueProvider 
 	protected List<FieldValue> createFieldValue(final SwatchColorEnum color, final IndexedProperty indexedProperty)
 	{
 		final List<FieldValue> fieldValues = new ArrayList<FieldValue>();
-		final Object value = color.getCode();
+		final Object value = color.getCode().toLowerCase();
 		final Collection<String> fieldNames = fieldNameProvider.getFieldNames(indexedProperty, null);
 		for (final String fieldName : fieldNames)
 		{

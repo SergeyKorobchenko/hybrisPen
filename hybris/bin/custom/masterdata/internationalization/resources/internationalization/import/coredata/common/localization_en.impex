@@ -1241,6 +1241,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.page.sort.relevance;Relevance
 ;search.page.sort.topRated;Top rated
 ;search.page.sortTitle;Sort by:
+;search.page.defaultSort;Select
 ;search.page.totalResults;{0} Products found
 ;search.placeholder;I'm looking for
 ;search.spellingSuggestion.prompt;Did you mean:
