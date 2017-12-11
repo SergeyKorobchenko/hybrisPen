@@ -7,9 +7,11 @@
 
 <div class=" col-xs-12 col-md-3 pull-left">
     <a href="${exportUrl}" class="export__cart--link">
+        <span class="glyphicon glyphicon-download-alt"></span>
         <spring:theme code="basket.export.csv.file"/>
     </a>
     <a href="${imagesExportUrl}" class="export__images--link">
+        <span class="glyphicon glyphicon-download-alt"></span>
         <spring:theme code="basket.export.images.file"/>
     </a>
 </div>
