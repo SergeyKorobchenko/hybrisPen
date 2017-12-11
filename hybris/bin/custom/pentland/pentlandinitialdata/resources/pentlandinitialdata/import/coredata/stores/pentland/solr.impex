@@ -49,7 +49,7 @@ INSERT_UPDATE SolrIndexConfig;name[unique=true];indexMode(code)
 
 # Declare the indexed type Product
 INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
-;$solrIndexedType;Product;false;sortRef3,sortRef4,sortRef5,sortRef6
+;$solrIndexedType;Product;false;sortRef1,sortRef3,sortRef4,sortRef5,sortRef6
 
 INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
 ;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online
@@ -170,6 +170,7 @@ INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[uniq
 ;sortRef6;$solrIndexedType;name-desc;false
 ;sortRef3;$solrIndexedType;price-asc;false
 ;sortRef4;$solrIndexedType;price-desc;false
+;sortRef1;$solrIndexedType;relevance;false
 
 # Define the sort fields
 INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
@@ -177,6 +178,7 @@ INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fiel
 ;$solrIndexedType:name-desc;name;false
 ;$solrIndexedType:price-asc;priceValue;true
 ;$solrIndexedType:price-desc;priceValue;false
+;$solrIndexedType:relevance;score;false
 
  #Search query template
 INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder;group[default=true];groupFacets[default=true];groupLimit[default=-1];groupProperty(name, solrIndexedType(identifier))
