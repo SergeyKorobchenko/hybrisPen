@@ -1,3 +1,7 @@
+.header__top {
+  background-color: @nav-subcat-background;
+}
+
 ul.nav__links {
 
   &::after {
@@ -48,7 +52,7 @@ ul.nav__links {
   display: inline-block;
 }
 
-.navigation--top .nav__right {
+.header__top .nav__right {
 
   .nav__links--account {
     margin: 0;
@@ -67,9 +71,9 @@ ul.nav__links {
 
     li {
       display: inline-block;
-      font-size: 12px;
-      color: @meta-nav-color;
-      font-weight: 400;
+      font-size: 13px;
+      color: inherit;
+      font-weight: 300;
       text-transform: uppercase;
 
       &:last-child {
@@ -100,15 +104,14 @@ ul.nav__links {
         color: inherit;
         cursor: pointer;
         text-transform: uppercase;
-        font-weight: 400;
-        padding: 12px;
+        font-weight: 300;
+        padding: 10px;
         display: block;
-        font-size: 1em;
-        line-height: 1.329em;
+        font-size: @font-size-small;
 
         &:hover {
           text-decoration: none;
-          color: @meta-nav-hover-color;
+          color: @link-color;
         }
       }
     }
@@ -124,15 +127,15 @@ ul.nav__links {
 
       &:hover,
       &:focus {
-        color: @meta-nav-hover-color;
+        color: @link-color;
         text-decoration: none;
       }
     }
 
     .myAccountLinksHeader,
     .myCompanyLinksHeader {
-      background-color: @meta-nav-background;
-      color: @meta-nav-color-open;
+      //background-color: @meta-nav-background;
+      color: @link-color;
       text-decoration: none;
       height: 40px;
     }
@@ -142,33 +145,36 @@ ul.nav__links {
 #accNavComponentDesktopOne,
 #accNavComponentDesktopTwo {
   padding: 0;
-  background-color: @meta-nav-background;
+  //background-color: @meta-nav-background;
 
   ul.nav__links {
     width: 100%;
     padding: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
+    border-top: 1px solid @border-color-2;
 
     li {
       text-transform: capitalize;
       list-style: none;
-      font-size: 12px;
-      color: @meta-nav-color;
-      font-weight: 400;
+      font-size: @font-size-small;
+      color: inherit;
+      font-weight: 300;
       padding: 0;
-      border-right: 1px solid @meta-nav-border-color;
-      border-bottom: 1px solid @meta-nav-border-color;
+      //border-right: 1px solid @meta-nav-border-color;
+      //border-bottom: 1px solid @meta-nav-border-color;
 
       &:hover {
-        background-color: @meta-nav-hover-background;
+        //background-color: @meta-nav-hover-background;
+        color: @link-color;
       }
 
       a {
-        color: @meta-nav-color-open;
+        color: inherit;
         display: block;
-        padding: 25px 0 25px 30px;
-        font-size: 15px;
-        font-weight: 400;
+        padding: 15px 0 0 0;
+        font-size: @font-size-small;
+        font-weight: 300;
+        text-transform: uppercase;
 
         &:hover {
           text-decoration: none;
