@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-7 col-lg-6 pull-right cart-actions--print">
         <div class="express-checkout">
-            <div class="headline"><spring:theme code="text.expresscheckout.header"/></div>
+            <h3 class="title"><spring:theme code="text.expresscheckout.header"/></h3>
             <strong><spring:theme code="text.expresscheckout.title"/></strong>
             <ul>
                 <li><spring:theme code="text.expresscheckout.line1"/></li>

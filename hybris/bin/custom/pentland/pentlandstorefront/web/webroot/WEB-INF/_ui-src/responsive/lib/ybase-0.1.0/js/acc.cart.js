@@ -129,11 +129,12 @@ ACC.cart = {
         var quantityBefore = 0;
         var grid = $('#ajaxGrid' + itemIndex + " .product-grid-container");
 
-        grid.on('blur keypress', skuQuantityClass, function (event) {
+        grid.on('keypress', skuQuantityClass, function (event) {
             this.value = ACC.productorderform.filterSkuEntry(this.value);
         });
 
         grid.on('blur', skuQuantityClass, function (event) {
+            this.value = ACC.productorderform.filterSkuEntry(this.value);
             var packSize = $(this).data('pack-size');
             this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
         });
@@ -422,6 +423,7 @@ ACC.cart = {
                     daysOfWeekDisabled: [0, 6],
                     allowInputToggle: true,
                     useCurrent: false,
+                    debug: false,
                     disabledDates: inputData.disableddates.split(',')
                 });
             }

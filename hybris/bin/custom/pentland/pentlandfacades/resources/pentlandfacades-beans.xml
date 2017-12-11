@@ -134,4 +134,8 @@
 		<property name="brandCode" type="String" />
 	</bean>
 
+	<bean class="de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData">
+		<property name="sizeNo" type="java.lang.Integer"/>
+	</bean>
+
 </beans>
