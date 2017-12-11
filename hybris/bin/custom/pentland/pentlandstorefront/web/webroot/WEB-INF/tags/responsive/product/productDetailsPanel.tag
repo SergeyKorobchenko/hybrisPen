@@ -8,17 +8,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="grid" tagdir="/WEB-INF/tags/responsive/grid" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
-<script>
 
-</script>
-<div class="product-details page-title">
-	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
-		<div class="name">${fn:escapeXml(product.name)}<span class="sku"><spring:theme code="product.sku"/></span><span class="code">${fn:escapeXml(product.materialKey)}</span></div>
-	</ycommerce:testId>
-</div>
 <div class="row">
 
-	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-4">
+	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-6">
 		<product:productImagePanel galleryImages="${galleryImages}" />
 		<c:if test="${not empty product.videoURL}">
 			<div class=""><spring:theme code="product.videourl"/>: <span data-toggle="modal" data-target="#videoURLModal"><a href="javascript:void(0);">${fn:escapeXml(product.videoURL)}</a></span></div>
@@ -29,40 +22,54 @@
 	</div>
 
 	<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
-	<div class="col-sm-6 col-lg-8">
+
+	<div class="col-sm-6 col-lg-6">
+		<div class="product-details page-title">
+			<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
+				<h1>${fn:escapeXml(product.name)}</h1>
+			</ycommerce:testId>
+		</div>
+
 		<div class="product-main-info">
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-12">
 					<div class="product-details">
+						<p class="product-details__sub-info"><spring:theme code="product.sku"/>: ${fn:escapeXml(product.materialKey)}</p>
 						<c:if test="${not empty product.brandName}">
-							<div class=""><spring:theme code="product.brand"/>: ${fn:escapeXml(product.brandName)}</div>
+							<p class="product-details__sub-info"><spring:theme code="product.brand"/>: ${fn:escapeXml(product.brandName)}</p>
 						</c:if>
+						<c:if test="${not empty product.season}">
+							<p class="product-details__sub-info"><spring:theme code="product.season"/>: ${fn:escapeXml(product.season)}</p>
+						</c:if>
+						<c:if test="${not empty product.unit}">
+							<p class="product-details__sub-info"><spring:theme code="product.unit"/>: ${fn:escapeXml(product.unit)}</p>
+						</c:if>
+					</div>
+
+					<div class="product-details-price">
 						<common:hidePricesForUser>
-							<p class="price">
-								<spring:theme code="product.customer.price"/>: <format:price priceData="${product.customerPrice}"/>
-							</p>
+							<div class="price">
+								<spring:theme code="product.customer.price"/>:&nbsp;<strong><format:price priceData="${product.customerPrice}"/></strong>
+							</div>
 							<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 								<product:productPricePanel product="${product}" />
 							</ycommerce:testId>
 						</common:hidePricesForUser>
-						<c:if test="${not empty product.season}">
-							<div class=""><spring:theme code="product.season"/>: ${fn:escapeXml(product.season)}</div>
-						</c:if>
-
 					</div>
+
 					<cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
 					</cms:pageSlot>
+
 					<c:if test="${not empty product.sizeChartGuide}">
 						<c:url value="${product.sizeChartGuide.url}" var="sizeChartGuideUrl" />
-						<div class="name" data-toggle="modal" data-target="#sizeChartModal" ><a href="javascript:void(0);"><spring:theme code="product.sizeChartGuide"/></a></div>
+						<div class="size-chart-guide" data-toggle="modal" data-target="#sizeChartModal" ><a href="javascript:void(0);"><spring:theme code="product.sizeChartGuide"/></a></div>
 					</c:if>
-					<c:if test="${not empty product.unit}">
-						<div class="name"><spring:theme code="product.unit"/>: ${fn:escapeXml(product.unit)}</div>
-					</c:if>
+
 					<cms:pageSlot position="AddToCart" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-add-to-cart-component"/>
 					</cms:pageSlot>
+
 					<c:if test="${not empty product.description or not empty product.featureDescription}" >
 						<div id="tabs">
 							<ul>
@@ -86,17 +93,13 @@
 						</div>
 					</c:if>
 				</div>
-
-<%--				<div class="col-sm-12 col-md-9 col-lg-6">
-
-				</div>--%>
 			</div>
 		</div>
 
 	</div>
 
 </div>
-<div  class="row" >
+<div class="product-details-order-form">
 	<spring:url value="getProductVariantMatrix" var="targetUrl"/>
 	<grid:productGridWrapper styleClass="add-to-cart-order-form-wrap display-none"
 							 targetUrl="${targetUrl}" product="${product}"/>
