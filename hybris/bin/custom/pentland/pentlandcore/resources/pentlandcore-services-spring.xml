@@ -118,11 +118,6 @@
 		<property name="productService" ref="productService"/>
 	</bean>
 
-	<alias name="defaultProductSizeService" alias="productSizeService"/>
-	<bean id="defaultProductSizeService" class="com.bridgex.core.product.impl.DefaultProductSizeService">
-		<property name="productSizeDao" ref="productSizeDao"/>
-	</bean>
-
 	<alias name="defaultPentlandProductModelUrlResolver" alias="productModelUrlResolver"/>
 	<bean id="defaultPentlandProductModelUrlResolver"
 	      class="com.bridgex.core.product.url.impl.DefaultPentlandProductModelUrlResolver" parent="defaultProductModelUrlResolver" />

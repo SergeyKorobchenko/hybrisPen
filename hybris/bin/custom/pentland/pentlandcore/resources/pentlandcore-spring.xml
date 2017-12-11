@@ -80,14 +80,6 @@
 		<property name="integrationService" ref="orderSimulateService" />
 	</bean>
 
-	<bean name="productSizeUpdateInterceptor" class="com.bridgex.core.product.interceptors.ProductSizeUpdateInterceptor">
-		<property name="productSizeService" ref="productSizeService"/>
-	</bean>
-	<bean id="productSizeUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
-		<property name="interceptor" ref="productSizeUpdateInterceptor"/>
-		<property name="typeCode" value="ProductSize"/>
-	</bean>
-
 	<bean name="pentlandOrderPrepareInterceptor" class="com.bridgex.core.order.interceptor.PentlandOrderPrepareInterceptor" parent="orderPrepareInterceptor">
 		<property name="eventService" ref="eventService"/>
 	</bean>

@@ -150,6 +150,12 @@
 		<property name="add" ref="additionalFiltersQueryPopulator"/>
 	</bean>
 
+	<alias name="pentlandFacetSearchQuerySortsPopulator" alias="facetSearchQuerySortsPopulator"/>
+	<bean id="pentlandFacetSearchQuerySortsPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.PentlandFacetSearchQuerySortsPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
 	<bean id="pentlandFsQueryParameterProvider" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandFsQueryParameterProvider">
 		<property name="catalogVersionService" ref="catalogVersionService"/>
 	</bean>

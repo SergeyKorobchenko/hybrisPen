@@ -41,8 +41,8 @@ public class OrderExportDto {
   private Date rdd;
 
   @JsonProperty("I_CANCEL_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date cancelDate;
+//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private String cancelDate = "00000000";
 
   @JsonProperty("I_PURCHASE_ORDER_NUMBER")
   private String purchaseOrderNumber = "";
@@ -89,7 +89,9 @@ public class OrderExportDto {
   }
 
   public void setLang(String lang) {
-    this.lang = lang;
+    if(lang != null) {
+      this.lang = lang;
+    }
   }
 
   public String getServiceConsumer() {
@@ -105,7 +107,9 @@ public class OrderExportDto {
   }
 
   public void setDocNumber(String docNumber) {
-    this.docNumber = docNumber;
+    if(docNumber != null) {
+      this.docNumber = docNumber;
+    }
   }
 
   public String getPurchaseOrderNumber() {
@@ -113,7 +117,9 @@ public class OrderExportDto {
   }
 
   public void setPurchaseOrderNumber(String purchaseOrderNumber) {
-    this.purchaseOrderNumber = purchaseOrderNumber;
+    if(purchaseOrderNumber != null) {
+      this.purchaseOrderNumber = purchaseOrderNumber;
+    }
   }
 
   public Date getRdd() {
@@ -129,7 +135,9 @@ public class OrderExportDto {
   }
 
   public void setSapCustomerID(String sapCustomerID) {
-    this.sapCustomerID = sapCustomerID;
+    if(sapCustomerID != null) {
+      this.sapCustomerID = sapCustomerID;
+    }
   }
 
   public String getShippingAddress() {
@@ -137,7 +145,9 @@ public class OrderExportDto {
   }
 
   public void setShippingAddress(String shippingAddress) {
-    this.shippingAddress = shippingAddress;
+    if(shippingAddress != null) {
+      this.shippingAddress = shippingAddress;
+    }
   }
 
 //  public String getReferenceUser() {
@@ -153,15 +163,19 @@ public class OrderExportDto {
   }
 
   public void setPoType(String poType) {
-    this.poType = poType;
+    if(poType != null) {
+      this.poType = poType;
+    }
   }
 
-  public Date getCancelDate() {
+  public String getCancelDate() {
     return cancelDate;
   }
 
-  public void setCancelDate(Date cancelDate) {
-    this.cancelDate = cancelDate;
+  public void setCancelDate(String cancelDate) {
+    if(cancelDate != null) {
+      this.cancelDate = cancelDate;
+    }
   }
 
   public String getRefDocNo() {
@@ -177,7 +191,9 @@ public class OrderExportDto {
   }
 
   public void setTechOrderReason(String techOrderReason) {
-    this.techOrderReason = techOrderReason;
+    if(techOrderReason != null) {
+      this.techOrderReason = techOrderReason;
+    }
   }
 
   public String getPaymentType() {
@@ -185,7 +201,9 @@ public class OrderExportDto {
   }
 
   public void setPaymentType(String paymentType) {
-    this.paymentType = paymentType;
+    if(paymentType != null) {
+      this.paymentType = paymentType;
+    }
   }
 
   public String getCustomerComment() {
@@ -193,7 +211,9 @@ public class OrderExportDto {
   }
 
   public void setCustomerComment(String customerComment) {
-    this.customerComment = customerComment;
+    if(customerComment != null) {
+      this.customerComment = customerComment;
+    }
   }
 
   public List<MultiBrandOrderInput> getOrderEntries() {
@@ -225,6 +245,8 @@ public class OrderExportDto {
   }
 
   public void setPaymentTransactionCode(String paymentTransactionCode) {
-    this.paymentTransactionCode = paymentTransactionCode;
+    if(paymentTransactionCode != null){
+      this.paymentTransactionCode = paymentTransactionCode;
+    }
   }
 }

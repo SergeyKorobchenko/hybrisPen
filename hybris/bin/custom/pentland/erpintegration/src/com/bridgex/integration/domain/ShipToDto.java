@@ -39,7 +39,9 @@ public class ShipToDto {
   }
 
   public void setId(String id) {
-    this.id = id;
+    if(id != null) {
+      this.id = id;
+    }
   }
 
   public String getMarkForFlag() {
@@ -47,7 +49,9 @@ public class ShipToDto {
   }
 
   public void setMarkForFlag(String markForFlag) {
-    this.markForFlag = markForFlag;
+    if(markForFlag != null) {
+      this.markForFlag = markForFlag;
+    }
   }
 
   public String getName() {
@@ -55,7 +59,9 @@ public class ShipToDto {
   }
 
   public void setName(String name) {
-    this.name = name;
+    if(name != null) {
+      this.name = name;
+    }
   }
 
   public String getStreet() {
@@ -63,7 +69,9 @@ public class ShipToDto {
   }
 
   public void setStreet(String street) {
-    this.street = street;
+    if(street != null) {
+      this.street = street;
+    }
   }
 
   public String getCity() {
@@ -71,7 +79,9 @@ public class ShipToDto {
   }
 
   public void setCity(String city) {
-    this.city = city;
+    if(city != null) {
+      this.city = city;
+    }
   }
 
   public String getRegion() {
@@ -79,7 +89,9 @@ public class ShipToDto {
   }
 
   public void setRegion(String region) {
-    this.region = region;
+    if(region != null) {
+      this.region = region;
+    }
   }
 
   public String getCountry() {
@@ -87,7 +99,9 @@ public class ShipToDto {
   }
 
   public void setCountry(String country) {
-    this.country = country;
+    if(country != null) {
+      this.country = country;
+    }
   }
 
   public String getPostalCode() {
@@ -95,6 +109,8 @@ public class ShipToDto {
   }
 
   public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
+    if(postalCode != null) {
+      this.postalCode = postalCode;
+    }
   }
 }
