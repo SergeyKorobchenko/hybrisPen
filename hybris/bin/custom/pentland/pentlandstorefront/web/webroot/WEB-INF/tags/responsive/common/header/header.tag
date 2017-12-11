@@ -15,7 +15,7 @@
 
 <header class="js-mainHeader">
 
-	<nav class="header__top navigation hidden-xs hidden-sm">
+	<nav class="header__top hidden-xs hidden-sm">
 		<div class="container">
 			<div class="b-section--full-width">
 				<div class="row">
@@ -103,6 +103,7 @@
 			</div>
 		</nav>
 	</div>
+
 	<nav class="navigation navigation--middle js-navigation--middle">
 		<div class="container-fluid">
 			<div class="row">
@@ -153,9 +154,7 @@
 					<ul class="nav__links nav__links--shop_info">
 						<li>
 							<cms:pageSlot position="MiniCart" var="cart" element="div" class="componentContainer">
-
 								<cms:component component="${cart}" element="div"/>
-
 							</cms:pageSlot>
 						</li>
 					</ul>
@@ -163,10 +162,11 @@
 			</div>
 		</div>
 	</nav>
+
 	<a id="skiptonavigation"></a>
+
 	<nav:topNavigation />
 </header>
-
 
 <cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
 	<cms:component component="${component}" />
