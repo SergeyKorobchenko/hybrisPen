@@ -26,8 +26,12 @@
 
     <jsp:body>
         <div class="branding-mobile hidden-md hidden-lg">
-            <div class="js-mobile-logo">
-                    <%--populated by JS acc.navigation--%>
+            <div class="container">
+                <div class="b-section--full-width">
+                    <div class="js-mobile-logo">
+                            <%--populated by JS acc.navigation--%>
+                    </div>
+                </div>
             </div>
         </div>
         <main data-currency-iso-code="${fn:escapeXml(currentCurrency.isocode)}">

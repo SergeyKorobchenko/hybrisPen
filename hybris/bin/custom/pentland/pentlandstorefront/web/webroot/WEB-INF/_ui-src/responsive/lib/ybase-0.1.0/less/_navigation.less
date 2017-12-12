@@ -29,16 +29,27 @@ ul.nav__links {
 }
 
 .branding-mobile {
-  padding: 10px 0 9px 0;
-  border-bottom: solid 1px @nav-border-color;
+  padding: 10px 0 10px 0;
+  //border-bottom: solid 1px @nav-border-color;
   z-index: 9999;
   background-color: @header-background-color;
-  .full-width-padding();
+  //.full-width-padding();
+
+  .js-mobile-logo {
+    a, img {
+      width: 160px;
+    }
+  }
 }
 
 .navigation.navigation--top {
   padding-top: 20px;
   padding-bottom: 20px;
+
+  @media (max-width: @screen-md) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 .navigation--top .nav__left {
