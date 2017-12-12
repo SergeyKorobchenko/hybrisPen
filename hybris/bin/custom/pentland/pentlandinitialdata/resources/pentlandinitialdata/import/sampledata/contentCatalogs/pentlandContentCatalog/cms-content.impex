@@ -234,7 +234,10 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 
 ## navigation bar slot ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
-; ; NavigationBarSlot ; PentlandCategoryNavigationComponent,breadcrumbComponent
+; ; NavigationBarSlot ; PentlandCategoryNavigationComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
+; ; BottomHeaderSlot ; breadcrumbComponent
 
 INSERT_UPDATE BreadcrumbComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 ; ; breadcrumbComponent ; Breadcrumb CMS Component ; breadcrumbComponent
