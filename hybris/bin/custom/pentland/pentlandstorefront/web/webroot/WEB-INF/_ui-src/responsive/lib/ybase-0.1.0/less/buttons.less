@@ -38,14 +38,14 @@
 }
 
 .btn-icon {
-  padding-left: @btn-icon-font-size + @padding-large-horizontal + (@grid-gutter-width * 2) + @btn-border-width;
+  //padding-left: @btn-icon-font-size + @padding-large-horizontal + (@grid-gutter-width * 2) + @btn-border-width;
   position: relative;
 
   &:before {
     position: absolute;
     font-size: @btn-icon-font-size;
-    top: 9px;
-    left: @grid-gutter-width;
+    top: 13px;
+    left: @grid-gutter-width - 5;
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
@@ -83,4 +83,14 @@
 .btn-primary {
   border: @btn-border-width solid;
   .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border; @btn-primary-hover-color; @btn-primary-hover-border; @btn-primary-hover-background; @btn-primary-disabled-bg);
+}
+
+.btn-red {
+  border: @btn-border-width solid;
+  .button-variant(@btn-red-color; @btn-red-bg; @btn-red-border; @btn-red-hover-color; @btn-red-hover-border; @btn-red-hover-background; @btn-red-disabled-bg);
+}
+
+.btn-gray {
+  border: @btn-border-width solid;
+  .button-variant(@btn-gray-color; @btn-gray-bg; @btn-gray-border; @btn-gray-hover-color; @btn-gray-hover-border; @btn-gray-hover-background; @btn-gray-disabled-bg);
 }

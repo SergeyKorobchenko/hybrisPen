@@ -116,7 +116,7 @@
                 </c:forEach>
 
                 <ycommerce:testId code="orderDetails_productQuantity_label">
-                    <label class="visible-xs visible-sm"><spring:theme code="basket.page.qty"/>:</label>
+                    <span class="visible-xs visible-sm"><spring:theme code="basket.page.qty"/>:</span>
                     <span class="qtyValue">${orderEntry.quantity}</span>
                 </ycommerce:testId>
             </div>
@@ -152,7 +152,7 @@
 
                 <div class="details ${showMultiDGridClass}" data-index="${loop.index}">
                     <div class="qty">
-                        <label><spring:theme code="basket.page.qty"/>:</label>
+                        <span><spring:theme code="basket.page.qty"/>:</span>
                         <span class="qtyValue">${orderEntry.quantity}</span>
                         <c:if test="${orderEntry.product.multidimensional}">
                             <span class="glyphicon glyphicon-chevron-right"></span>

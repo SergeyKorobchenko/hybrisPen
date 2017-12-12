@@ -13,10 +13,10 @@
 
 <spring:htmlEscape defaultHtmlEscape="true"/>
 
-<table>
+<%--<table>--%>
     <c:if test="${entryGroup.groupType.code != 'STANDALONE'}">
-        <tr class="entry-group-header">
-            <th>
+        <%--<tr class="entry-group-header">--%>
+            <%--<th>--%>
                 <div class="row">
                     <div class="col-md-10 col-lg-11 col-sm-9 left-align">
                             ${fn:escapeXml(entryGroup.label)}
@@ -32,8 +32,8 @@
                         </c:if>
                     </div>
                 </div>
-            </th>
-        </tr>
+            <%--</th>--%>
+        <%--</tr>--%>
     </c:if>
     <c:choose>
         <c:when test="${not empty entryGroup.children}">
@@ -44,13 +44,13 @@
         <c:otherwise>
             <c:if test="${not empty entryGroup.orderEntries}">
                 <c:forEach items="${entryGroup.orderEntries}" var="entry">
-                    <tr>
-                        <td>
+                    <%--<tr>--%>
+                        <%--<td>--%>
                             <cart:cartItem cartData="${cartData}" entry="${entry}" index="${entryGroup.groupNumber}"/>
-                        </td>
-                    </tr>
+                        <%--</td>--%>
+                    <%--</tr>--%>
                 </c:forEach>
             </c:if>
         </c:otherwise>
     </c:choose>
-</table>
+<%--</table>--%>

@@ -3,8 +3,8 @@
 //////////////////////////////////
 @max-item-image-width: 96px;
 .item__list {
-  margin-top: 30px;
-  margin-bottom: @grid-gutter-width;
+  margin-top: 15px;
+  margin-bottom: @grid-gutter-width + 10;
 
   .list-unstyled;
 
@@ -82,7 +82,7 @@
     width: (@font-size-base + 1 + @grid-gutter-width/2);
 
     color: @carousel-arrow-color;
-    font-size: @font-size-large-3;
+    font-size: @font-size-large-2;
 
     > * {
       cursor: pointer;
@@ -138,7 +138,7 @@
     text-align: right;
 
     .btn {
-      font-size: @font-size-large-3;
+      font-size: @font-size-large-2;
       color: @btn-primary-bg;
 
       background-color: transparent;
@@ -156,7 +156,6 @@
   #cartOrderGridForm {
     .product-grid-container {
       table {
-        background-color: @table-2n-line-bg;
         th {
           background-color: @cart-product-table-head-color;
           color: @text-color;
@@ -181,11 +180,11 @@
 
 
   .read-only-grid {
-    .grid-row {
-      > td {
-        border-bottom: 1px solid @border-color;
-      }
-    }
+    //.grid-row {
+    //  > td {
+    //    border-bottom: 1px solid @border-color;
+    //  }
+    //}
     .grid-prod-img {
       width: 100px;
       padding: 25px 40px 20px 45px;
@@ -234,11 +233,11 @@
 //////////////////////////////////
 @media (min-width: @screen-md-min) {
   .item__list {
-    > li {
-      .add-to-cart-order-form-wrap {
-        border-bottom: 1px solid @border-color-2;
-      }
-    }
+    //> li {
+    //  .add-to-cart-order-form-wrap {
+    //    border-bottom: 1px solid @border-color-2;
+    //  }
+    //}
 
     .item__list--item {
       display: table;
@@ -300,8 +299,6 @@
 @media (max-width: @screen-sm-max) {
 
   .item__list {
-    border-top: 1px solid @border-color-2;
-    margin-top: 0;
     clear: both;
 
     .item__toggle {
@@ -368,13 +365,11 @@
           padding-right: 12px;
           margin-right: (@grid-gutter-width/2);
         }
-        .qtyValue {
-          float: left;
-        }
         .glyphicon {
           float: right;
           line-height: 40px;
           padding-left: 5px;
+          color: @carousel-arrow-color;
         }
       }
 

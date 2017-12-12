@@ -122,23 +122,20 @@
 							<spring:theme code='text.account.savedCart.total'/>
 						</td>
 						<td class="responsive-table-cell">
-							<strong>
-								<ycommerce:testId code="savedCarts_totalProductPrice_label">
-									<span class="js-saved-cart-total">
-										<c:if test="${importCartIsProcessing eq false}">
-											${fn:escapeXml(savedCart.totalPrice.formattedValue)}
-										</c:if>
-									</span>
-								</ycommerce:testId>
-							</strong>
+							<ycommerce:testId code="savedCarts_totalProductPrice_label">
+								<span class="js-saved-cart-total">
+									<c:if test="${importCartIsProcessing eq false}">
+										${fn:escapeXml(savedCart.totalPrice.formattedValue)}
+									</c:if>
+								</span>
+							</ycommerce:testId>
 						</td>
 						 <td class="responsive-table-cell restore-item-column text-center">
 							<ycommerce:testId code="savedCarts_restore_link">
 								<a href="#" class="js-restore-saved-cart restore-item-link ${importCartIsProcessing || fn:length(savedCart.entries) < 1 ? 'hidden' : '' }"
 									data-savedcart-id="${fn:escapeXml(savedCart.code)}"
 									data-restore-popup-title="<spring:theme code='text.account.savedcart.restore.popuptitle'/>">
-									<span class="hidden-xs"><spring:theme code='text.account.savedCart.restore'/></span>
-									<span class="glyphicon glyphicon-share-alt visible-xs"></span>
+									<span class="glyphicon glyphicon-share-alt"></span>
 								</a>
 							</ycommerce:testId>
 						</td>

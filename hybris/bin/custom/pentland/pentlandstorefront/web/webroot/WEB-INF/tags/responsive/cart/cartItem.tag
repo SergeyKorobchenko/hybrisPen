@@ -195,7 +195,7 @@
                             <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
                             <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
                             <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-                            <label class="visible-xs visible-sm"><spring:theme code="basket.page.qty"/>:</label>
+                            <span class="visible-xs visible-sm"><spring:theme code="basket.page.qty"/>:</span>
                             <span class="qtyValue"><c:out value="${entry.quantity}" /></span>
                             <input type="hidden" name="quantity" value="0"/>
                             <ycommerce:testId code="cart_product_updateQuantity">
@@ -235,9 +235,9 @@
             <div class="item__menu">
                 <c:if test="${entry.updateable}" >
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
+                        <span type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
                             <span class="glyphicon glyphicon-option-vertical"></span>
-                        </button>
+                        </span>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <c:if test="${not empty cartData.quoteData}">
                                 <c:choose>
@@ -315,7 +315,7 @@
                                     <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
                                     <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
                                     <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-                                    <label><spring:theme code="basket.page.qty"/>:</label>
+                                    <span><spring:theme code="basket.page.qty"/>:</span>
                                     <span class="qtyValue"><c:out value="${entry.quantity}" /></span>
                                     <input type="hidden" name="quantity" value="0"/>
                                     <ycommerce:testId code="cart_product_updateQuantity">

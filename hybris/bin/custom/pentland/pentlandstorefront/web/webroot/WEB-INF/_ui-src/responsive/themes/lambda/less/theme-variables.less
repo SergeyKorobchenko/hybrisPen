@@ -12,6 +12,7 @@
 
 //********* Theme colors *********
 @dark-gray: #555555;
+@red: red;
 
 //********* Brand colors *********
 
@@ -87,7 +88,7 @@
 @input-success-text: #00A651;
 
 //********* Header background *********
-@header-background-color: 	#f4f4f4;
+@header-background-color: 	@brand-primary-pantone-dark-green;
 @nav-border-color: 			@border-color-2;
 
 //*********Secondary Navigation colors*********
@@ -228,6 +229,24 @@
 @btn-default-hover-border: @brand-primary-pantone-blue;
 @btn-default-hover-background: fade(@brand-primary-pantone-dark-green, 80%);
 @btn-default-disabled-bg: @brand-primary-zircon-gray;
+
+//== Red Button State
+@btn-red-color: @brand-primary-white;
+@btn-red-bg: @red;
+@btn-red-border: @red;
+@btn-red-hover-color: @brand-primary-white;
+@btn-red-hover-border: @red;
+@btn-red-hover-background: fade(@red, 80%);
+@btn-red-disabled-bg: @brand-primary-zircon-gray;
+
+//== Gray Button State
+@btn-gray-color: @brand-primary-white;
+@btn-gray-bg: @brand-primary-gray;
+@btn-gray-border: @brand-primary-gray;
+@btn-gray-hover-color: @brand-primary-white;
+@btn-gray-hover-border: @brand-primary-gray;
+@btn-gray-hover-background: fade(@brand-primary-gray, 80%);
+@btn-gray-disabled-bg: @brand-primary-zircon-gray;
 
 //*********Accordion Colors*********
 @accordion-bg: #000000;

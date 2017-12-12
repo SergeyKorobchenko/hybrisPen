@@ -41,8 +41,8 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-#;;SiteLogoComponent;/images/theme/logo_pentland_white.svg
-;;SiteLogoComponent;/images/theme/logo_pentland.png
+;;SiteLogoComponent;/images/theme/logo_pentland_white.svg
+#;;SiteLogoComponent;/images/theme/logo_pentland.png
 
 # CMS Mini Cart Component
 UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];title[lang=en]

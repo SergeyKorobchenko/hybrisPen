@@ -30,7 +30,7 @@
     <div class="form__actions">
         <div class="row">
             <c:if test="${allowedActions['EDIT']}">
-                <div class="col-sm-4 col-md-3 ">
+                <div class="col-sm-4 col-md-3 col-md-offset-3">
                     <button type="button"
                         class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button"
                         data-continue-shopping-url="${continueShoppingUrl}">
@@ -40,7 +40,7 @@
             </c:if>
 
             <c:if test="${allowedActions['CANCEL']}">
-                <div class="col-sm-4 col-md-3 col-md-offset-3">
+                <div class="col-sm-4 col-md-3">
                     <button type="button" class="btn btn-default btn-block js-quote-cancel-btn form__actions--cancel">
                         <spring:theme code="quote.cancel" />
                     </button>
@@ -97,17 +97,17 @@
         <div id="quoteFormDiv" class="js-quote-form" data-metadata-url="${metadataUrl}">
             <div class="quote__form--section">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-4" id="js-quote-name-wrapper">
+                    <div class="col-xs-12 col-sm-6 col-md-6" id="js-quote-name-wrapper">
                         <formElement:formInputBox idKey="js-quote-name"
                                                   labelKey="text.quote.name.label" path="name"
                                                   inputCSS="text" mandatory="true" maxlength="255"/>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-1">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
                         <formElement:formInputBox idKey="js-quote-description"
                                                   labelKey="text.quote.description.label" path="description"
                                                   inputCSS="text" mandatory="false" maxlength="255"/>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-5 col-sm-offset-6">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-6 col-sm-offset-6">
                         <div class="quote__estimate">
                             <label class="quote__estimate--label">
                                 <spring:theme code="text.quote.previous.estimated.total.display"/>

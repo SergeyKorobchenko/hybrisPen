@@ -163,7 +163,7 @@ ACC.navigation = {
             var oListItem = oDoc.createElement("li");
             oListItem.appendChild(oLink);
             oListItem = $(oListItem);
-            oListItem.addClass("auto col-md-4");
+            oListItem.addClass("auto col-md-3");
             oMMainNavDesktop.get(0).appendChild(oListItem.get(0));
         }
 
