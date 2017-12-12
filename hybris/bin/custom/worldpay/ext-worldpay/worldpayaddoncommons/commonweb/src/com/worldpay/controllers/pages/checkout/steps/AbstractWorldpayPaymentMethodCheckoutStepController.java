@@ -1,5 +1,6 @@
 package com.worldpay.controllers.pages.checkout.steps;
 
+import com.bridgex.facades.customer.PentlandCustomerFacade;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.worldpay.data.AdditionalAuthInfo;
 import com.worldpay.data.BankTransferAdditionalAuthInfo;
@@ -67,6 +68,9 @@ public abstract class AbstractWorldpayPaymentMethodCheckoutStepController extend
     @Resource
     private PentlandAcceleratorCheckoutFacade acceleratorCheckoutFacade;
 
+    @Resource
+    private PentlandCustomerFacade pentlandCustomerFacade;
+
     @ModelAttribute ("billingCountries")
     public Collection<CountryData> getBillingCountries() {
         return getCheckoutFacade().getBillingCountries();
@@ -123,7 +127,7 @@ public abstract class AbstractWorldpayPaymentMethodCheckoutStepController extend
 
         for (final Map.Entry<String, CheckoutStep> entry : progressBarMap.entrySet()) {
             final CheckoutStep checkoutStep = entry.getValue();
-            if("deliveryAddress.markFor".equals(checkoutStep.getProgressBarId()) && CollectionUtils.isEmpty(markForAddressesForShippingAddress)
+            if("deliveryAddress.markFor".equals(checkoutStep.getProgressBarId()) && (CollectionUtils.isEmpty(markForAddressesForShippingAddress)|| !pentlandCustomerFacade.hasMarkFors())
                || "paymentMethod".equals(checkoutStep.getProgressBarId()) && "ACCOUNT".equals(paymentType.getCode())){
                 continue;
             }
