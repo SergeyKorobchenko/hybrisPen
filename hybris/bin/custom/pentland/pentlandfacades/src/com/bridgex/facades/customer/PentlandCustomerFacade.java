@@ -8,4 +8,6 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 public interface PentlandCustomerFacade extends CustomerFacade{
 
   void setCustomerHidePricesOption(boolean hidePrices);
+
+  boolean hasMarkFors();
 }
