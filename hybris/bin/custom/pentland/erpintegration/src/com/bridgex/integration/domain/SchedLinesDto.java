@@ -2,6 +2,8 @@ package com.bridgex.integration.domain;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,7 +26,7 @@ public class SchedLinesDto {
   private String size = "";
 
   @JsonProperty("REQUESTED_QUANTITY")
-  private int quantity;
+  private String quantity = "";
 
   //not used
   @JsonProperty("REFERENCE_DOCUMENT")
@@ -46,11 +48,11 @@ public class SchedLinesDto {
     this.ean = ean;
   }
 
-  public int getQuantity() {
+  public String getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(int quantity) {
+  public void setQuantity(String quantity) {
     this.quantity = quantity;
   }
 
@@ -59,7 +61,9 @@ public class SchedLinesDto {
   }
 
   public void setSize(String size) {
-    this.size = size;
+    if(StringUtils.isNotEmpty(size)) {
+      this.size = size;
+    }
   }
 
   public String getReferenceDocument() {

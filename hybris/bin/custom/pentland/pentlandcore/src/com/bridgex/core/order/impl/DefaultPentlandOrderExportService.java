@@ -154,8 +154,8 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
           SchedLinesDto sizeEntry = new SchedLinesDto();
           ApparelSizeVariantProductModel sizeProduct = (ApparelSizeVariantProductModel)size.getProduct();
           sizeEntry.setEan(sizeProduct.getCode());
-          sizeEntry.setQuantity(size.getQuantity().intValue());
-          sizeEntry.setSize(sizeProduct.getSize());
+          sizeEntry.setQuantity(Long.toString(size.getQuantity()));
+//          sizeEntry.setSize(sizeProduct.getSize());
           sizeEntry.setRdd(orderModel.getRdd());
           sizeEntries.add(sizeEntry);
         }
@@ -226,8 +226,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
         if (ErpintegrationConstants.RESPONSE.ET_RETURN.SUCCESS_TYPE.equals(returnDto.getType())) {
           return true;
         }
-        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType())
-            || ErpintegrationConstants.RESPONSE.ET_RETURN.WARNING_TYPE.equals(returnDto.getType())) {
+        if (ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE.equals(returnDto.getType())) {
           result = false;
         }
       }
