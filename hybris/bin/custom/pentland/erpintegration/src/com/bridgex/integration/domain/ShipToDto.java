@@ -13,9 +13,6 @@ public class ShipToDto {
   @JsonProperty("ID")
   private String id = "";
 
-  @JsonProperty("MARK_FOR_FLAG")
-  private String markForFlag = "";
-
   @JsonProperty("NAME")
   private String name = "";
 
@@ -33,6 +30,9 @@ public class ShipToDto {
 
   @JsonProperty("POSTL_CODE")
   private String postalCode = "";
+
+  @JsonProperty("MARK_FOR")
+  private String markForFlag = "";
 
   public String getId() {
     return id;

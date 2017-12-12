@@ -167,7 +167,7 @@
 
 	<nav:topNavigation />
 
-	<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
+	<cms:pageSlot position="BottomHeaderSlot" var="component" element="div">
 		<cms:component component="${component}" />
 	</cms:pageSlot>
 

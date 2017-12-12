@@ -69,7 +69,7 @@ public class OrderExportDto {
   @JsonProperty("I_USER_EMAIL")
   private String email = "";
 
-  @JsonProperty("I_MULTIBRAND_INPUT_T")
+  @JsonProperty("I_MULTIBRAND_ORDER_INPUT_T")
   private List<MultiBrandOrderInput> orderEntries;
 
   @JsonProperty("IT_EMAIL")
