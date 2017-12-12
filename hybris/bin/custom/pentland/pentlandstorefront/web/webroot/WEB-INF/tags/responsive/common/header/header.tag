@@ -166,8 +166,9 @@
 	<a id="skiptonavigation"></a>
 
 	<nav:topNavigation />
-</header>
 
-<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
-	<cms:component component="${component}" />
-</cms:pageSlot>
+	<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
+		<cms:component component="${component}" />
+	</cms:pageSlot>
+
+</header>
