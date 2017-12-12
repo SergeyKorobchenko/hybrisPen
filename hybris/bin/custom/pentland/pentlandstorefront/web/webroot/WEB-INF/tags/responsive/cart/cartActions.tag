@@ -27,14 +27,14 @@
     </c:if>
 
     <div class="col-sm-4 col-md-3 pull-right">
-        <button class="btn btn-default btn-block btn--savecart-checkout js-savecart-checkout-button">
+        <button class="btn btn-primary btn-block btn--savecart-checkout js-savecart-checkout-button">
             <spring:theme code="checkout.savecart"/>
         </button>
     </div>
 
-    <%--<div class="col-sm-4 col-md-3">--%>
-        <%--<button class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button" data-continue-shopping-url="${continueShoppingUrl}">--%>
-            <%--<spring:theme code="cart.page.continue"/>--%>
-        <%--</button>--%>
-    <%--</div>--%>
+    <div class="col-sm-4 col-md-3">
+        <button class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button" data-continue-shopping-url="${continueShoppingUrl}">
+            <spring:theme code="cart.page.continue"/>
+        </button>
+    </div>
 </div>

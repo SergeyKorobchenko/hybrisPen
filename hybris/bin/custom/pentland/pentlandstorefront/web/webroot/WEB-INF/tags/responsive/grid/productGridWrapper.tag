@@ -12,8 +12,8 @@
 <div class="js-product-order-form display-none">
     <div class="back-link product-details">
             <div class="js-show-editable-product-form-grid" data-read-only-multid-grid="false">
-                <span class="label"><spring:theme code="order.form"/>&nbsp;</span>
                 <span class="glyphicon no-border glyphicon-chevron-down"></span>
+                <span><spring:theme code="order.form"/>&nbsp;</span>
             </div>
     </div>
     <div id="productShowGridAction">

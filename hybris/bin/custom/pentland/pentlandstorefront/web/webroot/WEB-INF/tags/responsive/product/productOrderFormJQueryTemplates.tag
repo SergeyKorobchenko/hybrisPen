@@ -7,7 +7,11 @@
 			{{each(index, availability) availabilities}}
 			<div class="future_stock_value">
                 <div>\${formattedDate}</div>
+                {{if stock.stockLevel > stock.stockThreshold }}
+			    <div>\${stock.stockThreshold}+</div>
+			    {{else}}
 			    <div>\${stock.stockLevel}</div>
+			    {{/if}}
             </div>
 			{{/each}}
 		</span>

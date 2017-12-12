@@ -122,15 +122,15 @@ INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code)
 
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(addressID);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;userPriceGroup(code);customerType(code);sapID
 ;KIS;Pronto;Pronto;Pronto;;Pronto;ProntoAddrID1;ProntoID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;;pronto;
-;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto;ACCOUNT;pronto-goods
+;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;131128;ProntoID2;;;;;pronto;ACCOUNT;pronto-goods
 ;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto;CREDITCARD;pronto-services
 
 INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(addressID);displayName[lang=en]
-;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;ProntoAddrID2;ProntoID2;pronto-services;true;;address6
+;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;131128;ProntoID2;pronto-services;true;;131128
 ;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;pronto-services;true;;address7
 ;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID7;ProntoID3;jamesTestB2B;true;;address102
-;3000 Lombard Street;94123;San Francisco;GB;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;ProntoAddrID2,ProntoAddrID3;address8
-;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;ProntoAddrID4;ProntoID1;107660;false;ProntoAddrID2,ProntoAddrID3;address9
+;3000 Lombard Street;94123;San Francisco;GB;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;131128,ProntoAddrID3;address8
+;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;125387;ProntoID1;107660;false;131128,ProntoAddrID3;125387
 ;112 Some Street;14223;London;GB;TRUE;TRUE;TRUE;TRUE;John;Snow;james.bell@pronto-hw.com;mr;ProntoAddrID8;ProntoID1;107660;false;;No MarkFors Addr
 ;123 Some Street;11323;London;GB;TRUE;TRUE;TRUE;TRUE;Mitre;User;mitre.user@mitre.com;mr;ProntoAddrID9;ProntoID1;125253;false;;No MarkFors Addr
 

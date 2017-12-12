@@ -15,21 +15,15 @@
   //}
 
   .cart__id--label {
-    font-size: 18px;
-    font-weight: 600;
-    padding: 0 5px 0 10px;
-
-    &:before {
-      content: "|";
-      position: relative;
-      left: -2px;
-      color: @text-color-secondary;
-      font-weight: 400;
-      vertical-align: top;
-    }
+    font-family: @font-family-base;
+    color: @brand-secondary;
+    font-size: @font-size-base;
+    padding: 0 5px 0 15px;
+    vertical-align: top;
 
     .cart__id {
       padding-left: 5px;
+      vertical-align: top;
     }
   }
 }
@@ -77,22 +71,21 @@
 }
 
 .cart__top--totals {
+  color: @brand-secondary;
   text-align: right;
-  font-size: 15px;
-  margin-top: 15px;
-  .full-width-padding();
+  margin-top: 30px;
 
   .cart__top--amount {
-    margin-left: 5px;
+    margin-left: 15px;
 
-    &:before {
-      content: "|";
-      position: relative;
-      left: -2px;
-      color: @text-color-secondary;
-      font-weight: 400;
-      top: -1px;
-    }
+    //&:before {
+    //  content: "|";
+    //  position: relative;
+    //  left: -2px;
+    //  color: @text-color-secondary;
+    //  font-weight: 400;
+    //  top: -1px;
+    //}
   }
 }
 
@@ -105,7 +98,7 @@
 }
 
 .item__list__cart {
-  margin-top: @grid-gutter-width + 10;
+  margin-top: @grid-gutter-width - 5;
   margin-bottom: 0px;
 
   table td {
@@ -384,17 +377,6 @@
 }
 
 @image-offset: 100px;
-.cartpotproline,
-.cartproline {
-  font-size: @font-size-large-2;
-  padding-bottom: @grid-gutter-width + 5;
-  border-bottom: 1px solid @border-color-2;
-  .full-width-padding();
-
-  .info {
-    font-size: @font-size-base;
-  }
-}
 
 .promotion {
   font-size: @font-size-base;
@@ -415,10 +397,6 @@
 }
 
 @media (max-width: @screen-xs-max) {
-  .cartpotproline,
-  .cartproline {
-    padding: @grid-gutter-width/2 @grid-gutter-width (@grid-gutter-width + 5);
-  }
 
   .btn--continue-shopping,
   .btn--continue-checkout,
@@ -523,7 +501,6 @@
 #quoteForm {
   .form__actions {
     margin-bottom: @grid-gutter-width + 10;
-    .full-width-padding();
   }
 
   .form__actions--cancel,
@@ -540,12 +517,11 @@
   .quote__head {
     color: @nav-cat-link-color;
     background-color: @nav-cat-background;
-    padding: @grid-gutter-width 0;
-    .full-width-padding();
+    padding: @grid-gutter-width + 10;
 
     .quote__head--label {
       color: @table-head-color;
-      font-size: 15px;
+      font-size: @font-size-base;
       margin-bottom: 0;
     }
 
@@ -574,8 +550,8 @@
 }
 
 #quoteFormDiv {
-  background: @header-background-color;
-  padding-top: @grid-gutter-width + 5;
+  background: @cart-product-table-head-color;
+  padding-top: @grid-gutter-width + 10;
 
   //label {
   //  color: @text-color;
@@ -585,12 +561,12 @@
 }
 
 .quote__comments--wrapper {
-  padding-top: @grid-gutter-width;
-  padding-bottom: @grid-gutter-width + 30;
+  padding-bottom: @grid-gutter-width + 10;
 }
 
 .quote__form--section {
-  .full-width-padding();
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .quote__estimate .quote__estimate--amount {
@@ -605,6 +581,7 @@ textarea.quote__comments--textarea {
 
 .quote__comments--toggle,
 .quote__form--toggle {
+  font-size: @font-size-large-2;
   background: none;
   border: none;
 
@@ -634,18 +611,16 @@ textarea.quote__comments--textarea {
 
 .quote__comments__header {
   border-top: 1px solid @border-color-2;
-  border-bottom: 1px solid @border-color-2;
-  padding: @grid-gutter-width 0;
+  padding: @grid-gutter-width + 10;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 14px;
-  .full-width-padding();
   margin-top: @grid-gutter-width + 10;
 }
 
 .quote__comments {
 
-  .full-width-padding();
+  padding-left: 30px;
+  padding-right: 30px;
   margin-top: 0;
 
   .quote__comments--header {
@@ -719,5 +694,13 @@ textarea.quote__comments--textarea {
   @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
     padding: (@grid-gutter-width / 4) (@grid-gutter-width / 2);
     height: 28px;
+  }
+}
+
+.export {
+  &__cart--link, &__images--link {
+    font-size: @font-size-small;
+    text-transform: uppercase;
+    padding-right: @grid-gutter-width - 5;
   }
 }
