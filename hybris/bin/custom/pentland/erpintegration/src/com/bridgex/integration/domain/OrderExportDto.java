@@ -15,7 +15,7 @@ public class OrderExportDto {
   }
 
   @JsonProperty("I_DOC_TYPE")
-  private String docType = ErpintegrationConstants.REQUEST.DEFAULT_DOC_TYPE;
+  private String docType = "";
 
   @JsonProperty("I_LANGUAGE")
   private String lang = ErpintegrationConstants.REQUEST.DEFAULT_LANGUAGE;
