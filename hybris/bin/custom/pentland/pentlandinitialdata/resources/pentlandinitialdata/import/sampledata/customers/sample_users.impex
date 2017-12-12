@@ -122,7 +122,7 @@ INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code)
 
 INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(uid);reportingOrganization(uid);Addresses(addressID);&B2BUnitID;accountManager(uid);accountManagerGroups(uid);creditLimit(code);approvalProcessCode;userPriceGroup(code);customerType(code);sapID
 ;KIS;Pronto;Pronto;Pronto;;Pronto;ProntoAddrID1;ProntoID1;acctmgrd;SuperAccountMangers;Monthly30KAlert3K;;pronto;
-;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;ProntoAddrID2;ProntoID2;;;;;pronto;ACCOUNT;pronto-goods
+;Unit A;Pronto Goods;Pronto Goods;Pronto Goods;Pronto;Pronto;131128;ProntoID2;;;;;pronto;ACCOUNT;pronto-goods
 ;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto;CREDITCARD;pronto-services
 
 INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(addressID);displayName[lang=en]

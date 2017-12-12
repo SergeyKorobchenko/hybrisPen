@@ -13,6 +13,7 @@ package de.hybris.platform.pentlandb2baddon.controllers.pages.checkout.steps;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutGroup;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
@@ -31,9 +32,7 @@ import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Resource;
 
@@ -47,6 +46,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bridgex.facades.customer.PentlandCustomerFacade;
 
 @Controller
 @RequestMapping(value = "/checkout/multi/payment-type")
@@ -62,6 +62,10 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 
 	@Resource(name = "paymentTypeFormValidator")
 	private PaymentTypeFormValidator paymentTypeFormValidator;
+
+	@Resource
+	private PentlandCustomerFacade pentlandCustomerFacade;
+
 
 	@ModelAttribute("paymentTypes")
 	public Collection<B2BPaymentTypeData> getAllB2BPaymentTypes()
@@ -187,6 +191,26 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 	protected CheckoutStep getCheckoutStep()
 	{
 		return getCheckoutStep(PAYMENT_TYPE);
+	}
+
+	@ModelAttribute("checkoutSteps")
+	public List<CheckoutSteps> addCheckoutStepsToModel() {
+		final CheckoutGroup checkoutGroup = getCheckoutGroup();
+		final Map<String, CheckoutStep> progressBarMap = checkoutGroup.getCheckoutProgressBar();
+		final List<CheckoutSteps> checkoutSteps = new ArrayList<CheckoutSteps>(progressBarMap.size());
+
+		for (final Map.Entry<String, CheckoutStep> entry : progressBarMap.entrySet()) {
+			final CheckoutStep checkoutStep = entry.getValue();
+			if("deliveryAddress.markFor".equals(checkoutStep.getProgressBarId()) && !pentlandCustomerFacade.hasMarkFors()){
+				continue;
+			}
+			if (checkoutStep.isEnabled()) {
+				checkoutSteps.add(new CheckoutSteps(checkoutStep.getProgressBarId(), StringUtils.remove(checkoutStep.currentStep(),
+				                                                                                        REDIRECT_PREFIX), Integer.valueOf(entry.getKey())));
+			}
+		}
+
+		return checkoutSteps;
 	}
 
 }

@@ -30,6 +30,7 @@ import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.util.Config;
 
+import com.bridgex.facades.customer.PentlandCustomerFacade;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
@@ -62,6 +63,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
 
+	@Resource
+	private PentlandCustomerFacade pentlandCustomerFacade;
+
 	@ModelAttribute("checkoutSteps")
 	public List<CheckoutSteps> addCheckoutStepsToModel() {
 		final CheckoutGroup checkoutGroup = getCheckoutGroup();
@@ -73,6 +77,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		for (final Map.Entry<String, CheckoutStep> entry : progressBarMap.entrySet()) {
 			final CheckoutStep checkoutStep = entry.getValue();
 			if("paymentMethod".equals(checkoutStep.getProgressBarId()) && "ACCOUNT".equals(paymentType.getCode())){
+				continue;
+			}
+			if("deliveryAddress.markFor".equals(checkoutStep.getProgressBarId()) && !pentlandCustomerFacade.hasMarkFors()){
 				continue;
 			}
 			if (checkoutStep.isEnabled()) {
