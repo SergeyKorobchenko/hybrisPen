@@ -18,9 +18,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<button href="#" class="cart__head--link js-save-cart-link btn btn-primary pull-right">
-    <spring:theme code="basket.save.cart" />
-</button>
+<a href="#" class="cart__head--link js-save-cart-link pull-right"><span class="glyphicon glyphicon-floppy-disk"></span><spring:theme code="basket.save.cart" /></a>
     
 <spring:url value="/cart/save" var="actionUrl" htmlEscape="false"/>
 <cart:saveCartModal titleKey="text.save.cart.title" actionUrl="${actionUrl}" messageKey="basket.save.cart.info.msg"/>

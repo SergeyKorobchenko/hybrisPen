@@ -17,7 +17,7 @@
             <c:if test="${not empty savedCartCount and savedCartCount ne 0}">
                 <spring:url value="/my-account/saved-carts" var="listSavedCartUrl" htmlEscape="false"/>
                 <a href="${listSavedCartUrl}" class="save__cart--link cart__head--link">
-                    <spring:theme code="saved.cart.total.number" arguments="${savedCartCount}"/>
+                    <span class="glyphicon glyphicon-folder-open"></span><spring:theme code="saved.cart.total.number" arguments="${savedCartCount}"/>
                 </a>
                 <c:if test="${not empty quoteCount and quoteCount ne 0}">
                     <spring:url value="/my-account/my-quotes" var="listQuotesUrl" htmlEscape="false"/>
@@ -47,11 +47,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row cart__top">
+
         <cart:exportCart/>
 
-
-        <div class="col-sm-12 col-md-4 col-md-push-5">
+        <div class="col-sm-12 col-md-6">
             <div class="js-cart-top-totals cart__top--totals">
                 <c:choose>
                     <c:when test="${fn:length(cartData.entries) > 1 or fn:length(cartData.entries) == 0}">

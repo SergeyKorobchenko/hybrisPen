@@ -8,7 +8,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:if test="${not empty cartData.entries}">
-    <div class="row">
+    <div class="row cart__top">
         <%--<c:if test="${exportCsvEnabled}">--%>
             <%--<cart:exportCart/>--%>
         <%--</c:if>--%>

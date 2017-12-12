@@ -36,7 +36,7 @@
 		<div class="col-xs-12 col-md-8">
 			<label><spring:theme code="text.cart.customerNotes"/></label>
 			<div>
-				<form:textarea class="form-control" style="width: 400px; min-height: 100px;" path="customerNotes" data-initial="${b2bCartForm.customerNotes}"/>
+				<form:textarea class="form-control" style="min-height: 42px; height: 42px;" path="customerNotes" data-initial="${b2bCartForm.customerNotes}"/>
 			</div>
 		</div>
 	</div>
