@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+
         <main data-currency-iso-code="${fn:escapeXml(currentCurrency.isocode)}">
             <spring:theme code="text.skipToContent" var="skipToContent"/>
             <a href="#skip-to-content" class="skiptocontent" data-role="none">${fn:escapeXml(skipToContent)}</a>

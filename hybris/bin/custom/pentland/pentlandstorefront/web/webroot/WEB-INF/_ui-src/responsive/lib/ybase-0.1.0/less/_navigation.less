@@ -425,7 +425,7 @@ ul.nav__links {
     @media (max-width: @screen-xs-max) {
       text-align: center;
       vertical-align: top;
-      border-left: 1px solid @nav-border-color;
+      //border-left: 0px solid @nav-border-color;
 
     }
   }
@@ -442,6 +442,7 @@ ul.nav__links {
   .btn {
     &:hover, &:active, &:focus {
       background-color: @nav-icon-hover-background;
+      color: @link-color;
       box-shadow: none;
     }
   }
@@ -615,7 +616,7 @@ ul.nav__links {
       }
 
       .componentContainer .mobile__nav__row--table-cell {
-        border-right: 1px solid @nav-border-color;
+        //border-right: 1px solid @nav-border-color;
 
         &:last-child {
           border-right: none;
@@ -625,10 +626,8 @@ ul.nav__links {
 
     .mobile__nav__row--seperator {
       @media (max-width: @screen-xs-max) {
-        border-left: 1px solid @nav-border-color;
-
+        border-left: 0px;
       }
-
     }
   }
 
