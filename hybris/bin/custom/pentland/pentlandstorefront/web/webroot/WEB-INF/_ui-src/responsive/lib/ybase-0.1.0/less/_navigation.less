@@ -69,7 +69,7 @@ ul.nav__links {
 
   &--menu {
     vertical-align: bottom;
-    margin-left: 60px;
+    margin-left: 30px;
   }
 }
 
@@ -77,9 +77,22 @@ ul.nav__links {
   display: inline-block;
 }
 
-.header__top .nav__right {
+.navigation--middle.nav__right {
+  &--basket {
+    margin-top: 28px;
 
-  .nav__links--account {
+    .nav__left {
+      .site-search {
+        .ui-front {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.header__top .nav__right {
+    .nav__links--account {
     margin: 0;
     padding-left: 0;
     float: right;
@@ -245,6 +258,8 @@ ul.nav__links {
     @media (min-width: @screen-md) {
       padding-left: 30px;
       padding-right: 30px;
+      margin-bottom: 0;
+      margin-top: 8px;
     }
 
     .site-search {
@@ -277,23 +292,25 @@ ul.nav__links {
       }
 
       .glyphicon-search {
-        color: @searchbar-icon-color;
+        color: @nav-cat-background;
         font-size: 17px;
       }
 
       .input-group {
         background-color: @input-background;
-        min-height: 38px;
-        border: 1px solid @input-border-color;
+        min-height: 30px;
+        //border: 1px solid @input-border-color;
 
         @media (min-width: @screen-md) {
-          width: 445px;
+          width: 245px;
         }
 
         .form-control {
           border: 0;
           box-shadow: none;
-          height: 38px;
+          height: 30px;
+          font-size: @font-size-small;
+          text-transform: uppercase;
         }
 
         .btn {
@@ -375,11 +392,11 @@ ul.nav__links {
   }
 
   .nav__right {
-    padding-right: 25px;
+    //padding-right: 25px;
 
-    @media (max-width: @screen-md) {
-      padding-right: 20px;
-    }
+    //@media (max-width: @screen-md) {
+    //  padding-right: 20px;
+    //}
 
     ul.nav__links--shop_info {
       margin-bottom: 0;
@@ -461,7 +478,7 @@ ul.nav__links {
 
   .nav-cart {
     float: right;
-    padding: 0 10px;
+    padding: 0;
 
     @media (min-width: @screen-sm) {
       padding-left: 30px;
@@ -478,9 +495,9 @@ ul.nav__links {
       @media (min-width: @screen-sm) {
         overflow: hidden;
         margin-left: 5px;
-        margin-right: 5px;
+        //margin-right: 5px;
         float: right;
-        font-size: 16px;
+        //font-size: 16px;
         font-weight: 600;
         position: relative;
         top: 4px;
@@ -492,7 +509,7 @@ ul.nav__links {
       color: @nav-icon-color;
 
       @media (min-width: @screen-sm) {
-        line-height: 55px;
+        line-height: 56px;
         white-space: nowrap;
       }
 
@@ -500,21 +517,21 @@ ul.nav__links {
         display: block;
 
         .mini-cart-icon {
-          color: @nav-icon-color;
+          //color: @link-color;;
           left: -7px;
           top: 10px;
 
-          .glyphicon-shopping-cart {
-            width: @mobile-nav-icon-font-size;
-            font-size: 22px;
-            position: relative;
-            right: -6px;
-            top: 3px;
-          }
+          //.glyphicon-shopping-cart {
+          //  width: @mobile-nav-icon-font-size;
+          //  font-size: 22px;
+          //  position: relative;
+          //  right: -6px;
+          //  top: 3px;
+          //}
         }
 
         .mini-cart-count {
-          font-size: 12px;
+          font-size: 13px;
           position: absolute;
           right: 44%;
           top: -13px;
@@ -530,6 +547,10 @@ ul.nav__links {
           color: @btn-primary-color;
           line-height: 25px;
         }
+      }
+
+      &:hover, &:focus {
+        color: @nav-icon-color;
       }
     }
 
@@ -550,7 +571,7 @@ ul.nav__links {
       }
 
       float: right;
-      font-size: 12px;
+      font-size: 13px;
       text-transform: uppercase;
 
       .nav-items-total {
@@ -567,12 +588,19 @@ ul.nav__links {
         top: 5px;
       }
 
-      .glyphicon-shopping-cart {
-        font-size: 22px;
+      //.glyphicon-shopping-cart {
+      //  font-size: 22px;
+      //
+      //  @media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+      //    margin-left: 5px;
+      //  }
+      //}
 
-        @media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
-          margin-left: 5px;
-        }
+      .basket-icon {
+        background: url(~"@{imagePath}/svg/backet-icon.svg") no-repeat center;
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
       }
     }
   }
@@ -691,8 +719,8 @@ ul.nav__links {
       cursor: pointer;
       margin: 0 auto;
       color: @nav-icon-color;
-      font-size: 29px;
-      top: 2px;
+      font-size: 30px;
+      top: -4px;
     }
   }
 }
@@ -1389,11 +1417,11 @@ main.offcanvas {
 
   @media (min-width: @screen-sm-min) {
     border-left: 0px;
-    border-right: 1px solid @nav-border-color;
-    padding: 0px 15px;
+    //border-right: 1px solid @nav-border-color;
+    //padding: 0px 15px;
   }
   @media (min-width: @screen-md-min) {
-    padding: 0px 30px;
+    //padding: 0px 30px;
   }
   @media (max-width: @screen-xs-max) {
     position: static;
@@ -1401,7 +1429,8 @@ main.offcanvas {
 
   &:before {
     position: relative;
-    top: 23%;
+    //top: 23%;
+    top: 9px;
     display: inline;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
@@ -1506,9 +1535,13 @@ main.offcanvas {
   border: 1px solid @nav-border-color;
   background-color: @nav-icon-dropdown-background;
   right: -1px;
-  top: @navigation--middle-height;
+  top: 60px;
   width: 260px;
   z-index: 10;
+
+  @media (max-width: @screen-md) {
+    top: 60px;
+  }
 
   @media (max-width: @screen-xs-max) {
     width: 100vw;
@@ -1531,7 +1564,7 @@ main.offcanvas {
     padding: @grid-gutter-width @grid-gutter-width*1.5;
 
     &:hover {
-      background-color: @nav-icon-hover-background;;
+      //background-color: @nav-icon-hover-background;;
     }
   }
 }
