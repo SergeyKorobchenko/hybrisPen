@@ -2949,3 +2949,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.unsaved.popup.warning;Do you wish to save the changes?
 ;cart.unsaved.popup.save;YES
 ;cart.unsaved.popup.cancel;NO
+
+;text.company.accountsummary.unit.details.page.defaultSort;Sort by
