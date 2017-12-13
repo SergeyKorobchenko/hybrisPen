@@ -365,4 +365,7 @@
 		<property name="cartFacade" ref="cartFacade"/>
 	</bean>
 
+	<alias name="pentlandProductPopulator" alias="productPopulator"/>
+	<bean id="pentlandProductPopulator" class="com.bridgex.facades.populators.PentlandProductPopulator" parent="defaultProductPopulator"/>
+
 </beans>
