@@ -115,9 +115,32 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;siteMapMediaJob;siteMapMediaJob
 ;specialCategoryAssignmentJobPerformable;specialCategoryAssignmentJobPerformable
 
+
+#% if: "dev".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE Division;code[unique=true];email
+;active;devpentland@pentland.com
+;footwear;devpentland@pentland.com
+#% endif:
+
+#% if: "stag".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE Division;code[unique=true];email
+;active;testpentland@pentland.com
+;footwear;testpentland@pentland.com
+#% endif:
+
+#% if: "prod".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE Division;code[unique=true];email
+;active;testpentland@pentland.com
+;footwear;testpentland@pentland.com
+#% endif:
+
+#% if: "common".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE Division;code[unique=true];email
 ;active;active@test.test
 ;footwear;footwear@test.test
+#% endif:
+
+
 
 
 INSERT_UPDATE B2BDocumentType;code[unique=true];name[lang=en];includeInOpenBalance;displayInAllList
