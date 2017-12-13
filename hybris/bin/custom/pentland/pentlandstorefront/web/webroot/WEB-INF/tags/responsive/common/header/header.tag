@@ -90,16 +90,29 @@
 		</div>
 	</nav>
 
+	<%--<div class="container">--%>
+		<%--<nav class="navigation navigation--top hidden-xs hidden-sm b-section--full-width">--%>
+			<%--<div class="row">--%>
+				<%--<div class="col-sm-12 col-md-4">--%>
+					<%--<div class="nav__left js-site-logo">--%>
+						<%--<cms:pageSlot position="SiteLogo" var="logo" limit="1">--%>
+							<%--<cms:component component="${logo}" element="div" class="yComponentWrapper"/>--%>
+						<%--</cms:pageSlot>--%>
+					<%--</div>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+		<%--</nav>--%>
+	<%--</div>--%>
+
 	<div class="container">
 		<nav class="navigation navigation--top hidden-xs hidden-sm b-section--full-width">
-			<div class="row">
-				<div class="col-sm-12 col-md-4">
-					<div class="nav__left js-site-logo">
-						<cms:pageSlot position="SiteLogo" var="logo" limit="1">
-							<cms:component component="${logo}" element="div" class="yComponentWrapper"/>
-						</cms:pageSlot>
-					</div>
-				</div>
+			<div class="nav__left js-site-logo">
+				<cms:pageSlot position="SiteLogo" var="logo" limit="1">
+					<cms:component component="${logo}" element="div" class="yComponentWrapper"/>
+				</cms:pageSlot>
+			</div>
+			<div class="nav__left--menu visible-md-inline-block visible-lg-inline-block">
+				<nav:topNavigation />
 			</div>
 		</nav>
 	</div>
@@ -134,40 +147,42 @@
 						</div>
 					</div>
 				</div>
-				<div class="row desktop__nav">
-					<div class="nav__left col-xs-12 col-sm-6">
-						<div class="row">
-							<div class="col-sm-2 hidden-xs visible-sm mobile-menu">
-								<button class="btn js-toggle-sm-navigation" type="button">
-									<span class="glyphicon glyphicon-align-justify"></span>
-								</button>
-							</div>
-							<div class="col-sm-10">
-								<div class="site-search">
-									<cms:pageSlot position="SearchBox" var="component">
-										<cms:component component="${component}" element="div"/>
-									</cms:pageSlot>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="nav__right col-xs-6 col-xs-6 hidden-xs">
-						<ul class="nav__links nav__links--shop_info">
-							<li>
-								<cms:pageSlot position="MiniCart" var="cart" element="div" class="componentContainer">
-									<cms:component component="${cart}" element="div"/>
-								</cms:pageSlot>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<%--<div class="row desktop__nav">--%>
+					<%--<div class="nav__left col-xs-12 col-sm-6">--%>
+						<%--<div class="row">--%>
+							<%--<div class="col-sm-2 hidden-xs visible-sm mobile-menu">--%>
+								<%--<button class="btn js-toggle-sm-navigation" type="button">--%>
+									<%--<span class="glyphicon glyphicon-align-justify"></span>--%>
+								<%--</button>--%>
+							<%--</div>--%>
+							<%--<div class="col-sm-10">--%>
+								<%--<div class="site-search">--%>
+									<%--<cms:pageSlot position="SearchBox" var="component">--%>
+										<%--<cms:component component="${component}" element="div"/>--%>
+									<%--</cms:pageSlot>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+						<%--</div>--%>
+					<%--</div>--%>
+					<%--<div class="nav__right col-xs-6 col-xs-6 hidden-xs">--%>
+						<%--<ul class="nav__links nav__links--shop_info">--%>
+							<%--<li>--%>
+								<%--<cms:pageSlot position="MiniCart" var="cart" element="div" class="componentContainer">--%>
+									<%--<cms:component component="${cart}" element="div"/>--%>
+								<%--</cms:pageSlot>--%>
+							<%--</li>--%>
+						<%--</ul>--%>
+					<%--</div>--%>
+				<%--</div>--%>
 			</div>
 		</nav>
 
 		<a id="skiptonavigation"></a>
 	</sec:authorize>
 
-	<nav:topNavigation />
+	<div class="hidden-md hidden-lg">
+		<nav:topNavigation />
+	</div>
 
 	<cms:pageSlot position="BottomHeaderSlot" var="component" element="div">
 		<cms:component component="${component}" />

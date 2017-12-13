@@ -44,20 +44,32 @@ ul.nav__links {
 
 .navigation.navigation--top {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 0;
 
   @media (max-width: @screen-md) {
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 0;
   }
 }
 
 .navigation--top .nav__left {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  @media (max-width: @screen-md) {
+    margin-bottom: 10px;
+  }
+
   .simple-banner-component img,
   .simple-banner-component a,
   .banner__component img,
   .banner__component a {
     width: 160px;
+  }
+
+  &--menu {
+    vertical-align: bottom;
+    margin-left: 60px;
   }
 }
 
