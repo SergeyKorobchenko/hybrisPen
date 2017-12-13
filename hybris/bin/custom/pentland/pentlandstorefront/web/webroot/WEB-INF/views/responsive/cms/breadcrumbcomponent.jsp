@@ -6,10 +6,10 @@
 
 <c:if test="${fn:length(breadcrumbs) > 0}">
 	<div class="breadcrumb-section">
-		<%--<div class="container">--%>
+		<div class="container">
 			<div class="b-section--full-width">
 				<breadcrumb:breadcrumb breadcrumbs="${breadcrumbs}" />
 			</div>
-		<%--</div>--%>
+		</div>
 	</div>
 </c:if>

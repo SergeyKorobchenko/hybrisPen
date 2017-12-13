@@ -44,11 +44,11 @@
             <c:if test="${not empty quoteCount and quoteCount ne 0}">
                 <spring:url value="/my-account/my-quotes" var="listQuotesUrl" htmlEscape="false"/>
                     <a href="${listQuotesUrl}" class="cart__quotes--link cart__head--link">
-                        <spring:theme code="saved.quote.total.number" arguments="${quoteCount}"/>
+                        <span class="glyphicon glyphicon-flash"></span><spring:theme code="saved.quote.total.number" arguments="${quoteCount}"/>
                     </a>
             </c:if>
             <a href="${newCartUrl}" class="new__cart--link cart__head--link">
-                <spring:theme code="quote.edit.done" />
+                <span class="glyphicon glyphicon-floppy-disk"></span><spring:theme code="quote.edit.done" />
             </a>
         </div>
     </div>

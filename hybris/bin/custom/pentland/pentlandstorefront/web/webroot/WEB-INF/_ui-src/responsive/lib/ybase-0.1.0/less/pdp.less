@@ -100,11 +100,30 @@
 		  color: @brand-secondary;
 		  margin-bottom: 0px;
 
+		  &--id {
+			  font-size: @font-size-large-1;
+			  color: @text-color;
+			  margin-bottom: 15px;
+		  }
+
 		  &:last-child {
 			  margin-bottom: 30px;
 		  }
 	  }
   }
+}
+.product-details__external-links {
+	margin-top: 30px;
+	text-align: center;
+
+	.product-details__external-links--link {
+		padding-left: 15px;
+		padding-right: 15px;
+
+		.glyphicon {
+			margin-right: 5px;
+		}
+	}
 }
 
 .variant-section{
@@ -381,7 +400,7 @@
 		.glyphicon {
 			top: 4px;
 			padding-left: 15px;
-			color: @brand-secondary;
+			color: @link-color;
 		}
 	}
 }

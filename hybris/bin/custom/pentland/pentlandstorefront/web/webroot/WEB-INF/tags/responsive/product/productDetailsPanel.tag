@@ -11,19 +11,23 @@
 
 <div class="row">
 
-	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-6">
+	<div class="col-xs-12 col-sm-12 col-lg-6">
 		<product:productImagePanel galleryImages="${galleryImages}" />
-		<c:if test="${not empty product.videoURL}">
-			<div class=""><spring:theme code="product.videourl"/>: <span data-toggle="modal" data-target="#videoURLModal"><a href="javascript:void(0);">${fn:escapeXml(product.videoURL)}</a></span></div>
-		</c:if>
-		<c:if test="${not empty product.externalURL}">
-			<div class=""><spring:theme code="product.externalurl"/>: <a target="_blank" href="${fn:escapeXml(product.externalURL)}">${fn:escapeXml(product.externalURL)}</a></div>
-		</c:if>
+
+		<div class="product-details__external-links">
+			<c:if test="${not empty product.videoURL}">
+				<span data-toggle="modal" data-target="#videoURLModal"><a class="product-details__external-links--link" href="javascript:void(0);"><span class="glyphicon glyphicon-facetime-video"></span><spring:theme code="product.videourl"/></a></span>
+			</c:if>
+
+			<c:if test="${not empty product.externalURL}">
+				<a class="product-details__external-links--link" target="_blank" href="${fn:escapeXml(product.externalURL)}"><span class="glyphicon glyphicon-link"></span><spring:theme code="product.externalurl"/></a>
+			</c:if>
+		</div>
 	</div>
 
 	<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
 
-	<div class="col-sm-6 col-lg-6">
+	<div class="col-sm-12 col-lg-6">
 		<div class="product-details page-title">
 			<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 				<h1>${fn:escapeXml(product.name)}</h1>
@@ -34,7 +38,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="product-details">
-						<p class="product-details__sub-info"><spring:theme code="product.sku"/>: ${fn:escapeXml(product.materialKey)}</p>
+						<p class="product-details__sub-info--id"><spring:theme code="product.sku"/>: ${fn:escapeXml(product.materialKey)}</p>
 						<c:if test="${not empty product.brandName}">
 							<p class="product-details__sub-info"><spring:theme code="product.brand"/>: ${fn:escapeXml(product.brandName)}</p>
 						</c:if>

@@ -45,7 +45,7 @@
 
     <div class="hidden">
         <div class="unsaved_popup_content" data-popup-title="<spring:theme code='cart.unsaved.popup.title'/>">
-            <p class="lead text-center"><spring:theme code="cart.unsaved.popup.warning"/></p>
+            <p><spring:theme code="cart.unsaved.popup.warning"/></p>
             <div class="modal-actions">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">

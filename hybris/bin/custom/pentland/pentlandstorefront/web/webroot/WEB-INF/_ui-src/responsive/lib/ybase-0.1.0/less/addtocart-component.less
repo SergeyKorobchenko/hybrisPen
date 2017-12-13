@@ -95,7 +95,8 @@
 .add-to-cart{
 
 	.add-to-cart-item{
-		margin-bottom:(@grid-gutter-width/2);
+		margin-bottom:(@grid-gutter-width + 10);
+
 		.thumb {
 			float: left;
 			margin-right: (@grid-gutter-width/2);
@@ -104,12 +105,13 @@
 				}
 		}
 		.details{
-			font-size: 18px;
-			margin-left: 65px+(@grid-gutter-width/2);
-			.name{
-				font-weight: bold;
-				color: inherit;
-			}
+			//font-size: 18px;
+			margin-left: 65px + (@grid-gutter-width - 5);
+			min-height: 65px;
+			//.name{
+			//	font-weight: bold;
+			//	color: inherit;
+			//}
 		}
 
 		.price{

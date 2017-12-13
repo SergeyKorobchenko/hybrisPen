@@ -5,7 +5,7 @@
 <spring:url value="/cart/export" var="exportUrl" htmlEscape="false"/>
 <spring:url value="/cart/images" var="imagesExportUrl" htmlEscape="false"/>
 
-<div class=" col-xs-12 col-md-3 pull-left">
+<div class=" col-xs-12 col-md-6 pull-left">
     <a href="${exportUrl}" class="export__cart--link">
         <span class="glyphicon glyphicon-download-alt"></span>
         <spring:theme code="basket.export.csv.file"/>

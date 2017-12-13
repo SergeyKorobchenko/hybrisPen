@@ -65,15 +65,15 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
 ;;PentlandTermsOfUseParagraphComponent;"<a name=""PentlandTerms""></a>
 <div class=""terms"">
-<h2>Terms of Use</h2>
-<h4>Company Information</h4>
+<h2>Pentland Terms</h2>
+<h3>Company Information</h3>
 <p>
 Pentland Brands Limited<br/>
 Company Registration Number: 09820760<br/>
 Company Registration Address: 8 Manchester Square, London, W1U 3PH, UK<br/>
 V.A.T Registration Number: GB 231 0451 211<br/>
-Registered in England<br/>
-</p>
+Registered in England
+</p><br/>
 <h3>
 Legal Notice:
 </h3>
@@ -94,10 +94,8 @@ Legal Notice:
 <p>SPEEDO and the Arrow Device are registered trade marks owned and used under licence from Speedo Holdings B.V.</p>
 <p>TED BAKER is a registered trade mark owned and used under licence from Ted Baker Limited</p>
 <p>TRACKSMITH and the Hare Device are registered trade marks owned by the Tracksmith Corporation</p>
-</div>
-<h3>
-Terms & Conditions
-</h3>
+</div><br/>
+<h3>Terms & Conditions</h3>
 <p>
 This website is brought to you by Pentland Brands Limited (“Pentland Brands”), and all rights, including copyright, in the content of these Pentland Brands web pages are owned and controlled by Pentland Brands.
 </p>
@@ -106,24 +104,22 @@ If you have any comments or queries relating to this website, please contact us 
 </p>
 <p>
 You (“the User”) are invited to use the Pentland Brands Website (“the Website”) on the basis of the terms and conditions of use set out below.
-</p>
-<h4>
-Terms of Use
-</h4>
+</p><br/>
+<h4>Terms of Use</h4>
 <ul>
 <li>By entering the Website and using the Features you are deemed to have read and accepted these Term of Use. If you do not accept these Term of Use or any part of them, you should not enter or use the Website.</li>
 <li>Pentland Brands may modify these Terms of Use from time to time. Your continued use of this Website following such change demonstrates your agreement to be bound by the modified Terms of Use.</li>
-</ul>
-<h4>
-The Features
-</h4>
+</ul><br/>
+<h4>The Features</h4>
 <p>The Website currently makes the following features available to the User Text Messaging, e-postcards, video clips, downloading of screensavers, desktops and soundsets.</p>
+<br/>
 <h4>Registration</h4>
 <ul>
 <li>Before using the Features, the User must register with Pentland Brands by submitting the Registration Form. Upon registration, Pentland Brands will issue each User with a unique password. This password allows the User to access the Features.</li>
 <li>The User is solely responsible for maintaining the security and confidentiality of the password and must not reveal it to any unauthorised third party.</li>
 <li>If the password is lost or becomes known to an unauthorised third party, the User must notify the Moderator as soon as possible. Pentland Brands will disable the original password and issue a replacement.</li>
 </ul>
+<br/>
 <h4>Misuse of Features</h4>
 <ul>
 <li>In providing the Text Messaging and e-Postcard Features, Pentland Brands’ role is limited to enabling the relevant communications to take place. Pentland Brands does not monitor material disseminated by Users through these features. Pentland Brands does not monitor or confirm the identity or age of the User.</li>
@@ -136,6 +132,7 @@ The Features
 </ul>
 </li>
 </ul>
+<br/>
 <h4>Website Content – Accuracy and Permitted Use</h4>
 <ul>
 <li>Pentland Brands makes every effort to ensure that the content of the Website is accurate and up-to-date, but Pentland Brands does not offer any warranties (whether express, implied or otherwise) as to the reliability, accuracy or completeness of the information appearing on the Website.</li>
@@ -144,12 +141,14 @@ The Features
 <li>his website is intended to provide information relating to Pentland Brands products and is designed for personal, non-commercial use only.</li>
 <li>Users may not use this Website, or any of the material appearing on the Website from time to time to further any commercial purpose, including (but not limited to) advertising or to promote or encourage traffic to any other website.</li>
 </ul>
+<br/>
 <h4>Intellectual Property Rights</h4>
 <ul>
 <li>You acknowledge and agree that all copyright, rights in data, databases, trade marks, names, images, logos and other intellectual property rights in the Website content, software and all HTML and other code involved in this Website (“Intellectual Property Rights”), shall remain at all times vested in Pentland Brands and is protected by copyright and other laws and international treaty provisions.</li>
 <li>Users may not, other than in accordance with these Terms, modify, copy, distribute, transmit, display, redistribute, reproduce, publish, license, show or play in public, download, commercially exploit, create derivative works from, transfer, or sell in whole or in part, the Website or any of the Intellectual Property Rights relating thereto, without first obtaining written permission from Pentland Brands to do so.</li>
 <li>All trade marks appearing on the Website are owned by Pentland Brands or our affiliates and nothing contained in this Website shall be construed as conferring by implication or otherwise any licence or right to use any of the Intellectual Property Rights displayed or subsisting on or in this Website other than in accordance with these Terms.</li>
 </ul>
+<br/>
 <h4>Limitation of Liability</h4>
 <ul>
 <li>The internet is by its nature an unreliable medium. Consequently, you accept that this Website is offered on an “as is” and “as available” basis.</li>
@@ -157,25 +156,25 @@ The Features
 <li>Pentland Brands has no control over, and disclaims all responsibility for, any content you encounter, or events which may occur as a result of your use of the Features and Pentland Brands shall not be liable for any damages or other losses of any type whatsoever incurred by you as a result of your use of the Website or the Features.</li>
 <li>Pentland Brands does not exclude liability for death or personal injury. However, by accepting these Terms of Use, you accept that Pentland Brands cannot be liable to you for any loss or damage you suffer as a result of visiting this Website or making use of the Features or information available on the Website. You must take you own precautions (including but not limited to installing adequate protective measures to guard against software viruses and ensuring that you retain up-to-date copies of all data) to protect yourself against loss or damage.</li>
 </ul>
+<br/>
 <h4>Governing Law</h4>
 <ul>
 <li>These terms and your use of this Website shall be governed by and construed in accordance with English law.</li>
 <li>By accepting these Terms and using the Website or the Features, you accept that any dispute under these Terms or arising out of use of this Website shall be subject to the exclusive jurisdiction of the English courts and by using this Website you hereby submit to the jurisdiction of such courts for such purposes and waive any and all objections to jurisdiction or venue in such courts.</li>
 <li>This Website is not intended for use of access by any person or company in any jurisdiction other than England and Wales. Those who choose to use or access this Website from other jurisdictions do so at their own risk and on their own initiative and are responsible for compliance with local laws, to the extent any local laws are applicable.</li>
 </ul>
+<br/>
 </div>"
-;;MitreTermsParagraphComponent;"<a name=""MitreTerms""/><div class=""terms"">
-<p><a name=""websiteterms""></a></p>
+;;MitreTermsParagraphComponent;"<a name=""MitreTerms""/></a><div class=""terms"">
+<h2>Mitre Terms</h2>
+<a name=""websiteterms""></a>
 <h3>Website Terms and Conditions of Use</h3>
-<p>Welcome to <a href=""http://www.mitreprostar.com/"">www.Mitreprostar.com</a> (the &ldquo;Website&rdquo;). There are a few rules that our visitors must follow when using our Website, so we ask all our visitors to read our Terms and Conditions of Use (the &ldquo;Terms and Conditions&rdquo;) carefully.</p>
+<p>Welcome to <a href=""http://www.mitreprostar.com/"">www.mitreprostar.com</a> (the &ldquo;Website&rdquo;). There are a few rules that our visitors must follow when using our Website, so we ask all our visitors to read our Terms and Conditions of Use (the &ldquo;Terms and Conditions&rdquo;) carefully.</p>
 <p>This Website is brought to you by Prostar Sports Ltd (&ldquo;Prostar&rdquo;, or &ldquo;we&rdquo;, or &ldquo;us&rdquo;), and all rights, including copyright, in the content of the Website is owned or controlled by Prostar.</p>
 <p>Prostar and its affiliates provide access to the Website and Prostar sells its products to you subject to the Prostar Business Terms and Conditions of Sale.</p>
-<p>If you have any comments or queries relating to this Website, please contact us via email at enquiries@Mitreprostar.com or by post at Prostar Sports Limited, The Pentland Centre, Squires Lane, London, N3 2QL, England.</p>
-<ol>
-<li>
+<p>If you have any comments or queries relating to this Website, please contact us via email at enquiries@mitreprostar.com or by post at Prostar Sports Limited, The Pentland Centre, Squires Lane, London, N3 2QL, England.</p>
+<br/>
 <h4>What do I agree to by entering the Website?</h4>
-</li>
-</ol>
 <p>You are invited to use the Website on the basis of these Terms and Conditions.</p>
 <p>By entering the Website and using its Features (as defined below) you are deemed to have read and accepted these Terms and Conditions. If you do not accept these Terms and Conditions or any part of them, you should not enter or use the Website.</p>
 <p>Prostar may modify or update these Terms and Conditions from time to time. If you continue to use this Website after any changes, this means you agree to be bound by the modified Terms and Conditions.</p>
@@ -183,17 +182,14 @@ The Features
 <p>These Terms and Conditions regarding your use of the Website constitute a legally binding agreement between you and Prostar.</p>
 <p>These Terms and Conditions will remain in full force and effect as long as you are a user of the Website and in the event of termination of any membership, service or feature, you will still be bound by your obligations under these Terms and Conditions and any additional terms or rules featured in the Website, including any indemnities, warranties and limitations of liability.</p>
 <p>We reserve the right to refuse access to the Website, terminate accounts and to remove or edit content at our sole discretion.</p>
-<ol start=""2"">
-<li><strong>Registration</strong></li>
-</ol>
+<br/>
+<h4>Registration</h4>
 <p>We may require you to have a unique user name and password combination in order to access and use certain features or functions of the Website and may also, from time to time, provide you with additional codes or passwords necessary to access and use certain features or functions of the Website. As part of the registration process for the feature or function, you will choose a user name and password (or we may assign an initial password which we will give you the option to change). Your user name and password are personal to you and you may not allow any others to use your user name or password under any circumstances. We are not liable for any harm caused or related to the theft or misappropriation of your user name or password, disclosure of your user name or password, or your authorization of anyone else to use your user name or password. You agree to immediately notify us if you become aware of or believe there is or may have been any unauthorized use of (or activity using) your user name or password or any other need to deactivate your user name or password due to security concerns.</p>
-<ol start=""3"">
-<li><strong> The Features</strong></li>
-</ol>
+<br/>
+<h4>The Features</h4>
 <p>The Website offers MITRE and PROSTAR branded products for sale to you (the &ldquo;Features&rdquo;). Any purchases made by you are subject to our Business Terms and Conditions of Sale.</p>
-<ol start=""4"">
-<li><strong> Permitted Use of the Website</strong></li>
-</ol>
+<br/>
+<h4>Permitted Use of the Website</h4>
 <p>You agree to use the Features in this Website in good faith and in the spirit in which they are made available to you. In particular you must not:</p>
 <ul>
 <li>upload, send or resend any content which is obscene or vulgar, offensive, abusive, harmful, threatening, libellous, defamatory, invasive of another's privacy, racially or ethically or religiously insulting or otherwise unlawful; or is in breach of copyright, trade mark, confidence, privacy or any other right; or is otherwise injurious to third parties; or objectionable; or which consists of, or contains, software viruses, commercial solicitation, chain letters, mass mailings or any 'spam';</li>
@@ -215,22 +211,19 @@ The Features
 <p>If you or any other party has any issues or concerns with the content of any communications generated via the Website, you should contact the website moderator as soon as possible at the address shown above.</p>
 <p>You agree that all Features will be used entirely at your own risk and Prostar accepts no responsibility for any losses or consequences suffered by you as a result of your use of the Website.</p>
 <p>If Prostar is informed or has any reason to believe that any of the Features on our Website are being used by a user other than in accordance with these Terms and Conditions, Prostar reserves the right to suspend or permanently prevent access by that user to the Features and shall have no liability to the user whatsoever in such event.</p>
-<ol start=""5"">
-<li><strong> Sending Us Material</strong></li>
-</ol>
+<br/>
+<h4>Sending Us Material</h4>
 <p>Whenever you make use of a feature that allows you to upload material such as ideas, opinions, suggestions, mini-polls, surveys, videos, pictures or anything else (the &ldquo;Material&rdquo;) to our site, you must comply with the content standards set out in our Permitted Use policy as set out in paragraph 4 above. You warrant that any such contribution does comply with those standards, and you indemnify us for any breach of that warranty.</p>
 <p>Any material you upload to our site will be considered non-confidential and non-proprietary, and we have the right to use, copy, create derivative works from, distribute and disclose to third parties any such material for any purpose. By submitting Material to this Website you warrant that you have the right to make it available to Prostar, the Material is not defamatory and the Material does not infringe any law or rights or interests of any third party in any country of the world, in particular that the Material does not plagiarise or infringe on the rights of third parties including copyright, trade mark, trade secret, privacy, personal publicity or proprietary rights in accordance with our Permitted Use policy as set out in paragraph 4 above. We also have the right to disclose your identity to any third party who is claiming that any material posted or uploaded by you to our site constitutes a violation of their intellectual property rights, or of their right to privacy.</p>
 <p>We will not be responsible, or liable to any third party, for the content or accuracy of any materials posted by you or any other user of our site.</p>
 <p>We have the right to remove any material or posting you make on our site if, in our opinion, such material does not comply with the content standards set out in our Permitted Use policy as set out in paragraph 4 above.</p>
 <p>You agree to indemnify Prostar against all legal fees, damages and other expenses that may be incurred by Prostar as a result of your breach of the above warranty. You also agree to waive any moral rights in the Material for the purposes of its submission to and publication on the Website and the other purposes specified above.</p>
 <p>Please also refer to our promotional Terms and Conditions for any special terms which apply to competition entries.</p>
-<ol start=""6"">
-<li><strong> Licence for Website Access</strong></li>
-</ol>
+<br/>
+<h4>Licence for Website Access</h4>
 <p>Prostar grants you a limited licence to access and make use of this Website. The licence does not allow you to download (other than where specifically indicated or for the purpose of page caching) or modify it, or any portion of it, except with our express written consent. This licence does not include any resale or commercial use of this Website or its contents; any derivative use of this Website or its contents; any downloading or copying of account information for the benefit of another merchant; or any use of data mining, robots, or similar data gathering and extraction tools.</p>
-<ol start=""7"">
-<li><strong> Website Content &ndash; Accuracy and Permitted Use</strong></li>
-</ol>
+<br/>
+<h4>Website Content &ndash; Accuracy and Permitted Use</h4>
 <p>RELIANCE ON INFORMATION POSTED</p>
 <p>Prostar makes every effort to ensure that the content of the Website is accurate and up-to-date, but Prostar does not offer any warranties (whether express, implied or otherwise) as to the reliability, accuracy or completeness of the information appearing on the Website. Prostar disclaims all liability and responsibility arising from any reliance placed upon the content of the Website by any visitor to the Website, or by anyone who may be informed of any of the contents of the Website.</p>
 <p>Prostar does not verify, endorse, or have any responsibility for any third party websites, their business practices, or any goods or services associated with or obtained in connection with any such website which is linked to or from this website. For the avoidance of doubt, Prostar is not responsible for the content in any such third party website.</p>
@@ -249,65 +242,58 @@ The Features
 <p>Contracts for the supply of goods formed through our site or as a result of visits made by you are governed by our Business Terms and Conditions of Sale.</p>
 <p>CHANGES TO THE PERMITTED USE POLICY</p>
 <p>We may revise our permitted use policy at any time by amending this page. You are expected to check this page from time to time to take notice of any changes we make, as they are legally binding on you. Some of the provisions contained in this acceptable use policy may also be superseded by provisions or notices published elsewhere on our site.</p>
-<ol start=""8"">
-<li><strong> Intellectual Property Rights</strong></li>
-</ol>
+<br/>
+<h4>Intellectual Property Rights</h4>
 <p>You acknowledge and agree that all copyright, rights in data, databases, trade marks, names, images, designs, logos and other intellectual property rights in the Website software, content, compilation of such content included on the Website such as text, graphics, logos, button icons and images, and all HTML and other code involved in this Website (&ldquo;Intellectual Property Rights&rdquo;), shall remain at all times vested in Prostar or its subsidiaries, its affiliates or its content suppliers and that these are protected by UK, European and International copyright and database right laws other laws and international treaty provisions.</p>
 <p>You may not, other than in accordance with these Terms and Conditions, modify, copy, distribute, transmit, display, redistribute, transfer, or sell in whole or in part, the Website or any of the Intellectual Property Rights relating thereto, or use any logo or trade mark which is featured on the Website or other proprietary graphic or trade mark as part of the link without our express written consent. You may not frame or use similar techniques to enclose any trade mark, logo, or other proprietary information (including images, text, page layout, or form) of Prostar and its affiliates. You may not use any meta tags or any other 'hidden text' utilising Prostar or its affiliates' names or trade marks. Any unauthorised use shall terminate the permission or license granted by Prostar.</p>
 <p>All trade marks appearing on the Website are used by Prostar with permission from the relevant trade mark owners. Nothing contained in this Website shall be construed as conferring by implication or otherwise any licence or right to use any of the Intellectual Property Rights displayed or subsisting on or in this Website other than in accordance with these Terms and Conditions.</p>
-<ol start=""9"">
-<li><strong> Viruses, Hacking and Other Offences</strong></li>
-</ol>
+<br/>
+<h4>Viruses, Hacking and Other Offences</h4>
 <p>You must not misuse the Website by knowingly introducing viruses, trojans, worms, logic bombs or other material which is malicious or technologically harmful. You must not attempt to gain unauthorised access to the Website, the server on which the Website is stored or any server, computer or database connected to the Website. You must not attack the Website via a denial-of-service attack or a distributed denial-of service attack.</p>
 <p>By breaching this provision, you would commit a criminal offence under the Computer Misuse Act 1990. We will report any such breach to the relevant law enforcement authorities and we will co-operate with those authorities by disclosing your identity to them. In the event of such a breach, your right to use the Website will cease immediately.</p>
 <p>We will not be liable for any loss or damage caused by a distributed denial-of-service attack, viruses or other technologically harmful material that may infect your computer equipment, computer programs, data or other proprietary material due to your use of the Website or to your downloading of any material posted on it, or on any website linked to it.</p>
-<ol start=""10"">
-<li><strong> Disclaimer and Limitation of Liability</strong></li>
-</ol>
+<br/>
+<h4>Disclaimer and Limitation of Liability</h4>
 <p>The Internet is by its nature an unreliable medium. Consequently, you accept that this Website is offered on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis.</p>
 <p>We will do our utmost to ensure uninterrupted availability of the Website and that transmissions will be without errors. However, due to the nature of the Internet, this cannot be guaranteed. Your access to the Website may also be occasionally suspended or restricted to allow for repairs, maintenance, or the introduction of new facilities or services. We will attempt to limit the frequency and duration of any such suspension or restriction.</p>
 <p>While Prostar takes all reasonable steps to ensure that the Website is accurate and up-to-date, and properly functioning at all times, Prostar does not offer any representations or warranties of any kind (whether express, implied or otherwise) as to the reliability, accuracy or completeness of the Website; the information, content, materials, or products included on this Website; that your access to the Website will be uninterrupted, timely, secure or error-free; that defects will be corrected; or that this Website, e-mails sent by us or the server that makes the Website available are free of software viruses or bugs or other harmful components or defects.</p>
 <p>Prostar has no control over, and disclaims all responsibility for, any content you encounter, or events which may occur as a result of your use of the Features and Prostar shall not be liable for any damages or other losses of any type whatsoever incurred by you as a result of your use of the Website or the Features.</p>
 <p>Prostar does not exclude liability for death or personal injury. However, by accepting these Terms and Conditions and using the Website, you accept that Prostar cannot be liable to you for any loss or damage you suffer as a result of visiting this Website or making use of the Features or information available on the Website. You must take your own precautions (including but not limited to installing adequate protective measures to guard against software viruses and ensuring that you retain up-to-date copies of all data) to protect yourself against loss or damage.</p>
-<ol start=""11"">
-<li><strong> Alteration of Service or Amendments to the Conditions</strong></li>
-</ol>
+<br/>
+<h4>Alteration of Service or Amendments to the Conditions</h4>
 <p>We reserve the right to make changes to our Website, policies, and these Terms and Conditions at any time. Your use of the Website will be subject to the policies and Terms and Conditions in force at the time that you use the Website, unless any change to those policies or these conditions is required to be made by law or government authority. If any of these conditions is deemed invalid, void, or for any reason unenforceable, that condition will be deemed severable and will not affect the validity and enforceability of the remaining conditions.</p>
-<ol start=""12"">
-<li><strong> Events beyond our Reasonable Control</strong></li>
-</ol>
+<br/>
+<h4>Events beyond our Reasonable Control</h4>
 <p>Prostar will not be held responsible for any delay or failure to comply with our obligations under these conditions if the delay or failure arises from any cause which is beyond our reasonable control.</p>
-<ol start=""13"">
-<li><strong> Waiver</strong></li>
-</ol>
+<br/>
+<h4>Waiver</h4>
 <p>If you breach these Terms and Conditions and we take no action, we will still be entitled to use our rights and remedies in any other situation where you breach these conditions.</p>
-<ol start=""14"">
-<li><strong> Governing Law and Jurisdiction</strong></li>
-</ol>
+<br/>
+<h4>Governing Law and Jurisdiction</h4>
 <p>These terms and your use of this Website shall be governed by and construed in accordance with English Law.</p>
 <p>By accepting these Terms and Conditions and using the Website, you accept that any dispute under these Terms and Conditions or arising out of use of this Website shall be subject to the exclusive jurisdiction of the English courts and by using this Website you hereby submit to the jurisdiction of such courts for such purposes and waive any and all objections to jurisdiction or venue in such courts.</p>
 <p>Those persons outside England and Wales who choose to use or access this Website from their own jurisdictions do so at their own risk and on their own initiative and are responsible for compliance with local laws, to the extent any local laws are applicable.</p>
-<ol start=""15"">
-<li><strong> Our Details</strong></li>
-</ol>
-<p><a href=""http://www.mitreprostar.com/"">www.Mitreprostar.com</a> is owned by Prostar Sports Limited, The Pentland Centre, Squires Lane, London N3 2QL, England. Our Company Registration Number is 1912919 and our registered office address is at 8 Manchester Square, London W1U 3PH.</p>
+<br/>
+<h4>Our Details</h4>
+<p><a href=""http://www.mitreprostar.com/"">www.mitreprostar.com</a> is owned by Prostar Sports Limited, The Pentland Centre, Squires Lane, London N3 2QL, England. Our Company Registration Number is 1912919 and our registered office address is at 8 Manchester Square, London W1U 3PH.</p>
 <p>&copy;2014 Prostar Sports Limited. All Rights Reserved.</p>
-<p>&nbsp;</p>
-<p><a name=""businessterms""></a></p>
+<br/>
+<a name=""businessterms""></a>
 <h3>Business Terms and Conditions of Sale</h3>
 <p>Welcome to <a href=""http://www.mitreprostar.com/"">www.mitreprostar.com</a> (the ""Website""). This Website is brought to you by Prostar Sports Limited (the ""Company"") and all rights, including copyright, in the content of the website is owned or controlled by the Company.</p>
 <p>The Company and its affiliates provide access to the Website subject to the Terms and Conditions set out herein.</p>
 <p>All business is carried on subject to the following terms and conditions (&ldquo;Terms&rdquo;), except as varied by specific written agreement of the Company. By placing any order with the Company the customer shall be deemed to have agreed to and accepted these Terms. In these Terms &ldquo;Contract&rdquo; means the contract for the supply of Goods formed by the Company&rsquo;s acceptance of the customer&rsquo;s order.</p>
-<p><strong>Terms and Conditions of Sale</strong></p>
+<br/>
+<h4>Terms and Conditions of Sale</h4>
 <ol>
-<li><strong> Your Account</strong></li>
+<li>Your Account</li>
 </ol>
 <p>1.1. You are responsible for maintaining the confidentiality of your account and password and for restricting access to prevent unauthorised access to your account. You agree to accept responsibility for all activities that occur under your account or password. You should take all necessary steps to ensure that the password is kept confidential and secure and should inform us immediately if you have any reason to believe that your password has become known to anyone else, or if the password is being, or is likely to be, used in an unauthorised manner.</p>
 <p>1.2. Please ensure that the details you provide us with are correct and complete, and inform us immediately of any changes to the information that you provided when you registered.</p>
 <p>1.3. The Website only sells products to those who can purchase with a credit/debit card or via their customer account with Prostar where this has been separately agreed in advance with Prostar.</p>
 <p>1.4. Prostar reserves the right to refuse access to the Website, terminate accounts, remove or edit content, or cancel orders at its discretion. If we cancel an order, it will be without charge to you.</p>
 <ol start=""2"">
-<li><strong> Our Contract</strong></li>
+<li>Our Contract</li>
 </ol>
 <p>2.1. No order will be binding upon the Company unless and until accepted by the Company in writing or by delivery of any goods the subject of the order (&ldquo;Goods&rdquo;).</p>
 <p>2.2. Orders are accepted only on the basis that these Terms (or varied as aforesaid) apply to the order. Accordingly any terms endorsed on or contained or referred to in any customer&rsquo;s order or confirmation or otherwise communicated to the Company which are inconsistent with these Terms and are not specifically agreed to in writing by the Company, shall be deemed to be superseded and nullified by these Terms.</p>
@@ -324,24 +310,26 @@ The Features
 <p>2.13. Interest on any outstanding amounts may be charged which shall accrue from the due payment date until the date of payment at a rate of 2% above National Westminster Bank plc&rsquo;s base lending rate from time to time in force. No payment shall be deemed to have been made until the Company&rsquo;s account is credited with the relevant cleared funds.</p>
 <p>2.14. The customer may not withhold or make any deduction from or set off against any payment due to the Company for any reason.</p>
 <ol start=""3"">
-<li><strong> Returns</strong></li>
+<li>Returns</li>
 </ol>
 <p>3.1.The Company will (at the Company's option) either replace, repair or refund the price (at the Company's sole option) of any Goods (including reasonable delivery costs) which are shown to the Company's reasonable satisfaction to be defective in materials or workmanship at the time of delivery or to be a shortfall in quantity delivered provided that:</p>
-<p>the customer inspects the Goods on delivery and notifies the Company within three (3) days of delivery of any alleged defects, shortage in quantity or damage. If the customer fails to comply with these provisions, the Goods shall be deemed conclusively to be in accordance with the Contract and free from any defect or damage which would be apparent on a reasonable examination of them;</p>
-<p>when signing for deliveries the customer must state clearly on the delivery note any damage or shortages;</p>
-<p><br /> loss or non-delivery must be notified in writing to the Company and to the carrier within seven (7) working days of the despatch date on the advice.</p>
-<p>where a defect would not have been apparent on a reasonable examination under clause 3.1(a), the customer notifies the Company as soon as reasonably possible when the defect becomes apparent or within three hundred and sixty five days (365) days of delivery whichever is earlier; and</p>
-<p>the customer provides all information and assistance required by the Company to investigate any suspected defect and, if required, permits the Company to inspect the Goods concerned at any premises where the same are located.</p>
-<p>The customer has adhered to all care and maintenance requirements for the Goods (for example, washing instructions on apparel, appropriate use of balls and care sheet).</p>
-<p>The customer will arrange for the return of all Goods and will be responsible for all delivery costs associated with the return of the Goods. Delivery costs will be credited to the customer upon request (up to a maximum of &pound;7.50) if the Goods are deemed by the Company (at the Company's discretion) as faulty.</p>
+<ul>
+<li>the customer inspects the Goods on delivery and notifies the Company within three (3) days of delivery of any alleged defects, shortage in quantity or damage. If the customer fails to comply with these provisions, the Goods shall be deemed conclusively to be in accordance with the Contract and free from any defect or damage which would be apparent on a reasonable examination of them;</li>
+<li>when signing for deliveries the customer must state clearly on the delivery note any damage or shortages;</li>
+<li>loss or non-delivery must be notified in writing to the Company and to the carrier within seven (7) working days of the despatch date on the advice.</li>
+<li>where a defect would not have been apparent on a reasonable examination under clause 3.1(a), the customer notifies the Company as soon as reasonably possible when the defect becomes apparent or within three hundred and sixty five days (365) days of delivery whichever is earlier; and</li>
+<li>the customer provides all information and assistance required by the Company to investigate any suspected defect and, if required, permits the Company to inspect the Goods concerned at any premises where the same are located.</li>
+<li>The customer has adhered to all care and maintenance requirements for the Goods (for example, washing instructions on apparel, appropriate use of balls and care sheet).</li>
+<li>The customer will arrange for the return of all Goods and will be responsible for all delivery costs associated with the return of the Goods. Delivery costs will be credited to the customer upon request (up to a maximum of &pound;7.50) if the Goods are deemed by the Company (at the Company's discretion) as faulty.</li>
+</ul>
 <p>3.2. Customers must always contact the Company prior to returning any Goods. Goods which are returned without an authorisation code on the outside of the packaging will be rejected by the Company and the Goods will not be replaced, repaired or Refunded in accordance with these Terms and Conditions.</p>
 <p>3.3. Clause 3.1 defines the Company's full liability in respect of the Goods. All other conditions, warranties or other undertakings concerned with the Goods whether express or implied by statute, common law, custom, usage or otherwise, are excluded except that nothing in these Terms shall exclude any liability of the Company for death or injury resulting from negligence or for breach of terms as to title under Section 12 of the Sale of Goods Act 1979.</p>
 <p>3.4. Without prejudice to the provisions of clauses 3.1 and 3.2, the Company shall not be liable for any costs, claims, damages, losses or expenses arising out of any tortious act or omission or any breach of contract or statutory duty calculated by reference to profits, income, production or accruals or loss of such profits, income, production or accruals.</p>
 <p>3.5. Save where the law prohibits such limitation of liability and without prejudice to clauses 3.1, 3.2 and 3.3, the liability of the Company shall not in any circumstances exceed the invoice value of the Goods.</p>
 <p>3.6. No unwanted Goods may be returned without the Company's prior written agreement. Any returns of unwanted Goods which the Company agrees to accept must be forwarded carriage prepaid to the Company. For returns that require repackaging or re-boxing, a 10% restocking fee will be made.</p>
-<p>The customer will arrange for the return of all unwanted goods and will be responsible for all delivery costs associated with the return. <em><br /> <br /> </em></p>
+<p>The customer will arrange for the return of all unwanted goods and will be responsible for all delivery costs associated with the return.</p>
 <ol start=""4"">
-<li><strong>Title and Risk</strong></li>
+<li>Title and Risk</li>
 </ol>
 <p>4.1 The passing of title and risk in the Goods supplied by the Company shall be as follows:</p>
 <ul>
@@ -381,20 +369,20 @@ The Features
 <p>4.5. Any suggested retail prices quoted in the Company&rsquo;s price lists or catalogues shall not limit the customer&rsquo;s right to set its own retail prices.</p>
 <p>4.6. The Company shall not be liable in any way for loss, damage or expense arising directly or indirectly from any failure or delay in performing any obligation under any contract caused by any circumstances beyond its reasonable control, which shall, without limiting the generality of the foregoing, be deemed to include war or any other action of military forces, terrorism, riot, civil commotion, sabotage, vandalism, accident, break-down or damage to machinery or equipment, fire flood, legislative or administrative interference, acts of God, strike, lock-out or other industrial disputes (whether or not involving employees of the Company) or shortage of materials or the Company&rsquo;s inability to procure materials or supplies. On the occurrence of any such event, the Company may at its discretion, perform, suspend performance of or terminate the contract.</p>
 <ol start=""5"">
-<li><strong> Intellectual Property</strong></li>
+<li>Intellectual Property</li>
 </ol>
 <p>5.1. The Customer shall ensure that no trade mark or logo used on or in connection with any of the Goods or their packaging is added to, obscured, removed, defaced, altered or otherwise interfered with in any way.</p>
 <p>5.2. Trade marks and/or logos applied to any of the Goods may be used in advertising material intended for use in retail outlets or in catalogues for the purpose only of promoting the retail sale of the Goods concerned and provided that the Company&rsquo;s prior written consent is obtained.</p>
 <p>5.3. Except as permitted by clause 27 above the customer shall not make any use of any logo or trade mark owned or used by the Company (whether in connection with the goods or otherwise) or any part thereof for any purpose whatsoever.</p>
 <ol start=""6"">
-<li><strong> Product Care and Printing</strong></li>
+<li>Product Care and Printing</li>
 </ol>
 <p>6.1. The customer shall follow all care instructions and take all necessary precautions to protect the material and colour of the Goods. In this regard, the customer should note that all fabric will discolour by staining and/or perspiration; lighter colours will discolour more than darker; and fabric printed by sublimation process can re-print if subjected to temperatures over 70&deg;C.</p>
 <p>6.2. The Company will not accept any liability for or replace Goods which have been discoloured or damaged as a result of the customer&rsquo;s (or customer&rsquo;s customer&rsquo;s) failure to comply with any product care instructions provided by the Company, including but not limited to discolouring or damage as a result of staining and/or perspiration or which have re-printed, or which receive further print or embellishment or customising processes from sources other than the Company.</p>
 <p>6.3. Whilst the Company takes care to ensure that the colours printed in its catalogues or brochures are an accurate reflection of the colours of its products, variations will occur. Materials of different fibres in the same garment can also vary in colour during wear and laundering and no liability can be accepted by the Company for those variations.</p>
 <p>6.4. The Company takes care to accurately reproduce customers&rsquo; requirements for additional printing on its products such as sponsors, names, numbers or letters. The Company cannot however guarantee an exact reproduction and slight variations will occur for which no liability will be accepted.</p>
 <ol start=""7"">
-<li><strong> Sales Outside the United Kingdom </strong></li>
+<li>Sales Outside the United Kingdom</li>
 </ol>
 <p>7.1. The customer shall not solicit orders from any person outside the UK but within the EEA where such person is in a territory exclusively reserved to the Company or allocated by the Company to a third party. For the avoidance of doubt, the customer shall be entitled to make sales of the Goods outside the UK but within the EEA in response to unsolicited orders or in territories within the EEA which have not been exclusively reserved to the Company or allocated by the Company to a third party.</p>
 <p>7.2. The customer shall refer to the Company all enquiries it receives for the Goods which relate to sales outside or export from the EEA.</p>
@@ -405,7 +393,7 @@ The Features
 </ul>
 <p>In particular (but not without prejudice to the generality of the foregoing) the customer shall not engage in advertising by reference to the MITRE or PROSTAR trade marks aimed at any place outside the UK or use any branch or distribution depot outside the UK for the sale or marketing of the products.</p>
 <ol start=""8"">
-<li><strong> Fraud Prevention, Fraud Screening and Age and Identity Verification Checks </strong></li>
+<li>Fraud Prevention, Fraud Screening and Age and Identity Verification Checks</li>
 </ol>
 <p>8.1. By confirming your order, including by taking the positive step of ticking the relevant box on our website, you will be indicating that you have read, understood and agree to these e-commerce terms and conditions and that you explicitly consent to your personal information being used by us, our third party service providers and Fraud Prevention Agencies (as further described below) for the following purposes. You should not confirm your order or tick the relevant box on our website unless you consent to this use of your personal information. If you have any questions at all about this, please contact us at sales@prostar.co.uk before you proceed with your purchase.</p>
 <p>8.2. Your personal information including your full name and address, your bank account and card payment details and your sensitive personal data will be used for fraud prevention, fraud screening and age and identity verification purposes. This personal information may be disclosed to and used by fraud prevention agencies (&ldquo;FPAs&rdquo;) for all such purposes and those agencies may keep a record of it where permitted by the Data Protection Act 1998 (as amended and/or replaced from time to time). This personal information will also be disclosed to third parties providing fraud prevention, fraud screening and age and/or identity verification services us.</p>
@@ -420,29 +408,26 @@ The Features
 <p>8.6. If you give us false or inaccurate information about yourself and if we suspect fraudulent payments and/or identity fraud we will record this and may also pass this information to FPAs and other organisations involved in crime and fraud prevention. We and other organisations may access and use information which relates to you and which is recorded by FPAs in other countries.</p>
 <p>8.7. This section constitutes a short form explanation about how your personal information may be used by us in conjunction with the FPAs. If you would like to obtain full details about this, please contact us at sales@prostar.co.uk.</p>
 <ol start=""9"">
-<li><strong> Other</strong></li>
+<li>Other</li>
 </ol>
 <p>9.1. The customer shall also comply with all applicable laws, regulations, codes and sanctions relating to anti-bribery and anti-corruption and shall act in accordance with the Company's policy in this regard in all dealings with or on behalf of the Company.</p>
 <p>9.2. Any part of these Terms which is void or unenforceable shall be deemed severable and shall not affect any other part of these Terms.</p>
 <p>9.3. No waiver or forbearance by the Company (express or implied) in enforcing any of its rights under a Contract shall prejudice its right to do so in the future.</p>
-<p>&nbsp;</p>
-<p><a name=""prostarasset""></a></p>
+<br/>
+<a name=""prostarasset""></a>
 <h3>Prostar Asset Management Terms and Conditions</h3>
-<p>Welcome to <a href=""http://www.mitreprostar.com/"">www.mitreprostar.com</a><u> </u> (the &ldquo;Website&rdquo;). There are a few rules that our visitors must follow when using our Website, so we ask all our visitors to read our Terms and Conditions of Use (the &ldquo;Terms and Conditions&rdquo;) carefully.</p>
+<p>Welcome to <a href=""http://www.mitreprostar.com/"">www.mitreprostar.com</a> (the &ldquo;Website&rdquo;). There are a few rules that our visitors must follow when using our Website, so we ask all our visitors to read our Terms and Conditions of Use (the &ldquo;Terms and Conditions&rdquo;) carefully.</p>
 <p>This Website is brought to you by Prostar Sports Limited (&ldquo;Prostar&rdquo;, or &ldquo;we&rdquo;, or &ldquo;us&rdquo;), and all rights, including copyright, in the content of the Website is owned or controlled by Prostar.</p>
 <p>If you have any comments or queries relating to this Website, please contact us via email at <a href=""mailto:sales@prostar.co.uk"">sales@prostar.co.uk</a>.</p>
 <p>Use of the Asset Management facility is subject to the Website Terms and Conditions of Use, above.</p>
-<ol>
-<li><strong>The Materials <br /> <br /> </strong></li>
-</ol>
+<br/>
+<h4>The Materials</h4>
 <p>The Website is available to retailer customers (&ldquo;You&rdquo; or the &ldquo;User&rdquo;) of the MITRE and PROSTAR brands and enables registered users to view and download digital assets (the &ldquo;Materials&rdquo;) for the purpose of marketing the MITRE and PROSTAR brands.</p>
-<ol start=""2"">
-<li><strong>Website Content &ndash; Accuracy and Permitted Use <br /> <br /> </strong></li>
-</ol>
+<br/>
+<h4>Website Content &ndash; Accuracy and Permitted Use</h4>
 <p>Prostar or its affiliates may remove Materials, from the Website at its own discretion and without any notice. <br /> You are permitted to use the Website and the Materials from time to time only as expressly authorised by Prostar or its affiliates.</p>
-<ol start=""3"">
-<li><strong>Copyright, legal statement and database rights </strong></li>
-</ol>
+<br/>
+<h4>Copyright, legal statement and database rights</h4>
 <p>MITRE, and the are registered trade marks of Mitre Sports International Limited (the &ldquo;Mitre Trade Marks&rdquo;).</p>
 <p>PROSTAR and are registered trade marks of Prostar Sports Limited (the &ldquo;Prostar Trade Marks&rdquo;).</p>
 <p>All content and compilation of such content included on the Website including but not limited to the Materials and all other, text, graphics, logos, photographs, button icons, images and software contained on this Website (the &ldquo;Website Content&rdquo;), is the property of Prostar or its affiliates and is protected by UK, European and International laws.</p>
@@ -450,6 +435,7 @@ The Features
 <p>Users may use the Materials only in the form in which they are provided on this Website. No alterations should be made to the Materials without the prior written consent of Prostar. <br /> Users shall only use the Materials in the promotion of Mitre and Prostar products. <strong>Any and all use of the Materials shall be subject to Prostar&rsquo;s prior written consent and the marketing material approval process and policy as notified to the user from time to time. All marketing materials, brochures and advertising materials created using the Materials must be provided to Prostar for prior written approval in accordance with the Prostar and/or Mitre marketing approval policy. </strong></p>
 <p>Please contact Prostar if you require further information regarding the Prostar or the Mitre marketing approval process and policy.</p>
 <p>You must not use the Mitre Trade Marks or the Prostar Trade Marks as part of your corporate, business, internet domain or trading name. You must not use or authorise the use of any of the Trade Marks as the name of any shop or other retail outlet. You shall only use the Trade Marks in the form in which they are provided on this Website.</p>
+<br/>
 </div>"
 ;;PentlandCookiePolicyParagraphComponent;"<a name=""CookiePolicy""></a><div class=""terms""><h2>Cookie Policy</h2><p>Our Website uses cookies to improve its content and ease of use. Cookies are small files of letters and numbers that we put on your computer if you agree.</p><p>We use session cookies that allow you to be remembered within the website, so any page changes or item or data selection you do is recalled from page to page. This means that you don&rsquo;t get asked the same information that you've already given to the site. These cookies are temporary and are erased when you close your browser at the end of your surfing session.</p>
 <p>We use tracking cookies. These help us to remember your information and settings when you visit our website in the future. This results in a faster and more convenient access and may enhance your experience of services or functions we offer. These cookies remain on your hard drive until you delete them or they expire (they have varying expiry dates, going up to two years).</p>
@@ -457,38 +443,38 @@ The Features
 <p>Our cookies do not keep personally identifiable information. None of the data we get from cookies will contain information that will enable anyone to contact you via telephone, email, any other means. Tracking is limited to this site and is not shared with third party advertisers.</p>
 <p>You can block cookies by activating the setting on your browser which allows you to refuse the setting of all or some cookies. However, if you use your browser settings to block all cookies, you may not be able to access all, or parts of our site, and might not be able to shop on the website. Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies as soon you visit our site.</p>
 <p>Please visit <a href=""http://www.aboutcookies.org/"" target=""_blank"">www.aboutcookies.org</a> to find out more about cookies.</p>
+<br/>
 </div>"
 ;;PentlandPrivacyPolicyParagraphComponent;"<a name=""PrivacyPolicy""></a><div class=""terms""><h2>Privacy Policy</h2>
-<ul>
-<li>Pentland Brands is careful to ensure that any personal information submitted by the User is properly looked after. Pentland Brands is committed to meeting the requirements of all relevant laws and codes including the Data Protection Act 1998 and is registered with the Information Commission under registration no Z7299961 as a Data Controller.</li>
-<li>Personal Information
-<ul>
+<p>Pentland Brands is careful to ensure that any personal information submitted by the User is properly looked after. Pentland Brands is committed to meeting the requirements of all relevant laws and codes including the Data Protection Act 1998 and is registered with the Information Commission under registration no Z7299961 as a Data Controller.</p>
+<br/>
+<h3>Personal Information</h3>
 <li>The only personal information that we will collect is the personal information that you provide to us when you register with us or which are required to use certain of the Features. We will at any time, at your written request, provide you with a copy of any personal information that we are holding about you.</li>
 <li>By using this Website and communicating electronically with Pentland Brands, the User acknowledges and agrees to Pentland Brands processing personal information in accordance with these Terms.</li>
 </ul>
 </li>
-<li>Cookies</li>
 </ul>
+<br/>
+<h3>Cookies</h3>
 <p>Our website uses cookies to improve its content and ease of use. Cookies are small files of letters and numbers that we put on your computer if you agree. We use web analytics cookies to help us understand what content is most useful to our users. They allow us to recognise and count the number of users and to see how they like to move around the website. This helps us to improve how the website works, for example by making sure that users are finding what they need easily.</p>
 <p>Our cookies do not keep personally identifiable information. None of the data we get from cookies will contain information that will enable anyone to contact you via telephone, email, or any other means.</p>
 <p>You can block cookies by activating the setting on your browser which allows you to refuse the setting of all or some cookies. However, if you use your browser settings to block all cookies, you may not be able to access all, or parts of the website.</p>
 <p>Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies as soon you visit the website.</p>
 <p>Please visit&nbsp;<a href=""http://www.aboutcookies.org/"">www.aboutcookies.org</a>&nbsp;to find out more about cookies.</p>
 <ul>
-<li>Disclosure</li>
 </ul>
+<br/>
+<h3>Disclosure</h3>
 <p>Except as otherwise provided, Pentland Brands will not disclose any information processed by us to any third party, unless required to do so by law.</p>
-<ul>
-<li>Changes to our Privacy Policy</li>
+<br/>
+<h3>Changes to our Privacy Policy</h3>
 <ul>
 <li>Any changes to the Privacy Policy will be posted here.</li>
 <li>If Pentland Brands wishes to make material changes to the way we use your personal information we will ask for your consent before we do so.</li>
 </ul>
-</ul>
-</div>"
-;;faqMenuParagraph;"<div class=""nav_column""><div class=""title_holder""><div class=""title""><div class=""title-top"">
-</div></div>
-<h2>Frequently asked questions</h2></div>
+</div>
+<br/>"
+;;faqMenuParagraph;"<h1>Frequently asked questions</h1><div class=""faq__nav_column"">
 <div class=""item""><ul class=""facet_block indent"">
 <li><a href=""#PentlandTerms"">Pentland Terms</a></li>
 <li><a href=""#MitreTerms"">Mitre Terms</a>
@@ -504,9 +490,7 @@ The Features
 
 #Contact Us Page
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;PentlandContactUsParagraphComponent ;"<div class=""contact-info""><h3> We are here </h3> <h5> We are a truly global business with offices in 26 locations worldwide </h5> <h4> Our Global HQ </h4> <p> Pentland Brands Limited<br/> Lakeside, Squires Lane, London, N3 2QL, UK<br/> <a href=""tel:+4402083462600"">+44(0)20 8346 2600</a><br/> <a class=""mail"" href=""mailto:b2binfo@pentland.com?subject=Pentland%20Brands%20-%20Wholesale%20and%20Retail%20Portal%20Enquiry"">b2binfo@pentland.com</a><br/> </p> </div>"
-
-
+;;PentlandContactUsParagraphComponent ;"<h1>We are here</h1><h5>We are a truly global business with offices in 26 locations worldwide</h5><h2>Our Global HQ</h2><p>Pentland Brands Limited<br/> Lakeside, Squires Lane, London, N3 2QL, UK</p> <p><a href=""tel:+4402083462600"">+44(0)20 8346 2600</a><br/> <a href=""mailto:b2binfo@pentland.com?subject=Pentland%20Brands%20-%20Wholesale%20and%20Retail%20Portal%20Enquiry"">b2binfo@pentland.com</a></p>"
 
 # Dynamic banner for Product grid page
 UPDATE  DynamicBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
@@ -581,7 +565,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 
 # Apparel Cart Page
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
-;;EmptyCartParagraphComponent;"<h2>Your shopping basket is empty</h2><p>Suggestions</p><ul>	<li>Browse our products by selecting a category above</li></ul>"
+;;EmptyCartParagraphComponent;"<h2>Your shopping basket is empty</h2><p>Suggestions:</p><ul><li>Browse our products by selecting a category above.</li></ul>"
 ;;HelpParagraphComponent;"<strong>Need Help with your checkout process?</strong> <span>Contact Us or Call phone number.</span>"
 
 # Apparel Navigation nodes and links
