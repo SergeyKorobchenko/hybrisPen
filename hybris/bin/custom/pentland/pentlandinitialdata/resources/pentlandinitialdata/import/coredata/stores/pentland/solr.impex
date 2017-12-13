@@ -34,6 +34,18 @@ INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=tru
 ;$serverConfigName;http://pnt-d-fr-srch-001.hybrishosting.com:8983/solr;true
 #% endif:
 
+#% if: "stag".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+;$serverConfigName;http://pnt-s-fr-srch-001.hybrishosting.com:8983/solr;true
+;$serverConfigName;http://pnt-s-fr-srch-002.hybrishosting.com:8983/solr;false
+#% endif:
+
+#% if: "prod".equals(Config.getParameter("environment.id"));
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+;$serverConfigName;http://pnt-p-fr-srch-001.hybrishosting.com:8983/solr;true
+;$serverConfigName;http://pnt-p-fr-srch-002.hybrishosting.com:8983/solr;false
+#% endif:
+
 #% if: "common".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
 ; $serverConfigName ; http://localhost:8983/solr ; true
