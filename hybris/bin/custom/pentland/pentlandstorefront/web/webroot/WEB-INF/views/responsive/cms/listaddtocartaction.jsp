@@ -27,8 +27,11 @@
                     </button>
                 </c:when>
                 <c:otherwise>
-                    <button type="submit" class="btn btn-icon btn-primary btn-block glyphicon-shopping-cart js-enable-btn" disabled="disabled">
-                        <spring:theme code="basket.add.to.basket"/>
+                    <%--<button type="submit" class="btn btn-icon btn-primary btn-block glyphicon-shopping-cart js-enable-btn" disabled="disabled">--%>
+                        <%--<spring:theme code="basket.add.to.basket"/>--%>
+                    <%--</button>--%>
+                    <button type="submit" class="btn btn-icon btn-primary btn-block js-enable-btn" disabled="disabled">
+                        <span class="basket-icon"></span><spring:theme code="basket.add.to.basket"/>
                     </button>
                 </c:otherwise>
             </c:choose>

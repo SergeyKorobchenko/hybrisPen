@@ -25,7 +25,8 @@
 		data-mini-cart-items-text="<spring:theme code="basket.items"/>"
 		>
 		<div class="mini-cart-icon">
-			<span class="glyphicon glyphicon-shopping-cart "></span>
+			<%--<span class="glyphicon glyphicon-shopping-cart "></span>--%>
+			<span class="basket-icon"></span>
 		</div>
 		<ycommerce:testId code="miniCart_items_label">
 			<common:hidePricesForUser>
