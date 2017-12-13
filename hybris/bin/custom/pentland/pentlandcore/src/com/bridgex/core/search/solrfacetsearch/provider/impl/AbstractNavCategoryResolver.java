@@ -56,7 +56,7 @@ public abstract class AbstractNavCategoryResolver extends AbstractValueResolver<
   }
 
   private boolean isCategoryBlocked(CategoryModel category){
-    if(category.isClearance() || category.isSmu() || category.isHidden()){
+    if(category.isHidden()){
       return true;
     }
     if(CollectionUtils.isEmpty(category.getSupercategories()) || category instanceof ClassificationClassModel) {
