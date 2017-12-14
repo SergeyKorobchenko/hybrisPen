@@ -251,8 +251,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final String brandCode = product.getVariantOption().getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
     reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
-    // todo uncomment after ERP fix
-    //reqProduct.setMaterialNumber(product.getVariantOption().getCode());
+    reqProduct.setMaterialNumber(product.getVariantOption().getCode());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
@@ -285,8 +284,7 @@ public class PentlandProductFacadeImpl extends DefaultProductFacade implements P
     final String brandCode = product.getBrandCode();
     final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
     reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
-    // todo uncomment after ERP fix
-    //reqProduct.setMaterialNumber(product.getMaterialKey());
+    reqProduct.setMaterialNumber(product.getMaterialKey());
 
     if(MapUtils.isNotEmpty(brandUnitsMap)) {
       final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
