@@ -229,4 +229,8 @@
 		<property name="userService" ref="userService"/>
 	</bean>
 
+	<alias name="pentlandSearchResponseResultsPopulator" alias="commerceSearchResponseResultsPopulator"/>
+	<bean id="pentlandSearchResponseResultsPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.PentlandSearchResponseResultsPopulator"
+	      parent="defaultCommerceSearchResponseResultsPopulator"/>
+
 </beans>
