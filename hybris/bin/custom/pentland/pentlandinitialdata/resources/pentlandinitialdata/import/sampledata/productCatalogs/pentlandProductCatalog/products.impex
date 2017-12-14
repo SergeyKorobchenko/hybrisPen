@@ -84,10 +84,10 @@ INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);supercategori
 ;M35392_B;;pieces;shoes;ApparelStyleVariantProduct;;;;FEMALE
 
 # Create ApparelStyleVariantProduct variants
-INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);primaryColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved
-;M25687_B;;M25687;pieces;BLACK;5001;ApparelSizeVariantProduct
-;M25687_W;;M25687;pieces;WHITE;5001;ApparelSizeVariantProduct
-;M27160;;M27160_B;pieces;SILVER;5001;ApparelSizeVariantProduct
+INSERT_UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);primaryColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved;clearance[default=false]
+;M25687_B;;M25687;pieces;BLACK;5001;ApparelSizeVariantProduct;;true
+;M25687_W;;M25687;pieces;WHITE;5001;ApparelSizeVariantProduct;;true
+;M27160;;M27160_B;pieces;SILVER;5001;ApparelSizeVariantProduct;;true
 ;M28323;;M28323_B;pieces;BLACK;5001;ApparelSizeVariantProduct
 ;M32946;;M32946_B;pieces;WHITE;5002;ApparelSizeVariantProduct
 ;M33307;;M33307_B;pieces;BLACK;5002;ApparelSizeVariantProduct
