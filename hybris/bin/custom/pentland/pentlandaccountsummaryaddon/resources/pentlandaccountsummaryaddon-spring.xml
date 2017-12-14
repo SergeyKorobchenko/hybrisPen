@@ -34,20 +34,18 @@
 	<alias name="defaultAmountFormatter" alias="amountFormatter" />
 	<bean id="defaultAmountFormatter" class="com.bridgex.pentlandaccountsummaryaddon.formatters.impl.DefaultAmountFormatter" />
 
-	<util:map id="accountStatusSearchByList" map-class="java.util.HashMap" 
+	<util:map id="accountStatusSearchByList" map-class="java.util.HashMap"
 			key-type="java.lang.String" value-type="java.lang.Class">
 		<entry key="documentNumber" value="java.lang.String" />
 		<entry key="documentType" value="java.lang.String" />
 		<entry key="date" value="java.util.Date" />
 		<entry key="dueDate" value="java.util.Date" />
 		<entry key="amount" value=" java.math.BigDecimal" />
-		<entry key="openAmount" value=" java.math.BigDecimal" />
 	</util:map>
 		
 	<util:constant id="DATE" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel.DATE"/>
 	<util:constant id="DUEDATE" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel.DUEDATE"/>
 	<util:constant id="AMOUNT" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel.AMOUNT"/>
-	<util:constant id="OPENAMOUNT" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel.OPENAMOUNT"/>
 	<util:constant id="DOCUMENTTYPE" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel.DOCUMENTTYPE"/>
 	<util:constant id="DOCUMENTTYPECODE" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel.CODE"/>
 	<util:constant id="STATUS" static-field="com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel.STATUS"/>
@@ -71,10 +69,7 @@
 	<bean id="amountRangeCriteria" class="com.bridgex.pentlandaccountsummaryaddon.document.criteria.AmountRangeCriteria" scope="prototype">
 		<constructor-arg ref="AMOUNT"/>
 	</bean>
-	<bean id="openAmountRangeCriteria" class="com.bridgex.pentlandaccountsummaryaddon.document.criteria.AmountRangeCriteria" scope="prototype">
-		<constructor-arg ref="OPENAMOUNT"/>
-	</bean>
-	
+
 	<util:map id="filterByList" map-class="java.util.LinkedHashMap" 
 			key-type="java.lang.String" value-type="com.bridgex.pentlandaccountsummaryaddon.document.criteria.FilterByCriteria">
 		<entry key="documentNumber" value-ref="documentNumberCriteria" />
@@ -93,18 +88,18 @@
 	
 	<util:map id="b2bDocumentSortMap" map-class="java.util.LinkedHashMap" 
 			key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="byDocumentNumberAsc" value-ref="DOCUMENTNUMBER"/>
+		<entry key="byDocumentNumberDesc" value-ref="DOCUMENTNUMBER"/>
+		<entry key="byDocumentTypeAsc" value-ref="DOCUMENTTYPECODE"/>
+		<entry key="byDocumentTypeDesc" value-ref="DOCUMENTTYPECODE"/>
 		<entry key="byDocumentDateAsc" value-ref="DATE"/>
 		<entry key="byDocumentDateDesc" value-ref="DATE"/>
 		<entry key="byDueDateAsc" value-ref="DUEDATE"/>
 		<entry key="byDueDateDesc" value-ref="DUEDATE"/>
 		<entry key="byOriginalAmountAsc" value-ref="AMOUNT"/>
 		<entry key="byOriginalAmountDesc" value-ref="AMOUNT"/>
-		<entry key="byDocumentTypeAsc" value-ref="DOCUMENTTYPECODE"/>
-		<entry key="byDocumentTypeDesc" value-ref="DOCUMENTTYPECODE"/>
 		<entry key="byDocumentStatusAsc" value-ref="STATUS"/>
 		<entry key="byDocumentStatusDesc" value-ref="STATUS"/>
-		<entry key="byDocumentNumberAsc" value-ref="DOCUMENTNUMBER"/>
-		<entry key="byDocumentNumberDesc" value-ref="DOCUMENTNUMBER"/>
 	</util:map>
 
 	<alias alias="b2bDocumentDao" name="defaultB2BDocumentDao" />

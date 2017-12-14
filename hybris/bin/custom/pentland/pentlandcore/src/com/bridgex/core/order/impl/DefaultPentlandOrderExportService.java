@@ -165,9 +165,13 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     });
   }
 
-  private boolean processSuccessfulResponse(OrderModel orderModel, ExportOrderResponse responseBody) {List<SapOrderDto> sapOrderDTOList = responseBody.getSapOrderDTOList();
+  private boolean processSuccessfulResponse(OrderModel orderModel, ExportOrderResponse responseBody) {
+    List<SapOrderDto> sapOrderDTOList = responseBody.getSapOrderDTOList();
     List<OrderModel> byBrandOrderList = new ArrayList<>();
     for(SapOrderDto sapOrderDTO: sapOrderDTOList){
+      if(StringUtils.isEmpty(sapOrderDTO.getOrderCode())){
+        continue;
+      }
       OrderModel sapOrder = null;
       try {
         sapOrder = customerAccountService.getOrderForCode(sapOrderDTO.getOrderCode(), orderModel.getStore());
