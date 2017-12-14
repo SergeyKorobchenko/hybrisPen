@@ -43,12 +43,16 @@
 
                                         <div id="addressbook"  class="long-scrollable ">
                                                 <div class="addressEntry">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="${nextStep}"
-                                                               class="btn btn-success btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.markFor.noSelection"/></a>
-                                                        </li>
-                                                    </ul>
+                                                    <form action="${request.contextPath}/checkout/multi/mark-for/select" method="GET">
+                                                        <input type="hidden" name="selectedAddressCode" value="" />
+                                                        <ul>
+                                                            <li>
+                                                                <button type="submit" class="btn btn-success btn-block checkout-next">
+                                                                    <spring:theme code="checkout.multi.deliveryAddress.markFor.noSelection" />
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </form>
                                                 </div>
                                             <c:forEach items="${deliveryAddresses}" var="deliveryAddress" varStatus="status">
                                                 <div class="addressEntry">

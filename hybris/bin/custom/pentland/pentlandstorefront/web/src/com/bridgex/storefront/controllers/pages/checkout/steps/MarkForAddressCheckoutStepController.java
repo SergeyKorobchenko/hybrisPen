@@ -123,7 +123,14 @@ public class MarkForAddressCheckoutStepController extends AbstractCheckoutStepCo
 	}
 
 	protected void setDeliveryAddress(final String selectedAddressCode) {
-		acceleratorCheckoutFacade.setMarkForAddressForCart(selectedAddressCode);
+		if(StringUtils.isEmpty(selectedAddressCode)){
+			CartData checkoutCart = getCheckoutFacade().getCheckoutCart();
+			if(checkoutCart.getMarkForAddress() != null){
+				acceleratorCheckoutFacade.removeMarkForAddressFromCart();
+			}
+		}else {
+			acceleratorCheckoutFacade.setMarkForAddressForCart(selectedAddressCode);
+		}
 	}
 
 	@RequestMapping(value = "/back", method = RequestMethod.GET)

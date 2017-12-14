@@ -74,10 +74,10 @@ public class SpecialCategoryAssignmentJobPerformable extends AbstractJobPerforma
 
     List<ProductModel> clearanceProductsForSapBrandAndCatalogVersion = productService.findClearanceProductsForSapBrandAndCatalogVersion(brand.getCode(), catalogVersion);
     for(ProductModel productModel: clearanceProductsForSapBrandAndCatalogVersion){
-      productModel.setSupercategories(Collections.singletonList(category));
+      productModel.setSupercategories(null);
     }
     modelService.saveAll(clearanceProductsForSapBrandAndCatalogVersion);
-//    category.setProducts(clearanceProductsForSapBrandAndCatalogVersion);
+    category.setProducts(clearanceProductsForSapBrandAndCatalogVersion);
 
     modelService.save(category);
   }
