@@ -22,26 +22,21 @@ public class PentlandCommerceDeliveryAddressStrategy extends DefaultCommerceDeli
     validateParameterNotNull(cartModel, "Cart model cannot be null");
     getModelService().refresh(cartModel);
 
-    final UserModel user = cartModel.getUser();
-    getModelService().refresh(user);
-
     cartModel.setDeliveryAddress(addressModel);
+    cartModel.setMarkFor(null);
 
-    // Check that the address model belongs to the same user as the cart
-    if (isValidDeliveryAddress(cartModel, addressModel)) {
+
       getModelService().save(cartModel);
 
-      if (addressModel != null && flagAsDeliveryAddress && !Boolean.TRUE.equals(addressModel.getShippingAddress())) {
-        // Flag the address as a delivery address
-        addressModel.setShippingAddress(Boolean.TRUE);
-        getModelService().save(addressModel);
-      }
-
-      getModelService().refresh(cartModel);
-
-      return true;
+    if (addressModel != null && flagAsDeliveryAddress && !Boolean.TRUE.equals(addressModel.getShippingAddress())) {
+      // Flag the address as a delivery address
+      addressModel.setShippingAddress(Boolean.TRUE);
+      getModelService().save(addressModel);
     }
 
-    return false;
+    getModelService().refresh(cartModel);
+
+    return true;
+
   }
 }
