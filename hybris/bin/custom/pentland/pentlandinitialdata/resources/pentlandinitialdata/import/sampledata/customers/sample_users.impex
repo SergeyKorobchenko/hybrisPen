@@ -28,7 +28,9 @@ INSERT_UPDATE UserPriceGroup;code[unique=true]
 UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid);sapBrand;salesOrg;distCh;
 ;TestB2BUnit;pronto-services;PROFORMA;107660;mitregroup,speedogroup,canterburygroup;05;5000;01
 ;MitreTestB2BUnit;pronto-services;PROFORMA;107660;mitregroup;05;5000;01
-;SpeedoTestB2BUnit;pronto-services;PROFORMA;107660;speedogroup;08;8000;01
+;SpeedoTestB2BUnit;pronto-services;PROFORMA;107660;speedogroup;08;8001;01
+;SpeedoExportTestB2BUnit;pronto-services;PROFORMA;125387;speedogroup;08;8001;01
+;MitreExportTestB2BUnit;pronto-services;PROFORMA;125387;mitregroup;05;5000;01
 ;CanterburyTestB2BUnit;pronto-services;PROFORMA;107660;Pronto Services, canterburygroup;0Q;5000;01
 ;MitreTestB2BUnit_125253;pronto-services;PROFORMA;125253;mitregroup;05;5000;01
 
@@ -126,11 +128,12 @@ INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(
 ;Unit B;Pronto Services;Pronto Services;Pronto Services;Pronto;Pronto;ProntoAddrID3;ProntoID3;;;;;pronto;CREDITCARD;pronto-services
 
 INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);addressID[unique=true];owner(&B2BUnitID)[unique=true];sapCustomerID;markForAddress;markForAddresses(addressID);displayName[lang=en]
-;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;131128;ProntoID2;pronto-services;true;;131128
+;700 E 50th Street;10022;New York;GB;TRUE;TRUE;TRUE;TRUE;Gi;Sun;gi.sun@pronto-hw.com;mr;131128;ProntoID2;125387;true;;131128
 ;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID3;ProntoID3;pronto-services;true;;address7
 ;11000 Bagby Street Houston;Texas;Houston;GB;TRUE;TRUE;TRUE;TRUE;James;Bell;james.bell@Pronto-hw.com;mr;ProntoAddrID7;ProntoID3;jamesTestB2B;true;;address102
 ;3000 Lombard Street;94123;San Francisco;GB;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@pronto-hw.com;mr;ProntoAddrID1;ProntoID1;pronto-services;false;131128,ProntoAddrID3;address8
-;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;125387;ProntoID1;107660;false;131128,ProntoAddrID3;125387
+;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;ProntoAddrID4;ProntoID1;107660;false;ProntoAddrID3;address9
+;221B Baker Street;94123;London;GB;TRUE;TRUE;TRUE;TRUE;Sherlock;Holmes;james.bell@pronto-hw.com;mr;125387;ProntoID1;125387;false;131128,ProntoAddrID3;125387
 ;112 Some Street;14223;London;GB;TRUE;TRUE;TRUE;TRUE;John;Snow;james.bell@pronto-hw.com;mr;ProntoAddrID8;ProntoID1;107660;false;;No MarkFors Addr
 ;123 Some Street;11323;London;GB;TRUE;TRUE;TRUE;TRUE;Mitre;User;mitre.user@mitre.com;mr;ProntoAddrID9;ProntoID1;125253;false;;No MarkFors Addr
 
@@ -149,6 +152,7 @@ INSERT_UPDATE B2BCustomer;description;uid[unique=true];email;name;title(code);gr
 ;Customer C;william.hunter@pronto-hw.com;william.hunter@pronto-hw.com;William Hunter;mr;Pronto Services, b2bcustomergroup, enhancedPermissions, TestB2BUnit;
 ;Customer D;gi.sun@pronto-hw.com;gi.sun@pronto-hw.com;Gi Sun;mr;Pronto Services, b2bcustomergroup, commonPermissions, TestB2BUnit;;
 ;Manager A;akiro.nakamura@pronto-hw.com;akiro.nakamura@pronto-hw.com;Akiro Nakamura;mr;b2bmanagergroup, MitreTestB2BUnit,SpeedoTestB2BUnit,CanterburyTestB2BUnit, b2bcustomergroup;
+;Manager A;aria.stark@stark.com;aria.stark@stark.com;A girl has no name;ms;b2bmanagergroup, MitreExportTestB2BUnit,SpeedoExportTestB2BUnit, b2bcustomergroup;
 ;Manager B;anil.gupta@pronto-hw.com;anil.gupta@pronto-hw.com;Anil Gupta;mr;Pronto Goods, b2bmanagergroup,TestB2BUnit;
 
 INSERT_UPDATE B2BBudget;code[unique=true];Unit(uid);budget;currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=en];

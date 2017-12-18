@@ -34,10 +34,7 @@ import com.bridgex.facades.customer.PentlandCustomerFacade;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.Resource;
 
@@ -410,7 +407,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	{
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
-		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
+		model.addAttribute("deliveryAddresses", getDeliveryAddresses());
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));
 		model.addAttribute("removeAddressEnabled", Boolean.valueOf(getCheckoutFacade().isRemoveAddressEnabledForCart()));
@@ -422,6 +419,16 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setCheckoutStepLinksForModel(model, getCheckoutStep());
+	}
+
+	protected List<? extends AddressData> getDeliveryAddresses()
+	{
+		List<AddressData> deliveryAddresses = null;
+
+		deliveryAddresses = (List<AddressData>) getCheckoutFacade().getSupportedDeliveryAddresses(true);
+
+
+		return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
 	}
 
 }
