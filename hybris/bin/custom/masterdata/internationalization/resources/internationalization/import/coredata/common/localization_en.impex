@@ -1440,6 +1440,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.status.display.refused;Refused
 ;text.account.order.status.display.rejected;Rejected
 ;text.account.order.status.display.valid;Valid
+;text.account.order.status.display.IN PROGRESS;In Progress
+;text.account.order.status.display.APPROVED;Approved
 ;text.account.order.status.title;Status
 ;text.account.order.subtotal;Subtotal:
 ;text.account.order.summary;A summary of your order is below:
