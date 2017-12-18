@@ -2951,3 +2951,4 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.unsaved.popup.cancel;NO
 
 ;text.company.accountsummary.unit.details.page.defaultSort;Sort by
+;product.grid.variants.clearance;Clearance on some colours

@@ -98,7 +98,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@PreValidateCheckoutStep(checkoutStep = DELIVERY_ADDRESS)
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
-		getCheckoutFacade().setDeliveryAddressIfAvailable();
+//		getCheckoutFacade().setDeliveryAddressIfAvailable();
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
 		populateCommonModelAttributes(model, cartData, new AddressForm());

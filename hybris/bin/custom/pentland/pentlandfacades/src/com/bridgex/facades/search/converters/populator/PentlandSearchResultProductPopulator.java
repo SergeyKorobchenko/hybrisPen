@@ -57,6 +57,11 @@ public class PentlandSearchResultProductPopulator extends SearchResultVariantOpt
 
     populateUrl(source, target);
 
+    Boolean clearance = this.<Boolean>getValue(source, "clearance");
+    if(BooleanUtils.isTrue(clearance)){
+      target.setClearance(clearance);
+    }
+
     if (CollectionUtils.isEmpty(source.getVariants()))
     {
       return;
@@ -73,10 +78,7 @@ public class PentlandSearchResultProductPopulator extends SearchResultVariantOpt
     final List<SearchResultValueData> variants = source.getVariants().stream()
                                                        .filter(distinctByKey(p -> getValue(p, rollupProperty))).collect(Collectors.toList());
 
-    Boolean clearance = this.<Boolean>getValue(source, "clearance");
-    if(BooleanUtils.isTrue(clearance)){
-      target.setClearance(clearance);
-    }else {
+    if(BooleanUtils.isFalse(clearance)) {
       for (SearchResultValueData variant : variants) {
         clearance = this.<Boolean>getValue(variant, "clearance");
         if (BooleanUtils.isTrue(clearance)) {
