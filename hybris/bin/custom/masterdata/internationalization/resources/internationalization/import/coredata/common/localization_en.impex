@@ -2925,7 +2925,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
 ;checkout.error.empty.cart;Your basket does not have any quantity. Please add quantity before proceeding to checkout.
-;checkout.error.empty.entry.cart;Your basket does not have any quantity for one or more products. Please add quantity before proceeding to checkout.
+;checkout.error.empty.entry.cart;"Your basket does not have any quantity for one or more products. Please add quantity before proceeding to checkout, or remove these products from the basket."
 
 ;text.account.hidePrices;Show/Hide prices
 ;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
@@ -2954,3 +2954,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;text.company.accountsummary.unit.details.page.defaultSort;Sort by
 ;product.grid.variants.clearance;Clearance on some colours
+
+;order.form.moq;MOQ={0}
+;order.form.moq.any;MOQ=Any

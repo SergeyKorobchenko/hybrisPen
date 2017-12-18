@@ -53,7 +53,14 @@
 
                                     <form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get" action="#">
                                         <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control">
-                                            <option disabled <c:if test="${'relevance' eq searchPageData.pagination.sort}">selected="selected"</c:if>><spring:theme code="${themeMsgKey}.defaultSort"/></option>
+                                            <c:choose>
+                                                <c:when test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
+                                                    <option disabled <c:if test="${'relevance' eq searchPageData.pagination.sort}">selected="selected"</c:if>><spring:theme code="${themeMsgKey}.defaultSort"/></option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option disabled><spring:theme code="${themeMsgKey}.sortTitle"/></option>
+                                                </c:otherwise>
+                                            </c:choose>
                                             <c:forEach items="${searchPageData.sorts}" var="sort">
                                                 <c:if test="${'relevance' ne sort.code}">
                                                     <option value="${fn:escapeXml(sort.code)}" ${sort.selected? 'selected="selected"' : ''}>

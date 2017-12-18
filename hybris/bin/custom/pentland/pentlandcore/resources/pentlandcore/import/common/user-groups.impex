@@ -24,6 +24,8 @@ INSERT_UPDATE B2BUnit;description;uid[unique=true];name;locName[lang=en];groups(
 ;MitreTestB2BUnit;MitreTestB2BUnit;MitreTestB2BUnit;MitreTestB2BUnit;;MitreTestB2BUnit
 ;MitreTestB2BUnit_125253;MitreTestB2BUnit_125253;MitreTestB2BUnit_125253;MitreTestB2BUnit_125253;;MitreTestB2BUnit_125253
 ;SpeedoTestB2BUnit;SpeedoTestB2BUnit;SpeedoTestB2BUnit;SpeedoTestB2BUnit;;SpeedoTestB2BUnit
+;MitreExportTestB2BUnit;MitreExportTestB2BUnit;MitreExportTestB2BUnit;MitreExportTestB2BUnit;;MitreExportTestB2BUnit
+;SpeedoExportTestB2BUnit;SpeedoExportTestB2BUnit;SpeedoExportTestB2BUnit;SpeedoExportTestB2BUnit;;SpeedoExportTestB2BUnit
 ;CanterburyTestB2BUnit;CanterburyTestB2BUnit;CanterburyTestB2BUnit;CanterburyTestB2BUnit;;CanterburyTestB2BUnit
 
 INSERT_UPDATE B2BCustomer;description;uid[unique=true];originalUid;email;name;title(code);groups(uid);sessionCurrency(isocode)[default='GBP'];sessionLanguage(isocode);$setPassword
