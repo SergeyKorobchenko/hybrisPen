@@ -217,9 +217,8 @@
                                                 </a>
                                             </c:when>
                                             <c:otherwise>
-                                                <a class="req-doc-link" href="${getDocumentUrl}${result.documentNumber}/">
-                                                    <spring:theme code="text.company.accountsummary.document.attachment.view.label"/>
-                                                </a>
+                                                <a class="req-doc-link" href="${getDocumentUrl}${result.documentNumber}/"><span class="download-pdf-icon"></span></a>
+                                                <%--<spring:theme code="text.company.accountsummary.document.attachment.view.label"/>--%>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
