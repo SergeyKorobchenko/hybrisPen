@@ -97,11 +97,23 @@
             <%--</c:if>--%>
 
             <input type="hidden" class="${fn:escapeXml(skusId)} sku" name="cartEntries[${loopIndex}].sku" id="cartEntries[${loopIndex}].sku" value="${fn:escapeXml(variant.variantOption.code)}" />
-            <input type="textbox" maxlength="9" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
-                   name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' data-current-value=""
-                   id="cartEntries[${loopIndex}].quantity" data-pack-size="${variant.packSize}" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
+                <span class="block">
+                    <label for="cartEntries[${loopIndex}].quantity">
+                        <c:choose>
+                            <c:when test="${variant.packSize > 0}">
+                                <spring:theme code="order.form.moq" arguments="${variant.packSize}"/>
+                            </c:when>
+                            <c:otherwise>
+                                <spring:theme code="order.form.moq.any"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </label>
+                </span>
 
-            <grid:coreTableStockRow variant="${variant}" />
+                    <input type="textbox" maxlength="9" class="sku-quantity" data-instock="${variant.variantOption.stock.stockLevel}"  data-variant-id="variant_${loopIndex}"
+                           name="cartEntries[${loopIndex}].quantity" data-product-selection='{"product":"${fn:escapeXml(variant.variantOption.code)}"}' data-current-value=""
+                           id="cartEntries[${loopIndex}].quantity" data-pack-size="${variant.packSize}" value="0" ${disableForOutOfStock} data-parent-id="${fn:escapeXml(product.code)}"/>
+                    <grid:coreTableStockRow variant="${variant}" />
 
             <%--<span class="data-grid-total" data-grid-total-id="total_value_${loopIndex}"></span>--%>
 

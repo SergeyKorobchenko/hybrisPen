@@ -2952,3 +2952,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;text.company.accountsummary.unit.details.page.defaultSort;Sort by
 ;product.grid.variants.clearance;Clearance on some colours
+
+;order.form.moq;MOQ={0}
+;order.form.moq.any;MOQ=Any
