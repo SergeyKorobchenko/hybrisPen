@@ -45,6 +45,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
+	private static final String IMPORT_PRODUCT_SAMPLE = "importProductSample";
 
 	private static final String PENTLAND = "pentland";
 	private static final String PENTLAND_STORE = "pentland";
@@ -65,6 +66,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", true));
 		params.add(createBooleanSystemSetupParameter(IMPORT_SAMPLE_DATA, "Import Sample Data", true));
 		params.add(createBooleanSystemSetupParameter(ACTIVATE_SOLR_CRON_JOBS, "Activate Solr Cron Jobs", true));
+		params.add(createBooleanSystemSetupParameter(IMPORT_PRODUCT_SAMPLE, "Import Product Data", true));
 		// Add more Parameters here as you require
 
 		return params;

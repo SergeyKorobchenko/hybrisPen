@@ -23,6 +23,8 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
   public static final String CUSTOMER_SUPPORT_BACKOFFICE_EXTENSION_NAME = "customersupportbackoffice";
   public static final String ORDER_MANAGEMENT_BACKOFFICE_EXTENSION_NAME = "ordermanagementbackoffice";
   public static final String ASSISTED_SERVICE_EXTENSION_NAME            = "assistedservicestorefront";
+  private static final String IMPORT_PRODUCT_SAMPLE = "importProductSample";
+  private boolean importProductSample = true;
 
 
   private String environment;
@@ -37,6 +39,7 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
   public void execute(final AbstractSystemSetup systemSetup, final SystemSetupContext context, final List<ImportData> importData)
   {
     final boolean importSampleData = systemSetup.getBooleanSystemSetupParameter(context, IMPORT_SAMPLE_DATA);
+    importProductSample = systemSetup.getBooleanSystemSetupParameter(context, IMPORT_PRODUCT_SAMPLE);
 
     if (importSampleData) {
       for (final ImportData data : importData) {
@@ -81,7 +84,7 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/customersupport-assistedservice-groups.impex", extensionName), false);
     }
 
-    if(!isCleanInstall) {
+    if(this.importProductSample) {
       //user sample data
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/customers/sample_users.impex", extensionName), false);
 
@@ -93,7 +96,7 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
   @Override
   protected void importProductCatalog(final String extensionName, final String productCatalogName)
   {
-    if(!isCleanInstall) {
+    if(this.importProductSample) {
       // Load Units
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/classifications-units.impex", extensionName, productCatalogName),
                                              false);
@@ -176,7 +179,7 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
   @Override
   protected void importStore(final String extensionName, final String storeName, final String productCatalogName)
   {
-    if(!isCleanInstall) {
+    if(this.importProductSample) {
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/stores/%s/points-of-service-media.impex", extensionName, storeName), false);
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/stores/%s/points-of-service.impex", extensionName, storeName), false);
       if (isExtensionLoaded(BTG_EXTENSION_NAME)) {
