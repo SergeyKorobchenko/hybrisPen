@@ -9,6 +9,8 @@ import de.hybris.platform.jalo.order.AbstractOrderEntry;
 import de.hybris.platform.jalo.order.CartEntry;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -18,6 +20,8 @@ import com.bridgex.integration.service.IntegrationService;
 
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -62,9 +66,27 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
   }
 
   private void storeOrderDetailsInSession(OrderDetailsResponse response) {
-    Map<String, Integer> orderDetailsForReorder = response.getOrderEntries().stream()
-            .flatMap(entry -> entry.getSizeVariants().stream())
-            .collect(Collectors.toMap(SizeVariantDto::getEan, vr -> Double.valueOf(vr.getTotalQuantity()).intValue()));
+    Map<String, Integer> orderDetailsForReorder = new HashMap<>();
+    List<OrderEntryDto> orderEntries = response.getOrderEntries();
+    if(CollectionUtils.isNotEmpty(orderEntries)){
+      for(OrderEntryDto entry: orderEntries){
+        List<SizeVariantDto> sizeVariants = entry.getSizeVariants();
+        if(CollectionUtils.isNotEmpty(sizeVariants)){
+          for(SizeVariantDto size: sizeVariants){
+            String ean = size.getEan();
+            Integer totalQuantity = Double.valueOf(size.getTotalQuantity()).intValue();
+            if(orderDetailsForReorder.containsKey(ean)){
+              totalQuantity += orderDetailsForReorder.get(ean);
+            }
+            orderDetailsForReorder.put(ean, totalQuantity);
+          }
+        }
+      }
+    }
+
+//    Map<String, Integer> orderDetailsForReorder = response.getOrderEntries().stream()
+//            .flatMap(entry -> entry.getSizeVariants().stream())
+//            .collect(Collectors.toMap(SizeVariantDto::getEan, vr -> Double.valueOf(vr.getTotalQuantity()).intValue()));
     sessionService.setAttribute(String.format(ORDER_DETAILS_SESSION_KEY, response.getCode()), orderDetailsForReorder);
   }
 
