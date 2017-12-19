@@ -137,7 +137,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;b2busergroup.parent;Parent Business Unit
 ;b2busergroup.save;Save Updates
 ;basket.add.free.gift;Add your free gift to Basket
-;basket.add.to.basket;Add to bag
+;basket.add.to.basket;Add to basket
 ;basket.add.to.cart;Add
 ;basket.added.to.basket;Added to Your Basket
 ;basket.added.to.mobile.basket;Added Item
@@ -1440,8 +1440,27 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.status.display.refused;Refused
 ;text.account.order.status.display.rejected;Rejected
 ;text.account.order.status.display.valid;Valid
+;text.account.order.status.display.in progress;In Progress
+
+;text.account.order.status.display.CANCELLED;Cancelled
+;text.account.order.status.display.CANCELLING;Cancel Pending
+;text.account.order.status.display.COMPLETED;Completed
+;text.account.order.status.display.CREATED;Created
+;text.account.order.status.display.ERROR;Pending
+;text.account.order.status.display.PENDING;Pending
+;text.account.order.status.display.PROCESSING;In Process
+;text.account.order.status.display.REFUSED;Refused
+;text.account.order.status.display.REJECTED;Rejected
+;text.account.order.status.display.VALID;Valid
 ;text.account.order.status.display.IN PROGRESS;In Progress
 ;text.account.order.status.display.APPROVED;Approved
+;text.account.order.status.display.ON_HOLD;On Hold
+;text.account.order.status.display.IN_PROGRESS;In Progress
+;text.account.order.status.display.SHIPPED;Shipped
+;text.account.order.status.display.OPEN;Open
+;text.account.order.status.display.INVOICED;Invoiced
+;text.account.order.status.display.NEW;New
+
 ;text.account.order.status.title;Status
 ;text.account.order.subtotal;Subtotal:
 ;text.account.order.summary;A summary of your order is below:
@@ -2872,14 +2891,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.total;Order Total
 ;text.account.order.tax;Order Tax
 ;text.account.order.net;Order Net
-
-;text.account.order.status.display.ON_HOLD;On Hold
-;text.account.order.status.display.IN_PROGRESS;In Progress
-;text.account.order.status.display.SHIPPED;Shipped
-;text.account.order.status.display.OPEN;Open
-;text.account.order.status.display.CANCELLED;Cancelled
-;text.account.order.status.display.INVOICED;Invoiced
-;text.account.order.status.display.NEW;New
 
 ;text.account.supporttickets.success;Your ticket successfully sended
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
