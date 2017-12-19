@@ -137,7 +137,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;b2busergroup.parent;Parent Business Unit
 ;b2busergroup.save;Save Updates
 ;basket.add.free.gift;Add your free gift to Basket
-;basket.add.to.basket;Add to bag
+;basket.add.to.basket;Add to basket
 ;basket.add.to.cart;Add
 ;basket.added.to.basket;Added to Your Basket
 ;basket.added.to.mobile.basket;Added Item
