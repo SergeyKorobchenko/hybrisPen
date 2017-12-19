@@ -80,13 +80,13 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
 
   private void fillAddresses(OrderModel orderModel, AddressModel deliveryAddressModel, OrderExportDto request) {List<UserContactsDto> userContacts = new ArrayList<>();
     UserContactsDto deliveryAddressDto = new UserContactsDto();
-    deliveryAddressDto.setEmail(orderModel.getUser().getUid());
+//    deliveryAddressDto.setEmail(orderModel.getUser().getUid());
     ShipToDto deliveryAddress = populateAddress(deliveryAddressModel, StringUtils.EMPTY);
     deliveryAddressDto.setShipToAddress(deliveryAddress);
     userContacts.add(deliveryAddressDto);
     if(orderModel.getMarkFor() != null){
       UserContactsDto markForAddressDto = new UserContactsDto();
-      markForAddressDto.setEmail(orderModel.getUser().getUid());
+//      markForAddressDto.setEmail(orderModel.getUser().getUid());
       ShipToDto markForAddress = populateAddress(orderModel.getMarkFor(), ErpintegrationConstants.REQUEST.DEFAULT_ERP_FLAG_TRUE);
       markForAddressDto.setShipToAddress(markForAddress);
       userContacts.add(markForAddressDto);
@@ -97,13 +97,13 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   private ShipToDto populateAddress(AddressModel deliveryAddressModel, String markFor) {
     ShipToDto deliveryAddress = new ShipToDto();
     deliveryAddress.setId(deliveryAddressModel.getAddressID());
-    deliveryAddress.setName(deliveryAddressModel.getDisplayName());
+//    deliveryAddress.setName(deliveryAddressModel.getDisplayName());
     deliveryAddress.setMarkForFlag(markFor);
-    deliveryAddress.setStreet(deliveryAddressModel.getStreetname());
-    deliveryAddress.setCity(deliveryAddressModel.getTown());
-    deliveryAddress.setRegion(deliveryAddressModel.getRegion() != null ? deliveryAddressModel.getRegion().getIsocode() : StringUtils.EMPTY);
-    deliveryAddress.setCountry(deliveryAddressModel.getCountry() != null ? deliveryAddressModel.getCountry().getIsocode() : StringUtils.EMPTY);
-    deliveryAddress.setPostalCode(deliveryAddressModel.getPostalcode());
+//    deliveryAddress.setStreet(deliveryAddressModel.getStreetname());
+//    deliveryAddress.setCity(deliveryAddressModel.getTown());
+//    deliveryAddress.setRegion(deliveryAddressModel.getRegion() != null ? deliveryAddressModel.getRegion().getIsocode() : StringUtils.EMPTY);
+//    deliveryAddress.setCountry(deliveryAddressModel.getCountry() != null ? deliveryAddressModel.getCountry().getIsocode() : StringUtils.EMPTY);
+//    deliveryAddress.setPostalCode(deliveryAddressModel.getPostalcode());
     return deliveryAddress;
   }
 
