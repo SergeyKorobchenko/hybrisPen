@@ -306,6 +306,9 @@
                         <persistence type="property" />
                         <description>SAP Price List assigned to this Customer</description>
                     </attribute>
+                    <attribute qualifier="currency" type="Currency">
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
         </typegroup>

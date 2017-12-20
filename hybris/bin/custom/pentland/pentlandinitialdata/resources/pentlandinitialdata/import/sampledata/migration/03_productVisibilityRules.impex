@@ -1,10 +1,10 @@
 $catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),version[default='Staged'])[unique=true,default='pentlandProductCatalog:Staged']
 
 INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion[unique = true];
-;skiing;mitregroup
-;skiwear;mitregroup
-;skigear;mitregroup
-;snowboarding;mitregroup
-;snowwear;mitregroup
-;snowgear;mitregroup
-;climbing;mitregroup
+;skiing;05
+;skiwear;05
+;skigear;05
+;snowboarding;05
+;snowwear;05
+;snowgear;05
+;climbing;05

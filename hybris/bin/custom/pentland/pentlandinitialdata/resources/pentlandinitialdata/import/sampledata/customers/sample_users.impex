@@ -12,30 +12,30 @@
 # Import Two Sample B2B Organizations
 #
 
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid);locname[lang=en];
+INSERT_UPDATE Usergroup;locname[lang=en];uid[unique=true];groups(uid);
 ;b2bunitsgroup;;
-;mitregroup;b2bunitsgroup;
-;speedogroup;b2bunitsgroup;
-;canterburygroup;b2bunitsgroup;
-;boxfreshgroup;b2bunitsgroup;
-;kickersgroup;b2bunitsgroup;
-;berghausgroup;b2bunitsgroup;
+;mitregroup;05;b2bunitsgroup;
+;speedogroup;08;b2bunitsgroup;
+;canterburygroup;0Q;b2bunitsgroup;
+;boxfreshgroup;0E;b2bunitsgroup;
+;kickersgroup;01;b2bunitsgroup;
+;berghausgroup;04;b2bunitsgroup;
 
 INSERT_UPDATE UserPriceGroup;code[unique=true]
 ;pronto
 ;pronto-services
 
 UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid);sapBrand;salesOrg;distCh;
-;TestB2BUnit;pronto-services;PROFORMA;107660;mitregroup,speedogroup,canterburygroup;05;5000;01
-;MitreTestB2BUnit;pronto-services;PROFORMA;107660;mitregroup;05;5000;01
-;SpeedoTestB2BUnit;pronto-services;PROFORMA;107660;speedogroup;08;8001;01
-;SpeedoExportTestB2BUnit;pronto-services;PROFORMA;125387;speedogroup;08;8001;01
-;MitreExportTestB2BUnit;pronto-services;PROFORMA;125387;mitregroup;05;5000;01
-;CanterburyTestB2BUnit;pronto-services;PROFORMA;107660;Pronto Services, canterburygroup;0Q;5000;01
-;MitreTestB2BUnit_125253;pronto-services;PROFORMA;125253;mitregroup;05;5000;01
+;TestB2BUnit;pronto-services;PROFORMA;107660;05,08,0Q;05;5000;01
+;MitreTestB2BUnit;pronto-services;PROFORMA;107660;05;05;5000;01
+;SpeedoTestB2BUnit;pronto-services;PROFORMA;107660;08;08;8001;01
+;SpeedoExportTestB2BUnit;pronto-services;PROFORMA;125387;08;08;8001;01
+;MitreExportTestB2BUnit;pronto-services;PROFORMA;125387;05;05;5000;01
+;CanterburyTestB2BUnit;pronto-services;PROFORMA;107660;Pronto Services, 0Q;0Q;5000;01
+;MitreTestB2BUnit_125253;pronto-services;PROFORMA;125253;05;05;5000;01
 
 INSERT_UPDATE B2BUnit;uid[unique=true];userPriceGroup(code);customerType(code);sapID;groups(uid);sapBrand;locname[lang=en]
-;AccountTestB2BUnit;pronto-services;ACCOUNT;jamesTestB2B;mitregroup;05;AccountTestB2BUnit
+;AccountTestB2BUnit;pronto-services;ACCOUNT;jamesTestB2B;05;05;AccountTestB2BUnit
 
 $defaultPassword=12341234
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];

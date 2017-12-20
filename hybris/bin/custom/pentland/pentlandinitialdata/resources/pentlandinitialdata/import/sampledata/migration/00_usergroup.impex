@@ -1,8 +1,8 @@
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid);locname[lang=en];
+INSERT_UPDATE Usergroup;locname[lang=en];uid[unique=true];groups(uid);
 ;b2bunitsgroup;;
-;mitregroup;b2bunitsgroup;
-;speedogroup;b2bunitsgroup;
-;canterburygroup;b2bunitsgroup;
-;boxfreshgroup;b2bunitsgroup;
-;kickersgroup;b2bunitsgroup;
-;berghausgroup;b2bunitsgroup;
+;mitregroup;05;b2bunitsgroup;
+;speedogroup;08;b2bunitsgroup;
+;canterburygroup;0Q;b2bunitsgroup;
+;boxfreshgroup;0E;b2bunitsgroup;
+;kickersgroup;01;b2bunitsgroup;
+;berghausgroup;04;b2bunitsgroup;

@@ -3,23 +3,23 @@ $catalogVersion=catalogVersion(catalog(id[default='pentlandProductCatalog']),ver
 $categories=target(code, $catalogVersion)[unique=true]
 $supercategories=source(code, $catalogVersion)[unique=true]
 
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid);locname[lang=en];
+INSERT_UPDATE Usergroup;locname[lang=en];uid[unique=true];groups(uid);
 ;b2bunitsgroup;;
-;mitregroup;b2bunitsgroup;
-;speedogroup;b2bunitsgroup;
-;canterburygroup;b2bunitsgroup;
-;boxfreshgroup;b2bunitsgroup;
-;kickersgroup;b2bunitsgroup;
-;berghausgroup;b2bunitsgroup;
+;mitregroup;05;b2bunitsgroup;
+;speedogroup;08;b2bunitsgroup;
+;canterburygroup;0Q;b2bunitsgroup;
+;boxfreshgroup;0E;b2bunitsgroup;
+;kickersgroup;01;b2bunitsgroup;
+;berghausgroup;04;b2bunitsgroup;
 
 # Create Categories
 INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden;order[default=0]
-;04;;;berghausgroup;;1
-;0E;;;boxfreshgroup;;2
-;0Q;;;canterburygroup;;3
-;01;;;kickersgroup;;4
-;05;;;mitregroup;;5
-;08;;;speedogroup;;6
+;04;;;04;;1
+;0E;;;0E;;2
+;0Q;;;0Q;;3
+;01;;;01;;4
+;05;;;05;;5
+;08;;;08;;6
 
 ;5000;;05;;;0
 ;5100;;05;;;1
@@ -60,9 +60,9 @@ INSERT_UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$c
 
 #update groups again for interceptors to kick in
 UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
-;04;;;berghausgroup
-;0E;;;boxfreshgroup
-;0Q;;;canterburygroup
-;01;;;kickersgroup
-;05;;;mitregroup
-;08;;;speedogroup
+;04;;;04
+;0E;;;0E
+;0Q;;;0Q
+;01;;;01
+;05;;;05
+;08;;;08
