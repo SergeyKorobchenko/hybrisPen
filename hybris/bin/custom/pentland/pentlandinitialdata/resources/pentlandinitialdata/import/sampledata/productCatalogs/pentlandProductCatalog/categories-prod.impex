@@ -4,7 +4,7 @@ $categories=target(code, $catalogVersion)[unique=true]
 $supercategories=source(code, $catalogVersion)[unique=true]
 
 INSERT_UPDATE Usergroup;locname[lang=en];uid[unique=true];groups(uid);
-;b2bunitsgroup;;
+;b2bunitsgroup;b2bunitsgroup;
 ;mitregroup;05;b2bunitsgroup;
 ;speedogroup;08;b2bunitsgroup;
 ;canterburygroup;0Q;b2bunitsgroup;
