@@ -14,7 +14,9 @@ import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.product.data.VariantOptionData;
 import de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData;
 import de.hybris.platform.converters.Populator;
+import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.mediaconversion.enums.ConversionStatus;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.variants.model.VariantProductModel;
 
@@ -30,19 +32,22 @@ public class PentlandVariantOptionDataMediaPopulator<SOURCE extends VariantProdu
   public void populate(final VariantProductModel variantProductModel, final VariantOptionData variantOptionData)
     throws ConversionException
   {
-    VariantProductModel sourceProduct;
-    if(variantProductModel instanceof ApparelSizeVariantProductModel){
-      sourceProduct = (VariantProductModel) variantProductModel.getBaseProduct();
-    }else{
-      sourceProduct = variantProductModel;
-    }
-    MediaModel picture = sourceProduct.getPicture();
+//    VariantProductModel sourceProduct;
+//    if(variantProductModel instanceof ApparelSizeVariantProductModel){
+//      sourceProduct = (VariantProductModel) variantProductModel.getBaseProduct();
+//    }else{
+//      sourceProduct = variantProductModel;
+//    }
+    MediaModel picture = variantProductModel.getPicture();
     final Collection<VariantOptionQualifierData> qualifierDataList = new ArrayList<>();
-    if (picture != null && picture.getMediaContainer() != null) {
-      for(MediaModel mediaModel: picture.getMediaContainer().getMedias()){
+
+    if (picture != null && picture.getMediaContainer() != null && ConversionStatus.CONVERTED.equals(picture.getMediaContainer().getConversionStatus())
+        && "productConversionGroup".equals(picture.getMediaContainer().getConversionGroup().getCode())) {
+      MediaContainerModel mediaContainer = picture.getMediaContainer();
+      for(MediaModel mediaModel: mediaContainer.getMedias()){
         final ImageData imageData = new ImageData();
         imageData.setUrl(mediaModel.getURL());
-        imageData.setFormat(getMediaFormat(mediaModel.getMediaFormat().getName()));
+        imageData.setFormat(getMediaFormat(mediaModel.getMediaFormat().getQualifier()));
 
         final VariantOptionQualifierData qualifierData = new VariantOptionQualifierData();
         qualifierData.setImage(imageData);
@@ -59,7 +64,7 @@ public class PentlandVariantOptionDataMediaPopulator<SOURCE extends VariantProdu
 
         final ImageData imageData = new ImageData();
         imageData.setUrl(mediaModel.getURL());
-        imageData.setFormat(getMediaFormat(mediaModel.getMediaFormat().getName()));
+        imageData.setFormat(getMediaFormat(mediaModel.getMediaFormat().getQualifier()));
 
         final VariantOptionQualifierData qualifierData = new VariantOptionQualifierData();
         qualifierData.setImage(imageData);
