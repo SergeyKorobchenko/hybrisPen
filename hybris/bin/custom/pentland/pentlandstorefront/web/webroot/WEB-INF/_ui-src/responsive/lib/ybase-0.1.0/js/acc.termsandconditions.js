@@ -19,11 +19,17 @@ ACC.termsandconditions = {
 				}
 			});
 		});
+	},
+	bindCloseCookieDirective: function(){
+		$(".cookie-close").on("click", function(){
+			$(".cookie-disclaimer").addClass("hidden");
+		});
 	}
 }
 
 $(function(){
 	with(ACC.termsandconditions) {
 		bindTermsAndConditionsLink();
+		bindCloseCookieDirective();
 	}
 });
