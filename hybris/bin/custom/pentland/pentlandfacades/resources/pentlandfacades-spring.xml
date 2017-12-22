@@ -368,4 +368,18 @@
 	<alias name="pentlandProductPopulator" alias="productPopulator"/>
 	<bean id="pentlandProductPopulator" class="com.bridgex.facades.populators.PentlandProductPopulator" parent="defaultProductPopulator"/>
 
+	<alias name="pentlandVariantOptionDataMediaPopulator" alias="variantOptionDataMediaPopulator"/>
+	<bean id="pentlandVariantOptionDataMediaPopulator" class="com.bridgex.facades.populators.PentlandVariantOptionDataMediaPopulator">
+		<property name="acceleratorImageFormatMapping" ref="imageFormatMapping"/>
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+				<value>styleSwatch</value>
+			</list>
+		</property>
+	</bean>
+
 </beans>
