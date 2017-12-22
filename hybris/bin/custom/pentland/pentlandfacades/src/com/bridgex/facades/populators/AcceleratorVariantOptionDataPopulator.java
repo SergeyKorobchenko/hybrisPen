@@ -18,6 +18,7 @@ import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaFormatModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.type.ComposedTypeModel;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.media.MediaContainerService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.type.TypeService;
@@ -85,7 +86,11 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 				final MediaFormatModel mediaFormat = getMediaService().getFormat(mediaFormatQualifier);
 				if (mediaFormat != null)
 				{
-					return getMediaContainerService().getMediaForFormat(mediaContainer, mediaFormat);
+					try {
+						return getMediaContainerService().getMediaForFormat(mediaContainer, mediaFormat);
+					}catch(ModelNotFoundException e){
+						return null;
+					}
 				}
 			}
 		}
