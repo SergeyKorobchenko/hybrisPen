@@ -33,7 +33,7 @@ INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=tru
 
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code);facetSort(code);priority;visible;fieldValueProvider;customFacetSortProvider;rangeSets(name);$classAttributeAssignment
 
-INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=false];fieldValueProvider[default=$fieldValueProvider];$classAttributeAssignment;;facet[default=true];facetType(code)[default=MultiSelectOr];facetSort(code)[default=Alpha]
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=true];fieldValueProvider[default=$fieldValueProvider];$classAttributeAssignment;;facet[default=true];facetType(code)[default=MultiSelectOr];facetSort(code)[default=Alpha]
 #;$solrIndexedType;teamwearType;string;;;;clTeamwear:::teamwearType::::
 #;$solrIndexedType;trainingwearType;string;;;;clTrainingWear:::trainingwearType::::
 ;$solrIndexedType;sport;string;;;;clBalls:::sport::::
