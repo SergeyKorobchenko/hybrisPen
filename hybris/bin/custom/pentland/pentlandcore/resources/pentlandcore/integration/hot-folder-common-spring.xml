@@ -279,7 +279,7 @@
 				$mediaCatalog = pentlandMediaCatalog
 				$mediaCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default = $mediaCatalog]), CatalogVersion.version[default = 1.0])[default = $mediaCatalog:1.0]
 				$classificationCatalog = pentlandClassificationCatalog
-				$clAttrModifiers = system = '$classificationCatalog', version = '1.0', lang = $lang, translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+				$clAttrModifiers = system = '$classificationCatalog', version = '1.0', lang = $lang, translator = de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator, collection-delimiter=|
 				$sport = @sport[$clAttrModifiers];
 				$useageOccasion = @useageOccasion[$clAttrModifiers];
 				$surface = @surface[$clAttrModifiers];
