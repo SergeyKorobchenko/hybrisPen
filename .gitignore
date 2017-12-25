@@ -77,6 +77,7 @@ hybris/bin/custom/**/web/webroot/WEB-INF/_ui-src/addons/**
 
 **/theme-alpha
 **/theme-lambda
+!theme-lambda/images
 internationalizationhmc.jar
 internationalizationbackoffice_bof.jar
 pentlandbackoffice_bof.jar
