@@ -138,24 +138,23 @@ ACC.cart = {
             var packSize = $(this).data('pack-size');
             this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
         });
-
-        // grid.on('focusin', skuQuantityClass, function (event) {
-        //     quantityBefore = jQuery.trim(this.value);
-        //
-        //     $(this).parents('tr').next('.variant-summary').remove();
-        //     if ($(this).parents('table').data(ACC.productorderform.selectedVariantData)) {
-        //         ACC.productorderform.selectedVariants = $(this).parents('table').data(ACC.productorderform.selectedVariantData);
-        //     } else {
-        //         ACC.productorderform.selectedVariants = [];
-        //     }
-        //
-        //     if (quantityBefore == "") {
-        //         quantityBefore = 0;
-        //         this.value = 0;
-        //     }
-        // });
-
         if ($('#quoteForm').length > 0) {
+            grid.on('focusin', skuQuantityClass, function (event) {
+                quantityBefore = jQuery.trim(this.value);
+
+                $(this).parents('tr').next('.variant-summary').remove();
+                if ($(this).parents('table').data(ACC.productorderform.selectedVariantData)) {
+                    ACC.productorderform.selectedVariants = $(this).parents('table').data(ACC.productorderform.selectedVariantData);
+                } else {
+                    ACC.productorderform.selectedVariants = [];
+                }
+
+                if (quantityBefore == "") {
+                    quantityBefore = 0;
+                    this.value = 0;
+                }
+            });
+
             grid.on('focusout keypress', skuQuantityClass, function (event) {
                 var code = event.keyCode || event.which || event.charCode;
 
@@ -215,7 +214,7 @@ ACC.cart = {
                         }
                     });
 
-                    if (newVariant && this.value > 0) {
+                    if (newVariant && this.value >= 0) {
                         // update variantData
                         ACC.productorderform.selectedVariants.push({
                             id: currentSkuId,
