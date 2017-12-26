@@ -44,6 +44,7 @@
 		<property name="frontendTemplateName" value="OrderConfirmationRepEmailTemplate"/>
 		<property name="groupMemberDao" ref="principalGroupMembersDao"/>
 		<property name="emailFetchStrategy" ref="emailAddressFetchStrategy"/>
+		<property name="b2BUnitService" ref="pentlandB2BUnitService" />
 	</bean>
 
 	<bean id="generateOrderStatusChangeEmail" parent="abstractGenerateEmailAction">

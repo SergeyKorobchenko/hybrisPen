@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.dao.PentlandPrincipalGroupMemberDao;
+import com.bridgex.core.services.PentlandB2BUnitService;
 
 import de.hybris.platform.acceleratorservices.email.strategy.EmailAddressFetchStrategy;
 import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
@@ -28,6 +29,7 @@ public class GenerateSalesRepEmailAction extends GenerateEmailAction {
 
   private PentlandPrincipalGroupMemberDao groupMemberDao;
   private EmailAddressFetchStrategy       emailFetchStrategy;
+  private PentlandB2BUnitService b2BUnitService;
 
   private static final Logger LOG = Logger.getLogger(GenerateSalesRepEmailAction.class);
 
@@ -85,9 +87,7 @@ public class GenerateSalesRepEmailAction extends GenerateEmailAction {
   }
 
   private List<EmailAddressModel> getSalesRepAddresses(UserModel user) {
-    Set<String> unitIds = user.getGroups().stream()
-                              .filter(B2BUnitModel.class::isInstance)
-                              .map(B2BUnitModel.class::cast)
+    Set<String> unitIds = b2BUnitService.getAllParents(user).stream()
                               .map(B2BUnitModel::getUid)
                               .collect(Collectors.toSet());
     return groupMemberDao.findEmployeesForB2BUnits(unitIds).stream()
@@ -95,6 +95,8 @@ public class GenerateSalesRepEmailAction extends GenerateEmailAction {
       .collect(Collectors.toList());
   }
 
-
-
+  @Required
+  public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
+    this.b2BUnitService = b2BUnitService;
+  }
 }

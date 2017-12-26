@@ -129,6 +129,21 @@ public class DefaultPentlandB2BUnitService extends DefaultB2BUnitService impleme
     return CollectionUtils.select(employee.getGroups(), PredicateUtils.instanceofPredicate(B2BUnitModel.class));
   }
 
+  @Override
+  public Collection<B2BUnitModel> getAllParents(UserModel employee) {
+    if (employee == null) {
+      return null;
+    }
+    else {
+      Collection<B2BUnitModel> allUnits = new ArrayList<>();
+      employee.getGroups().stream().filter(group -> group instanceof B2BUnitModel).forEach(group -> {
+        allUnits.add((B2BUnitModel) group);
+        allUnits.addAll(group.getGroups().stream().filter(B2BUnitModel.class::isInstance).map(u -> (B2BUnitModel) u).collect(Collectors.toList()));
+      });
+      return allUnits;
+    }
+  }
+
   @Required
   public void setAddressDao(PentlandAddressDao addressDao) {
     this.addressDao = addressDao;
