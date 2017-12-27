@@ -77,7 +77,7 @@ INSERT_UPDATE SolrURIRedirect;&redirectID;url[unique=true]
 ;terms;"/termsofuse#PentlandTerms"
 ;contact;"/contactus"
 ;sizes;"/size-guides"
-;my-account;"/my-account/update-profile"
+;my-account;"/my-account/update-email"
 
 INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[default=$facetSearchConfigName];keyword[unique=true];redirect(&redirectID);language(isocode)[default=en];ignoreCase[default=true];matchType(code)[default=EXACT];
 ;;"Terms";terms
