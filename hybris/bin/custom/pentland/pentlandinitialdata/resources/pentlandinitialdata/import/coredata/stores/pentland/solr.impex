@@ -74,8 +74,8 @@ UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 ;$indexBaseSite;$facetSearchConfigName
 
 INSERT_UPDATE SolrURIRedirect;&redirectID;url[unique=true]
-;terms;"/terms"
-;contact;"/contact-us"
+;terms;"/termsofuse#PentlandTerms"
+;contact;"/contactus"
 ;sizes;"/size-guides"
 ;my-account;"/my-account/update-profile"
 
@@ -199,12 +199,12 @@ INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[
 # Non-facet search query properties
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
 ;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
-;materialKey:$solrIndexedType            ;   ;    ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
-;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;;	 ;  ;POSTFIX;45;3;
+;materialKey:$solrIndexedType            ;   ;    ;TRUE;90 ;    ;  ;;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;; ;  ;   	   ;  ;
 #;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;   	   ;  ;
 ;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-;keywords:$solrIndexedType               ;	 ;    ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;keywords:$solrIndexedType               ;	 ;    ;; ;;;; ;  ;       ;  ;
 ;img-515Wx515H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;img-300Wx300H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;img-96Wx96H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
@@ -214,7 +214,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;priceRange:$solrIndexedType		  	 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;allCategories:$solrIndexedType	 		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;categoryName:$solrIndexedType	 		 ;	 ;	  ;TRUE;40 ;TRUE;20;; ;  ;       ;  ;
 ;productTypeName:$solrIndexedType	 		 ;	 ;	  ;; ;TRUE;20;; ;  ;       ;  ;
 ;brandName:$solrIndexedType	 		 ;	 ;	  ;; ;TRUE;20;; ;  ;       ;  ;
 ;baseProductCode:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
@@ -222,7 +222,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;upc:$solrIndexedType		  ; ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 
 # Facet search query properties
-INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];ftsQuery[default=false];ftsQueryBoost
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];ftsQuery[default=false];ftsQueryBoost;
 ;categoryPath:$solrIndexedType		;	;MultiSelectOr	 		;-9999	;													;								;							;;
 #;category:$solrIndexedType			;	;Refine	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
 ;facetCategory:$solrIndexedType			;	;MultiSelectOr	 		;6000	;categoryFacetDisplayNameProvider					;								;defaultTopValuesProvider	;;
