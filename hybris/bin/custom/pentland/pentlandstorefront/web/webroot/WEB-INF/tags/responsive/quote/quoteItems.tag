@@ -96,7 +96,8 @@
             <%-- price --%>
             <div class="item__price">
                 <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>:</span>
-                <order:orderEntryPrice orderEntry="${orderEntry}"/>
+                <%--<order:orderEntryPrice orderEntry="${orderEntry}"/>--%>
+                <format:price priceData="${orderEntry.basePrice}" displayFreeForZero="true"/>
             </div>
 
             <%-- quantity --%>

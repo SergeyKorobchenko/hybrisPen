@@ -430,7 +430,7 @@ ACC.cart = {
     },
 
     scanCartForEdits: function(){
-        $(".js-continue-checkout-button, .export__cart--link, .export__images--link").on("click", function(e){
+        $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button").on("click", function(e){
             var $form = $('#updateAllCartForm');
             var $updateFormData = $($form.serializeArray());
             var postData = {};
