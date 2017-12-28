@@ -40,11 +40,11 @@
     <div class="cart-items">
         <cart:cartItems cartData="${cartData}"/>
     </div>
-    <div class="row">
-        <c:if test="${exportCsvEnabled}">
-            <cart:exportCart/>
-        </c:if>
-    </div>
+    <%--<div class="row">--%>
+        <%--<c:if test="${exportCsvEnabled}">--%>
+            <%--<cart:exportCart/>--%>
+        <%--</c:if>--%>
+    <%--</div>--%>
     <cart:cartPromotions cartData="${cartData}"/>
     <cart:ajaxCartPromotions/>
 </c:if>
