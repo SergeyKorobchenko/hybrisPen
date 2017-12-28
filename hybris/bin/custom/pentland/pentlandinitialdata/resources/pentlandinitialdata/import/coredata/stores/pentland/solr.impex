@@ -142,13 +142,13 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 
 
 # Other facet properties
-INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name);;valueProviderParameters[map-delimiter=|]
 ;$solrIndexedType; style            ;string ; ;     ;true;    ; ;MultiSelectOr ;Alpha ;-1   ;false;    ;    ;optionalModelPropertyFieldValueProvider;                                             ;                             ;
 ;$solrIndexedType; primaryColors    ;string ; ;     ;    ;true; ;MultiSelectOr ;Alpha ; 2500;true;    ;    ;colorFacetValueProvider                ;colorFacetDisplayNameProvider                ;                             ;
 ;$solrIndexedType; size             ;string ; ;     ;true;    ; ;MultiSelectOr ;Custom; 2000;true;    ;    ;optionalModelPropertyFieldValueProvider;                                             ;sizeAttributeSortProvider    ;
 ;$solrIndexedType; price        	  ;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;priceRangeValueResolver;;;defaultTopValuesProvider;pentlandPriceRangeGBP
 #;$solrIndexedType; productGroup     ;string ;  ; ; true; ; ;MultiSelectOr; Alpha; 5000; true; ; ; optionalModelPropertyFieldValueProvider;;
-;$solrIndexedType; season           ;string ; ; ; true; ; ;MultiSelectOr; Alpha; 6000; true; ; ; springELValueProvider;;
+;$solrIndexedType; season           ;string ; ; ; true; ; ;MultiSelectOr; Alpha; 6000; true; ; ; productAttributesValueResolver;;;;;attribute->season
 ;$solrIndexedType; gender           ;string;;;;;;MultiSelectOr;Alpha; 4500;true;false;;genderValueResolver                       ;genderFacetDisplayNameProvider
 
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
