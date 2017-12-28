@@ -4,10 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -55,7 +52,7 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
 
   @Override
   public void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products){
-    Set<MediaModel> collectedMedia = products.stream().map(this::getPrimaryImageMasterUrl).collect(Collectors.toSet());
+    Set<MediaModel> collectedMedia = products.stream().map(this::getPrimaryImageMasterUrl).filter(Objects::nonNull).collect(Collectors.toSet());
 
     String urlPrefix = Config.getString(MEDIA_EXPORT_HTTP, DEFAULT_MEDIA_ROOT);
 
