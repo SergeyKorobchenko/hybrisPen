@@ -7,7 +7,7 @@
 		<property name="query" ref="exportPentlandProductQuery"/>
 		<property name="itemConverter" ref="exportPentlandProductConverter"/>
 		<property name="outputConverter" ref="pentlandExportConvertObjectsToCSV"/>
-		<property name="filename" value="'productrich-' + headers.timestamp + '.csv'"/>
+		<property name="filename" value="'productrich-' + payload.language.isocode + '-' + headers.timestamp + '.csv'"/>
 	</bean>
 
 	<alias name="defaultExportPentlandProductQuery" alias="exportPentlandProductQuery"/>

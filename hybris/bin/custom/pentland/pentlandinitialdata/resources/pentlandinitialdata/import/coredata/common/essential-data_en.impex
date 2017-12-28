@@ -18,6 +18,8 @@ $lang=en
 # Languages
 UPDATE Language;isocode[unique=true];name[lang=$lang]
 ;en;English;
+;de;German;
+;fr;French
 
 
 # Currencies
