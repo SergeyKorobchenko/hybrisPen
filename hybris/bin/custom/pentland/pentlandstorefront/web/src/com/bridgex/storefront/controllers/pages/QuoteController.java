@@ -24,10 +24,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.comment.data.CommentData;
 import de.hybris.platform.commercefacades.order.QuoteFacade;
 import de.hybris.platform.commercefacades.order.SaveCartFacade;
-import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
-import de.hybris.platform.commercefacades.order.data.CartData;
-import de.hybris.platform.commercefacades.order.data.CommerceCartMetadata;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.order.data.*;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.quote.data.QuoteData;
@@ -36,6 +33,7 @@ import de.hybris.platform.commercefacades.voucher.VoucherFacade;
 import de.hybris.platform.commercefacades.voucher.data.VoucherData;
 import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
 import de.hybris.platform.commerceservices.enums.QuoteAction;
+import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceQuoteAssignmentException;
 import de.hybris.platform.commerceservices.order.CommerceQuoteExpirationTimeException;
 import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteStateException;
@@ -50,12 +48,7 @@ import de.hybris.platform.servicelayer.internal.model.impl.ItemModelCloneCreator
 import com.bridgex.storefront.util.QuoteExpirationTimeConverter;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -63,6 +56,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -171,6 +165,23 @@ public class QuoteController extends AbstractCartPageController
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_CREATE_ERROR, null);
 			return REDIRECT_CART_URL;
 		}
+	}
+
+	@Override
+	protected boolean validateCart(final RedirectAttributes redirectModel)
+	{
+		//Validate the cart
+		boolean validationSuccess = super.validateCart(redirectModel);
+		if(validationSuccess){
+			CartData cartData = getCartFacade().getSessionCart();
+			if (StringUtils.isEmpty(cartData.getPurchaseOrderNumber())) {
+				return false;
+			}
+			if (cartData.getRdd() == null) {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**

@@ -78,4 +78,7 @@
 	<bean id="pentlandQuoteExpirationTimeValidationStrategy" class="com.bridgex.core.strategies.impl.PentlandQuoteExpirationTimeValidationStrategy">
 	</bean>
 
+	<alias name="pentlandQuoteCartValidationStrategy" alias="quoteCartValidationStrategy" />
+	<bean id="pentlandQuoteCartValidationStrategy" class="com.bridgex.core.strategies.impl.PentlandQuoteCartValidationStrategy" parent="defaultQuoteCartValidationStrategy"/>
+
 </beans>
