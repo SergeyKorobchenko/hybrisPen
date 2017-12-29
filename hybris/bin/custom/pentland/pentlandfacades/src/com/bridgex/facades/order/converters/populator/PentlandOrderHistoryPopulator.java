@@ -12,7 +12,9 @@ public class PentlandOrderHistoryPopulator extends OrderHistoryPopulator {
   public void populate(final OrderModel source, final OrderHistoryData target)
   {
     super.populate(source, target);
-    target.setOrderType(source.getOrderType());
+    if(source.getOrderType() != null) {
+      target.setOrderType(getEnumerationService().getEnumerationName(source.getOrderType()));
+    }
     target.setRdd(source.getRdd());
     target.setPurchaseOrderNumber(source.getPurchaseOrderNumber());
     target.setTotalQty(source.getTotalQty());

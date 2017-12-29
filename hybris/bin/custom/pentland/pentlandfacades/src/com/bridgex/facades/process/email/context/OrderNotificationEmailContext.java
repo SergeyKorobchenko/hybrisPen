@@ -19,7 +19,11 @@ import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.search.restriction.SearchRestrictionService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.session.SessionExecutionBody;
+import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,17 +38,29 @@ import org.springframework.beans.factory.annotation.Required;
 public class OrderNotificationEmailContext extends AbstractEmailContext<OrderProcessModel>
 {
 	private Converter<OrderModel, OrderData> orderConverter;
-	private OrderData orderData;
-	private List<CouponData> giftCoupons;
+	private OrderData                        orderData;
+	private List<CouponData>                 giftCoupons;
+	private SessionService                   sessionService;
+	private UserService                      userService;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
 	{
 		super.init(orderProcessModel, emailPageModel);
-		OrderModel order = orderProcessModel.getOrder();
-		orderData = getOrderConverter().convert(order);
-		orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
-		put("customer",getCustomer(orderProcessModel));
+		CustomerModel customer = getCustomer(orderProcessModel);
+		put("customer", customer);
+
+		sessionService.executeInLocalView(new SessionExecutionBody() {
+			@Override
+			public Object execute() {
+				userService.setCurrentUser(customer);
+				OrderModel order = orderProcessModel.getOrder();
+				orderData = getOrderConverter().convert(order);
+				orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
+				return super.execute();
+			}
+		});
+
 
 		giftCoupons = orderData.getAppliedOrderPromotions().stream()
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())
@@ -87,5 +103,14 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	public List<CouponData> getCoupons()
 	{
 		return giftCoupons;
+	}
+
+	@Required
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 }
