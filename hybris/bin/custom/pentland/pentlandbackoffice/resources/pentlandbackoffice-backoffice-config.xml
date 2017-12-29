@@ -14,6 +14,7 @@
         xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
         xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
         xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+        xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
         xmlns:cb="http://www.hybris.com/cockpitng/config/collectionbrowser"
         xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
         xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms">
@@ -27,12 +28,35 @@
 		</advanced-search:advanced-search>
 	</context>
 
+	<context merge-by="type" component="advanced-search" type="PriceRow">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="productId" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
 	<context merge-by="type" component="advanced-search" type="Product">
 		<advanced-search:advanced-search>
 			<advanced-search:field-list >
 				<advanced-search:field name="discontinuedStatus"/>
 			</advanced-search:field-list>
 		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="Address" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="lastname" merge-mode="remove"/>
+			<list-view:column qualifier="firstname" merge-mode="remove"/>
+			<list-view:column qualifier="addressID" position="0"/>
+			<list-view:column qualifier="displayName" position="1"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="PDTRow" type="PriceRow" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="productId" position="1"/>
+		</list-view:list-view>
 	</context>
 
 	<context merge-by="type" type="Product" component="editor-area">
