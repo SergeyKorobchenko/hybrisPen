@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
+import com.bridgex.core.enums.OrderType;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandOrderExportService;
 import com.bridgex.core.services.PentlandB2BUnitService;
@@ -192,6 +193,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
       sapOrder.setSapBrand(sapOrderDTO.getSapBrand());
       OrderStatus newStatus = OrderStatus.valueOf(sapOrderDTO.getStatus());
       sapOrder.setStatus(newStatus);
+      sapOrder.setOrderType(OrderType.valueOf(sapOrderDTO.getOrderType()));
       sapOrder.setTotalPrice(Double.parseDouble(sapOrderDTO.getTotalPrice()));
       sapOrder.setTotalQty(Integer.parseInt(sapOrderDTO.getTotalQty()));
       sapOrder.setRdd(sapOrderDTO.getRequestedDeliveryDate());

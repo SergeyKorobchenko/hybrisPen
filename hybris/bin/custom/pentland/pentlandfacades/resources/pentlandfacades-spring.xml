@@ -347,6 +347,7 @@
 	<alias name="pentlandOrderPopulator" alias="orderPopulator"/>
 	<bean id="pentlandOrderPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderPopulator" parent="defaultOrderPopulator">
 		<property name="categoryService" ref="categoryService"/>
+		<property name="enumerationService" ref="enumerationService"/>
 	</bean>
 
 	<alias name="defaultPentlandFutureStockFacade" alias="futureStockFacade"/>

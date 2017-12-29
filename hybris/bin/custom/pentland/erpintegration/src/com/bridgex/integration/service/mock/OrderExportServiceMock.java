@@ -23,7 +23,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
 
     SapOrderDto order1 = new SapOrderDto();
     order1.setOrderCode(requestDto.getDocNumber() + "_1");
-    order1.setOrderType(requestDto.getDocType());
+    order1.setOrderType("ZZRO");
     order1.setRequestedDeliveryDate(new Date());
     order1.setSapBrand("05");
     order1.setStatus("CREATED");
@@ -32,7 +32,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
 
     SapOrderDto order2 = new SapOrderDto();
     order2.setOrderCode(requestDto.getDocNumber() + "_2");
-    order2.setOrderType(requestDto.getDocType());
+    order2.setOrderType("ZMTO");
     order2.setRequestedDeliveryDate(DateUtils.addDays(new Date(), 2));
     order2.setSapBrand("0Q");
     order2.setStatus("CREATED");

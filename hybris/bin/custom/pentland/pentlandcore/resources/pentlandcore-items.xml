@@ -53,7 +53,22 @@
 
         <enumtype code="Gender" autocreate="false" dynamic="true"/>
 
-        <enumtype code="OrderType" generate="true" autocreate="true" dynamic="true" />
+        <enumtype code="OrderType" generate="true" autocreate="true" dynamic="true" >
+            <value code="ZZRO"/>
+            <value code="Z3PD"/>
+            <value code="ZCQN"/>
+            <value code="ZFOC"/>
+            <value code="ZFRO"/>
+            <value code="ZMKT"/>
+            <value code="ZMTO"/>
+            <value code="ZMTF"/>
+            <value code="ZZCL"/>
+            <value code="ZZCR"/>
+            <value code="ZZDR"/>
+            <value code="ZZRP"/>
+            <value code="ZRES"/>
+            <value code="ZREN"/>
+        </enumtype>
 
         <enumtype code="SalesApplication" generate="false" autocreate="false" dynamic="true">
             <value code="SAP"/>
