@@ -191,7 +191,7 @@
 	<bean id="pentlandBatchParentB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=en];active[default=true];groups(uid)[collection-delimiter=|]
+				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=$lang];active[default=true];groups(uid)[collection-delimiter=|]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -203,7 +203,7 @@
 	<bean id="pentlandBatchB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid)[collection-delimiter=|];salesOrg;distCh;sapID;sapPriceList;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=en];active[default=true]
+				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid)[collection-delimiter=|];salesOrg;distCh;sapID;sapPriceList;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=$lang];active[default=true]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -218,7 +218,7 @@
 	<bean id="pentlandBatchAddressConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE Address;owner(B2BUnit.uid);sapCustomerID[unique=true];addressID[unique=true];displayName[lang=en];country(isocode)[default='GB'];state;postalcode;town;streetname;streetnumber;district;building;appartment;department;markForAddresses(addressID)[collection-delimiter=|];markForAddress[default=false];visibleInAddressBook[default=true];contactAddress[default=false];billingAddress[default=false];unloadingAddress[default=false];shippingAddress[default=true];
+				INSERT_UPDATE Address;owner(B2BUnit.uid);sapCustomerID[unique=true];addressID[unique=true];displayName[lang=$lang];country(isocode)[default='GB'];state;postalcode;town;streetname;streetnumber;district;building;appartment;department;markForAddresses(addressID)[collection-delimiter=|];markForAddress[default=false];visibleInAddressBook[default=true];contactAddress[default=false];billingAddress[default=false];unloadingAddress[default=false];shippingAddress[default=true];
 				#%groovy% beforeEach: line.put(1, pentlandB2BUnitService.getUnitBySapID(line.get(2)).getUid());
 			</value>
 		</property>

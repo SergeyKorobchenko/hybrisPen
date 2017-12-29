@@ -28,7 +28,7 @@
 	                	</c:forEach>
 	               </div>
 	           </div>
-	           <!--div class="footer__right col-xs-12 col-md-3">
+	           <div class="footer__right col-xs-12 col-md-3 pull-right">
 	               <c:if test="${showLanguageCurrency}">
 	                   <div class="row">
 	                       <div class="col-xs-6 col-md-6 footer__dropdown">
@@ -39,7 +39,7 @@
 	                       </div>
 	                   </div>
 	               </c:if>
-	            </div-->
+	            </div>
 	        </div>
 	    </div>
 	</div>
