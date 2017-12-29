@@ -20,13 +20,13 @@ public class DefaultPentlandAddressDao extends DefaultAddressDao implements Pent
     queryBuilder.append("{").append(AddressModel.SAPCUSTOMERID).append("}=?sapId ");
     queryBuilder.append("and {").append(AddressModel.VISIBLEINADDRESSBOOK).append("}=?visible ");
     queryBuilder.append("and {").append(AddressModel.SHIPPINGADDRESS).append("}=?shippingAddress ");
-    queryBuilder.append("and {").append(AddressModel.MARKFORADDRESS).append("}=?markForAddress ");
+    //queryBuilder.append("and {").append(AddressModel.MARKFORADDRESS).append("}=?markForAddress ");
 
     FlexibleSearchQuery query = new FlexibleSearchQuery(queryBuilder.toString());
     query.addQueryParameter("sapId", b2BUnitModel.getSapID());
     query.addQueryParameter("visible", Boolean.TRUE);
     query.addQueryParameter("shippingAddress", Boolean.TRUE);
-    query.addQueryParameter("markForAddress", Boolean.FALSE);
+    //query.addQueryParameter("markForAddress", Boolean.FALSE);
 
     return getFlexibleSearchService().<AddressModel>search(query).getResult();
   }
