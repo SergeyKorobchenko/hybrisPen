@@ -43,7 +43,7 @@
 
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
 		<property name="totalQty" type="java.lang.Integer"/>
-		<property name="orderType" type="com.bridgex.core.enums.OrderType"/>
+		<property name="orderType" type="String"/>
 		<property name="rdd" type="java.util.Date"/>
 	</bean>
 	
