@@ -38,6 +38,7 @@ public class GenerateQuoteEmailAction extends GenerateEmailAction {
         EmailMessageModel lastMessage = emailMessages.get(emailMessages.size() - 1);
         EmailAddressModel emailAddress = getCustomerOpsEmail(b2BCustomer);
         lastMessage.setToAddresses(Collections.singletonList(emailAddress));
+        getModelService().save(lastMessage);
         return Transition.OK;
       }
     }
