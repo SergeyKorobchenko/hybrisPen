@@ -67,21 +67,16 @@
               </tr>
               <tr>
                 <td>
-                                            <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('queryStatus', $ctx.messages.status)}</strong>
-                                        </span>
-                  <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('queryDate', $ctx.dateTool.format('d MMM, yyyy', $ctx.quote.creationTime))}</strong>
-                  </span>
+                  <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('queryStatus', $ctx.messages.status)}</strong></div>
+                  <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('queryDate', $ctx.dateTool.format('d MMM, yyyy', $ctx.quote.creationTime))}</strong>
+                  </div>
 
-                  <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('queryName', $ctx.quote.name)}</strong>
-                                        </span>
-                  #if ($ctx.quote.description)
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('queryDescription', $ctx.quote.description)}</strong></span>
-                  #end
-                  #if ($ctx.quote.comments.size > 0)
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.queryComments}</strong></span>
-                    #foreach($comment in $ctx.quote.comments)
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:15px;">${ctx.messages.getMessage('queryComment', $comment.author.name, $comment.text)}</span>
-                  #end
+                  <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('queryName', $ctx.quote.name)}</strong></div>
+                  #if ($ctx.quote.comments.size() > 0)
+                    <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.queryComments}</strong></div>
+                      #foreach($comment in $ctx.quote.comments)
+                      <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:15px;">${ctx.messages.getMessage('queryComment', $comment.author.name, $comment.text)}</div>
+                    #end
                   #end
                 </td>
               </tr>
@@ -108,10 +103,10 @@
               <tr>
                 #if ($ctx.opsMail)
                   <td>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.internalUse</strong></span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</span>
+                    <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.internalUse</strong></div>
+                    <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</div>
+                    <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</div>
+                    <div style="font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</div>
                   </td>
                 #end
               </tr>
