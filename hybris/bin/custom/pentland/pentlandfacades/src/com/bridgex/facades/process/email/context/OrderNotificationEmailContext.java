@@ -58,7 +58,7 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				userService.setCurrentUser(customer);
 				OrderModel order = orderProcessModel.getOrder();
 				orderData = getOrderConverter().convert(order);
-				if(ExportStatus.EXPORTED.equals(order) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
+				if(ExportStatus.EXPORTED.equals(order.getExportStatus()) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
 					orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
 				}else{
 					orderData.setSubOrders(Collections.singletonList(orderData));

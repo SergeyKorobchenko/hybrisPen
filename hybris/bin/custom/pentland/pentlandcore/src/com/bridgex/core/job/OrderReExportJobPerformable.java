@@ -14,6 +14,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.event.OrderStatusChangedEvent;
 import com.bridgex.core.model.OrderExportCronJobModel;
 import com.bridgex.core.order.PentlandOrderExportService;
 
@@ -28,6 +29,7 @@ import de.hybris.platform.cronjob.model.CronJobModel;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
 import de.hybris.platform.servicelayer.cronjob.TypeAwareJobPerformable;
+import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.internal.model.ServicelayerJobModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -53,6 +55,8 @@ public class OrderReExportJobPerformable extends AbstractJobPerformable<OrderExp
   private ItemObjectResolver         modelResolver;
 
   private List<OrderModel> failedOrders;
+
+  private EventService eventService;
 
   @Override
   public PerformResult perform(OrderExportCronJobModel orderExportCronJobModel) {
@@ -123,9 +127,15 @@ public class OrderReExportJobPerformable extends AbstractJobPerformable<OrderExp
         OrderModel orderModel = (OrderModel)item;
         if(!pentlandOrderExportService.exportOrder(orderModel) && orderModel.getReexportRetries() > allowedRetries){
           failedOrders.add(orderModel);
+        }else{
+          submitChangeStatusEvent(orderModel);
         }
       });
     }
+  }
+
+  private void submitChangeStatusEvent(OrderModel order) {
+    eventService.publishEvent(new OrderStatusChangedEvent(order.getCode()));
   }
 
   protected void mailFailedOrders(OrderExportCronJobModel cronJob){
@@ -193,5 +203,10 @@ public class OrderReExportJobPerformable extends AbstractJobPerformable<OrderExp
   public void setModelResolver(final ItemObjectResolver modelResolver)
   {
     this.modelResolver = modelResolver;
+  }
+
+  @Required
+  public void setEventService(EventService eventService) {
+    this.eventService = eventService;
   }
 }
