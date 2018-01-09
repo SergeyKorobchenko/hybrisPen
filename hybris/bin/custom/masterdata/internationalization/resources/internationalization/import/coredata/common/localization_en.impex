@@ -467,7 +467,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.hostedOrderPostPage.header.wait;Please wait while we transfer you
 ;checkout.multi.inStore;In Store
 ;checkout.multi.items.to.pickup;Pick Up:
-;checkout.multi.lightbox.redirect.error;There was an error communicating with the payment provider. Please try again later or use an alternative method of payment.
+;checkout.multi.lightbox.redirect.error;We are having a problem processing your payment. Please contact your Customer Operations representative.
 ;checkout.multi.next;Next &raquo
 ;checkout.multi.order.summary;Order Summary
 ;checkout.multi.payment;"Payment Type:"
@@ -475,7 +475,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.paymentMethod;Payment
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddressDiffersFromDeliveryAddress;If your billing address is  different  to your delivery address, please use this form to enter your billing address
-;checkout.multi.paymentMethod.addPaymentDetails.communicationError;There was an error communicating with the payment provider - please try again later.
+;checkout.multi.paymentMethod.addPaymentDetails.communicationError;We are having a problem processing your payment. Please contact your Customer Operations representative.
 ;checkout.multi.paymentMethod.addPaymentDetails.enterDifferentBillingAddress;Enter a different billing address
 ;checkout.multi.paymentMethod.addPaymentDetails.enterYourCardDetails;Please enter your card details for payment
 ;checkout.multi.paymentMethod.addPaymentDetails.generalError;An error occurred contacting the payment provider.  Wait a few minutes and try again.  If the problem persist, please contact our sales team.
