@@ -15,6 +15,7 @@ import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmai
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -25,6 +26,7 @@ import de.hybris.platform.servicelayer.session.SessionExecutionBody;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +58,11 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				userService.setCurrentUser(customer);
 				OrderModel order = orderProcessModel.getOrder();
 				orderData = getOrderConverter().convert(order);
-				orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
+				if(ExportStatus.EXPORTED.equals(order) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
+					orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
+				}else{
+					orderData.setSubOrders(Collections.singletonList(orderData));
+				}
 				return super.execute();
 			}
 		});

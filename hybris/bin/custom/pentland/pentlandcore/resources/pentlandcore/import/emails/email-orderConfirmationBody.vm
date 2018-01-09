@@ -70,8 +70,14 @@
                     <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('orderSummary', $order.code)}</strong></div>
                     <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderStatus', $order.statusDisplay)}
                 </div>
+                    #if (!$order.orderType)
+                      #set($order.orderType = "")
+                    #end
                     <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderType', $order.orderType)}
                                         </div>
+                    #if (!$order.brand)
+                      #set($order.brand = "")
+                    #end
                     <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderBrand', $order.brand)}
                                         </div>
                     <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderDate', $ctx.dateTool.format('d MMM, yyyy', $order.created))}
