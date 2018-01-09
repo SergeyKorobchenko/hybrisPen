@@ -109,9 +109,9 @@
               <tr>
 								#if ($ctx.salesRep)
                   <td>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</strong></span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</strong></span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</strong></span>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</strong></div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</strong></div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</strong></div>
                   </td>
 								#end
               </tr>
