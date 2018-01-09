@@ -19,7 +19,7 @@ task deployfile {
 		logger.quiet("Environment: " + environment_name)
 		logger.quiet("Version: " + version)
 
-		//production.execute()
+		production.execute()
 
 		def environment = new main.groovy.Environment(project)
         def filename = environment.getAttribute("filename") + '_' + version
