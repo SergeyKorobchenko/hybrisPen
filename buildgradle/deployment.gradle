@@ -19,7 +19,7 @@ task deployfile {
 		logger.quiet("Environment: " + environment_name)
 		logger.quiet("Version: " + version)
 
-		production.execute()
+		//production.execute()
 
 		def environment = new main.groovy.Environment(project)
         def filename = environment.getAttribute("filename") + '_' + version
@@ -64,6 +64,9 @@ task deployfile {
         	include("languages/**")
         	into devEnvPath
         }
+        def date = new Date()
+        def timestamp = date.format('yyyy-MM-dd HH:mm:ss')
+        def deployment_version = "deployment.timestamp=${timestamp}\n\ndeployment.version=${version}\n\n"
         //stage properties
         def commonStag = file("${hybrisEnvConfig}/stag/common.properties")
         def admStag = file("${hybrisEnvConfig}/stag/customer.adm.properties")
@@ -71,6 +74,8 @@ task deployfile {
         def targetAdmStag = file("${stageEnvPath}/customer.adm.properties")
         def targetAppStag = file("${stageEnvPath}/customer.app.properties")
         copyProperties(common_properties, commonStag, admStag, appStag, targetAdmStag, targetAppStag,stageEnvPath)
+        targetAdmStag.text = deployment_version + targetAdmStag.text
+        targetAppStag.text = deployment_version + targetAppStag.text
          //prod properties
         def commonProd = file("${hybrisEnvConfig}/prod/common.properties")
         def admProd = file("${hybrisEnvConfig}/prod/customer.adm.properties")
@@ -78,7 +83,8 @@ task deployfile {
         def targetAdmProd = file("${prodEnvPath}/customer.adm.properties")
         def targetAppProd = file("${prodEnvPath}/customer.app.properties")
         copyProperties(common_properties, commonProd, admProd, appProd, targetAdmProd, targetAppProd,prodEnvPath)
-        
+        targetAdmProd.text = deployment_version + targetAdmProd.text
+        targetAppProd.text = deployment_version + targetAppProd.text
 
 		logger.lifecycle("Creating deployment zip ${filename}.zip...")
 
