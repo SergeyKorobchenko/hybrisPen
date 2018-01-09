@@ -178,6 +178,9 @@
 		<property name="userService" ref="userService"/>
 	</bean>
 
+	<bean id="orderConfirmationRepEmailContext" class="com.bridgex.facades.process.email.context.OrderConfirmationRepEmailContext" parent="orderNotificationEmailContext" scope="prototype">
+	</bean>
+
 	<bean id="quoteNotificationEmailContext" class="com.bridgex.facades.process.email.context.QuoteNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="quoteService" ref="quoteService"/>
 		<property name="quoteConverter" ref="quoteConverter"/>

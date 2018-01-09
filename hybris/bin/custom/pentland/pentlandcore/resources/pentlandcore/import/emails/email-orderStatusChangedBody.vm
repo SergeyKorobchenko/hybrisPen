@@ -67,20 +67,20 @@
 							#foreach ($order in $ctx.order.subOrders)
                 <tr>
                   <td>
-                                            <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('orderStatus', $order.statusDisplay)}</strong>
-                                        </span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('orderType', $order.orderType)}</strong>
-                                        </span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('orderBrand', $order.brand)}</strong>
-                                        </span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('orderDate', $ctx.dateTool.format('d MMM, yyyy', $order.created))}</strong>
-                  						</span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('orderRdd', $ctx.dateTool.format('d MMM, yyyy', $order.rdd))}</strong>
-                  					</span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('orderTotal', $order.totalPrice.formattedValue)}</strong>
-                                        </span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>${ctx.messages.getMessage('orderQuantity', $order.totalUnitCount)}</strong>
-                                        </span>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;padding-top:15px;"><strong>${ctx.messages.getMessage('orderSummary', $order.code)}</strong></div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderStatus', $order.statusDisplay)}</div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderType', $order.orderType)}
+                                        </div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderBrand', $order.brand)}
+                                        </div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderDate', $ctx.dateTool.format('d MMM, yyyy', $order.created))}
+                  						</div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderRdd', $ctx.dateTool.format('d MMM, yyyy', $order.rdd))}
+                  					</div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderTotal', $order.totalPrice.formattedValue)}
+                                        </div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.messages.getMessage('orderQuantity', $order.totalUnitCount)}
+                                        </div>
                   </td>
                 </tr>
 							#end
@@ -109,9 +109,9 @@
               <tr>
 								#if ($ctx.salesRep)
                   <td>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</strong></span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</strong></span>
-                    <span style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</strong></span>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerName',$ctx.customer.name)</strong></div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerEmail',$ctx.customer.uid)</strong></div>
+                    <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;"><strong>$ctx.messages.getMessage('internalCustomerSoldTo',$ctx.account)</strong></div>
                   </td>
 								#end
               </tr>

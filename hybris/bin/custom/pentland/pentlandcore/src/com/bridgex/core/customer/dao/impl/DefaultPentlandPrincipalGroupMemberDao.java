@@ -18,12 +18,12 @@ public class DefaultPentlandPrincipalGroupMemberDao extends DefaultPrincipalGrou
   private static final String SALESREPGROUP = "salesrepgroup";
 
   private static final String FIND_EMPLOYEES_FOR_DESIRED_UNITS = "SELECT DISTINCT pk FROM {Employee" +
-                                                                 "AS emp JOIN PrincipalGroupRelation as pgr {emp.pk} = {pgr.source}" +
-                                                                 "JOIN UserGroup as ug on {pgr.target} = {ug.pk}" +
-                                                                 "JOIN PrincipalGroupRelation as pgr2 on {emp.pk} = {pgr2.source}" +
-                                                                 "JOIN B2BUnit as bbu on {pgr2.target} = {bbu.pk}}" +
-                                                                 "WHERE {ug.uid} = ?group " +
-                                                                 "AND {bbu.uid} IN ?units";
+                                                                 " AS emp JOIN PrincipalGroupRelation as pgr ON {emp.pk} = {pgr.source}" +
+                                                                 " JOIN UserGroup as ug on {pgr.target} = {ug.pk}" +
+                                                                 " JOIN PrincipalGroupRelation as pgr2 on {emp.pk} = {pgr2.source}" +
+                                                                 " JOIN B2BUnit as bbu on {pgr2.target} = {bbu.pk}}" +
+                                                                 " WHERE {ug.uid} = ?group " +
+                                                                 " AND {bbu.uid} IN (?units)";
 
   @Override
   public List<EmployeeModel> findEmployeesForB2BUnits(Set<String> b2BUnitIds) {

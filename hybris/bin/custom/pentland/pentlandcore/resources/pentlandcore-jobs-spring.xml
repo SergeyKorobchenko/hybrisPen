@@ -42,6 +42,7 @@
 		<property name="modelResolver" ref="modelResolver"/>
 		<property name="pageSize" value="100"/>
 		<property name="abortOnError" value="false"/>
+		<property name="eventService" ref="eventService"/>
 	</bean>
 
 </beans>
