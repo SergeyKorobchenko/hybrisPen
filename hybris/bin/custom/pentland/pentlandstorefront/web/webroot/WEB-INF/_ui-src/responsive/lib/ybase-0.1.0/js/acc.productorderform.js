@@ -398,7 +398,7 @@ ACC.productorderform = {
             $('.js-total-price').html(formattedTotal);
             $('#quantity, .js-total-items-count').html(0);
             $('#quantityValue, #avgPriceValue, #subtotalValue, .js-total-price-value').val(0);
-            ACC.productorderform.$emptySkuQuantityInputs.val(0);
+            $("input.sku-quantity").val(0);
             ACC.productorderform.$totalGridValues.html("");
         }
     },
