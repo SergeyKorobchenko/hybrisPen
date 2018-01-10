@@ -10,7 +10,7 @@ ACC.cart = {
         ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0],
         "bindRddDatetimePicker",
         "bindUpdateAllFormSubmit",
-        "scanCartForEdits"
+        "bindScanCartForEdits"
     ],
 
     bindHelp: function () {
@@ -429,67 +429,74 @@ ACC.cart = {
         });
     },
 
-    scanCartForEdits: function(){
-        $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button").on("click", function(e){
-            var $form = $('#updateAllCartForm');
-            var $updateFormData = $($form.serializeArray());
-            var postData = {};
-            $updateFormData.each(function (index, value) {
-                postData[value.name] = value.value;
-            });
-            postData.cartEntries = [];
-            var foundUnsavedChanges = false;
+    scanCartForEdits: function(e) {
+        var $form = $('#updateAllCartForm');
+        var $updateFormData = $($form.serializeArray());
+        var postData = {};
+        $updateFormData.each(function (index, value) {
+            postData[value.name] = value.value;
+        });
+        postData.cartEntries = [];
+        var foundUnsavedChanges = false;
 
-            //check cart header
-            var $rddInput = $form.find("input[name='requestedDeliveryDate']");
-            var initial = $rddInput.data("initial") == undefined ? '' : $rddInput.data("initial");
-            if(initial != $rddInput.val()){
+        //check cart header
+        var $rddInput = $form.find("input[name='requestedDeliveryDate']");
+        var initial = $rddInput.data("initial") == undefined ? '' : $rddInput.data("initial");
+        if (initial != $rddInput.val()) {
+            foundUnsavedChanges = true;
+        } else {
+            var $poInput = $form.find("input[name='purchaseOrderNumber']");
+            initial = $poInput.data("initial") == undefined ? '' : $poInput.data("initial");
+            if (initial != $poInput.val()) {
                 foundUnsavedChanges = true;
-            }else{
-                var $poInput = $form.find("input[name='purchaseOrderNumber']");
-                initial = $poInput.data("initial") == undefined ? '' : $poInput.data("initial");
-                if(initial != $poInput.val()){
+            } else {
+                var $commentInput = $form.find("textarea[name='customerNotes']");
+                initial = $commentInput.data("initial") == undefined ? '' : $commentInput.data("initial");
+                if (initial != $commentInput.val()) {
                     foundUnsavedChanges = true;
-                }else{
-                    var $commentInput = $form.find("textarea[name='customerNotes']");
-                    initial = $commentInput.data("initial") == undefined ? '' : $commentInput.data("initial");
-                    if(initial != $commentInput.val()){
-                        foundUnsavedChanges = true;
-                    }else{
-                        //check quantities
-                        $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
-                            var $v = $(v);
-                            var currentInputData = $v.data();
-                            var quantity = $v.val();
-                            if (currentInputData.initialQuantity != quantity) {
-                                foundUnsavedChanges = true;
-                                return true;
-                            }
-                        });
-                    }
+                } else {
+                    //check quantities
+                    $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
+                        var $v = $(v);
+                        var currentInputData = $v.data();
+                        var quantity = $v.val();
+                        if (currentInputData.initialQuantity != quantity) {
+                            foundUnsavedChanges = true;
+                            return true;
+                        }
+                    });
                 }
             }
+        }
 
+        if (foundUnsavedChanges) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var popupTitle = $(".unsaved_popup_content").data('popup-title');
 
-            if(foundUnsavedChanges){
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                var popupTitle = $(".unsaved_popup_content").data('popup-title');
-
-                ACC.colorbox.open(popupTitle,{
-                    html: $(".unsaved_popup_content").html(),
-                    width: '500px',
-                    onComplete: function ()
-                    {
-                        $(this).colorbox.resize();
-                        $(".js-save-cart").click(function(){
-                            ACC.cart.submitUpdateAllForm(function() {location.reload()});
+            ACC.colorbox.open(popupTitle, {
+                html: $(".unsaved_popup_content").html(),
+                width: '500px',
+                onComplete: function () {
+                    $(this).colorbox.resize();
+                    $(".js-save-cart").click(function () {
+                        ACC.cart.submitUpdateAllForm(function () {
+                            location.reload()
                         });
-                        $(".js-close-unsaved-popup").click(function(){
-                            ACC.colorbox.close();
-                        });
-                    }
-                });
+                    });
+                    $(".js-close-unsaved-popup").click(function () {
+                        ACC.colorbox.close();
+                    });
+                }
+            });
+        }
+    },
+
+    bindScanCartForEdits: function() {
+        $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button, .js-continue-shopping-button").on("click", ACC.cart.scanCartForEdits);
+        $(document).ready(function () {
+            if ($('#updateAllCartForm').length > 0 && 'CART' === $('#updateAllCartForm').data('pageType')) {
+                $("a[href], .js_search_button").on("click", ACC.cart.scanCartForEdits);
             }
         });
     },
