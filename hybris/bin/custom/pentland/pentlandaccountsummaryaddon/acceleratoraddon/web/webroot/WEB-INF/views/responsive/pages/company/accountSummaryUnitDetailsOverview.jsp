@@ -24,9 +24,9 @@
                 	<span class="item-label"><spring:theme code="text.company.accountsummary.address.label"/></span>
                     <c:if test="${not empty accountSummaryInfoData.address}">
                         <span class="item-value">
-                            ${fn:escapeXml(accountSummaryInfoData.address.postalCode)}&nbsp;${fn:escapeXml(accountSummaryInfoData.address.town)}<br/>
                             ${fn:escapeXml(accountSummaryInfoData.address.line1)},&nbsp;${fn:escapeXml(accountSummaryInfoData.address.line2)}<br/>
-                            ${fn:escapeXml(accountSummaryInfoData.address.state)},&nbsp;${fn:escapeXml(accountSummaryInfoData.address.country.name)}
+                            ${fn:escapeXml(accountSummaryInfoData.address.town)},&nbsp;${fn:escapeXml(accountSummaryInfoData.address.state)}<br/>
+                            ${fn:escapeXml(accountSummaryInfoData.address.postalCode)}&nbsp;${fn:escapeXml(accountSummaryInfoData.address.country.name)}
                         </span>
                     </c:if>
                 </div>
