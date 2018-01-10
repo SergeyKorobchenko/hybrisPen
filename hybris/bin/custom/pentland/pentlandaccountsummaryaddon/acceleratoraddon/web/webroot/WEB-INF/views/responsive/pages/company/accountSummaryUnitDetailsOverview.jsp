@@ -94,16 +94,6 @@
                              ${fn:escapeXml(range.value)}
                             </span>
                         </c:forEach>
-
-
-                <div class="item-group total">
-                    <span class="item-label">
-                        <spring:theme code="text.company.accountsummary.pastduebalance.label"/>
-                    </span>
-                    <span class="item-value">
-                        ${fn:escapeXml(accountSummaryInfoData.amountBalanceData.pastDueBalance)}
-                    </span>
-                </div>
             </div>
         </div>
     </div>
