@@ -1,1 +1,5 @@
-﻿${ctx.messages.getMessage('emailSubject', ${ctx.order.code})}
+﻿#set ($orderCodes = "")
+#foreach ($suborder in $ctx.order.subOrders)
+  #set ($orderCodes = $orderCodes + " #" + $suborder.code)
+#end
+${ctx.messages.getMessage('emailSubject', ${orderCodes})}

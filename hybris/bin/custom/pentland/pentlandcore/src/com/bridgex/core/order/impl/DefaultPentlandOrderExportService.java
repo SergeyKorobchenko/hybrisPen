@@ -207,6 +207,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
       sapOrder.setUser(orderModel.getUser());
       sapOrder.setUnit(orderModel.getUnit());
       sapOrder.setSalesApplication(SalesApplication.SAP);
+      sapOrder.setLanguage(orderModel.getLanguage());
       modelService.save(sapOrder);
       byBrandOrderList.add(sapOrder);
     }

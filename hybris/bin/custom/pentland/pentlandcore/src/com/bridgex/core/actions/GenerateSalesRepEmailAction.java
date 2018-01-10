@@ -19,6 +19,7 @@ import de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmai
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.model.BusinessProcessModel;
 import de.hybris.platform.task.RetryLaterException;
 
@@ -73,7 +74,9 @@ public class GenerateSalesRepEmailAction extends GenerateEmailAction {
       return Transition.NOK;
     }
 
-    emailMessageModel.setToAddresses(getSalesRepAddresses(businessProcessModel.getUser()));
+    emailMessageModel.setToAddresses(getSalesRepAddresses(((OrderProcessModel) businessProcessModel).getOrder().getUser()));
+
+    getModelService().save(emailMessageModel);
 
     final List<EmailMessageModel> emails = new ArrayList<>();
     emails.addAll(businessProcessModel.getEmails());
