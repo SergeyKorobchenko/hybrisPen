@@ -876,7 +876,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.form.currency;£
 ;order.form.subtotal;Subtotal
 ;order.form.total;Order Form Total
-;order.form.color;Color
+;order.form.color;Colour
 ;order.free;FREE
 ;order.itemPrice;Item Price
 ;order.order.totals;Order Totals
