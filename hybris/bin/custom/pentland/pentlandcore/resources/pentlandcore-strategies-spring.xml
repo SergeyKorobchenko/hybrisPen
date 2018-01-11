@@ -68,7 +68,9 @@
 	<bean id="pentlandCommerceAddToCartStrategy" class="com.bridgex.core.order.impl.PentlandCommerceAddToCartStrategy" parent="defaultCommerceAddToCartStrategy"/>
 
 	<alias name="pentlandTicketEventEmailStrategy" alias="ticketEventEmailStrategy"/>
-	<bean id="pentlandTicketEventEmailStrategy" class="com.bridgex.core.strategies.impl.PentlandTicketEventEmailStrategy" parent="defaultTicketEventEmailStrategy"/>
+	<bean id="pentlandTicketEventEmailStrategy" class="com.bridgex.core.strategies.impl.PentlandTicketEventEmailStrategy" parent="defaultTicketEventEmailStrategy">
+		<property name="pentlandMediaService" ref="mediaService"/>
+	</bean>
 
 	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="b2bCommerceDeliveryAddressStrategy"/>
 	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="commerceDeliveryAddressStrategy"/>

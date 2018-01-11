@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -32,16 +33,16 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
   public static final String WEBSITE_PENTLAND_HTTPS = "website.pentland.https";
 
   private Map<CsEmailRecipients, String> recipientTypeToContextClassMap;
-  private MediaService mediaService;
+  private MediaService pentlandMediaService;
 
   @Override
   public void setRecipientTypeToContextClassMap(Map<CsEmailRecipients, String> recipientTypeToContextClassMap) {
     this.recipientTypeToContextClassMap = recipientTypeToContextClassMap;
   }
 
-  @Override
-  public void setMediaService(MediaService mediaService) {
-    this.mediaService = mediaService;
+  @Required
+  public void setPentlandMediaService(MediaService mediaService) {
+    this.pentlandMediaService = mediaService;
   }
 
   @Override
@@ -73,7 +74,7 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
   private String getLogoUrl() {
     try {
       String urlPrefix = Config.getParameter(MEDIA_EXPORT_HTTP);
-      return urlPrefix + mediaService.getMedia("/images/logo_pentland.png").getDownloadURL();
+      return urlPrefix + pentlandMediaService.getMedia("/images/logo_pentland.png").getDownloadURL();
     } catch (UnknownIdentifierException | AmbiguousIdentifierException e) {
       LOG.error("Error while loading logo image");
       return StringUtils.EMPTY;
