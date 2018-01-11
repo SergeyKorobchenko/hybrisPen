@@ -116,6 +116,7 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.VariantMatrixElementData">
 		<property name="variantName" type="String"/>
+		<property name="variantCode" type="String"/>
 		<property name="maxVariants" type="java.lang.Integer"/>
 		<property name="qty" type="java.lang.Long" />
 		<property name="packSize" type="java.lang.Integer" />

@@ -64,8 +64,6 @@
                     <a href="${productUrl}"><span class="item__name">${fn:escapeXml(entry.product.name)}</span></a>
                 </ycommerce:testId>
 
-                <div class="item__code">${fn:escapeXml(entry.product.code)}</div>
-
                 <%-- availability --%>
                 <div class="item__stock">
                     <c:set var="entryStock" value="${entry.product.stock.stockLevelStatus.code}"/>
