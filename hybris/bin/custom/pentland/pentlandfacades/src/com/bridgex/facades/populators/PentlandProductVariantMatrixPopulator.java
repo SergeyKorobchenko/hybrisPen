@@ -40,6 +40,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
       ApparelStyleVariantProductModel styleVariantProductModel = (ApparelStyleVariantProductModel) styleLevelVariantModel;
       VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
       styleElementData.setVariantName(styleVariantProductModel.getStyle());
+      styleElementData.setVariantCode(styleVariantProductModel.getCode());
       styleElementData.setIsLeaf(Boolean.FALSE);
       styleElementData.setPackSize(styleVariantProductModel.getPackSize());
       final VariantOptionData styleVariantOptionData = Optional.ofNullable(styleElementData.getVariantOption()).orElse(new VariantOptionData());

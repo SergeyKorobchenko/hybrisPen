@@ -54,6 +54,9 @@
             </c:forEach>
             <br/><br/>
         </div>
+        <div class="variant-code">
+            <div>${fn:escapeXml(firstVariant.variantCode)}</div>
+        </div>
         <div class="description">
             <div>${fn:escapeXml(firstVariant.variantName)}</div>
         </div>

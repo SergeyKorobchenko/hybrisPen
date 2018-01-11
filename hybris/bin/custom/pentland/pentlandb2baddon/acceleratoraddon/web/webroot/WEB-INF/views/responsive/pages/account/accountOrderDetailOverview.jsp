@@ -43,17 +43,10 @@
 				<b2b-order:accountOrderDetailsOverview order="${orderData}"/>
 			</ycommerce:testId>
 		</div>
-		<c:if test="${not empty orderData.placedBy}">
-			<div class="alert alert-info order-placedby">
-				<c:choose>
-					<c:when test="${not empty agent}">
-						<spring:theme code="text.account.order.placedBy" arguments="${orderData.placedBy}"/>
-					</c:when>
-					<c:otherwise>
-						<spring:theme code="text.account.order.placedByText"/>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</c:if>
+		<div class="well-lg well well-tertiary">
+			<ycommerce:testId code="orderDetail_soldTo_section">
+				<b2b-order:accountOrderDetailsSoldTo order="${orderData}"/>
+			</ycommerce:testId>
+		</div>
 	</c:otherwise>
 </c:choose>
