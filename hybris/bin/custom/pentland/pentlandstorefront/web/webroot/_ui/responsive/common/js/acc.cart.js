@@ -429,7 +429,8 @@ ACC.cart = {
         });
     },
 
-    scanCartForEdits: function(e) {
+    scanCartForEdits: function(e){
+        // $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button").on("click", function(e){
         var $form = $('#updateAllCartForm');
         var $updateFormData = $($form.serializeArray());
         var postData = {};
@@ -442,19 +443,19 @@ ACC.cart = {
         //check cart header
         var $rddInput = $form.find("input[name='requestedDeliveryDate']");
         var initial = $rddInput.data("initial") == undefined ? '' : $rddInput.data("initial");
-        if (initial != $rddInput.val()) {
+        if(initial != $rddInput.val()){
             foundUnsavedChanges = true;
-        } else {
+        }else{
             var $poInput = $form.find("input[name='purchaseOrderNumber']");
             initial = $poInput.data("initial") == undefined ? '' : $poInput.data("initial");
-            if (initial != $poInput.val()) {
+            if(initial != $poInput.val()){
                 foundUnsavedChanges = true;
-            } else {
+            }else{
                 var $commentInput = $form.find("textarea[name='customerNotes']");
                 initial = $commentInput.data("initial") == undefined ? '' : $commentInput.data("initial");
-                if (initial != $commentInput.val()) {
+                if(initial != $commentInput.val()){
                     foundUnsavedChanges = true;
-                } else {
+                }else{
                     //check quantities
                     $('input[type=textbox][name^=cartEntries]').each(function (i, v) {
                         var $v = $(v);
@@ -469,27 +470,28 @@ ACC.cart = {
             }
         }
 
-        if (foundUnsavedChanges) {
+
+        if(foundUnsavedChanges){
             e.preventDefault();
             e.stopImmediatePropagation();
             var popupTitle = $(".unsaved_popup_content").data('popup-title');
 
-            ACC.colorbox.open(popupTitle, {
+            ACC.colorbox.open(popupTitle,{
                 html: $(".unsaved_popup_content").html(),
                 width: '500px',
-                onComplete: function () {
+                onComplete: function ()
+                {
                     $(this).colorbox.resize();
-                    $(".js-save-cart").click(function () {
-                        ACC.cart.submitUpdateAllForm(function () {
-                            location.reload()
-                        });
+                    $(".js-save-cart").click(function(){
+                        ACC.cart.submitUpdateAllForm(function() {location.reload()});
                     });
-                    $(".js-close-unsaved-popup").click(function () {
+                    $(".js-close-unsaved-popup").click(function(){
                         ACC.colorbox.close();
                     });
                 }
             });
         }
+        // });
     },
 
     bindScanCartForEdits: function() {
