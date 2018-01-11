@@ -10,7 +10,7 @@ ACC.cart = {
         ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0],
         "bindRddDatetimePicker",
         "bindUpdateAllFormSubmit",
-        "scanCartForEdits"
+        "bindScanCartForEdits"
     ],
 
     bindHelp: function () {
@@ -429,8 +429,8 @@ ACC.cart = {
         });
     },
 
-    scanCartForEdits: function(){
-        $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button").on("click", function(e){
+    scanCartForEdits: function(e){
+        // $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button").on("click", function(e){
             var $form = $('#updateAllCartForm');
             var $updateFormData = $($form.serializeArray());
             var postData = {};
@@ -490,6 +490,15 @@ ACC.cart = {
                         });
                     }
                 });
+            }
+        // });
+    },
+
+    bindScanCartForEdits: function() {
+        $(".js-continue-checkout-button, .export__cart--link, .export__images--link, .js-create-quote-button, .js-continue-shopping-button").on("click", ACC.cart.scanCartForEdits);
+        $(document).ready(function () {
+            if ($('#updateAllCartForm').length > 0 && 'CART' === $('#updateAllCartForm').data('pageType')) {
+                $("a[href], .js_search_button").on("click", ACC.cart.scanCartForEdits);
             }
         });
     },

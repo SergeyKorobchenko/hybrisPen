@@ -8,7 +8,7 @@
 
 <c:url value="/cart/update-all" var="updateAllCartFormAction" />
 
-<form:form method="post" id="updateAllCartForm" action="${updateAllCartFormAction}" commandName="b2bCartForm">
+<form:form method="post" id="updateAllCartForm" action="${updateAllCartFormAction}" commandName="b2bCartForm" data-page-type="${pageType}">
 	<div class="row">
 		<div class="col-xs-12 col-md-2">
 			<label><spring:theme code="text.cart.rdd"/></label>
