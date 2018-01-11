@@ -24,6 +24,8 @@
 # * Tax & Tax Groups
 # * Jobs
 
+#% impex.enableCodeExecution(true);
+
 # Languages
 INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
 ;en;;;
