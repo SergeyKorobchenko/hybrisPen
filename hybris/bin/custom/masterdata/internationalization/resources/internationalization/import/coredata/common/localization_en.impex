@@ -1455,6 +1455,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.status.display.IN PROGRESS;In Progress
 ;text.account.order.status.display.APPROVED;Approved
 ;text.account.order.status.display.ON_HOLD;On Hold
+;text.account.order.status.display.ON HOLD;On Hold
 ;text.account.order.status.display.IN_PROGRESS;In Progress
 ;text.account.order.status.display.SHIPPED;Shipped
 ;text.account.order.status.display.OPEN;Open
