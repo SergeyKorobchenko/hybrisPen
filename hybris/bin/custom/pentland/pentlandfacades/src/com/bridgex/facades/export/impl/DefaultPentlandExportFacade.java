@@ -1,6 +1,7 @@
 package com.bridgex.facades.export.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -34,7 +35,7 @@ import de.hybris.platform.util.Config;
 public class DefaultPentlandExportFacade implements PentlandExportFacade{
 
   private static final Logger LOG = Logger.getLogger(DefaultPentlandExportFacade.class);
-  public static final String MEDIA_EXPORT_HTTP = "media.export.http";
+  public static final String MEDIA_EXPORT_PATH = "media.replication.dirs";
   public static final String DEFAULT_MEDIA_ROOT = "http://pentland.local:9001";
 
   private PentlandProductService productService;
@@ -54,7 +55,7 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
   public void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products){
     Set<MediaModel> collectedMedia = products.stream().map(this::getPrimaryImageMasterUrl).filter(Objects::nonNull).collect(Collectors.toSet());
 
-    String urlPrefix = Config.getString(MEDIA_EXPORT_HTTP, DEFAULT_MEDIA_ROOT);
+    String pathPrefix = Config.getString(MEDIA_EXPORT_PATH, "") + "/sys_master/";
 
     for(MediaModel media: collectedMedia){
       //for the images imported via hotfolder the realfilename is always filled. However, it still can be null for initialdata images or for any other reason
@@ -67,7 +68,8 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
       ZipEntry zipEntry = new ZipEntry(fileName);
       try{
         zipOutputStream.putNextEntry(zipEntry);
-        BufferedImage image = ImageIO.read(new URL(urlPrefix + media.getDownloadURL()));
+//        BufferedImage image = ImageIO.read(new URL(urlPrefix + media.getDownloadURL()));
+        BufferedImage image = ImageIO.read(new File(pathPrefix + media.getLocation()));
         String imageFormat = "jpg";
         //try to get image format from filename
         String[] split = fileName.split("\\.");
