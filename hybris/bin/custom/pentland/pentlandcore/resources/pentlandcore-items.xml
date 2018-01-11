@@ -68,6 +68,8 @@
             <value code="ZZRP"/>
             <value code="ZRES"/>
             <value code="ZREN"/>
+            <value code="ZZOR"/>
+            <value code="ZZIO"/>
         </enumtype>
 
         <enumtype code="SalesApplication" generate="false" autocreate="false" dynamic="true">
