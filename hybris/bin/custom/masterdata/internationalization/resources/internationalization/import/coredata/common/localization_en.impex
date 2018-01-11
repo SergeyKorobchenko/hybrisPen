@@ -2893,7 +2893,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.tax;Order Tax
 ;text.account.order.net;Order Net
 
-;text.account.supporttickets.success;Your ticket successfully sended
+;text.account.supporttickets.success;Your ticket successfully sent
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
 
