@@ -6,11 +6,18 @@ import com.bridgex.core.event.OrderStatusChangedEvent;
 
 import de.hybris.platform.commerceservices.enums.SalesApplication;
 import de.hybris.platform.core.enums.ExportStatus;
+import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.order.interceptors.DefaultOrderPrepareInterceptor;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
+import de.hybris.platform.servicelayer.internal.model.impl.DefaultModelServiceInterceptorContext;
+import de.hybris.platform.servicelayer.internal.model.impl.ModelValueHistory;
+import de.hybris.platform.servicelayer.model.ItemModelContext;
+import de.hybris.platform.servicelayer.model.ItemModelContextImpl;
+import de.hybris.platform.servicelayer.model.ModelContextUtils;
 
 /**
  * @author Goncharenko Mikhail, created on 23.11.2017.
@@ -40,6 +47,21 @@ public class PentlandOrderPrepareInterceptor extends DefaultOrderPrepareIntercep
   }
 
   private boolean isNotificationNeeded(OrderModel order, InterceptorContext ctx) {
-    return ctx.isModified(order, OrderModel.STATUS) && !ctx.isNew(order) && SalesApplication.SAP.equals(order.getSalesApplication()) && order.getSourceOrder() != null;
+    ModelValueHistory modelValueHistory = getModelValueHistory(order);
+    OrderStatus oldStatus = null;
+    if(modelValueHistory != null) {
+      oldStatus = (OrderStatus)modelValueHistory.getOriginalValue(OrderModel.STATUS);
+    }
+
+    return !ctx.isNew(order) && SalesApplication.SAP.equals(order.getSalesApplication()) && order.getSourceOrder() != null
+      && ctx.isModified(order, OrderModel.STATUS) && !order.getStatus().equals(oldStatus);
+  }
+
+  private ModelValueHistory getModelValueHistory(final AbstractOrderModel orderModel) {
+    final ItemModelContext itemModelContext = ModelContextUtils.getItemModelContext(orderModel);
+    if (itemModelContext != null) {
+      return ((ItemModelContextImpl) itemModelContext).getValueHistory();
+    }
+    return null;
   }
 }
