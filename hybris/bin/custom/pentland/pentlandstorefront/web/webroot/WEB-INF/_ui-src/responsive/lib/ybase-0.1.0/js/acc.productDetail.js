@@ -82,20 +82,21 @@ ACC.productDetail = {
     },
 
     populateAndShowEditableGrid: function (element, event) {
-        var $grid = $("#ajaxGrid");
-        var $gridEntry = $('#grid');
+        if ($(element).hasClass('open')) {
+            if ($('.product-grid-container').children().length > 0) {
+                $(window).scrollTo($('#AddToCartOrderForm'), 1000);
+            }
+        } else {
+            var $grid = $("#ajaxGrid");
+            var $gridEntry = $('#grid');
 
-        var $orderForm = $('.js-product-order-form');
+            var $orderForm = $('.js-product-order-form');
 
-        $(element).toggleClass('open');
+            $(element).toggleClass('open');
 
-        var targetUrl = $gridEntry.data("target-url");
-        var productCode = $gridEntry.data("product-code");
+            var targetUrl = $gridEntry.data("target-url");
+            var productCode = $gridEntry.data("product-code");
 
-        if ($('.product-grid-container').children().length > 0) {
-            $(window).scrollTo($('#AddToCartOrderForm'), 1000);
-        }
-        else {
             var method = "GET";
             $.ajax({
                 url: targetUrl,
