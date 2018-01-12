@@ -29,23 +29,6 @@
     <input type="hidden" id="editMode" name="editMode" value="true"/>
     <div class="form__actions">
         <div class="row">
-            <c:if test="${allowedActions['EDIT']}">
-                <div class="col-sm-4 col-md-3 col-md-offset-3">
-                    <button type="button"
-                        class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button"
-                        data-continue-shopping-url="${continueShoppingUrl}">
-                        <spring:theme code="cart.page.continue" />
-                    </button>
-                </div>
-            </c:if>
-
-            <c:if test="${allowedActions['CANCEL']}">
-                <div class="col-sm-4 col-md-3">
-                    <button type="button" class="btn btn-default btn-block js-quote-cancel-btn form__actions--cancel">
-                        <spring:theme code="quote.cancel" />
-                    </button>
-                </div>
-            </c:if>
 
             <c:if test="${allowedActions['SUBMIT']}">
                 <div class="col-sm-4 col-md-3 pull-right">
@@ -62,6 +45,24 @@
                             </button>
                         </c:otherwise>
                     </c:choose>
+                </div>
+            </c:if>
+
+            <c:if test="${allowedActions['CANCEL']}">
+                <div class="col-sm-4 col-md-3 pull-right">
+                    <button type="button" class="btn btn-default btn-block js-quote-cancel-btn form__actions--cancel">
+                        <spring:theme code="quote.cancel" />
+                    </button>
+                </div>
+            </c:if>
+
+            <c:if test="${allowedActions['EDIT']}">
+                <div class="col-sm-4 col-md-3 pull-right">
+                    <button type="button"
+                            class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button"
+                            data-continue-shopping-url="${continueShoppingUrl}">
+                        <spring:theme code="cart.page.continue" />
+                    </button>
                 </div>
             </c:if>
         </div>
