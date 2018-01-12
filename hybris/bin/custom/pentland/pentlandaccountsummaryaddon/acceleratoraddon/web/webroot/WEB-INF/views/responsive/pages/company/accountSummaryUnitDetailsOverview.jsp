@@ -35,9 +35,10 @@
                 <div class="item-group">
 					<span class="item-label"><spring:theme code="text.company.accountsummary.creditrep.label"/></span>
 					<span class="item-value">
-					    <c:forEach var="creditRepLine" items="${accountSummaryInfoData.creditReps}">
-                            ${fn:escapeXml(creditRepLine)}<br/>
-                        </c:forEach>
+					    <%--<c:forEach var="creditRepLine" items="${accountSummaryInfoData.creditReps}">--%>
+                            <%--${fn:escapeXml(creditRepLine)}<br/>--%>
+                        <%--</c:forEach>--%>
+                        <spring:theme code="text.company.accountsummary.not.applicable"/>
 					</span>
                 </div>
                 <div class="item-group">
