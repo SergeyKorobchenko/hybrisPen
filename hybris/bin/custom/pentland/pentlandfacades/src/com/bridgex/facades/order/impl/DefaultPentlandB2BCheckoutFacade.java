@@ -8,6 +8,8 @@ import java.util.Map;
 
 import com.bridgex.core.order.PentlandCartService;
 import com.bridgex.facades.order.PentlandB2BCheckoutFacade;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.enums.B2BUnitType;
@@ -25,6 +27,8 @@ import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.order.CalculationService;
+import de.hybris.platform.order.exceptions.CalculationException;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
@@ -33,7 +37,8 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
 
   private Map<B2BUnitType, List<CheckoutPaymentType>> b2bPaymentTypeMapping;
   private B2BUnitService<B2BUnitModel, UserModel>     b2bUnitService;
-  private PentlandCartService pentlandCartService;
+  private PentlandCartService                         pentlandCartService;
+  private CalculationService                          calculationService;
 
   private static final String CART_CHECKOUT_DELIVERYADDRESS_INVALID = "cart.deliveryAddress.invalid";
   private static final String CART_CHECKOUT_DELIVERYMODE_INVALID = "cart.deliveryMode.invalid";
@@ -41,6 +46,8 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
   private static final String CART_CHECKOUT_NOT_CALCULATED = "cart.not.calculated";
   private static final String CART_CHECKOUT_QUOTE_REQUIREMENTS_NOT_SATISFIED = "cart.quote.requirements.not.satisfied";
   private static final String CART_CHECKOUT_PAYMENTTYPE_INVALID = "cart.paymenttype.invalid";
+
+  private static final Logger LOG = Logger.getLogger(DefaultPentlandB2BCheckoutFacade.class);
 
   @Override
   public List<B2BPaymentTypeData> getPaymentTypes() {
@@ -88,7 +95,13 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
 
   @Override
   public void createCartFromSessionDetails(String orderCode) {
-    pentlandCartService.createCartFromSessionDetails(orderCode);
+    CartModel cartModel = pentlandCartService.createCartFromSessionDetails(orderCode);
+    try {
+      getCalculationService().calculate(cartModel);
+    }
+    catch (CalculationException e) {
+      LOG.error("Error during cart calculation", e);
+    }
   }
 
     
@@ -171,5 +184,14 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
   @Required
   public void setPentlandCartService(PentlandCartService pentlandCartService) {
     this.pentlandCartService = pentlandCartService;
+  }
+
+  protected CalculationService getCalculationService() {
+    return calculationService;
+  }
+
+  @Required
+  public void setCalculationService(CalculationService calculationService) {
+    this.calculationService = calculationService;
   }
 }
