@@ -250,6 +250,7 @@
 		</property>
 		<property name="b2bUnitService" ref="b2bUnitService"/>
 		<property name="pentlandCartService" ref="cartService"/>
+		<property name="calculationService" ref="calculationService"/>
 	</bean>
 
 	<util:list id="accountPayment">
