@@ -50,7 +50,7 @@
             <c:if test="${allowedActions['SUBMIT']}">
                 <div class="col-sm-4 col-md-3 pull-right">
                     <c:choose>
-                        <c:when test="${cartData.totalPrice.value lt 0}">
+                        <c:when test="${cartData.totalPrice.value lt 0 || cartData.totalUnitCount == 0}">
                             <button type="button" class="btn btn-primary btn-block col-md-4 pull-right js-quote-submit-btn form__actions--submit"
                                     disabled="disabled" >
                                 <spring:theme code="quote.submit" />

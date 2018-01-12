@@ -122,4 +122,8 @@
 	<bean id="defaultPentlandProductModelUrlResolver"
 	      class="com.bridgex.core.product.url.impl.DefaultPentlandProductModelUrlResolver" parent="defaultProductModelUrlResolver" />
 
+	<alias alias="commerceQuoteService" name="pentlandCommerceQuoteService"/>
+	<bean id="pentlandCommerceQuoteService" class="com.bridgex.core.order.impl.PentlandCommerceQuoteService"
+				parent="defaultCommerceQuoteService"/>
+
 </beans>
