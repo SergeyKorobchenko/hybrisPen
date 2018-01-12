@@ -122,20 +122,20 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 
 #% if: "dev".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE Division;code[unique=true];email
-;active;devpentland@pentland.com
-;footwear;devpentland@pentland.com
+;active;devpentlandconnect@pentland.com
+;footwear;devpentlandconnect@pentland.com
 #% endif:
 
 #% if: "stag".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE Division;code[unique=true];email
-;active;testpentland@pentland.com
-;footwear;testpentland@pentland.com
+;active;testpentlandconnect@pentland.com
+;footwear;testpentlandconnect@pentland.com
 #% endif:
 
 #% if: "prod".equals(Config.getParameter("environment.id"));
 INSERT_UPDATE Division;code[unique=true];email
-;active;testpentland@pentland.com
-;footwear;testpentland@pentland.com
+;active;pentlandconnect@pentland.com
+;footwear;pentlandconnect@pentland.com
 #% endif:
 
 #% if: "common".equals(Config.getParameter("environment.id"));
