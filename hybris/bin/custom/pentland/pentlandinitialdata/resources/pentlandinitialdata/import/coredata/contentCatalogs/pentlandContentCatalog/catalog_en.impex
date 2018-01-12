@@ -14,7 +14,9 @@
 
 # Language
 $lang=en
+$mediaCatalog=pentlandMediaCatalog
 
 # Create Content Catalog
 UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
- ;pentlandContentCatalog;"Pentland Content Catalog"
+;pentlandContentCatalog;"Pentland Content Catalog"
+;$mediaCatalog;"Pentland Media Catalog"

@@ -24,10 +24,13 @@
 <div class="p_slider ${not empty banners && banners.size() > 1 ? 'js-banner-carousel _infinite' : ''}">
 	<c:forEach items="${banners}" var="banner" varStatus="status">
 		<c:if test="${ycommerce:evaluateRestrictions(banner)}">
+			<c:url value="${banner.urlLink}" var="encodedUrl" />
 			<div class="ps-item">
+				<a tabindex="-1" href="${encodedUrl}"<c:if test="${banner.external}"> target="_blank"</c:if>>
 				<img src="${banner.media.url}" width="100%"
 					 alt="${not empty banner.headline ? banner.headline : banner.media.altText}"
 					 title="${not empty banner.headline ? banner.headline : banner.media.altText}"/>
+				</a>
 			</div>
 		</c:if>
 	</c:forEach>
