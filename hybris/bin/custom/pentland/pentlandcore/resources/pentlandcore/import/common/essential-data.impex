@@ -63,7 +63,7 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 #remove OOTB formats to avoid conflicts
 REMOVE MediaFormat;qualifier[unique=true]
 ;1200Wx1200H
-;515Wx515H
+;600Wx600H
 ;365Wx246H
 ;300Wx300H
 ;96Wx96H
@@ -78,16 +78,16 @@ INSERT_UPDATE MediaFormat;qualifier[unique=true]
 
 INSERT_UPDATE ConversionMediaFormat; qualifier[unique = true]; name[lang = en]; ; conversionStrategy; conversion
 ; 1200Wx1200H ; superZoomConversionMediaFormat   ; superZoomConversionMediaFormat   ; imageMagickMediaConversionStrategy ; -resize 1200x1200 -background white -gravity center -extent 1200x1200
-; 515Wx515H   ; zoomConversionMediaFormat        ; zoomConversionMediaFormat        ; imageMagickMediaConversionStrategy ; -resize 515x515 -background white -gravity center -extent 515x515
+; 600Wx600H   ; zoomConversionMediaFormat        ; zoomConversionMediaFormat        ; imageMagickMediaConversionStrategy ; -resize 600x600 -background white -gravity center -extent 600x600
 ; 365Wx246H   ; storeConversionMediaFormat       ; storeConversionMediaFormat       ; imageMagickMediaConversionStrategy ; -resize 365x246 -background white -gravity center -extent 365x246
 ; 300Wx300H   ; productConversionMediaFormat     ; productConversionMediaFormat     ; imageMagickMediaConversionStrategy ; -resize 300x300 -background white -gravity center -extent 300x300
 ; 96Wx96H     ; thumbnailConversionMediaFormat   ; thumbnailConversionMediaFormat   ; imageMagickMediaConversionStrategy ; -resize 96x96 -background white -gravity center -extent 96x96
 ; 65Wx65H     ; cartIconConversionMediaFormat    ; cartIconConversionMediaFormat    ; imageMagickMediaConversionStrategy ; -resize 65x65 -background white -gravity center -extent 65x65
-; 30Wx30H     ; styleSwatchConversionMediaFormat ; styleSwatchConversionMediaFormat ; imageMagickMediaConversionStrategy ; -resize 30x30 -background white -gravity center -extent 30x30
+; 38Wx38H     ; styleSwatchConversionMediaFormat ; styleSwatchConversionMediaFormat ; imageMagickMediaConversionStrategy ; -resize 38x38 -background white -gravity center -extent 38x38
 
 INSERT_UPDATE ConversionGroup; code[unique = true]; supportedFormats(qualifier)
-; productConversionGroup ; 515Wx515H, 365Wx246H, 300Wx300H, 96Wx96H, 65Wx65H, 30Wx30H
-; galleryConversionGroup ; 300Wx300H, 96Wx96H, 515Wx515H
+; productConversionGroup ; 600Wx600H, 365Wx246H, 300Wx300H, 96Wx96H, 65Wx65H, 38Wx38H
+; galleryConversionGroup ; 300Wx300H, 96Wx96H, 600Wx600H
 
 # Tax & Tax Groups
 INSERT_UPDATE UserTaxGroup;code[unique=true]
