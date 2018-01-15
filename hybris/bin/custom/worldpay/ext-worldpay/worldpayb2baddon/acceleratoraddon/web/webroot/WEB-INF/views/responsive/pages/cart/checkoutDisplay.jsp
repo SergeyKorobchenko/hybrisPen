@@ -5,6 +5,6 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <c:url value="/cart/checkout" var="checkoutUrl" scope="session"/>
-<div class="cart__actions">
+<div class="cart__actions hidden">
     <cart:cartActions/>
 </div>

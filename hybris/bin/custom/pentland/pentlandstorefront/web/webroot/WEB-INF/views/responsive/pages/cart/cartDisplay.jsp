@@ -39,7 +39,7 @@
 
     <div class="row">
         <div class="col-xs-12 pull-right cart-actions--print">
-            <div class="cart__actions">
+            <div class="cart__actions hidden">
                 <cart:cartActions/>
                 <br/>
                 <cart:cartHeader/>

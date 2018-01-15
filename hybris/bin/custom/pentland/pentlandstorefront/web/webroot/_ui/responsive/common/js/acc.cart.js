@@ -10,8 +10,15 @@ ACC.cart = {
         ["bindToReleaseVoucher", $("#js-applied-vouchers").length != 0],
         "bindRddDatetimePicker",
         "bindUpdateAllFormSubmit",
-        "bindScanCartForEdits"
+        "bindScanCartForEdits",
+        "showCartActions"
     ],
+
+    showCartActions: function(){
+        $(document).ready(function () {
+            $(".cart__actions").removeClass("hidden");
+        });
+    },
 
     bindHelp: function () {
         $(document).on("click", ".js-cart-help", function (e) {
