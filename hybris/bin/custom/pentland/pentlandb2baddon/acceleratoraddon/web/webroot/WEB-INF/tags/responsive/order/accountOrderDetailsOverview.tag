@@ -38,7 +38,7 @@
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_creationDate_label">
                         <span class="item-label"><spring:theme code="text.account.orderHistory.creationDate"/></span>
-                        <span class="item-value"><fmt:formatDate value="${order.created}" dateStyle="medium" timeStyle="medium" type="both"/></span>
+                        <span class="item-value"><fmt:formatDate value="${order.created}" dateStyle="medium" type="date"/></span>
                     </ycommerce:testId>
                 </div>
                 <div class="item-group">
