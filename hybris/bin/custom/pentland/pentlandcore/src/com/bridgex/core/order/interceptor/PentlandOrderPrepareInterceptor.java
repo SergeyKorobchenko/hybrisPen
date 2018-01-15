@@ -49,8 +49,12 @@ public class PentlandOrderPrepareInterceptor extends DefaultOrderPrepareIntercep
   private boolean isNotificationNeeded(OrderModel order, InterceptorContext ctx) {
     ModelValueHistory modelValueHistory = getModelValueHistory(order);
     OrderStatus oldStatus = null;
-    if(modelValueHistory != null) {
-      oldStatus = (OrderStatus)modelValueHistory.getOriginalValue(OrderModel.STATUS);
+    try {
+      if (modelValueHistory != null) {
+        oldStatus = (OrderStatus) modelValueHistory.getOriginalValue(OrderModel.STATUS);
+      }
+    } catch (IllegalStateException ise) {
+      return false;
     }
 
     return !ctx.isNew(order) && SalesApplication.SAP.equals(order.getSalesApplication()) && order.getSourceOrder() != null
