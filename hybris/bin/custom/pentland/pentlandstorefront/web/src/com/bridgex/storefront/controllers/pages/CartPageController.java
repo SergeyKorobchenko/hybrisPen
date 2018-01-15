@@ -49,6 +49,7 @@ import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
 
 import com.bridgex.facades.export.PentlandExportFacade;
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
@@ -132,6 +133,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "pentlandExportFacade")
 	private PentlandExportFacade pentlandExportFacade;
+
+	@Resource
+	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -530,6 +534,12 @@ public class CartPageController extends AbstractCartPageController
 
 	@RequestMapping(value = "/images", method = RequestMethod.GET, produces = "text/csv")
 	public String exportImagesArchive(final HttpServletResponse response, final RedirectAttributes redirectModel) throws IOException {
+
+		if(pentlandB2BAcceleratorCheckoutFacade.cartHasZeroQuantityBaseEntries()){
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "basket.error.export.image.empty.cart",
+			                               null);
+			return REDIRECT_CART_URL;
+		}
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		ZipOutputStream zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
