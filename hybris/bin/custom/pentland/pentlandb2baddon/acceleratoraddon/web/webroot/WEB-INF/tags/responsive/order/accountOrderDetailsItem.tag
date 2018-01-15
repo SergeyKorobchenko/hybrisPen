@@ -26,10 +26,14 @@
             <span class="item-label"><spring:theme code="text.account.orderHistory.item.shipments"/>:</span>
             <c:forEach items="${item.shipments}" var="shipment">
                     <span class="item-info">
-                        <span class="item-value"><spring:theme code="text.account.orderHistory.item.shipdate"/>: <fmt:formatDate value="${shipment.key}"/> |</span>
+                        <span class="item-value"><spring:theme code="text.account.orderHistory.item.shipdate"/>
+                        <c:choose>
+                            <c:when test="${shipment.key != null}"> :<fmt:formatDate value="${shipment.key}"/> |</c:when>
+                            <c:otherwise>: <spring:theme code="text.account.orderHistory.item.notassigned"/> |</c:otherwise>
+                        </c:choose>
+                        </span>
                         <span class="item-value"> <spring:theme code="text.account.orderHistory.item.qty"/>: ${shipment.value.qty} |</span>
                         <span class="item-value"> <spring:theme code="text.account.orderHistory.item.status"/>: ${shipment.value.shipmentStatus}</span>
-
                     </span>
             </c:forEach>
         </ycommerce:testId>

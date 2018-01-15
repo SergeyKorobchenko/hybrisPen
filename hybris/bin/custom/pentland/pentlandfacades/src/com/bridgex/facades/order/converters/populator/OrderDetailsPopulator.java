@@ -1,6 +1,8 @@
 package com.bridgex.facades.order.converters.populator;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -35,6 +37,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
 
   private ProductService productService;
   private PriceDataFactory priceDataFactory;
+  private SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
   private BiFunction<ShipmentData, ShipmentData, ShipmentData> shipmentDataMerger = (shipment1,shipment2) -> {
     shipment1.setQty(shipment1.getQty() + shipment2.getQty());
@@ -81,11 +84,26 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     for(SizeVariantDto size : dto.getSizeVariants()) {
       ShipmentData shipment = new ShipmentData();
       shipment.setShipmentStatus(size.getShipStatus());
-      shipment.setShipDate(size.getShipDate());
+
+      Date shipDate = parseShipDate(size);
+
+      shipment.setShipDate(shipDate);
       shipment.setQty(getInt(size.getShipQty()));
-      shipments.merge(size.getShipDate(), shipment, shipmentDataMerger);
+      shipments.merge(shipDate, shipment, shipmentDataMerger);
     }
     item.setShipments(shipments);
+  }
+
+  private Date parseShipDate(SizeVariantDto size) {
+    Date shipDate = null;
+    if (size.getShipDate() != null) {
+      try {
+        shipDate = formatter.parse(size.getShipDate());
+      } catch (ParseException e) {
+        LOG.error("Unable to parse shipment date. Change to N/A");
+      }
+    }
+    return shipDate;
   }
 
   private void populateNameAndImage(OrderEntryDto dto, OrderItemData item) {

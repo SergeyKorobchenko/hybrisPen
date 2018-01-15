@@ -23,8 +23,7 @@ public class SizeVariantDto {
   private String totalQuantity;
 
   @JsonProperty("SHIPPED_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date shipDate;
+  private String shipDate;
 
   @JsonProperty("SHIPPED_QUANTITY")
   private String shipQty;
@@ -56,12 +55,14 @@ public class SizeVariantDto {
     this.totalQuantity = totalQuantity;
   }
 
-  public Date getShipDate() {
+  public String getShipDate() {
     return shipDate;
   }
 
-  public void setShipDate(Date shipDate) {
-    this.shipDate = shipDate;
+  public void setShipDate(String shipDate) {
+    if (!shipDate.startsWith("0000")) {
+      this.shipDate = shipDate;
+    }
   }
 
   public String getShipQty() {
