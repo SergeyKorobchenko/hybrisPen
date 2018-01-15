@@ -82,7 +82,7 @@ public class ProductExportController extends AbstractPageController {
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     ZipOutputStream zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
 
-    pentlandExportFacade.exportImagesForProductList(zipOutputStream, new HashSet<>(Arrays.asList(content)));
+    pentlandExportFacade.exportImagesForProductList(zipOutputStream, new HashSet<>(Arrays.asList(content)), true);
 
     zipOutputStream.finish();
 

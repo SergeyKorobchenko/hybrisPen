@@ -12,5 +12,5 @@ public interface PentlandExportFacade {
 
   void exportImagesFromCart(final ZipOutputStream zipOutputStream, final CartData cartData);
 
-  void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products);
+  void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products, boolean onlyMaster);
 }

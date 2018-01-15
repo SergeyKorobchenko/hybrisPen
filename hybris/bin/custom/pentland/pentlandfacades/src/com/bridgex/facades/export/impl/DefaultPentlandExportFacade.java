@@ -23,6 +23,7 @@ import com.bridgex.facades.export.PentlandExportFacade;
 
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
@@ -46,14 +47,19 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
     List<OrderEntryData> entries = cartData.getEntries();
     if(CollectionUtils.isNotEmpty(entries)){
       Set<String> products = collectProductCodesFromEntries(entries);
-      exportImagesForProductList(zipOutputStream, products);
+      exportImagesForProductList(zipOutputStream, products, false);
     }
 
   }
 
   @Override
-  public void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products){
-    Set<MediaModel> collectedMedia = products.stream().map(this::getPrimaryImageMasterUrl).filter(Objects::nonNull).collect(Collectors.toSet());
+  public void exportImagesForProductList(final ZipOutputStream zipOutputStream, Set<String> products, boolean onlyMaster){
+    Set<MediaModel> collectedMedia;
+    if(onlyMaster){
+      collectedMedia = products.stream().map(this::getPrimaryImageMasterUrl).filter(Objects::nonNull).collect(Collectors.toSet());
+    }else {
+      collectedMedia = products.stream().flatMap(productCode -> getGalleryImages(productCode).stream()).filter(Objects::nonNull).collect(Collectors.toSet());
+    }
 
     String pathPrefix = Config.getString(MEDIA_EXPORT_PATH, "") + "/sys_master/";
 
@@ -114,6 +120,24 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
       LOG.error("Unknown product code in cart: " + productCode);
       return null;
     }
+  }
+
+  private List<MediaModel> getGalleryImages(final String productCode){
+    try {
+      ProductModel productForCode = productService.getProductForCode(productCode);
+      if(productForCode instanceof ApparelSizeVariantProductModel){
+        productForCode = ((ApparelSizeVariantProductModel) productForCode).getBaseProduct();
+      }
+      //relying on assumption that primary image master is included in gallery images
+      List<MediaContainerModel> galleryImages = productForCode.getGalleryImages();
+      if(CollectionUtils.isNotEmpty(galleryImages)){
+        return galleryImages.stream().map(MediaContainerModel::getMaster).collect(Collectors.toList());
+      }
+    }catch(UnknownIdentifierException | AmbiguousIdentifierException e){
+      //shouldn't ever be possible, but...
+      LOG.error("Unknown product code in cart: " + productCode);
+    }
+    return new ArrayList<>();
   }
 
   @Required
