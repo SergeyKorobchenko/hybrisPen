@@ -73,6 +73,10 @@ ACC.productorderform = {
             var totalPrice = 0;
             var _this = this;
             var currentPrice = $("input[id='productPrice[" + currentIndex + "]']").val();
+            currentPrice = parseFloat(currentPrice);
+            if (isNaN(currentPrice)) {
+                currentPrice = 0.0;
+            }
             this.value = ACC.productorderform.filterSkuEntry(this.value);
             var packSize = $(this).data('pack-size');
             this.value = ACC.productorderform.correctQuantityToPackSize(this.value, packSize);
@@ -673,6 +677,10 @@ ACC.productorderform = {
         var indexPattern = "[0-9]+";
         var currentIndex = parseInt(_this.attr("id").match(indexPattern));
         var currentPrice = $("input[id='productPrice[" + currentIndex + "]']").val();
+        currentPrice = parseFloat(currentPrice);
+        if (isNaN(currentPrice)) {
+            currentPrice = 0.0;
+        }
         var $gridTotalValue = $gridGroup.find("[data-grid-total-id=" + 'total_value_' + currentIndex + "]");
         if(quantityToAdd > 0)
             $gridTotalValue.html(ACC.productorderform.formatTotalsCurrency(parseFloat(currentPrice) * parseInt(quantityToAdd)));
