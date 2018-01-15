@@ -571,7 +571,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.worldpay.declined.message.92;This card type is not supported through this merchant, please try an alternative payment method
 ;checkout.multi.worldpay.declined.message.94;There was an issue contacting your card issuing bank, please try again
 ;checkout.multi.worldpay.declined.message.97;Your card issuer has rejected the transaction, please contact your card issuer
-;checkout.multi.worldpay.declined.message.default;An error occurred with your payment
+;checkout.multi.worldpay.declined.message.default;We are having a problem processing your payment. Please contact your Customer Operations representative.
 ;checkout.order.fields.email.help;Email
 ;checkout.order.fields.name.help;Real Name
 ;checkout.order.fields.phone.help;Phone
