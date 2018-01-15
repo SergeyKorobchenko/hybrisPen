@@ -97,7 +97,7 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
     Set<String> productCodes = new HashSet<>();
     for (final OrderEntryData entry : entries) {
       if (Boolean.TRUE.equals(entry.getProduct().getMultidimensional())) {
-        productCodes.addAll(entry.getEntries().stream().map(subEntry -> subEntry.getProduct().getBaseProduct()).collect(Collectors.toList()));
+        productCodes.addAll(entry.getEntries().stream().filter(e -> e.getQuantity() > 0).map(subEntry -> subEntry.getProduct().getBaseProduct()).collect(Collectors.toList()));
       }
       else
       {

@@ -2951,6 +2951,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;basket.error.checkout.empty.ponumber;P.O. Number is required
 ;basket.error.checkout.empty.rdd;Requested delivery date is requred
+;basket.error.export.image.empty.cart;Please add some quantity for a product before downloading images
 
 ;search.nav.facetShowMore_productType;more product types...
 ;search.nav.facetShowLess_productType;less product types...
