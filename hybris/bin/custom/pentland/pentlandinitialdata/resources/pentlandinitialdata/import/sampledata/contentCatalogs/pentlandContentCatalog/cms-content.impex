@@ -453,7 +453,7 @@ INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = tru
 ; ; PentlandHomPageParagraphComponent ; Pentland Homepage Paragraph Component ; PentlandHomPageParagraphComponent;
 
 ## components in slot 3 ##
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
 ;;PentlandHomepageStreetYouthBannerComponent;Pentland Homepage Section-3 Component-1;/youth;PentlandHomepageStreetYouthBannerComponent
 ;;PentlandHomepageWomenStreetBannerComponent;Pentland Homepage Section-3 Component-2;/women;PentlandHomepageWomenStreetBannerComponent
 ;;PentlandHomepageManStreetBannerComponent;Pentland Homepage Section-3 Component-3;/men;PentlandHomepageManStreetBannerComponent
@@ -916,7 +916,7 @@ INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; na
 ; ; MitreBrandPage2BannerComponent ; Mitre Brand Banner Page Component ; /protection  ; MitreBrandPage2BannerComponent
 
 ## components in slot 2 ##
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
 ; ; MitreBrandPageHelmetBannerComponent     ; Pentland Brandpage Section-2 Component-1    ; ; MitreBrandPageHelmetBannerComponent
 ; ; MitreBrandPageProtectionBannerComponent ; Pentland Brandpage Section-2 Component-2    ; ; MitreBrandPageProtectionBannerComponent
 ; ; MitreBrandPageShoesBannerComponent      ; Pentland Brandpage Section-2 Component-3    ; ; MitreBrandPageShoesBannerComponent
@@ -1036,7 +1036,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'notFound']; contentSlot(uid, $contentCV)[unique = true]
 ; ; Pentland-MiddleContent-Errorpage ; MiddleContent ; ; Pentland-MiddleContent-Errorpage
 
-INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 ; ; PentlandErrorpageBannerComponent ; Pentland Error Page Banner Component ; PentlandErrorpageBannerComponent
 
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; folder(qualifier)[default = 'images'];;
