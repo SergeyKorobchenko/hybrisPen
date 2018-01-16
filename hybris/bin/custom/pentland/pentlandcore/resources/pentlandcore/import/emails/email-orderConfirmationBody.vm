@@ -93,7 +93,8 @@
 							#end
               <tr>
                 <td>
-                  <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('contactUsParagraph', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlBoldFont(${ctx.messages.contactUs})", "#genHtmlLinkEndTag()")}</font></p>
+                  #set ($contactLink = $ctx.secureBaseUrl + $ctx.messages.contactUsPage)
+                  <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('contactUsParagraph', "#genHtmlLinkStartTag($contactLink)", "#genHtmlBoldFont(${ctx.messages.contactUs})", "#genHtmlLinkEndTag()")}</font></p>
                   <p>
                     <font color="#000000" size="2" face="Arial, Helvetica, sans-serif">
 											${ctx.messages.complimentaryClosing}
