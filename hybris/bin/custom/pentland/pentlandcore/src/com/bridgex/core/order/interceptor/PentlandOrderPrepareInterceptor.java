@@ -47,18 +47,22 @@ public class PentlandOrderPrepareInterceptor extends DefaultOrderPrepareIntercep
   }
 
   private boolean isNotificationNeeded(OrderModel order, InterceptorContext ctx) {
+    if(ctx.isNew(order) || !SalesApplication.SAP.equals(order.getSalesApplication()) || order.getSourceOrder() == null || !ctx.isModified(order, OrderModel.STATUS)){
+      return false;
+    }
+
     ModelValueHistory modelValueHistory = getModelValueHistory(order);
     OrderStatus oldStatus = null;
     try {
       if (modelValueHistory != null) {
         oldStatus = (OrderStatus) modelValueHistory.getOriginalValue(OrderModel.STATUS);
+        return !order.getStatus().equals(oldStatus);
       }
     } catch (IllegalStateException ise) {
       return false;
     }
 
-    return !ctx.isNew(order) && SalesApplication.SAP.equals(order.getSalesApplication()) && order.getSourceOrder() != null
-      && ctx.isModified(order, OrderModel.STATUS) && !order.getStatus().equals(oldStatus);
+    return false;
   }
 
   private ModelValueHistory getModelValueHistory(final AbstractOrderModel orderModel) {
