@@ -43,6 +43,13 @@ ACC.product = {
                 $(this).prop("disabled", false);
             }
         });
+        $('#addToCartButton').on("click", function(e){
+            if ($(".js-total-items-count").length != 0 && $(".js-total-items-count").text() > 0) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                $("#addToCartBtn").click();
+            }
+        });
     },
 
     enableVariantSelectors: function () {
