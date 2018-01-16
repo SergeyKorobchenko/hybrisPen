@@ -82,7 +82,7 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     SizeVariantDto size = new SizeVariantDto();
     size.setEan("300147490");
     size.setLineNumber("1");
-    size.setShipDate(new Date());
+    size.setShipDate("20180101");
     size.setShipQty("10.00");
     size.setShipStatus("SHIPPED");
     size.setTotalQuantity("10.00");
@@ -90,7 +90,7 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     SizeVariantDto size2 = new SizeVariantDto();
     size2.setEan("300020465");
     size2.setLineNumber("2");
-    size2.setShipDate(new Date());
+    size2.setShipDate("20180101");
     size2.setShipQty("5.00");
     size2.setShipStatus("SHIPPED");
     size2.setTotalQuantity("5.00");
