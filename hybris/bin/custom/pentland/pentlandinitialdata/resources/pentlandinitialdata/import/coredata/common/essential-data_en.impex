@@ -44,9 +44,9 @@ UPDATE Title;code[unique=true];name[lang=$lang]
 UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
 ;1200Wx1200H;1200Wx1200H;
 ;300Wx300H;300Wx300H;
-;30Wx30H;30Wx30H;
+;38Wx38H;38Wx38H;
 ;365Wx246H;365Wx246H;
-;515Wx515H;515Wx515H;
+;600Wx600H;600Wx600H;
 ;65Wx65H;65Wx65H;
 ;96Wx96H;96Wx96H;
 ;sizeChart;SizeChart;

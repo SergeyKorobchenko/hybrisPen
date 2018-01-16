@@ -96,7 +96,7 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 # Media formats
 INSERT_UPDATE MediaFormat;qualifier[unique=true]
 ;1200Wx1200H
-;515Wx515H
+;600Wx600H
 ;365Wx246H
 ;300Wx300H
 ;96Wx96H

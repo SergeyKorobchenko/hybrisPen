@@ -64,7 +64,7 @@
 	</bean>
 
 	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
-		<property name="mediaFormat" value="515Wx515H"/>
+		<property name="mediaFormat" value="600Wx600H"/>
 	</bean>
 	<bean id="image300ValueProvider" parent="abstractImageValueProvider" >
 		<property name="mediaFormat" value="300Wx300H"/>
@@ -76,7 +76,7 @@
 		<property name="mediaFormat" value="65Wx65H"/>
 	</bean>
 	<bean id="image30ValueProvider" parent="abstractImageValueProvider" >
-		<property name="mediaFormat" value="30Wx30H"/>
+		<property name="mediaFormat" value="38Wx38H"/>
 	</bean>
 
 	<bean id="productUrlValueProvider"
