@@ -122,7 +122,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     CountryData country = new CountryData();
     country.setName(source.getDeliveryAddressCountry());
     address.setCountry(country);
-
+    address.setId(source.getDeliveryAddressId());
     address.setPostalCode(source.getDeliveryAddressPostcode());
     address.setState(source.getDeliveryAddressState());
     address.setTown(source.getDeliveryAddressCity());
