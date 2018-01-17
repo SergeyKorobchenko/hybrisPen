@@ -27,14 +27,14 @@
 		<property name="prefixPriority">
 			<map>
 				<!-- default priority is 0; todo set appropriate priorities -->
-				<entry key="productmaster" value="2" />
-				<entry key="productrich" value="3" />
-				<entry key="media" value="3" />
+				<entry key="productmaster" value="3" />
+				<entry key="productrich" value="2" />
+				<entry key="media" value="0" />
 				<entry key="price" value="1" />
 				<entry key="b2bcustomer" value="1" />
 				<entry key="customer" value="1" />
 				<entry key="asagent" value="1" />
-				<entry key="address" value="2" />
+				<entry key="address" value="0" />
 				<entry key="invoice" value="1" />
 				<entry key="order" value="1" />
 				<entry key="sizechart" value="4" />
