@@ -7,7 +7,8 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 
 <div class="image-gallery js-gallery">
-    <span class="image-gallery__zoom-icon glyphicon glyphicon-resize-full"></span>
+    <spring:theme code="product.gallery.zoom.tooltip" var="zoomTooltip"/>
+    <span class="image-gallery__zoom-icon glyphicon glyphicon-resize-full" title="${zoomTooltip}"></span>
 
     <c:choose>
         <c:when test="${galleryImages == null || galleryImages.size() == 0}">
