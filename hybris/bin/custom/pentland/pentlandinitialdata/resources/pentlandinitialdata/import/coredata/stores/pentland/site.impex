@@ -19,6 +19,7 @@ $storeUid=pentland
 $siteUid=pentland
 $webServiceSiteUid=$siteUidWS
 $siteMapLangCur=enGbp,enUsd,enEur
+$defaultCurrency=GBP
 $siteMapUrlLimitPerFile=50000
 $siteMapPage=Homepage,Product,CategoryLanding,Category,Store,Content,Custom
 $customSiteMapUrls=
@@ -46,6 +47,13 @@ INSERT_UPDATE UncollectedOrdersCronJob;code[unique=true];job(code)[default=uncol
 
 INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
 ;$siteUid-CartRemovalJob;0;5;4;-1;-1;-1;false;true;-1
-;$siteUid-UncollectedOrdersJob;0;0;6;-1;-1;-1;true;false;-1
+#;$siteUid-UncollectedOrdersJob;0;0;6;-1;-1;-1;true;false;-1
 
 
+INSERT_UPDATE ExportDataCronJob;code[unique=true];job(code);baseStore(uid);cmsSite(uid);language(isocode);currency(isocode);user(uid);thirdPartyHost;thirdPartyUsername;thirdPartyPassword;dataGenerationPipeline;sessionLanguage(isocode)
+;pentlandProductsExportJob;exportDataJobPerformable;$storeUid;$siteUid;$defaultLanguage;$defaultCurrency;anonymous;;;;exportPentlandProductPipeline;$defaultLanguage
+
+
+Remove Trigger;cronJob(code)[unique=true];
+# Run the CloseStagnantServiceTicketsJob at 12:00 AM every day
+;CloseStagnantServiceTicketsJob;
