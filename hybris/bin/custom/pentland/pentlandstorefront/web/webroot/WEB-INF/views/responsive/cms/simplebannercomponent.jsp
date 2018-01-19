@@ -7,7 +7,7 @@
 <div class="banner__component simple-banner">
 	<c:choose>
 		<c:when test="${empty encodedUrl || encodedUrl eq '#'}">
-			<c:if test="${media.url}">
+			<c:if test="${not empty media.url}">
 				<img title="${fn:escapeXml(media.altText)}" alt="${fn:escapeXml(media.altText)}"
 					src="${media.url}">
 			</c:if>

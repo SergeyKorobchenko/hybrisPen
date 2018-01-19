@@ -2972,3 +2972,4 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;order.form.moq;MOQ={0}
 ;order.form.moq.any;MOQ=Any
+;product.gallery.zoom.tooltip;"Click image and drag around to see the enlarged image."
