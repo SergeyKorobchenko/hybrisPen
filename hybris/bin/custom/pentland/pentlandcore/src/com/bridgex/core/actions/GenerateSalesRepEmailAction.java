@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -74,18 +75,21 @@ public class GenerateSalesRepEmailAction extends GenerateEmailAction {
       return Transition.NOK;
     }
 
-    emailMessageModel.setToAddresses(getSalesRepAddresses(((OrderProcessModel) businessProcessModel).getOrder().getUser()));
+    List<EmailAddressModel> salesRepAddresses = getSalesRepAddresses(((OrderProcessModel) businessProcessModel).getOrder().getUser());
+    if(CollectionUtils.isNotEmpty(salesRepAddresses)) {
+      emailMessageModel.setToAddresses(salesRepAddresses);
 
-    getModelService().save(emailMessageModel);
+      getModelService().save(emailMessageModel);
 
-    final List<EmailMessageModel> emails = new ArrayList<>();
-    emails.addAll(businessProcessModel.getEmails());
-    emails.add(emailMessageModel);
-    businessProcessModel.setEmails(emails);
+      final List<EmailMessageModel> emails = new ArrayList<>();
+      emails.addAll(businessProcessModel.getEmails());
+      emails.add(emailMessageModel);
+      businessProcessModel.setEmails(emails);
 
-    getModelService().save(businessProcessModel);
+      getModelService().save(businessProcessModel);
 
-    LOG.info("Email message generated");
+      LOG.info("Email message generated");
+    }
     return Transition.OK;
   }
 
