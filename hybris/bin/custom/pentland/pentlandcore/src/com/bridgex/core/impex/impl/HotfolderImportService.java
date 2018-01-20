@@ -1,5 +1,6 @@
 package com.bridgex.core.impex.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import de.hybris.platform.impex.model.cronjob.ImpExImportCronJobModel;
@@ -17,6 +18,8 @@ import de.hybris.platform.servicelayer.impex.impl.ImportCronJobResult;
  */
 public class HotfolderImportService extends DefaultImportService {
 
+  private static final Logger LOG = Logger.getLogger(HotfolderImportService.class);
+
   private ClusterService clusterService;
 
   /**
@@ -29,7 +32,7 @@ public class HotfolderImportService extends DefaultImportService {
   }
 
   private ImportResult importDataUsingStandardImpex(ImportConfig config) {
-
+    LOG.info("Importing data using standard impex...");
     ImpExImportCronJobModel cronJob = this.getModelService().create("ImpExImportCronJob");
 
     try {
@@ -37,10 +40,11 @@ public class HotfolderImportService extends DefaultImportService {
     } catch (ModelInitializationException var4) {
       throw new SystemException(var4);
     }
-
+    LOG.info("Created cronjob for hot folder import " + cronJob.getCode());
     this.configureCronJob(cronJob, config);
     cronJob.setNodeID(clusterService.getClusterId());
     this.getModelService().saveAll(cronJob.getJob(), cronJob);
+    LOG.info("Succesfully configured job " + cronJob.getCode() + " to import on cluster node " + cronJob.getNodeID());
     this.importData(cronJob, config.isSynchronous(), config.isRemoveOnSuccess());
     return ((Item)this.getModelService().getSource(cronJob)).isAlive() ? new ImportCronJobResult(cronJob) : new ImportCronJobResult(null);
   }
