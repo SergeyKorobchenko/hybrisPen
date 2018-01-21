@@ -637,12 +637,3 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;360100;360000;
 ;360200;360000;
 ;360700;360000;
-
-#update groups again for interceptors to kick in
-UPDATE Category;code[unique=true];$catalogVersion;supercategories(code,$catalogVersion);allowedPrincipals(uid);hidden
-;04;;;04;;1
-;0E;;;0E;;2
-;0Q;;;0Q;;3
-;01;;;01;;4
-;05;;;05;;5
-;08;;;08;;6
