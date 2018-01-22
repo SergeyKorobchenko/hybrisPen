@@ -43,6 +43,13 @@ public class OrderEntryDto {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
+  @JsonProperty("SHIPPED_QUANTITY")
+  private String shippedQuantity;
+
+  @JsonProperty("SHIPPED_DATE")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+  private Date shippedDate;
+
   @JsonProperty("ZSCHEDULE")
   private List<SizeVariantDto> sizeVariants;
 
@@ -124,5 +131,21 @@ public class OrderEntryDto {
 
   public void setSizeVariants(List<SizeVariantDto> sizeVariants) {
     this.sizeVariants = sizeVariants;
+  }
+
+  public String getShippedQuantity() {
+    return shippedQuantity;
+  }
+
+  public void setShippedQuantity(String shippedQuantity) {
+    this.shippedQuantity = shippedQuantity;
+  }
+
+  public Date getShippedDate() {
+    return shippedDate;
+  }
+
+  public void setShippedDate(Date shippedDate) {
+    this.shippedDate = shippedDate;
   }
 }

@@ -71,6 +71,8 @@
 		<property name="itemStatus" type="String"/>
 		<property name="totalPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 		<property name="shipments" type="java.util.Map&lt;java.util.Date,com.bridgex.facades.order.data.ShipmentData>"/>
+		<property name="shipDate" type="java.util.Date"/>
+		<property name="shippedQty" type="Integer"/>
 	</bean>
 	
 	<bean class="com.bridgex.facades.order.data.ShipmentData">
