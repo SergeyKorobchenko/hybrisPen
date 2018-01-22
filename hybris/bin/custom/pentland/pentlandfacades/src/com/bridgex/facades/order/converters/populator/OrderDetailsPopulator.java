@@ -72,6 +72,8 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       item.setItemStatus(dto.getEntryStatus());
       item.setTotalPrice(populatePriceData(dto.getNetPrice(), source.getCurrency()));
       item.setQty(getInt(dto.getQuantity()));
+      item.setShippedQty(getInt(dto.getShippedQuantity()));
+      item.setShipDate(dto.getShippedDate());
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
       items.add(item);
