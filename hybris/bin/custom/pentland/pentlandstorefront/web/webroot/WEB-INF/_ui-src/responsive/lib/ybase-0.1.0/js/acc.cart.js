@@ -468,7 +468,7 @@ ACC.cart = {
                             var $v = $(v);
                             var currentInputData = $v.data();
                             var quantity = $v.val();
-                            if (currentInputData.initialQuantity != quantity) {
+                            if (currentInputData.initialQuantity != quantity && !(currentInputData.initialQuantity == undefined && quantity == 0)) {
                                 foundUnsavedChanges = true;
                                 return true;
                             }
