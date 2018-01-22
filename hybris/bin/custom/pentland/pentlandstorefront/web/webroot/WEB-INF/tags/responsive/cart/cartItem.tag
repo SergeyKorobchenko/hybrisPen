@@ -225,7 +225,7 @@
             <%-- total --%>
             <ycommerce:testId code="cart_totalProductPrice_label">
                 <div class="item__total js-item-total hidden-xs hidden-sm">
-                    <format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
+                    <format:price priceData="${entry.totalPrice}" displayFreeForZero="false"/>
                 </div>
             </ycommerce:testId>
 
