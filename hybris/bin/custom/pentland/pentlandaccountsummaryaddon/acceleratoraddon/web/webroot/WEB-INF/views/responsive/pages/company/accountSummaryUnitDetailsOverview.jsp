@@ -2,7 +2,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -96,6 +97,8 @@
                             </span>
                         </c:forEach>
             </div>
+            <fmt:formatDate value="${firstWorkigDayOfMonth}" pattern="dd/MM/yyyy" var="firstDate"/>
+            <span><spring:theme code="account.summary.balances.validity" arguments="${firstDate}"/></span>
         </div>
     </div>
 </div>
