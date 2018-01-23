@@ -672,7 +672,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.summary.paymentMethod.securityCode.whatIsThis;(What is this?)
 ;checkout.summary.paymentMethod.securityCode.whatIsThis.description;The last 3 digits on the signature strip on the back of the card. For American Express, it's the 4 digits just above the hologram on the front of the card.
 ;checkout.summary.placeOrder;Place order
-;checkout.summary.placeOrder.readTermsAndConditions;"By placing the order, I am confirming that I have read and agree with the <a class=""termsAndConditionsLink"" href=""{0}"">Terms & Conditions</a>"
+;checkout.summary.placeOrder.readTermsAndConditions;"By placing the order, I am confirming that I have read and agree with the <a href=""{0}"" target=""_blank"">Terms & Conditions</a>"
 ;checkout.summary.placeOrder.readTermsAndConditions.close;Close
 ;checkout.summary.placeOrder.wrongDateFormatMessage;Date format must be {0}.
 ;checkout.summary.placeReplenishmentOrder;Place replenishment order
