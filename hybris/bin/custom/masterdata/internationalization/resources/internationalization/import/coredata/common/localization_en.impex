@@ -516,7 +516,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.purchaseOrderNumber.label;P.O. Number
 ;checkout.multi.replenishment;Replenishment
 ;checkout.multi.saveAddress;Save address
-;checkout.multi.secure.checkout;SecuUkout
+;checkout.multi.secure.checkout;Secure checkout
 ;checkout.multi.shipment.items;Shipment - {0} Item(s)
 ;checkout.multi.shipment.pickup.location;Shipment/Pick Up Location
 ;checkout.multi.sop.globalError;An error occurred processing your request. Possible action: Wait a few minutes and resend the order.
