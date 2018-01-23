@@ -16,7 +16,24 @@
            http://www.springframework.org/schema/beans/spring-beans.xsd
 					 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean id="erpRestTemplate" class="org.springframework.web.client.RestTemplate" />
+	<bean id="erpRestTemplate" class="org.springframework.web.client.RestTemplate" >
+		<property name="requestFactory" ref="erpBufferedRequestFactory" />
+		<property name="interceptors">
+			<list>
+				<bean class="com.bridgex.integration.interceptor.LoggingRequestInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="erpBufferedRequestFactory" class="org.springframework.http.client.BufferingClientHttpRequestFactory">
+		<constructor-arg name="requestFactory" ref="erpRequestFactory" />
+	</bean>
+
+	<bean id="erpRequestFactory" class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+		<property name="connectionRequestTimeout" value="60000" />
+		<property name="connectTimeout" value="60000" />
+		<property name="readTimeout" value="60000" />
+	</bean>
 
 	<bean id="abstractRESTClient" class="com.bridgex.integration.rest.impl.AbstractRESTClient" abstract="true"/>
 

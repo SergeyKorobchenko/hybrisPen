@@ -38,6 +38,11 @@
 
     <bean id="internationalizationSystemSetup" class="ru.masterdata.internationalization.setup.CoreDataSystemSetup" parent="abstractCoreSystemSetup"/>
 
+    <alias name="defaultPentlandI18NFacade" alias="i18NFacade"/>
+    <bean id="defaultPentlandI18NFacade" class="ru.masterdata.internationalization.facades.i18n.impl.DefaultPentlandI18NFacade" parent="defaultI18NFacade">
+        <property name="localizationEntryService" ref="localizationEntryService"/>
+    </bean>
+
 	<!--
 	The hybris platform provides one single Spring application context for beans located at the jalo layer.
 	Each extension can add beans to this context by specifying them at this configuration file.

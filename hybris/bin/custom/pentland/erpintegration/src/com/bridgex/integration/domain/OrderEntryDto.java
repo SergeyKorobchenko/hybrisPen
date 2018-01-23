@@ -43,15 +43,15 @@ public class OrderEntryDto {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date rdd;
 
+  @JsonProperty("ZSCHEDULE")
+  private List<SizeVariantDto> sizeVariants;
+
   @JsonProperty("SHIPPED_QUANTITY")
   private String shippedQuantity;
 
   @JsonProperty("SHIPPED_DATE")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
   private Date shippedDate;
-
-  @JsonProperty("ZSCHEDULE")
-  private List<SizeVariantDto> sizeVariants;
 
   public String getEntryNumber() {
     return entryNumber;
