@@ -26,6 +26,8 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
+
+import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 import com.bridgex.storefront.forms.ZeroAddToCartForm;
 
@@ -67,8 +69,8 @@ public class AddToCartController extends AbstractController
 
 	private static final Logger LOG = Logger.getLogger(AddToCartController.class);
 
-	@Resource(name = "cartFacade")
-	private CartFacade cartFacade;
+	@Resource(name = "pentlandCartFacade")
+	private PentlandCartFacade pentlandCartFacade;
 
 	@Resource(name = "productVariantFacade")
 	private ProductFacade productFacade;
@@ -96,11 +98,11 @@ public class AddToCartController extends AbstractController
 		{
 			try
 			{
-				final CartModificationData cartModification = cartFacade.addToCart(code, qty);
+				final CartModificationData cartModification = pentlandCartFacade.addToCart(code, qty);
 				model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
 				model.addAttribute("entry", cartModification.getEntry());
 				model.addAttribute("cartCode", cartModification.getCartCode());
-				model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+				model.addAttribute("isQuote", pentlandCartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
 
 //				if (cartModification.getQuantityAdded() == 0L)
 //				{
@@ -180,6 +182,8 @@ public class AddToCartController extends AbstractController
 			}
 		}
 
+		pentlandCartFacade.populateCart();
+
 		if (CollectionUtils.isNotEmpty(modificationDataList))
 		{
 			groupCartModificationListPopulator.populate(null, modificationDataList);
@@ -257,7 +261,7 @@ public class AddToCartController extends AbstractController
 			addToCartParams.setProductCode(form.getProductCode());
 			addToCartParams.setQuantity(qty);
 			addToCartParams.setStoreId(null);
-			final CartModificationData cartModification = cartFacade.addToCart(addToCartParams);
+			final CartModificationData cartModification = pentlandCartFacade.addToCart(addToCartParams);
 			model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
 			model.addAttribute("entry", cartModification.getEntry());
 			model.addAttribute("cartCode", cartModification.getCartCode());
@@ -309,7 +313,7 @@ public class AddToCartController extends AbstractController
 		try
 		{
 			final long qty = cartEntry.getQuantity().longValue();
-			final CartModificationData cartModificationData = cartFacade.addToCart(cartEntry.getProduct().getCode(), qty);
+			final CartModificationData cartModificationData = pentlandCartFacade.addToCart(cartEntry.getProduct().getCode(), qty);
 			if (cartModificationData.getQuantityAdded() == 0L)
 			{
 				errorMsg = "basket.information.quantity.noItemsAdded." + cartModificationData.getStatusCode();
