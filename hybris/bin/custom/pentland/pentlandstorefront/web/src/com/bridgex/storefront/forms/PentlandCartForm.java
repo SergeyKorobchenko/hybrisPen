@@ -20,7 +20,7 @@ public class PentlandCartForm {
 
   private String purchaseOrderNumber;
   private String customerNotes;
-  private String minDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ISO_LOCAL_DATE);
+  private String minDate;
   private String bankHolidays;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -31,9 +31,13 @@ public class PentlandCartForm {
   public PentlandCartForm() {}
 
   public PentlandCartForm(CartData cartData) {
-    purchaseOrderNumber = cartData.getPurchaseOrderNumber();
-    requestedDeliveryDate = cartData.getRdd();
-    customerNotes = cartData.getCustomerNotes();
+    this.purchaseOrderNumber = cartData.getPurchaseOrderNumber();
+    LocalDate minRDD = LocalDate.now().plusDays(2);
+    this.minDate =  minRDD.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    if(cartData.getRdd() != null && cartData.getRdd().compareTo(java.sql.Date.valueOf(minRDD)) >= 0){
+      this.requestedDeliveryDate = cartData.getRdd();
+    }
+    this.customerNotes = cartData.getCustomerNotes();
   }
 
   public String getPurchaseOrderNumber() {
