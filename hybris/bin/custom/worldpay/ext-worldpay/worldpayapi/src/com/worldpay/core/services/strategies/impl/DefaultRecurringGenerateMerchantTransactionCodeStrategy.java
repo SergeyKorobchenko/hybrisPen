@@ -1,17 +1,25 @@
 package com.worldpay.core.services.strategies.impl;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.worldpay.core.services.strategies.RecurringGenerateMerchantTransactionCodeStrategy;
 
 import de.hybris.platform.b2b.model.B2BUnitModel;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.variants.model.VariantProductModel;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
@@ -43,10 +51,17 @@ public class DefaultRecurringGenerateMerchantTransactionCodeStrategy implements 
         if (CollectionUtils.isNotEmpty(units)) {
            customerSAPId = units.get(0).getSapID();
         }
-        final String worldpayOrderCode = parameterOrder.getCode() + "-" + customerSAPId + "-" + getTime();
+        final String worldpayOrderCode = parameterOrder.getCode().replaceFirst("^0+(?!$)", "") + "-" + customerSAPId + getBrands(parameterOrder);
         parameterOrder.setWorldpayOrderCode(worldpayOrderCode);
         modelService.save(parameterOrder);
         return worldpayOrderCode;
+    }
+
+    private String getBrands(AbstractOrderModel parameterOrder) {
+        String collectedBrands = parameterOrder.getEntries().stream().map(AbstractOrderEntryModel::getProduct).filter(product -> product instanceof VariantProductModel)
+                                               .map(product -> ((VariantProductModel)product).getBaseProduct().getSapBrand()).filter(Objects::nonNull)
+                                               .collect(Collectors.collectingAndThen(Collectors.toSet(), set -> String.join("-", set)));
+        return StringUtils.isEmpty(collectedBrands) ? "" :"-" + collectedBrands;
     }
 
     protected long getTime() {
