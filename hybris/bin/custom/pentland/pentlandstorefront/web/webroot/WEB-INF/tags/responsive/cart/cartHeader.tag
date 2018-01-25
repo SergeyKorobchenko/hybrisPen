@@ -9,7 +9,7 @@
 <c:url value="/cart/update-all" var="updateAllCartFormAction" />
 
 <form:form method="post" id="updateAllCartForm" action="${updateAllCartFormAction}" commandName="b2bCartForm" data-page-type="${pageType}">
-	<div class="row">
+	<div class="row align-items-end">
 		<div class="col-xs-12 col-md-2">
 			<label><spring:theme code="text.cart.rdd"/></label>
 			<div class="form-group">
@@ -24,15 +24,17 @@
 				<span style="display:none;" class="help-block" id="requestedDeliveryDateError"><spring:theme code="basket.error.checkout.empty.rdd"/></span>
 			</div>
 		</div>
+
 		<div class="col-xs-12 col-md-2">
 			<label><spring:theme code="text.cart.purchaseOrderNumber"/></label>
 			<div class="form-group">
 				<div>
-					<form:input type="text" class="form-control" style="width: 99%;" path="purchaseOrderNumber" data-initial="${b2bCartForm.purchaseOrderNumber}"/>
+					<form:input type="text" class="form-control" style="width: 100%;" path="purchaseOrderNumber" data-initial="${b2bCartForm.purchaseOrderNumber}"/>
 				</div>
 				<span style="display:none;" class="help-block" id="purchaseOrderNumberError"><spring:theme code="basket.error.checkout.empty.ponumber"/></span>
 			</div>
 		</div>
+
 		<div class="col-xs-12 col-md-8">
 			<label><spring:theme code="text.cart.customerNotes"/></label>
 			<div>
