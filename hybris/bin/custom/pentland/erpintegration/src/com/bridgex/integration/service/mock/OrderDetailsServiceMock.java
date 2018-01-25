@@ -36,6 +36,8 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     response.setCustomerName("Akira Namomuta");
     response.setCustomerId("339982");
 
+    response.setDeliveryAddressId("123580");
+    response.setDeliveryAddressName("Test Ship-To Name");
     response.setDeliveryAddressCity("London");
     response.setDeliveryAddressCountry("GB");
     response.setDeliveryAddressMarkForName("Akira");
@@ -74,6 +76,8 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     entry.setPrice("1010.00");
     entry.setQuantity("10.00");
     entry.setRdd(new Date());
+    entry.setShippedDate(new Date());
+    entry.setShippedQuantity("10.00");
     entry.setSizeVariants(getSizeVariantsDto());
     return entry;
   }

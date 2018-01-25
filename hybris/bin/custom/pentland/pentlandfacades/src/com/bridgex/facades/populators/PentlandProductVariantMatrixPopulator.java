@@ -7,6 +7,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.category.PentlandCategoryService;
+import com.bridgex.core.enums.DiscontinuedStatus;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.core.product.util.ProductSizeComparator;
@@ -25,56 +26,61 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   extends AbstractProductPopulator<SOURCE, TARGET>
 {
 
+  private static final Set<DiscontinuedStatus> onlineStatusSet = new HashSet<>(Arrays.asList(DiscontinuedStatus.D03, DiscontinuedStatus.D04, DiscontinuedStatus.D05));
+
   private Populator<VariantProductModel, VariantOptionData> variantOptionDataMediaPopulator;
 
   @Override
   public void populate(ProductModel productModel, ProductData productData) throws ConversionException {
     final Collection<VariantProductModel> variants = productModel.getVariants();
-    productData.setMultidimensional(Boolean.valueOf(CollectionUtils.isNotEmpty(variants)));
+    productData.setMultidimensional(CollectionUtils.isNotEmpty(variants));
     ProductModel baseProductModel = getBaseProduct(productModel);
     List<VariantMatrixElementData> variantMatrixElementDataList = new ArrayList<>();
 
     int maxVariants = 0;
 
     for (VariantProductModel styleLevelVariantModel : baseProductModel.getVariants()) {
-      ApparelStyleVariantProductModel styleVariantProductModel = (ApparelStyleVariantProductModel) styleLevelVariantModel;
-      VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
-      styleElementData.setVariantName(styleVariantProductModel.getStyle());
-      styleElementData.setVariantCode(styleVariantProductModel.getCode());
-      styleElementData.setIsLeaf(Boolean.FALSE);
-      styleElementData.setPackSize(styleVariantProductModel.getPackSize());
-      final VariantOptionData styleVariantOptionData = Optional.ofNullable(styleElementData.getVariantOption()).orElse(new VariantOptionData());
-      styleVariantOptionData.setCode(styleLevelVariantModel.getCode());
-      styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
-      styleElementData.setVariantOption(styleVariantOptionData);
-      variantMatrixElementDataList.add(styleElementData);
+      if (isOnlineProduct(styleLevelVariantModel)) {
+        ApparelStyleVariantProductModel styleVariantProductModel = (ApparelStyleVariantProductModel) styleLevelVariantModel;
+        VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
+        styleElementData.setVariantName(styleVariantProductModel.getStyle());
+        styleElementData.setVariantCode(styleVariantProductModel.getCode());
+        styleElementData.setIsLeaf(Boolean.FALSE);
+        styleElementData.setPackSize(styleVariantProductModel.getPackSize());
+        final VariantOptionData styleVariantOptionData = Optional.ofNullable(styleElementData.getVariantOption()).orElse(new VariantOptionData());
+        styleVariantOptionData.setCode(styleLevelVariantModel.getCode());
+        styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
+        styleElementData.setVariantOption(styleVariantOptionData);
+        variantMatrixElementDataList.add(styleElementData);
 
+        List<ApparelSizeVariantProductModel> sizeLevelVariants =
+          styleVariantProductModel.getVariants().stream().filter(this::isOnlineProduct).map(e -> (ApparelSizeVariantProductModel) e).sorted(new ProductSizeComparator()).collect(Collectors.toList());
 
-      List<ApparelSizeVariantProductModel> sizeLevelVariants = styleVariantProductModel.getVariants().stream().map(e -> (ApparelSizeVariantProductModel)e)
-                                                                                       .sorted(new ProductSizeComparator()).collect(Collectors.toList());
-
-      for (ApparelSizeVariantProductModel sizeVariantProductModel : sizeLevelVariants) {
-        VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
-        sizeElementData.setVariantName(sizeVariantProductModel.getSize());
-        sizeElementData.setIsLeaf(Boolean.TRUE);
-        sizeElementData.setPackSize(styleVariantProductModel.getPackSize());
-        final VariantOptionData sizeVariantOptionData = Optional.ofNullable(sizeElementData.getVariantOption()).orElse(new VariantOptionData());
-        sizeVariantOptionData.setCode(sizeVariantProductModel.getCode());
-        sizeElementData.setVariantOption(sizeVariantOptionData);
-        styleElementData.getElements().add(sizeElementData);
+        for (ApparelSizeVariantProductModel sizeVariantProductModel : sizeLevelVariants) {
+          VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
+          sizeElementData.setVariantName(sizeVariantProductModel.getSize());
+          sizeElementData.setIsLeaf(Boolean.TRUE);
+          sizeElementData.setPackSize(styleVariantProductModel.getPackSize());
+          final VariantOptionData sizeVariantOptionData = Optional.ofNullable(sizeElementData.getVariantOption()).orElse(new VariantOptionData());
+          sizeVariantOptionData.setCode(sizeVariantProductModel.getCode());
+          sizeElementData.setVariantOption(sizeVariantOptionData);
+          styleElementData.getElements().add(sizeElementData);
+        }
+        if (maxVariants < styleElementData.getElements().size()) {
+          maxVariants = styleElementData.getElements().size();
+        }
       }
-      if (maxVariants < styleElementData.getElements().size()) {
-        maxVariants = styleElementData.getElements().size();
+      for (VariantMatrixElementData variantMatrixElementData : variantMatrixElementDataList) {
+        variantMatrixElementData.setMaxVariants(maxVariants);
       }
+      VariantMatrixElementData root = createNode(baseProductModel);
+      root.setElements(variantMatrixElementDataList);
+      root.setIsLeaf(Boolean.FALSE);
+      productData.setVariantMatrix(Collections.singletonList(root));
     }
-    for (VariantMatrixElementData variantMatrixElementData: variantMatrixElementDataList) {
-      variantMatrixElementData.setMaxVariants(maxVariants);
-    }
-    VariantMatrixElementData root = createNode(baseProductModel);
-    root.setElements(variantMatrixElementDataList);
-    root.setIsLeaf(Boolean.FALSE);
-    productData.setVariantMatrix(Collections.singletonList(root));
   }
+
+  private boolean isOnlineProduct(ProductModel productModel) {return productModel.getDiscontinuedStatus() == null || onlineStatusSet.contains(productModel.getDiscontinuedStatus());}
 
   protected ProductModel getBaseProduct(ProductModel productModel) {
     ProductModel currentProduct = productModel;

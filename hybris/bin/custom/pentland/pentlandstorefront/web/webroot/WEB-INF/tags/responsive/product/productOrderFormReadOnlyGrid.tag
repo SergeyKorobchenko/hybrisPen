@@ -13,6 +13,7 @@
         <tr class="grid-row">
             <td class="grid-prod-img">
                 <product:productPrimaryImage product="${readonlyGridData.value.product}" format="cartIcon" />
+                <p>${readonlyGridData.value.product.materialKey}</p>
             </td>
             <td>
                 <table>

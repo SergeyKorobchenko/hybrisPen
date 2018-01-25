@@ -99,7 +99,8 @@ task deployfile {
 
 		//generate md5
 		if(!"dev".equals(environment_name)){
-			ant.checksum(file: "${hybris_temp}/${filename}.zip", format: "MD5SUM", fileext: ".md5")
+			ant.checksum(file: "${hybris_temp}/${filename}.zip", format: "MD5SUM", pattern: "{0}  {1}", fileext: ".md5")
+              new File("${hybris_temp}/${filename}.zip.md5").renameTo("${hybris_temp}/${filename}.md5")
 		}
 
 	}

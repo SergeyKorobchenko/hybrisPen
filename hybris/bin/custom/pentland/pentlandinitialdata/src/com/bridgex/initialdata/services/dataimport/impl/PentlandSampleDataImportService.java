@@ -103,7 +103,7 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
 
       // Load Categories
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/categories.impex", extensionName, productCatalogName), false);
-
+      getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/categories-visibility.impex", extensionName, productCatalogName), false);
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/categories-classifications.impex",
                                                            extensionName,
                                                            productCatalogName), false);
@@ -152,7 +152,7 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
 
       // Load Categories
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/categories-prod.impex", extensionName, productCatalogName), false);
-
+      getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/categories-visibility.impex", extensionName, productCatalogName), false);
       getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/categories-classifications.impex",
                                                            extensionName,
                                                            productCatalogName), false);

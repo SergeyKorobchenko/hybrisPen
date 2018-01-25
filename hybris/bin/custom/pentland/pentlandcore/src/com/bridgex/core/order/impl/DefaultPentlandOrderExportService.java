@@ -211,8 +211,13 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
       modelService.save(sapOrder);
       byBrandOrderList.add(sapOrder);
     }
-    orderModel.setExportStatus(ExportStatus.EXPORTED);
-    orderModel.setReexportRetries(0);
+    if(byBrandOrderList.size() == sapOrderDTOList.size()) {
+      orderModel.setExportStatus(ExportStatus.EXPORTED);
+      orderModel.setReexportRetries(0);
+    }else{
+      orderModel.setExportStatus(ExportStatus.NOTEXPORTED);
+      orderModel.setReexportRetries(1);
+    }
     orderModel.setByBrandOrderList(byBrandOrderList);
 
     ETReturnDto creditMessage = responseBody.getEtReturn().stream().filter(etReturnDto -> "023".equals(etReturnDto.getNumber())).findFirst().orElse(null);

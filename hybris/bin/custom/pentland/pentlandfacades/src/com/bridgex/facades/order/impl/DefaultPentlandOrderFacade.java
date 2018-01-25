@@ -18,6 +18,7 @@ import de.hybris.platform.commercefacades.order.impl.DefaultOrderFacade;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.converters.Converters;
+import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -63,7 +64,7 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
       OrderModel orderModel = getCustomerAccountService().getOrderForCode((CustomerModel) getUserService().getCurrentUser(), orderCode,
                                                              baseStoreModel);
       List<OrderModel> byBrandOrderList = orderModel.getByBrandOrderList();
-      if(CollectionUtils.isNotEmpty(byBrandOrderList)){
+      if(ExportStatus.EXPORTED.equals(orderModel.getExportStatus()) && CollectionUtils.isNotEmpty(byBrandOrderList)){
         return Converters.convertAll(byBrandOrderList, getOrderConverter());
       }
     }catch (final ModelNotFoundException e) {

@@ -56,8 +56,10 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     target.setTotalPriceWithTax(populatePriceData(source.getTotalPrice(), source.getCurrency()));
     target.setTotalUnitCount(Double.valueOf(source.getTotalQuantity()).intValue());
 
-    target.setSoldTo(source.getCustomerName() + " " + source.getCustomerId());
-    target.setMarkFor(source.getDeliveryAddressMarkForId() + " " + source.getDeliveryAddressMarkForName());
+    target.setSoldTo(source.getCustomerId());
+    target.setSoldToName(source.getCustomerName());
+    target.setMarkFor(source.getDeliveryAddressMarkForId());
+    target.setMarkForName(source.getDeliveryAddressMarkForName());
 
     populateItems(source, target);
     populateAddress(source, target);
@@ -72,6 +74,8 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       item.setItemStatus(dto.getEntryStatus());
       item.setTotalPrice(populatePriceData(dto.getNetPrice(), source.getCurrency()));
       item.setQty(getInt(dto.getQuantity()));
+      item.setShippedQty(getInt(dto.getShippedQuantity()));
+      item.setShipDate(dto.getShippedDate());
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
       items.add(item);
@@ -127,7 +131,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     address.setState(source.getDeliveryAddressState());
     address.setTown(source.getDeliveryAddressCity());
     address.setLine1(source.getDeliveryAddressStreet());
-
+    address.setDisplayName(source.getDeliveryAddressName());
     target.setDeliveryAddress(address);
   }
 

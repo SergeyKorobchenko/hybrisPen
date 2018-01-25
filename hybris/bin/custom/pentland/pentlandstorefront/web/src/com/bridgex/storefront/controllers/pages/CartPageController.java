@@ -535,7 +535,7 @@ public class CartPageController extends AbstractCartPageController
 	@RequestMapping(value = "/images", method = RequestMethod.GET, produces = "text/csv")
 	public String exportImagesArchive(final HttpServletResponse response, final RedirectAttributes redirectModel) throws IOException {
 
-		if(pentlandB2BAcceleratorCheckoutFacade.cartHasZeroQuantityBaseEntries()){
+		if(pentlandB2BAcceleratorCheckoutFacade.isCartTotalQuantityZero()){
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "basket.error.export.image.empty.cart",
 			                               null);
 			return REDIRECT_CART_URL;

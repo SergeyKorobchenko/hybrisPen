@@ -6,13 +6,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${not storeAddress }">
-	<c:if test="${not empty address.id}">
-		${fn:escapeXml(address.id)}&nbsp;
-	</c:if>
 	<c:if test="${not empty address.title}">
 	    ${fn:escapeXml(address.title)}&nbsp;
 	</c:if>
 	${fn:escapeXml(address.firstName)}&nbsp;${fn:escapeXml(address.lastName)}
+	<br>
+</c:if>
+<c:if test="${not empty address.id}">
+	${fn:escapeXml(address.id)}&nbsp;
+	<br>
+</c:if>
+<c:if test="${not empty address.displayName}">
+	${fn:escapeXml(address.displayName)}&nbsp;
 	<br>
 </c:if>
 ${fn:escapeXml(address.line1)}

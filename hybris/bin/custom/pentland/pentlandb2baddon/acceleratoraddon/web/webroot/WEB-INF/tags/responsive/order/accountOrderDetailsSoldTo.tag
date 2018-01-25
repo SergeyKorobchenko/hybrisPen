@@ -17,7 +17,7 @@
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_soldTo_label">
                         <span class="item-label"><spring:theme code="text.account.orderHistory.soldTo"/></span>
-                        <span class="item-value">${fn:escapeXml(order.soldTo)}</span>
+                        <span class="item-value">${fn:escapeXml(order.soldTo)}<br>${fn:escapeXml(order.soldToName)}</span>
                     </ycommerce:testId>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_markFor_label">
                         <span class="item-label"><spring:theme code="text.account.orderHistory.markFor"/></span>
-                        <span class="item-value">${fn:escapeXml(order.markFor)}</span>
+                        <span class="item-value">${fn:escapeXml(order.markFor)}<br>${fn:escapeXml(order.markForName)}</span>
                     </ycommerce:testId>
                 </div>
             </div>

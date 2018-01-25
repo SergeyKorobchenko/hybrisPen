@@ -10,15 +10,13 @@
  */
 package com.bridgex.pentlandaccountsummaryaddon.controllers.pages;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.expression.AccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,14 +41,12 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
-import de.hybris.platform.b2bacceleratorfacades.customer.impl.DefaultB2BCustomerFacade;
-import de.hybris.platform.b2bcommercefacades.company.B2BUnitFacade;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
+import ru.masterdata.internationalization.facades.i18n.PentlandI18NFacade;
 
 /**
  * Controller for organization management.
@@ -75,6 +71,9 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 
 	@Resource
 	private Map<String, CriteriaValidator> validatorMapping;
+
+	@Resource
+	private PentlandI18NFacade i18NFacade;
 
 	@RequestMapping(value = ACCOUNTSUMMARY_UNIT_URL, method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -135,6 +134,10 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 				populateModel(model, searchPageData, showMode);
 			}
 		}
+
+		LocalDate firstWorkingDay = i18NFacade.getFirstWorkingDayOfMonth();
+		model.addAttribute("firstWorkigDayOfMonth", java.sql.Date.valueOf(firstWorkingDay));
+
 		model.addAttribute("dateFormat", PentlandaccountsummaryaddonConstants.DATE_FORMAT_MM_DD_YYYY);
 		model.addAttribute("filterByList", filterByList.keySet());
 		model.addAttribute("documentStatusList", PentlandaccountsummaryaddonUtils.getDocumentStatusList());

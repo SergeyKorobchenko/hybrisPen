@@ -13,16 +13,16 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;account.error.account.exists.with.email.address.title;An account already exists for email address {0}
 ;account.error.account.not.found;No account was found for the email address provided.
 ;account.error.login.please;You must login to access this page. Please log in with your credentials below.
-;address.building;Building Name or Number
-;address.building_and_room;Building Name and Room Number
+;address.building;Building name or number
+;address.building_and_room;Building name and room number
 ;address.country;Country
 ;address.country.invalid;Please select a country
 ;address.default;Make this my default address
 ;address.district;District
 ;address.district.invalid;Please enter a district
-;address.district_and_street;District and Street
+;address.district_and_street;District and street
 ;address.error.formentry.invalid;Errors were found with the address you provided. Please check the errors below and re-submit your address.
-;address.firstName;First Name
+;address.firstName;First name
 ;address.firstName.invalid;Please enter a first name
 ;address.furtherSubarea;Further subarea number, house number
 ;address.furtherSubarea.invalid;Please enter further subarea number
@@ -51,10 +51,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;address.selectProvince;Province
 ;address.selectState;State / Province
 ;address.state;State / Province
-;address.street;Street Name with Street Number
+;address.street;Street name with street number
 ;address.subarea;Subarea
 ;address.subarea.invalid;Please enter a subarea
-;address.surname;Last Name
+;address.surname;Last name
 ;address.title;Title
 ;address.title.invalid;Please select a title
 ;address.title.pleaseSelect;title
@@ -102,20 +102,20 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;asm.emulate.timer.min;min
 ;asm.emulate.username.label;Customer ID
 ;asm.emulate.username.placeholder;Customer Name/Email Address
-;asm.login;Sign In
+;asm.login;Sign in
 ;asm.login.blocked;Your account has been locked. Please contact your system administrator.
 ;asm.login.disabled;Sorry. You do not have access rights to the ASM. Please contact your Administrator.
 ;asm.login.error;Agent ID and / or Password not found
 ;asm.login.logged;Signed in as:
 ;asm.login.password.placeholder;Password
 ;asm.login.username.placeholder;Agent ID
-;asm.logout;Sign Out
+;asm.logout;Sign out
 ;asm.logout.error;Error during logout
 ;asm.logout.error.no_agent;There is no logged in agent.
 ;asm.session.ends;Your session has been ended
-;asm.session.inProgress;ASM Session In Progress
+;asm.session.inProgress;ASM session in progress
 ;b2bcustomer.cancel;Cancel
-;b2bunit.approvalProcess;Approval Process
+;b2bunit.approvalProcess;Approval process
 ;b2bunit.cancel;Cancel
 ;b2bunit.disabled.infomsg;This business unit is disabled
 ;b2bunit.id;Business Unit ID
@@ -135,12 +135,12 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;b2busergroup.id;User group ID
 ;b2busergroup.name;User group Name
 ;b2busergroup.parent;Parent Business Unit
-;b2busergroup.save;Save Updates
+;b2busergroup.save;Save updates
 ;basket.add.free.gift;Add your free gift to Basket
 ;basket.add.to.basket;Add to basket
 ;basket.add.to.cart;Add
-;basket.added.to.basket;Added to Your Basket
-;basket.added.to.mobile.basket;Added Item
+;basket.added.to.basket;Added to your basket
+;basket.added.to.mobile.basket;Added item
 ;basket.configure.product;Configure
 ;basket.confirmation.items.added;Your saved items were added to your bag.
 ;basket.error.checkout.empty.cart;You cannot proceed to checkout with empty basket.
@@ -194,29 +194,29 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.message.update.reducedNumberOfItemsAdded.noStock;"<a href=""{1}"" style=""text-decoration: underline"">{0}</a> has been removed from the basket due to insufficient stock."
 ;basket.page.needHelp;Need help?
 ;basket.page.number;No.
-;basket.page.price;Trade Price
-;basket.page.wholesalePrice;Wholesale Price
+;basket.page.price;Trade price
+;basket.page.wholesalePrice;Wholesale price
 ;basket.page.product;Product
-;basket.page.productdetails;Product Details
+;basket.page.productdetails;Product details
 ;basket.page.qty;Qty
 ;basket.page.quantity;Quantity
-;basket.page.quote.discounts;Order Query Discount:
+;basket.page.quote.discounts;Order query discount:
 ;basket.page.quote.discounts.link;Discount
 ;basket.page.quote.discounts.link.absolute.off;{0} off
 ;basket.page.quote.discounts.link.percent.off;{0}% off
 ;basket.page.quote.discounts.link.target.as;Target as {0}
 ;basket.page.remove;Remove
 ;basket.page.shipping;Shipping
-;basket.page.shipping.change.store;Change Store
-;basket.page.shipping.find.store;Find a Store
+;basket.page.shipping.change.store;Change store
+;basket.page.shipping.find.store;Find a store
 ;basket.page.shipping.pickup;Pickup
 ;basket.page.shipping.ship;Ship
 ;basket.page.title;Item
-;basket.page.title.pickupFrom;Pick Up from:
-;basket.page.title.yourDeliveryItems;Your Delivery Items
+;basket.page.title.pickupFrom;Pick up from:
+;basket.page.title.yourDeliveryItems;Your delivery items
 ;basket.page.title.yourDeliveryItems.pickup;Order items to be picked up will appear later in the checkout.
-;basket.page.title.yourItems;Your Bag
-;basket.page.title.yourPickUpItems;Your Pick Up Items
+;basket.page.title.yourItems;Your bag
+;basket.page.title.yourPickUpItems;Your pick up items
 ;basket.page.total;Total
 ;basket.page.totals.delivery;Delivery:
 ;basket.page.totals.deliverycountry;Delivery destination:
@@ -230,20 +230,20 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.totals.grossTax;Your order includes {0} tax.
 ;basket.page.totals.netTax;Tax:
 ;basket.page.totals.noNetTax;*No taxes are included in the total
-;basket.page.totals.quote.total.after.discount;New Subtotal:
-;basket.page.totals.quote.total.original;Original Subtotal:
+;basket.page.totals.quote.total.after.discount;New subtotal:
+;basket.page.totals.quote.total.original;Original subtotal:
 ;basket.page.totals.savings;Savings
 ;basket.page.totals.subtotal;Subtotal:
-;basket.page.totals.total;Order Total
+;basket.page.totals.total;Order total
 ;basket.page.totals.total.items;{0} items
 ;basket.page.totals.total.items.one;{0} item
 ;basket.page.update;Update
 ;basket.page.validation.message;Product(s) have been updated/removed in your basket.
-;basket.page.viewFuture;Future Availability
+;basket.page.viewFuture;Future availability
 ;basket.page.viewFuture.not.multisku;The selected code {0} is not a multidimensional product.
 ;basket.page.viewFuture.unavailable;Future stock system is unavailable, please try again later.
 ;basket.pickup.product.variant;{0}: {1}
-;basket.potential.promotions;Potential Promotions
+;basket.potential.promotions;Potential promotions
 ;basket.quick.order.error;{0} Product(s) were not added to the basket, Review errors on quick orders page
 ;basket.received.promotions;Received Promotions
 ;basket.restoration;Welcome back {0}. Some items from your previous shopping basket have been restored to your current shopping basket.
@@ -256,13 +256,13 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.restoration.success;{0}
 ;basket.restoration.unavailable;Unfortunately {0} is no longer available. You previously had {2} in your basket.
 ;basket.restoration.view.cart;"<a href=""{0}"">  Click to view basket</a>."
-;basket.restoration.view.cart.btn;View Basket
-;basket.save.cart;New Basket
+;basket.restoration.view.cart.btn;View basket
+;basket.save.cart;New basket
 ;basket.save.cart.action.cancel;Cancel
 ;basket.save.cart.action.save;Save
 ;basket.save.cart.description;Description
 ;basket.save.cart.info.msg;Your basket will be moved to Saved Basket list.
-;basket.save.cart.max.chars;Characters Left
+;basket.save.cart.max.chars;Characters left
 ;basket.save.cart.name;Name
 ;basket.save.cart.on.error;There was an exception while saving Basket {0}
 ;basket.save.cart.on.success;Basket {0} was successfully saved
@@ -293,10 +293,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;breadcrumb.home;Home
 ;breadcrumb.login;Login
 ;breadcrumb.mnn;Active substances
-;breadcrumb.not.found;Page Not Found
-;breadcrumb.quickOrder;Quick Order
-;breadcrumb.quote.edit;Edit Order Query
-;breadcrumb.quote.view;Order Query {0}
+;breadcrumb.not.found;Page not found
+;breadcrumb.quickOrder;Quick order
+;breadcrumb.quote.edit;Edit order query
+;breadcrumb.quote.view;Order query {0}
 ;cart.checkout;CHECKOUT
 ;cart.checkout.error;Error proceeding to checkout.
 ;cart.count;{0}
@@ -305,16 +305,16 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.groups.remove;remove
 ;cart.items;{0} item(s)
 ;cart.page.checkout;Checkout
-;cart.page.continue;Continue Shopping
+;cart.page.continue;Continue shopping
 ;cart.page.minimalorderamountnotpassed;Lowest order amount is {0}
 ;cart.page.shop;Shop
-;cart.page.title;Your Shopping Basket
+;cart.page.title;Your shopping basket
 ;cart.page.total;Total:
 ;cart.product.configuration.toolong;Value is too long
 ;cart.view;VIEW CART
 ;category.navTitle;Shop by Category
 ;checkout.billing.address.page.global.field.error;Some fields were not filled in correctly. Please check your details are correct
-;checkout.checkout;Check Out
+;checkout.checkout;Checkout
 ;checkout.checkout.customer.email.title;Customer email
 ;checkout.checkout.flow.select;Select an alternative checkout flow
 ;checkout.checkout.multi;Checkout Multi
@@ -401,19 +401,19 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.express.error.notAvailable;Express checkout is not available since it is disabled.
 ;checkout.express.error.paymentInfo;Express checkout is not available since you do not have a default payment info. Please set a default payment info in your account to use Express Checkout next time.
 ;checkout.information.delivery.method.changed;Your delivery method has been updated based on your delivery location.
-;checkout.login.guestCheckout;Check Out as a Guest
-;checkout.login.loginAndCheckout;Log In and Check Out
-;checkout.login.registerAndCheckout;Register and Checkout
+;checkout.login.guestCheckout;Checkout as a guest
+;checkout.login.loginAndCheckout;Log in and checkout
+;checkout.login.registerAndCheckout;Register and checkout
 ;checkout.multi.3dsecure.autosubmit.form.text1;This page should forward you to your own card issuer for identification. If your browser does not start loading the page, press the Submit button. <br/>
 ;checkout.multi.3dsecure.autosubmit.form.text2;After you successfully identify yourself you will be sent back to this website, where the payment process will continue.<br/>
 ;checkout.multi.addEditform;Please use this form to add/edit an address.
 ;checkout.multi.address.added;Your address was created.
 ;checkout.multi.address.updated;Your address was updated
-;checkout.multi.addressDetails;Address Details
+;checkout.multi.addressDetails;Address details
 ;checkout.multi.breadcrumb;Checkout
 ;checkout.multi.cancel;Cancel
 ;checkout.multi.confirmOrder;Final Review
-;checkout.multi.costCenter.label;Cost Center
+;checkout.multi.costCenter.label;Cost center
 ;checkout.multi.costCenter.notprovided;You must provide a cost center in order to go to the next step.
 ;checkout.multi.costCenter.title.pleaseSelect;Please select...
 ;checkout.multi.deliveryAddress;Shipment/Pick Up Location
@@ -426,31 +426,31 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.deliveryAddress.edit;Edit
 ;checkout.multi.deliveryAddress.editAddress;Edit address
 ;checkout.multi.deliveryAddress.noExistingAddresses;You don't have any addresses in your address book.
-;checkout.multi.deliveryAddress.noPickup;Shipping Address
-;checkout.multi.deliveryAddress.noPickup.breadcrumb;Shipping Address
+;checkout.multi.deliveryAddress.noPickup;Shipping address
+;checkout.multi.deliveryAddress.noPickup.breadcrumb;Shipping address
 ;checkout.multi.deliveryAddress.noSuggestedAddresses;No address suggestions
 ;checkout.multi.deliveryAddress.notprovided;You must provide a delivery address in order to go to the next step.
 ;checkout.multi.deliveryAddress.remove;Remove
 ;checkout.multi.deliveryAddress.select;Select
 ;checkout.multi.deliveryAddress.selectAddressMessage;Select an existing address for your delivery.
 ;checkout.multi.deliveryAddress.selectSuggestedAddress;Verify Your address.<br>We suggest you accept one of the following changes to your address:
-;checkout.multi.deliveryAddress.selectSuggestedAddress.sumbitAsIs;Submit As Is
-;checkout.multi.deliveryAddress.stepHeader;1 - Select Delivery Address
-;checkout.multi.deliveryAddress.stepHeader.done;1 - Delivery Address
-;checkout.multi.deliveryAddress.useThisAddress;Use this Address
+;checkout.multi.deliveryAddress.selectSuggestedAddress.sumbitAsIs;Submit as is
+;checkout.multi.deliveryAddress.stepHeader;1 - Select delivery address
+;checkout.multi.deliveryAddress.stepHeader.done;1 - Delivery address
+;checkout.multi.deliveryAddress.useThisAddress;Use this address
 ;checkout.multi.deliveryMethod;Shipping Method
-;checkout.multi.deliveryMethod.breadcrumb;Shipping Method
+;checkout.multi.deliveryMethod.breadcrumb;Shipping method
 ;checkout.multi.deliveryMethod.continue;Next
-;checkout.multi.deliveryMethod.deliveryOptions;Delivery Options
+;checkout.multi.deliveryMethod.deliveryOptions;Delivery options
 ;checkout.multi.deliveryMethod.edit;Edit
-;checkout.multi.deliveryMethod.header;Delivery Options
+;checkout.multi.deliveryMethod.header;Delivery options
 ;checkout.multi.deliveryMethod.message;Items will ship as soon as they are available. <br> See Order Summary for more information.
 ;checkout.multi.deliveryMethod.noExistingDeliveryMethod;No delivery method currently exist.
 ;checkout.multi.deliveryMethod.notprovided;You must provide a delivery option in order to go to the next step.
-;checkout.multi.deliveryMethod.selectDeliveryMethodMessage;Shipment Method
-;checkout.multi.deliveryMethod.stepHeader;2 - Select Delivery Method
-;checkout.multi.deliveryMethod.stepHeader.done;2 - Delivery Method
-;checkout.multi.deliveryMethod.useThisDeliveryMethod;Use Selected Delivery Method
+;checkout.multi.deliveryMethod.selectDeliveryMethodMessage;Shipment method
+;checkout.multi.deliveryMethod.stepHeader;2 - Select delivery method
+;checkout.multi.deliveryMethod.stepHeader.done;2 - Delivery method
+;checkout.multi.deliveryMethod.useThisDeliveryMethod;Use selected delivery method
 ;checkout.multi.hostedOrderPageError.ERROR;General system failure. Possible action: Wait a few minutes and resend the order.
 ;checkout.multi.hostedOrderPageError.ERROR.150;General system failure. Possible action: Wait a few minutes and resend the order.
 ;checkout.multi.hostedOrderPageError.ERROR.151;The request was received, but a server time-out occurred. Possible action: To avoid duplicating the order, do not resend the request until you have contacted our sales team.
@@ -479,8 +479,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.paymentMethod.addPaymentDetails.enterDifferentBillingAddress;Enter a different billing address
 ;checkout.multi.paymentMethod.addPaymentDetails.enterYourCardDetails;Please enter your card details for payment
 ;checkout.multi.paymentMethod.addPaymentDetails.generalError;An error occurred contacting the payment provider.  Wait a few minutes and try again.  If the problem persist, please contact our sales team.
-;checkout.multi.paymentMethod.addPaymentDetails.header;Payment Details
-;checkout.multi.paymentMethod.addPaymentDetails.paymentCard;Card Details
+;checkout.multi.paymentMethod.addPaymentDetails.header;Payment details
+;checkout.multi.paymentMethod.addPaymentDetails.paymentCard;Card details
 ;checkout.multi.paymentMethod.addPaymentDetails.savePaymentDetailsInAccount;Save these payment details in my account
 ;checkout.multi.paymentMethod.addPaymentDetails.useSavedCard;Use a saved card
 ;checkout.multi.paymentMethod.addPaymentDetails.useSavedCard.description;Registered customers may select a previously saved card
@@ -494,37 +494,37 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.paymentMethod.paymentDetails.expires;Expires {0} / {1}
 ;checkout.multi.paymentMethod.paymentDetails.noneSelected;None selected
 ;checkout.multi.paymentMethod.savedCards.actions;Actions
-;checkout.multi.paymentMethod.savedCards.billingAddress;Billing Address
-;checkout.multi.paymentMethod.savedCards.enterNewPaymentDetails;Enter New Payment Details
+;checkout.multi.paymentMethod.savedCards.billingAddress;Billing address
+;checkout.multi.paymentMethod.savedCards.enterNewPaymentDetails;Enter new payment details
 ;checkout.multi.paymentMethod.savedCards.noExistingSavedCards;You don't have any saved cards
-;checkout.multi.paymentMethod.savedCards.paymentCard;Payment Card
+;checkout.multi.paymentMethod.savedCards.paymentCard;Payment card
 ;checkout.multi.paymentMethod.savedCards.select;Select
 ;checkout.multi.paymentMethod.savedCards.selectSavedCardOrEnterNew;Select existing payment details or enter new payment details
-;checkout.multi.paymentMethod.savedCards.stepHeader;3 - Select Payment Details
+;checkout.multi.paymentMethod.savedCards.stepHeader;3 - Select payment details
 ;checkout.multi.paymentMethod.seeOrderSummaryForMoreInformation;See the Order Summary area for more information.
-;checkout.multi.paymentMethod.viewSavedPayments;View Saved Payments
-;checkout.multi.paymentType;Payment Type
-;checkout.multi.paymentType.breadcrumb;Payment Type
+;checkout.multi.paymentMethod.viewSavedPayments;View saved payments
+;checkout.multi.paymentType;Payment type
+;checkout.multi.paymentType.breadcrumb;Payment type
 ;checkout.multi.paymentType.continue;Next
 ;checkout.multi.paymentType.notprovided;You must provide a payment type in order to go to the next step.
 ;checkout.multi.paymentType.selectPaymentTypeMessage;Please select your payment type.
-;checkout.multi.paymentType.stepHeader;Payment Type
+;checkout.multi.paymentType.stepHeader;Payment type
 ;checkout.multi.pickup.items;Pick Up #{0} - {1} Item(s)
 ;checkout.multi.pickupInStore;Pick Up in Store
 ;checkout.multi.pickupInStore.confirm.and.continue;Simply confirm the information below and continue to the next step of checkout.
 ;checkout.multi.product.unpurchasable;Not purchasable
 ;checkout.multi.purchaseOrderNumber.label;P.O. Number
 ;checkout.multi.replenishment;Replenishment
-;checkout.multi.saveAddress;Save Address
-;checkout.multi.secure.checkout;Secure Checkout
+;checkout.multi.saveAddress;Save address
+;checkout.multi.secure.checkout;Secure checkout
 ;checkout.multi.shipment.items;Shipment - {0} Item(s)
 ;checkout.multi.shipment.pickup.location;Shipment/Pick Up Location
 ;checkout.multi.sop.globalError;An error occurred processing your request. Possible action: Wait a few minutes and resend the order.
 ;checkout.multi.sop.remove;Remove
-;checkout.multi.sop.savePaymentInfo;Save Payment Info
-;checkout.multi.sop.useMyDeliveryAddress;Use my Delivery Address
+;checkout.multi.sop.savePaymentInfo;Save payment info
+;checkout.multi.sop.useMyDeliveryAddress;Use my delivery address
 ;checkout.multi.sop.useThisPaymentInfo;Use this payment info
-;checkout.multi.summary.breadcrumb;Final Review
+;checkout.multi.summary.breadcrumb;Final review
 ;checkout.multi.summary.orderPlacedBy;Order placed by
 ;checkout.multi.summary.markFor;"Mark For:"
 ;checkout.multi.worldpay.declined.message.12;Please check all your details and try again
@@ -573,11 +573,11 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.worldpay.declined.message.97;Your card issuer has rejected the transaction, please contact your card issuer
 ;checkout.multi.worldpay.declined.message.default;We are having a problem processing your payment. Please contact your Customer Operations representative.
 ;checkout.order.fields.email.help;Email
-;checkout.order.fields.name.help;Real Name
+;checkout.order.fields.name.help;Real name
 ;checkout.order.fields.phone.help;Phone
 ;checkout.orderConfirmation.auth;Authorization
-;checkout.orderConfirmation.checkoutSuccessful;Checkout Successful
-;checkout.orderConfirmation.continueShopping;Continue Shopping
+;checkout.orderConfirmation.checkoutSuccessful;Checkout successful
+;checkout.orderConfirmation.continueShopping;Continue shopping
 ;checkout.orderConfirmation.copySentTo;A copy of your order details has been sent to {0}
 ;checkout.orderConfirmation.copySentToShort;A copy of your order details has been sent to
 ;checkout.orderConfirmation.coupon.code;Use coupon code: {0}
@@ -587,7 +587,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.orderConfirmation.get.coupon;You've earned the following coupon!
 ;checkout.orderConfirmation.orderNumber;Your order number is {0}
 ;checkout.orderConfirmation.orderNumberShort;Order # {0}
-;checkout.orderConfirmation.orderStatus;Order Status : {0}
+;checkout.orderConfirmation.orderStatus;Order status : {0}
 ;checkout.orderConfirmation.pending;Your order is pending!
 ;checkout.orderConfirmation.pending.thankYouForOrder;Your order is pending! Thank you for shopping with us.
 ;checkout.orderConfirmation.pickupItems;{0} Items for Pick Up in Store
@@ -598,22 +598,22 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.orderConfirmation.thankYouForOrder;Thank you for your Order!
 ;checkout.orderConfirmation.total.review;Total Number: {0}, Price Value:  {1}
 ;checkout.orderConfirmation.yourEmail.registered;Your Email <b>{0}</b> is registered
-;checkout.orderConfirmation.yourItems;Your Items
-;checkout.orderDetails.hide;[-] Hide Order Details
-;checkout.orderDetails.show;[+] View Order Details
+;checkout.orderConfirmation.yourItems;Your items
+;checkout.orderDetails.hide;[-] Hide order details
+;checkout.orderDetails.show;[+] View order details
 ;checkout.paymentMethod.createSubscription.billingAddress.noneSelected;Please enter a billing address or enter a delivery address first so that it can be used as billing address.
 ;checkout.paymentMethod.createSubscription.failed;Failed to create subscription. Please check the values entered.
 ;checkout.paymentMethod.noSecurityCode;Please provide security code.
 ;checkout.paymentMethod.notSelected;Please provide details of your payment for your order
 ;checkout.pickup.confirm.and.continue;Simply confirm the information below and continue to the next step of checkout.
 ;checkout.pickup.continue.button;Continue
-;checkout.pickup.estimated.total;Estimated Total:
+;checkout.pickup.estimated.total;Estimated total:
 ;checkout.pickup.items.appear.later;Order items to be picked up will appear later in the checkout
 ;checkout.pickup.items.at.one.location;All items in your order selected for pickup are currently available at these store locations:
 ;checkout.pickup.items.available.at.one.location;YOUR PICKUP ITEMS ARE AVAILABLE AT ONE LOCATION (Does not affect delivery orders)
 ;checkout.pickup.items.simplify.pickup.location;I would like to change my order to pickup all my items in the same store
 ;checkout.pickup.items.to.be.delivered;Items to be delivered
-;checkout.pickup.items.to.be.shipped;Ship To:
+;checkout.pickup.items.to.be.shipped;Ship to:
 ;checkout.pickup.items.to.pickup;{0} item(s) to pickup
 ;checkout.pickup.no.delivery.required;No delivery required for this order
 ;checkout.pickup.pickup.in.store;Pickup in Store - {0}, {1}
@@ -623,70 +623,70 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.placeOrder.failed;Failed to place the order
 ;checkout.security.code;Security Code
 ;checkout.single.pickup.notActive;Error message, offer to choose another pharmacy
-;checkout.summary.deliveryAddress;Delivery Address
+;checkout.summary.deliveryAddress;Delivery address
 ;checkout.summary.deliveryAddress.edit;Edit
-;checkout.summary.deliveryAddress.editDeliveryAddressButton;Edit Delivery Address
-;checkout.summary.deliveryAddress.enterDeliveryAddressButton;Edit Delivery Address
-;checkout.summary.deliveryAddress.header;Delivery Address
+;checkout.summary.deliveryAddress.editDeliveryAddressButton;Edit delivery address
+;checkout.summary.deliveryAddress.enterDeliveryAddressButton;Edit delivery address
+;checkout.summary.deliveryAddress.header;Delivery address
 ;checkout.summary.deliveryAddress.noExistingAddresses;You don't have any addresses in your address book.
 ;checkout.summary.deliveryAddress.noneSelected;None selected
-;checkout.summary.deliveryAddress.saveAddressInMyAddressBook;Save Shipping Address
+;checkout.summary.deliveryAddress.saveAddressInMyAddressBook;Save shipping address
 ;checkout.summary.deliveryAddress.saveAndUseThisAddress;Save and use this address
-;checkout.summary.deliveryAddress.selectExistingAddress;Select Existing Address
+;checkout.summary.deliveryAddress.selectExistingAddress;Select existing address
 ;checkout.summary.deliveryAddress.useForNewAddress;Please use this form to enter a new address
 ;checkout.summary.deliveryAddress.useThisAddress;Use this address
-;checkout.summary.deliveryMode.editDeliveryMethod;Edit Delivery Method
+;checkout.summary.deliveryMode.editDeliveryMethod;Edit delivery method
 ;checkout.summary.deliveryMode.header;Delivery Options
 ;checkout.summary.deliveryMode.items.for.pickup;{0} Items for Pickup in Store
 ;checkout.summary.deliveryMode.noneSelected;None selected
 ;checkout.summary.deliveryMode.number.of.pickup.destinations;{0} Store Pickup Destination(s)
-;checkout.summary.deliveryMode.selectDeliveryMethod;Select Delivery Method
-;checkout.summary.deliveryMode.selectDeliveryMethodForOrder;Shipment Method
+;checkout.summary.deliveryMode.selectDeliveryMethod;Select delivery method
+;checkout.summary.deliveryMode.selectDeliveryMethodForOrder;Shipment method
 ;checkout.summary.deliveryMode.useThisDeliveryMethod;Use this delivery method
 ;checkout.summary.edit;Edit
-;checkout.summary.paymentMethod.addPaymentDetails.billingAddress;Billing Address
+;checkout.summary.paymentMethod.addPaymentDetails.billingAddress;Billing address
 ;checkout.summary.paymentMethod.addPaymentDetails.billingAddressDiffersFromDeliveryAddress;If your billing address is  different  to your delivery address, please use this form to enter your billing address
 ;checkout.summary.paymentMethod.addPaymentDetails.enterDifferentBillingAddress;Enter a different billing address
 ;checkout.summary.paymentMethod.addPaymentDetails.enterYourCardDetails;Please enter your card details for payment
-;checkout.summary.paymentMethod.addPaymentDetails.header;Payment Details
-;checkout.summary.paymentMethod.addPaymentDetails.paymentCard;Payment Card
+;checkout.summary.paymentMethod.addPaymentDetails.header;Payment details
+;checkout.summary.paymentMethod.addPaymentDetails.paymentCard;Payment card
 ;checkout.summary.paymentMethod.addPaymentDetails.saveAndUseThesePaymentDetails;Save and use these payment details
 ;checkout.summary.paymentMethod.addPaymentDetails.savePaymentDetailsInAccount;Save these payment details in my account
 ;checkout.summary.paymentMethod.addPaymentDetails.useSavedCard;Use a saved card
 ;checkout.summary.paymentMethod.addPaymentDetails.useSavedCard.description;Registered customers may select a previously saved card
 ;checkout.summary.paymentMethod.addPaymentDetails.useThesePaymentDetails;Use these payment details
-;checkout.summary.paymentMethod.billingAddress.header;Billing Address:
-;checkout.summary.paymentMethod.editPaymentMethod;Edit Payment Method
-;checkout.summary.paymentMethod.header;Payment Details
+;checkout.summary.paymentMethod.billingAddress.header;Billing address:
+;checkout.summary.paymentMethod.editPaymentMethod;Edit payment method
+;checkout.summary.paymentMethod.header;Payment details
 ;checkout.summary.paymentMethod.paymentDetails.expires;Expires {0} / {1}
 ;checkout.summary.paymentMethod.paymentDetails.noneSelected;None selected
 ;checkout.summary.paymentMethod.savedCards.UseThisSavedCard;Use these payment details
 ;checkout.summary.paymentMethod.savedCards.actions;Actions
-;checkout.summary.paymentMethod.savedCards.billingAddress;Billing Address
+;checkout.summary.paymentMethod.savedCards.billingAddress;Billing address
 ;checkout.summary.paymentMethod.savedCards.enterNewPaymentDetails;Enter new payment details
-;checkout.summary.paymentMethod.savedCards.header;Select Payment Details
+;checkout.summary.paymentMethod.savedCards.header;Select payment details
 ;checkout.summary.paymentMethod.savedCards.noExistingSavedCards;You don't have any saved cards
-;checkout.summary.paymentMethod.savedCards.paymentCard;Payment Card
+;checkout.summary.paymentMethod.savedCards.paymentCard;Payment card
 ;checkout.summary.paymentMethod.savedCards.selectSavedCardOrEnterNew;Select existing payment details or enter new payment details
-;checkout.summary.paymentMethod.securityCode;Security Code
+;checkout.summary.paymentMethod.securityCode;Security code
 ;checkout.summary.paymentMethod.securityCode.whatIsThis;(What is this?)
 ;checkout.summary.paymentMethod.securityCode.whatIsThis.description;The last 3 digits on the signature strip on the back of the card. For American Express, it's the 4 digits just above the hologram on the front of the card.
-;checkout.summary.placeOrder;Place Order
-;checkout.summary.placeOrder.readTermsAndConditions;"By placing the order, I am confirming that I have read and agree with the <a class=""termsAndConditionsLink"" href=""{0}"">Terms & Conditions</a>"
+;checkout.summary.placeOrder;Place order
+;checkout.summary.placeOrder.readTermsAndConditions;"By placing the order, I am confirming that I have read and agree with the <a href=""{0}"" target=""_blank"">Terms & Conditions</a>"
 ;checkout.summary.placeOrder.readTermsAndConditions.close;Close
 ;checkout.summary.placeOrder.wrongDateFormatMessage;Date format must be {0}.
-;checkout.summary.placeReplenishmentOrder;Place Replenishment Order
+;checkout.summary.placeReplenishmentOrder;Place replenishment order
 ;checkout.summary.replenishmentScheduleForm.cancel;Cancel
 ;checkout.summary.replenishmentScheduleForm.title;Set replenishment schedule
 ;checkout.summary.requestApproval.cancel;Cancel
 ;checkout.summary.reviewYourOrder;Final Review
 ;checkout.summary.reviewYourOrderMessage;Please review your order carefully!
-;checkout.summary.scheduleReplenishment;Schedule Replenishment
-;checkout.summary.select.payment.method;Select Payment Method
-;checkout.summary.shippingAddress;Shipping Address
+;checkout.summary.scheduleReplenishment;Schedule replenishment
+;checkout.summary.select.payment.method;Select payment method
+;checkout.summary.shippingAddress;Shipping address
 ;coupon.already.exists.cart;A coupon of the same campaign has already been applied to the basket.
 ;coupon.already.redeemed;The coupon code entered has been redeemed already.
-;coupon.general.error;Coupon Redemption Failed.
+;coupon.general.error;Coupon redemption failed.
 ;coupon.invalid.code.provided;The coupon code entered is not valid.
 ;coupon.not.active.expired;The coupon code entered is no longer valid.
 ;coupon.order.recalculation.error;Error occured while re-calculatinng the order.
@@ -727,10 +727,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;file.size.kilobytes;{0} KB
 ;file.size.megabytes;{0} MB
 ;forgottenPwd.description;Please enter your account email address.  Instructions on how to Reset your Password will be sent to this address.
-;forgottenPwd.email;Email Address
+;forgottenPwd.email;Email address
 ;forgottenPwd.email.invalid;Please enter a valid email
-;forgottenPwd.submit;Send Email
-;forgottenPwd.title;Reset Password
+;forgottenPwd.submit;Send email
+;forgottenPwd.title;Reset password
 ;form.b2bcustomer.adminrole.error;A B2B Administrator can not downgrade their administrative role.
 ;form.b2bcustomer.parentunit.error;A B2B Administrator can not modify his parent unit.
 ;form.b2bunit.approvalProcessCode.required;Please select an approval process for the root unit
@@ -745,7 +745,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;form.required;Fields marked * are required
 ;form.select.empty;Please select
 ;general.continue.button;Continue
-;general.continue.shopping;Continue Shopping
+;general.continue.shopping;Continue shopping
 ;general.delete.button;Delete
 ;general.find.a.store;Find a Store
 ;general.mobile.store;Mobile Store
@@ -764,14 +764,14 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;general.required;Required
 ;general.unknown.identifier;Unknown identifier was passed
 ;general.zoom;Enlarged view of picture
-;guest.checkPwd;Confirm Password
+;guest.checkPwd;Confirm password
 ;guest.checkout;New to {0}?
 ;guest.checkout.existingaccount.register.error;An account with email id {0} already exists.
-;guest.confirm.email;Confirm Email Address
+;guest.confirm.email;Confirm email address
 ;guest.description;Prefer to shop without creating an account? <br />It's quick and simple!
-;guest.email;Email Address
+;guest.email;Email address
 ;guest.pwd;Password
-;guest.register;Create an Account
+;guest.register;Create an account
 ;guest.register.description;Benefit from a faster checkout for your next purchase and access your order history
 ;guest.register.submit;Register
 ;guest.required.message;Fields marked * are required
@@ -779,7 +779,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;header.link.account;My Account
 ;header.link.company;My Company
 ;header.link.login;Sign in / Register
-;header.link.logout;Sign Out
+;header.link.logout;Sign out
 ;header.mobile.link.login;Login
 ;header.welcome;Welcome {0}
 ;img.account.addressBook;/_ui/desktop/theme-blue/images/icon-cust-acc-address.png
@@ -822,26 +822,26 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;import.csv.savedCart.noFile;No file chosen.
 ;import.csv.savedCart.selectFile;Select a file to upload. The file must be a text file with extension CSV.
 ;import.csv.savedCart.success;"Your import is now being processed. Check <a href=""{0}"" style=""text-decoration: underline"">saved baskets</a> page to see its progress."
-;import.csv.savedCart.title;Import Saved Basket
+;import.csv.savedCart.title;Import saved basket
 ;import.csv.savedCart.uploadStarted;Uploading file...
 ;invoice.page.details.error.message;Invoice details could not be retrieved.
 ;j_password;Password
 ;j_username;Login
 ;login.description;Already have an account? Sign in to retrieve your account settings.
-;login.email;Email Address
+;login.email;Email address
 ;login.error.account.not.found.subtitle;If you forgot your password, please use the Forgotten Password link.
 ;login.error.account.not.found.title;Your username or password was incorrect.
 ;login.error.incorrect.password.subtitle;If you forgot your password, please use the Forgotten Password link.
 ;login.error.incorrect.password.title;Your username or password was incorrect.
 ;login.link.forgottenPwd;Forgot your password?
-;login.login;Log In
+;login.login;Log in
 ;login.optional;(optional)
 ;login.password;Password
 ;login.required;Required
 ;login.required.message;Fields marked * are required
 ;login.title;Returning Customer
 ;menu.button.home;Home
-;minicart.cart.alt;Your Shopping Basket
+;minicart.cart.alt;Your shopping basket
 ;minicart.checkout.checkout;Checkout
 ;mnn.allmnn;All ingredients
 ;mnn.search.placeholder;Enter ingredient name
@@ -850,19 +850,19 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;mobile.checkout.cart.viewLess;View less
 ;mobile.checkout.confirmOrder;Final Review
 ;mobile.checkout.continue.button;Continue
-;mobile.checkout.continue.shopping;Continue Shopping
-;mobile.checkout.deliveryAddress;Delivery Address
+;mobile.checkout.continue.shopping;Continue shopping
+;mobile.checkout.deliveryAddress;Delivery address
 ;mobile.checkout.deliveryAddress.selectAddressMessage;Choose a delivery address from your address book, or add a new one
 ;mobile.checkout.deliveryAddress.use;Use
-;mobile.checkout.deliveryMethod;Delivery Options
+;mobile.checkout.deliveryMethod;Delivery options
 ;mobile.checkout.edit.link;Edit
-;mobile.checkout.items.hide;Hide Items
-;mobile.checkout.items.show;Show more Items
+;mobile.checkout.items.hide;Hide items
+;mobile.checkout.items.show;Show more items
 ;mobile.checkout.multi.button.submit;Submit
 ;mobile.checkout.paymentMethod;Payment Details
-;mobile.checkout.paymentMethod.add.card;Add New Card
+;mobile.checkout.paymentMethod.add.card;Add new card
 ;mobile.checkout.paymentMethod.addOrSelect.card;Select a saved payment card from your wallet or add a new card
-;mobile.multi.checkout.selectExistingCard;Choose from existing Payment Details
+;mobile.multi.checkout.selectExistingCard;Choose from existing payment details
 ;mobile.payment.issueNumber;Issue number (Maestro / Solo / Switch only)
 ;mobile.search.add.refinements;Refine
 ;mobile.search.nav.clearSelections;Clear all selections
@@ -872,24 +872,24 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;oldPassword.updatePasswordForm.newPassword;The password can not be changed to the current one
 ;order.button.print;Print Order
 ;order.confirmation.guest.register.description;For a Fast Checkout and Easy Access to Previous Orders
-;order.form;Order Form
+;order.form;Order form
 ;order.form.currency;£
 ;order.form.subtotal;Subtotal
-;order.form.total;Order Form Total
+;order.form.total;Order form total
 ;order.form.color;Colour
 ;order.free;FREE
-;order.itemPrice;Item Price
-;order.order.totals;Order Totals
-;order.orderItems;Order Items
+;order.itemPrice;Item price
+;order.order.totals;Order totals
+;order.orderItems;Order items
 ;order.product;Product
 ;order.product.seeDetails;See details
-;order.productDetails;Product Details
+;order.productDetails;Product details
 ;order.quantity;Quantity
 ;order.reorder.error;Error reordering.
-;order.replenishment.confirmation;Replenishment Order Confirmation
-;order.replenishment.confirmation.number;Confirmation Number:
+;order.replenishment.confirmation;Replenishment order confirmation
+;order.replenishment.confirmation.number;Confirmation number:
 ;order.replenishment.schedule.title;Your replenishment schedule
-;order.replenishment.thankYou;Thank you for your scheduled Replenishment Order!
+;order.replenishment.thankYou;Thank you for your scheduled replenishment order!
 ;order.total;Total
 ;order.totals.delivery;Delivery:
 ;order.totals.savings;Savings:
@@ -934,8 +934,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;pickup.in.store;Pick Up in Store
 ;pickup.in.store.back.to.results;Back
 ;pickup.location.required;Please provide your location to see products available in your area.
-;pickup.mobile.back.to.cart.page;Back to Shopping Bag
-;pickup.mobile.back.to.product.page;Back to Product Page
+;pickup.mobile.back.to.cart.page;Back to shopping bag
+;pickup.mobile.back.to.product.page;Back to product page
 ;pickup.out.of.stock;OUT OF STOCK
 ;pickup.pagination.first;First
 ;pickup.pagination.from;from&nbsp
@@ -1018,51 +1018,51 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.variants.size.guide;Size guide
 ;product.variants.type;Type
 ;product.variants.update;update
-;product.view.details;View Details
+;product.view.details;View details
 ;product.view.more;More >
 ;product.volumePrices.column.price;Price each
 ;product.volumePrices.column.qa;Quantity
-;profile.checkEmail;Confirm New Email Address
+;profile.checkEmail;Confirm new email address
 ;profile.checkEmail.invalid;Please confirm your email address
-;profile.checkNewPassword;Confirm New Password
+;profile.checkNewPassword;Confirm new password
 ;profile.checkNewPassword.invalid;Please confirm your new password
 ;profile.checkPwd;Confirm Password
 ;profile.checkPwd.invalid;Please confirm your password
 ;profile.currentPassword;Current Password
 ;profile.currentPassword.invalid;Please enter your current password
-;profile.email;New Email Address
+;profile.email;New email address
 ;profile.email.invalid;Please enter a valid email
 ;profile.email.unique;The email you entered is not available
-;profile.firstName;First Name
+;profile.firstName;First name
 ;profile.firstName.invalid;Please enter a first name
-;profile.lastName;Last Name
+;profile.lastName;Last name
 ;profile.lastName.invalid;Please enter a last name
-;profile.newPassword;New Password
+;profile.newPassword;New password
 ;profile.newPassword.invalid;Please enter your new password
-;profile.phone;Phone Number
+;profile.phone;Phone number
 ;profile.pwd;Password
 ;profile.pwd.invalid;Please enter your password
 ;profile.submit;Update
 ;profile.title;Title
 ;profile.title.invalid;Please select a title
 ;quote.accept.error;Error accepting order query.
-;quote.acceptandcheckout;Accept and Checkout
-;quote.approve;Approve Order Query
+;quote.acceptandcheckout;Accept and checkout
+;quote.approve;Approve order query
 ;quote.approve.error;Error approving order query.
-;quote.approve.success;Order Query approved with success.
-;quote.cancel;Cancel Order Query
+;quote.approve.success;Order query approved with success.
+;quote.cancel;Cancel order query
 ;quote.cart.checkout.error;The vendor order query was modified, Please Accept & Checkout again.
 ;quote.cart.comments;Basket Comments
 ;quote.cart.empty.error;Missing or empty basket
 ;quote.cart.insufficient.access.rights.error;Insufficient access rights for basket {0}.
 ;quote.cart.title;This basket is being order queried
 ;quote.comment.invalid;Comment cannot be more than 255 characters
-;quote.create;Request a Order Query
+;quote.create;Request an order query
 ;quote.create.error;Error creating order query.
-;quote.create.success;Order Query created with success.
+;quote.create.success;Order query created with success.
 ;quote.description.invalid;Description cannot be more than 255 characters
-;quote.edit;Edit Order Query
-;quote.edit.done;New Basket
+;quote.edit;Edit order query
+;quote.edit.done;New basket
 ;quote.edit.locked;Order Query ID : {0} is currently being edited by {1}
 ;quote.enter.comment;Add a comment and press enter
 ;quote.less.comments;View less comments
@@ -1071,31 +1071,31 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.newcart.error;An error occurred processing your request. Please try to submit your request again.
 ;quote.newcart.success;Order Query {0} was successfully saved
 ;quote.not.editable;Order Query ID : {0} is not editable
-;quote.reject;Reject Order Query
+;quote.reject;Reject order query
 ;quote.reject.error;Error rejecting order query.
 ;quote.reject.initiate.request;Minimum {0} subtotal to submit a order query.
 ;quote.reject.success;Order Query rejected with success.
 ;quote.requote;Requery
 ;quote.requote.error;Error requerying.
-;quote.save;Save Order Query
+;quote.save;Save order query
 ;quote.save.cart.error;There was an internal error. Please try again.
 ;quote.save.error;Error saving order query.
 ;quote.state.BUYER_DRAFT;DRAFT
 ;quote.state.expired;This order query has expired. Create a new order query or edit the expired order query.
-;quote.submit;Submit Order Query
+;quote.submit;Submit order query
 ;quote.submit.error;Error submitting order query.
-;quote.submit.success;Order Query submitted with success.
-;quote.view;View Order Query
-;recently.viewed.products.title;Recently Viewed Products
+;quote.submit.success;Order query submitted with success.
+;quote.view;View order query
+;recently.viewed.products.title;Recently viewed products
 ;register.back.login;Back to login
-;register.checkPwd;Confirm Password
+;register.checkPwd;Confirm password
 ;register.checkPwd.invalid;Please confirm your password
 ;register.description;For a fast checkout, easy access to previous orders, and the ability to create an address book and store settings. Register below.
-;register.email;Email Address
+;register.email;Email address
 ;register.email.invalid;Please enter a valid email
-;register.firstName;First Name
+;register.firstName;First name
 ;register.firstName.invalid;Please enter a first name
-;register.lastName;Last Name
+;register.lastName;Last name
 ;register.lastName.invalid;Please enter a last name
 ;register.name.invalid;Combined length of first name and last name must be less than 255 characters
 ;register.new.customer;Create an Account
@@ -1162,16 +1162,16 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;review.write.title;Write a Review
 ;review.write.title.product;Write a Review for {0}
 ;saved.cart.total.description;You have
-;saved.cart.total.number;Saved Baskets ({0})
-;saved.cart.total.number.one;{0} Saved Basket
-;saved.quote.total.number;Order Queries ({0})
-;search.advanced;Order Forms
+;saved.cart.total.number;Saved baskets ({0})
+;saved.cart.total.number.one;{0} Saved basket
+;saved.quote.total.number;Order queries ({0})
+;search.advanced;Order forms
 ;search.advanced.catalog;Catalog
-;search.advanced.createorderform;Create Order Form
+;search.advanced.createorderform;Create order form
 ;search.advanced.keyword;Keyword Search
-;search.advanced.meta.description.title;Order Forms
-;search.advanced.onlyproductids;Product IDs Only
-;search.advanced.orderform;Order Form
+;search.advanced.meta.description.title;Order forms
+;search.advanced.onlyproductids;Product IDs only
+;search.advanced.orderform;Order form
 ;search.advanced.productids;Enter Product Id(s) separated by a comma
 ;search.advanced.productids.add;Add
 ;search.advanced.search;Search
@@ -1180,7 +1180,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.meta.description.on;on
 ;search.meta.description.results;Search results for
 ;search.meta.title;Search
-;search.mobile.no.results;No Results Found
+;search.mobile.no.results;No results found
 ;search.mobile.page.currentPage;{0} - {1} of {2} products
 ;search.mobile.page.linkNextPage;Next &raquo
 ;search.mobile.page.linkPreviousPage;&laquo
@@ -1188,7 +1188,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.mobile.page.showAllResults;Show all
 ;search.mobile.page.sortTitle;Sort by:
 ;search.mobile.page.totalResults;{0} item(s)
-;search.nav.applied.facets;Applied Facets
+;search.nav.applied.facets;Applied facets
 ;search.nav.appliedFilters;Remove
 ;search.nav.categoryNav;Shop by Category
 ;search.nav.changeLocation;Change Location
@@ -1220,15 +1220,15 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.nav.facetValueCount;({0})
 ;search.nav.refine.button;Refine
 ;search.nav.refinements;Refinements
-;search.nav.removeAttribute;Remove Attribute
+;search.nav.removeAttribute;Remove attribute
 ;search.nav.resultsForStore;Results for: {0}
-;search.nav.selectRefinements.title;Select Refinements
+;search.nav.selectRefinements.title;Select refinements
 ;search.no.results;0 items found for keyword <strong>{0}</strong>
 ;search.page.currentPage;Page {0} of {1}
 ;search.page.firstPage;&laquo
 ;search.page.lastPage;&raquo
-;search.page.linkNextPage;Next Page
-;search.page.linkPreviousPage;Previous Page
+;search.page.linkNextPage;Next page
+;search.page.linkPreviousPage;Previous page
 ;search.page.nearbyStores;You searched for nearby stores
 ;search.page.searchText;"You searched for ""{0}"""
 ;search.page.showAllResults;Show all
@@ -1301,11 +1301,11 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;system.error.page.not.found;404 Page Not Found
 ;test.account.invoice.itemno;Item No.
 ;text.account.account;Account
-;text.account.addressBook;Address Book
-;text.account.addressBook.addAddress;Add Address
-;text.account.addressBook.addEditAddress;Add/Edit Address
+;text.account.addressBook;Address book
+;text.account.addressBook.addAddress;Add address
+;text.account.addressBook.addEditAddress;Add/edit address
 ;text.account.addressBook.addEditform;Please use this form to add/edit an address
-;text.account.addressBook.addressDetails;Address Details
+;text.account.addressBook.addressDetails;Address details
 ;text.account.addressBook.back.btn;Back
 ;text.account.addressBook.confirmationUpdated;Your address was updated
 ;text.account.addressBook.manageDeliveryAddresses;Manage your delivery address
@@ -1313,9 +1313,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.addressBook.noSavedAddresses;No Saved Addresses Found
 ;text.account.addressBook.saveAddress;Save address
 ;text.account.addressBook.setDefaultDeliveryAddress;Set default delivery address
-;text.account.addressBook.updateAddress;Update Address
+;text.account.addressBook.updateAddress;Update address
 ;text.account.addressBook.yourDefaultAddress;This is your default address
-;text.account.change.email.address;Change Email Address
+;text.account.change.email.address;Change email address
 ;text.account.configuration.display;View Configuration
 ;text.account.confirmation.password.updated;Your password has been changed
 ;text.account.consent.consentManagement;Consent Management
@@ -1326,8 +1326,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.customerList.page.currentPage;Page {0} of {1}
 ;text.account.customerList.page.firstPage;&laquo
 ;text.account.customerList.page.lastPage;&raquo
-;text.account.customerList.page.linkNextPage;Next Page
-;text.account.customerList.page.linkPreviousPage;Previous Page
+;text.account.customerList.page.linkNextPage;Next page
+;text.account.customerList.page.linkPreviousPage;Previous page
 ;text.account.customerList.page.showAllResults;Show all
 ;text.account.customerList.page.showPageResults;Show paginated
 ;text.account.customerList.page.sort.byDateAsc;Date (Asc)
@@ -1350,113 +1350,113 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.favorites;Favorites
 ;text.account.invoice.billToAddress;Bill-To Address
 ;text.account.invoice.currency;Currency {0}
-;text.account.invoice.customerNumber;Customer Number
-;text.account.invoice.delivery.items;Your Delivery Items
-;text.account.invoice.deliveryNumber;Delivery Number
-;text.account.invoice.grandTotal;Billed Value
-;text.account.invoice.grossPrice;Gross Price
-;text.account.invoice.invoiceDate;Invoice Date
-;text.account.invoice.invoiceNumber;Invoice Number
-;text.account.invoice.invoiceTotal;Invoice Total
-;text.account.invoice.itemDesc;Item Desc.
-;text.account.invoice.netPrice;Net Price
+;text.account.invoice.customerNumber;Customer number
+;text.account.invoice.delivery.items;Your delivery items
+;text.account.invoice.deliveryNumber;Delivery number
+;text.account.invoice.grandTotal;Billed value
+;text.account.invoice.grossPrice;Gross price
+;text.account.invoice.invoiceDate;Invoice date
+;text.account.invoice.invoiceNumber;Invoice number
+;text.account.invoice.invoiceTotal;Invoice total
+;text.account.invoice.itemDesc;Item desc.
+;text.account.invoice.netPrice;Net price
 ;text.account.invoice.order.conditions;Conditions
-;text.account.invoice.order.grossWeight;Gross Weight
-;text.account.invoice.order.netWeight;Net Weight
-;text.account.invoice.order.weight;Weight or Volume
-;text.account.invoice.orderNumber;Order Number
-;text.account.invoice.orderPlaced;Placed On
-;text.account.invoice.overallTax;Sales Tax Total
+;text.account.invoice.order.grossWeight;Gross weight
+;text.account.invoice.order.netWeight;Net weight
+;text.account.invoice.order.weight;Weight or volume
+;text.account.invoice.orderNumber;Order number
+;text.account.invoice.orderPlaced;Placed on
+;text.account.invoice.overallTax;Sales tax total
 ;text.account.invoice.posno;Pos. No.
-;text.account.invoice.shipToAddress;Ship-To Address
-;text.account.invoice.termsOfDelivery;Terms of Delivery
-;text.account.invoice.termsOfPayment;Terms of Payment
-;text.account.invoice.totalNet;Net Invoice Value
-;text.account.manageQuotes.breadcrumb;Order Queries
-;text.account.manageReplenishment;Manage Replenishment Schedule
-;text.account.manageReplenishment.confirm.cancel.breadcrumb;Remove Replenishment Schedule {0}
-;text.account.myReplenishment;My Replenishment Orders
+;text.account.invoice.shipToAddress;Ship-to address
+;text.account.invoice.termsOfDelivery;Terms of delivery
+;text.account.invoice.termsOfPayment;Terms of payment
+;text.account.invoice.totalNet;Net invoice value
+;text.account.manageQuotes.breadcrumb;Order queries
+;text.account.manageReplenishment;Manage replenishment schedule
+;text.account.manageReplenishment.confirm.cancel.breadcrumb;Remove replenishment schedule {0}
+;text.account.myReplenishment;My replenishment orders
 ;text.account.no.button;No
-;text.account.order.appliedCoupons;Applied Coupons:
+;text.account.order.appliedCoupons;Applied coupons:
 ;text.account.order.approval.title;Approval details
 ;text.account.order.approver.title;Approver
 ;text.account.order.back.btn;Back
-;text.account.order.comment;Order Comment
-;text.account.order.consignment.pickUpBy;Pick Up By
+;text.account.order.comment;Order comment
+;text.account.order.consignment.pickUpBy;Pick up by
 ;text.account.order.consignment.status.cancelled;Cancelled
-;text.account.order.consignment.status.pickedup;Picked Up
-;text.account.order.consignment.status.processing;In Process
-;text.account.order.consignment.status.readyforpickup;In Store Pick-Up
+;text.account.order.consignment.status.pickedup;Picked up
+;text.account.order.consignment.status.processing;In process
+;text.account.order.consignment.status.readyforpickup;In store pick-up
 ;text.account.order.consignment.status.shipped;Shipped
 ;text.account.order.consignment.store.title;Store
 ;text.account.order.consignment.trackingID.notavailable;Not available.
 ;text.account.order.delivery;Delivery:
-;text.account.order.deliveryDate;Delivery Date
+;text.account.order.deliveryDate;Delivery date
 ;text.account.order.discount;Order Discounts:
 ;text.account.order.includesTax;Your order includes {0} tax
 ;text.account.order.netTax;Tax:
 ;text.account.order.order;Order
 ;text.account.order.orderBreadcrumb;Order {0}
-;text.account.order.orderDetails.CostCenter;Cost Center
-;text.account.order.orderDetails.ParentBusinessUnit;Parent Unit
-;text.account.order.orderDetails.billingInformtion;Billing Information
+;text.account.order.orderDetails.CostCenter;Cost center
+;text.account.order.orderDetails.ParentBusinessUnit;Parent unit
+;text.account.order.orderDetails.billingInformtion;Billing information
 ;text.account.order.orderDetails.orderNumber;Order # {0}
 ;text.account.order.orderDetails.purchaseOrderNumber;P.O. Number
-;text.account.order.orderDetails.validUntil;Valid Until
-;text.account.order.orderNumber;Your Order Number is {0}
-;text.account.order.orderNumberLabel;Your Order Number is
+;text.account.order.orderDetails.validUntil;Valid until
+;text.account.order.orderNumber;Your order number is {0}
+;text.account.order.orderNumberLabel;Your order number is
 ;text.account.order.orderNumberShort;Order #: {0}
 ;text.account.order.orderPlaced;Placed on {0}
 ;text.account.order.orderStatus;The order is {0}
-;text.account.order.orderTotals;Order Total
-;text.account.order.ourTaxNumber;Our Tax Number
-;text.account.order.permission.notes;Approver Comments
+;text.account.order.orderTotals;Order total
+;text.account.order.ourTaxNumber;Our tax number
+;text.account.order.permission.notes;Approver comments
 ;text.account.order.permission.title;Permission
 ;text.account.order.pickup.location;Pick Up Location:
 ;text.account.order.placedBy;Placed by: {0}
-;text.account.order.placedByText;Placed by: Customer Service Team Member
+;text.account.order.placedByText;Placed by: Customer service team member
 ;text.account.order.purchase;Purchaser
 ;text.account.order.qty;Qty
-;text.account.order.receivedPromotions;Received Promotions
-;text.account.order.savings;Order Savings:
+;text.account.order.receivedPromotions;Received promotions
+;text.account.order.savings;Order savings:
 ;text.account.order.shipping;Shipping:
-;text.account.order.shipto;Ship To
+;text.account.order.shipto;Ship to
 ;text.account.order.status;Status: {0}
 ;text.account.order.status.display.Error;Pending
 ;text.account.order.status.display.approved;Approved
-;text.account.order.status.display.assigned.admin;Assigned To Administrator
+;text.account.order.status.display.assigned.admin;Assigned to administrator
 ;text.account.order.status.display.cancelled;Cancelled
-;text.account.order.status.display.cancelling;Cancel Pending
+;text.account.order.status.display.cancelling;Cancel pending
 ;text.account.order.status.display.completed;Completed
 ;text.account.order.status.display.created;Created
 ;text.account.order.status.display.error;Pending
-;text.account.order.status.display.merchant.approved;Merchant Approved
-;text.account.order.status.display.merchant.rejected;Merchant Rejected
+;text.account.order.status.display.merchant.approved;Merchant approved
+;text.account.order.status.display.merchant.rejected;Merchant rejected
 ;text.account.order.status.display.open;Open
 ;text.account.order.status.display.pending;Pending
-;text.account.order.status.display.pending.approval;Pending Approval
-;text.account.order.status.display.pending.merchant.approval;Pending Merchant Approval
-;text.account.order.status.display.processing;In Process
+;text.account.order.status.display.pending.approval;Pending approval
+;text.account.order.status.display.pending.merchant.approval;Pending merchant approval
+;text.account.order.status.display.processing;In process
 ;text.account.order.status.display.refused;Refused
 ;text.account.order.status.display.rejected;Rejected
 ;text.account.order.status.display.valid;Valid
-;text.account.order.status.display.in progress;In Progress
+;text.account.order.status.display.in progress;In progress
 
 ;text.account.order.status.display.CANCELLED;Cancelled
-;text.account.order.status.display.CANCELLING;Cancel Pending
+;text.account.order.status.display.CANCELLING;Cancel pending
 ;text.account.order.status.display.COMPLETED;Completed
 ;text.account.order.status.display.CREATED;Created
 ;text.account.order.status.display.ERROR;Pending
 ;text.account.order.status.display.PENDING;Pending
-;text.account.order.status.display.PROCESSING;In Process
+;text.account.order.status.display.PROCESSING;In process
 ;text.account.order.status.display.REFUSED;Refused
 ;text.account.order.status.display.REJECTED;Rejected
 ;text.account.order.status.display.VALID;Valid
-;text.account.order.status.display.IN PROGRESS;In Progress
+;text.account.order.status.display.IN PROGRESS;In progress
 ;text.account.order.status.display.APPROVED;Approved
 ;text.account.order.status.display.ON_HOLD;On Hold
 ;text.account.order.status.display.ON HOLD;On Hold
-;text.account.order.status.display.IN_PROGRESS;In Progress
+;text.account.order.status.display.IN_PROGRESS;In progress
 ;text.account.order.status.display.SHIPPED;Shipped
 ;text.account.order.status.display.OPEN;Open
 ;text.account.order.status.display.INVOICED;Invoiced
@@ -1466,63 +1466,63 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.subtotal;Subtotal:
 ;text.account.order.summary;A summary of your order is below:
 ;text.account.order.taxNumber;Tax Number
-;text.account.order.title.deliveryItems;Delivery Items
-;text.account.order.title.details;Order Details
-;text.account.order.title.inProgressItems;In Progress Order Items
+;text.account.order.title.deliveryItems;Delivery items
+;text.account.order.title.details;Order details
+;text.account.order.title.inProgressItems;In Progress order items
 ;text.account.order.title.storePickUpItems;Store Pick Up Items
 ;text.account.order.total.includesTax;Total includes {0} in taxes
 ;text.account.order.totalSavings;You saved {0} on your order
-;text.account.order.tracking;Tracking Number
+;text.account.order.tracking;Tracking number
 ;text.account.order.unconsignedEntry.status.pending;Pending
 ;text.account.order.warning.storePickUpItems;Reminder - Please pick up your items(s) soon.
 ;text.account.order.yourOrder;Your Order
 ;text.account.orderApproval.addApproverComments;Please add comments for your decision
 ;text.account.orderApproval.approve.reason;Add approval comment below (optional):
-;text.account.orderApproval.approveButton.displayName;Accept Order
-;text.account.orderApproval.orderStatus;Order Status
+;text.account.orderApproval.approveButton.displayName;Accept order
+;text.account.orderApproval.orderStatus;Order status
 ;text.account.orderApproval.reject.reason;Add reason for rejection below
 ;text.account.orderApproval.rejectButton.displayName;Reject Order
 ;text.account.orderApprovalDashBoard.actions;Actions
-;text.account.orderApprovalDashBoard.orderCreated;Order Created
-;text.account.orderApprovalDashBoard.orderNumber;Order Number
-;text.account.orderApprovalDashBoard.orderStatus;Order Status
+;text.account.orderApprovalDashBoard.orderCreated;Order created
+;text.account.orderApprovalDashBoard.orderNumber;Order number
+;text.account.orderApprovalDashBoard.orderStatus;Order status
 ;text.account.orderApprovalDashBoard.purchaseOrderNumber;P.O.No:
 ;text.account.orderApprovalDashBoard.viewOrdersPendingForApproval;Orders pending for your approval
-;text.account.orderApprovalDashboard;Order Approval Dashboard
-;text.account.orderApprovalDetails.OrderNumber;Order Number
+;text.account.orderApprovalDashboard;Order approval dashboard
+;text.account.orderApprovalDetails.OrderNumber;Order number
 ;text.account.orderApprovalDetails.comments.label;Comments
 ;text.account.orderApprovalDetails.costCenter;Cost Center
-;text.account.orderApprovalDetails.label;Order Approval Details
+;text.account.orderApprovalDetails.label;Order approval details
 ;text.account.orderApprovalDetails.orderPlacedBy;Order placed by
-;text.account.orderApprovalDetails.orderStatusDetails.label;Order Status Details
+;text.account.orderApprovalDetails.orderStatusDetails.label;Order status details
 ;text.account.orderApprovalDetails.paidOntoAccount;Paid onto account
-;text.account.orderApprovalDetails.parentBusinessUnit;Parent Business Unit
+;text.account.orderApprovalDetails.parentBusinessUnit;Parent business unit
 ;text.account.orderApprovalDetails.purchaseOrderNumber;P.O.No
 ;text.account.orderDetails.backToOrderHistory;Back To order history
 ;text.account.orderHistory;Order History
 ;text.account.orderHistory.actions;Actions
 ;text.account.orderHistory.back;Back
-;text.account.orderHistory.emptyOrderHistory;Order History Empty
+;text.account.orderHistory.emptyOrderHistory;Order history empty
 ;text.account.orderHistory.mobile.page.currentPage;{0} of {1}
 ;text.account.orderHistory.mobile.page.currentResults;{0} - {1} of {2} orders
 ;text.account.orderHistory.mobile.page.linkNextPage;Next &raquo
 ;text.account.orderHistory.mobile.page.linkPreviousPage;&laquo
 ;text.account.orderHistory.mobile.page.sort.byDate;Date
-;text.account.orderHistory.mobile.page.sort.byOrderNumber;Order Number
+;text.account.orderHistory.mobile.page.sort.byOrderNumber;Order number
 ;text.account.orderHistory.mobile.page.sortTitle;Sort by:
 ;text.account.orderHistory.mobile.page.totalResults;{0} Orders found
-;text.account.orderHistory.noOrders;No Orders Found
-;text.account.orderHistory.orderNumber;Order Number
-;text.account.orderHistory.orderStatus;Order Status
+;text.account.orderHistory.noOrders;No orders found
+;text.account.orderHistory.orderNumber;Order number
+;text.account.orderHistory.orderStatus;Order status
 ;text.account.orderHistory.page.currentPage;Page {0} of {1}
 ;text.account.orderHistory.page.firstPage;&laquo
 ;text.account.orderHistory.page.lastPage;&raquo
-;text.account.orderHistory.page.linkNextPage;Next Page
-;text.account.orderHistory.page.linkPreviousPage;Previous Page
+;text.account.orderHistory.page.linkNextPage;Next page
+;text.account.orderHistory.page.linkPreviousPage;Previous page
 ;text.account.orderHistory.page.showAllResults;Show all
 ;text.account.orderHistory.page.showPageResults;Show paginated
-;text.account.orderHistory.page.sort.byDate;Date Placed
-;text.account.orderHistory.page.sort.byOrderNumber;Order Number
+;text.account.orderHistory.page.sort.byDate;Date placed
+;text.account.orderHistory.page.sort.byOrderNumber;Order number
 ;text.account.orderHistory.page.sortTitle;Sort by
 ;text.account.orderHistory.page.totalResults;of {0} Orders
 ;text.account.orderHistory.page.totalResultsCurrPage;{0} of {1} Orders
@@ -1530,35 +1530,35 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.page.totalResultsSinglePag;{0} Orders
 ;text.account.orderHistory.purchaseOrderNumber;P.O. Number
 ;text.account.orderHistory.reorder;Reorder
-;text.account.orderHistory.replenishment;This is a scheduled Order
-;text.account.orderHistory.replenishment.link;View the Replenishment Schedule
+;text.account.orderHistory.replenishment;This is a scheduled order
+;text.account.orderHistory.replenishment.link;View the replenishment schedule
 ;text.account.orderHistory.replenishment.schedule;Replenishment schedule: {0}
 ;text.account.orderHistory.replenishment.startFrom;Start replenishment from: {0}
 ;text.account.orderHistory.total;Total
 ;text.account.orderHistory.viewOrders;View your order history
-;text.account.orderHistoryEntry.customerTitle;Customer Approval Details
-;text.account.orderHistoryEntry.merchantTitle;Merchant Approval Details
-;text.account.paymentDetails;Payment Details
-;text.account.paymentDetails.billingAddress;Billing Address
+;text.account.orderHistoryEntry.customerTitle;Customer approval details
+;text.account.orderHistoryEntry.merchantTitle;Merchant approval details
+;text.account.paymentDetails;Payment details
+;text.account.paymentDetails.billingAddress;Billing address
 ;text.account.paymentDetails.delete;Delete
 ;text.account.paymentDetails.delete.following;The following payment method will be deleted
-;text.account.paymentDetails.delete.popup.title;Delete Payment
+;text.account.paymentDetails.delete.popup.title;Delete payment
 ;text.account.paymentDetails.managePaymentDetails;Manage your payment details
-;text.account.paymentDetails.noPaymentInformation;No Saved Payment Details
-;text.account.paymentDetails.paymentCard;Payment Card
-;text.account.paymentDetails.paymentCard.default;My Default Payment Card
+;text.account.paymentDetails.noPaymentInformation;No saved payment details
+;text.account.paymentDetails.paymentCard;Payment card
+;text.account.paymentDetails.paymentCard.default;My default payment card
 ;text.account.paymentDetails.setDefaultPaymentDetails;Set default payment details
-;text.account.paymentType;Payment Type
+;text.account.paymentType;Payment type
 ;text.account.profile;Profile
 ;text.account.profile.cancel;Cancel
 ;text.account.profile.changePassword;Change your password
-;text.account.profile.changePassword.mobile;Change Password
+;text.account.profile.changePassword.mobile;Change password
 ;text.account.profile.confirmationUpdated;Your profile has been updated
 ;text.account.profile.email.regexMismatch;Bad email
 ;text.account.profile.emailNotChanged;Your email was not updated
-;text.account.profile.paymentCart.removed;Payment Card removed successfully
-;text.account.profile.personalDetails;Personal Details
-;text.account.profile.resetPassword;Reset Password
+;text.account.profile.paymentCart.removed;Payment card removed successfully
+;text.account.profile.personalDetails;Personal details
+;text.account.profile.resetPassword;Reset password
 ;text.account.profile.saveUpdates;Update
 ;text.account.profile.updateEmail;Update your email
 ;text.account.profile.updateEmail.mobile;Change Email
@@ -1568,41 +1568,41 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.profile.updatePasswordForm;Password
 ;text.account.profile.updatePersonalDetails;Personal details
 ;text.account.profile.updatePersonalDetails.mobile;Edit
-;text.account.profile.updateProfile.mobile;Update Profile
-;text.account.quote.action.display.CANCEL;Cancel Order Query
-;text.account.quote.action.display.CHECKOUT;Accept and Check Out Order Query
-;text.account.quote.action.display.CREATE;Create Order Query
-;text.account.quote.action.display.EDIT;Edit Order Query
+;text.account.profile.updateProfile.mobile;Update profile
+;text.account.quote.action.display.CANCEL;Cancel order query
+;text.account.quote.action.display.CHECKOUT;Accept and checkout order query
+;text.account.quote.action.display.CREATE;Create order query
+;text.account.quote.action.display.EDIT;Edit order query
 ;text.account.quote.action.display.EXPIRED;Expired
-;text.account.quote.action.display.ORDER;Order Order Query
-;text.account.quote.action.display.REJECT;Reject Order Query
-;text.account.quote.action.display.SAVE;Save Order Query
-;text.account.quote.action.display.SUBMIT;Submit Order Query
-;text.account.quote.action.display.VIEW;View Order Query
+;text.account.quote.action.display.ORDER;Order order query
+;text.account.quote.action.display.REJECT;Reject order query
+;text.account.quote.action.display.SAVE;Save order query
+;text.account.quote.action.display.SUBMIT;Submit order query
+;text.account.quote.action.display.VIEW;View order query
 ;text.account.quote.cancel;Cancel
 ;text.account.quote.code;Order Query ID
-;text.account.quote.date.placed;Date Placed
-;text.account.quote.date.updated;Date Updated
+;text.account.quote.date.placed;Date placed
+;text.account.quote.date.updated;Date updated
 ;text.account.quote.duplicate;Duplicate
-;text.account.quote.manage.items;Manage Items
-;text.account.quote.myquotes;My Order Queries
+;text.account.quote.manage.items;Manage items
+;text.account.quote.myquotes;My order queries
 ;text.account.quote.name;Name
 ;text.account.quote.page.currentPage;Page {0} of {1}
 ;text.account.quote.page.firstPage;&laquo
 ;text.account.quote.page.lastPage;&raquo
-;text.account.quote.page.linkNextPage;Next Page
-;text.account.quote.page.linkPreviousPage;Previous Page
+;text.account.quote.page.linkNextPage;Next page
+;text.account.quote.page.linkPreviousPage;Previous page
 ;text.account.quote.page.showAllResults;Show all
 ;text.account.quote.page.showPageResults;Show paginated
 ;text.account.quote.page.sort.byCode;Order Query ID
-;text.account.quote.page.sort.byDate;Date Updated
+;text.account.quote.page.sort.byDate;Date updated
 ;text.account.quote.page.sort.byName;Name
 ;text.account.quote.page.sort.byState;Status
 ;text.account.quote.page.sortTitle;Sort by
-;text.account.quote.page.totalResults;of {0} Order Queries
-;text.account.quote.page.totalResultsCurrPage;{0} of {1} Order Queries
-;text.account.quote.page.totalResultsSingleOrder;1 Order Query found
-;text.account.quote.page.totalResultsSinglePag;{0} Order Queries found
+;text.account.quote.page.totalResults;of {0} order queries
+;text.account.quote.page.totalResultsCurrPage;{0} of {1} order queries
+;text.account.quote.page.totalResultsSingleOrder;1 order query found
+;text.account.quote.page.totalResultsSinglePag;{0} order queries found
 ;text.account.quote.remove;Remove
 ;text.account.quote.status;Status
 ;text.account.quote.status.display.BUYER_ACCEPTED;Accepted
@@ -1616,120 +1616,120 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.quote.status.display.EXPIRED;Expired
 ;text.account.quote.status.display.SELLERAPPROVER_APPROVED;Submitted
 ;text.account.quote.status.display.SELLERAPPROVER_DRAFT;Draft
-;text.account.quote.status.display.SELLERAPPROVER_PENDING;Pending Approval
+;text.account.quote.status.display.SELLERAPPROVER_PENDING;Pending approval
 ;text.account.quote.status.display.SELLERAPPROVER_REJECTED;Rejected
 ;text.account.quote.status.display.SELLER_DRAFT;Draft
 ;text.account.quote.status.display.SELLER_REQUEST;Requested
 ;text.account.quote.status.display.SELLER_SUBMITTED;Submitted
 ;text.account.quote.total;Total
-;text.account.quotes.noQuotes;No Order Queries
-;text.account.quotes.page.totalResultsCurrPage;{0} of {1} Order Queries
+;text.account.quotes.noQuotes;No order queries
+;text.account.quotes.page.totalResultsCurrPage;{0} of {1} order queries
 ;text.account.replenishment.Schedule;Schedule
 ;text.account.replenishment.actions;Cancel
-;text.account.replenishment.cancel.button;Cancel Replenishment
+;text.account.replenishment.cancel.button;Cancel replenishment
 ;text.account.replenishment.canceled;Canceled
-;text.account.replenishment.confirm.cancel;End Schedule Order Now. Are you sure you want to stop automatic replenishment of this order ({0})?
+;text.account.replenishment.confirm.cancel;End schedule order now. Are you sure you want to stop automatic replenishment of this order ({0})?
 ;text.account.replenishment.confirmation.canceled;Your replenishment order has been canceled
-;text.account.replenishment.creationDate;Date Created
-;text.account.replenishment.datePlaced;Date Placed
-;text.account.replenishment.details;Replenishment Details
+;text.account.replenishment.creationDate;Date created
+;text.account.replenishment.datePlaced;Date placed
+;text.account.replenishment.details;Replenishment details
 ;text.account.replenishment.frequency;Frequency
-;text.account.replenishment.history;Replenishment History
-;text.account.replenishment.manageReplenishmentSchedule;Manage Your Replenishment Schedule
-;text.account.replenishment.nextOrderDate;Next Order Date
+;text.account.replenishment.history;Replenishment history
+;text.account.replenishment.manageReplenishmentSchedule;Manage your replenishment schedule
+;text.account.replenishment.nextOrderDate;Next order date
 ;text.account.replenishment.noOrders;You have no orders
-;text.account.replenishment.noOrdersFound;No Replenishment Orders found
+;text.account.replenishment.noOrdersFound;No replenishment orders found
 ;text.account.replenishment.noReplenishment;You have no replenishment orders scheduled
-;text.account.replenishment.orderNumber;Order Number
-;text.account.replenishment.orderStatus;Order Status
-;text.account.replenishment.orders;Replenishment Orders
+;text.account.replenishment.orderNumber;Order number
+;text.account.replenishment.orderStatus;Order status
+;text.account.replenishment.orders;Replenishment orders
 ;text.account.replenishment.page.currentPage;Page {0} of {1}
 ;text.account.replenishment.page.firstPage;&laquo
 ;text.account.replenishment.page.lastPage;&raquo
-;text.account.replenishment.page.linkNextPage;Next Page
-;text.account.replenishment.page.linkPreviousPage;Previous Page
+;text.account.replenishment.page.linkNextPage;Next page
+;text.account.replenishment.page.linkPreviousPage;Previous page
 ;text.account.replenishment.page.showAllResults;Show all
 ;text.account.replenishment.page.showPageResults;Show paginated
-;text.account.replenishment.page.sort.byDate;Date Created
-;text.account.replenishment.page.sort.byNextOrderDate;Next Order Date
-;text.account.replenishment.page.sort.byOrderNumber;Order Number
-;text.account.replenishment.page.sort.byReplenishmentNumber;Replenishment Number
+;text.account.replenishment.page.sort.byDate;Date created
+;text.account.replenishment.page.sort.byNextOrderDate;Next order date
+;text.account.replenishment.page.sort.byOrderNumber;Order number
+;text.account.replenishment.page.sort.byReplenishmentNumber;Replenishment number
 ;text.account.replenishment.page.sortTitle;Sort by:
 ;text.account.replenishment.page.totalResults;{0} Replenishments found
 ;text.account.replenishment.purchaseOrderNumber;P.O. No
-;text.account.replenishment.remove.confirmation.title;Confirm Removal
-;text.account.replenishment.replenishmentBreadcrumb;Replenishment Schedule {0}
+;text.account.replenishment.remove.confirmation.title;Confirm removal
+;text.account.replenishment.replenishmentBreadcrumb;Replenishment schedule {0}
 ;text.account.replenishment.replenishmentNumber;Replenishment No
 ;text.account.replenishment.replenishmentOrderDetailBreadcrumb;Order {0}
-;text.account.replenishment.shipToItems;Ship To Items
+;text.account.replenishment.shipToItems;Ship To items
 ;text.account.replenishment.startDate;Start
 ;text.account.replenishment.total;Est. Total
 ;text.account.replenishment.viewReplenishmentOrders;View your replenishment orders
-;text.account.replenishmentOrderDetails.title;Replenishment Order Details
-;text.account.saveCart.edit.error;There was an exception while updating Basket {0}
+;text.account.replenishmentOrderDetails.title;Replenishment order details
+;text.account.saveCart.edit.error;There was an exception while updating basket {0}
 ;text.account.saveCart.edit.success;Basket {0} was successfully updated
-;text.account.savedCart.backToSavedCarts;Back to Saved Baskets
-;text.account.savedCart.dateSaved;Date Saved
-;text.account.savedCart.delete;Delete Basket
+;text.account.savedCart.backToSavedCarts;Back to saved baskets
+;text.account.savedCart.dateSaved;Date saved
+;text.account.savedCart.delete;Delete basket
 ;text.account.savedCart.description;Description
 ;text.account.savedCart.edit;Edit
-;text.account.savedCart.edit.title;Edit Saved Basket
+;text.account.savedCart.edit.title;Edit saved basket
 ;text.account.savedCart.id;ID
 ;text.account.savedCart.message;Promotions and totals reflect what existed at the time the basket was saved. Promotions and totals may change or no longer apply when the basket is restored.
 ;text.account.savedCart.name;Name
-;text.account.savedCart.numberOfProducts;Number of Products
+;text.account.savedCart.numberOfProducts;Number of products
 ;text.account.savedCart.qty;QTY
 ;text.account.savedCart.restore;Restore
-;text.account.savedCart.savedCartBreadcrumb;Saved Basket {0}
-;text.account.savedCart.title.details;Saved Basket Details
+;text.account.savedCart.savedCartBreadcrumb;Saved basket {0}
+;text.account.savedCart.title.details;Saved basket details
 ;text.account.savedCart.total;Total
 ;text.account.savedCarts;Saved Baskets
-;text.account.savedCarts.noSavedCarts;No Saved Baskets Found
+;text.account.savedCarts.noSavedCarts;No saved baskets found
 ;text.account.savedCarts.page.currentPage;Page {0} of {1}
 ;text.account.savedCarts.page.firstPage;&laquo
 ;text.account.savedCarts.page.lastPage;&raquo
-;text.account.savedCarts.page.linkNextPage;Next Page
-;text.account.savedCarts.page.linkPreviousPage;Previous Page
+;text.account.savedCarts.page.linkNextPage;Next page
+;text.account.savedCarts.page.linkPreviousPage;Previous page
 ;text.account.savedCarts.page.showAllResults;Show all
 ;text.account.savedCarts.page.showPageResults;Show paginated
 ;text.account.savedCarts.page.sort.byCode;ID
-;text.account.savedCarts.page.sort.byDateModified;Date Modified
-;text.account.savedCarts.page.sort.byDateSaved;Date Saved
+;text.account.savedCarts.page.sort.byDateModified;Date modified
+;text.account.savedCarts.page.sort.byDateSaved;Date saved
 ;text.account.savedCarts.page.sort.byName;Name
 ;text.account.savedCarts.page.sort.byTotal;Total
 ;text.account.savedCarts.page.sortTitle;Sort by
-;text.account.savedCarts.page.totalResults;of {0} Saved Baskets
-;text.account.savedCarts.page.totalResultsCurrPage;{0} of {1} Saved Baskets
-;text.account.savedCarts.page.totalResultsSingleOrder;1 Saved Basket
-;text.account.savedCarts.page.totalResultsSinglePag;{0} Saved Baskets
+;text.account.savedCarts.page.totalResults;of {0} Saved baskets
+;text.account.savedCarts.page.totalResultsCurrPage;{0} of {1} Saved baskets
+;text.account.savedCarts.page.totalResultsSingleOrder;1 Saved basket
+;text.account.savedCarts.page.totalResultsSinglePag;{0} Saved baskets
 ;text.account.savedcart.activecart.msg;The current items in the basket will be saved as:
 ;text.account.savedcart.cart.id;ID
-;text.account.savedcart.cart.name;Basket Name
+;text.account.savedcart.cart.name;Basket name
 ;text.account.savedcart.delete.msg;The following basket will be deleted
-;text.account.savedcart.delete.popuptitle;Delete Saved Basket
+;text.account.savedcart.delete.popuptitle;Delete saved basket
 ;text.account.savedcart.numberofproducts;Number of products
 ;text.account.savedcart.restore.btn;Restore
-;text.account.savedcart.restore.popuptitle;Restore Saved Basket
+;text.account.savedcart.restore.popuptitle;Restore saved basket
 ;text.account.savedcart.retain.savedcart;Keep a copy of this basket on saved list
 ;text.account.savedcart.save.activecart;I do not want to save items for later
 ;text.account.savedcart.to.activecart;The following saved basket will restore as active basket
 ;text.account.trackOrders;Track your orders
-;text.account.update.email.address;Email Address
-;text.account.user.saveUpdates;Save Updates
+;text.account.update.email.address;Email address
+;text.account.user.saveUpdates;Save updates
 ;text.account.viewOrderHistory;View order history
 ;text.account.yes.button;Yes
 ;text.account.yourAccount;My Account
-;text.accountsummary.invoice.title.details;Invoice Details
+;text.accountsummary.invoice.title.details;Invoice details
 ;text.actions;Actions
 ;text.addToCart;Add to basket
 ;text.addToCart.outOfStock;out of stock online
 ;text.address;Address
 ;text.address.delete;Delete
-;text.address.delete.popup.title;Delete Address
+;text.address.delete.popup.title;Delete address
 ;text.address.remove.confirm;Are you sure you want to delete this address?
-;text.address.remove.following;The following address will be deleted from your Address Book
+;text.address.remove.following;The following address will be deleted from your address book
 ;text.asm.customerList.360view;360 View
-;text.asm.customerList.360view.alt;360 View of Customer
+;text.asm.customerList.360view.alt;360 View of customer
 ;text.asm.customerList.cart;CART
 ;text.asm.customerList.carts.empty;-
 ;text.asm.customerList.component;Customers
@@ -1774,16 +1774,16 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.accountsummary;Account Summary
 ;text.company.accountsummary.address.label;Address
 ;text.company.accountsummary.allstatus.label;All
-;text.company.accountsummary.amount.label;Original Amount
-;text.company.accountsummary.amountRange.label;Original Amount Range
+;text.company.accountsummary.amount.label;Original amount
+;text.company.accountsummary.amountRange.label;Original amount range
 ;text.company.accountsummary.amountrange.error;Error, the amount range format is invalid.
 ;text.company.accountsummary.b2bunit.label;Name
 ;text.company.accountsummary.businessunitid.label;ID
 ;text.company.accountsummary.button.pay;Pay
 ;text.company.accountsummary.button.search;Search
 ;text.company.accountsummary.closed.label;Closed
-;text.company.accountsummary.closedstatus.label;Closed Documents
-;text.company.accountsummary.creditline.label;Credit Line
+;text.company.accountsummary.closedstatus.label;Closed documents
+;text.company.accountsummary.creditline.label;Credit line
 ;text.company.accountsummary.creditrep.label;Credit Rep
 ;text.company.accountsummary.criteria.amount.format.from.invalid;'From' amount is invalid
 ;text.company.accountsummary.criteria.amount.format.to.invalid;'To' amount is invalid
@@ -1793,32 +1793,32 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.accountsummary.criteria.date.invalid;'From' date cannot be later than 'To' date
 ;text.company.accountsummary.criteria.document.status.label;Show
 ;text.company.accountsummary.criteria.filterby.label;Filter By
-;text.company.accountsummary.currentbalance.label;Current Balance
-;text.company.accountsummary.date.label;Document Date
-;text.company.accountsummary.dateRange.label;Document Date Range
+;text.company.accountsummary.currentbalance.label;Current balance
+;text.company.accountsummary.date.label;Document date
+;text.company.accountsummary.dateRange.label;Document date range
 ;text.company.accountsummary.daterange.error;Error, the date range format is invalid.
 ;text.company.accountsummary.days.label;Days
-;text.company.accountsummary.details;Account Summary Details
+;text.company.accountsummary.details;Account summary details
 ;text.company.accountsummary.document.attachment.label;Attachment
 ;text.company.accountsummary.document.attachment.view.label;View
-;text.company.accountsummary.document.newbalance;New Balance
-;text.company.accountsummary.document.openbalance;Open Balance
-;text.company.accountsummary.document.payamount;Pay Amount
-;text.company.accountsummary.document.paymentsummary;Payment Summary
+;text.company.accountsummary.document.newbalance;New balance
+;text.company.accountsummary.document.openbalance;Open balance
+;text.company.accountsummary.document.payamount;Pay amount
+;text.company.accountsummary.document.paymentsummary;Payment summary
 ;text.company.accountsummary.document.status.CLOSED.label;Closed
 ;text.company.accountsummary.document.status.OPEN.label;Open
 ;text.company.accountsummary.document.status.all.label;All
-;text.company.accountsummary.document.totalpayamount;Total Pay Amount
+;text.company.accountsummary.document.totalpayamount;Total pay amount
 ;text.company.accountsummary.document.type.select.label;Select
 ;text.company.accountsummary.document.yourdocuments;Your Documents
 ;text.company.accountsummary.documentMedia.label;View Document
 ;text.company.accountsummary.documentMedia.view.label;View
 ;text.company.accountsummary.documentNumber.label;Document #
 ;text.company.accountsummary.documentNumberRange.label;Document # Range
-;text.company.accountsummary.documentType.label;Document Type
+;text.company.accountsummary.documentType.label;Document type
 ;text.company.accountsummary.documents.label;Documents
-;text.company.accountsummary.dueDate.label;Due Date
-;text.company.accountsummary.dueDateRange.label;Due Date Range
+;text.company.accountsummary.dueDate.label;Due date
+;text.company.accountsummary.dueDateRange.label;Due date range
 ;text.company.accountsummary.from.label;From:
 ;text.company.accountsummary.invalid.criteria;Unknown criteria
 ;text.company.accountsummary.invoice.label;Invoice
@@ -1826,40 +1826,40 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.accountsummary.noresult.info;No result found.
 ;text.company.accountsummary.not.applicable;n/a
 ;text.company.accountsummary.open.label;Open
-;text.company.accountsummary.openAmount.label;Open Amount
-;text.company.accountsummary.openAmountRange.label;Open Amount Range
-;text.company.accountsummary.openbalance.label;Open Balance
-;text.company.accountsummary.openstatus.label;Open Documents
-;text.company.accountsummary.pastduebalance.label;Past Due Balance
+;text.company.accountsummary.openAmount.label;Open amount
+;text.company.accountsummary.openAmountRange.label;Open amount range
+;text.company.accountsummary.openbalance.label;Open balance
+;text.company.accountsummary.openstatus.label;Open documents
+;text.company.accountsummary.pastduebalance.label;Past due balance
 ;text.company.accountsummary.resultcount.label;"Viewing <em id=""numberOfResult"">0</em> of <em id=""totalResult"">0</em>"
-;text.company.accountsummary.showmoreresultlink.label;Show More Results
+;text.company.accountsummary.showmoreresultlink.label;Show more results
 ;text.company.accountsummary.sorthighest.label;Highest
 ;text.company.accountsummary.sortlowest.label;Lowest
 ;text.company.accountsummary.status.label;Status
 ;text.company.accountsummary.to.label;To:
-;text.company.accountsummary.unit.details.back.btn;Account Summary Details
-;text.company.accountsummary.unit.details.backToAccountSummary;Back to Account Summary
+;text.company.accountsummary.unit.details.back.btn;Account summary details
+;text.company.accountsummary.unit.details.backToAccountSummary;Back to account summary
 ;text.company.accountsummary.unit.details.page.currentPage;Page {0} of {1}
 ;text.company.accountsummary.unit.details.page.firstPage;&laquo
 ;text.company.accountsummary.unit.details.page.lastPage;&raquo
-;text.company.accountsummary.unit.details.page.linkNextPage;Next Page
-;text.company.accountsummary.unit.details.page.linkPreviousPage;Previous Page
+;text.company.accountsummary.unit.details.page.linkNextPage;Next page
+;text.company.accountsummary.unit.details.page.linkPreviousPage;Previous page
 ;text.company.accountsummary.unit.details.page.showAllResults;Show all
 ;text.company.accountsummary.unit.details.page.showPageResults;Show paginated
-;text.company.accountsummary.unit.details.page.sort.byDocumentDateAsc;Document Date Asc
-;text.company.accountsummary.unit.details.page.sort.byDocumentDateDesc;Document Date Desc
+;text.company.accountsummary.unit.details.page.sort.byDocumentDateAsc;Document date Asc
+;text.company.accountsummary.unit.details.page.sort.byDocumentDateDesc;Document date Desc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentNumberAsc;Document # Asc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentNumberDesc;Document # Desc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentStatusAsc;Status Asc
 ;text.company.accountsummary.unit.details.page.sort.byDocumentStatusDesc;Status Desc
-;text.company.accountsummary.unit.details.page.sort.byDocumentTypeAsc;Document Type Asc
-;text.company.accountsummary.unit.details.page.sort.byDocumentTypeDesc;Document Type Desc
-;text.company.accountsummary.unit.details.page.sort.byDueDateAsc;Due Date Asc
-;text.company.accountsummary.unit.details.page.sort.byDueDateDesc;Due Date Desc
-;text.company.accountsummary.unit.details.page.sort.byOpenAmountAsc;Open Amount Asc
-;text.company.accountsummary.unit.details.page.sort.byOpenAmountDesc;Open Amount Desc
-;text.company.accountsummary.unit.details.page.sort.byOriginalAmountAsc;Original Amount Asc
-;text.company.accountsummary.unit.details.page.sort.byOriginalAmountDesc;Original Amount Desc
+;text.company.accountsummary.unit.details.page.sort.byDocumentTypeAsc;Document type Asc
+;text.company.accountsummary.unit.details.page.sort.byDocumentTypeDesc;Document type Desc
+;text.company.accountsummary.unit.details.page.sort.byDueDateAsc;Due date Asc
+;text.company.accountsummary.unit.details.page.sort.byDueDateDesc;Due date Desc
+;text.company.accountsummary.unit.details.page.sort.byOpenAmountAsc;Open amount Asc
+;text.company.accountsummary.unit.details.page.sort.byOpenAmountDesc;Open amount Desc
+;text.company.accountsummary.unit.details.page.sort.byOriginalAmountAsc;Original amount Asc
+;text.company.accountsummary.unit.details.page.sort.byOriginalAmountDesc;Original amount Desc
 ;text.company.accountsummary.unit.details.page.sortTitle;Sort by
 ;text.company.accountsummary.unit.details.page.totalResults;of {0} Documents
 ;text.company.accountsummary.unit.details.page.totalResultsCurrPage;{0} of {1} Documents
@@ -2607,11 +2607,11 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.customerInformation;Customer Information
 ;text.default;Default
 ;text.delete.savedcart.error;Error while deleting saved basket
-;text.deliveryAddress;Delivery Address
-;text.deliveryMethod;Delivery Method
+;text.deliveryAddress;Delivery address
+;text.deliveryMethod;Delivery method
 ;text.edit;Edit
 ;text.expires;Expires
-;text.expresscheckout.header;Express Checkout
+;text.expresscheckout.header;Express checkout
 ;text.expresscheckout.info1;By succesfully configuring your settings this way, signed users will proceed directly to the Final Review step when proceeding to checkout
 ;text.expresscheckout.info2;Users who have not yet signed in may choose Express Checkout in the shopping basket
 ;text.expresscheckout.info3;The express checkout feature is not available to Guest Users
@@ -2688,14 +2688,14 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.paymentMethod;Payment Method
 ;text.paymentcard.remove.confirm;Are you sure you want to delete this payment card?
 ;text.pleaseSelect;title
-;text.popupCartTitle;Your Shopping Basket
+;text.popupCartTitle;Your shopping basket
 ;text.product;Product
-;text.productDetails;Product Details
+;text.productDetails;Product details
 ;text.productreviews;Reviews
 ;text.quantity;Quantity
-;text.quick.order.reset.form;Reset Form
+;text.quick.order.reset.form;Reset form
 ;text.quickOrder.form.product.exists;Sku already exists in the form
-;text.quickOrder.header;Quick Order
+;text.quickOrder.header;Quick order
 ;text.quickOrder.page.price;Price
 ;text.quickOrder.page.product;Product
 ;text.quickOrder.page.qty;Qty
@@ -2708,17 +2708,17 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quickOrder.product.quantity.max;Quantity reduced due to insufficient stock
 ;text.quote.cancel.button.label;Cancel
 ;text.quote.cancel.confirmation.message;Are you sure you want to cancel this order query?
-;text.quote.cancel.confirmation.modal.title;Cancel Order Query?
+;text.quote.cancel.confirmation.modal.title;Cancel order query?
 ;text.quote.cancel.success;Order Query {0} has been canceled
-;text.quote.checkout.confirmation.modal.title;Accept and Checkout Order Query?
+;text.quote.checkout.confirmation.modal.title;Accept and checkout order query?
 ;text.quote.checkout.notice.message;Accept and Checkout will take you to the Checkout page to place the order.
 ;text.quote.checkout.warning.message;You will not be able to modify the basket on the checkout page.
 ;text.quote.checkout.confirmation.message;Do you wish to continue?
-;text.quote.code;Order Query ID:
-;text.quote.comment.label;Negotiation Comment
+;text.quote.code;Order query ID:
+;text.quote.comment.label;Negotiation comment
 ;text.quote.comments.label;Comments
 ;text.quote.conteroffer.confirmation.message;Do you wish to continue?
-;text.quote.conteroffer.confirmation.modal.title;Submit Order Query?
+;text.quote.conteroffer.confirmation.modal.title;Submit order query?
 ;text.quote.conteroffer.possible.checkout.message;The buyer can accept and checkout, once this query is submitted.
 ;text.quote.dateformat;MM/dd/yyyy
 ;text.quote.dateformat.datepicker.selection;mm/dd/yy
@@ -2728,17 +2728,17 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quote.discount.adjust.total;Adjust Total
 ;text.quote.discount.apply.argument.invalid.error;The discount input is invalid. Please try again.
 ;text.quote.discount.apply.calculation.error;There is an internal error for applying the discount. Please try again.
-;text.quote.discount.by.amount;Discount by Amount
-;text.quote.discount.by.percentage;Discount by Percentage
+;text.quote.discount.by.amount;Discount by amount
+;text.quote.discount.by.percentage;Discount by percentage
 ;text.quote.discount.modal.title;Discount {0}
 ;text.quote.discount.rate.null.error;The discount rate is null.
 ;text.quote.discount.type.null.error;The discount type is null.
 ;text.quote.done.button.label;Done
 ;text.quote.edit.confirmation.message;This order query has been approved, Editing this order query will prevent checkout until the new edits are approved.
-;text.quote.edit.confirmation.modal.title;Edit Order Query?
+;text.quote.edit.confirmation.modal.title;Edit order query?
 ;text.quote.edit.warning.message;Are you sure you want to edit this approved order query?
 ;text.quote.expiration.time.invalid;Please enter a valid expiry date
-;text.quote.expiration.time.label;Expiry Date
+;text.quote.expiration.time.label;Expiry date
 ;text.quote.expiration.time.warning;Note: If the expiry date is set to today or earlier, it will be set to {0} days from today.
 ;text.quote.illegal.state.error;Please note that {0} action you tried to perform is not allowed for order query {1} with {2} status
 ;text.quote.name.description.invalid;Please enter a valid name and description
@@ -2746,22 +2746,22 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quote.no.button.label;No
 ;text.quote.not.cancelable;Order Query {0} is not cancelable
 ;text.quote.not.submitable;Order Query cannot be submitted since total is negative
-;text.quote.previous.estimated.total.display;Previous Estimated Total
+;text.quote.previous.estimated.total.display;Previous estimated total
 ;text.quote.state.label;Status
 ;text.quote.submit.confirmation.message;Do you wish to continue?
-;text.quote.submit.confirmation.modal.title;Submit Order Query?
+;text.quote.submit.confirmation.modal.title;Submit order query?
 ;text.quote.submit.not.modifiable.message;This query will be submitted to Customer Ops, and cannot be modified until they process this query.
 ;text.quote.validity.message;This order query is valid until {0}
 ;text.quote.yes.button.label;Yes
-;text.quotes.enterSecurityCode;Card Verification Number
-;text.region.select.title;Select Region
+;text.quotes.enterSecurityCode;Card verification number
+;text.region.select.title;Select region
 ;text.remove;Remove
 ;text.restore.savedcart.error;Error while restoring saved basket
-;text.save.cart.title;Save Basket
+;text.save.cart.title;Save basket
 ;text.search;Search
 ;text.secureportal.link.createAccount;Register
 ;text.secureportal.register.account.existing;Account already exists.
-;text.secureportal.register.companyName;Company Name
+;text.secureportal.register.companyName;Company name
 ;text.secureportal.register.description;Submit your registration below
 ;text.secureportal.register.email.invalid;Please enter a valid email.
 ;text.secureportal.register.email.not.match;Email's don't match
@@ -2774,8 +2774,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.secureportal.register.position;Your Position
 ;text.secureportal.register.submit.confirmation;User registered with success.
 ;text.setDefault;Set as default
-;text.shippingMethod;Shipping Method
-;text.showFacet;Show Refinement
+;text.shippingMethod;Shipping method
+;text.showFacet;Show refinement
 ;text.skipToContent;Skip to content
 ;text.skipToNavigation;Skip to navigation menu
 ;text.status;Status
@@ -2837,19 +2837,19 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;tooShort.updatePasswordForm.newPassword;Must be at least 6 characters.
 ;unit.name.invalid;Please select a name for the business unit
 ;unit.uid.invalid;Please select a unique identifier for the business unit
-;updatePwd.checkPwd;Confirm Password
+;updatePwd.checkPwd;Confirm password
 ;updatePwd.checkPwd.invalid;Please confirm your password
 ;updatePwd.description;Please enter a new password.
-;updatePwd.pwd;New Password
+;updatePwd.pwd;New password
 ;updatePwd.pwd.invalid;Password does not meet minimum requirements.
 ;updatePwd.submit;Update
-;updatePwd.title;Update Password
+;updatePwd.title;Update password
 ;updatePwd.token.invalid;The link used to access the update page was invalid.
 ;updatePwd.token.invalidated;Your password has already been updated.
 ;user.authentication.failed;Incorrect login anf(or) password
 ;user.email;Email
-;user.firstName;First Name
-;user.lastName;Last Name
+;user.firstName;First name
+;user.lastName;Last name
 ;user.registration.failed;Fill all required fields
 ;user.title;Title
 ;usergroup.disabled;User group is not active, in order to activate it add members to this user group
@@ -2861,25 +2861,25 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;usergroup.yes.button;Yes
 ;validation.checkEmail.equals;Email and Re-enter email address does not match
 ;validation.checkPwd.equals;Password and password confirmation do not match
-;worldpay.apm.completed.payment.by;Paid By
+;worldpay.apm.completed.payment.by;Paid by
 ;worldpay.apm.payment.method.bank;Bank
 ;worldpay.apm.payment.method.name;Payment method
-;worldpay.apm.pending.payment.by;Pending Payment By
+;worldpay.apm.pending.payment.by;Pending payment by
 ;worldpay.paymentMethod.creditcard;Card
-;worldpay.paymentMethod.invalid;Please select a Payment Method
+;worldpay.paymentMethod.invalid;Please select a payment method
 ;worldpay.paymentMethod.noShopperBankCode;Please select a bank for payment Method
 
 ;product.grid.variants.more;More colors available
 
 ;text.account.orderHistory.page.sort.byPurchaseOrderNumber;P.O. Number
-;text.account.orderHistory.page.sort.byStatus;Order Status
-;text.account.orderHistory.page.sort.byOrderType;Order Type
+;text.account.orderHistory.page.sort.byStatus;Order status
+;text.account.orderHistory.page.sort.byOrderType;Order type
 ;text.account.orderHistory.page.sort.byRdd;RDD
-;text.account.orderHistory.orderType;Order Type
+;text.account.orderHistory.orderType;Order type
 ;text.account.orderHistory.rdd;RDD
 ;text.account.orderHistory.totalQty;Total Qty
-;text.account.orderHistory.creationDate;Order Creation Date
-;text.account.orderhistory.dateplaced;Date Placed
+;text.account.orderHistory.creationDate;Order creation date
+;text.account.orderhistory.dateplaced;Date placed
 ;text.account.orderHistory.POnumber;P.O. Number
 ;text.account.orderHistory.shipTo;Ship To
 ;text.account.orderHistory.soldTo;Sold To
@@ -2887,18 +2887,18 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.item.status;Status
 ;text.account.orderHistory.item.qty;Qty
 ;text.account.orderHistory.item.shipments;Shipments
-;text.account.orderHistory.item.shipdate;Ship Date
+;text.account.orderHistory.item.shipdate;Ship date
 ;text.account.orderHistory.item.notassigned;N/A
-;text.account.orderHistory.item.number;Item Number
-;text.account.order.total;Order Total
-;text.account.order.tax;Order Tax
-;text.account.order.net;Order Net
+;text.account.orderHistory.item.number;Item number
+;text.account.order.total;Order total
+;text.account.order.tax;Order tax
+;text.account.order.net;Order net
 
 ;text.account.supporttickets.success;Your ticket successfully sent
-;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product Enquiry
+;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product enquiry
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
 
-;text.cart.rdd;Requested Delivery Date
+;text.cart.rdd;Requested delivery date
 ;text.cart.purchaseOrderNumber;P.O. Number
 ;text.cart.customerNotes;Notes
 ;checkout.savecart;Save updated basket
@@ -2914,14 +2914,14 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.deliveryAddress.markFor.noSelection;Do not apply Mark For
 
 ;product.wholesale.price;Wholesale price
-;product.videourl;Watch Video
-;product.externalurl;External Link
+;product.videourl;Watch video
+;product.externalurl;External link
 ;product.brand;Brand
 ;product.customer.price;Price
 ;product.season;Season
 ;product.description;Description
 ;product.features;Features
-;product.sizeChartGuide;Size Chart Guide
+;product.sizeChartGuide;Size chart guide
 ;product.unit;Base UOM
 ;product.sku;ID
 
@@ -2943,8 +2943,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;text.account.hidePrices;Show/Hide prices
 ;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
-;text.account.hidePrices.show;Show Prices
-;text.account.hidePrices.hide;Hide Prices
+;text.account.hidePrices.show;Show prices
+;text.account.hidePrices.hide;Hide prices
 
 ;basket.export.images.file;Download product images
 ;erp.integration.failed;Error while processing ERP request
@@ -2963,9 +2963,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;currency.GBP;£
 
 ;cart.unsaved.popup.title;You have made edits to the basket
-;cart.unsaved.popup.warning;Do you wish to save the changes?
-;cart.unsaved.popup.save;YES
-;cart.unsaved.popup.cancel;NO
+;cart.unsaved.popup.warning;You cannot proceed without saving the changes.
+;cart.unsaved.popup.save;OK
+;cart.unsaved.popup.cancel;CANCEL
 
 ;text.company.accountsummary.unit.details.page.defaultSort;Sort by
 ;product.grid.variants.clearance;Clearance on some colours
@@ -2973,3 +2973,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.form.moq;MOQ={0}
 ;order.form.moq.any;MOQ=Any
 ;product.gallery.zoom.tooltip;"Click image and drag around to see the enlarged image."
+
+;account.summary.balances.validity;"All balances shown are up to date and correct as at the close of business {0}."

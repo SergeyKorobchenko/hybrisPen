@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<spring:url value="/checkout/multi/termsAndConditions" var="getTermsAndConditionsUrl"/>
+<spring:url value="/termsofuse#PentlandTerms" var="getTermsAndConditionsUrl"/>
 
 <div id="termsAndConditions" class="terms clear">
     <div class="checkbox">
