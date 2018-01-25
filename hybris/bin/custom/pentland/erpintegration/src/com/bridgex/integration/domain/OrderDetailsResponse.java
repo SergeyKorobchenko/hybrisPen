@@ -56,6 +56,9 @@ public class OrderDetailsResponse {
   @JsonProperty("E_SHIP_TO_CODE")
   private String deliveryAddressId;
 
+  @JsonProperty("E_SHIP_TO_NAME")
+  private String deliveryAddressName;
+
   @JsonProperty("E_SHIP_TO_STREET")
   private String deliveryAddressStreet;
 
@@ -230,6 +233,14 @@ public class OrderDetailsResponse {
 
   public void setDeliveryAddressId(String deliveryAddressId) {
     this.deliveryAddressId = deliveryAddressId;
+  }
+
+  public String getDeliveryAddressName() {
+    return deliveryAddressName;
+  }
+
+  public void setDeliveryAddressName(String deliveryAddressName) {
+    this.deliveryAddressName = deliveryAddressName;
   }
 
   public String getTotalQuantity() {

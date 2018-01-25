@@ -36,6 +36,8 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     response.setCustomerName("Akira Namomuta");
     response.setCustomerId("339982");
 
+    response.setDeliveryAddressId("123580");
+    response.setDeliveryAddressName("Test Ship-To Name");
     response.setDeliveryAddressCity("London");
     response.setDeliveryAddressCountry("GB");
     response.setDeliveryAddressMarkForName("Akira");

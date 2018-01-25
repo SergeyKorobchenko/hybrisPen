@@ -56,6 +56,8 @@
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
 		<property name="soldTo" type="String"/>
 		<property name="markFor" type="String"/>
+		<property name="soldToName" type="String"/>
+		<property name="markForName" type="String"/>
 		<property name="orderItems" type="java.util.List&lt;com.bridgex.facades.order.data.OrderItemData>"/>
 		<property name="orderType" type="String"/>
 		<property name="brand" type="String"/>
