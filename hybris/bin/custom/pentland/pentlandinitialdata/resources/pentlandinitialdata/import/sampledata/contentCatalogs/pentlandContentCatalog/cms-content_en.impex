@@ -53,8 +53,8 @@ UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];title[lang=e
 #;;ProductDetailsTabComponent;Product Details
 
 # CMS Footer Navigation Component
-UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en]
-;;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";
+UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=en];name;
+;;FooterNavigationComponent;"© 2017 Pentland Brands Limited. All rights reserved. All trademarks acknowledged.";FooterNavigationComponent;
 
 # CMS Paragraph Component
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
