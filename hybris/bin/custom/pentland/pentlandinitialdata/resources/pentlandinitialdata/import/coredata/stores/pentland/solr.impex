@@ -203,7 +203,7 @@ INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
 ;itemtype:$solrIndexedType 				 ;   ;    ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;code:$solrIndexedType                   ;   ;    ;TRUE;90 ;    ;  ;;	 ;  ;POSTFIX;45;3;
-;materialKey:$solrIndexedType            ;   ;    ;TRUE;90 ;    ;  ;;	 ;  ;POSTFIX;45;3;
+;materialKey:$solrIndexedType            ;   ;    ;TRUE;90 ;    ;  ;;	 ;true;POSTFIX;45;3;
 ;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;; ;  ;   	   ;  ;
 #;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;   	   ;  ;
 ;priceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
