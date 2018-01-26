@@ -125,7 +125,7 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; realfilenam
 ; ; loginbanner.jpg ; loginbanner.jpg ; $siteResource/images/loginbanner.jpg
 
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink; $picture[lang=$lang];visible[default=true]
-; ; LoginPageBrandBannerComponent ; Login Image Component ; LoginPageBrandBannerComponent ; "/";loginbanner.jpg;
+; ; LoginPageBrandBannerComponent ; Login Image Component ; LoginPageBrandBannerComponent ; "/";;
 
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid,$contentCV)

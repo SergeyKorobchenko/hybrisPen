@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="c-link-banners b-margin-bottom">
+    <div class="c-link-banners">
         <div class="container">
             <div class="b-section--full-width">
                 <cms:pageSlot position="Section3" var="feature" element="div" class="row">
@@ -31,13 +31,11 @@
         </div>
     </div>
 
-    <div class="c-best-products">
-        <div class="container">
-            <div class="b-section--full-width">
-                <cms:pageSlot position="Section4" var="feature" element="div" class="row no-margin">
-                    <cms:component component="${feature}" element="div" class="no-space yComponentWrapper"/>
-                </cms:pageSlot>
-            </div>
+    <div class="container">
+        <div class="b-section--full-width">
+            <cms:pageSlot position="Section4" var="feature" element="div" class="row no-margin">
+                <cms:component component="${feature}" element="div" class="no-space yComponentWrapper"/>
+            </cms:pageSlot>
         </div>
     </div>
 
