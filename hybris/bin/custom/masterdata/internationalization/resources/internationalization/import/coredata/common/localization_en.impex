@@ -2974,7 +2974,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.form.moq.any;MOQ=Any
 ;product.gallery.zoom.tooltip;"Click image and drag around to see the enlarged image."
 
-;account.summary.balances.validity;"All balances shown are up to date and correct as at the close of business {0}."
+;account.summary.balances.validity;"Account balances displayed are up-to-date, this can differ from your customer statement provided on {0}."
 
 ;text.account.supporttickets.createTicket.ticketCategory;Category
 ;text.account.supportTickets.page.totalResults;of {0} tickets
