@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:utils="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache
-       http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+			http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
 
-	<cache:annotation-driven cache-manager="compositeCacheManager"/>
-
-	<alias name="defaultCacheManagerList" alias="cacheManagerList"/>
-	<utils:list id="defaultCacheManagerList">
-		<ref bean="localizationCacheManager"/>
-	</utils:list>
-
-	<alias name="defaultCompositeCacheManager" alias="compositeCacheManager"/>
-	<bean id="defaultCompositeCacheManager" class="org.springframework.cache.support.CompositeCacheManager">
-		<property name="cacheManagers">
-			<ref bean="cacheManagerList"/>
+	<bean name="localizationCacheRegion" class="de.hybris.platform.regioncache.region.impl.EHCacheRegion">
+		<constructor-arg name="name" value="localizationCacheRegion" />
+		<constructor-arg name="maxEntries" value="${regioncache.localization.size}" />
+		<constructor-arg name="evictionPolicy" value="${regioncache.localization.evictionpolicy}" />
+		<property name="handledTypes">
+			<array>
+				<value>32000</value>
+			</array>
 		</property>
 	</bean>
 
-	<bean id="localizationCacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-		<property name="caches">
-			<set>
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
-					<property name="name" value="LOCALIZATION"/>
-				</bean>
-			</set>
-		</property>
-	</bean>
+	<bean id="localizationCacheRegionRegistrar" class="de.hybris.platform.regioncache.region.CacheRegionRegistrar" c:region-ref="localizationCacheRegion" />
 
 </beans>

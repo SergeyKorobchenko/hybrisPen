@@ -23,13 +23,6 @@
     <alias name="defaultLocalizationEntryService" alias="localizationEntryService"/>
     <bean id="defaultLocalizationEntryService" class="ru.masterdata.internationalization.services.impl.DefaultLocalizationEntryService"/>
 
-    <bean id="localizationInterceptor" class="ru.masterdata.internationalization.interceptors.LocalizationInterceptor"/>
-
-    <bean id="localizationEntryInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
-        <property name="interceptor" ref="localizationInterceptor" />
-        <property name="typeCode" value="LocalizationEntry" />
-    </bean>
-
     <alias name="customLocalizationMessageSource" alias="baseMessageSource"/>
     <bean id="customLocalizationMessageSource" class="ru.masterdata.internationalization.messagesource.CustomLocalizationMessageSource">
         <property name="fallbackLocale" value="${fallback.locale}"/>
