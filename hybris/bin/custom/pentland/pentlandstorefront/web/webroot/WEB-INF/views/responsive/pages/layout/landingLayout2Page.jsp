@@ -24,9 +24,11 @@
     <div class="c-link-banners b-margin-bottom">
         <div class="container">
             <div class="b-section--full-width">
-                <cms:pageSlot position="Section3" var="feature" element="div" class="row">
-                    <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 col-md-3 col-lg-3"/>
-                </cms:pageSlot>
+                <div class="row">
+                    <cms:pageSlot position="Section3" var="feature" element="div" class="row">
+                        <cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 col-md-3 col-lg-3"/>
+                    </cms:pageSlot>
+                </div>
             </div>
         </div>
     </div>
@@ -34,9 +36,11 @@
     <div class="c-best-products">
         <div class="container">
             <div class="b-section--full-width">
-                <cms:pageSlot position="Section4" var="feature" element="div" class="row no-margin">
-                    <cms:component component="${feature}" element="div" class="no-space yComponentWrapper"/>
-                </cms:pageSlot>
+                <div class="row">
+                    <cms:pageSlot position="Section4" var="feature" element="div" class="row no-margin">
+                        <cms:component component="${feature}" element="div" class="no-space yComponentWrapper"/>
+                    </cms:pageSlot>
+                </div>
             </div>
         </div>
     </div>
