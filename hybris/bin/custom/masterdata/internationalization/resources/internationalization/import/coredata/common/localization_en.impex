@@ -314,7 +314,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.view;VIEW CART
 ;category.navTitle;Shop by Category
 ;checkout.billing.address.page.global.field.error;Some fields were not filled in correctly. Please check your details are correct
-;checkout.checkout;Checkout
+;checkout.checkout;Go to basket
+;checkout.checkout.do;Checkout
 ;checkout.checkout.customer.email.title;Customer email
 ;checkout.checkout.flow.select;Select an alternative checkout flow
 ;checkout.checkout.multi;Checkout Multi
