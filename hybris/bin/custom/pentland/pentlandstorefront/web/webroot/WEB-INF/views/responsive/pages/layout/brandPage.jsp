@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="c-link-banners b-margin-bottom">
+    <div class="c-link-banners">
         <div class="container">
             <div class="b-section--full-width">
                 <cms:pageSlot position="Section2" var="feature" element="div">
