@@ -75,7 +75,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       item.setTotalPrice(populatePriceData(dto.getNetPrice(), source.getCurrency()));
       item.setQty(getInt(dto.getQuantity()));
       item.setShippedQty(getInt(dto.getShippedQuantity()));
-      item.setShipDate(dto.getShippedDate());
+      item.setShipDate(parseShipDate(dto.getShippedDate()));
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
       items.add(item);
@@ -103,6 +103,18 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     if (size.getShipDate() != null) {
       try {
         shipDate = formatter.parse(size.getShipDate());
+      } catch (ParseException e) {
+        LOG.error("Unable to parse shipment date. Change to N/A");
+      }
+    }
+    return shipDate;
+  }
+
+  private Date parseShipDate(String date) {
+    Date shipDate = null;
+    if (date != null) {
+      try {
+        shipDate = formatter.parse(date);
       } catch (ParseException e) {
         LOG.error("Unable to parse shipment date. Change to N/A");
       }

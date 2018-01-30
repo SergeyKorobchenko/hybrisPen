@@ -50,8 +50,7 @@ public class OrderEntryDto {
   private String shippedQuantity;
 
   @JsonProperty("SHIPPED_DATE")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
-  private Date shippedDate;
+  private String shippedDate;
 
   public String getEntryNumber() {
     return entryNumber;
@@ -141,11 +140,11 @@ public class OrderEntryDto {
     this.shippedQuantity = shippedQuantity;
   }
 
-  public Date getShippedDate() {
+  public String getShippedDate() {
     return shippedDate;
   }
 
-  public void setShippedDate(Date shippedDate) {
+  public void setShippedDate(String shippedDate) {
     this.shippedDate = shippedDate;
   }
 }
