@@ -35,7 +35,7 @@ $storefrontContextRoot=$config-storefrontContextRoot
 
 # CMS Site
 INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=pentlandPromoGrp];enableRegistration
-;$siteUid;lambda;B2B;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$,(?i)^https?://pnt-d-adm.ms.ycs.io.*$,(?i)^https?://pnt-d-www.ms.ycs.io.*$,(?i)^.*pentlandstorefront.*$,(?i)^https?://pnt-s-www.ms.ycs.io.*$,(?i)^https?://pnt-s-adm.ms.ycs.io.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;language,currency;;false
+;$siteUid;lambda;B2B;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$,(?i)^https?://pnt-d-adm.ms.ycs.io.*$,(?i)^https?://pnt-d-www.ms.ycs.io.*$,(?i)^.*pentlandstorefront.*$,(?i)^https?://pnt-s-www.ms.ycs.io.*$,(?i)^https?://pnt-s-adm.ms.ycs.io.*$,(?i)^https?://pentlandconnect.com.*$,(?i)^https?://pnt-p-www.ms.ycs.io.*$,(?i)^https?://pnt-p-www.ms.ycs.io.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;language,currency;;false
 
 # Cart Cleanup CronJobs
 INSERT_UPDATE CartRemovalCronJob;code[unique=true];job(code)[default=cartRemovalJob];sites(uid)[default=$siteUid];sessionLanguage(isoCode)[default=en]
