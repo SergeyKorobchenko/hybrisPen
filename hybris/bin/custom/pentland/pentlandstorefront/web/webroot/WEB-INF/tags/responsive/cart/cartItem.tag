@@ -161,13 +161,13 @@
             <%-- wholesale price --%>
             <div class="item__price">
                 <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>: </span>
-                <format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
+                <format:price priceData="${entry.basePrice}" displayFreeForZero="false"/>
             </div>
 
             <%-- price --%>
             <div class="item__price">
                 <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemWholesalePrice"/>: </span>
-                <format:price priceData="${entry.erpPrice}" displayFreeForZero="true"/>
+                <format:price priceData="${entry.erpPrice}" displayFreeForZero="false"/>
             </div>
 
             <%-- quantity --%>
@@ -329,7 +329,7 @@
                         </c:if>
                         <ycommerce:testId code="cart_totalProductPrice_label">
                             <div class="item__total js-item-total">
-                                <format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
+                                <format:price priceData="${entry.totalPrice}" displayFreeForZero="false"/>
                             </div>
                         </ycommerce:testId>
                     </div>

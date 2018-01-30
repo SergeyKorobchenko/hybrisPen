@@ -29,7 +29,7 @@
 			<label><spring:theme code="text.cart.purchaseOrderNumber"/></label>
 			<div class="form-group">
 				<div>
-					<form:input type="text" class="form-control" style="width: 100%;" path="purchaseOrderNumber" data-initial="${b2bCartForm.purchaseOrderNumber}"/>
+					<form:input type="text" class="form-control" style="width: 100%;" path="purchaseOrderNumber" data-initial="${b2bCartForm.purchaseOrderNumber}" maxlength="20"/>
 				</div>
 				<span style="display:none;" class="help-block" id="purchaseOrderNumberError"><spring:theme code="basket.error.checkout.empty.ponumber"/></span>
 			</div>

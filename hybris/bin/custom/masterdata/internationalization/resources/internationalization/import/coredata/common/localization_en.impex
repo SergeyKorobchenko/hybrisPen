@@ -314,7 +314,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.view;VIEW CART
 ;category.navTitle;Shop by Category
 ;checkout.billing.address.page.global.field.error;Some fields were not filled in correctly. Please check your details are correct
-;checkout.checkout;Checkout
+;checkout.checkout;Go to basket
+;checkout.checkout.do;Checkout
 ;checkout.checkout.customer.email.title;Customer email
 ;checkout.checkout.flow.select;Select an alternative checkout flow
 ;checkout.checkout.multi;Checkout Multi
@@ -324,10 +325,10 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.checkout.multi.pci-sop;PCI-SOP
 ;checkout.checkout.multi.pci-ws;PCI-Default
 ;checkout.checkout.multi.pci.select;Select a PCI option
-;checkout.multi.deliveryAddress.markFor;Mark For Address
-;checkout.multi.deliveryAddress.markFor.description;Select Mark For address or press Next to skip this step
-;checkout.multi.deliveryAddress.markFor.empty;There are no Mark For addresses for selected shipping address. Press Next to skip this step
-;checkout.multi.deliveryAddress.markFor.breadcrumb;Mark For
+;checkout.multi.deliveryAddress.markFor;Mark for address
+;checkout.multi.deliveryAddress.markFor.description;Select Mark for address or press Next to skip this step
+;checkout.multi.deliveryAddress.markFor.empty;There are no Mark for addresses for selected shipping address. Press Next to skip this step
+;checkout.multi.deliveryAddress.markFor.breadcrumb;Mark for
 ;checkout.checkout.single;Checkout Single
 ;checkout.deliveryAddress.notSelected;Please provide a delivery address for your order
 ;checkout.deliveryMethod.notSelected;Please select a method of delivery for your order
@@ -412,7 +413,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.addressDetails;Address details
 ;checkout.multi.breadcrumb;Checkout
 ;checkout.multi.cancel;Cancel
-;checkout.multi.confirmOrder;Final Review
+;checkout.multi.confirmOrder;Final review
 ;checkout.multi.costCenter.label;Cost center
 ;checkout.multi.costCenter.notprovided;You must provide a cost center in order to go to the next step.
 ;checkout.multi.costCenter.title.pleaseSelect;Please select...
@@ -444,7 +445,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.deliveryMethod.deliveryOptions;Delivery options
 ;checkout.multi.deliveryMethod.edit;Edit
 ;checkout.multi.deliveryMethod.header;Delivery options
-;checkout.multi.deliveryMethod.message;Items will ship as soon as they are available. <br> See Order Summary for more information.
+;checkout.multi.deliveryMethod.message;Items will ship as soon as they are available. <br> See Order summary for more information.
 ;checkout.multi.deliveryMethod.noExistingDeliveryMethod;No delivery method currently exist.
 ;checkout.multi.deliveryMethod.notprovided;You must provide a delivery option in order to go to the next step.
 ;checkout.multi.deliveryMethod.selectDeliveryMethodMessage;Shipment method
@@ -469,8 +470,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.items.to.pickup;Pick Up:
 ;checkout.multi.lightbox.redirect.error;We are having a problem processing your payment. Please contact your Customer Operations representative.
 ;checkout.multi.next;Next &raquo
-;checkout.multi.order.summary;Order Summary
-;checkout.multi.payment;"Payment Type:"
+;checkout.multi.order.summary;Order summary
+;checkout.multi.payment;"Payment type:"
 ;checkout.multi.paymentDetails.notprovided;You must provide a payment details in order to go to the next step.
 ;checkout.multi.paymentMethod;Payment
 ;checkout.multi.paymentMethod.addPaymentDetails.billingAddress;Billing Address
@@ -501,7 +502,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.paymentMethod.savedCards.select;Select
 ;checkout.multi.paymentMethod.savedCards.selectSavedCardOrEnterNew;Select existing payment details or enter new payment details
 ;checkout.multi.paymentMethod.savedCards.stepHeader;3 - Select payment details
-;checkout.multi.paymentMethod.seeOrderSummaryForMoreInformation;See the Order Summary area for more information.
+;checkout.multi.paymentMethod.seeOrderSummaryForMoreInformation;See the Order summary area for more information.
 ;checkout.multi.paymentMethod.viewSavedPayments;View saved payments
 ;checkout.multi.paymentType;Payment type
 ;checkout.multi.paymentType.breadcrumb;Payment type
@@ -513,7 +514,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.pickupInStore;Pick Up in Store
 ;checkout.multi.pickupInStore.confirm.and.continue;Simply confirm the information below and continue to the next step of checkout.
 ;checkout.multi.product.unpurchasable;Not purchasable
-;checkout.multi.purchaseOrderNumber.label;P.O. Number
+;checkout.multi.purchaseOrderNumber.label;P.O. number
 ;checkout.multi.replenishment;Replenishment
 ;checkout.multi.saveAddress;Save address
 ;checkout.multi.secure.checkout;Secure checkout
@@ -526,7 +527,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.multi.sop.useThisPaymentInfo;Use this payment info
 ;checkout.multi.summary.breadcrumb;Final review
 ;checkout.multi.summary.orderPlacedBy;Order placed by
-;checkout.multi.summary.markFor;"Mark For:"
+;checkout.multi.summary.markFor;"Mark for:"
 ;checkout.multi.worldpay.declined.message.12;Please check all your details and try again
 ;checkout.multi.worldpay.declined.message.13;Please check all your details and try again
 ;checkout.multi.worldpay.declined.message.14;Please check all your details and try again
@@ -679,7 +680,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.summary.replenishmentScheduleForm.cancel;Cancel
 ;checkout.summary.replenishmentScheduleForm.title;Set replenishment schedule
 ;checkout.summary.requestApproval.cancel;Cancel
-;checkout.summary.reviewYourOrder;Final Review
+;checkout.summary.reviewYourOrder;Final review
 ;checkout.summary.reviewYourOrderMessage;Please review your order carefully!
 ;checkout.summary.scheduleReplenishment;Schedule replenishment
 ;checkout.summary.select.payment.method;Select payment method
@@ -839,7 +840,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;login.password;Password
 ;login.required;Required
 ;login.required.message;Fields marked * are required
-;login.title;Returning Customer
+;login.title;Returning customer
 ;menu.button.home;Home
 ;minicart.cart.alt;Your shopping basket
 ;minicart.checkout.checkout;Checkout
@@ -848,7 +849,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;mobile.basket.page.update;Update quantity
 ;mobile.checkout.cart.viewFullCart;View Full Bag
 ;mobile.checkout.cart.viewLess;View less
-;mobile.checkout.confirmOrder;Final Review
+;mobile.checkout.confirmOrder;Final review
 ;mobile.checkout.continue.button;Continue
 ;mobile.checkout.continue.shopping;Continue shopping
 ;mobile.checkout.deliveryAddress;Delivery address
@@ -1310,7 +1311,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.addressBook.confirmationUpdated;Your address was updated
 ;text.account.addressBook.manageDeliveryAddresses;Manage your delivery address
 ;text.account.addressBook.manageYourAddresses;Manage your address book
-;text.account.addressBook.noSavedAddresses;No Saved Addresses Found
+;text.account.addressBook.noSavedAddresses;No saved addresses found
 ;text.account.addressBook.saveAddress;Save address
 ;text.account.addressBook.setDefaultDeliveryAddress;Set default delivery address
 ;text.account.addressBook.updateAddress;Update address
@@ -1401,7 +1402,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.orderDetails.ParentBusinessUnit;Parent unit
 ;text.account.order.orderDetails.billingInformtion;Billing information
 ;text.account.order.orderDetails.orderNumber;Order # {0}
-;text.account.order.orderDetails.purchaseOrderNumber;P.O. Number
+;text.account.order.orderDetails.purchaseOrderNumber;P.O. number
 ;text.account.order.orderDetails.validUntil;Valid until
 ;text.account.order.orderNumber;Your order number is {0}
 ;text.account.order.orderNumberLabel;Your order number is
@@ -1499,7 +1500,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderApprovalDetails.parentBusinessUnit;Parent business unit
 ;text.account.orderApprovalDetails.purchaseOrderNumber;P.O.No
 ;text.account.orderDetails.backToOrderHistory;Back To order history
-;text.account.orderHistory;Order History
+;text.account.orderHistory;Order history
 ;text.account.orderHistory.actions;Actions
 ;text.account.orderHistory.back;Back
 ;text.account.orderHistory.emptyOrderHistory;Order history empty
@@ -1528,7 +1529,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.page.totalResultsCurrPage;{0} of {1} Orders
 ;text.account.orderHistory.page.totalResultsSingleOrder;1 Order
 ;text.account.orderHistory.page.totalResultsSinglePag;{0} Orders
-;text.account.orderHistory.purchaseOrderNumber;P.O. Number
+;text.account.orderHistory.purchaseOrderNumber;P.O. number
 ;text.account.orderHistory.reorder;Reorder
 ;text.account.orderHistory.replenishment;This is a scheduled order
 ;text.account.orderHistory.replenishment.link;View the replenishment schedule
@@ -1683,7 +1684,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.savedCart.savedCartBreadcrumb;Saved basket {0}
 ;text.account.savedCart.title.details;Saved basket details
 ;text.account.savedCart.total;Total
-;text.account.savedCarts;Saved Baskets
+;text.account.savedCarts;Saved baskets
 ;text.account.savedCarts.noSavedCarts;No saved baskets found
 ;text.account.savedCarts.page.currentPage;Page {0} of {1}
 ;text.account.savedCarts.page.firstPage;&laquo
@@ -1784,7 +1785,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.accountsummary.closed.label;Closed
 ;text.company.accountsummary.closedstatus.label;Closed documents
 ;text.company.accountsummary.creditline.label;Credit line
-;text.company.accountsummary.creditrep.label;Credit Rep
+;text.company.accountsummary.creditrep.label;Credit rep
 ;text.company.accountsummary.criteria.amount.format.from.invalid;'From' amount is invalid
 ;text.company.accountsummary.criteria.amount.format.to.invalid;'To' amount is invalid
 ;text.company.accountsummary.criteria.amount.invalid;'From' amount cannot be larger than 'To' amount
@@ -2355,7 +2356,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.company.manageusers.permission.edit;Edit Permission {0}
 ;text.company.manageusers.permissions.subtitle;Permissions define the financial limits of a user. Permissions can be on a per-order or per-timespan basis.
 ;text.company.manageusers.permissions.title;Select Permission(s)
-;text.company.manageusers.restpassword.breadcrumb;Update Password
+;text.company.manageusers.restpassword.breadcrumb;Update password
 ;text.company.manageusers.roles.subtitle;A user is an individual who is able to login to the {0}. The functionality available to a user is dependent on the roles they have. B2B Administrators have access to the My Company area to modify the organization hierarchy. B2B Managers can view statistics on the sales of the organization (awaiting implementation). B2B Approvers can approve orders for which the B2B Customer did not have enough permissions. B2B Customers can place orders in the {0}front.
 ;text.company.manageusers.subtitle;A user is an individual who is able to login to the {0}. The {0} functionality available to the user is dependent on the roles they have. B2B Administrators have access to the My Company area to modify the organization hierarchy. B2B Managers can view statistics on the sales of the organization (awaiting implementation). B2B Approvers can approve orders for which the B2B Customer did not have enough permissions. B2B Customers can place orders in the {0}front. In general, the visibility and jurisdiction of a user is restricted to the branch of the unit to which they are assigned.
 ;text.company.manageusers.usergroups.subtitle;User groups allow you to assign permissions to multiple customers without adhering to the hierarchical structure of the organization hierarchy.
@@ -2612,7 +2613,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.edit;Edit
 ;text.expires;Expires
 ;text.expresscheckout.header;Express checkout
-;text.expresscheckout.info1;By succesfully configuring your settings this way, signed users will proceed directly to the Final Review step when proceeding to checkout
+;text.expresscheckout.info1;By succesfully configuring your settings this way, signed users will proceed directly to the Final review step when proceeding to checkout
 ;text.expresscheckout.info2;Users who have not yet signed in may choose Express Checkout in the shopping basket
 ;text.expresscheckout.info3;The express checkout feature is not available to Guest Users
 ;text.expresscheckout.line1;setting a default Delivery Address in your account or when you checkout
@@ -2871,19 +2872,19 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;product.grid.variants.more;More colors available
 
-;text.account.orderHistory.page.sort.byPurchaseOrderNumber;P.O. Number
+;text.account.orderHistory.page.sort.byPurchaseOrderNumber;P.O. number
 ;text.account.orderHistory.page.sort.byStatus;Order status
 ;text.account.orderHistory.page.sort.byOrderType;Order type
 ;text.account.orderHistory.page.sort.byRdd;RDD
 ;text.account.orderHistory.orderType;Order type
 ;text.account.orderHistory.rdd;RDD
-;text.account.orderHistory.totalQty;Total Qty
+;text.account.orderHistory.totalQty;Total qty
 ;text.account.orderHistory.creationDate;Order creation date
 ;text.account.orderhistory.dateplaced;Date placed
-;text.account.orderHistory.POnumber;P.O. Number
-;text.account.orderHistory.shipTo;Ship To
-;text.account.orderHistory.soldTo;Sold To
-;text.account.orderHistory.markFor;Mark For
+;text.account.orderHistory.POnumber;P.O. number
+;text.account.orderHistory.shipTo;Ship to
+;text.account.orderHistory.soldTo;Sold to
+;text.account.orderHistory.markFor;Mark for
 ;text.account.orderHistory.item.status;Status
 ;text.account.orderHistory.item.qty;Qty
 ;text.account.orderHistory.item.shipments;Shipments
@@ -2899,7 +2900,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
 
 ;text.cart.rdd;Requested delivery date
-;text.cart.purchaseOrderNumber;P.O. Number
+;text.cart.purchaseOrderNumber;P.O. number
 ;text.cart.customerNotes;Notes
 ;checkout.savecart;Save updated basket
 ;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-04-17,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
@@ -2911,7 +2912,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;checkout.payment.ACCOUNT.PROFORMA;Pro-Forma
 
 ;checkout.multi.deliveryAddress.noAddress;There are no shipping addresses assigned to current customer.
-;checkout.multi.deliveryAddress.markFor.noSelection;Do not apply Mark For
+;checkout.multi.deliveryAddress.markFor.noSelection;Do not apply Mark for
 
 ;product.wholesale.price;Wholesale price
 ;product.videourl;Watch video
@@ -2936,12 +2937,12 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.export.global.error;"We are unable to process this order at this time. We will re-process this request. In the meantime, the Order Number displayed below is a temporary number assigned to it.
 <br>We apologize for the inconvenience. If you have any further queries or require assistance – please <a href=""{0}"">contact us.</a>"
 
-;checkout.error.empty.po;Please fill in P.O. Number before proceeding to checkout
+;checkout.error.empty.po;Please fill in P.O. number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
 ;checkout.error.empty.cart;Your basket does not have any quantity. Please add quantity before proceeding to checkout.
 ;checkout.error.empty.entry.cart;"Your basket does not have any quantity for one or more products. Please add quantity before proceeding to checkout, or remove these products from the basket."
 
-;text.account.hidePrices;Show/Hide prices
+;text.account.hidePrices;Show/hide prices
 ;text.account.hidePrices.notice;"By selecting the option ""Hide Prices"", all prices displayed on your Home Page, Brand Landing Page, Product List Page, and Product Detail Page will be hidden. <br>Please note that by selecting this option, the prices will not be hidden on the Cart and Checkout Pages."
 ;text.account.hidePrices.show;Show prices
 ;text.account.hidePrices.hide;Hide prices
@@ -2950,7 +2951,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;erp.integration.failed;Error while processing ERP request
 ;order.export.credit.check.failed;"Your account is nearing the available credit limit, please contact your account representative."
 
-;basket.error.checkout.empty.ponumber;P.O. Number is required
+;basket.error.checkout.empty.ponumber;P.O. number is required
 ;basket.error.checkout.empty.rdd;Requested delivery date is requred
 ;basket.error.export.image.empty.cart;Please add some quantity for a product before downloading images
 
@@ -2974,4 +2975,84 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.form.moq.any;MOQ=Any
 ;product.gallery.zoom.tooltip;"Click image and drag around to see the enlarged image."
 
-;account.summary.balances.validity;"All balances shown are up to date and correct as at the close of business {0}."
+;account.summary.balances.validity;"Account balances displayed are up-to-date, this can differ from your customer statement provided on {0}."
+
+;text.account.supporttickets.createTicket.ticketCategory;Category
+;text.account.supportTickets.page.totalResults;of {0} tickets
+;text.account.supporttickets.createTicket.heading;Request customer support
+;text.account.supportTickets.page.sort.byTicketId;Ticket ID
+;text.account.supportTickets.page.currentPage;Page {0} of {1}
+;supportticket.subject.invalid;Please enter subject.
+;text.account.supporttickets.createTicket.ticketCategory.PROBLEM;Problem
+;text.account.supporttickets.updateTicket.message.desc;Update a message. Please provide as much information as possible.
+;text.account.supporttickets.fileMaxSizeExceeded;The file is too large.
+;text.account.supportTickets.page.totalResultsSinglePag;{0} Tickets
+;text.account.supporttickets.createTicket.chooseFile;Choose file
+;text.account.supporttickets.dateCreated;Date created
+;text.account.supportTickets.page.sortTitle;Sort by
+;text.account.supportTickets.page.totalResultsSingleOrder;1 Ticket
+;text.account.supportTickets.page.linkPreviousPage;Previous page
+;ticketstatus.CLOSED;Closed
+;text.account.supporttickets.heading;Support tickets
+;text.account.supporttickets;Support tickets
+;ticketstatus.OPEN;Open
+;text.account.supporttickets.createTicket.back;Back
+;text.account.supporttickets.createTicket.Order;Order
+;text.account.supportTicket.updateTicket.status;Status
+;text.account.supporttickets.createTicket.selectFile;Select a file
+;text.account.supportTickets.page.linkNextPage;Next page
+;text.account.supportTickets.page.showAllResults;Show all
+;text.account.supportTicket.updateTicket.heading;Update support ticket
+;text.account.supporttickets.createTicket.message.desc;Enter a message. Please provide as much information as possible.
+;text.account.supporttickets.createTicket.noFileChosen;No file chosen
+;ticketstatus.COMPLETED;Completed
+;ticketstatus.box.CLOSED;Closed
+;text.account.supportTickets.page.sort.LastChangeDateTime;Date updated
+;text.account.supportTickets.page.lastPage;&raquo;
+;text.account.supporttickets.currentStatus;current status
+;text.account.supporttickets.cancel;Cancel
+;text.account.supporttickets.addSupportTicket;Create support ticket
+;ticketstatus.box.INPROCESS;Reopen
+;supportticket.subject.invalid.length;Subject should not be more than 255 characters.
+;text.account.supporttickets.createTicket.subject;Subject
+;text.account.supporttickets.createTicket.ticketCategory.ENQUIRY;Enquiry
+;text.account.supporttickets.subject;Subject
+;text.account.supporttickets.updateTicket.addMessage;Add message
+;text.account.supporttickets.tryLater;Sorry, there was a problem, please try again later
+;text.account.supporttickets.createTicket.SavedCart;Saved cart
+;text.account.supporttickets.requestSupport;Add new
+;text.account.supporttickets.createTicket.associatedTo.option1;Optionally Select...
+;text.account.supportTickets.page.totalResultsCurrPage;{0} of {1} tickets
+;supportticket.message.invalid;Please enter a valid message.
+;text.account.supporttickets.createTicket.message;Message
+;text.account.supporttickets.ticketId;Ticket ID
+;text.account.supporttickets.subHeading;Manage your support tickets
+;text.account.supporttickets.history.addedBy.customerService;Customer service
+;text.account.supporttickets.attachment.block.listed;File attachment has unsupported extension. Only {0} are allowed.
+;text.account.supportTicket.confirmation.ticket.added;Thank you for your customer support request. Your message has been sent to one of our Customer Service agents who will contact you shortly.
+;supportticket.message.invalid.length;Message should not be more than 5000 characters.
+;text.account.supporttickets.dateUpdated;Date updated
+;text.account.supportTickets.page.sort.byDate;Date updated
+;text.account.supporttickets.status;Status
+;text.account.supportTickets.page.showPageResults;Show paginated
+;text.account.supporttickets.updateSupportTicket;Update support ticket
+;text.account.supporttickets.createTicket.subject.desc;Enter the subject of your request.
+;ticketstatus.box.COMPLETED;Complete
+;text.account.supportTickets.page.firstPage;&laquo;
+;text.account.supporttickets.createTicket.associatedTo;Associated to
+;text.account.supporttickets.messages;Messages
+;text.account.supporttickets.noSupporttickets;You have no support tickets
+;text.account.supporttickets.createTicket.submit;Submit
+;text.account.supporttickets.viewDetails;View details
+;ticketstatus.REOPEN;Reopened
+;text.account.supporttickets.createTicket.message.history;Message history
+;text.account.supporttickets.updateTicket.on;on
+;text.account.supporttickets.history;Support tickets
+;text.account.supporttickets.createTicket.Cart;Cart
+;text.account.supporttickets.createTicket.ticketCategory.COMPLAINT;Complaint
+;text.account.supporttickets.file.is.large.than;File is too big (>{0})
+;text.account.supporttickets.createTicket.updated;Updated
+;ticketstatus.INPROCESS;In process
+;text.account.supportTickets.page.sort.ObjectID;Ticket ID
+
+;cart.po.max.exceeded.error;Maximum allowed size of PO number is 20 symbols

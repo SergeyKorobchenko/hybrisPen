@@ -1,5 +1,7 @@
 package com.bridgex.core.order.interceptor;
 
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.event.OrderStatusChangedEvent;
@@ -37,13 +39,13 @@ public class PentlandOrderPrepareInterceptor extends DefaultOrderPrepareIntercep
     if (model instanceof OrderModel) {
       OrderModel order = (OrderModel) model;
       if (isNotificationNeeded(order, ctx)) {
-        submitChangeStatusEvent(order.getSourceOrder());
+        submitChangeStatusEvent(order);
       }
     }
   }
 
   private void submitChangeStatusEvent(OrderModel order) {
-    eventService.publishEvent(new OrderStatusChangedEvent(order.getCode()));
+     eventService.publishEvent(new OrderStatusChangedEvent(order.getCode()));
   }
 
   private boolean isNotificationNeeded(OrderModel order, InterceptorContext ctx) {

@@ -432,8 +432,8 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
 ; ; Section1Slot-Homepage  ; Section1 Slot for Homepage  ; true ; PentlandHompageBannersCarouselComponent
 ; ; Section2Slot-Homepage  ; Section2 Slot for Homepage  ; true ; PentlandHomPageParagraphComponent
-; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ; PentlandHomepageStreetYouthBannerComponent,PentlandHomepageWomenStreetBannerComponent,PentlandHomepageManStreetBannerComponent,PentlandHomepageBrandsBannerComponent
-; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ; PentlandHomepageProductCarouselComponent
+; ; Section3Slot-Homepage  ; Section3 Slot for Homepage  ; true ;
+; ; Section4Slot-Homepage  ; Section4 Slot for Homepage  ; true ;
 
 ## slot 5: nothing to display ##
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
@@ -441,12 +441,14 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 
 ## components in slot 1 ##
 INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
-; ;PentlandHompageBannersCarouselComponent;Pentland Homepage Banner Carousel Component;zoom;PentlandHomepageBerghausBannerComponent,PentlandHomepageCanterburyBannerComponent,PentlandHomepageSpeedoBannerComponent;PentlandHompageBannersCarouselComponent
+; ;PentlandHompageBannersCarouselComponent;Pentland Homepage Banner Carousel Component;zoom;PentlandHomepageMitreBannerComponent,PentlandHomepageBannerComponent;PentlandHompageBannersCarouselComponent
 
-INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; PentlandHomepageBerghausBannerComponent ; Pentland Homepage Berghaus Banner Component ; /berghaus ; PentlandHomepageBerghausBannerComponent
-; ; PentlandHomepageCanterburyBannerComponent ; Pentland Homepage Canterbury Banner Component  ; /canterbury  ; PentlandHomepageCanterburyBannerComponent
-; ; PentlandHomepageSpeedoBannerComponent ; Pentland Homepage Speedo Banner Component ; /speedo ; PentlandHomepageSpeedoBannerComponent
+INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink;external[default=false]; &componentRef
+; ; PentlandHomepageBerghausBannerComponent ; Pentland Homepage Berghaus Banner Component ; /berghaus ; ;PentlandHomepageBerghausBannerComponent
+; ; PentlandHomepageCanterburyBannerComponent ; Pentland Homepage Canterbury Banner Component  ; /canterbury  ; ;PentlandHomepageCanterburyBannerComponent
+; ; PentlandHomepageSpeedoBannerComponent ; Pentland Homepage Speedo Banner Component ; /speedo ; ;PentlandHomepageSpeedoBannerComponent
+; ; PentlandHomepageBannerComponent ; Pentland Homepage Banner Component ; http://www.pentland.com/about-us.html ; true;PentlandHomepageBannerComponent
+; ; PentlandHomepageMitreBannerComponent ; Pentland Homepage Mitre Banner Component ; /mitre ; ;PentlandHomepageMitreBannerComponent
 
 ## components in slot 2 ##
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;
@@ -869,22 +871,22 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;Section1Slot-mitreBrandPage;Section1 Slot for mitreBrandPage;true;MitreBrandPageBannersCarouselComponent
-;;Section2Slot-mitreBrandPage;Section2 Slot for mitreBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
-;;Section3Slot-mitreBrandPage;Section3 Slot for mitreBrandPage;true;MitreBrandPageBestSellersCarouselComponent
+;;Section2Slot-mitreBrandPage;Section2 Slot for mitreBrandPage;true;MitreBrandPageTeamwearBannerComponent,MitreBrandPageTrainingwearBannerComponent,MitreBrandPageBallsBannerComponent,MitreBrandPageEquipmentBannerComponent
+;;Section3Slot-mitreBrandPage;Section3 Slot for mitreBrandPage;true;
 ;;Section1Slot-speedoBrandPage;Section1 Slot for speedoBrandPage;true;MitreBrandPageBannersCarouselComponent
-;;Section2Slot-speedoBrandPage;Section2 Slot for speedoBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section2Slot-speedoBrandPage;Section2 Slot for speedoBrandPage;true;MitreBrandPageTeamwearBannerComponent,MitreBrandPageTrainingwearBannerComponent,MitreBrandPageBallsBannerComponent,MitreBrandPageEquipmentBannerComponent
 ;;Section3Slot-speedoBrandPage;Section3 Slot for speedoBrandPage;true;MitreBrandPageBestSellersCarouselComponent
 ;;Section1Slot-kickersBrandPage;Section1 Slot for kickersBrandPage;true;MitreBrandPageBannersCarouselComponent
-;;Section2Slot-kickersBrandPage;Section2 Slot for kickersBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section2Slot-kickersBrandPage;Section2 Slot for kickersBrandPage;true;MitreBrandPageTeamwearBannerComponent,MitreBrandPageTrainingwearBannerComponent,MitreBrandPageBallsBannerComponent,MitreBrandPageEquipmentBannerComponent
 ;;Section3Slot-kickersBrandPage;Section3 Slot for kickersBrandPage;true;MitreBrandPageBestSellersCarouselComponent
 ;;Section1Slot-canterburyBrandPage;Section1 Slot for canterburyBrandPage;true;MitreBrandPageBannersCarouselComponent
-;;Section2Slot-canterburyBrandPage;Section2 Slot for canterburyBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section2Slot-canterburyBrandPage;Section2 Slot for canterburyBrandPage;true;MitreBrandPageTeamwearBannerComponent,MitreBrandPageTrainingwearBannerComponent,MitreBrandPageBallsBannerComponent,MitreBrandPageEquipmentBannerComponent
 ;;Section3Slot-canterburyBrandPage;Section3 Slot for canterburyBrandPage;true;MitreBrandPageBestSellersCarouselComponent
 ;;Section1Slot-boxfreshBrandPage;Section1 Slot for boxfreshBrandPage;true;MitreBrandPageBannersCarouselComponent
-;;Section2Slot-boxfreshBrandPage;Section2 Slot for boxfreshBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section2Slot-boxfreshBrandPage;Section2 Slot for boxfreshBrandPage;true;MitreBrandPageTeamwearBannerComponent,MitreBrandPageTrainingwearBannerComponent,MitreBrandPageBallsBannerComponent,MitreBrandPageEquipmentBannerComponent
 ;;Section3Slot-boxfreshBrandPage;Section3 Slot for boxfreshBrandPage;true;MitreBrandPageBestSellersCarouselComponent
 ;;Section1Slot-berghausBrandPage;Section1 Slot for berghausBrandPage;true;MitreBrandPageBannersCarouselComponent
-;;Section2Slot-berghausBrandPage;Section2 Slot for berghausBrandPage;true;MitreBrandPageHelmetBannerComponent,MitreBrandPageProtectionBannerComponent,MitreBrandPageShoesBannerComponent,MitreBrandPageSurfBannerComponent
+;;Section2Slot-berghausBrandPage;Section2 Slot for berghausBrandPage;true;MitreBrandPageTeamwearBannerComponent,MitreBrandPageTrainingwearBannerComponent,MitreBrandPageBallsBannerComponent,MitreBrandPageEquipmentBannerComponent
 ;;Section3Slot-berghausBrandPage;Section3 Slot for berghausBrandPage;true;MitreBrandPageBestSellersCarouselComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
@@ -909,18 +911,18 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 ## components in slot 1 ##
 INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; effect(code); banners(&componentRef); &componentRef
-; ;MitreBrandPageBannersCarouselComponent;Mitre Brand Page Banners Carousel Component;zoom;MitreBrandPageBannerComponent,MitreBrandPage2BannerComponent;MitreBrandPageBannersCarouselComponent
+; ;MitreBrandPageBannersCarouselComponent;Mitre Brand Page Banners Carousel Component;zoom;MitreBrandPageBannerComponent;MitreBrandPageBannersCarouselComponent
 
 INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; MitreBrandPageBannerComponent ; Mitre Brand Banner Page Component ; /helmet ; MitreBrandPageBannerComponent
-; ; MitreBrandPage2BannerComponent ; Mitre Brand Banner Page Component ; /protection  ; MitreBrandPage2BannerComponent
+; ; MitreBrandPageBannerComponent ; Mitre Brand Banner Page Component ; ; MitreBrandPageBannerComponent
+#; ; MitreBrandPage2BannerComponent ; Mitre Brand Banner Page Component ; /protection  ; MitreBrandPage2BannerComponent
 
 ## components in slot 2 ##
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink; &componentRef
-; ; MitreBrandPageHelmetBannerComponent     ; Pentland Brandpage Section-2 Component-1    ; ; MitreBrandPageHelmetBannerComponent
-; ; MitreBrandPageProtectionBannerComponent ; Pentland Brandpage Section-2 Component-2    ; ; MitreBrandPageProtectionBannerComponent
-; ; MitreBrandPageShoesBannerComponent      ; Pentland Brandpage Section-2 Component-3    ; ; MitreBrandPageShoesBannerComponent
-; ; MitreBrandPageSurfBannerComponent       ; Pentland Brandpage Section-2 Component-4    ; ; MitreBrandPageSurfBannerComponent
+; ; MitreBrandPageTeamwearBannerComponent     ; Pentland Brandpage Section-2 Component-1    ;/c/5000 ; MitreBrandPageTeamwearBannerComponent
+; ; MitreBrandPageTrainingwearBannerComponent ; Pentland Brandpage Section-2 Component-2    ;/c/5100 ; MitreBrandPageTrainingwearBannerComponent
+; ; MitreBrandPageBallsBannerComponent      ; Pentland Brandpage Section-2 Component-3    ;/c/5200 ; MitreBrandPageBallsBannerComponent
+; ; MitreBrandPageEquipmentBannerComponent       ; Pentland Brandpage Section-2 Component-4    ;/c/5300 ; MitreBrandPageEquipmentBannerComponent
 
 ## components in slot 3 ##
 INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef

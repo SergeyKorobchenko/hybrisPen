@@ -1,10 +1,12 @@
 package com.bridgex.core.event;
 
+import java.time.LocalDate;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import de.hybris.platform.b2b.services.B2BOrderService;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.order.OrderService;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.event.impl.AbstractEventListener;
@@ -14,6 +16,8 @@ import de.hybris.platform.servicelayer.model.ModelService;
  * @author Goncharenko Mikhail, created on 23.11.2017.
  */
 public class OrderStatusChangedEventListener extends AbstractEventListener<OrderStatusChangedEvent> {
+
+  private static Logger LOG = Logger.getLogger(OrderStatusChangedEventListener.class);
 
   private final static String PROCESS_DEFINITION = "orderStatusChangeEmailProcess";
 
@@ -40,10 +44,19 @@ public class OrderStatusChangedEventListener extends AbstractEventListener<Order
 
     OrderModel order = b2BOrderService.getOrderForCode(event.getOrderCode());
 
-    OrderProcessModel process = businessProcessService.createProcess(PROCESS_DEFINITION + "-" + order.getCode() + "-" + System.currentTimeMillis(), PROCESS_DEFINITION);
-    process.setOrder(order);
-    modelService.save(process);
-    businessProcessService.startProcess(process);
+    String processId = PROCESS_DEFINITION + "-" + order.getCode() + "-" + order.getStatus() + "-" + LocalDate.now().toString();
+    //check that this status change is not already being handled by another node
+    if(businessProcessService.getProcess(processId) == null){
+      try {
+        OrderProcessModel process = businessProcessService.createProcess(processId, PROCESS_DEFINITION);
+        process.setOrder(order.getSourceOrder());
+        modelService.save(process);
+        businessProcessService.startProcess(process);
+      }catch(Throwable e){
+        //process was already created by another node
+        LOG.debug(e.getMessage());
+      }
+    }
   }
 
 }

@@ -13,7 +13,7 @@
     <div class="col-sm-4 col-md-3 pull-right">
         <ycommerce:testId code="checkoutButton">
             <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">
-                <spring:theme code="checkout.checkout"/>
+                <spring:theme code="checkout.checkout.do"/>
             </button>
         </ycommerce:testId>
     </div>

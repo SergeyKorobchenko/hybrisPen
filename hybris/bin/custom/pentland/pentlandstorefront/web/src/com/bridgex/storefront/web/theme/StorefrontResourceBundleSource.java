@@ -136,29 +136,29 @@ public class StorefrontResourceBundleSource implements ThemeSource, ResourceLoad
 	protected MessageSource createAddOnMessageSource(final List<String> addOnNames, final MessageSource parentMessageSource,
 			final String... nameParts)
 	{
-		if (addOnNames.isEmpty())
-		{
+//		if (addOnNames.isEmpty())
+//		{
 			return parentMessageSource;
-		}
-
-		String lastBasenamePart = String.join("-", nameParts);
-
-		MessageSource messageSource = null;
-		MessageSource tmpParentMessageSource = parentMessageSource;
-		for (final String addOnName : addOnNames)
-		{
-			final String basename = "file:///" + Utilities.getExtensionInfo(addOnName).getExtensionDirectory()
-					+ "/acceleratoraddon/web/webroot/WEB-INF/messages/" + lastBasenamePart;
-			if (LOG.isDebugEnabled())
-			{
-				LOG.debug("AddOn message reource basename: " + basename);
-			}
-
-			messageSource = createMessageSource(basename, tmpParentMessageSource);
-			tmpParentMessageSource = messageSource;
-		}
-
-		return messageSource;
+//		}
+//
+//		String lastBasenamePart = String.join("-", nameParts);
+//
+//		MessageSource messageSource = null;
+//		MessageSource tmpParentMessageSource = parentMessageSource;
+//		for (final String addOnName : addOnNames)
+//		{
+//			final String basename = "file:///" + Utilities.getExtensionInfo(addOnName).getExtensionDirectory()
+//					+ "/acceleratoraddon/web/webroot/WEB-INF/messages/" + lastBasenamePart;
+//			if (LOG.isDebugEnabled())
+//			{
+//				LOG.debug("AddOn message reource basename: " + basename);
+//			}
+//
+//			messageSource = createMessageSource(basename, tmpParentMessageSource);
+//			tmpParentMessageSource = messageSource;
+//		}
+//
+//		return messageSource;
 	}
 
 	protected String[] splitThemeName(final String themeName)

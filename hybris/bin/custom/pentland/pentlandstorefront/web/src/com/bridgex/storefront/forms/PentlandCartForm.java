@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,6 +20,7 @@ import de.hybris.platform.commercefacades.order.data.OrderEntryData;
  */
 public class PentlandCartForm {
 
+  @Size(max = 20, message = "{cart.po.max.exceeded.error}")
   private String purchaseOrderNumber;
   private String customerNotes;
   private String minDate;

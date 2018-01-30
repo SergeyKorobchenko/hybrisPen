@@ -33,16 +33,16 @@
 	</bean>
 
 	<!-- localization -->
-	<bean id="messageSource"
-	      class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basenames">
-			<list>
-				<value>/WEB-INF/messages/base</value>
-				<value>/WEB-INF/messages/addons/pentlandsupportticketingaddon/base</value>
-			</list>
-		</property>
-		<property name="defaultEncoding" value="UTF-8"/>
-	</bean>
+	<!--<bean id="messageSource"-->
+	      <!--class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
+		<!--<property name="basenames">-->
+			<!--<list>-->
+				<!--<value>/WEB-INF/messages/base</value>-->
+				<!--<value>/WEB-INF/messages/addons/pentlandsupportticketingaddon/base</value>-->
+			<!--</list>-->
+		<!--</property>-->
+		<!--<property name="defaultEncoding" value="UTF-8"/>-->
+	<!--</bean>-->
 
 	<bean id="getSupportticketingaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
 		<property name="adaptee">
