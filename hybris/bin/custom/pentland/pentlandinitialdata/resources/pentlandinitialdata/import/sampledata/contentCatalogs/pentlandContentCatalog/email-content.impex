@@ -92,13 +92,13 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 				<p><b>Associated to:</b> ${ctx.ticket.getOrder().getCode()}</p>
 				#end
 				<p><b>Category:</b> ${ctx.ticket.category}</p>
+        <br>
+        <br>
 
-
-  			<p>Customer contact info:<br>
-	        Name: ${ctx.customerName}<br>
-	        Email: ${ctx.customerEmail}<br>
+  			<strong>For internal use only.</strong>
+	       <p>Customer name: ${ctx.customerName}<br>
+	        Customer Email ID: ${ctx.customerEmail}<br>
 	        Customer Account Name: ${ctx.customerAccount}<br>
-	        Customer ID: ${ctx.sapCustomer}
 	       </p>
 
         </td></tr>

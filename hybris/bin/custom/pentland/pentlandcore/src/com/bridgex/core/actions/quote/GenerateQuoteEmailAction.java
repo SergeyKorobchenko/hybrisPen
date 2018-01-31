@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorservices.model.email.EmailAddressModel;
 import de.hybris.platform.acceleratorservices.model.email.EmailMessageModel;
 import de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
+import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.processengine.model.BusinessProcessModel;
 import de.hybris.platform.task.RetryLaterException;
@@ -46,13 +47,16 @@ public class GenerateQuoteEmailAction extends GenerateEmailAction {
   }
 
   private EmailAddressModel getCustomerOpsEmail(B2BCustomerModel b2BCustomer) {
-    //TODO default values
-    String email = Optional.ofNullable(b2BCustomer.getDivision())
-                           .map(DivisionModel::getEmail)
-                           .orElse(DEFAULT_CUSTOMERREP_EMAIL);
-    String displayedName = Optional.ofNullable(b2BCustomer.getDivision())
-                           .map(DivisionModel::getName)
-                           .orElse(DEFAULT_CUSTOMERREP_NAME);
+    B2BUnitModel b2bUnit = (B2BUnitModel)b2BCustomer.getGroups().stream().filter(group -> group instanceof B2BUnitModel).findFirst().orElse(null);
+    String email = "";
+    String displayedName = "";
+    if(b2bUnit != null && b2bUnit.getDivision() != null){
+      email = b2bUnit.getDivision().getEmail();
+      displayedName = b2bUnit.getDivision().getName();
+    }else {
+      email = Optional.ofNullable(b2BCustomer.getDivision()).map(DivisionModel::getEmail).orElse(DEFAULT_CUSTOMERREP_EMAIL);
+      displayedName = Optional.ofNullable(b2BCustomer.getDivision()).map(DivisionModel::getName).orElse(DEFAULT_CUSTOMERREP_NAME);
+    }
     return emailService.getOrCreateEmailAddressForEmail(email,displayedName);
   }
 

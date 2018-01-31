@@ -33,10 +33,12 @@ public class PentlandCustomerRepTicketContext extends CustomerTicketContext {
   @Override
   public String getTo() {
     UserModel user = getTicket().getCustomer();
-    return Optional.ofNullable(((B2BCustomerModel) user))
-                   .map(B2BCustomerModel::getDivision)
-                   .map(DivisionModel::getEmail)
-                   .orElse(null);
+    B2BUnitModel b2bUnit = (B2BUnitModel)user.getGroups().stream().filter(group -> group instanceof B2BUnitModel).findFirst().orElse(null);
+    if(b2bUnit != null && b2bUnit.getDivision() != null){
+      return b2bUnit.getDivision().getEmail();
+    }else {
+      return Optional.ofNullable(((B2BCustomerModel) user)).map(B2BCustomerModel::getDivision).map(DivisionModel::getEmail).orElse(null);
+    }
   }
 
   public String getCustomerName(){
