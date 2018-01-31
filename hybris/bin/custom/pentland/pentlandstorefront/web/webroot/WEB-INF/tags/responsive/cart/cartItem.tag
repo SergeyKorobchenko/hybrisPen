@@ -79,7 +79,7 @@
                         </c:if>
                     </c:forEach>
 
-                    <div>
+<%--                    <div>
                         <c:choose>
                             <c:when test="${not empty entryStock and entryStock ne 'outOfStock' or entry.product.multidimensional}">
                                 <span class="stock"><spring:theme code="product.variants.in.stock"/></span>
@@ -88,7 +88,7 @@
                                 <span class="out-of-stock"><spring:theme code="product.variants.out.of.stock"/></span>
                             </c:otherwise>
                         </c:choose>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <c:if test="${ycommerce:doesPotentialPromotionExistForOrderEntryOrOrderEntryGroup(cartData, entry)}">

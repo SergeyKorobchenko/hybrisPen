@@ -43,7 +43,7 @@
 				"id": "${jirafeSiteId}",
 				"baseUrl": "${jirafeDataUrl}",
 				"cart": {
-					"total": "${cartData.totalPrice.value}",
+					"total": "${cartData.subTotal.value}",
 					"products": [ <c:forEach items="${cartData.entries}" var="entry" varStatus="status">
 									{
 										"sku": "${entry.product.code}",

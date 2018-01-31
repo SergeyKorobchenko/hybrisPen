@@ -79,15 +79,27 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
           if (CollectionUtils.isNotEmpty(materialList)) {
             materialList.forEach(m -> populatePrices(m, cartModel));
           }
-          cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
-          cartModel.setSubtotal(cartModel.getTotalPrice());
-          cartModel.setTotalTax(Double.parseDouble(response.getMultiBrandCartOutput().getTotalTaxPrice()));
+          try {
+            cartModel.setSubtotal(Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice()));
+          } catch (NullPointerException | NumberFormatException ex) {
+            cartModel.setSubtotal(0d);
+          }
+          try {
+            cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+          } catch (NullPointerException | NumberFormatException ex) {
+            cartModel.setTotalPrice(0d);
+          }
+          try {
+            cartModel.setTotalTax(Double.parseDouble(response.getMultiBrandCartOutput().getTotalTaxPrice()));
+          } catch (NullPointerException | NumberFormatException ex) {
+            cartModel.setTotalTax(0d);
+          }
           getModelService().save(cartModel);
         }
       }else{
         cartModel.setTotalTax(0d);
-        cartModel.setTotalPrice(0d);
         cartModel.setSubtotal(0d);
+        cartModel.setTotalPrice(0d);
         getModelService().save(cartModel);
       }
     }
