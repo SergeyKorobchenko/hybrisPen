@@ -330,6 +330,7 @@
 	<bean id="pentlandProductVariantMatrixPopulator" class="com.bridgex.facades.populators.PentlandProductVariantMatrixPopulator">
 		<property name="modelService" ref="modelService"/>
 		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
+		<property name="commercePriceService" ref="commercePriceService"/>
 	</bean>
 
 	<alias name="pentlandCsvFacade" alias="csvFacade"/>

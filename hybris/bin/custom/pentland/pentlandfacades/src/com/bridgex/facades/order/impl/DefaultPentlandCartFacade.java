@@ -132,10 +132,45 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   private MultiBrandCartDto createSimulateOrderRequest(CartModel cartModel) {
     final MultiBrandCartDto requestRoot = createRequestRoot(cartModel);
     final Map<String, B2BUnitModel> brandUnitsMap = createBrandUnitsMap(getPentlandB2BUnitService().getCurrentUnits());
-    final List<MultiBrandCartInput> cartInput = cartModel.getEntries().stream().map(e -> createMultiBrandCartInput(e, brandUnitsMap)).collect(Collectors.toList());
+    Map<ProductModel, List<AbstractOrderEntryModel>> groupedEntries =
+      cartModel.getEntries().stream().collect(Collectors.groupingBy(e -> ((VariantProductModel) e.getProduct()).getBaseProduct()));
+    final List<MultiBrandCartInput> cartInput =
+      groupedEntries.entrySet().stream().map(groupedEntry -> createMultiBrandCartInput(groupedEntry.getKey(), groupedEntry.getValue(), brandUnitsMap)).collect(Collectors.toList());
+
     requestRoot.setCartInput(cartInput);
 
     return requestRoot;
+  }
+
+  private MultiBrandCartInput createMultiBrandCartInput(ProductModel material, List<AbstractOrderEntryModel> sizes, Map<String, B2BUnitModel> brandUnitsMap) {
+    final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
+
+    final String brandCode = material.getSapBrand();
+    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
+    reqProduct.setMaterialNumber(material.getCode());
+
+    if(MapUtils.isNotEmpty(brandUnitsMap)) {
+      final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
+      if (targetUnit != null) {
+        reqProduct.setDistrChannel(targetUnit.getDistCh());
+        reqProduct.setSalesOrg(targetUnit.getSalesOrg());
+      } else {
+        LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + material.getCode());
+      }
+    }
+
+    final List<SizeDataDto> sizeData = new ArrayList<>();
+
+    for(AbstractOrderEntryModel sizeEntry: sizes) {
+      final SizeDataDto size = new SizeDataDto();
+      size.setEan(sizeEntry.getProduct().getCode());
+      size.setQuantity(sizeEntry.getQuantity().toString());
+      sizeData.add(size);
+    }
+
+    reqProduct.setSizeData(sizeData);
+
+    return reqProduct;
   }
 
   private MultiBrandCartDto createRequestRoot(CartModel cartModel) {
@@ -160,39 +195,6 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     }
 
     return requestRoot;
-  }
-
-  private MultiBrandCartInput createMultiBrandCartInput(final AbstractOrderEntryModel entryModel, Map<String, B2BUnitModel> brandUnitsMap) {
-    ProductModel productModel = entryModel.getProduct();
-    final String brandCode = getBrandCodeFor(productModel);
-    final MultiBrandCartInput reqProduct = new MultiBrandCartInput();
-    reqProduct.setBrandCode(StringUtils.isNotBlank(brandCode) ? brandCode : StringUtils.EMPTY);
-    reqProduct.setMaterialNumber(getMaterialKeyFor(productModel));
-
-    if(MapUtils.isNotEmpty(brandUnitsMap)) {
-      final B2BUnitModel targetUnit = brandUnitsMap.get(brandCode);
-      if (targetUnit != null) {
-        reqProduct.setDistrChannel(targetUnit.getDistCh());
-        reqProduct.setSalesOrg(targetUnit.getSalesOrg());
-      } else {
-        LOG.warn("B2BUnit with brand code - " + brandCode + " not found for product - " + productModel.getCode());
-      }
-    }
-
-    final List<SizeDataDto> sizeData = new ArrayList<>();
-
-    final SizeDataDto size = new SizeDataDto();
-
-    size.setEan(productModel.getCode());
-    size.setQuantity(entryModel.getQuantity().toString());
-
-    //to check if required
-    //size.setUnit();
-
-    sizeData.add(size);
-    reqProduct.setSizeData(sizeData);
-
-    return reqProduct;
   }
 
   private String getMaterialKeyFor(ProductModel source) {

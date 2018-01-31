@@ -14,6 +14,7 @@ import com.bridgex.core.product.util.ProductSizeComparator;
 
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.*;
+import de.hybris.platform.commerceservices.price.CommercePriceService;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
@@ -29,6 +30,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   private static final Set<DiscontinuedStatus> onlineStatusSet = new HashSet<>(Arrays.asList(DiscontinuedStatus.D03, DiscontinuedStatus.D04, DiscontinuedStatus.D05));
 
   private Populator<VariantProductModel, VariantOptionData> variantOptionDataMediaPopulator;
+  private CommercePriceService                              commercePriceService;
 
   @Override
   public void populate(ProductModel productModel, ProductData productData) throws ConversionException {
@@ -40,7 +42,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
     int maxVariants = 0;
 
     for (VariantProductModel styleLevelVariantModel : baseProductModel.getVariants()) {
-      if (isOnlineProduct(styleLevelVariantModel)) {
+      if (isOnlineProduct(styleLevelVariantModel) && hasPrice(styleLevelVariantModel)) {
         ApparelStyleVariantProductModel styleVariantProductModel = (ApparelStyleVariantProductModel) styleLevelVariantModel;
         VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
         styleElementData.setVariantName(styleVariantProductModel.getStyle());
@@ -51,7 +53,6 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
         styleVariantOptionData.setCode(styleLevelVariantModel.getCode());
         styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
         styleElementData.setVariantOption(styleVariantOptionData);
-        variantMatrixElementDataList.add(styleElementData);
 
         List<ApparelSizeVariantProductModel> sizeLevelVariants =
           styleVariantProductModel.getVariants().stream().filter(this::isOnlineProduct).map(e -> (ApparelSizeVariantProductModel) e).sorted(new ProductSizeComparator()).collect(Collectors.toList());
@@ -69,6 +70,11 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
         if (maxVariants < styleElementData.getElements().size()) {
           maxVariants = styleElementData.getElements().size();
         }
+
+        if(CollectionUtils.isNotEmpty(sizeLevelVariants)) {
+          variantMatrixElementDataList.add(styleElementData);
+        }
+
       }
       for (VariantMatrixElementData variantMatrixElementData : variantMatrixElementDataList) {
         variantMatrixElementData.setMaxVariants(maxVariants);
@@ -80,7 +86,13 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
     }
   }
 
-  private boolean isOnlineProduct(ProductModel productModel) {return productModel.getDiscontinuedStatus() == null || onlineStatusSet.contains(productModel.getDiscontinuedStatus());}
+  private boolean hasPrice(VariantProductModel styleLevelVariantModel) {
+    return commercePriceService.getWebPriceForProduct(styleLevelVariantModel) != null;
+  }
+
+  private boolean isOnlineProduct(ProductModel productModel) {
+    return productModel.getDiscontinuedStatus() == null || onlineStatusSet.contains(productModel.getDiscontinuedStatus());
+  }
 
   protected ProductModel getBaseProduct(ProductModel productModel) {
     ProductModel currentProduct = productModel;
@@ -124,5 +136,10 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   @Required
   public void setVariantOptionDataMediaPopulator(Populator<VariantProductModel, VariantOptionData> variantOptionDataMediaPopulator) {
     this.variantOptionDataMediaPopulator = variantOptionDataMediaPopulator;
+  }
+
+  @Required
+  public void setCommercePriceService(CommercePriceService commercePriceService) {
+    this.commercePriceService = commercePriceService;
   }
 }
