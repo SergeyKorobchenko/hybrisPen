@@ -77,12 +77,36 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 ;TickSystem_CustomerRep_TicketCreated_HTML;com.bridgex.core.ticket.PentlandCustomerRepTicketContext;Ticket System Ticket Created Customer Rep HTML Email;;"
 	<html>
 		<head></head>
-		<body>
-			<div>
-				<p>Dear Customer Service Agent Manager</p>
-				<p>The following customer support ticket ${ctx.ticketId} was created with the following message: ${ctx.htmlText}</p>
-				<p>Thank you</p>
-				<p>Your Customer Service Team</p>
+		<body style=""line-height:18px"">
+		<table width=""610"" align=""center"" bgcolor=""#fefefe"">
+			<tr><td><img src=""${ctx.logo}""/></td></tr>
+			<tr><td>
+		<table width=""570"" border=""0"" align=""center"">
+		<tr><td>
+				<p>Dear ${ctx.name}</p>
+				<p>Thank you for raising a ticket. We will contact you shortly.</p>
+				<p>Here is the summary of your ticket.</p>
+				<p><b>Subject:</b> $ctx.ticket.getHeadline()</p>
+				<p><b>Message:</b><br/>$ctx.htmlText</p>
+        #if ($ctx.ticket.getOrder())
+				<p><b>Associated to:</b> ${ctx.ticket.getOrder().getCode()}</p>
+				#end
+				<p><b>Category:</b> ${ctx.ticket.category}</p>
+
+
+  			<p>Customer contact info:<br>
+	        Name: ${ctx.customerName}<br>
+	        Email: ${ctx.customerEmail}<br>
+	        Customer Account Name: ${ctx.customerAccount}<br>
+	        Customer ID: ${ctx.sapCustomer}
+	       </p>
+
+        </td></tr>
+        <tr><td align=""center"">
+        Pentland Brands Limited<br/>Lakeside, Squires Lane, London, N32QL, UK<br/>${ctx.siteUrl}
+        </td></tr>
+        </table>
+        </td></tr>
 			</div>
 		</body>
 	</html>

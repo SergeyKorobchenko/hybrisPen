@@ -5,10 +5,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.bridgex.core.model.DivisionModel;
+import com.bridgex.core.services.PentlandB2BUnitService;
 
 import de.hybris.platform.b2b.model.B2BCustomerModel;
+import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.jalo.media.MediaManager;
 import de.hybris.platform.ticket.email.context.CustomerTicketContext;
@@ -32,6 +37,35 @@ public class PentlandCustomerRepTicketContext extends CustomerTicketContext {
                    .map(B2BCustomerModel::getDivision)
                    .map(DivisionModel::getEmail)
                    .orElse(null);
+  }
+
+  public String getCustomerName(){
+    UserModel user = getTicket().getCustomer();
+    return user.getName();
+  }
+
+  public String getCustomerEmail(){
+    UserModel user = getTicket().getCustomer();
+    return user.getUid();
+  }
+
+  public String getSapCustomer(){
+    UserModel user = getTicket().getCustomer();
+    B2BUnitModel b2bUnit = (B2BUnitModel)user.getGroups().stream().filter(group -> group instanceof B2BUnitModel).findFirst().orElse(null);
+    if(b2bUnit != null && StringUtils.isNotEmpty(b2bUnit.getSapID())){
+      return b2bUnit.getSapID();
+    }
+    return StringUtils.EMPTY;
+  }
+
+  public String getCustomerAccount(){
+    UserModel user = getTicket().getCustomer();
+    B2BUnitModel b2bUnit = (B2BUnitModel)user.getGroups().stream().filter(group -> group instanceof B2BUnitModel).findFirst().orElse(null);
+    if(b2bUnit != null){
+      return b2bUnit.getName();
+    }
+
+    return StringUtils.EMPTY;
   }
 
   @Override
