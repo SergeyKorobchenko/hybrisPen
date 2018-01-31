@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.services.PentlandB2BUnitService;
+import de.hybris.platform.core.model.user.UserGroupModel;
 import com.worldpay.core.services.strategies.RecurringGenerateMerchantTransactionCodeStrategy;
 
 import de.hybris.platform.b2b.model.B2BUnitModel;
@@ -16,6 +17,7 @@ import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.variants.model.VariantProductModel;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -27,9 +29,10 @@ import org.springframework.beans.factory.annotation.Required;
  */
 public class DefaultRecurringGenerateMerchantTransactionCodeStrategy implements RecurringGenerateMerchantTransactionCodeStrategy {
 
-    private ModelService modelService;
-    private CartService cartService;
+    private ModelService           modelService;
+    private CartService            cartService;
     private PentlandB2BUnitService pentlandB2BUnitService;
+    private UserService            userService;
 
     @Override
     public String generateCode(final CartModel cartModel) {
@@ -58,10 +61,13 @@ public class DefaultRecurringGenerateMerchantTransactionCodeStrategy implements 
     }
 
     private String getBrands(AbstractOrderModel parameterOrder) {
-        String collectedBrands = parameterOrder.getEntries().stream().map(AbstractOrderEntryModel::getProduct).filter(product -> product instanceof VariantProductModel)
+        Set<String> collectedBrandCodes = parameterOrder.getEntries().stream().map(AbstractOrderEntryModel::getProduct).filter(product -> product instanceof VariantProductModel)
                                                .map(product -> ((VariantProductModel)product).getBaseProduct().getSapBrand()).filter(Objects::nonNull)
-                                               .collect(Collectors.collectingAndThen(Collectors.toSet(), set -> String.join("-", set)));
-        return StringUtils.isEmpty(collectedBrands) ? "" :"-" + collectedBrands;
+                                               .collect(Collectors.toSet());
+        //it's guaranteed that brand group always exists and uid is equal to sapBrand, otherwise products of this brand couldn't be visible and purchased
+        String brandString = collectedBrandCodes.stream().map(code -> userService.getUserGroupForUID(code).getDescription())
+                                                .filter(Objects::nonNull).collect(Collectors.joining("-"));
+        return StringUtils.isEmpty(brandString) ? "" :"-" + brandString;
     }
 
     protected long getTime() {
@@ -81,5 +87,10 @@ public class DefaultRecurringGenerateMerchantTransactionCodeStrategy implements 
     @Required
     public void setPentlandB2BUnitService(PentlandB2BUnitService pentlandB2BUnitService) {
         this.pentlandB2BUnitService = pentlandB2BUnitService;
+    }
+
+    @Required
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

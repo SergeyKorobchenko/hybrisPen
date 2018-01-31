@@ -12,14 +12,14 @@
 # Import Two Sample B2B Organizations
 #
 
-INSERT_UPDATE Usergroup;locname[lang=en];uid[unique=true];groups(uid);
-;b2bunitsgroup;b2bunitsgroup;
-;mitregroup;05;b2bunitsgroup;
-;speedogroup;08;b2bunitsgroup;
-;canterburygroup;0Q;b2bunitsgroup;
-;boxfreshgroup;0E;b2bunitsgroup;
-;kickersgroup;01;b2bunitsgroup;
-;berghausgroup;04;b2bunitsgroup;
+INSERT_UPDATE Usergroup;locname[lang=en];uid[unique=true];groups(uid);description
+;b2bunitsgroup;b2bunitsgroup;;
+;mitregroup;05;b2bunitsgroup;5000
+;speedogroup;08;b2bunitsgroup;8000
+;canterburygroup;0Q;b2bunitsgroup;Q000
+;boxfreshgroup;0E;b2bunitsgroup;E000
+;kickersgroup;01;b2bunitsgroup;1000
+;berghausgroup;04;b2bunitsgroup;4000
 
 INSERT_UPDATE UserPriceGroup;code[unique=true]
 ;pronto
