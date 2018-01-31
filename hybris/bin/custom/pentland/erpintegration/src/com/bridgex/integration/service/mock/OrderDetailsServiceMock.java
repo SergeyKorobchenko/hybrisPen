@@ -69,7 +69,7 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
   private OrderEntryDto getOrderEntryDto() {
     OrderEntryDto entry = new OrderEntryDto();
     entry.setEntryNumber("0");
-    entry.setProduct("300005449");
+    entry.setProduct("M35392");
     entry.setEntryStatus("shipped");
     entry.setNetPrice("1000.00");
     entry.setUnitNetPrice("100.00");
@@ -84,7 +84,7 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
 
   private List<SizeVariantDto> getSizeVariantsDto() {
     SizeVariantDto size = new SizeVariantDto();
-    size.setEan("300147490");
+    size.setEan("300150177");
     size.setLineNumber("1");
     size.setShipDate("20180101");
     size.setShipQty("10.00");
@@ -92,7 +92,7 @@ public class OrderDetailsServiceMock extends OrderDetailsServiceImpl {
     size.setTotalQuantity("10.00");
 
     SizeVariantDto size2 = new SizeVariantDto();
-    size2.setEan("300020465");
+    size2.setEan("300065501");
     size2.setLineNumber("2");
     size2.setShipDate("20180101");
     size2.setShipQty("5.00");

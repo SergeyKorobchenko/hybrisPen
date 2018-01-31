@@ -81,6 +81,12 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 			<div>
 				<p>Dear Customer Service Agent Manager</p>
 				<p>The following customer support ticket ${ctx.ticketId} was created with the following message: ${ctx.htmlText}</p>
+				  <p>Customer contact info:<br>
+	        Name: ${ctx.customerName}<br>
+	        Email: ${ctx.customerEmail}<br>
+	        Customer Account Name: ${ctx.customerAccount}<br>
+	        Customer ID: ${ctx.sapCustomer}
+	        </p>
 				<p>Thank you</p>
 				<p>Your Customer Service Team</p>
 			</div>

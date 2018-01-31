@@ -125,7 +125,11 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
   private void populateNameAndImage(OrderEntryDto dto, OrderItemData item) {
     try {
       ProductModel product = productService.getProductForCode(dto.getProduct());
-      item.setName(product.getName());
+      if(StringUtils.isNotEmpty(product.getSapName())) {
+        item.setName(product.getSapName());
+      }else{
+        item.setName(product.getName());
+      }
       } catch (UnknownIdentifierException e) {
         LOG.warn("Error while loading product: " + e.getMessage());
         item.setName(StringUtils.EMPTY);
