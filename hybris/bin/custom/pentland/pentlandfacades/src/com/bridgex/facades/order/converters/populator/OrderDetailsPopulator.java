@@ -112,7 +112,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
 
   private Date parseShipDate(String date) {
     Date shipDate = null;
-    if (date != null) {
+    if (date != null && !"00000000".equals(date)) {
       try {
         shipDate = formatter.parse(date);
       } catch (ParseException e) {
