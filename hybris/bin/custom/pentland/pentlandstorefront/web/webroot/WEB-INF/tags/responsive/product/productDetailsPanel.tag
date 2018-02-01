@@ -11,7 +11,7 @@
 
 <div class="row">
 
-	<div class="col-xs-12 col-sm-12 col-lg-6">
+	<div class="col-xs-12 col-sm-12 col-md-6">
 		<product:productImagePanel galleryImages="${galleryImages}" />
 
 		<div class="product-details__external-links">
@@ -27,7 +27,7 @@
 
 	<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
 
-	<div class="col-sm-12 col-lg-6">
+	<div class="col-sm-12 col-md-6">
 		<div class="product-details page-title">
 			<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 				<h1>${fn:escapeXml(product.name)}</h1>
