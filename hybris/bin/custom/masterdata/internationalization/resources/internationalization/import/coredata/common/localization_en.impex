@@ -234,7 +234,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.totals.quote.total.original;Original subtotal:
 ;basket.page.totals.savings;Savings
 ;basket.page.totals.subtotal;Subtotal:
-;basket.page.totals.total;Order total
+;basket.page.totals.total;Net total
 ;basket.page.totals.total.items;{0} items
 ;basket.page.totals.total.items.one;{0} item
 ;basket.page.update;Update
