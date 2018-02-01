@@ -331,6 +331,7 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
 		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="onlineStatusSet" ref="onlineStatusSet"/>
 	</bean>
 
 	<alias name="pentlandCsvFacade" alias="csvFacade"/>
@@ -395,6 +396,7 @@
 		<property name="variantOptionDataConverter" ref="variantOptionDataConverter"/>
 		<property name="baseOptionDataConverter" ref="baseOptionDataConverter"/>
 		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="onlineStatusSet" ref="onlineStatusSet"/>
 	</bean>
 
 </beans>

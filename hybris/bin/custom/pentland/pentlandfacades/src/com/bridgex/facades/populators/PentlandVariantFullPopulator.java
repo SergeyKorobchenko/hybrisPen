@@ -25,7 +25,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
  */
 public class PentlandVariantFullPopulator<SOURCE extends ProductModel, TARGET extends ProductData> implements Populator<SOURCE, TARGET> {
 
-  private static final Set<DiscontinuedStatus> onlineStatusSet = new HashSet<>(Arrays.asList(DiscontinuedStatus.D03, DiscontinuedStatus.D04, DiscontinuedStatus.D05));
+  private Set<DiscontinuedStatus> onlineStatusSet;
 
   private  Converter<VariantProductModel, VariantOptionData> variantOptionDataConverter;
   private  Converter<VariantProductModel, BaseOptionData>    baseOptionDataConverter;
@@ -107,7 +107,13 @@ public class PentlandVariantFullPopulator<SOURCE extends ProductModel, TARGET ex
     this.baseOptionDataConverter = baseOptionDataConverter;
   }
 
+  @Required
   public void setCommercePriceService(CommercePriceService commercePriceService) {
     this.commercePriceService = commercePriceService;
+  }
+
+  @Required
+  public void setOnlineStatusSet(Set<DiscontinuedStatus> onlineStatusSet) {
+    this.onlineStatusSet = onlineStatusSet;
   }
 }

@@ -27,7 +27,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   extends AbstractProductPopulator<SOURCE, TARGET>
 {
 
-  private static final Set<DiscontinuedStatus> onlineStatusSet = new HashSet<>(Arrays.asList(DiscontinuedStatus.D03, DiscontinuedStatus.D04, DiscontinuedStatus.D05));
+  private Set<DiscontinuedStatus> onlineStatusSet;
 
   private Populator<VariantProductModel, VariantOptionData> variantOptionDataMediaPopulator;
   private CommercePriceService                              commercePriceService;
@@ -141,5 +141,10 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   @Required
   public void setCommercePriceService(CommercePriceService commercePriceService) {
     this.commercePriceService = commercePriceService;
+  }
+
+  @Required
+  public void setOnlineStatusSet(Set<DiscontinuedStatus> onlineStatusSet) {
+    this.onlineStatusSet = onlineStatusSet;
   }
 }

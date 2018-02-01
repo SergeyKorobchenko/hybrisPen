@@ -89,4 +89,10 @@
 		<property name="typeCode" value="Order"/>
 	</bean>
 
+	<util:list id="onlineStatusSet" value-type="com.bridgex.core.enums.DiscontinuedStatus">
+		<value>D03</value>
+		<value>D04</value>
+		<value>D05</value>
+	</util:list>
+
 </beans>
