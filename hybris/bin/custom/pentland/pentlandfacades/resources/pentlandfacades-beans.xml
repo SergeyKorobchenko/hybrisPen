@@ -51,6 +51,7 @@
 		<value>removeValue==Problem</value>
 		<value>Product_enquiry</value>
 		<value>B2B_system_issue</value>
+		<value>Feedback</value>
 	</enum>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">

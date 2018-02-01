@@ -2898,6 +2898,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.supporttickets.success;Your ticket successfully sent
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product enquiry
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
+;text.account.supporttickets.createTicket.ticketCategory.FEEDBACK;Feedback
 
 ;text.cart.rdd;Requested delivery date
 ;text.cart.purchaseOrderNumber;P.O. number
