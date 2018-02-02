@@ -40,7 +40,7 @@
     <div class="col-xs-6 cart-totals-left grand-total"><spring:theme code="basket.page.totals.total"/></div>
     <div class="col-xs-6 cart-totals-right text-right grand-total">
         <ycommerce:testId code="cart_totalPrice_label">
-            <format:price priceData="${cartData.totalPrice}"/>
+            <format:price priceData="${cartData.subTotal}"/>
             <%--<c:choose>--%>
                 <%--<c:when test="${showTax}">--%>
                     <%--<format:price priceData="${cartData.totalPriceWithTax}"/>--%>

@@ -69,9 +69,9 @@
 											<div class="itemPickup"><span class="itemPickupLabel"><spring:theme code="popup.cart.pickup"/></span>&nbsp;${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
 										</c:if>
 									</div>
-									<common:hidePricesForUser>
+<%--									<common:hidePricesForUser>
 										<div class="price"><format:price priceData="${entry.basePrice}"/></div>
-									</common:hidePricesForUser>
+									</common:hidePricesForUser>--%>
 								</li>
 							</c:forEach>
 						</ol>
@@ -83,7 +83,7 @@
 						<common:hidePricesForUser>
 							<div class="mini-cart-totals">
 								<div class="key"><spring:theme code="popup.cart.total"/></div>
-								<div class="value"><format:price priceData="${cartData.totalPrice}"/></div>
+								<div class="value"><format:price priceData="${cartData.subTotal}"/></div>
 							</div>
 						</common:hidePricesForUser>
 

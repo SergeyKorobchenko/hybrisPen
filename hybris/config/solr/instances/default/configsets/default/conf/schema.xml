@@ -51,6 +51,19 @@
 			<similarity class="de.hybris.platform.lucene.search.similarities.FixedTFIDFSimilarityFactory" />
 		</fieldType>
 
+		<fieldType name="stringci" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+			<!-- Disable TF/IDF scoring for string fields so we can use them for boosting -->
+			<similarity class="de.hybris.platform.lucene.search.similarities.FixedTFIDFSimilarityFactory" />
+			<analyzer type="index">
+				<tokenizer class="solr.KeywordTokenizerFactory"/>
+				<filter class="solr.LowerCaseFilterFactory"/>
+			</analyzer>
+			<analyzer type="query">
+				<tokenizer class="solr.KeywordTokenizerFactory"/>
+				<filter class="solr.LowerCaseFilterFactory"/>
+			</analyzer>
+		</fieldType>
+
 		<!-- boolean type: "true" or "false" -->
 		<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true">
 			<!-- Disable TF/IDF scoring for string fields so we can use them for boosting -->
@@ -657,6 +670,8 @@
 		<dynamicField name="*_tdouble_mv" type="tdouble" indexed="true" stored="true" multiValued="true" />
 		<dynamicField name="*_tdate" type="tdate" indexed="true" stored="true" />
 		<dynamicField name="*_tdate_mv" type="tdate" indexed="true" stored="true" multiValued="true" />
+
+	    <dynamicField name="*_stringci" type="stringci" indexed="true" stored="true" multiValued="false"/>
 
 	</fields>
 

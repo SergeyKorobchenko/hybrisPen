@@ -60,14 +60,14 @@
 		<spring:theme code="basket.page.totals.total"/>
 		<span>
 			<ycommerce:testId code="cart_totalPrice_label">
-				<c:choose>
+<%--				<c:choose>
 					<c:when test="${showTax}">
 						<format:price priceData="${cartData.totalPriceWithTax}"/>
 					</c:when>
-					<c:otherwise>
+					<c:otherwise>--%>
 						<format:price priceData="${cartData.totalPrice}"/>
-					</c:otherwise>
-				</c:choose>
+<%--					</c:otherwise>
+				</c:choose>--%>
 
 			</ycommerce:testId>
 		</span>

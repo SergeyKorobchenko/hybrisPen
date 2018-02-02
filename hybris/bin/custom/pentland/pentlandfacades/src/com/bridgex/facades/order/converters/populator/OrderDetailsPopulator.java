@@ -75,7 +75,7 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
       item.setTotalPrice(populatePriceData(dto.getNetPrice(), source.getCurrency()));
       item.setQty(getInt(dto.getQuantity()));
       item.setShippedQty(getInt(dto.getShippedQuantity()));
-      item.setShipDate(dto.getShippedDate());
+      item.setShipDate(parseShipDate(dto.getShippedDate()));
       populateNameAndImage(dto, item);
       populateShipments(dto, item);
       items.add(item);
@@ -110,10 +110,26 @@ public class OrderDetailsPopulator implements Populator<OrderDetailsResponse, Or
     return shipDate;
   }
 
+  private Date parseShipDate(String date) {
+    Date shipDate = null;
+    if (date != null && !"00000000".equals(date)) {
+      try {
+        shipDate = formatter.parse(date);
+      } catch (ParseException e) {
+        LOG.error("Unable to parse shipment date. Change to N/A");
+      }
+    }
+    return shipDate;
+  }
+
   private void populateNameAndImage(OrderEntryDto dto, OrderItemData item) {
     try {
       ProductModel product = productService.getProductForCode(dto.getProduct());
-      item.setName(product.getName());
+      if(StringUtils.isNotEmpty(product.getSapName())) {
+        item.setName(product.getSapName());
+      }else{
+        item.setName(product.getName());
+      }
       } catch (UnknownIdentifierException e) {
         LOG.warn("Error while loading product: " + e.getMessage());
         item.setName(StringUtils.EMPTY);

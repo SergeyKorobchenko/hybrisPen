@@ -29,7 +29,7 @@
                         <format:price priceData="${cartData.totalPriceWithTax}"/>
                     </c:when>
                     <c:otherwise>
-                        <format:price priceData="${cartData.totalPrice}"/>
+                        <format:price priceData="${cartData.subTotal}"/>
                     </c:otherwise>
                 </c:choose>
             </span>

@@ -46,7 +46,7 @@ public class PentlandCartPopulator<T extends CartData> extends CartPopulator<T> 
     final PriceData subTotalPriceData = createPrice(source, subTotal);
     prototype.setSubTotal(subTotalPriceData);
     prototype.setSubTotalWithoutQuoteDiscounts(createPrice(source, subTotal + quoteDiscountsAmount));
-    prototype.setTotalPriceWithTax((createPrice(source, calcTotalWithTax(source))));
+    prototype.setTotalPriceWithTax(prototype.getTotalPrice());
   }
 
 }

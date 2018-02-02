@@ -81,6 +81,10 @@
             <value code="CustomerRep" />
         </enumtype>
 
+        <enumtype code="SolrPropertiesTypes" dynamic="true" generate="true" autocreate="false">
+            <value code="stringCi"/>
+        </enumtype>
+
     </enumtypes>
 
     <relations>

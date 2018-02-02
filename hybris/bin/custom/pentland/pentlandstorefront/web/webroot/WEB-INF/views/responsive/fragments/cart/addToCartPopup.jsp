@@ -6,7 +6,7 @@
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
 
 {"cartData": {
-"total": "${cartData.totalPrice.value}",
+"total": "${cartData.subTotal.value}",
 "products": [
 <c:forEach items="${cartData.entries}" var="cartEntry" varStatus="status">
 	{

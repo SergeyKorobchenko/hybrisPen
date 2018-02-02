@@ -330,6 +330,8 @@
 	<bean id="pentlandProductVariantMatrixPopulator" class="com.bridgex.facades.populators.PentlandProductVariantMatrixPopulator">
 		<property name="modelService" ref="modelService"/>
 		<property name="variantOptionDataMediaPopulator" ref="variantOptionDataMediaPopulator" />
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="onlineStatusSet" ref="onlineStatusSet"/>
 	</bean>
 
 	<alias name="pentlandCsvFacade" alias="csvFacade"/>
@@ -387,6 +389,14 @@
 				<value>styleSwatch</value>
 			</list>
 		</property>
+	</bean>
+
+	<alias name="pentlandVariantFullPopulator" alias="variantFullPopulator"/>
+	<bean id="pentlandVariantFullPopulator" class="com.bridgex.facades.populators.PentlandVariantFullPopulator">
+		<property name="variantOptionDataConverter" ref="variantOptionDataConverter"/>
+		<property name="baseOptionDataConverter" ref="baseOptionDataConverter"/>
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="onlineStatusSet" ref="onlineStatusSet"/>
 	</bean>
 
 </beans>

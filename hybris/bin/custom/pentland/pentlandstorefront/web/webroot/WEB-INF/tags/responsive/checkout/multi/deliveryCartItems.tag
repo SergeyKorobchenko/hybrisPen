@@ -104,7 +104,7 @@
 				<div class="name"><a href="${productUrl}">${fn:escapeXml(entry.product.name)}</a></div>
 				<div>
                     <span class="label-spacing"><spring:theme code="order.itemPrice" />:</span>
-					<format:price priceData="${entry.product.price}" />
+					<format:price priceData="${entry.erpPrice}" />
 				</div>
 				<div class="qty"><span><spring:theme code="basket.page.qty"/>:</span>${entry.quantity}</div>
 				<div>

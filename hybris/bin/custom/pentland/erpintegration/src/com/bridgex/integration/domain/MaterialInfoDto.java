@@ -18,8 +18,11 @@ public class MaterialInfoDto {
   @JsonProperty("IS_AVAILABLE")
   private String available;
 
-  @JsonProperty("TOTAL_NET_VALUE")
+  @JsonProperty("TOTAL_NET_PRICE")
   private String totalPrice;
+
+  @JsonProperty("TOTAL_NET_VALUE")
+  private String totalPriceWithTax;
 
   @JsonProperty("ET_MATERIAL_OUTPUT_GRID")
   private List<MaterialOutputGridDto> materialOutputGridList;
@@ -62,6 +65,14 @@ public class MaterialInfoDto {
 
   public void setMaterialOutputGridList(List<MaterialOutputGridDto> materialOutputGridList) {
     this.materialOutputGridList = materialOutputGridList;
+  }
+
+  public String getTotalPriceWithTax() {
+    return totalPriceWithTax;
+  }
+
+  public void setTotalPriceWithTax(String totalPriceWithTax) {
+    this.totalPriceWithTax = totalPriceWithTax;
   }
 }
 
