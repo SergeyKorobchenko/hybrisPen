@@ -122,10 +122,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;TopContent-SecureCustomerPortalRegisterPage;TopContent Slot for SecureCustomerPortalRegisterPage;true;
 
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpg']; altText; folder(qualifier)[default = 'images']
-; ; loginbanner.jpg ; loginbanner.jpg ; $siteResource/images/loginbanner.jpg
+; ; PentlandBannerOptions_1800x500_3.jpg ; Pentland Banner Options_1800x500_3.jpg ; $siteResource/images/Pentland Banner Options_1800x500_3.jpg
 
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink; $picture[lang=$lang];visible[default=true]
-; ; LoginPageBrandBannerComponent ; Login Image Component ; LoginPageBrandBannerComponent ; "/";;
+; ; LoginPageBrandBannerComponent ; Login Image Component ; LoginPageBrandBannerComponent ; "/";PentlandBannerOptions_1800x500_3.jpg;
 
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid,$contentCV)
