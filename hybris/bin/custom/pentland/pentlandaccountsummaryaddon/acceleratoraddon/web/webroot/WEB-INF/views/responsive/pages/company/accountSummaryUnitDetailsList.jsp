@@ -212,7 +212,7 @@
                                     <td class="responsive-table-cell">
                                         <c:choose>
                                             <c:when test="${not empty result.documentMedia.downloadURL}">
-                                                <a class="download-lnk" href="${result.documentMedia.downloadURL}" target="_blank">
+                                                <a class="download-lnk" href="${result.documentMedia.downloadURL}">
                                                     <spring:theme code="text.company.accountsummary.document.attachment.view.label"/>
                                                 </a>
                                             </c:when>

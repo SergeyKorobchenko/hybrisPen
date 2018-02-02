@@ -231,10 +231,14 @@ public class DefaultB2BAccountSummaryFacade implements B2BAccountSummaryFacade {
   @Override
   public MediaData requestDocumentMedia(String documentNumber) {
     DocumentMediaModel mediaModel = b2bDocumentService.getDocumentMediaByNumber(documentNumber);
-    MediaData media = new MediaData();
-    media.setDownloadURL(mediaModel.getDownloadURL());
-    media.setRealFileName(mediaModel.getRealFileName());
-    return media;
+    if(mediaModel != null) {
+      MediaData media = new MediaData();
+      media.setDownloadURL(mediaModel.getDownloadURL());
+      media.setRealFileName(mediaModel.getRealFileName());
+      return media;
+    }else{
+      return null;
+    }
   }
 
   @Override
