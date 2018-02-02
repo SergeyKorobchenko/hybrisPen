@@ -34,7 +34,7 @@
 											<span class="facet__list__text">
 												${fn:escapeXml(facetValue.name)}
 												<ycommerce:testId code="facetNav_count">
-													<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
+													<span class="facet__value__count">&nbsp;<spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
 												</ycommerce:testId>
 											</span>
 										</span>
@@ -46,7 +46,7 @@
 								<span class="facet__text">
 									<a href="${facetValueQueryUrl}&amp;text=${fn:escapeXml(searchPageData.freeTextSearch)}">${fn:escapeXml(facetValue.name)}</a>&nbsp;
 									<ycommerce:testId code="facetNav_count">
-										<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
+										<span class="facet__value__count">&nbsp;<spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
 									</ycommerce:testId>
 								</span>
 							</c:if>
@@ -67,9 +67,9 @@
 									<span class="facet__list__label">
 										<span class="facet__list__mark"></span>
 										<span class="facet__list__text">
-											${fn:escapeXml(facetValue.name)}&nbsp;
+											${fn:escapeXml(facetValue.name)}
 											<ycommerce:testId code="facetNav_count">
-												<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
+												<span class="facet__value__count">&nbsp;<spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
 											</ycommerce:testId>
 										</span>
 									</span>
@@ -82,7 +82,7 @@
 							<span class="facet__text">
 								<a href="${facetValueQueryUrl}">${fn:escapeXml(facetValue.name)}</a>
 								<ycommerce:testId code="facetNav_count">
-									<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
+									<span class="facet__value__count">&nbsp;<spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
 								</ycommerce:testId>
 							</span>
 						</c:if>

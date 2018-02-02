@@ -18,7 +18,7 @@
             <c:choose>
                 <c:when test="${searchPageData.pagination.totalNumberOfResults > 0}">
                     <c:set var="isResultEmpty" value="false"/>
-                    <c:set var="productGridClass" value="col-sm-12 col-md-9"/>
+                    <c:set var="productGridClass" value="col-xs-12 col-md-8 col-lg-9"/>
                 </c:when>
                 <c:otherwise>
                     <c:set var="isResultEmpty" value="true"/>
@@ -29,7 +29,7 @@
             <div class="row">
                 <c:if test="${!isResultEmpty}">
                     <cms:pageSlot position="ProductLeftRefinements" var="feature" element="div"
-                                  class="product-grid-left-refinements-slot col-xs-3">
+                                  class="product-grid-left-refinements-slot col-md-4 col-lg-3">
                         <cms:component component="${feature}" element="div"
                                        class="yComponentWrapper product-grid-left-refinements-component"/>
                     </cms:pageSlot>
