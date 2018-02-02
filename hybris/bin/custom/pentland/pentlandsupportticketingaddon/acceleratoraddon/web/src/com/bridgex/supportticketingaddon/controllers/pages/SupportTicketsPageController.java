@@ -156,7 +156,8 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 
 		try
 		{
-			ticketFacade.createTicket(this.populateTicketData(supportTicketForm));
+			TicketData newTicket = ticketFacade.createTicket(this.populateTicketData(supportTicketForm));
+			return new ResponseEntity<>(getSuccessMessageMap(newTicket), HttpStatus.OK);
 		}
 		catch (final UnsupportedAttachmentException usAttEx)
 		{
@@ -177,14 +178,12 @@ public class SupportTicketsPageController extends AbstractSearchPageController
 			return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>(getSuccessMessageMap(), HttpStatus.OK);
-
 	}
 
-	private Map<String, String> getSuccessMessageMap() {
+	private Map<String, String> getSuccessMessageMap(TicketData ticket) {
 		final Map<String, String> map = Maps.newHashMap();
 		map.put(PentlandsupportticketingaddonConstants.SUPPORT_TICKET_SUCCESS, getMessageSource().getMessage(
-			PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKET_SUCCESS, null, getI18nService().getCurrentLocale()));
+			PentlandsupportticketingaddonConstants.TEXT_SUPPORT_TICKET_SUCCESS, new Object[]{ticket.getId()}, getI18nService().getCurrentLocale()));
 		return map;
 	}
 
