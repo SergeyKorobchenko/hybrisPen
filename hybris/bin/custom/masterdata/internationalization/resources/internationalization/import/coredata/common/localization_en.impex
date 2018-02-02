@@ -2895,7 +2895,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.order.tax;Order tax
 ;text.account.order.net;Order net
 
-;text.account.supporttickets.success;Your ticket successfully sent
+;text.account.supporttickets.success;Your ticket successfully sent. Ticket #{0}
 ;text.account.supporttickets.createTicket.ticketCategory.PRODUCT_ENQUIRY;Product enquiry
 ;text.account.supporttickets.createTicket.ticketCategory.B2B_SYSTEM_ISSUE;B2B System issue
 ;text.account.supporttickets.createTicket.ticketCategory.FEEDBACK;Feedback
@@ -2904,7 +2904,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.cart.purchaseOrderNumber;P.O. number
 ;text.cart.customerNotes;Notes
 ;checkout.savecart;Save updated basket
-;text.cart.bankHolidays;"2017-12-25,2017-12-26,2018-01-01,2018-03-30,2018-04-02,2018-04-17,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
+;text.cart.bankHolidays;"2018-01-01,2018-03-30,2018-04-02,2018-04-17,2018-05-07,2018-05-28,2018-08-27,2018-12-25,2018-12-26"
 ;text.cart.update.success;Basket was successfully saved
 
 ;checkout.payment.CARD.CREDITCARD;Online payment
