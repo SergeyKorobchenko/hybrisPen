@@ -74,6 +74,6 @@
     </div>
 </div>
 
-<%--<div class="cart-totals-taxes text-right">--%>
-    <%--<spring:theme code="basket.page.totals.noNetTax"/>--%>
-<%--</div>--%>
+<div class="cart-totals-taxes text-right">
+    <spring:theme code="basket.page.totals.noNetTax"/>
+</div>
