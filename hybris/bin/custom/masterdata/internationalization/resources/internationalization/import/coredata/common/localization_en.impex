@@ -2927,7 +2927,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;product.unit;Base UOM
 ;product.sku;ID
 
-;cookie.directive.header;Cookies on pentland.com
+;cookie.directive.header;Cookies on pentlandconnect.com
 ;cookie.directive.message;"We use cookies to ensure that we give you the best experience on our website. You can manage and change cookies in your browser settings or continue to use the site as normal. For more information on cookies see our <a href=""{0}"">cookie policy</a>."
 
 ;text.account.order.orderNumberLabel.plural;"Your Order Number(s): "
