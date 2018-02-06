@@ -49,7 +49,7 @@ public class OrderSimulateServiceMock extends OrderSimulateServiceImpl {
       final MaterialInfoDto materialInfoDto = new MaterialInfoDto();
       int unitPrice;
 //      materialInfoDto.setUnitPrice(String.valueOf(unitPrice = (rn.nextInt(100) + 10)));
-      materialInfoDto.setUnitPrice(String.valueOf(unitPrice = 50));
+      materialInfoDto.setUnitPrice(String.valueOf(unitPrice = (rn.nextInt(100) + 10)));
       materialInfoDto.setMaterialNumber(cartInput.getMaterialNumber());
 
       final List<MaterialOutputGridDto> resMatGridList = new ArrayList<>();
