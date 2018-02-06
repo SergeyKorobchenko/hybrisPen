@@ -3057,3 +3057,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.supportTickets.page.sort.ObjectID;Ticket ID
 
 ;cart.po.max.exceeded.error;Maximum allowed size of PO number is 20 symbols
+
+;checkout.summary.shippingAddress.select;Select an address
