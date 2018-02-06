@@ -24,16 +24,16 @@
 
 <div class="orderTotal">
     <div class="row">
-        <div class="col-xs-6">
-            <spring:theme code="text.account.order.subtotal"/>
-        </div>
-        <div class="col-xs-6">
-            <div class="text-right">
-                <ycommerce:testId code="orderTotal_subTotal_label">
-                    <format:price priceData="${order.subTotal}"/>
-                </ycommerce:testId>
-            </div>
-        </div>
+        <%--<div class="col-xs-6">--%>
+            <%--<spring:theme code="text.account.order.subtotal"/>--%>
+        <%--</div>--%>
+        <%--<div class="col-xs-6">--%>
+            <%--<div class="text-right">--%>
+                <%--<ycommerce:testId code="orderTotal_subTotal_label">--%>
+                    <%--<format:price priceData="${order.subTotal}"/>--%>
+                <%--</ycommerce:testId>--%>
+            <%--</div>--%>
+        <%--</div>--%>
         <c:if test="${order.totalDiscounts.value > 0}">
             <div class="col-xs-6">
                 <div class="subtotals__item--state-discount">
@@ -60,20 +60,20 @@
         </c:if>
         <div class="col-xs-6">
             <div class="totals">
-                <spring:theme code="text.account.order.orderTotals" />
+                <spring:theme code="basket.page.totals.total" />
             </div>
         </div>
 
         <div class="col-xs-6 text-right">
             <div class="totals">
                 <ycommerce:testId code="orderTotal_totalPrice_label">
-                    <format:price priceData="${order.totalPrice}"/>
+                    <format:price priceData="${order.subTotal}"/>
                 </ycommerce:testId>
             </div>
         </div>
     </div>
 </div>
 
-<div class="cart-totals-taxes text-right">
-    <spring:theme code="basket.page.totals.noNetTax"/>
-</div>
+<%--<div class="cart-totals-taxes text-right">--%>
+    <%--<spring:theme code="basket.page.totals.noNetTax"/>--%>
+<%--</div>--%>
