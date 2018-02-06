@@ -14,7 +14,6 @@
   padding-bottom: @footer-padding-bottom;
 
   font-family: @footer-font-family;
-  text-align: center;
 
   @media (max-width: @screen-sm) {
     padding-bottom: @footer-padding-bottom - 10px;
@@ -49,6 +48,11 @@
         &:hover, &:focus {
           color: @footer-link-hover;
         }
+      }
+
+      li.footer__link {
+        padding-left: 25%;
+        padding-right: 25%;
       }
     }
   }
