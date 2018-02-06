@@ -27,7 +27,7 @@
                             <div class="checkout-indent">
                                 <c:choose>
                                     <c:when test="${not empty deliveryAddresses}">
-                                        <div class="headline"><spring:theme code="checkout.summary.shippingAddress" /></div>
+                                        <div class="headline"><spring:theme code="checkout.summary.shippingAddress.select" /></div>
 
 
                                         <address:addressFormSelector supportedCountries="${countries}"
