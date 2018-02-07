@@ -85,6 +85,11 @@
             <value code="stringCi"/>
         </enumtype>
 
+        <enumtype code="CsTicketCategory" autocreate="false" generate="true" dynamic="true">
+            <value code="B2B_SYSTEM_ISSUE"/>
+            <value code="FEEDBACK"/>
+          </enumtype>
+
     </enumtypes>
 
     <relations>

@@ -70,6 +70,7 @@
 	<alias name="pentlandTicketEventEmailStrategy" alias="ticketEventEmailStrategy"/>
 	<bean id="pentlandTicketEventEmailStrategy" class="com.bridgex.core.strategies.impl.PentlandTicketEventEmailStrategy" parent="defaultTicketEventEmailStrategy">
 		<property name="pentlandMediaService" ref="mediaService"/>
+		<property name="enumerationService" ref="enumerationService"/>
 	</bean>
 
 	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="b2bCommerceDeliveryAddressStrategy"/>
