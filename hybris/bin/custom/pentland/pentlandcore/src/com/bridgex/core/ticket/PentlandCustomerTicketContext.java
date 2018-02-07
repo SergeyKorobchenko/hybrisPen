@@ -15,6 +15,8 @@ import de.hybris.platform.ticket.model.CsTicketModel;
  */
 public class PentlandCustomerTicketContext extends CustomerTicketContext {
 
+  private String localizedCategory;
+
   public PentlandCustomerTicketContext(CsTicketModel ticket, CsTicketEventModel event, String logoUrl) {
     super(ticket, event);
     put("logo", logoUrl);
@@ -33,4 +35,11 @@ public class PentlandCustomerTicketContext extends CustomerTicketContext {
     return text.replaceAll("(\\n\\r?)+", "<br/>");
   }
 
+  public String getLocalizedCategory() {
+    return localizedCategory;
+  }
+
+  public void setLocalizedCategory(String localizedCategory) {
+    this.localizedCategory = localizedCategory;
+  }
 }

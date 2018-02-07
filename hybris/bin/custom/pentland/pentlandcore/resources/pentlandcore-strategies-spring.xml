@@ -83,4 +83,13 @@
 	<alias name="pentlandQuoteCartValidationStrategy" alias="quoteCartValidationStrategy" />
 	<bean id="pentlandQuoteCartValidationStrategy" class="com.bridgex.core.strategies.impl.PentlandQuoteCartValidationStrategy" parent="defaultQuoteCartValidationStrategy"/>
 
+	<alias name="pentlandDefaultTicketEventEmailStrategy" alias="defaultTicketEventEmailStrategy"/>
+	<bean id="pentlandDefaultTicketEventEmailStrategy" class="com.bridgex.core.ticket.strategies.impl.PentlandDefaultTicketEventEmailStrategy" parent="abstractBusinessService" >
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="flexibleSearch" ref="flexibleSearchService"/>
+		<property name="recipientTypeToContextClassMap" ref="recipientTypeToContextClassMap"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="rendererService" ref="rendererService" />
+	</bean>
+
 </beans>
