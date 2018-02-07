@@ -54,6 +54,7 @@ import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.facades.product.PentlandProductFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 import com.bridgex.storefront.forms.PentlandCartForm;
+import com.bridgex.storefront.forms.validation.PentlandSaveCartFormValidator;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -113,8 +114,8 @@ public class CartPageController extends AbstractCartPageController
 	@Resource(name = "saveCartFacade")
 	private SaveCartFacade saveCartFacade;
 
-	@Resource(name = "saveCartFormValidator")
-	private SaveCartFormValidator saveCartFormValidator;
+	@Resource(name = "pentlandSaveCartFormValidator")
+	private PentlandSaveCartFormValidator saveCartFormValidator;
 
 	@Resource(name = "csvFacade")
 	private CsvFacade csvFacade;
