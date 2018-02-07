@@ -85,6 +85,9 @@
 								<div class="key"><spring:theme code="popup.cart.total"/></div>
 								<div class="value"><format:price priceData="${cartData.subTotal}"/></div>
 							</div>
+							<div class="cart-totals-taxes text-right">
+								<spring:theme code="basket.page.totals.noNetTax"/>
+							</div>
 						</common:hidePricesForUser>
 
 						<a href="${cartUrl}" class="btn btn-primary btn-block mini-cart-checkout-button">
