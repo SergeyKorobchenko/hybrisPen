@@ -29,6 +29,9 @@
             <product:productFormAddToCartPanel product="${product}"/>
         </ol>
     </div>
+    <div class="cart-totals-taxes text-right">
+        <spring:theme code="basket.page.totals.noNetTax"/>
+    </div>
 
     <div class="add-to-cart-order-form-wrap">
         <c:url value="/cart/addGrid" var="addToCartGridUrl"/>

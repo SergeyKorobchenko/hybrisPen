@@ -33,7 +33,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 		<head></head>
 		<body style=""line-height:18px"">
 		<table width=""610"" align=""center"" bgcolor=""#fefefe"">
-			<tr><td><img src=""${ctx.logo}""/></td></tr>
+			<tr><td><img src=""${ctx.logo}"" style=""margin-left: -12px;""/></td></tr>
 			<tr><td>
 		<table width=""570"" border=""0"" align=""center"">
 		<tr><td>
@@ -79,7 +79,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 		<head></head>
 		<body style=""line-height:18px"">
 		<table width=""610"" align=""center"" bgcolor=""#fefefe"">
-			<tr><td><img src=""${ctx.logo}""/></td></tr>
+			<tr><td><img src=""${ctx.logo}"" style=""margin-left: -12px;""/></td></tr>
 			<tr><td>
 		<table width=""570"" border=""0"" align=""center"">
 		<tr><td>
@@ -93,13 +93,13 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 				#end
 				<p><b>Category:</b> ${ctx.ticket.category}</p>
         <br>
-        <br>
 
   			<strong>For internal use only.</strong>
 	       <p>Customer name: ${ctx.customerName}<br>
 	        Customer Email ID: ${ctx.customerEmail}<br>
 	        Customer Account Name: ${ctx.customerAccount}<br>
 	       </p>
+	       <br>
 
         </td></tr>
         <tr><td align=""center"">

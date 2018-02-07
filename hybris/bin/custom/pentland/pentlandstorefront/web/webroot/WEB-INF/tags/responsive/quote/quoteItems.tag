@@ -18,9 +18,9 @@
             <li class="item__toggle"></li>
             <li class="item__image"></li>
             <li class="item__info"><spring:theme code="basket.page.item"/></li>
+            <li class="item__price"><spring:theme code="basket.page.wholesalePrice"/></li>
             <li class="item__price"><spring:theme code="basket.page.price"/></li>
             <li class="item__quantity"><spring:theme code="basket.page.qty"/></li>
-            <li class="item__delivery"><spring:theme code="basket.page.delivery"/></li>
             <li class="item__total--column"><spring:theme code="basket.page.total"/></li>
         </ul>
     </li>
@@ -55,49 +55,20 @@
                     ${fn:escapeXml(orderEntry.product.code)}
                 </div>
 
-                <%-- availability --%>
-                <div class="item__stock">
-                    <c:set var="entryStock" value="${fn:escapeXml(orderEntry.product.stock.stockLevelStatus.code)}"/>
-                    <c:choose>
-                    	<c:when test="${orderEntry.product.multidimensional}">
-                        	<span class="stock"><spring:theme code="product.variants.in.stock"/></span>
-                    	</c:when>
-                    	<c:when test="${not empty entryStock and entryStock ne 'outOfStock'}">
-                        	<span class="stock"><spring:theme code="product.variants.in.stock"/></span>
-                    	</c:when>
-                    	<c:when test="${orderEntry.deliveryPointOfService eq null}">
-                        	<span class="out-of-stock"><spring:theme code="product.variants.out.of.stock"/></span>
-                    	</c:when>
-                	</c:choose>
-                </div>
-
-                <c:if test="${not empty quoteData.appliedProductPromotions}">
-                    <div class="promo">
-                        <ul>
-                            <c:forEach items="${quoteData.appliedProductPromotions}" var="promotion">
-                                <c:set var="displayed" value="false"/>
-                                <c:forEach items="${promotion.consumedEntries}" var="consumedEntry">
-                                    <c:if test="${not displayed && consumedEntry.orderEntryNumber == orderEntry.entryNumber}">
-                                        <c:set var="displayed" value="true"/>
-                                        <li>
-                                            ${ycommerce:sanitizeHTML(promotion.description)}
-                                        </li>
-                                    </c:if>
-                                </c:forEach>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </c:if>
- 
                 <common:configurationInfos entry="${orderEntry}"/>
-                <common:viewConfigurationInfos baseUrl="/my-account/my-quotes" orderEntry="${orderEntry}" itemCode="${quoteData.code}"/>           
+                <common:viewConfigurationInfos baseUrl="/my-account/my-quotes" orderEntry="${orderEntry}" itemCode="${quoteData.code}"/>
             </div>
 
-            <%-- price --%>
+                <%-- wholesale price --%>
             <div class="item__price">
-                <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>:</span>
-                <%--<order:orderEntryPrice orderEntry="${orderEntry}"/>--%>
-                <format:price priceData="${orderEntry.basePrice}" displayFreeForZero="true"/>
+                <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>: </span>
+                <format:price priceData="${orderEntry.basePrice}" displayFreeForZero="false"/>
+            </div>
+
+                <%-- price --%>
+            <div class="item__price">
+                <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemWholesalePrice"/>: </span>
+                <format:price priceData="${orderEntry.erpPrice}" displayFreeForZero="false"/>
             </div>
 
             <%-- quantity --%>
@@ -120,24 +91,6 @@
                     <span class="visible-xs visible-sm"><spring:theme code="basket.page.qty"/>:</span>
                     <span class="qtyValue">${orderEntry.quantity}</span>
                 </ycommerce:testId>
-            </div>
-
-            <%-- delivery --%>
-            <div class="item__delivery">
-                <c:if test="${orderEntry.product.purchasable}">
-                    <c:if test="${not empty entryStock and entryStock ne 'outOfStock'}">
-                        <c:if test="${orderEntry.deliveryPointOfService eq null or not orderEntry.product.availableForPickup}">
-                            <span class="item__delivery--label"><spring:theme code="basket.page.shipping.ship"/></span>
-                        </c:if>
-                    </c:if>
-                    <c:if test="${not empty orderEntry.deliveryPointOfService.name}">
-                        <span class="item__delivery--label"><spring:theme code="basket.page.shipping.pickup"/></span>
-                    </c:if>
-
-                    <c:if test="${orderEntry.product.availableForPickup and not empty orderEntry.deliveryPointOfService.name}">
-                        <div class="item__delivery--store">${fn:escapeXml(orderEntry.deliveryPointOfService.name)}</div>
-                    </c:if>
-                </c:if>
             </div>
 
             <%-- total --%>

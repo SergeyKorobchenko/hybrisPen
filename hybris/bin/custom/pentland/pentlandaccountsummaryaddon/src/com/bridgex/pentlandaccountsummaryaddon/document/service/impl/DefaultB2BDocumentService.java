@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.web.client.ResourceAccessException;
 
 import com.bridgex.core.integration.PentlandIntegrationService;
 import com.bridgex.integration.domain.DocumentDto;
@@ -163,18 +164,27 @@ public class DefaultB2BDocumentService implements B2BDocumentService
 			return mediaModel;
 		}
 		DocumentMediaModel newMedia = requestAndSaveDocumentMedia(documentNumber);
-		documentModel.setDocumentMedia(newMedia);
-		modelService.saveAll();
-		return newMedia;
+		if(newMedia != null) {
+			documentModel.setDocumentMedia(newMedia);
+			modelService.saveAll();
+			return newMedia;
+		}else{
+			return null;
+		}
 	}
 
 	private DocumentMediaModel requestAndSaveDocumentMedia(String documentNumber) {
-		DocumentResponse response = invoicePDFService.requestData(createDocumentDto(documentNumber));
-		DocumentMediaModel newMedia = modelService.create(DocumentMediaModel.class);
-		newMedia.setCode("invoice-" + documentNumber);
-		modelService.save(newMedia);
-		mediaService.setStreamForMedia(newMedia, new ByteArrayInputStream(response.getEtOutput().getBinaryData()), documentNumber + ".pdf", "application/pdf", mediaService.getFolder("accountsummary"));
-		return newMedia;
+		try {
+			DocumentResponse response = invoicePDFService.requestData(createDocumentDto(documentNumber));
+			DocumentMediaModel newMedia = modelService.create(DocumentMediaModel.class);
+			newMedia.setCode("invoice-" + documentNumber);
+			modelService.save(newMedia);
+			mediaService.setStreamForMedia(newMedia, new ByteArrayInputStream(response.getEtOutput().getBinaryData()), documentNumber + ".pdf", "application/pdf", mediaService.getFolder("accountsummary"));
+			return newMedia;
+		}catch(ResourceAccessException e){
+			LOG.info("Error generating PDF for document " + documentNumber + ". " + e.getMessage());
+			return null;
+		}
 	}
 
 	private DocumentDto createDocumentDto(String documentNumber) {

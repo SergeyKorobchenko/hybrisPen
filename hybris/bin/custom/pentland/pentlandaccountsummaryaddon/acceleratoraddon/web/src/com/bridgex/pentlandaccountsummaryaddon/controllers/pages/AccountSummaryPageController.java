@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -184,10 +186,15 @@ public class AccountSummaryPageController extends AbstractSearchPageController
 	@RequestMapping(value = ACCOUNTSUMMARY_UNIT_URL + "document/{id}")
 	@RequireHardLogIn
 	@ResponseBody
-	public MediaData requestDocumentMedia(@PathVariable String id,
-	                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public ResponseEntity<MediaData> requestDocumentMedia(@PathVariable String id,
+	                                                      final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		return b2bAccountSummaryFacade.requestDocumentMedia(id);
+		MediaData mediaData = b2bAccountSummaryFacade.requestDocumentMedia(id);
+		if(mediaData != null) {
+			return new ResponseEntity<>(mediaData, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }
