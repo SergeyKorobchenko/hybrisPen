@@ -2,8 +2,8 @@ $lang='en'
 
 INSERT_UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);alteredAttributes(qualifier,enclosingType(ComposedType.code));eventType(code);subject;plainTextTemplate(code);htmlTemplate(code);
 #Ticket Creation
-;1;Customer;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}. Category: ${ctx.ticket.category}";TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
-;2;CustomerRep;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}. Category: ${ctx.ticket.category}";TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
+;1;Customer;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}. Category: ${ctx.localizedCategory}";TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
+;2;CustomerRep;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}. Category: ${ctx.localizedCategory}";TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
 
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$lang];rendererType(code)[default='velocity'];templateScript[lang=$lang];
 
@@ -22,7 +22,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 
   Associated to: ${ctx.ticket.assignedAgent}
 
-  Category: ${ctx.ticket.category}
+  Category: ${ctx.localizedCategory}
 
   Alternatively, if you have any further queries or require assistance – please contact us: https://pentlandconnect.com/contactus.
   Kind Regards,
@@ -45,7 +45,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
         #if ($ctx.ticket.getOrder())
 				<p><b>Associated to:</b> ${ctx.ticket.getOrder().getCode()}</p>
 				#end
-				<p><b>Category:</b> ${ctx.ticket.category}</p>
+				<p><b>Category:</b> ${ctx.localizedCategory}</p>
 
   			<p>Alternatively, if you have any further queries or require assistance – please <a href=""${ctx.siteUrl}/contactus"">contact us</a>.</p>
         <p>Kind Regards,<br/>

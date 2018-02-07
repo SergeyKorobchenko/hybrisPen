@@ -11,6 +11,10 @@ import org.apache.commons.mail.EmailException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.ticket.PentlandCustomerRepTicketContext;
+import com.bridgex.core.ticket.PentlandCustomerTicketContext;
+
+import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -33,7 +37,8 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
   public static final String WEBSITE_PENTLAND_HTTPS = "website.pentland.https";
 
   private Map<CsEmailRecipients, String> recipientTypeToContextClassMap;
-  private MediaService pentlandMediaService;
+  private MediaService                   pentlandMediaService;
+  private EnumerationService             enumerationService;
 
   @Override
   public void setRecipientTypeToContextClassMap(Map<CsEmailRecipients, String> recipientTypeToContextClassMap) {
@@ -64,6 +69,15 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
       text.append("\n").append(event.getText());
       event.setText(text.toString());
       ticketContext.put("siteUrl", Config.getParameter(WEBSITE_PENTLAND_HTTPS));
+      if(ticketContext instanceof PentlandCustomerTicketContext){
+        PentlandCustomerTicketContext pentlandTicket = (PentlandCustomerTicketContext) ticketContext;
+        pentlandTicket.setLocalizedCategory(enumerationService.getEnumerationName(ticket.getCategory()));
+        return pentlandTicket;
+      }else if(ticketContext instanceof PentlandCustomerRepTicketContext){
+        PentlandCustomerRepTicketContext pentlandTicket = (PentlandCustomerRepTicketContext) ticketContext;
+        pentlandTicket.setLocalizedCategory(enumerationService.getEnumerationName(ticket.getCategory()));
+        return pentlandTicket;
+      }
       return ticketContext;
     } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | ClassNotFoundException var11) {
       LOG.error("Error finding context class for email target [" + config.getRecipientType() + "]. Context class was [" + contextClassName + "]", var11);
@@ -79,6 +93,12 @@ public class PentlandTicketEventEmailStrategy extends DefaultTicketEventEmailStr
       LOG.error("Error while loading logo image");
       return StringUtils.EMPTY;
     }
+  }
+
+  @Required
+  public void setEnumerationService(final EnumerationService enumerationService)
+  {
+    this.enumerationService = enumerationService;
   }
 
 }
