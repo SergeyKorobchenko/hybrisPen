@@ -51,6 +51,13 @@
 		<property name="frontendTemplateName" value="OrderStatusChangedEmailTemplate"/>
 	</bean>
 
+	<bean id="generateOrderStatusChangeRepEmail" class="com.bridgex.core.actions.GenerateSalesRepEmailAction" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderStatusChangedRepEmailTemplate"/>
+		<property name="groupMemberDao" ref="principalGroupMembersDao"/>
+		<property name="emailFetchStrategy" ref="emailAddressFetchStrategy"/>
+		<property name="b2BUnitService" ref="pentlandB2BUnitService" />
+	</bean>
+
 	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="DeliverySentEmailTemplate"/>
 	</bean>

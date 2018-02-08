@@ -32,6 +32,7 @@ INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;ac
 ;;OrderConfirmationEmailTemplate;Order Confirmation Email Template;true;orderConfirmationEmail;pentland_Email_Order_Confirmation_Subject;pentland_Email_Order_Confirmation_Body;EmailPage
 ;;OrderConfirmationRepEmailTemplate;Order Confirmation Reps Email Template;true;orderConfirmationRepEmail;pentland_Email_Order_Confirmation_Rep_Subject;pentland_Email_Order_Confirmation_Rep_Body;EmailPage
 ;;OrderStatusChangedEmailTemplate;Order Status Changed Email Template;true;orderStatusChangedEmail;pentland_Email_Order_Status_Changed_Subject;pentland_Email_Order_Status_Changed_Body;EmailPage
+;;OrderStatusChangedRepEmailTemplate;Order Status Changed Rep Email Template;true;orderStatusChangedRepEmail;pentland_Email_Order_Status_Changed_Subject;pentland_Email_Order_Status_Changed_Rep_Body;EmailPage
 ;;QuoteBuyerSubmissionEmailTemplate;Quote Buyer Submission Email Template;true;quoteBuyerSubmissionEmail;pentland_Email_Quote_Buyer_Submission_Subject;pentland_Email_Quote_Buyer_Submission_Body;EmailPage
 ;;QuoteSalesRepSubmissionEmailTemplate;Quote SalesRep Submission Email Template;true;quoteSalesRepSubmissionEmail;pentland_Email_Quote_SalesRep_Submission_Subject;pentland_Email_Quote_SalesRep_Submission_Body;EmailPage
 ;;QuoteBuyerCancellationEmailTemplate;Quote Buyer Cancellation Email Template;true;quoteBuyerCancellationEmail;pentland_Email_Quote_Buyer_Cancellation_Subject;pentland_Email_Quote_Buyer_Cancellation_Body;EmailPage
@@ -46,6 +47,7 @@ UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTempla
 ;;OrderConfirmationEmailTemplate;$jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
 ;;OrderConfirmationRepEmailTemplate;$jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
 ;;OrderStatusChangedEmailTemplate;$jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
+;;OrderStatusChangedRepEmailTemplate;$jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
 ;;QuoteBuyerSubmissionEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 ;;QuoteSalesRepSubmissionEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
 ;;QuoteBuyerCancellationEmailTemplate;$jarResourceCms/structure-view/structure_quoteNotificationEmailTemplate.vm
@@ -76,6 +78,11 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderStatusChangedEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderStatusChangedRepEmailTemplate'];validComponentTypes(code)
 ;SiteLogo;;;logo
 ;TopContent;;$wideContent;
 ;BottomContent;;$wideContent;
@@ -156,6 +163,11 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopContent-OrderCancelledEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-OrderCancelledEmail;BottomContent;;EmailBottomSlot;true
 
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderStatusChangedRepEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderCancelledRepEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-OrderCancelledRepEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-OrderCancelledRepEmail;BottomContent;;EmailBottomSlot;true
+
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteBuyerSubmissionEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-QuoteBuyerSubmissionEmail;SiteLogo;;EmailSiteLogoSlot;true
 ;;TopContent-QuoteBuyerSubmissionEmail;TopContent;;EmailTopSlot;true
@@ -193,6 +205,7 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 ;;OrderConfirmationEmail;Order Confirmation Email;OrderConfirmationEmailTemplate;true;;EmailPageModel_preview
 ;;OrderConfirmationRepEmail;Order Confirmation Reps Email;OrderConfirmationRepEmailTemplate;true;;EmailPageModel_preview
 ;;OrderStatusChangedEmail;Order Status Changed Email;OrderStatusChangedEmailTemplate;true;;EmailPageModel_preview
+;;OrderStatusChangedRepEmail;Order Status Changed Rep Email;OrderStatusChangedRepEmailTemplate;true;;EmailPageModel_preview
 ;;QuoteBuyerSubmissionEmail;Quote Buyer Submission Email;QuoteBuyerSubmissionEmailTemplate;true;;EmailPageModel_preview
 ;;QuoteSalesRepSubmissionEmail;Quote SalesRep Submission Email;QuoteSalesRepSubmissionEmailTemplate;true;;EmailPageModel_preview
 ;;QuoteBuyerCancellationEmail;Quote Buyer Cancellation Email;QuoteBuyerCancellationEmailTemplate;true;;EmailPageModel_preview
@@ -220,6 +233,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 ;pentland_Email_Order_Confirmation_Rep_Body;$emailPackageName.OrderConfirmationRepEmailContext
 ;pentland_Email_Order_Status_Changed_Subject;$emailPackageName.OrderNotificationEmailContext
 ;pentland_Email_Order_Status_Changed_Body;$emailPackageName.OrderNotificationEmailContext
+;pentland_Email_Order_Status_Changed_Rep_Body;$emailPackageName.OrderConfirmationRepEmailContext
 ;pentland_Email_Quote_Buyer_Submission_Subject;$emailPackageName.QuoteNotificationEmailContext
 ;pentland_Email_Quote_Buyer_Submission_Body;$emailPackageName.QuoteNotificationEmailContext
 ;pentland_Email_Quote_SalesRep_Submission_Subject;$emailPackageName.QuoteNotificationEmailContext
