@@ -3059,3 +3059,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.po.max.exceeded.error;Maximum allowed size of PO number is 20 symbols
 
 ;checkout.summary.shippingAddress.select;Select an address
+
+;checkout.page.totals.total;Order total
