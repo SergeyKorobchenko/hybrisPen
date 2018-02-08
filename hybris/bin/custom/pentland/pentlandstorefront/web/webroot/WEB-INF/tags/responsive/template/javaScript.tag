@@ -18,11 +18,6 @@
 	<c:otherwise>
 		<%-- jquery --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-3.2.1.min.js"></script>
-		
-		<%-- bootstrap --%>
-		<script type="text/javascript" src="${commonResourcePath}/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/bootstrap/js/collapse.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/bootstrap/js/transition.js"></script>
 
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
@@ -43,6 +38,11 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.scrollTo.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/slick.min.js"></script>
+
+		<%-- bootstrap --%>
+		<script type="text/javascript" src="${commonResourcePath}/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/bootstrap/js/collapse.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/bootstrap/js/transition.js"></script>
 
 		<%-- Custom ACC JS --%>
 		
