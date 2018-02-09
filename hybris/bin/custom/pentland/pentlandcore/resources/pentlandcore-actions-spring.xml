@@ -51,7 +51,7 @@
 		<property name="frontendTemplateName" value="OrderStatusChangedEmailTemplate"/>
 	</bean>
 
-	<bean id="generateOrderStatusChangeRepEmail" class="com.bridgex.core.actions.GenerateSalesRepEmailAction" parent="abstractGenerateEmailAction">
+	<bean id="generateOrderStatusChangeRepEmail" class="com.bridgex.core.actions.GenerateSalesRepAndOpsEmailAction" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="OrderStatusChangedRepEmailTemplate"/>
 		<property name="groupMemberDao" ref="principalGroupMembersDao"/>
 		<property name="emailFetchStrategy" ref="emailAddressFetchStrategy"/>
