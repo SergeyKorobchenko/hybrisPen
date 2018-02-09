@@ -21,6 +21,10 @@
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderStatusChangeEmailProcess.xml"/>
 	</bean>
+	<bean id="sendOrderStatusChangeRepEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandcore/processes/sendOrderStatusChangeRepEmailProcess.xml"/>
+	</bean>
 	<bean id="quoteBuyerProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/pentlandcore/processes/quote/quote-buyer-process.xml"/>

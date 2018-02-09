@@ -29,9 +29,9 @@ import de.hybris.platform.task.RetryLaterException;
  */
 public class GenerateSalesRepEmailAction extends GenerateEmailAction {
 
-  private PentlandPrincipalGroupMemberDao groupMemberDao;
-  private EmailAddressFetchStrategy       emailFetchStrategy;
-  private PentlandB2BUnitService b2BUnitService;
+  protected PentlandPrincipalGroupMemberDao groupMemberDao;
+  protected EmailAddressFetchStrategy       emailFetchStrategy;
+  protected PentlandB2BUnitService b2BUnitService;
 
   private static final Logger LOG = Logger.getLogger(GenerateSalesRepEmailAction.class);
 
@@ -93,7 +93,7 @@ public class GenerateSalesRepEmailAction extends GenerateEmailAction {
     return Transition.OK;
   }
 
-  private List<EmailAddressModel> getSalesRepAddresses(UserModel user) {
+  protected List<EmailAddressModel> getSalesRepAddresses(UserModel user) {
     Set<String> unitIds = b2BUnitService.getAllParents(user).stream()
                               .map(B2BUnitModel::getUid)
                               .collect(Collectors.toSet());

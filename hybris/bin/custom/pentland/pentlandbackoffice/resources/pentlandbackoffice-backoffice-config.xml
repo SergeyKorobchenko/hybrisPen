@@ -19,6 +19,14 @@
         xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
         xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms">
 
+	<context merge-by="type" component="simple-search" type="Address">
+		<simple-search:simple-search>
+			<simple-search:field name="addressID"/>
+			<simple-search:field name="sapCustomerID"/>
+			<simple-search:sort-field name="addressID" asc="true"/>
+		</simple-search:simple-search>
+	</context>
+
 	<context merge-by="type" component="advanced-search" type="ApparelSizeVariantProduct" parent="ApparelSizeVariantProduct">
 		<advanced-search:advanced-search>
 			<advanced-search:field-list >
@@ -40,6 +48,15 @@
 		<advanced-search:advanced-search>
 			<advanced-search:field-list >
 				<advanced-search:field name="discontinuedStatus"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" component="advanced-search" type="Address">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="addressID" position="0"/>
+				<advanced-search:field name="sapCustomerID" position="1"/>
 			</advanced-search:field-list>
 		</advanced-search:advanced-search>
 	</context>

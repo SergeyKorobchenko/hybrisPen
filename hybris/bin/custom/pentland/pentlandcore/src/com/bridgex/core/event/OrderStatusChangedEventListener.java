@@ -20,6 +20,7 @@ public class OrderStatusChangedEventListener extends AbstractEventListener<Order
   private static Logger LOG = Logger.getLogger(OrderStatusChangedEventListener.class);
 
   private final static String PROCESS_DEFINITION = "orderStatusChangeEmailProcess";
+  private final static String PROCESS_DEFINITION_REP = "orderStatusChangeRepEmailProcess";
 
   private ModelService           modelService;
   private BusinessProcessService businessProcessService;
@@ -54,6 +55,18 @@ public class OrderStatusChangedEventListener extends AbstractEventListener<Order
         businessProcessService.startProcess(process);
       }catch(Throwable e){
         //process was already created by another node
+        LOG.debug(e.getMessage());
+      }
+    }
+    if(event.isNotifySales()){
+      try {
+      String processIdRep = PROCESS_DEFINITION_REP + "-" + order.getCode() + "-" + order.getStatus() + "-" + LocalDate.now().toString();
+      OrderProcessModel process = businessProcessService.createProcess(processIdRep, PROCESS_DEFINITION_REP);
+      process.setOrder(order.getSourceOrder());
+      modelService.save(process);
+      businessProcessService.startProcess(process);
+      }catch(Throwable e){
+        //the email was already sent
         LOG.debug(e.getMessage());
       }
     }

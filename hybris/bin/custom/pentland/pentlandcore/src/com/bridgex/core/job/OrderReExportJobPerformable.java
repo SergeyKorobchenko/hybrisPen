@@ -35,6 +35,8 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.search.impl.LazyLoadModelList;
 import de.hybris.platform.servicelayer.search.internal.resolver.ItemObjectResolver;
+import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
 import de.hybris.platform.util.mail.MailUtils;
 
@@ -135,7 +137,9 @@ public class OrderReExportJobPerformable extends AbstractJobPerformable<OrderExp
   }
 
   private void submitChangeStatusEvent(OrderModel order) {
-    eventService.publishEvent(new OrderStatusChangedEvent(order.getCode()));
+    if(CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
+      eventService.publishEvent(new OrderStatusChangedEvent(order.getByBrandOrderList().get(0).getCode(), true));
+    }
   }
 
   protected void mailFailedOrders(OrderExportCronJobModel cronJob){

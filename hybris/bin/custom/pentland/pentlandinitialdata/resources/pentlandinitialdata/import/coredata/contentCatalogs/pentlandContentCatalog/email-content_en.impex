@@ -34,6 +34,7 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;pentland_Email_Forgotten_Password_Body;"Forgotten Password Email Body";$emailResource/email-forgottenPasswordBody.vm
  ;pentland_Email_Forgotten_Password_Subject;"Forgotten Password Email Subject";$emailResource/email-forgottenPasswordSubject.vm
  ;pentland_Email_Order_Status_Changed_Body;"Order Status Changed Email Body";$emailResource/email-orderStatusChangedBody.vm
+ ;pentland_Email_Order_Status_Changed_Rep_Body;"Order Status Changed Rep Email Body";$emailResource/email-orderStatusChangedBody.vm
  ;pentland_Email_Order_Status_Changed_Subject;"Order Status Changed Email Subject";$emailResource/email-orderStatusChangedSubject.vm
  ;pentland_Email_Order_Confirmation_Body;"Order Confirmation Email Body";$emailResource/email-orderConfirmationBody.vm
  ;pentland_Email_Order_Confirmation_Subject;"Order Confirmation Email Subject";$emailResource/email-orderConfirmationSubject.vm
@@ -57,6 +58,7 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;CustomerRegistrationEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;ForgottenPasswordEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;OrderStatusChangedEmail;"customerservices@pentland.com";"Pentland Customer Service"
+ ;;OrderStatusChangedRepEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;OrderConfirmationEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;OrderConfirmationRepEmail;"customerservices@pentland.com";"Pentland Customer Service"
  ;;QuoteBuyerCancellationEmail;"customerservices@pentland.com";"Pentland Customer Service"
