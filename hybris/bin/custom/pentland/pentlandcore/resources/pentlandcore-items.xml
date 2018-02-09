@@ -504,6 +504,19 @@
                     </attribute>
                 </attributes>
             </itemtype>
+            <itemtype code="FileMigrationCronJob" extends="CronJob" autocreate="true" generate="true">
+                <attributes>
+                    <attribute qualifier="sourceFolder" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="targetFolder" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="fileMask" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
     </itemtypes>
 </items>
