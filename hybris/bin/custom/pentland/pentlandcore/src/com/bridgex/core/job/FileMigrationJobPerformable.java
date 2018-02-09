@@ -23,6 +23,8 @@ import de.hybris.platform.servicelayer.cronjob.PerformResult;
 public class FileMigrationJobPerformable extends AbstractJobPerformable<FileMigrationCronJobModel> {
 
   private static final Logger LOG = Logger.getLogger(FileMigrationJobPerformable.class);
+  public static final String SYNXAX = "glob:";
+
   @Override
   public PerformResult perform(FileMigrationCronJobModel fileMigrationCronJobModel) {
     Assert.notNull(fileMigrationCronJobModel.getSourceFolder(), "Cannot run cronjob, source folder not specified");
@@ -50,7 +52,7 @@ public class FileMigrationJobPerformable extends AbstractJobPerformable<FileMigr
       }
     }
 
-    PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + fileMask);
+    PathMatcher matcher = FileSystems.getDefault().getPathMatcher(SYNXAX + fileMask);
 
     AtomicInteger count = new AtomicInteger(0);
     try {
