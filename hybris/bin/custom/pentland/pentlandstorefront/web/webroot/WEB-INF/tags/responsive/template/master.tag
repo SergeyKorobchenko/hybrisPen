@@ -65,6 +65,11 @@
 		<input type="hidden" id="accesibility_refreshScreenReaderBufferField" name="accesibility_refreshScreenReaderBufferField" value=""/>
 	</form>
 	<div id="ariaStatusMsg" class="skip" role="status" aria-relevant="text" aria-live="polite"></div>
+	<div class="p-loader">
+		<div class="p-loader__content">
+			<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+		</div>
+	</div>
 
 	<%-- Load JavaScript required by the site --%>
 	<template:javaScript/>
