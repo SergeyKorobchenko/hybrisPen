@@ -47,6 +47,7 @@ import de.hybris.platform.core.enums.QuoteState;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
+import ru.masterdata.internationalization.facades.i18n.PentlandI18NFacade;
 
 import com.bridgex.facades.export.PentlandExportFacade;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
@@ -58,6 +59,7 @@ import com.bridgex.storefront.forms.validation.PentlandSaveCartFormValidator;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.zip.ZipOutputStream;
 
@@ -137,6 +139,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource
 	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
+
+	@Resource
+	private PentlandI18NFacade i18NFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -358,7 +363,13 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	protected PentlandCartForm newCartForm() {
-		PentlandCartForm cartForm = new PentlandCartForm(getCartFacade().getSessionCart());
+		CartData sessionCart = getCartFacade().getSessionCart();
+		PentlandCartForm cartForm = new PentlandCartForm(sessionCart);
+		LocalDate minRDD = i18NFacade.getNextAvailableRDD();
+		cartForm.setMinDate(minRDD);
+		if(sessionCart.getRdd() != null && sessionCart.getRdd().compareTo(java.sql.Date.valueOf(cartForm.getMinDate())) >= 0){
+			cartForm.setRequestedDeliveryDate(sessionCart.getRdd());
+		}
 		cartForm.setBankHolidays(getMessageSource().getMessage("text.cart.bankHolidays", null, getI18nService().getCurrentLocale()));
 		return cartForm;
 	}
