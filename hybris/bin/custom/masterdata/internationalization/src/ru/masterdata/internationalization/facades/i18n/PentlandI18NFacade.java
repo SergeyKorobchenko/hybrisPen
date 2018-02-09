@@ -9,4 +9,6 @@ import de.hybris.platform.commercefacades.i18n.I18NFacade;
  */
 public interface PentlandI18NFacade extends I18NFacade{
   LocalDate getFirstWorkingDayOfMonth();
+
+  LocalDate getNextAvailableRDD();
 }
