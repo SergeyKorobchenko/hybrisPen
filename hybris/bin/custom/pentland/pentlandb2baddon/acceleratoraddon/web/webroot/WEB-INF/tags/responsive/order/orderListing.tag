@@ -37,13 +37,14 @@
                     <thead>
                     <tr class="responsive-table-head hidden-xs">
                         <th id="header1"><spring:theme code="text.account.orderHistory.orderNumber"/></th>
-                        <th id="header2"><spring:theme code="text.account.orderHistory.purchaseOrderNumber"/></th>
-                        <th id="header3"><spring:theme code="text.account.orderHistory.orderStatus"/></th>
-                        <th id="header4"><spring:theme code="text.account.orderhistory.dateplaced"/></th>
-                        <th id="header5"><spring:theme code="text.account.orderHistory.orderType"/></th>
-                        <th id="header6"><spring:theme code="text.account.orderHistory.rdd"/></th>
-                        <th id="header7"><spring:theme code="text.account.orderHistory.totalQty"/></th>
-                        <th id="header8"><spring:theme code="text.account.orderHistory.total"/></th>
+                        <th id="header2"><spring:theme code="text.account.orderHistory.brand"/></th>
+                        <th id="header3"><spring:theme code="text.account.orderHistory.purchaseOrderNumber"/></th>
+                        <th id="header4"><spring:theme code="text.account.orderHistory.orderStatus"/></th>
+                        <th id="header5"><spring:theme code="text.account.orderhistory.dateplaced"/></th>
+                        <th id="header6"><spring:theme code="text.account.orderHistory.orderType"/></th>
+                        <th id="header7"><spring:theme code="text.account.orderHistory.rdd"/></th>
+                        <th id="header8"><spring:theme code="text.account.orderHistory.totalQty"/></th>
+                        <th id="header9"><spring:theme code="text.account.orderHistory.total"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,6 +57,10 @@
                                     	${fn:escapeXml(order.code)}
                                     </a>
                                 </ycommerce:testId>
+                            </td>
+                            <td class="hidden-sm hidden-md hidden-lg"><spring:theme code="text.account.orderHistory.brand"/></td>
+                            <td headers="header2" class="responsive-table-cell">
+                                    ${fn:escapeXml(order.brand)}
                             </td>
                             <td class="hidden-sm hidden-md hidden-lg"><spring:theme code="text.account.orderHistory.purchaseOrderNumber"/></td>
                             <td headers="header2" class="responsive-table-cell">

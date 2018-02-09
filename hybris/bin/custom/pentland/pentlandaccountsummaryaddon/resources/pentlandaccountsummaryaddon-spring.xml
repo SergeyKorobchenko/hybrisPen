@@ -126,6 +126,7 @@
 		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
 		<property name="mediaConverter" ref="mediaConverter" />
 		<property name="amountFormatter" ref="amountFormatter" />
+		<property name="categoryService" ref="categoryService"/>
 	</bean>
 	
 	<alias name="defaultB2BDocumentPaymentInfoPopulator" alias="b2bDocumentPaymentInfoPopulator" />
