@@ -2967,7 +2967,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;cart.unsaved.popup.title;You have made edits to the basket
 ;cart.unsaved.popup.warning;You cannot proceed without saving the changes.
-;cart.unsaved.popup.save;OK
+;cart.unsaved.popup.save;SAVE
 ;cart.unsaved.popup.cancel;CANCEL
 
 ;text.company.accountsummary.unit.details.page.defaultSort;Sort by
