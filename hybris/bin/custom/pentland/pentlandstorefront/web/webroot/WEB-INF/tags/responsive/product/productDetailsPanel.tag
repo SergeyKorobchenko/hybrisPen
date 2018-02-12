@@ -116,7 +116,7 @@
 				<iframe id="iframeYoutube" width="560" height="315"  src="${fn:escapeXml(product.videoURL)}" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#iframeYoutube').attr('src', $('#iframeYoutube').attr('src')); return false;">Close</button>
 			</div>
 		</div>
 	</div>
