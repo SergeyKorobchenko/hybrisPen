@@ -169,7 +169,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.information.quantity.noItemsAdded.noStock;Sorry, there is insufficient stock for your basket.
 ;basket.information.quantity.reducedNumberOfItemsAdded.lowStock;A lower quantity of this product has been added to your bag due to insufficient stock
 ;basket.information.quantity.reducedNumberOfItemsAdded.maxOrderQuantityExceeded;Unfortunately the quantity you chose exceeded the maximum order quantity for this product. The quantity in your basket has been reduced to the maximum order quantity.
-;basket.items;Items
+;basket.items;Units
 ;basket.page.availability;Availability
 ;basket.page.cartHelpContent;Need help? <br />Call our team to help you directly 1-222-333-444<br />Your bag ID for assistance is {0}
 ;basket.page.cartHelpMessageMobile;"Need help? <br />Call our team to help you directly <a href=""tel:1-222-333-444"">1-222-333-444</a><br />Your bag ID for assistance is {0}"
