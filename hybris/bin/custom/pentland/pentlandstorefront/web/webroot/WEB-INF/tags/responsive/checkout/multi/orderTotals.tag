@@ -57,7 +57,7 @@
 		</div>
 	</c:if>
 	<div class="totals">
-		<spring:theme code="basket.page.totals.total"/>
+		<spring:theme code="checkout.page.totals.total"/>
 		<span>
 			<ycommerce:testId code="cart_totalPrice_label">
 <%--				<c:choose>

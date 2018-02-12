@@ -57,3 +57,6 @@ INSERT_UPDATE ExportDataCronJob;code[unique=true];job(code);baseStore(uid);cmsSi
 Remove Trigger;cronJob(code)[unique=true];
 # Run the CloseStagnantServiceTicketsJob at 12:00 AM every day
 ;CloseStagnantServiceTicketsJob;
+
+INSERT_UPDATE FileMigrationCronJob;code[unique=true];job(code);sourceFolder;targetFolder;fileMask;sessionUser(uid)[default=admin];sessionCurrency(isocode)[default=GBP];sessionLanguage(isocode)[default=en]
+;fileMigrationCronJob;fileMigrationJob;

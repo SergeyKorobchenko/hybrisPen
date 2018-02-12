@@ -169,7 +169,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.information.quantity.noItemsAdded.noStock;Sorry, there is insufficient stock for your basket.
 ;basket.information.quantity.reducedNumberOfItemsAdded.lowStock;A lower quantity of this product has been added to your bag due to insufficient stock
 ;basket.information.quantity.reducedNumberOfItemsAdded.maxOrderQuantityExceeded;Unfortunately the quantity you chose exceeded the maximum order quantity for this product. The quantity in your basket has been reduced to the maximum order quantity.
-;basket.items;Items
+;basket.items;Units
 ;basket.page.availability;Availability
 ;basket.page.cartHelpContent;Need help? <br />Call our team to help you directly 1-222-333-444<br />Your bag ID for assistance is {0}
 ;basket.page.cartHelpMessageMobile;"Need help? <br />Call our team to help you directly <a href=""tel:1-222-333-444"">1-222-333-444</a><br />Your bag ID for assistance is {0}"
@@ -182,6 +182,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.entry.unknownAction;Unknown basket entry action
 ;basket.page.free;FREE
 ;basket.page.id;Item ID
+;basket.page.itemEditQuantities;Edit quantities
 ;basket.page.item;Item (style number)
 ;basket.page.itemNumber;Item no.
 ;basket.page.itemPrice;Item price
@@ -1244,7 +1245,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.page.sortTitle;Sort by:
 ;search.page.defaultSort;Select
 ;search.page.totalResults;{0} Products found
-;search.placeholder;I'm looking for
+;search.placeholder;"I''m looking for"
 ;search.spellingSuggestion.prompt;Did you mean:
 ;storeDetails.map.link;Map
 ;storeDetails.table.address;Address
@@ -2891,6 +2892,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.item.shipdate;Ship date
 ;text.account.orderHistory.item.notassigned;N/A
 ;text.account.orderHistory.item.number;Item number
+;text.account.orderHistory.brand;Brand
 ;text.account.order.total;Order total
 ;text.account.order.tax;Order tax
 ;text.account.order.net;Order net
@@ -2966,7 +2968,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;cart.unsaved.popup.title;You have made edits to the basket
 ;cart.unsaved.popup.warning;You cannot proceed without saving the changes.
-;cart.unsaved.popup.save;OK
+;cart.unsaved.popup.save;SAVE
 ;cart.unsaved.popup.cancel;CANCEL
 
 ;text.company.accountsummary.unit.details.page.defaultSort;Sort by
@@ -3059,3 +3061,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.po.max.exceeded.error;Maximum allowed size of PO number is 20 symbols
 
 ;checkout.summary.shippingAddress.select;Select an address
+
+;checkout.page.totals.total;Order total
+;text.company.accountsummary.brandName.label;Brand

@@ -354,11 +354,11 @@
 	<bean id="pentlandBatchOrderConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE Order;code[unique=true];unit(uid)[unique=true];user[translator=com.bridgex.core.order.impex.translators.PentlandB2BUnitToUserTranslator];purchaseOrderNumber;status(code)[type=OrderStatus,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];date[dateformat='yyyy-MM-dd HH:mm:ss'];totalPrice;totalQty;orderType(code)[type=OrderType,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];rdd[dateformat='yyyy-MM-dd'];currency(isocode)[default=GBP];salesApplication(code)[default='SAP'];store(uid)[default=pentland];site(uid)[default=pentland];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE Order;code[unique=true];unit(uid)[unique=true];user[translator=com.bridgex.core.order.impex.translators.PentlandB2BUnitToUserTranslator];purchaseOrderNumber;status(code)[type=OrderStatus,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];date[dateformat='yyyy-MM-dd HH:mm:ss'];totalPrice;totalQty;orderType(code)[type=OrderType,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];rdd[dateformat='yyyy-MM-dd'];currency(isocode)[default=GBP];sapBrand;salesApplication(code)[default='SAP'];store(uid)[default=pentland];site(uid)[default=pentland];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
 			</value>
 		</property>
 		<property name="impexRow">
-			<value>;{+0};{+1};{+1};{2};{+3};{+4};{+5};{+6};{+7};{+8};{9};;;;{S}</value>
+			<value>;{+0};{+1};{+1};{2};{+3};{+4};{+5};{+6};{+7};{+8};{9};{10};;;;{S}</value>
 		</property>
 	</bean>
 	<bean id="pentlandBatchOrderStatusConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">

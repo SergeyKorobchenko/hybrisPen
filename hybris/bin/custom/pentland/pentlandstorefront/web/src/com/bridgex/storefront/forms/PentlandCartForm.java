@@ -35,11 +35,6 @@ public class PentlandCartForm {
 
   public PentlandCartForm(CartData cartData) {
     this.purchaseOrderNumber = cartData.getPurchaseOrderNumber();
-    LocalDate minRDD = LocalDate.now().plusDays(2);
-    this.minDate =  minRDD.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    if(cartData.getRdd() != null && cartData.getRdd().compareTo(java.sql.Date.valueOf(minRDD)) >= 0){
-      this.requestedDeliveryDate = cartData.getRdd();
-    }
     this.customerNotes = cartData.getCustomerNotes();
   }
 
@@ -69,6 +64,10 @@ public class PentlandCartForm {
 
   public String getMinDate() {
     return minDate;
+  }
+
+  public void setMinDate(LocalDate minRDD) {
+    this.minDate =  minRDD.format(DateTimeFormatter.ISO_LOCAL_DATE);
   }
 
   public String getBankHolidays() {

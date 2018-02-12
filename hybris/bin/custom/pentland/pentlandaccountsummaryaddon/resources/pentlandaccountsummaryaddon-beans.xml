@@ -27,6 +27,7 @@
 		<property name="currency" type="de.hybris.platform.commercefacades.storesession.data.CurrencyData" />
 		<property name="documentMedia" type="MediaData" />
 		<property name="selectable" type="java.lang.Boolean" />
+		<property name="brandName" type="String"/>
 	</bean>
 
 	<bean class="com.bridgex.pentlandaccountsummaryaddon.document.data.MediaData">

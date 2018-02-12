@@ -101,4 +101,4 @@ INSERT_UPDATE OrderExportCronJob;code[unique=true];job(code);sessionLanguage(iso
 ;pentlandOrderExportJob;orderReExportJobPerformable;$defaultLanguage;$defaultCurrency;anonymous
 
 INSERT_UPDATE Trigger;cronJob(code)[unique=true];cronExpression
-;pentlandOrderExportJob;0 0 0/1 1/1 * ? *
+;pentlandOrderExportJob;	0 0/15 * 1/1 * ? *

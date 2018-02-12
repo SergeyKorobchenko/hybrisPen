@@ -13,9 +13,12 @@ package com.bridgex.pentlandaccountsummaryaddon.document.populators;
 import java.math.BigDecimal;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
+import com.bridgex.core.category.PentlandCategoryService;
 import com.bridgex.pentlandaccountsummaryaddon.constants.PentlandaccountsummaryaddonConstants;
 import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentData;
 import com.bridgex.pentlandaccountsummaryaddon.document.data.B2BDocumentTypeData;
@@ -25,6 +28,8 @@ import com.bridgex.pentlandaccountsummaryaddon.formatters.AmountFormatter;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentModel;
 import com.bridgex.pentlandaccountsummaryaddon.model.B2BDocumentTypeModel;
 
+import de.hybris.platform.b2b.model.B2BUnitModel;
+import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.storesession.data.CurrencyData;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
 import de.hybris.platform.converters.Populator;
@@ -34,17 +39,23 @@ import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 
 public class B2BDocumentPopulator implements Populator<B2BDocumentModel, B2BDocumentData>
 {
+
+	private static final Logger LOG = Logger.getLogger(B2BDocumentPopulator.class);
+
 	private Converter<CurrencyModel, CurrencyData> currencyConverter;
 	private Converter<MediaModel, MediaData>       mediaConverter;
 	private AmountFormatter                        amountFormatter;
 	private CommerceCommonI18NService              commerceCommonI18NService;
 	private CommonI18NService                      commonI18NService;
 	private I18NService                            i18NService;
+	private PentlandCategoryService                categoryService;
 
 	@Override
 	public void populate( final B2BDocumentModel source, final B2BDocumentData target ) throws ConversionException
@@ -67,6 +78,17 @@ public class B2BDocumentPopulator implements Populator<B2BDocumentModel, B2BDocu
 		target.setCurrency(currencyConverter.convert(source.getCurrency()));
 		target.setStatus(source.getStatus().getCode());
 		target.setDocumentMedia(getDocumentMedia(source));
+
+		B2BUnitModel unit = source.getUnit();
+		if(unit != null && StringUtils.isNotEmpty(unit.getSapBrand())){
+			String sapBrand = unit.getSapBrand();
+			try {
+				CategoryModel brandCategory = categoryService.getCategoryForCode(sapBrand);
+				target.setBrandName(brandCategory.getName());
+			}catch(ModelNotFoundException | AmbiguousIdentifierException e){
+				LOG.debug("Error while retrieving brand category for unit: " + e);
+			}
+		}
 	}
 	
 	protected Locale getLocale()
@@ -172,5 +194,10 @@ public class B2BDocumentPopulator implements Populator<B2BDocumentModel, B2BDocu
 	public void setCommonI18NService( final CommonI18NService commonI18NService )
 	{
 		this.commonI18NService = commonI18NService;
+	}
+
+	@Required
+	public void setCategoryService(PentlandCategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 }

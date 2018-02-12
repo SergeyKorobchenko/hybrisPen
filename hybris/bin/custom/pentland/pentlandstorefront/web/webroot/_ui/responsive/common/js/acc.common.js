@@ -1,4 +1,7 @@
 ACC.common = {
+    _autoload: [
+        "bindTooltips"
+    ],
 	currentCurrency: $("main").data('currencyIsoCode') || "USD",
 	processingMessage: $("<img src='" + ACC.config.commonResourcePath + "/images/spinner.gif'/>"),
 
@@ -31,6 +34,12 @@ ACC.common = {
 				}
 			}
 		});
+	},
+
+	bindTooltips: function() {
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 	}
 };
 
