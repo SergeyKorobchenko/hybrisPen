@@ -223,7 +223,9 @@
 	</bean>
 
 	<alias name="pentlandOrderHistoryPopulator" alias="orderHistoryPopulator"/>
-	<bean id="pentlandOrderHistoryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderHistoryPopulator" parent="defaultOrderHistoryPopulator"/>
+	<bean id="pentlandOrderHistoryPopulator" class="com.bridgex.facades.order.converters.populator.PentlandOrderHistoryPopulator" parent="defaultOrderHistoryPopulator">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
 
 	<alias name="pentlandCartPopulator" alias="cartPopulator"/>
 	<bean id="pentlandCartPopulator" class="com.bridgex.facades.order.converters.populator.PentlandCartPopulator" parent="defaultCartPopulator"/>

@@ -44,6 +44,7 @@
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
 		<property name="totalQty" type="java.lang.Integer"/>
 		<property name="orderType" type="String"/>
+		<property name="brand" type="String"/>
 		<property name="rdd" type="java.util.Date"/>
 	</bean>
 	

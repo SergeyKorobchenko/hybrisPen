@@ -45,4 +45,6 @@
 		<property name="eventService" ref="eventService"/>
 	</bean>
 
+	<bean id="fileMigrationJobPerformable" class="com.bridgex.core.job.FileMigrationJobPerformable" parent="abstractJobPerformable"/>
+
 </beans>
