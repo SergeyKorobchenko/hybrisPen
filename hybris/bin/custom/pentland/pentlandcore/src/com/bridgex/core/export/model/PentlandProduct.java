@@ -21,10 +21,7 @@ public class PentlandProduct {
   private String categories;
 
   //classification attributes
-  private String teamwearType;
-  private String trainingwearType;
   private String sport;
-  private String accessoryType;
   private String useageOccasion;
   private String surface;
   private String trainingMethod;
@@ -110,47 +107,20 @@ public class PentlandProduct {
     this.categories = categories;
   }
 
-  public String getTeamwearType() {
-    return teamwearType;
-  }
-
-  @DelimitedFileMethod(position = 10)
-  public void setTeamwearType(String teamwearType) {
-    this.teamwearType = teamwearType;
-  }
-
-  public String getTrainingwearType() {
-    return trainingwearType;
-  }
-
-  @DelimitedFileMethod(position = 11)
-  public void setTrainingwearType(String trainingwearType) {
-    this.trainingwearType = trainingwearType;
-  }
-
   public String getSport() {
     return sport;
   }
 
-  @DelimitedFileMethod(position = 12)
+  @DelimitedFileMethod(position = 10)
   public void setSport(String sport) {
     this.sport = sport;
-  }
-
-  public String getAccessoryType() {
-    return accessoryType;
-  }
-
-  @DelimitedFileMethod(position = 13)
-  public void setAccessoryType(String accessoryType) {
-    this.accessoryType = accessoryType;
   }
 
   public String getUseageOccasion() {
     return useageOccasion;
   }
 
-  @DelimitedFileMethod(position = 14)
+  @DelimitedFileMethod(position = 11)
   public void setUseageOccasion(String useageOccasion) {
     this.useageOccasion = useageOccasion;
   }
@@ -159,7 +129,7 @@ public class PentlandProduct {
     return surface;
   }
 
-  @DelimitedFileMethod(position = 15)
+  @DelimitedFileMethod(position = 12)
   public void setSurface(String surface) {
     this.surface = surface;
   }
@@ -168,7 +138,7 @@ public class PentlandProduct {
     return trainingMethod;
   }
 
-  @DelimitedFileMethod(position = 16)
+  @DelimitedFileMethod(position = 13)
   public void setTrainingMethod(String trainingMethod) {
     this.trainingMethod = trainingMethod;
   }

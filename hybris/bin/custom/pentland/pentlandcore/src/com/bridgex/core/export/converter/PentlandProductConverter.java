@@ -29,6 +29,8 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
   private static final String CL_BALLS_SURFACE = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clBalls.surface";
   private static final String CL_EQUIPMENT_TRAININGMETHOD = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clEquipment.trainingmethod";
 
+  private static final String DELIMITER = "|";
+
   @Override
   public void populate(Message<ProductModel> productModelMessage, PentlandProduct pentlandProduct) {
     final ProductModel productModel = productModelMessage.getPayload();
@@ -54,19 +56,29 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
     if(CollectionUtils.isNotEmpty(features)){
       features.forEach(feature ->{
         switch(feature.getQualifier()){
-          case CL_TEAMWEAR_TEAMWEARTYPE: pentlandProduct.setTeamwearType(feature.getValue().toString());
+          case CL_BALLS_SPORT: if(StringUtils.isEmpty(pentlandProduct.getSport())){
+            pentlandProduct.setSport(feature.getValue().toString());
+          }else{
+            pentlandProduct.setSport(pentlandProduct.getSport() + DELIMITER + feature.getValue().toString());
+          }
                break;
-          case CL_TRAINING_WEAR_TRAININGWEARTYPE: pentlandProduct.setTrainingwearType(feature.getValue().toString());
+          case CL_BALLS_USEAGEOCCASION: if(StringUtils.isEmpty(pentlandProduct.getUseageOccasion())){
+            pentlandProduct.setUseageOccasion(feature.getValue().toString());
+          }else{
+            pentlandProduct.setUseageOccasion(pentlandProduct.getUseageOccasion() + DELIMITER + feature.getValue().toString());
+          }
                break;
-          case CL_BALLS_SPORT: pentlandProduct.setSport(feature.getValue().toString());
+          case CL_BALLS_SURFACE: if(StringUtils.isEmpty(pentlandProduct.getSurface())){
+            pentlandProduct.setSurface(feature.getValue().toString());
+          }else{
+            pentlandProduct.setSurface(pentlandProduct.getSurface() + DELIMITER + feature.getValue().toString());
+          }
                break;
-          case CL_EQUIPMENT_ACCESSORYTYPE: pentlandProduct.setAccessoryType(feature.getValue().toString());
-               break;
-          case CL_BALLS_USEAGEOCCASION: pentlandProduct.setUseageOccasion(feature.getValue().toString());
-               break;
-          case CL_BALLS_SURFACE: pentlandProduct.setSurface(feature.getValue().toString());
-               break;
-          case CL_EQUIPMENT_TRAININGMETHOD: pentlandProduct.setTrainingMethod(feature.getValue().toString());
+          case CL_EQUIPMENT_TRAININGMETHOD: if(StringUtils.isEmpty(pentlandProduct.getTrainingMethod())){
+            pentlandProduct.setTrainingMethod(feature.getValue().toString());
+          }else{
+            pentlandProduct.setTrainingMethod(pentlandProduct.getTrainingMethod() + DELIMITER + feature.getValue().toString());
+          }
                break;
         }
       });
@@ -74,7 +86,7 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
   }
 
   private void convertCategories(PentlandProduct pentlandProduct, ProductModel productModel) {
-    String categories = productModel.getSupercategories().stream().map(CategoryModel::getCode).collect(Collectors.joining("|"));
+    String categories = productModel.getSupercategories().stream().map(CategoryModel::getCode).collect(Collectors.joining(DELIMITER));
     pentlandProduct.setCategories(categories);
   }
 
