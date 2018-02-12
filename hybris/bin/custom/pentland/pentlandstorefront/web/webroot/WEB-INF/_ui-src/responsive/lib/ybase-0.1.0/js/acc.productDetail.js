@@ -87,6 +87,7 @@ ACC.productDetail = {
                 $(window).scrollTo($('#AddToCartOrderForm'), 1000);
             }
         } else {
+            ACC.loader.show();
             var $grid = $("#ajaxGrid");
             var $gridEntry = $('#grid');
 
@@ -113,9 +114,11 @@ ACC.productDetail = {
                     setTimeout(function()
                     {
                         ACC.productorderform.coreTableActions();
+                        ACC.loader.hide();
                     }, 500);
                 },
                 error: function (xht, textStatus, ex) {
+                    ACC.loader.hide();
                     alert("Failed to get variant matrix. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
                 }
 

@@ -101,6 +101,7 @@ ACC.cart = {
             grid.slideToggle("slow");
         }
         else {
+            ACC.loader.show();
             var method = "GET";
             $.ajax({
                 url: targetUrl,
@@ -117,8 +118,10 @@ ACC.cart = {
                     grid.slideDown("slow");
                     ACC.cart.coreCartGridTableActions(element, mapCodeQuantity);
                     ACC.productorderform.coreTableScrollActions(grid.children('#cartOrderGridForm'));
+                    ACC.loader.hide();
                 },
                 error: function (xht, textStatus, ex) {
+                    ACC.loader.hide();
                     alert("Failed to get variant matrix. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
                 }
 

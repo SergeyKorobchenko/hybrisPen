@@ -283,7 +283,7 @@ ACC.productorderform = {
     bindUpdateFutureStockButton: function (updateFutureStockButton) {
         $('body').on('click', updateFutureStockButton,function (event) {
             event.preventDefault();
-
+            ACC.loader.show();
             var $gridContainer = $(this).parents('.orderForm_grid_group').find(".product-grid-container");
             var $skus = jQuery.map($gridContainer.find("input[type='hidden'].sku"), function (o) {
                 return o.value
@@ -302,8 +302,10 @@ ACC.productorderform = {
                 dataType: 'json',
                 success: function (data) {
                     ACC.productorderform.updateFuture($gridContainer, $skus, data, skusId, showFutureStockLink , hideFutureStockInfo);
+                    ACC.loader.hide();
                 },
                 error: function (xht, textStatus, ex) {
+                    ACC.loader.hide();
                     alert("Failed to get delivery modes. Error details [" + xht + ", " + textStatus + ", " + ex + "]");
                 }
             });

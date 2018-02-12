@@ -89,6 +89,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.consent.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.loader.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
 
