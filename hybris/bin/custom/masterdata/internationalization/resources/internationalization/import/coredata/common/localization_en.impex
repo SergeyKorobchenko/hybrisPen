@@ -1245,7 +1245,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.page.sortTitle;Sort by:
 ;search.page.defaultSort;Select
 ;search.page.totalResults;{0} Products found
-;search.placeholder;I'm looking for
+;search.placeholder;"I''m looking for"
 ;search.spellingSuggestion.prompt;Did you mean:
 ;storeDetails.map.link;Map
 ;storeDetails.table.address;Address
@@ -2892,6 +2892,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.account.orderHistory.item.shipdate;Ship date
 ;text.account.orderHistory.item.notassigned;N/A
 ;text.account.orderHistory.item.number;Item number
+;text.account.orderHistory.brand;Brand
 ;text.account.order.total;Order total
 ;text.account.order.tax;Order tax
 ;text.account.order.net;Order net
@@ -3060,3 +3061,6 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.po.max.exceeded.error;Maximum allowed size of PO number is 20 symbols
 
 ;checkout.summary.shippingAddress.select;Select an address
+
+;checkout.page.totals.total;Order total
+;text.company.accountsummary.brandName.label;Brand

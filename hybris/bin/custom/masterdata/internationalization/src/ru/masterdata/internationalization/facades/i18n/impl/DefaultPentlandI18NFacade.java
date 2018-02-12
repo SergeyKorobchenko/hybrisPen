@@ -29,14 +29,14 @@ public class DefaultPentlandI18NFacade extends DefaultI18NFacade implements Pent
   private static final Logger LOG = Logger.getLogger(DefaultPentlandI18NFacade.class);
 
   private static final String DATE_FORMAT = "yyyy-MM-dd";
+  private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
   private static final String BANK_HOLIDAYS_KEY = "text.cart.bankHolidays";
+  private static final int deliveryDays = 2;
 
   private LocalizationEntryService localizationEntryService;
 
   @Override
   public LocalDate getFirstWorkingDayOfMonth() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-
     Set<LocalDate> ukHolidays = collectUKHolidays(formatter);
 
     LocalDate currentDate = LocalDate.now();
@@ -56,6 +56,30 @@ public class DefaultPentlandI18NFacade extends DefaultI18NFacade implements Pent
     });
 
     return firstDayOfMonth.with(firstWorkingDayAdjuster);
+  }
+
+  @Override
+  public LocalDate getNextAvailableRDD() {
+    Set<LocalDate> ukHolidays = collectUKHolidays(formatter);
+    LocalDate currentDate = LocalDate.now();
+
+    TemporalAdjuster skipDeliveryDaysAdjuster = TemporalAdjusters.ofDateAdjuster(localDate -> {
+      int daysToSkip = deliveryDays;
+      while(daysToSkip >= 0) {
+        if(ukHolidays.contains(localDate) || DayOfWeek.SUNDAY.equals(localDate.getDayOfWeek())){
+          localDate = localDate.plusDays(1);
+        }else if (DayOfWeek.SATURDAY.equals(localDate.getDayOfWeek())) {
+          localDate = localDate.plusDays(2);
+        }else{
+          localDate = localDate.plusDays(1);
+          daysToSkip--;
+        }
+      }
+      return localDate;
+    });
+
+    return currentDate.with(skipDeliveryDaysAdjuster);
+
   }
 
   private Set<LocalDate> collectUKHolidays(DateTimeFormatter formatter) {

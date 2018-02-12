@@ -29,6 +29,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
     order1.setStatus("CREATED");
     order1.setTotalPrice("1000");
     order1.setTotalQty("2");
+    order1.setPoNumber(requestDto.getPurchaseOrderNumber());
 
     SapOrderDto order2 = new SapOrderDto();
     order2.setOrderCode(requestDto.getDocNumber() + "_2");
@@ -38,6 +39,7 @@ public class OrderExportServiceMock extends OrderExportServiceImpl {
     order2.setStatus("CREATED");
     order2.setTotalPrice("2000");
     order2.setTotalQty("1");
+    order2.setPoNumber(requestDto.getPurchaseOrderNumber());
 
     List<SapOrderDto> orders = new ArrayList<>();
     orders.add(order1);
