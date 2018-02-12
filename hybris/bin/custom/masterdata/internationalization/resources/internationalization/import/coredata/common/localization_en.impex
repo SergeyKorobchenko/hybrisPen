@@ -182,6 +182,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.entry.unknownAction;Unknown basket entry action
 ;basket.page.free;FREE
 ;basket.page.id;Item ID
+;basket.page.itemEditQuantities;Edit quantities
 ;basket.page.item;Item (style number)
 ;basket.page.itemNumber;Item no.
 ;basket.page.itemPrice;Item price

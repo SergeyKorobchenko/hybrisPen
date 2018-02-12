@@ -47,7 +47,7 @@
                 <c:if test="${entry.product.multidimensional}" >
                     <div class="js-show-editable-grid" data-index="${index}" data-read-only-multid-grid="${not entry.updateable}">
                         <ycommerce:testId code="cart_product_updateQuantity">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
+                            <span class="glyphicon glyphicon-chevron-down" data-toggle="tooltip" data-placement="top" title="<spring:theme code="basket.page.itemEditQuantities"/>"></span>
                         </ycommerce:testId>
                     </div>
                 </c:if>
