@@ -18,6 +18,7 @@
 				<li class="item__sku__input"><spring:theme code="text.quickOrder.page.product"/></li>
 				<li class="item__image"></li>
 				<li class="item__info"></li>
+				<li class="item__price"><spring:theme code="text.quickOrder.page.size"/></li>
 				<li class="item__price"><spring:theme code="text.quickOrder.page.price"/></li>
 				<li class="item__quantity"><spring:theme code="text.quickOrder.page.qty"/></li>
 				<li class="item__total--column"><spring:theme code="text.quickOrder.page.total"/></li>
@@ -58,21 +59,27 @@
 			<span class="item__name">{{= name}}</span>
 		</a>
 
-	   <div class="item__stock">
-			<div>
-				{{if stock.stockLevelStatus.code && stock.stockLevelStatus.code != 'outOfStock'}}
-					<span class="stock">
-						<spring:theme code="product.variants.in.stock"/>
-					</span>
-				{{else}}
-					<span class="out-of-stock">
-						<spring:theme code="product.variants.out.of.stock"/>
-					</span>
-				{{/if}}
-			</div>
-		</div>
+	   <%--<div class="item__stock">--%>
+			<%--<div>--%>
+				<%--{{if stock.stockLevelStatus.code && stock.stockLevelStatus.code != 'outOfStock'}}--%>
+					<%--<span class="stock">--%>
+						<%--<spring:theme code="product.variants.in.stock"/>--%>
+					<%--</span>--%>
+				<%--{{else}}--%>
+					<%--<span class="out-of-stock">--%>
+						<%--<spring:theme code="product.variants.out.of.stock"/>--%>
+					<%--</span>--%>
+				<%--{{/if}}--%>
+			<%--</div>--%>
+		<%--</div>--%>
 	</div>
 
+	<div class="item__price js-product-info">
+		<span class="visible-xs visible-sm">
+			<spring:theme code="basket.page.itemSize"/>:
+		</span>
+		{{= size}}
+	</div>
 	<div class="item__price js-product-price js-product-info" data-product-price="{{= price.value}}">
 		<span class="visible-xs visible-sm">
 			<spring:theme code="basket.page.itemPrice"/>:
@@ -82,8 +89,8 @@
 
 	<div class="item__quantity js-product-info">
 		<input type="text" class="js-quick-order-qty form-control" value="1" maxlength="3" size="1"
-			data-max-product-qty="{{= stock.stockLevel}}" data-stock-level-status="{{= stock.stockLevelStatus.code}}"/>
-		<div class="js-product-info js-qty-validation-container help-block quick-order__help-block" data-max-product-qty-msg="${maxProductQtyMsg}"></div>
+			data-max-product-qty="10000" data-stock-level-status="inStock"/>
+		<div class="js-product-info help-block quick-order__help-block" data-max-product-qty-msg="${maxProductQtyMsg}"></div>
 	</div>
 
 

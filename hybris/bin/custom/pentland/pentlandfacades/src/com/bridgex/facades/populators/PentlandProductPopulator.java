@@ -23,11 +23,18 @@ public class PentlandProductPopulator extends ProductPopulator {
     getVariantSelectedPopulator().populate(source, target);
     getProductPrimaryImagePopulator().populate(source, target);
 
+    if (source instanceof ApparelSizeVariantProductModel) {
+      ApparelSizeVariantProductModel size = (ApparelSizeVariantProductModel) source;
+      target.setSize(size.getSize());
+    }
+
     target.setCode(source.getCode());
     if(StringUtils.isEmpty(target.getName())) {
 
       if (source instanceof ApparelSizeVariantProductModel) {
-        target.setName(((ApparelSizeVariantProductModel) source).getBaseProduct().getName());
+        ApparelSizeVariantProductModel size = (ApparelSizeVariantProductModel) source;
+        target.setName(size.getBaseProduct().getName());
+        target.setSize(size.getSize());
       } else {
         target.setName(source.getName());
       }
