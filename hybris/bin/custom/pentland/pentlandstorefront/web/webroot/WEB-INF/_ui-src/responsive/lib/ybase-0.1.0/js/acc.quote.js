@@ -51,6 +51,14 @@ ACC.quote = {
 					return true;
 				}
 			});
+		$(document).on("click", ".js_add_comment_button", function(e){
+			if($('#comment').val().trim() == '') {
+				return false;
+			}
+			event.preventDefault();
+			ACC.quote.quoteCommentSubmit($('#comment').val());
+			$('#comment').val("");
+		});
 	},
 
 	bindAddEntryComment: function () {
