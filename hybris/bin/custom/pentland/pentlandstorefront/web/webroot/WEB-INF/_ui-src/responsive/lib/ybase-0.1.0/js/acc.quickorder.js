@@ -298,18 +298,21 @@ if ($("#quickOrder").length > 0) {
         },
 
         shouldAddToCartBeEnabled: function () {
-            var sum = 0;
+            //var sum = 0;
             var enable = false;
-            $(ACC.quickorder.$qtyInputField).each(function () {
-                var str = this.value.trim();  // .trim() may need a shim
-                if (str) {   // don't send blank values to `parseInt`
-                    sum += parseInt(str, 10);
-                }
-                if (sum >= 1) {
-                    enable = true;
-                    return false;
-                }
-            });
+            if($(".item__name")){
+                enable = true;
+            }
+            // $(ACC.quickorder.$qtyInputField).each(function () {
+            //     var str = this.value.trim();  // .trim() may need a shim
+            //     if (str) {   // don't send blank values to `parseInt`
+            //         sum += parseInt(str, 10);
+            //     }
+            //     if (sum >= 1) {
+            //         enable = true;
+            //         return false;
+            //     }
+            // });
             return enable;
         },
 
