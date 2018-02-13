@@ -219,12 +219,12 @@
                                     <td class="responsive-table-cell">
                                         <c:choose>
                                             <c:when test="${not empty result.documentMedia.downloadURL}">
-                                                <a class="download-lnk" href="${result.documentMedia.downloadURL}">
+                                                <a class="download-lnk hidden" href="${result.documentMedia.downloadURL}">
                                                     <spring:theme code="text.company.accountsummary.document.attachment.view.label"/>
                                                 </a>
                                             </c:when>
                                             <c:otherwise>
-                                                <a class="req-doc-link" href="${getDocumentUrl}${result.documentNumber}/"><span class="download-pdf-icon"></span></a>
+                                                <a class="req-doc-link hidden" href="${getDocumentUrl}${result.documentNumber}/"><span class="download-pdf-icon"></span></a>
                                                 <%--<spring:theme code="text.company.accountsummary.document.attachment.view.label"/>--%>
                                             </c:otherwise>
                                         </c:choose>
