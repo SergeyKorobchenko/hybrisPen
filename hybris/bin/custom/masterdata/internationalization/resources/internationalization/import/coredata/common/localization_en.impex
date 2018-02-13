@@ -313,7 +313,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;cart.page.total;Total:
 ;cart.product.configuration.toolong;Value is too long
 ;cart.view;VIEW CART
-;category.navTitle;Shop by Category
+;category.navTitle;Category
 ;checkout.billing.address.page.global.field.error;Some fields were not filled in correctly. Please check your details are correct
 ;checkout.checkout;Go to basket
 ;checkout.checkout.do;Checkout
@@ -1192,7 +1192,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.mobile.page.totalResults;{0} item(s)
 ;search.nav.applied.facets;Applied facets
 ;search.nav.appliedFilters;Remove
-;search.nav.categoryNav;Shop by Category
+;search.nav.categoryNav;Category
+;search.nav.filterby;Filter by
 ;search.nav.changeLocation;Change Location
 ;search.nav.done.button;Done
 ;search.nav.facetShowLess;less...
@@ -1218,7 +1219,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.nav.facetShowMore_size;more sizes...
 ;search.nav.facetShowMore_stores;Show More Stores
 ;search.nav.facetShowMore_style;more styles...
-;search.nav.facetTitle;Shop by {0}
+;search.nav.facetTitle;{0}
 ;search.nav.facetValueCount;({0})
 ;search.nav.refine.button;Refine
 ;search.nav.refinements;Refinements

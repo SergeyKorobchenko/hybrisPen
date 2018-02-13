@@ -6,7 +6,14 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 
 
+<c:if test="${not empty pageData.facets}">
+	<div class="facet">
+		<div class="facet__name">
+			<spring:theme code="search.nav.filterby"/>
+		</div>
+	</div>
 
+</c:if>
 <c:forEach items="${pageData.facets}" var="facet">
 	<c:choose>
 		<c:when test="${facet.code eq 'availableInStores'}">
