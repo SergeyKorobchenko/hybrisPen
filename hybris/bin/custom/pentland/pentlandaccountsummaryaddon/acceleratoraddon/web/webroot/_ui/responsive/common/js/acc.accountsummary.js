@@ -114,4 +114,6 @@ $(document).ready(function (){
 		ACC.accountsummary.addRemoveDatePickerClass();
 
 	}
+	if($(".req-doc-link")) $(".req-doc-link").removeClass("hidden");
+	if($(".download-lnk")) $(".download-lnk").removeClass("hidden");
 });
