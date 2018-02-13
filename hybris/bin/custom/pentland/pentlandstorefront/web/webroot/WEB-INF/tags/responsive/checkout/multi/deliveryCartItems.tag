@@ -27,7 +27,7 @@
 			<c:when test="${showDeliveryAddress and not empty deliveryAddress}">
 				<div class="title"><spring:theme code="checkout.pickup.items.to.be.shipped"/></div>
 				<div class="address">
-					${fn:escapeXml(deliveryAddress.displayName)}
+						${fn:escapeXml(deliveryAddress.sapId)}&nbsp;${fn:escapeXml(deliveryAddress.displayName)}
 					<br>
 					<c:if test="${ not empty deliveryAddress.line1 }">
 						${fn:escapeXml(deliveryAddress.line1)},&nbsp;
@@ -55,7 +55,7 @@
 				<c:if test="${not empty cartData.markForAddress}">
 					<div class="title"><spring:theme code="checkout.multi.summary.markFor"/></div>
 					<div class="address">
-							${fn:escapeXml(cartData.markForAddress.displayName)}
+							${fn:escapeXml(cartData.markForAddress.sapId)}&nbsp;${fn:escapeXml(cartData.markForAddress.displayName)}
 						<br>
 						<c:if test="${ not empty cartData.markForAddress.line1 }">
 							${fn:escapeXml(cartData.markForAddress.line1)},&nbsp;

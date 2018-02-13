@@ -12,7 +12,7 @@ public class PentlandAddressPopulator extends AddressPopulator{
   @Override
   public void populate(final AddressModel source, final AddressData target) {
     super.populate(source, target);
-
+    target.setSapId(source.getAddressID());
     target.setDisplayName(source.getDisplayName());
   }
 }
