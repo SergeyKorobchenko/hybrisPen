@@ -65,7 +65,9 @@
                     <spring:theme code="text.quote.comments.label"/>&nbsp;<spring:theme code="login.optional" htmlEscape="false" />
                 </label>
                 <textarea class="form-control quote__comments--textarea" id="comment" placeholder='<spring:theme code="quote.enter.comment"/>'></textarea>
+                <button class="js_add_comment_button btn btn-primary"><spring:theme code="quote.add.comment"/></button>
             </div>
+
         </div>
     </c:if>
 

@@ -1066,7 +1066,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.edit;Edit order query
 ;quote.edit.done;New basket
 ;quote.edit.locked;Order Query ID : {0} is currently being edited by {1}
-;quote.enter.comment;Add a comment and press enter
+;quote.enter.comment;"Add a comment and press enter or ""Add comment"" button"
 ;quote.less.comments;View less comments
 ;quote.more.comments;View more comments
 ;quote.name.invalid;Please enter a valid name
@@ -3068,3 +3068,5 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 
 ;basket.page.itemSize;size
 ;text.quickOrder.page.size;Size
+
+;quote.add.comment;Add comment
