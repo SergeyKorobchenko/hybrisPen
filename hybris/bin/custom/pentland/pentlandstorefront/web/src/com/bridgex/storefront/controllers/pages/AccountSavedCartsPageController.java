@@ -38,6 +38,7 @@ import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import com.bridgex.storefront.controllers.ControllerConstants;
+import com.bridgex.storefront.forms.validation.PentlandSaveCartFormValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,8 +95,8 @@ public class AccountSavedCartsPageController extends AbstractSearchPageControlle
 	@Resource(name = "orderGridFormFacade")
 	private OrderGridFormFacade orderGridFormFacade;
 
-	@Resource(name = "saveCartFormValidator")
-	private SaveCartFormValidator saveCartFormValidator;
+	@Resource(name = "pentlandSaveCartFormValidator")
+	private PentlandSaveCartFormValidator saveCartFormValidator;
 
 	@Resource(name = "cartFacade")
 	private CartFacade cartFacade;
