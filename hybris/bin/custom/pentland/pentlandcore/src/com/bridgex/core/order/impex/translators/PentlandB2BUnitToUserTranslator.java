@@ -92,6 +92,7 @@ public class PentlandB2BUnitToUserTranslator extends SingleValueTranslator {
     b2bCustomer.setName(b2BUnitModel.getName() + " " + DEFAULT_CUSTOMER_NAME);
     b2bCustomer.setUid(b2BUnitModel.getUid() + DEFAULT_CUSTOMER_UID);
     b2bCustomer.setEmail(DEFAULT_CUSTOMER_EMAIL);
+    b2bCustomer.setLoginDisabled(true);
     Set<PrincipalGroupModel> groups = new HashSet<>();
     groups.add(userService.getUserGroupForUID(B2B_CUSTOMER_GROUP_UID));
     groups.add(b2BUnitModel);
