@@ -9,7 +9,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.order.PentlandOrderExportService;
+import com.bridgex.core.services.PentlandB2BUnitService;
 
+import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderStrategy;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.commerceservices.service.data.CommerceOrderResult;
@@ -28,6 +30,7 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
   private static final Logger LOG = Logger.getLogger(PentlandCommercePlaceOrderStrategy.class);
 
   private PentlandOrderExportService pentlandOrderExportService;
+  private PentlandB2BUnitService     b2BUnitService;
 
   @Override
   public CommerceOrderResult placeOrder(final CommerceCheckoutParameter parameter) throws InvalidCartException
@@ -67,16 +70,31 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
         }
         getModelService().save(orderModel);
 
+        String sapCustomerID = "";
         //remove sapCustomerId from all addresses to avoid them showing up in address listings
         AddressModel deliveryAddress = orderModel.getDeliveryAddress();
         if(deliveryAddress != null){
+          sapCustomerID = deliveryAddress.getSapCustomerID();
           deliveryAddress.setSapCustomerID(StringUtils.EMPTY);
           getModelService().save(deliveryAddress);
         }
         AddressModel markFor = orderModel.getMarkFor();
         if(markFor != null){
+          if(StringUtils.isEmpty(sapCustomerID)){
+            sapCustomerID = markFor.getSapCustomerID();
+          }
           markFor.setSapCustomerID(StringUtils.EMPTY);
           getModelService().save(markFor);
+        }
+
+        //check that cart b2bUnit is the same as the one address was for
+        if(StringUtils.isNotEmpty(sapCustomerID)){
+          B2BUnitModel unit = orderModel.getUnit();
+          if(!sapCustomerID.equals(unit.getSapID())){
+            B2BUnitModel unitBySapID = b2BUnitService.getUnitBySapID(sapCustomerID);
+            orderModel.setUnit(unitBySapID);
+            getModelService().save(orderModel);
+          }
         }
 
         // Calculate the order now that it has been copied
@@ -113,5 +131,10 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
   @Required
   public void setPentlandOrderExportService(PentlandOrderExportService pentlandOrderExportService) {
     this.pentlandOrderExportService = pentlandOrderExportService;
+  }
+
+  @Required
+  public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
+    this.b2BUnitService = b2BUnitService;
   }
 }
