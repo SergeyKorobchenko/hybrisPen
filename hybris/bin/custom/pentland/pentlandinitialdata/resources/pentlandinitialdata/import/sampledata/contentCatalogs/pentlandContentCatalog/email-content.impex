@@ -2,8 +2,8 @@ $lang='en'
 
 INSERT_UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);alteredAttributes(qualifier,enclosingType(ComposedType.code));eventType(code);subject;plainTextTemplate(code);htmlTemplate(code);
 #Ticket Creation
-;1;Customer;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}. Category: ${ctx.localizedCategory}";TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
-;2;CustomerRep;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}. Category: ${ctx.localizedCategory}";TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
+;1;Customer;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}.";TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
+;2;CustomerRep;;ticketCreationEvent;"Pentland Brands — Support Ticket #${ctx.ticket.ticketID}.";TickSystem_CustomerRep_TicketCreated_Text;TickSystem_CustomerRep_TicketCreated_HTML;
 
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$lang];rendererType(code)[default='velocity'];templateScript[lang=$lang];
 
