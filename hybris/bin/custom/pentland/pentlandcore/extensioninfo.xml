@@ -22,6 +22,7 @@
 		<requires-extension name="mediaconversion"/>
 		<requires-extension name="b2bacceleratorservices"/>
 		<requires-extension name="erpintegration" />
+		<requires-extension name="assistedserviceservices"/>
 
 		<coremodule generated="true" manager="com.bridgex.core.jalo.PentlandcoreManager" packageroot="com.bridgex.core"/>
 

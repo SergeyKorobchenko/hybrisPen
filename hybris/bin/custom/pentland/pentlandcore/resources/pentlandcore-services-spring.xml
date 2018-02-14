@@ -126,4 +126,7 @@
 	<bean id="pentlandCommerceQuoteService" class="com.bridgex.core.order.impl.PentlandCommerceQuoteService"
 				parent="defaultCommerceQuoteService"/>
 
+	<alias name="pentlandAssistedServiceService" alias="assistedServiceService"/>
+	<bean id="pentlandAssistedServiceService" class="com.bridgex.core.assistedservices.impl.PentlandAssistedServiceService" parent="defaultAssistedServiceService"/>
+
 </beans>
