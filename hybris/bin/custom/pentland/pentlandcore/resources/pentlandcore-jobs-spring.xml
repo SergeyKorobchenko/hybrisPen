@@ -47,4 +47,6 @@
 
 	<bean id="fileMigrationJobPerformable" class="com.bridgex.core.job.FileMigrationJobPerformable" parent="abstractJobPerformable"/>
 
+	<bean id="pricelessProductsMaintenanceJobPerformable" class="com.bridgex.core.job.PricelessProductsMaintenanceJobPerformable" parent="abstractGenericMaintenanceJobPerformable"/>
+
 </beans>

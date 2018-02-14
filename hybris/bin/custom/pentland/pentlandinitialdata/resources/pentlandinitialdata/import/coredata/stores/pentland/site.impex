@@ -60,3 +60,4 @@ Remove Trigger;cronJob(code)[unique=true];
 
 INSERT_UPDATE FileMigrationCronJob;code[unique=true];job(code);sourceFolder;targetFolder;fileMask;sessionUser(uid)[default=admin];sessionCurrency(isocode)[default=GBP];sessionLanguage(isocode)[default=en]
 ;fileMigrationCronJob;fileMigrationJob;
+;pricelessProductsMaintenanceJob;pricelessProductsMaintenanceJobPerformable
