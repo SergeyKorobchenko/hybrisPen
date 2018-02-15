@@ -88,6 +88,7 @@
         <enumtype code="CsTicketCategory" autocreate="false" generate="true" dynamic="true">
             <value code="B2B_SYSTEM_ISSUE"/>
             <value code="FEEDBACK"/>
+            <value code="PRODUCT_ENQUIRY"/>
           </enumtype>
 
     </enumtypes>
