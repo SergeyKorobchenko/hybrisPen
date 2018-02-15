@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.constants.PentlandcoreConstants;
@@ -15,19 +16,59 @@ import com.bridgex.facades.customer.PentlandCustomerFacade;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
+import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
+import de.hybris.platform.core.model.c2l.CurrencyModel;
+import de.hybris.platform.core.model.c2l.LanguageModel;
+import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.order.exceptions.CalculationException;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 11/24/2017.
  */
 public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade implements PentlandCustomerFacade {
 
+  private static final Logger LOG = Logger.getLogger(DefaultPentlandCustomerFacade.class);
+
   private PentlandB2BUnitService b2BUnitService;
 
   @Override
   public void loginSuccess(){
-    super.loginSuccess();
+    final CustomerData userData = getCurrentCustomer();
+
+    // First thing to do is to try to change the user on the session cart
+    if (getCartService().hasSessionCart()) {
+      getCartService().changeCurrentCartUser(getCurrentUser());
+    }
+
+    // Update the session currency (which might change the cart currency)
+    if (!updateSessionCurrency(userData.getCurrency(), getStoreSessionFacade().getDefaultCurrency())) {
+      // Update the user
+      getUserFacade().syncSessionCurrency();
+    }
+    if (!updateSessionLanguage(userData.getLanguage(), getStoreSessionFacade().getDefaultLanguage())) {
+      // Update the user
+      getUserFacade().syncSessionLanguage();
+    }
+
+    // Calculate the cart after setting everything up
+    if (getCartService().hasSessionCart()) {
+      final CartModel sessionCart = getCartService().getSessionCart();
+
+      // Clean the existing info on the cart if it does not beling to the current user
+      getCartCleanStrategy().cleanCart(sessionCart);
+      try {
+        final CommerceCartParameter parameter = new CommerceCartParameter();
+        parameter.setEnableHooks(true);
+        parameter.setCart(sessionCart);
+        getCommerceCartService().recalculateCart(parameter);
+      }catch (final CalculationException ex) {
+        LOG.error("Failed to recalculate order [" + sessionCart.getCode() + "]", ex);
+      }
+    }
     UserModel currentUser = getCurrentUser();
     if(currentUser instanceof B2BCustomerModel){
       B2BCustomerModel currentCustomer = (B2BCustomerModel) currentUser;
