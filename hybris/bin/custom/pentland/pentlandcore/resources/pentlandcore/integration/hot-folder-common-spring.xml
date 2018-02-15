@@ -234,13 +234,13 @@
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
 				$approved=approvalstatus(code)[default='approved']
-				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0};{6};{11};{12};{13};{17};;$catalog:Staged;;{S}
-				;{+0};{6};{11};{12};{13};{17};;$catalog:Online;;{S}
+				;{+0};{6};{11};{12};{13};{17};;$catalog:Staged;;
+				;{+0};{6};{11};{12};{13};{17};;$catalog:Online;;
 			</value>
 		</property>
 	</bean>
@@ -248,13 +248,13 @@
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
 				$approved=approvalstatus(code)[default='approved']
-				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;{S}
-				;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Online;;{S}
+				;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;
+				;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Online;;
 			</value>
 		</property>
 	</bean>
@@ -262,13 +262,13 @@
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
 				$approved=approvalstatus(code)[default='approved']
-				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sizeNo;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sizeNo;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+1}:$catalog:Staged;{2};{+3};{4};{9};{10};{11};{15};$catalog:Staged;;{S}
-				;{+1}:$catalog:Online;{2};{+3};{4};{9};{10};{11};{15};$catalog:Online;;{S}
+				;{+1}:$catalog:Staged;{2};{+3};{4};{9};{10};{11};{15};$catalog:Staged;;
+				;{+1}:$catalog:Online;{2};{+3};{4};{9};{10};{11};{15};$catalog:Online;;
 			</value>
 		</property>
 	</bean>
@@ -284,13 +284,13 @@
 				$useageOccasion = @useageOccasion[$clAttrModifiers];
 				$surface = @surface[$clAttrModifiers];
 				$trainingMethod = @trainingMethod[$clAttrModifiers];
-				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator,collection-delimiter=|];$sport;$useageOccasion;$surface;$trainingMethod;sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+				UPDATE ApparelStyleVariantProduct;code[unique=true];$catalogVersion;$approved;name[lang=$lang];description[lang=$lang];featureDescription[lang=$lang];packSize;videoURL;externalURL;sizeChartImage(code,$mediaCV);supercategories(code,$catalogVersion)[cellDecorator=com.bridgex.core.impex.decorator.CategoryCatalogVersionDecorator,collection-delimiter=|];$sport;$useageOccasion;$surface;$trainingMethod;
 			</value>
 		</property>
 		<property name="impexRow">
 			<value>
-				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{S}
-				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{S}
+				;{+0};$catalog:Staged;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};
+				;{+0};$catalog:Online;;{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};
 			</value>
 		</property>
 	</bean>
