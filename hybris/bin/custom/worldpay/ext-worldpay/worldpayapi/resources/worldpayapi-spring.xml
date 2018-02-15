@@ -40,6 +40,8 @@
     <alias name="defaultWorldpayMerchantConfigDataService" alias="worldpayMerchantConfigDataService"/>
     <bean id="defaultWorldpayMerchantConfigDataService" class="com.worldpay.merchant.impl.DefaultWorldpayMerchantConfigDataService">
         <property name="siteConfigService" ref="siteConfigService"/>
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
     </bean>
 
     <alias name="defaultWorldpayMerchantStrategy" alias="worldpayMerchantStrategy"/>

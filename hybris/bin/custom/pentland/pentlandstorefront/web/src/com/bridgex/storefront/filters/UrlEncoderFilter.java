@@ -79,6 +79,8 @@ public class UrlEncoderFilter extends OncePerRequestFilter
 			{
 				LOG.debug(" No URL attributes defined");
 			}
+			request.setAttribute("originalContextPath",
+			                     StringUtils.isBlank(request.getContextPath()) ? "/" : request.getContextPath());
 			request.setAttribute(WebConstants.URL_ENCODING_ATTRIBUTES, "");
 			filterChain.doFilter(request, response);
 		}
