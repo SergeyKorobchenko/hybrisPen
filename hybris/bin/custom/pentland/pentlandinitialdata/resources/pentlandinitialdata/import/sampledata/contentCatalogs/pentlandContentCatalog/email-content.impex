@@ -33,9 +33,10 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 		<head></head>
 		<body style=""line-height:18px"">
 		<table width=""610"" align=""center"" bgcolor=""#fefefe"">
-			<tr><td><img src=""${ctx.logo}"" style=""margin-left: -12px;""/></td></tr>
+		    <tr><td>&nbsp;</td></tr>
+			<tr><td><img src=""${ctx.logo}"" /></td></tr>
 			<tr><td>
-		<table width=""570"" border=""0"" align=""center"">
+		<table width=""546"" border=""0"" align=""center"">
 		<tr><td>
 				<p>Dear ${ctx.name}</p>
 				<p>Thank you for raising a ticket. We will contact you shortly.</p>
@@ -54,6 +55,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
         <tr><td align=""center"">
         Pentland Brands Limited<br/>Lakeside, Squires Lane, London, N32QL, UK<br/>${ctx.siteUrl}
         </td></tr>
+        <tr><td>&nbsp;</td></tr>
         </table>
         </td></tr>
 			</div>
@@ -79,9 +81,10 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
 		<head></head>
 		<body style=""line-height:18px"">
 		<table width=""610"" align=""center"" bgcolor=""#fefefe"">
-			<tr><td><img src=""${ctx.logo}"" style=""margin-left: -12px;""/></td></tr>
+		    <tr><td>&nbsp;</td></tr>
+			<tr><td><img src=""${ctx.logo}"" /></td></tr>
 			<tr><td>
-		<table width=""570"" border=""0"" align=""center"">
+		<table width=""546"" border=""0"" align=""center"">
 		<tr><td>
 				<p>Dear ${ctx.name}</p>
 				<p>Thank you for raising a ticket. We will contact you shortly.</p>
@@ -105,6 +108,7 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$
         <tr><td align=""center"">
         Pentland Brands Limited<br/>Lakeside, Squires Lane, London, N32QL, UK<br/>${ctx.siteUrl}
         </td></tr>
+        <tr><td>&nbsp;</td></tr>
         </table>
         </td></tr>
 			</div>
