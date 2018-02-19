@@ -1190,7 +1190,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;search.mobile.page.showAllResults;Show all
 ;search.mobile.page.sortTitle;Sort by:
 ;search.mobile.page.totalResults;{0} item(s)
-;search.nav.applied.facets;Applied facets
+;search.nav.applied.facets;Filters Applied
 ;search.nav.appliedFilters;Remove
 ;search.nav.categoryNav;Category
 ;search.nav.filterby;Filter by
