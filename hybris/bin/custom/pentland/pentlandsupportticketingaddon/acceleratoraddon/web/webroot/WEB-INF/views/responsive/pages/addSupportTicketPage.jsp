@@ -34,6 +34,8 @@
                             <span class="file-upload__file-name js-file-upload__file-name">
                                 <spring:theme code="text.account.supporttickets.createTicket.noFileChosen"/>
                             </span>
+                            <span class="nofilemsg" style="display: none;"> <spring:theme code="text.account.supporttickets.createTicket.noFileChosen"/>
+                            </span>
                         </div>
 
                         <%--Associated Objects--%>

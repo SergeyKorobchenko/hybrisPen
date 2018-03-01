@@ -26,7 +26,9 @@ ACC.pentlandsupportticketingaddon = {
     clearForm: function(_this) {
         $('#createTicket-subject').val("");
         $('#createTicket-message').val("");
-        $('.js-file-upload__file-name').html($('.js-file-upload__file-name').data("emptyMessage"));
+        $('.nofilemsg').show();
+        $('.js-file-upload__file-name').html($('.js-file-upload__file-name').hide());
+//        $('.js-file-upload__file-name').html($('.js-file-upload__file-name').data("emptyMessage"));
         $('#attachmentFiles').val("");
         $('#associatedTo').val(1);
         $('#ticketCategory').val(1);
