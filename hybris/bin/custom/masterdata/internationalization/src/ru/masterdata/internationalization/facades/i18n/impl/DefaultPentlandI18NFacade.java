@@ -2,6 +2,7 @@ package ru.masterdata.internationalization.facades.i18n.impl;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjuster;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.formula.functions.Now;
 import org.springframework.beans.factory.annotation.Required;
 
 import ru.masterdata.internationalization.facades.i18n.PentlandI18NFacade;
@@ -31,7 +33,7 @@ public class DefaultPentlandI18NFacade extends DefaultI18NFacade implements Pent
   private static final String DATE_FORMAT = "yyyy-MM-dd";
   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
   private static final String BANK_HOLIDAYS_KEY = "text.cart.bankHolidays";
-  private static final int deliveryDays = 2;
+  private static final int deliveryDays = 1;
 
   private LocalizationEntryService localizationEntryService;
 
@@ -64,23 +66,28 @@ public class DefaultPentlandI18NFacade extends DefaultI18NFacade implements Pent
     LocalDate currentDate = LocalDate.now();
 
     TemporalAdjuster skipDeliveryDaysAdjuster = TemporalAdjusters.ofDateAdjuster(localDate -> {
-      int daysToSkip = deliveryDays;
-      while(daysToSkip >= 0) {
-        if(ukHolidays.contains(localDate) || DayOfWeek.SUNDAY.equals(localDate.getDayOfWeek())){
-          localDate = localDate.plusDays(1);
-        }else if (DayOfWeek.SATURDAY.equals(localDate.getDayOfWeek())) {
-          localDate = localDate.plusDays(2);
-        }else{
-          localDate = localDate.plusDays(1);
-          daysToSkip--;
-        }
-      }
-      return localDate;
-    });
+			int daysToSkip = deliveryDays;
+			if (LocalTime.now().isAfter(LocalTime.of(15, 0, 0))) {
+				daysToSkip++;
+			}
+			while (daysToSkip >= 0) {
+				if (ukHolidays.contains(localDate) || DayOfWeek.SUNDAY.equals(localDate.getDayOfWeek())) {
+					localDate = localDate.plusDays(1);
+				} else if (DayOfWeek.SATURDAY.equals(localDate.getDayOfWeek())) {
+					localDate = localDate.plusDays(2);
+				} else {
+					localDate = localDate.plusDays(1);
+					daysToSkip--;
+				}
 
-    return currentDate.with(skipDeliveryDaysAdjuster);
+			}
 
-  }
+			return localDate;
+		});
+
+		return currentDate.with(skipDeliveryDaysAdjuster);
+
+	}
 
   private Set<LocalDate> collectUKHolidays(DateTimeFormatter formatter) {
     Set<LocalDate> holidays = new HashSet<>();
