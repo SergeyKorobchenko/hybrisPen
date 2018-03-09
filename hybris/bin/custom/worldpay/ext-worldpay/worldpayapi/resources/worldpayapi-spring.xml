@@ -615,6 +615,7 @@
         <property name="checkoutFlowFacade" ref="checkoutFlowFacade"/>
         <property name="cartService" ref="cartService"/>
         <property name="addressConverter" ref="addressConverter"/>
+        <property name="pentlandB2BCheckoutFacade" ref="b2bCheckoutFacade" />
     </bean>
 
     <alias name="defaultAPMAvailabilityFacade" alias="apmAvailabilityFacade"/>

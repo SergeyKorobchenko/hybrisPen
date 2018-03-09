@@ -6,7 +6,7 @@
         <requires-extension name="acceleratorfacades"/>
         <requires-extension name="acceleratorservices"/>
         <requires-extension name="assistedserviceservices"/>
-        <requires-extension name="pentlandcore"/>
+        <requires-extension name="pentlandfacades"/>
 
         <coremodule generated="true" manager="com.worldpay.jalo.WorldpayapiManager" packageroot="com.worldpay"/>
 
