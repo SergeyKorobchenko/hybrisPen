@@ -1,7 +1,10 @@
 package com.worldpay.facades.order.impl;
 
+import com.bridgex.core.enums.B2BUnitType;
+import com.bridgex.facades.order.PentlandB2BCheckoutFacade;
 import de.hybris.platform.acceleratorfacades.flow.CheckoutFlowFacade;
 import de.hybris.platform.acceleratorservices.enums.CheckoutPciOptionEnum;
+import de.hybris.platform.b2bacceleratorservices.enums.CheckoutPaymentType;
 import de.hybris.platform.commercefacades.order.data.*;
 import de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
@@ -24,6 +27,7 @@ public class WorldpayCheckoutFacadeDecorator implements CheckoutFlowFacade {
     private Converter<AddressModel, AddressData> addressConverter;
     private CartService cartService;
     private CheckoutFlowFacade checkoutFlowFacade;
+    private PentlandB2BCheckoutFacade pentlandB2BCheckoutFacade;
 
     public AddressData getBillingAddress() {
         final CartModel cartModel = getSessionCart();
@@ -66,7 +70,17 @@ public class WorldpayCheckoutFacadeDecorator implements CheckoutFlowFacade {
     @Override
     public boolean hasNoPaymentInfo() {
         final CartData cartData = getCheckoutCart();
-        return cartData == null || (cartData.getPaymentInfo() == null && cartData.getWorldpayAPMPaymentInfo() == null);
+        if (cartData == null) {
+            return true;
+        }
+        if (cartData.getPaymentInfo() == null && cartData.getWorldpayAPMPaymentInfo() == null) {
+            if (B2BUnitType.ACCOUNT.equals(getPentlandB2BCheckoutFacade().getCurrentCustomerType())) {
+                getPentlandB2BCheckoutFacade().setPaymentTypeSelectedForCheckout(CheckoutPaymentType.ACCOUNT.getCode());
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -383,6 +397,15 @@ public class WorldpayCheckoutFacadeDecorator implements CheckoutFlowFacade {
     @Required
     public void setCheckoutFlowFacade(CheckoutFlowFacade checkoutFlowFacade) {
         this.checkoutFlowFacade = checkoutFlowFacade;
+    }
+
+    public PentlandB2BCheckoutFacade getPentlandB2BCheckoutFacade() {
+        return pentlandB2BCheckoutFacade;
+    }
+
+    @Required
+    public void setPentlandB2BCheckoutFacade(PentlandB2BCheckoutFacade pentlandB2BCheckoutFacade) {
+        this.pentlandB2BCheckoutFacade = pentlandB2BCheckoutFacade;
     }
 
     public CartService getCartService() {

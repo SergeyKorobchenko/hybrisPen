@@ -30,6 +30,8 @@ import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.order.CalculationService;
 import de.hybris.platform.order.exceptions.CalculationException;
 
+import javax.annotation.Nullable;
+
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
  */
@@ -48,6 +50,15 @@ public class DefaultPentlandB2BCheckoutFacade extends DefaultB2BCheckoutFacade i
   private static final String CART_CHECKOUT_PAYMENTTYPE_INVALID = "cart.paymenttype.invalid";
 
   private static final Logger LOG = Logger.getLogger(DefaultPentlandB2BCheckoutFacade.class);
+
+  @Override
+  @Nullable
+  public B2BUnitType getCurrentCustomerType() {
+    final B2BCustomerModel currentUser = (B2BCustomerModel)getCurrentUserForCheckout();
+
+    final B2BUnitModel parent = getB2bUnitService().getParent(currentUser);
+    return parent.getCustomerType();
+  }
 
   @Override
   public List<B2BPaymentTypeData> getPaymentTypes() {
