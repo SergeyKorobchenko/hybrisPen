@@ -22,7 +22,7 @@
                     <div class="step-body"><jsp:doBody/></div>
                 </c:when>
                 <c:when test="${checkoutStep.stepNumber > activeCheckoutStepNumber}">
-                    <a href="${stepUrl}" class="step-head js-checkout-step ">
+                    <a href="#" class="step-head js-checkout-step ">
                         <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
                     </a>
                 </c:when>
