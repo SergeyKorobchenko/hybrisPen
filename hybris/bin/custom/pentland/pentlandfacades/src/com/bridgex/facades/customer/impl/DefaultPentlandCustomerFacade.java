@@ -2,7 +2,9 @@ package com.bridgex.facades.customer.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
@@ -16,11 +18,9 @@ import com.bridgex.facades.customer.PentlandCustomerFacade;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
-import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
-import de.hybris.platform.core.model.c2l.CurrencyModel;
-import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.UserModel;
@@ -114,4 +114,26 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
   public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
     this.b2BUnitService = b2BUnitService;
   }
+
+@Override
+public List<AddressData> getDeliveryAddressesForCustomer() {
+	
+	UserModel currentUser = getCurrentUser();
+	  //collect to set to avoid duplicates
+	    final Set<AddressModel> addressesCustomer = new HashSet<>();
+	  if (currentUser instanceof B2BCustomerModel) {
+
+	       B2BCustomerModel b2bCustomer = (B2BCustomerModel) currentUser;
+	       Collection<B2BUnitModel> firstLevelParents = b2BUnitService.getFirstLevelParents(b2bCustomer);
+
+	       if(CollectionUtils.isNotEmpty(firstLevelParents)){
+	         for(B2BUnitModel b2BUnit: firstLevelParents){
+	          addressesCustomer.addAll(b2BUnitService.findDeliveryAddressesForUnits(b2BUnit));
+	         }
+	       }
+	     }
+
+	     return new ArrayList<>(getAddressConverter().convertAll(addressesCustomer));
+	
+}
 }

@@ -592,6 +592,8 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=e
 ;;FacebookLink;"Facebook"
 ;;TwitterLink;"Twitter"
 ;;ContactUsLink;"Contact Us"
+;;AddressBookLink;"SHIP-TO ADDRESSES"
+;;MarkForAddressBookLink;"MARK-FOR ADDRESSES"
 
 
 

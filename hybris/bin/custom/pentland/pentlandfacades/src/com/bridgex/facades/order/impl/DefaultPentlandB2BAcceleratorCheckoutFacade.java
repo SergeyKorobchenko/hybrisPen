@@ -1,20 +1,23 @@
 package com.bridgex.facades.order.impl;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandCommerceCheckoutService;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
-
-import de.hybris.platform.b2bacceleratorfacades.order.impl.DefaultB2BAcceleratorCheckoutFacade;
-import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
+import de.hybris.platform.b2bacceleratorfacades.order.impl.DefaultB2BAcceleratorCheckoutFacade;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.PK;
@@ -22,7 +25,6 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
-import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
@@ -30,6 +32,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
 public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAcceleratorCheckoutFacade implements PentlandAcceleratorCheckoutFacade{
 
   private PentlandCommerceCheckoutService pentlandCommerceCheckoutService;
+  
 
   @Override
   public boolean isNewAddressEnabledForCart() {
@@ -52,6 +55,22 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
     }
 
     return Collections.EMPTY_LIST;
+  }
+  
+  @Override
+  public List<AddressData> findMarkForAddressesForCustomerShippingAddress(List<AddressData> addresses) {
+    final Set<AddressModel> customerAddresses = new HashSet<AddressModel>();
+    for (AddressData addressData : addresses) {
+     
+     AddressModel deliveryAddress = getAddressModelForID(addressData.getId());
+       Collection<AddressModel> markForAddresses = deliveryAddress.getMarkForAddresses();
+
+       if(CollectionUtils.isNotEmpty(markForAddresses)){
+         List<AddressModel> markFors = markForAddresses.stream().filter(AddressModel::getMarkForAddress).collect(Collectors.toList());
+         customerAddresses.addAll(markFors);
+       }
+    }
+   return Converters.convertAll(customerAddresses, getAddressConverter());
   }
 
   @Override

@@ -1304,7 +1304,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;system.error.page.not.found;404 Page Not Found
 ;test.account.invoice.itemno;Item No.
 ;text.account.account;Account
-;text.account.addressBook;Address book
+;text.account.addressBook;SHIP-TO ADDRESSES
+;text.account.markForAddressBook;MARK-FOR ADDRESSES
 ;text.account.addressBook.addAddress;Add address
 ;text.account.addressBook.addEditAddress;Add/edit address
 ;text.account.addressBook.addEditform;Please use this form to add/edit an address

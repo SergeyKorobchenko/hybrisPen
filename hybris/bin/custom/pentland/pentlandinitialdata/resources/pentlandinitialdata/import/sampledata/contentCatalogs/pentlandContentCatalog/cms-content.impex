@@ -76,6 +76,8 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; OrderQueriesNavNode          ; ; Order Queries           ; MyAccountNavNode ; ; OrderQueriesNavNode
 ; SupportTicketsNavNode        ; ; Support Tickets         ; MyAccountNavNode ; ; SupportTicketsNavNode
 ; HidePricesNavNode            ; ; Show/Hide Prices        ; MyAccountNavNode ; ; HidePricesNavNode
+; AddressBookNavNode           ; ; Address Book            ; MyAccountNavNode ; ; AddressBookNavNode
+; MarkForAddressBookNavNode    ; ; MarkFor Address Book    ; MyAccountNavNode ; ; MarkForAddressBookNavNode
 ## entries of the above navigation nodes ##
 
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
@@ -87,6 +89,8 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 ; OrderQueriesNavNodeEntry          ; ; OrderQueriesNavNodeEntry          ; OrderQueriesNavNode          ; OrderQueriesLink          ;
 ; SupportTicketsNavNodeEntry        ; ; SupportTicketsNavNodeEntry        ; SupportTicketsNavNode        ; SupportTicketsLink        ;
 ; HidePricesNavNodeEntry            ; ; HidePricesNavNodeEntry            ; HidePricesNavNode            ; HidePricesLink            ;
+; AddressBookNavNodeEntry           ; ; AddressBookNavNodeEntry           ; AddressBookNavNode           ; AddressBookLink           ;
+; MarkForAddressBookNavNodeEntry    ; ; MarkForAddressBookNavNodeEntry    ; MarkForAddressBookNavNode    ; MarkForAddressBookLink    ;
 
 ## links of the above navigattion entries ##
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; target(code)[default = 'sameWindow']
@@ -98,7 +102,34 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; OrderQueriesLink          ; OrderQueriesLink          ; /my-account/my-quotes          ; OrderQueriesLink          ;
 ; ; SupportTicketsLink        ; SupportTicketsLink        ; /add-support-ticket            ; SupportTicketsLink        ;
 ; ; HidePricesLink            ; HidePricesLink            ; /my-account/show-hide-prices   ; HidePricesLink            ;
+; ; AddressBookLink           ; AddressBookLink           ; /my-account/address-book       ; AddressBookLink           ;
+; ; MarkForAddressBookLink    ; MarkForAddressBookLink    ; /my-account/markforaddress-book; MarkForAddressBookLink    ;
 
+###### Account Address Book Start ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='address-book'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-address-book;SideContent;;SideContent-address-book;;;
+;;BodyContent-address-book;BodyContent;;BodyContent-address-book;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-address-book;Side Content Slot for Account Address Book;true;;;;
+;;BodyContent-address-book;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountAddressBookComponent;Account Address Book Component;accountAddressBookPage.jsp;;AccountAddressBookComponent
+###### Account Address Book End ######
+
+######  Account MarkFor Address Book Start ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='markforaddress-book'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-markforaddress-book;SideContent;;SideContent-markforaddress-book;;;
+;;BodyContent-markforaddress-book;BodyContent;;BodyContent-markforaddress-book;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-markforaddress-book;Side Content Slot for Account MarkFor Address Book;true;;;;
+;;BodyContent-markforaddress-book;Body Content Slot for Account MarkFor Address Book;true;AccountMarkForAddressBookComponent;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountMarkForAddressBookComponent;Account MarkFor Address Book Component;accountMarkForAddressBookPage.jsp;;AccountMarkForAddressBookComponent
+###### Account MarkFor Address Book End ######
 
 ##---- level 4. children of Order Tools ----##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
@@ -1028,6 +1059,7 @@ UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(
 ; ; searchAdvancedEmpty           ; searchAdvancedEmptyPreview
 ; ; saved-carts                   ; savedCartsPagePreview
 ; ; savedCartDetailsPage          ; savedCartDetailsPagePreview
+; ; markforaddress-book           ; addressBookPagePreview
 ###### update contentPage to set previewImage End ######
 
 

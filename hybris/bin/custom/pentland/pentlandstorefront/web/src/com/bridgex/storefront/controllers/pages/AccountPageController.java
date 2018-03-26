@@ -10,8 +10,10 @@
  */
 package com.bridgex.storefront.controllers.pages;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +84,7 @@ import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
 import com.bridgex.facades.customer.PentlandCustomerFacade;
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
@@ -94,6 +97,7 @@ import com.bridgex.storefront.controllers.ControllerConstants;
 public class AccountPageController extends AbstractSearchPageController
 {
 	private static final String TEXT_ACCOUNT_ADDRESS_BOOK = "text.account.addressBook";
+	private static final String TEXT_ACCOUNT_MARKFORADDRESS_BOOK = "text.account.markForAddressBook";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String IS_DEFAULT_ADDRESS_ATTR = "isDefaultAddress";
 	private static final String COUNTRY_DATA_ATTR = "countryData";
@@ -140,6 +144,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String UPDATE_PROFILE_CMS_PAGE = "update-profile";
 	private static final String UPDATE_EMAIL_CMS_PAGE = "update-email";
 	private static final String ADDRESS_BOOK_CMS_PAGE = "address-book";
+	private static final String MARKFORADDRESS_BOOK_CMS_PAGE = "markforaddress-book";
 	private static final String ADD_EDIT_ADDRESS_CMS_PAGE = "add-edit-address";
 	private static final String PAYMENT_DETAILS_CMS_PAGE = "payment-details";
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
@@ -193,6 +198,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
+	
+	@Resource
+	private PentlandAcceleratorCheckoutFacade acceleratorCheckoutFacade;
 
 	protected PasswordValidator getPasswordValidator()
 	{
@@ -610,7 +618,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getAddressBook(final Model model) throws CMSItemNotFoundException
 	{
-		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
+		model.addAttribute(ADDRESS_DATA_ATTR, customerFacade.getDeliveryAddressesForCustomer());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
@@ -618,6 +626,33 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
+	
+	@RequestMapping(value = "/markforaddress-book", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String getMarkForAddressBook(final Model model) throws CMSItemNotFoundException
+	{
+		List<AddressData> deliveryAddressesForCustomer = customerFacade.getDeliveryAddressesForCustomer();
+		model.addAttribute(ADDRESS_DATA_ATTR, acceleratorCheckoutFacade.findMarkForAddressesForCustomerShippingAddress(deliveryAddressesForCustomer));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(MARKFORADDRESS_BOOK_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MARKFORADDRESS_BOOK_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_MARKFORADDRESS_BOOK));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+	
+	private List<? extends AddressData> getMarkForAddresses(final AddressData selectedAddressData) // NOSONAR
+	{
+		List<AddressData> markForAddresses = null;
+		if (selectedAddressData != null) {
+			markForAddresses = acceleratorCheckoutFacade.findMarkForAddressesForShippingAddress(selectedAddressData.getId());
+
+
+		}
+
+		return markForAddresses == null ? Collections.emptyList() : markForAddresses;
+	}
+	
+	
 
 	@RequestMapping(value = "/add-address", method = RequestMethod.GET)
 	@RequireHardLogIn

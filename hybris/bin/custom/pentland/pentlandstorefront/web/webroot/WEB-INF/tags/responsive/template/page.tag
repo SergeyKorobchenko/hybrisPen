@@ -52,7 +52,45 @@
 
                 <jsp:doBody/>
             </div>
+            
+     <!-- After Session timeout popup will appear and click on close button then it redirects to login page... Connect-46 --> 
+      
+<script>
+			    var secondsBeforeExpire = ${pageContext.session.maxInactiveInterval};
+			    var timeToDecide = 0; 
+			    setTimeout(function() {
+			    	$('#myModal-timeout').modal('show');  
+			    	$('#myModal-timeout').on('hidden.bs.modal', function () {
+			    			 window.location="${request.contextPath}/login";
+			    		 		});	   	
+			    }, (secondsBeforeExpire - timeToDecide) * 1000);
+			</script>
 
+		<div class="modal fade" id="myModal-timeout" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" >
+		  <div class="modal-dialog">
+		    <div class="modal-content ">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>  
+		        <h2 class="modal-title custom-modal-title">
+		        	<div class="box-head">
+		        		<div class="title_head">
+		        			<span class="style-icons-font sty-normal">
+		        				<i class="fa fa-info-circle" aria-hidden="true"></i>
+		        			</span>
+		        			<span class="lb_head"><span class="lb_show">Information</span></span>
+		        		</div>
+		        	</div>
+		        </h2>   
+		      </div>
+		      <div class="modal-body">
+		        <p>Your session has expired. You will now be redirected to the login page.</p>
+		      </div>
+		      <div class="modal-footer">
+		         <button class="btn btn-default sty-btn-main" data-dismiss="modal">Close</button> 
+		       </div>
+		    </div>
+		  </div>
+		</div>
             <footer:footer/>
         </main>
 
