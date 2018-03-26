@@ -11,6 +11,8 @@ import de.hybris.platform.commercefacades.user.data.AddressData;
 public interface PentlandAcceleratorCheckoutFacade extends CheckoutFacade {
 
   List<AddressData> findMarkForAddressesForShippingAddress(String addressId);
+  
+  List<AddressData> findMarkForAddressesForCustomerShippingAddress();
 
   boolean setMarkForAddressForCart(String addressId);
 

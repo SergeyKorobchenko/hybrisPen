@@ -49,6 +49,7 @@
 
 	<bean id="pentlandCustomerAccountService" class="com.bridgex.core.customer.impl.DefaultPentlandCustomerAccountService" parent="defaultCustomerAccountService">
 		<property name="pentlandCustomerAccountDao" ref="pentlandCustomerAccountDao" />
+		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
 	</bean>
 
 

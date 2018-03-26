@@ -2,7 +2,9 @@ package com.bridgex.facades.customer.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
@@ -10,17 +12,16 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.constants.PentlandcoreConstants;
+import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.facades.customer.PentlandCustomerFacade;
 
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
-import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
-import de.hybris.platform.core.model.c2l.CurrencyModel;
-import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.UserModel;
@@ -35,6 +36,8 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
 
   private PentlandB2BUnitService b2BUnitService;
 
+  private PentlandCustomerAccountService pentlandCustomerAccountService;
+  
   @Override
   public void loginSuccess(){
     final CustomerData userData = getCurrentCustomer();
@@ -114,4 +117,23 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
   public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
     this.b2BUnitService = b2BUnitService;
   }
+
+@Override
+public List<AddressData> getDeliveryAddressesForCustomer() {
+	
+	UserModel currentUser = getCurrentUser();
+	List<AddressModel> deliveryAddressesForCustomer = getPentlandCustomerAccountService().getDeliveryAddressesForCustomer(currentUser);
+
+	     return new ArrayList<>(getAddressConverter().convertAll(deliveryAddressesForCustomer));
+	
+}
+
+public PentlandCustomerAccountService getPentlandCustomerAccountService() {
+	return pentlandCustomerAccountService;
+}
+
+public void setPentlandCustomerAccountService(PentlandCustomerAccountService pentlandCustomerAccountService) {
+	this.pentlandCustomerAccountService = pentlandCustomerAccountService;
+}
+
 }

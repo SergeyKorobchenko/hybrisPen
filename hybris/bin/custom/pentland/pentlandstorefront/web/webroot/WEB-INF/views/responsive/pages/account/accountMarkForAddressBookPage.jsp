@@ -12,7 +12,7 @@
 </c:if>
 
 <div class="account-section-header ${noBorder}">
-    <spring:theme code="text.account.addressBook"/>
+    <spring:theme code="text.account.markForAddressBook"/>
 
     </div>
 </div>

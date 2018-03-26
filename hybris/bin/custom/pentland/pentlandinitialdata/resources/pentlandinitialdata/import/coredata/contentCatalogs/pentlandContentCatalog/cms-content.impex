@@ -800,6 +800,8 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;importCSVSavedCartPage;Import CSV as Saved Cart Page;QuickOrderPageTemplate;importCSVSavedCartPage
 ;;quoteEditPage;Quote Edit Page;QuoteEditPageTemplate;quoteEditPage
 ;;accountHidePrices;Account Page;AccountPageTemplate;accountHidePrices
+;;address-book;Address Book Page;AccountPageTemplate;address-book
+;;markforaddress-book;MarkFor Address Book Page;AccountPageTemplate;markforaddress-book
 
 
 # Simple Content Pages

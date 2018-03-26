@@ -50,3 +50,5 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;update-profile;"Update Profile"
  ;;updatePassword;"Update Forgotten Password"
  ;;accountHidePrices;"Show/Hide Prices"
+ ;;address-book;"SHIP-TO ADDRESSES"
+;;markforaddress;"MARK-FOR ADDRESSES"
