@@ -631,8 +631,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getMarkForAddressBook(final Model model) throws CMSItemNotFoundException
 	{
-		List<AddressData> deliveryAddressesForCustomer = customerFacade.getDeliveryAddressesForCustomer();
-		model.addAttribute(ADDRESS_DATA_ATTR, acceleratorCheckoutFacade.findMarkForAddressesForCustomerShippingAddress(deliveryAddressesForCustomer));
+		model.addAttribute(ADDRESS_DATA_ATTR, acceleratorCheckoutFacade.findMarkForAddressesForCustomerShippingAddress());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MARKFORADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MARKFORADDRESS_BOOK_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_MARKFORADDRESS_BOOK));

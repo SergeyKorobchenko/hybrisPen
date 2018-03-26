@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.constants.PentlandcoreConstants;
+import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.facades.customer.PentlandCustomerFacade;
 
@@ -35,6 +36,8 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
 
   private PentlandB2BUnitService b2BUnitService;
 
+  private PentlandCustomerAccountService pentlandCustomerAccountService;
+  
   @Override
   public void loginSuccess(){
     final CustomerData userData = getCurrentCustomer();
@@ -119,21 +122,18 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
 public List<AddressData> getDeliveryAddressesForCustomer() {
 	
 	UserModel currentUser = getCurrentUser();
-	  //collect to set to avoid duplicates
-	    final Set<AddressModel> addressesCustomer = new HashSet<>();
-	  if (currentUser instanceof B2BCustomerModel) {
+	List<AddressModel> deliveryAddressesForCustomer = getPentlandCustomerAccountService().getDeliveryAddressesForCustomer(currentUser);
 
-	       B2BCustomerModel b2bCustomer = (B2BCustomerModel) currentUser;
-	       Collection<B2BUnitModel> firstLevelParents = b2BUnitService.getFirstLevelParents(b2bCustomer);
-
-	       if(CollectionUtils.isNotEmpty(firstLevelParents)){
-	         for(B2BUnitModel b2BUnit: firstLevelParents){
-	          addressesCustomer.addAll(b2BUnitService.findDeliveryAddressesForUnits(b2BUnit));
-	         }
-	       }
-	     }
-
-	     return new ArrayList<>(getAddressConverter().convertAll(addressesCustomer));
+	     return new ArrayList<>(getAddressConverter().convertAll(deliveryAddressesForCustomer));
 	
 }
+
+public PentlandCustomerAccountService getPentlandCustomerAccountService() {
+	return pentlandCustomerAccountService;
+}
+
+public void setPentlandCustomerAccountService(PentlandCustomerAccountService pentlandCustomerAccountService) {
+	this.pentlandCustomerAccountService = pentlandCustomerAccountService;
+}
+
 }

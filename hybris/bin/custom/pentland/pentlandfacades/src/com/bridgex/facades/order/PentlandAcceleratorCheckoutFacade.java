@@ -12,7 +12,7 @@ public interface PentlandAcceleratorCheckoutFacade extends CheckoutFacade {
 
   List<AddressData> findMarkForAddressesForShippingAddress(String addressId);
   
-  List<AddressData> findMarkForAddressesForCustomerShippingAddress(List<AddressData> addresses);
+  List<AddressData> findMarkForAddressesForCustomerShippingAddress();
 
   boolean setMarkForAddressForCart(String addressId);
 

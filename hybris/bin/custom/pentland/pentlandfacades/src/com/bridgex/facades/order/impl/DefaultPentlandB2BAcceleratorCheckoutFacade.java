@@ -1,23 +1,24 @@
 package com.bridgex.facades.order.impl;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.order.PentlandCommerceCheckoutService;
+import com.bridgex.facades.customer.PentlandCustomerFacade;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
-import de.hybris.platform.commercefacades.user.data.AddressData;
+
 import de.hybris.platform.b2bacceleratorfacades.order.impl.DefaultB2BAcceleratorCheckoutFacade;
+import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.PK;
@@ -25,6 +26,9 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 10/27/2017.
@@ -33,7 +37,10 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
 
   private PentlandCommerceCheckoutService pentlandCommerceCheckoutService;
   
-
+  private PentlandCustomerAccountService pentlandCustomerAccountService;
+ 
+  private UserService userService;
+  
   @Override
   public boolean isNewAddressEnabledForCart() {
     return false;
@@ -58,11 +65,14 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
   }
   
   @Override
-  public List<AddressData> findMarkForAddressesForCustomerShippingAddress(List<AddressData> addresses) {
+  public List<AddressData> findMarkForAddressesForCustomerShippingAddress() {
     final Set<AddressModel> customerAddresses = new HashSet<AddressModel>();
-    for (AddressData addressData : addresses) {
+    
+    UserModel currentUser = getUserService().getCurrentUser();
+    List<AddressModel> deliveryAddressesForCustomer = getPentlandCustomerAccountService().getDeliveryAddressesForCustomer(currentUser);
+    for (AddressModel address : deliveryAddressesForCustomer) {
      
-     AddressModel deliveryAddress = getAddressModelForID(addressData.getId());
+     AddressModel deliveryAddress = getAddressModelForID(address.getPk().toString());
        Collection<AddressModel> markForAddresses = deliveryAddress.getMarkForAddresses();
 
        if(CollectionUtils.isNotEmpty(markForAddresses)){
@@ -136,4 +146,18 @@ public class DefaultPentlandB2BAcceleratorCheckoutFacade extends DefaultB2BAccel
   public void setPentlandCommerceCheckoutService(PentlandCommerceCheckoutService pentlandCommerceCheckoutService) {
     this.pentlandCommerceCheckoutService = pentlandCommerceCheckoutService;
   }
+public PentlandCustomerAccountService getPentlandCustomerAccountService() {
+	return pentlandCustomerAccountService;
+}
+public void setPentlandCustomerAccountService(PentlandCustomerAccountService pentlandCustomerAccountService) {
+	this.pentlandCustomerAccountService = pentlandCustomerAccountService;
+}
+public UserService getUserService() {
+	return userService;
+}
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
+  
+  
 }
