@@ -31,12 +31,11 @@
 					<div class="col-xs-12 col-sm-6 col-md-4 card">
 						<ul class="pull-left">
 							<li>
-								<strong>${fn:escapeXml(address.title)}&nbsp;${fn:escapeXml(address.firstName)}&nbsp;${fn:escapeXml(address.lastName)}
-									<c:if test="${address.defaultAddress}">
-										(<spring:theme code="text.default"/>)
-									</c:if>
-								</strong>
-							</li>
+                                                                <strong>${fn:escapeXml(address.sapId)}</strong>
+                                                                </li>
+                                                                <li>
+                                                                <strong>${fn:escapeXml(address.displayName)}</strong>
+                                                                </li>
 							<li>${fn:escapeXml(address.line1)}</li>
 							<c:if test="${not empty fn:escapeXml(address.line2)}">
 								<li>${fn:escapeXml(address.line2)}</li>
