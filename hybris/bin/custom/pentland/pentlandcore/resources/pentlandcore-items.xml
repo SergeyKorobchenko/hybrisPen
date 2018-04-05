@@ -38,6 +38,7 @@
             <value code="ACCOUNT" />
             <value code="CREDITCARD" />
             <value code="PROFORMA" />
+            <value code="PROFORMAONLINE" />
         </enumtype>
 
         <enumtype generate="true" code="DiscontinuedStatus" autocreate="true" dynamic="false">

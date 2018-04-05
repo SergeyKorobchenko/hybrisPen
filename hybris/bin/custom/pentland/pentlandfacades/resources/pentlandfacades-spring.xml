@@ -248,6 +248,7 @@
 				<entry key="ACCOUNT" value-ref="accountPayment"/>
 				<entry key="CREDITCARD" value-ref="creditPayment"/>
 				<entry key="PROFORMA" value-ref="proformaPayment"/>
+				<entry key="PROFORMAONLINE" value-ref="proformaOnlinePayment"/>
 			</map>
 		</property>
 		<property name="b2bUnitService" ref="b2bUnitService"/>
@@ -262,6 +263,10 @@
 		<value>CARD</value>
 	</util:list>
 	<util:list id="proformaPayment">
+		<!-- <value>CARD</value> -->
+		<value>ACCOUNT</value>
+	</util:list>
+	<util:list id="proformaOnlinePayment">
 		<value>CARD</value>
 		<value>ACCOUNT</value>
 	</util:list>
