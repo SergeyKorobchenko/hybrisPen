@@ -12,7 +12,7 @@
 <c:set var="loopIndexColor" value="0"/>
 
 <c:forEach items="${product.variantMatrix}" var="firstVariant" varStatus="parentLoop">
-	<c:if test="${empty(filterSkus) || (!empty(filterSkus) && fn:contains(filterSkus, firstVariant.variantOption.code) ) }">
+	<%-- <c:if test="${empty(filterSkus) || (!empty(filterSkus) && fn:contains(filterSkus, firstVariant.variantOption.code) ) }"> --%>
 		<div class="orderForm_grid_group">
 			<c:set var="skusId" value="${firstVariant.variantOption.code}"/>
 			<grid:coreTableHeader variant="${firstVariant}"
@@ -41,6 +41,6 @@
 
 			</div>
 		</div>
-	</c:if>
+	<%-- </c:if> --%>
 
 </c:forEach>

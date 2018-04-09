@@ -113,7 +113,8 @@
 	<bean id="defaultGenderDataPopulator" class="com.bridgex.facades.populators.GenderDataPopulator" >
 		<property name="typeService" ref="typeService"/>
 	</bean>
-
+	
+	<alias name="apparelProductPopulator" alias="apparelPentlandProductPopulator"/>
 	<bean id="apparelProductPopulator" class="com.bridgex.facades.populators.ApparelProductPopulator" parent="baseProductPopulator">
 		<property name="genderConverter" ref="genderConverter"/>
 	</bean>
@@ -406,6 +407,36 @@
 		<property name="baseOptionDataConverter" ref="baseOptionDataConverter"/>
 		<property name="commercePriceService" ref="commercePriceService"/>
 		<property name="onlineStatusSet" ref="onlineStatusSet"/>
+	</bean>
+	
+	<alias name="defaultPentlandVariantProductSearchOptions" alias="productVariantSearchOptions"/>
+    <util:list id="defaultPentlandVariantProductSearchOptions" value-type="de.hybris.platform.commercefacades.product.ProductOption" >
+         <value>CATEGORIES</value>
+        <value>VARIANT_MATRIX_BASE</value>
+        <value>VARIANT_MATRIX_ALL_OPTIONS</value>
+        <value>URL</value>
+    </util:list>
+    
+    <alias name="defaultBasicProductSearchOptions" alias="productBasicSearchOptions"/>
+    <util:list id="defaultBasicProductSearchOptions" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+        <value>SUMMARY</value>
+        <value>DESCRIPTION</value>
+        <value>URL</value>
+        <value>PRICE</value>
+        <value>IMAGES</value>
+        <value>STOCK</value>
+        <value>CATEGORIES</value>
+        <value>BASIC</value>
+        <value>VARIANT_MATRIX_BASE</value>
+        <value>VARIANT_MATRIX_URL</value>
+        <value>APPAREL</value>
+    </util:list>
+	
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="APPAREL" />
+		<property name="add" ref="apparelPentlandProductPopulator" />
 	</bean>
 
 </beans>
