@@ -11,35 +11,15 @@
 package de.hybris.platform.pentlandb2baddon.controllers.pages;
 
 
-import de.hybris.platform.acceleratorservices.controllers.page.PageType;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.SearchBreadcrumbBuilder;
-import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.util.MetaSanitizerUtil;
-import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
-import de.hybris.platform.pentlandb2baddon.forms.AdvancedSearchForm;
-import de.hybris.platform.b2bacceleratorfacades.api.search.SearchFacade;
-import de.hybris.platform.b2bacceleratorfacades.search.data.ProductSearchStateData;
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.product.data.ProductData;
-import de.hybris.platform.commercefacades.search.data.SearchQueryData;
-import de.hybris.platform.commercefacades.search.data.SearchStateData;
-import de.hybris.platform.commerceservices.search.facetdata.FacetData;
-import de.hybris.platform.commerceservices.search.facetdata.FacetValueData;
-import de.hybris.platform.commerceservices.search.facetdata.ProductSearchPageData;
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
-import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
-import de.hybris.platform.util.Config;
-
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.function.Predicate;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,7 +33,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bridgex.facades.product.PentlandProductFacade;
 import com.google.common.collect.Lists;
+
+import de.hybris.platform.acceleratorservices.controllers.page.PageType;
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.SearchBreadcrumbBuilder;
+import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.util.MetaSanitizerUtil;
+import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
+import de.hybris.platform.b2bacceleratorfacades.api.search.SearchFacade;
+import de.hybris.platform.b2bacceleratorfacades.search.data.ProductSearchStateData;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.search.data.SearchQueryData;
+import de.hybris.platform.commercefacades.search.data.SearchStateData;
+import de.hybris.platform.commerceservices.search.facetdata.FacetData;
+import de.hybris.platform.commerceservices.search.facetdata.FacetValueData;
+import de.hybris.platform.commerceservices.search.facetdata.ProductSearchPageData;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.pentlandb2baddon.forms.AdvancedSearchForm;
+import de.hybris.platform.util.Config;
 
 
 @Controller
@@ -79,6 +82,9 @@ public class AdvanceSearchPageController extends AbstractSearchPageController
 
 	@Resource(name = "b2bSolrProductSearchFacade")
 	private SearchFacade<ProductData, SearchStateData> b2bSolrProductSearchFacade;
+	
+	@Resource(name = "productFacade")
+	private PentlandProductFacade productFacade;
 
 	@RequestMapping(value = "/advanced", method = RequestMethod.GET)
 	public String advanceSearchResults(
@@ -104,6 +110,13 @@ public class AdvanceSearchPageController extends AbstractSearchPageController
 				isPopulateVariants(searchResultType, isCreateOrderForm));
 
 		final SearchPageData<ProductData> searchPageData = performSearch(searchState, pageableData, useFlexibleSearch);
+		List<ProductData> allProducts=new ArrayList<ProductData>();
+		for (ProductData productData : searchPageData.getResults()) {
+			productFacade.populateCustomerPrice(productData);
+			productFacade.populateOrderForm(productData);
+			allProducts.add(productData);
+		}
+		searchPageData.setResults(allProducts);
 		populateModel(model, searchPageData, showMode);
 
 		final AdvancedSearchForm form = new AdvancedSearchForm();

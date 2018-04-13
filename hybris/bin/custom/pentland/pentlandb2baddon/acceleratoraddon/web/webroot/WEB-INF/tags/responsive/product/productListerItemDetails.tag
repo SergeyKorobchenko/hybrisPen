@@ -7,6 +7,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -55,7 +57,10 @@
     <%-- price --%>
     <div class="item__price">
         <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>: </span>
-        <product:productListerItemPrice product="${product}"/>
+         <%-- <product:productListerItemPrice product="${product}"/> --%>
+         <common:hidePricesForUser>
+         <format:price priceData="${product.customerPrice}"/>
+         </common:hidePricesForUser>
     </div>
 
     <%-- description --%>

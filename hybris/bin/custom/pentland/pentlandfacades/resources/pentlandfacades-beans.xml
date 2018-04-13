@@ -120,6 +120,7 @@
 		<value>FEATURE</value>
 		<value>BRAND</value>
 		<value>PDP</value>
+		<value>APPAREL</value>
 	</enum>
 
 	<bean class="de.hybris.platform.commercefacades.product.data.VariantMatrixElementData">
