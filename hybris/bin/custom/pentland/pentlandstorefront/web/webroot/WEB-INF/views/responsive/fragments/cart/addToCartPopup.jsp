@@ -75,7 +75,7 @@
             <ycommerce:testId code="checkoutLinkInPopup">
                 <a href="${cartUrl}" class="btn btn-primary btn-block add-to-cart-button">
 	                <c:choose>
-		                <c:when test="${isQuote}">
+		                <c:when test="${cartData.quoteData}">
 		                	<spring:theme code="quote.view" />
 	                    </c:when>
 	                    <c:otherwise>

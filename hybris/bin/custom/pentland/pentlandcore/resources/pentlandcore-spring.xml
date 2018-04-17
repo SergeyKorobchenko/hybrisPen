@@ -94,5 +94,6 @@
 		<value>D04</value>
 		<value>D05</value>
 	</util:list>
+	<bean parent="defaultCommerceQuoteService" class="com.bridgex.core.quote.cancelservices.impl.CancelOrderQuoteServiceImpl" id="cancelOrderQuoteService"> </bean>
 
 </beans>

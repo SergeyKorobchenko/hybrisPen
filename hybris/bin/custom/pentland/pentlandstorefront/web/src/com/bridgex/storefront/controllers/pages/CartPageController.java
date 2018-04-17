@@ -157,8 +157,9 @@ public class CartPageController extends AbstractCartPageController
 
 	protected String prepareCartUrl(final Model model) throws CMSItemNotFoundException
 	{
-		final Optional<String> quoteEditUrl = getQuoteUrl();
-		if (quoteEditUrl.isPresent())
+		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
+		final Optional<String> quoteEditUrl = getQuoteUrl(quoteData);
+		if (quoteEditUrl.isPresent() && !QuoteState.CANCELLED.equals(quoteData.getState()))
 		{
 			return quoteEditUrl.get();
 		}
@@ -170,9 +171,9 @@ public class CartPageController extends AbstractCartPageController
 		}
 	}
 
-	protected Optional<String> getQuoteUrl()
+	protected Optional<String> getQuoteUrl(QuoteData quoteData)
 	{
-		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
+//		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
 
 		return quoteData != null
 				? (QuoteState.BUYER_OFFER.equals(quoteData.getState())
