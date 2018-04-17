@@ -16,7 +16,7 @@
 <c:url value="/cart/checkout" var="checkoutUrl"/>
 
 <c:choose>
-	<c:when test="${not empty cartData.quoteData}">
+	<c:when test="${not empty cartData.quoteData && cartData.quoteData eq 'null'}">
 		<c:set var="miniCartProceed" value="quote.view"/>
 	</c:when>
 	<c:otherwise>
@@ -93,9 +93,9 @@
 						<a href="${cartUrl}" class="btn btn-primary btn-block mini-cart-checkout-button">
 							<spring:theme code="${miniCartProceed }" />
 						</a>
-						<a href="" class="btn btn-default btn-block js-mini-cart-close-button">
-							<spring:theme code="cart.page.continue"/>
-						</a>
+						<a href="${continueShoppingUrl}" class="btn btn-default btn-block btn--continue-shopping js-continue-shopping-button">
+      						 <spring:theme code="cart.page.continue"/>
+     					</a>
 				</c:when>
 
 				<c:otherwise>
