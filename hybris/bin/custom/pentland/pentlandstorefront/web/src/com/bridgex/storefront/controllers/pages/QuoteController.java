@@ -10,45 +10,11 @@
  */
 package com.bridgex.storefront.controllers.pages;
 
-import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
-import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCartPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.QuoteDiscountForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.QuoteForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.VoucherForm;
-import de.hybris.platform.acceleratorstorefrontcommons.tags.Functions;
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.comment.data.CommentData;
-import de.hybris.platform.commercefacades.order.QuoteFacade;
-import de.hybris.platform.commercefacades.order.SaveCartFacade;
-import de.hybris.platform.commercefacades.order.data.*;
-import de.hybris.platform.commercefacades.product.PriceDataFactory;
-import de.hybris.platform.commercefacades.product.data.PriceDataType;
-import de.hybris.platform.commercefacades.quote.data.QuoteData;
-import de.hybris.platform.commercefacades.util.CommerceCartMetadataUtils;
-import de.hybris.platform.commercefacades.voucher.VoucherFacade;
-import de.hybris.platform.commercefacades.voucher.data.VoucherData;
-import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
-import de.hybris.platform.commerceservices.enums.QuoteAction;
-import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
-import de.hybris.platform.commerceservices.order.CommerceQuoteAssignmentException;
-import de.hybris.platform.commerceservices.order.CommerceQuoteExpirationTimeException;
-import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteStateException;
-import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteSubmitException;
-import de.hybris.platform.commerceservices.order.exceptions.QuoteUnderThresholdException;
-import de.hybris.platform.commerceservices.util.QuoteExpirationTimeUtils;
-import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
-import de.hybris.platform.servicelayer.exceptions.ModelSavingException;
-import de.hybris.platform.servicelayer.exceptions.SystemException;
-import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
-import de.hybris.platform.servicelayer.internal.model.impl.ItemModelCloneCreator.CannotCloneException;
-import com.bridgex.storefront.util.QuoteExpirationTimeConverter;
-
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -72,6 +38,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
+
+import com.bridgex.facades.cart.cancel.quote.ICancelOrderQuoteFacade;
+
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCartPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.QuoteDiscountForm;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.QuoteForm;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.VoucherForm;
+import de.hybris.platform.acceleratorstorefrontcommons.tags.Functions;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.comment.data.CommentData;
+import de.hybris.platform.commercefacades.order.QuoteFacade;
+import de.hybris.platform.commercefacades.order.SaveCartFacade;
+import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
+import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.order.data.CommerceCartMetadata;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.PriceDataFactory;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
+import de.hybris.platform.commercefacades.quote.data.QuoteData;
+import de.hybris.platform.commercefacades.util.CommerceCartMetadataUtils;
+import de.hybris.platform.commercefacades.voucher.VoucherFacade;
+import de.hybris.platform.commercefacades.voucher.data.VoucherData;
+import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
+import de.hybris.platform.commerceservices.enums.QuoteAction;
+import de.hybris.platform.commerceservices.order.CommerceQuoteAssignmentException;
+import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteStateException;
+import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteSubmitException;
+import de.hybris.platform.commerceservices.order.exceptions.QuoteUnderThresholdException;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
+import de.hybris.platform.servicelayer.exceptions.ModelSavingException;
+import de.hybris.platform.servicelayer.exceptions.SystemException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.internal.model.impl.ItemModelCloneCreator.CannotCloneException;
 
 
 /**
@@ -126,6 +130,9 @@ public class QuoteController extends AbstractCartPageController
 
 	@Resource(name = "priceDataFactory")
 	private PriceDataFactory priceDataFactory;
+	
+	@Resource(name="cancelOrderQuoteFacade")
+	private ICancelOrderQuoteFacade cancelOrderQuoteFacade;
 
 	/**
 	 * Creates a new quote based on session cart.
@@ -362,7 +369,8 @@ public class QuoteController extends AbstractCartPageController
 	{
 		try
 		{
-			quoteFacade.cancelQuote(quoteCode);
+			
+			cancelOrderQuoteFacade.cancelQuote(quoteCode);
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, QUOTE_TEXT_CANCEL_SUCCESS,
 					new Object[]
 					{ quoteCode });

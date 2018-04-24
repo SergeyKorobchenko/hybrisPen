@@ -440,5 +440,11 @@
 		<property name="key" value="APPAREL" />
 		<property name="add" ref="apparelPentlandProductPopulator" />
 	</bean>
-	
+
+	<bean class="com.bridgex.facades.cart.cancel.quote.CancelOrderQuoteFacadeImpl" id="cancelOrderQuoteFacade" parent="defaultQuoteFacade">
+
+		<property name="cancelOrderQuoteService" ref="cancelOrderQuoteService"/>
+
+</bean>
+
 </beans>
