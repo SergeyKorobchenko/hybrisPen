@@ -21,7 +21,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set var="varShowStock" value="${(empty showStock) ? true : showStock}" />
+<%-- <c:set var="varShowStock" value="${(empty showStock) ? true : showStock}" /> --%>
 <c:set var="defaultViewConfigurationInfosBaseUrl" value="/my-account/order" />
 
 <c:url value="${orderEntry.product.url}" var="productUrl"/>
@@ -61,7 +61,7 @@
         </div>
 
         <%-- availability --%>
-        <c:if test="${varShowStock}">
+        <%-- <c:if test="${varShowStock}">
         	<div class="item__stock">
             	<ycommerce:testId code="orderDetail_productStock_label">
                 	<c:choose>
@@ -77,7 +77,7 @@
                 	</c:choose>
             	</ycommerce:testId>
         	</div>
-        </c:if>
+        </c:if> --%>
 
        	<c:if test="${not empty order.appliedProductPromotions}">
            	<div class="promo">
@@ -98,11 +98,11 @@
                 </ul>
             </div>
         </c:if>
-        <common:configurationInfos entry="${orderEntry}"/>
+        <%-- <common:configurationInfos entry="${orderEntry}"/>
         <c:if test="${empty showViewConfigurationInfos || showViewConfigurationInfos eq true}">        	
         	<common:viewConfigurationInfos baseUrl="${empty viewConfigurationInfosBaseUrl ? defaultViewConfigurationInfosBaseUrl : viewConfigurationInfosBaseUrl}" 
         		orderEntry="${orderEntry}" itemCode="${order.code}"/>	
-        </c:if>
+        </c:if> --%>
         
     </div>
 
@@ -110,7 +110,7 @@
     <div class="item__price">
         <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>:</span>
         <ycommerce:testId code="orderDetails_productItemPrice_label">
-            <order:orderEntryPrice orderEntry="${orderEntry}"/>
+            <format:price priceData="${entry.erpPrice}" displayFreeForZero="false"/>
         </ycommerce:testId>
     </div>
 

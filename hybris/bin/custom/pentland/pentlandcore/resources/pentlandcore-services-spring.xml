@@ -129,5 +129,10 @@
 
 	<alias name="pentlandAssistedServiceService" alias="assistedServiceService"/>
 	<bean id="pentlandAssistedServiceService" class="com.bridgex.core.assistedservices.impl.PentlandAssistedServiceService" parent="defaultAssistedServiceService"/>
+	
+	<alias name="pentlandOrderService" alias="orderService"/>
+	<bean id="pentlandOrderService" class="com.bridgex.core.order.impl.DefaultPentlandOrderService" parent="defaultOrderService">
+	<property name="pentlandOrderDao" ref="pentlandOrderDao"/>
+	</bean>
 
 </beans>

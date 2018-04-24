@@ -3,6 +3,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 
 <c:choose>
 	<c:when test="${pageType eq 'ORDERCONFIRMATION'}">
@@ -48,5 +49,22 @@
 				<b2b-order:accountOrderDetailsSoldTo order="${orderData}"/>
 			</ycommerce:testId>
 		</div>
+		<ul class="item__list">
+ <li class="hidden-xs hidden-sm">
+ <ul class="item__list--header">
+ <li class="item__toggle"></li>
+ <li class="item__image"></li>
+ <li class="item__info"><spring:theme code="basket.page.item"/></li>
+ <li class="item__price"><spring:theme code="basket.page.price"/></li>
+ <li class="item__quantity"><spring:theme code="basket.page.qty"/></li>
+ <li class="item__total--column"><spring:theme code="basket.page.total"/></li>
+ </ul>
+ </li>
+	<ycommerce:testId code="orderDetail_itemBody_section">
+	<c:forEach items="${sourceOrderData.entries}" var="entry" varStatus="loop">
+	<order:orderEntryDetails orderEntry="${entry}" order="${sourceOrderData}" itemIndex="${loop.index}"/>
+	</c:forEach>
+	</ycommerce:testId>
+</ul>
 	</c:otherwise>
 </c:choose>

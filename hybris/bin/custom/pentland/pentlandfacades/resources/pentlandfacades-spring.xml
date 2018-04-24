@@ -37,6 +37,8 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
+		<property name="pentlandOrderService" ref="pentlandOrderService"/>
+		<property name="orderConverter" ref="orderConverter"/>
 	</bean>
 
 	<bean id="orderDetailsConverter" parent="abstractPopulatingConverter">
@@ -438,6 +440,7 @@
 		<property name="key" value="APPAREL" />
 		<property name="add" ref="apparelPentlandProductPopulator" />
 	</bean>
+
 	<bean class="com.bridgex.facades.cart.cancel.quote.CancelOrderQuoteFacadeImpl" id="cancelOrderQuoteFacade" parent="defaultQuoteFacade">
 
 		<property name="cancelOrderQuoteService" ref="cancelOrderQuoteService"/>
