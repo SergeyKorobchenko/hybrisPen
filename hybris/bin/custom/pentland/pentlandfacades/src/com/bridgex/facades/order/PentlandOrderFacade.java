@@ -8,6 +8,7 @@ import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.core.model.order.OrderModel;
 
 /**
  * Created by dmitry.konovalov@masterdata.ru on 18.10.2017.
@@ -19,4 +20,6 @@ public interface PentlandOrderFacade extends OrderFacade {
   OrderData requestOrderDetails(String orderCode);
 
   List<OrderData> getSapOrdersForOrderCode(String orderCode);
+  
+  OrderData getSourceOrder(String sapOrderCode); 
 }

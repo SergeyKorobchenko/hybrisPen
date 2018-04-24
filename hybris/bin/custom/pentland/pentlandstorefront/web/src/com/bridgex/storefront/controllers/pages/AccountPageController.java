@@ -66,9 +66,11 @@ import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -332,7 +334,22 @@ public class AccountPageController extends AbstractSearchPageController
 		try
 		{
 			final OrderData orderDetails = orderFacade.requestOrderDetails(orderCode);
+			
+			OrderData sourceOrder = orderFacade.getSourceOrder(orderCode);
+			
+			if (sourceOrder.getEntries() != null && !sourceOrder.getEntries().isEmpty())
+			{
+				for (final OrderEntryData entry : sourceOrder.getEntries())
+				{
+					final String productCode = entry.getProduct().getCode();
+					final ProductData product = productFacade.getProductForCodeAndOptions(productCode,
+							Arrays.asList(
+	                                ProductOption.VARIANT_MATRIX_BASE,ProductOption.BASIC, ProductOption.PRICE, ProductOption.CATEGORIES));
+					entry.setProduct(product);
+				}
+			}
 			model.addAttribute("orderData", orderDetails);
+			model.addAttribute("sourceOrderData", sourceOrder);
 
 			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
 			breadcrumbs.add(new Breadcrumb("/my-account/orders", getMessageSource().getMessage("text.account.orderHistory", null,

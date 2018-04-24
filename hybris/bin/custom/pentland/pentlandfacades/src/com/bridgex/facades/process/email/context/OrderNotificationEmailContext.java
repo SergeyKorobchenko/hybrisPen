@@ -15,6 +15,10 @@ import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmai
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.ProductFacade;
+import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -26,12 +30,17 @@ import de.hybris.platform.servicelayer.session.SessionExecutionBody;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
+
+import com.bridgex.facades.product.PentlandProductFacade;
 
 
 /**
@@ -44,7 +53,9 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	private List<CouponData>                 giftCoupons;
 	private SessionService                   sessionService;
 	private UserService                      userService;
-
+	@Resource(name = "productFacade")
+	private PentlandProductFacade productFacade;
+	
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
 	{
@@ -58,6 +69,13 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				userService.setCurrentUser(customer);
 				OrderModel order = orderProcessModel.getOrder();
 				orderData = getOrderConverter().convert(order);
+				for (final OrderEntryData entry : orderData.getEntries())
+				{
+					List<OrderEntryData> entries = entry.getEntries();
+					for (OrderEntryData orderEntryData : entries) {
+						productFacade.populateCustomerPrice(orderEntryData.getProduct());
+					}
+				}
 				if(ExportStatus.EXPORTED.equals(order.getExportStatus()) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
 					orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
 				}else{

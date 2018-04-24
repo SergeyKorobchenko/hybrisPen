@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.integration.PentlandIntegrationService;
+import com.bridgex.core.order.PentlandOrderService;
 import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
@@ -24,7 +25,6 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
-import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.store.BaseStoreModel;
 
 /**
@@ -39,6 +39,10 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
 
   private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
+  
+  private PentlandOrderService pentlandOrderService;
+  
+  private Converter<OrderModel, OrderData> orderConverter;
 
   @Override
   public SearchPageData<OrderHistoryData> getPagedB2BOrderHistoryForStatuses(final PageableData pageableData, final OrderStatus... statuses)
@@ -79,6 +83,12 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
     request.setOrderCode(code);
     return request;
   }
+  
+  @Override
+  public OrderData getSourceOrder(String sapOrderCode)
+  {
+  	return getOrderConverter().convert(getPentlandOrderService().getSourceOrder(sapOrderCode));
+  }
 
   protected PentlandCustomerAccountService getPentlandCustomerAccountService() {
     return pentlandCustomerAccountService;
@@ -97,4 +107,25 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   public void setOrderDetailsConverter(Converter<OrderDetailsResponse, OrderData> orderDetailsConverter) {
     this.orderDetailsConverter = orderDetailsConverter;
   }
+
+  public PentlandOrderService getPentlandOrderService() {
+	 return pentlandOrderService;
+  }
+
+  public void setPentlandOrderService(PentlandOrderService pentlandOrderService) {
+	 this.pentlandOrderService = pentlandOrderService;
+  }
+
+public Converter<OrderModel, OrderData> getOrderConverter() {
+	return orderConverter;
+}
+
+public void setOrderConverter(Converter<OrderModel, OrderData> orderConverter) {
+	this.orderConverter = orderConverter;
+}
+  
+  
+   
+  
+
 }

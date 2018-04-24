@@ -46,6 +46,9 @@
 				parent="defaultPrincipalGroupMembersDao"/>
 	
 	<alias name="defaultPentlandPagedB2BProductDao" alias="pagedB2BProductDao"/>
-	<bean id="defaultPentlandPagedB2BProductDao" class="com.bridgex.core.product.dao.impl.DefaultPentlandPagedB2BProductDao" parent="defaultPagedB2BProductDao"/>				
+	<bean id="defaultPentlandPagedB2BProductDao" class="com.bridgex.core.product.dao.impl.DefaultPentlandPagedB2BProductDao" parent="defaultPagedB2BProductDao"/>
+	
+	<alias name="pentlandOrderDao" alias="orderDao"/>
+	<bean id="pentlandOrderDao" class="com.bridgex.core.order.dao.impl.DefaultPentlandOrderDao" parent="defaultOrderDao"/>				
 
 </beans>

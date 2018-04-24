@@ -37,6 +37,8 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
+		<property name="pentlandOrderService" ref="pentlandOrderService"/>
+		<property name="orderConverter" ref="orderConverter"/>
 	</bean>
 
 	<bean id="orderDetailsConverter" parent="abstractPopulatingConverter">
@@ -438,5 +440,5 @@
 		<property name="key" value="APPAREL" />
 		<property name="add" ref="apparelPentlandProductPopulator" />
 	</bean>
-
+	
 </beans>
