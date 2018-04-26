@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.integration.PentlandIntegrationService;
-import com.bridgex.core.order.PentlandOrderService;
 import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
@@ -39,8 +38,6 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
 
   private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
-  
-  private PentlandOrderService pentlandOrderService;
   
   private Converter<OrderModel, OrderData> orderConverter;
 
@@ -87,7 +84,9 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   @Override
   public OrderData getSourceOrder(String sapOrderCode)
   {
-  	return getOrderConverter().convert(getPentlandOrderService().getSourceOrder(sapOrderCode));
+	  final BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
+	  OrderModel orderForCode = getCustomerAccountService().getOrderForCode(sapOrderCode, baseStoreModel);
+  	  return getOrderConverter().convert(orderForCode.getSourceOrder());
   }
 
   protected PentlandCustomerAccountService getPentlandCustomerAccountService() {
@@ -108,21 +107,13 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
     this.orderDetailsConverter = orderDetailsConverter;
   }
 
-  public PentlandOrderService getPentlandOrderService() {
-	 return pentlandOrderService;
-  }
+	public Converter<OrderModel, OrderData> getOrderConverter() {
+		return orderConverter;
+	}
 
-  public void setPentlandOrderService(PentlandOrderService pentlandOrderService) {
-	 this.pentlandOrderService = pentlandOrderService;
-  }
-
-public Converter<OrderModel, OrderData> getOrderConverter() {
-	return orderConverter;
-}
-
-public void setOrderConverter(Converter<OrderModel, OrderData> orderConverter) {
-	this.orderConverter = orderConverter;
-}
+	public void setOrderConverter(Converter<OrderModel, OrderData> orderConverter) {
+		this.orderConverter = orderConverter;
+	}
   
   
    
