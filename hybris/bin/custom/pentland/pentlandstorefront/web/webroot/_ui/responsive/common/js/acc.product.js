@@ -133,7 +133,7 @@ ACC.product = {
             productsOnPage.push(product);
         });
             var $form = $("#export-csv");
-            $form.find("input[name='content']").val(JSON.stringify(productsOnPage));
+           // $form.find("input[name='content']").val(JSON.stringify(productsOnPage));
             $form.submit();
         });
     },
@@ -147,7 +147,7 @@ ACC.product = {
                 productsOnPage.push(product);
             });
             var $form = $("#export-images");
-            $form.find("input[name='content']").val(productsOnPage);
+           //	 $form.find("input[name='content']").val(productsOnPage);
             $form.submit();
         });
     }

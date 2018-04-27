@@ -133,8 +133,8 @@
 
 	<bean class="com.bridgex.facades.order.data.MiniOrderEntry">
 		<property name="stylecode" type="String"/>
-		<property name="materialKey" type="String"/>
-		<property name="sku" type="String"/>
+		<property name="materialKey" type="java.util.List&lt;String>"/>
+		<property name="sku" type="java.util.List&lt;String>"/>
 		<property name="name" type="String"/>
 		<property name="upc" type="String"/>
 		<property name="price" type="String"/>
