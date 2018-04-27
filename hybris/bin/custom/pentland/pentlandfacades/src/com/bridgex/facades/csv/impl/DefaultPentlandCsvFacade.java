@@ -76,27 +76,31 @@ public class DefaultPentlandCsvFacade extends DefaultCsvFacade implements Pentla
     addHeaders(headers, includeHeader, writer);
 
     if (CollectionUtils.isNotEmpty(collectedProducts)) {
-      for(MiniOrderEntry productData: collectedProducts){
-        final StringBuilder csvContent = new StringBuilder();
-        csvContent.append(StringEscapeUtils.escapeCsv(productData.getStylecode())).append(DELIMITER);
-        csvContent.append(StringEscapeUtils.escapeCsv(productData.getMaterialKey())).append(DELIMITER);
-        csvContent.append(StringEscapeUtils.escapeCsv(productData.getSku()))
-                  .append(DELIMITER)
-                  .append(StringEscapeUtils.escapeCsv(productData.getName()))
-                  .append(DELIMITER);
-        if (StringUtils.isNotEmpty(productData.getUpc())) {
-          csvContent.append(StringEscapeUtils.escapeCsv(productData.getUpc()));
-        }
-        csvContent.append(DELIMITER);
-        csvContent.append(1).append(DELIMITER);
-        csvContent.append(StringEscapeUtils.escapeCsv(productData.getPrice()))
-                  .append(DELIMITER);
-
-
-        csvContent.append(LINE_SEPERATOR);
-
-        writer.write(csvContent.toString());
-      }
+    	for(MiniOrderEntry productData: collectedProducts){
+    		final StringBuilder csvContent = new StringBuilder();
+    		csvContent.append(StringEscapeUtils.escapeCsv(productData.getStylecode())).append(DELIMITER);
+    		List<String> materialKey = productData.getMaterialKey();
+    		for (String string1 : materialKey) {
+    			csvContent.append(StringEscapeUtils.escapeCsv(string1));
+    		}
+    		csvContent.append(DELIMITER);
+    		List<String> sku = productData.getSku();
+    		for (String string : sku) {
+    			csvContent.append(StringEscapeUtils.escapeCsv(string));
+    		} 
+    		csvContent.append(DELIMITER);
+    		csvContent.append(StringEscapeUtils.escapeCsv(productData.getName()))
+    		.append(DELIMITER);	
+    		if (StringUtils.isNotEmpty(productData.getUpc())) {
+    			csvContent.append(StringEscapeUtils.escapeCsv(productData.getUpc()));
+    		}
+    		csvContent.append(DELIMITER);
+    		csvContent.append(1).append(DELIMITER);
+    		csvContent.append(StringEscapeUtils.escapeCsv(productData.getPrice()))
+    		.append(DELIMITER);
+    		csvContent.append(LINE_SEPERATOR);
+    		writer.write(csvContent.toString());
+    	}
     }
   }
 }

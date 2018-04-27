@@ -100,7 +100,7 @@
                                     </form>
                                 </div>
 
-                                <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
+                                <%-- <c:if test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
                                     <div class="hidden export js-export-block">
                                         <spring:url value="/export/csv" var="exportUrl" htmlEscape="false"/>
                                         <spring:url value="/export/images" var="imagesExportUrl" htmlEscape="false"/>
@@ -123,7 +123,52 @@
                                             </form>
                                         </div>
                                     </div>
-                                </c:if>
+                                </c:if> --%>
+                                <c:forTokens items="${searchUrl}" delims="q=" var="url">
+									<c:set var="searchQuery" value="${url}" />
+									<c:set var="searchQueryUrl" value="${searchQuery}" />
+									<c:set var="searchQueryUrlResult"
+										value="${fn:replace(searchQueryUrl, '%3A', ':')}" />
+									<c:set var="searchQueryUrlFinalResult"
+										value="${fn:replace(searchQueryUrlResult, '%25', '%')}" />
+									<c:set var="searchDataUrl"
+										value="${fn:replace(searchQueryUrlFinalResult, '%2B', '+')}" />
+								</c:forTokens>
+								<c:if
+									test="${pageType == 'CATEGORY' or pageType == 'PRODUCTSEARCH'}">
+									<div class="hidden export js-export-block">
+										<spring:url value="${request.contextPath}${searchUrl}"
+											var="exportUrl" htmlEscape="false" />
+										<spring:url value="${request.contextPath}${searchUrl}"
+											var="imagesExportUrl" htmlEscape="false" />
+										<div class="export__link">
+											<form id="export-csv"
+												action="${request.contextPath}${searchUrl}" method="get">
+												<input type="hidden" name="exportCsv" value="true" /> <input
+													type="hidden" name="q" value="${searchDataUrl}" /> <input
+													type="hidden" name="url" value="${searchUrl}" />
+											</form>
+											<a href="${request.contextPath}${searchUrl}"
+												class="exportCsvFromPLP media-heading"> <span
+												class="glyphicon glyphicon-download-alt"></span> <spring:theme
+													code="basket.export.csv.file" />
+											</a>
+										</div>
+										<div class="export__link">
+											<form id="export-images"
+												action="${request.contextPath}${searchUrl}" method="get">
+												<input type="hidden" name="exportImages" value="true" /> <input
+													type="hidden" name="q" value="${searchDataUrl}" /> <input
+													type="hidden" name="url" value="${searchUrl}" />
+											</form>
+											<a href="${request.contextPath}${searchUrl}"
+												class="exportImagesFromPLP"> <span
+												class="glyphicon glyphicon-download-alt"></span> <spring:theme
+													code="basket.export.images.file" />
+											</a>
+										</div>
+									</div>
+								</c:if>
                             </div>
                         </c:if>
 

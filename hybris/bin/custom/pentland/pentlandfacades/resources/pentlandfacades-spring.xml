@@ -37,7 +37,6 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="orderDetailsConverter" ref="orderDetailsConverter"/>
-		<property name="pentlandOrderService" ref="pentlandOrderService"/>
 		<property name="orderConverter" ref="orderConverter"/>
 	</bean>
 
