@@ -315,7 +315,7 @@ public class AccountPageController extends AbstractSearchPageController
 			throws CMSItemNotFoundException
 	{
 		// Handle paged search results
-		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
+		final PageableData pageableData = createPageableData(page, 10, sortCode, showMode);
 		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedB2BOrderHistoryForStatuses(pageableData);
 		populateModel(model, searchPageData, showMode);
 

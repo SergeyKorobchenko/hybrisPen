@@ -11,7 +11,7 @@
                     <spring:theme var="paymentTypeLabel" code="checkout.payment.${paymentType.code}.${user.unit.customerType}"/>
                 </c:if>
 
-                <form:radiobutton path="paymentType" id="PaymentTypeSelection_${paymentType.code}" value="${paymentType.code}"
+                <form:radiobutton checked="checked" path="paymentType" id="PaymentTypeSelection_${paymentType.code}" value="${paymentType.code}"
                                   label="${not empty paymentTypeLabel ? paymentTypeLabel : paymentType.displayName}" />
                 <br>
             </c:forEach>
