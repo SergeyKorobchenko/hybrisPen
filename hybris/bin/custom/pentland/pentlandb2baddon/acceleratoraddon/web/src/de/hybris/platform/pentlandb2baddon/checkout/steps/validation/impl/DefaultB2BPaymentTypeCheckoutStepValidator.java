@@ -13,7 +13,12 @@ package de.hybris.platform.pentlandb2baddon.checkout.steps.validation.impl;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.ValidationResults;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.pentlandb2baddon.checkout.steps.validation.AbstractB2BCheckoutStepValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
@@ -53,6 +58,26 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 				                               "checkout.error.empty.rdd");
 				return ValidationResults.FAILED;
 		}
+			 List<OrderEntryData> entries = cartData.getEntries();
+			   for (OrderEntryData orderEntryData : entries) {
+			    List<OrderEntryData> entries2 = orderEntryData.getEntries();
+			    List<String> sizeVars = new ArrayList<>();
+			    for (OrderEntryData orderEntryData2 : entries2) {
+			      ProductData product = orderEntryData2.getProduct();
+			      if(product.getPurchasable() == false)
+			       
+			      {
+			      sizeVars.add(product.getSize()+ " of " + product.getMaterialKey());
+			      }
+			    
+			    }
+			     if(null!=sizeVars && !sizeVars.isEmpty())
+			     {
+			      GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+			        "checkout.error.remove.entry.cart" + sizeVars);
+			      return ValidationResults.FAILED;
+			     }
+			   }
 			return ValidationResults.SUCCESS;
 		}
 

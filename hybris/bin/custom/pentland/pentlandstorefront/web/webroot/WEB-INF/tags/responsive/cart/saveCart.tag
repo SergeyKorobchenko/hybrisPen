@@ -17,8 +17,32 @@
 --%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<spring:url value="/cart/delete" var="actionUrl1"  />
+<a href="#" class="cart__head--link pull-right" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false"><spring:theme code="basket.empty.cart" /></a>
 
 <a href="#" class="cart__head--link js-save-cart-link pull-right"><span class="glyphicon glyphicon-plus"></span><spring:theme code="basket.save.cart" /></a>
     
 <spring:url value="/cart/save" var="actionUrl" htmlEscape="false"/>
 <cart:saveCartModal titleKey="text.save.cart.title" actionUrl="${actionUrl}" messageKey="basket.save.cart.info.msg"/>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- <h4 class="modal-title">Modal Header</h4> -->
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to clear the basket</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <a href="${actionUrl1}" class="btn btn-primary">Yes</a>
+      </div>
+    </div>
+
+  </div>
+</div>

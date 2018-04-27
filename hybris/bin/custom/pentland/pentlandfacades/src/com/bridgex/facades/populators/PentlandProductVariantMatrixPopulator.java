@@ -54,8 +54,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
         styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
         styleElementData.setVariantOption(styleVariantOptionData);
 
-        List<ApparelSizeVariantProductModel> sizeLevelVariants =
-          styleVariantProductModel.getVariants().stream().filter(this::isOnlineProduct).map(e -> (ApparelSizeVariantProductModel) e).sorted(new ProductSizeComparator()).collect(Collectors.toList());
+        List<ApparelSizeVariantProductModel> sizeLevelVariants = styleVariantProductModel.getVariants().stream().map(e->(ApparelSizeVariantProductModel)e).sorted(new ProductSizeComparator()).collect(Collectors.toList());
 
         for (ApparelSizeVariantProductModel sizeVariantProductModel : sizeLevelVariants) {
           VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
