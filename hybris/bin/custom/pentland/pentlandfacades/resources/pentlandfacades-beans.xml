@@ -134,10 +134,10 @@
 	<bean class="com.bridgex.facades.order.data.MiniOrderEntry">
 		<property name="stylecode" type="String"/>
 		<property name="materialKey" type="java.util.List&lt;String>"/>
-		<property name="sku" type="java.util.List&lt;String>"/>
-		<property name="name" type="String"/>
+		<property name="sku" type="java.util.Map&lt;String, java.util.List&lt;String>>"/>
+		<property name="name" type="java.util.Map&lt;String,String>"/>
 		<property name="upc" type="String"/>
-		<property name="price" type="String"/>
+		<property name="price" type="java.util.Map&lt;String,String>"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.product.data.VariantOptionData">
