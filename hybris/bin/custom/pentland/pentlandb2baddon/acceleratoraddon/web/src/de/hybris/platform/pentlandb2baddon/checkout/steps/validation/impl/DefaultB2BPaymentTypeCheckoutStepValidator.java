@@ -20,6 +20,7 @@ import de.hybris.platform.pentlandb2baddon.checkout.steps.validation.AbstractB2B
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -58,10 +59,11 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 				                               "checkout.error.empty.rdd");
 				return ValidationResults.FAILED;
 		}
-			 List<OrderEntryData> entries = cartData.getEntries();
+			List<String> sizeVars = new ArrayList<>();
+			   List<OrderEntryData> entries = cartData.getEntries();
 			   for (OrderEntryData orderEntryData : entries) {
 			    List<OrderEntryData> entries2 = orderEntryData.getEntries();
-			    List<String> sizeVars = new ArrayList<>();
+			   
 			    for (OrderEntryData orderEntryData2 : entries2) {
 			      ProductData product = orderEntryData2.getProduct();
 			      if(product.getPurchasable() == false)
@@ -71,13 +73,14 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 			      }
 			    
 			    }
-			     if(null!=sizeVars && !sizeVars.isEmpty())
+			   }
+			     if(CollectionUtils.isNotEmpty(sizeVars))
 			     {
 			      GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-			        "checkout.error.remove.entry.cart" + sizeVars);
+			        "cart.remove.size.variants",new Object[]
+			          { sizeVars.toString() });
 			      return ValidationResults.FAILED;
 			     }
-			   }
 			return ValidationResults.SUCCESS;
 		}
 
