@@ -28,6 +28,12 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
   private static final String CL_BALLS_USEAGEOCCASION = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clBalls.useageoccasion";
   private static final String CL_BALLS_SURFACE = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clBalls.surface";
   private static final String CL_EQUIPMENT_TRAININGMETHOD = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clEquipment.trainingmethod";
+  private static final String CL_EQUIPMENT_TECHNOLOGY = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clEquipment.technology";
+  private static final String CL_EXTREM_BREATHABILITY = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clExtrem.breathability";
+  private static final String CL_MENS_INNOVATION = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clMens.innovation";
+  private static final String CL_MENS_ACTIVITY = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clMens.activity";
+  private static final String CL_WOMENS_INNOVATION = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clWomens.innovation";
+  private static final String CL_WOMENS_ACTIVITY = PENTLAND_CLASSIFICATION_CATALOG_1_0 + "clWomens.activity";
 
   private static final String DELIMITER = "|";
 
@@ -80,6 +86,43 @@ public class PentlandProductConverter extends AbstractConverter<Message<ProductM
             pentlandProduct.setTrainingMethod(pentlandProduct.getTrainingMethod() + DELIMITER + feature.getValue().toString());
           }
                break;
+          case CL_EQUIPMENT_TECHNOLOGY: if(StringUtils.isEmpty(pentlandProduct.getTechnology())){
+              pentlandProduct.setTechnology(feature.getValue().toString());
+            }else{
+              pentlandProduct.setTechnology(pentlandProduct.getTechnology() + DELIMITER + feature.getValue().toString());
+            }
+               break;
+          case CL_EXTREM_BREATHABILITY: if (StringUtils.isEmpty(pentlandProduct.getBreathability())) {
+        	  pentlandProduct.setBreathability(feature.getValue().toString());			
+		}else {
+			pentlandProduct.setBreathability(pentlandProduct.getBreathability() + DELIMITER + feature.getValue().toString());
+		}
+            	break;
+          case CL_MENS_INNOVATION: if (StringUtils.isEmpty(pentlandProduct.getInnovation())) {
+        	  pentlandProduct.setInnovation(feature.getValue().toString());			
+		}else {
+			pentlandProduct.setInnovation(pentlandProduct.getInnovation() + DELIMITER + feature.getValue().toString());
+		}
+          		break;
+          case CL_MENS_ACTIVITY: if (StringUtils.isEmpty(pentlandProduct.getActivity())) {
+        	  pentlandProduct.setActivity(feature.getValue().toString());			
+		}else {
+			pentlandProduct.setActivity(pentlandProduct.getActivity() + DELIMITER + feature.getValue().toString());
+		}
+          	break;
+          	
+          case CL_WOMENS_INNOVATION: if (StringUtils.isEmpty(pentlandProduct.getInnovation())) {
+        	  pentlandProduct.setInnovation(feature.getValue().toString());			
+		}else {
+			pentlandProduct.setInnovation(pentlandProduct.getInnovation() + DELIMITER + feature.getValue().toString());
+		}
+          	break;
+          case 	CL_WOMENS_ACTIVITY: if (StringUtils.isEmpty(pentlandProduct.getActivity())) {
+        	  pentlandProduct.setActivity(feature.getValue().toString());			
+		}else {
+			pentlandProduct.setActivity(pentlandProduct.getActivity() + DELIMITER + feature.getValue().toString());
+		}
+          	break;
         }
       });
     }

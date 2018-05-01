@@ -114,7 +114,7 @@
                                 <spring:theme code="text.quote.previous.estimated.total.display"/>
                             </label>
                             <span class="quote__estimate--amount">
-                                <format:price priceData="${cartData.quoteData.previousEstimatedTotal}"/>
+                                <format:price priceData="${cartData.quoteData.subTotal}"/>
                             </span>
                         </div>
                     </div>

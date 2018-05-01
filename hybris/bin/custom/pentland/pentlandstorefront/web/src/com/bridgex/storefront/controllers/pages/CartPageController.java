@@ -10,6 +10,46 @@
  */
 package com.bridgex.storefront.controllers.pages;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.zip.ZipOutputStream;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.bridgex.facades.export.PentlandExportFacade;
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
+import com.bridgex.facades.order.PentlandCartFacade;
+import com.bridgex.facades.product.PentlandProductFacade;
+import com.bridgex.storefront.controllers.ControllerConstants;
+import com.bridgex.storefront.forms.PentlandCartForm;
+import com.bridgex.storefront.forms.validation.PentlandSaveCartFormValidator;
+
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryAction;
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryActionFacade;
 import de.hybris.platform.acceleratorfacades.cart.action.exceptions.CartEntryActionException;
@@ -26,7 +66,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.acceleratorstorefrontcommons.forms.SaveCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateQuantityForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.VoucherForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.SaveCartFormValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.SaveCartFacade;
@@ -44,39 +83,15 @@ import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationExc
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.core.enums.QuoteState;
+import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.enumeration.EnumerationService;
+import de.hybris.platform.order.CartService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
 import ru.masterdata.internationalization.facades.i18n.PentlandI18NFacade;
-
-import com.bridgex.facades.export.PentlandExportFacade;
-import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
-import com.bridgex.facades.order.PentlandCartFacade;
-import com.bridgex.facades.product.PentlandProductFacade;
-import com.bridgex.storefront.controllers.ControllerConstants;
-import com.bridgex.storefront.forms.PentlandCartForm;
-import com.bridgex.storefront.forms.validation.PentlandSaveCartFormValidator;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.zip.ZipOutputStream;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StreamUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
@@ -142,6 +157,15 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource
 	private PentlandI18NFacade i18NFacade;
+	
+	 @Resource(name = "cartService")
+	 private CartService cartService;
+
+	 @Resource(name ="modelService" )
+	 private ModelService modelService;
+	 	 
+	@Resource(name ="userService")
+	 private UserService userService;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -464,7 +488,19 @@ public class CartPageController extends AbstractCartPageController
 		orderEntry.setEntryNumber(entryNumber);
 		return orderEntry;
 	}
-
+	
+	@RequestMapping(value = "/delete")
+	 public String removeCart(){
+	  UserModel currentUser = userService.getCurrentUser();
+	  if(null!=currentUser && !currentUser.equals("anonymous")){
+	   
+	  CartModel cartModel = getCartService().getSessionCart();
+	     modelService.remove(cartModel);
+	     getSessionService().removeAttribute("cart");
+	  }
+	  return REDIRECT_CART_URL;
+	 }
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String saveCart(final SaveCartForm form, final BindingResult bindingResult, final RedirectAttributes redirectModel)
@@ -726,4 +762,28 @@ public class CartPageController extends AbstractCartPageController
 		return false;
 	}
 
+	public CartService getCartService() {
+		return cartService;
+	}
+
+	public void setCartService(CartService cartService) {
+		this.cartService = cartService;
+	}
+
+	public ModelService getModelService() {
+		return modelService;
+	}
+
+	public void setModelService(ModelService modelService) {
+		this.modelService = modelService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
 }
