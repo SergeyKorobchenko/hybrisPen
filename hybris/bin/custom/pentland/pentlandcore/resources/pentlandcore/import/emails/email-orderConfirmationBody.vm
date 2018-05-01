@@ -112,10 +112,10 @@
 	<table width="100%" border="0" align="center" cellpadding="2" cellspacing="2" bordercolor="#51585c" class="products" style="border: 1px solid #51585c;">
 		<tr>
 			<td>
-				#foreach( $orderGroup in ${ctx.order.entries} )
+				#foreach( $orderGroup in ${ctx.order.deliveryOrderGroups} )
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
-							<td width="100%" colspan="4" height="30" align="left" bgcolor="#000000"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif" style="padding-left:5px"><b style="text-transform:uppercase;">${ctx.messages.yourDeliveryItems} $velocityCount</b></font></td>
+							<td width="100%" colspan="4" height="30" align="left" bgcolor="#000000"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif" style="padding-left:5px"><b style="text-transform:uppercase;">${ctx.messages.yourDeliveryItems}</b></font></td>
 						</tr>
 						<tr>
 							<td width="50%"><font color="#333" size="2" face="Arial, Helvetica, sans-serif"><b>&nbsp;</b></font></td>
@@ -171,9 +171,9 @@
 									</table>
 								</td>
 								<td valign="top"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.quantity</font></p></td>
-								<td valign="top"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.product.customerPrice.formattedValue</font></p></td>
-								#set ($mul = $entry.product.customerPrice.value * $entry.quantity)
-								<td valign="top"><p><font color="#414a4f" size="3" face="Arial, Helvetica, sans-serif"><b>£$mul</b></font></p></td>
+								<td valign="top"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.erpPrice.formattedValue</font></p></td>
+								#set ($total = $entry.erpPrice.value * $entry.quantity)
+								<td valign="top"><p><font color="#414a4f" size="3" face="Arial, Helvetica, sans-serif"><b>£$total</b></font></p></td>
 							</tr>
 						#end
 					</table>

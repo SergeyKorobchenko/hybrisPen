@@ -53,8 +53,6 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	private List<CouponData>                 giftCoupons;
 	private SessionService                   sessionService;
 	private UserService                      userService;
-	@Resource(name = "productFacade")
-	private PentlandProductFacade productFacade;
 	
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
@@ -69,13 +67,6 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				userService.setCurrentUser(customer);
 				OrderModel order = orderProcessModel.getOrder();
 				orderData = getOrderConverter().convert(order);
-				for (final OrderEntryData entry : orderData.getEntries())
-				{
-					List<OrderEntryData> entries = entry.getEntries();
-					for (OrderEntryData orderEntryData : entries) {
-						productFacade.populateCustomerPrice(orderEntryData.getProduct());
-					}
-				}
 				if(ExportStatus.EXPORTED.equals(order.getExportStatus()) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
 					orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
 				}else{

@@ -1,6 +1,12 @@
 package com.bridgex.facades.order.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -17,7 +23,12 @@ import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.integration.constants.ErpintegrationConstants;
-import com.bridgex.integration.domain.*;
+import com.bridgex.integration.domain.ETReturnDto;
+import com.bridgex.integration.domain.MaterialInfoDto;
+import com.bridgex.integration.domain.MultiBrandCartDto;
+import com.bridgex.integration.domain.MultiBrandCartInput;
+import com.bridgex.integration.domain.MultiBrandCartResponse;
+import com.bridgex.integration.domain.SizeDataDto;
 
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.category.model.CategoryModel;
@@ -26,11 +37,9 @@ import de.hybris.platform.commercefacades.order.impl.DefaultCartFacade;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.product.data.VariantMatrixElementData;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
-import de.hybris.platform.commerceservices.price.CommercePriceService;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
@@ -118,20 +127,28 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   }
 
   private void populatePrices(MaterialInfoDto material, CartModel cart) {
-    AbstractOrderEntryModel entry = cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).findFirst().orElse(null);
-    if (entry != null) {
-      try {
-        entry.setErpPrice(Double.parseDouble(material.getUnitPrice()));
-      } catch (NumberFormatException nfe) {
-        entry.setErpPrice(0.0);
-      }
-      try {
-        entry.setTotalPrice(Double.parseDouble(material.getTotalPrice()));
-      } catch (NumberFormatException nfe) {
-        entry.setErpPrice(0.0);
-      }
-      getModelService().save(entry);
-    }
+  /*  AbstractOrderEntryModel entry = cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).findFirst().orElse(null);*/
+    List<AbstractOrderEntryModel> allEntries =cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).collect(Collectors.<AbstractOrderEntryModel>toList());
+   for (AbstractOrderEntryModel abstractOrderEntryModel : allEntries)
+   {
+	   if (abstractOrderEntryModel != null) {
+		      try {
+		    	  abstractOrderEntryModel.setErpPrice(Double.parseDouble(material.getUnitPrice()));
+		      } catch (NumberFormatException nfe) {
+		    	  abstractOrderEntryModel.setErpPrice(0.0);
+		      }
+		      try {
+		    	  if(abstractOrderEntryModel.getTotalPrice()<=0)
+		    	  {
+		    	    abstractOrderEntryModel.setTotalPrice(Double.parseDouble(material.getTotalPrice()));
+		    	  }
+		      } catch (NumberFormatException nfe) {
+		    	  abstractOrderEntryModel.setErpPrice(0.0);
+		      }
+		      getModelService().save(abstractOrderEntryModel);
+		    }
+   }
+    
   }
 
   private String getColorCode(ProductModel productModel) {
