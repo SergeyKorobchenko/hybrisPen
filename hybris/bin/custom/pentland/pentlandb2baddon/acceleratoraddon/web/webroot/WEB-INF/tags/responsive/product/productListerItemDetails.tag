@@ -67,7 +67,9 @@
     <div class="item__description">
         <product:productListerClassifications product="${product}"/>
     </div>
-
+<div class="item__info">
+	<div class="item__code" style="padding-left: 160px;">${fn:escapeXml(product.code)}</div>
+</div>
     <div class="item__quantity__total col-xs-12 visible-xs visible-sm">
         <div class="details js-show-order-form-grid-wrapper">
             <div class="qty">

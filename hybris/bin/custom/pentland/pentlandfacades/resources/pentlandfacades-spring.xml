@@ -416,6 +416,7 @@
         <value>VARIANT_MATRIX_BASE</value>
         <value>VARIANT_MATRIX_ALL_OPTIONS</value>
         <value>URL</value>
+        <value>BRAND</value>
     </util:list>
     
     <alias name="defaultBasicProductSearchOptions" alias="productBasicSearchOptions"/>
@@ -431,6 +432,7 @@
         <value>VARIANT_MATRIX_BASE</value>
         <value>VARIANT_MATRIX_URL</value>
         <value>APPAREL</value>
+        <value>BRAND</value>
     </util:list>
 	
 	<bean parent="configurablePopulatorModification">
