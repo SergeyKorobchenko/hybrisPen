@@ -33,12 +33,14 @@ import de.hybris.platform.commerceservices.search.facetdata.ProductSearchPageDat
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -51,6 +53,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bridgex.facades.csv.PentlandCsvFacade;
 import com.sap.security.core.server.csi.XSSEncoder;
 
 
@@ -81,11 +84,18 @@ public class SearchPageController extends AbstractSearchPageController
 
 	@Resource(name = "cmsComponentService")
 	private CMSComponentService cmsComponentService;
+	
+	@Resource
+	private PentlandCsvFacade csvFacade;
 
 	@RequestMapping(method = RequestMethod.GET, params = "!q")
 	public String textSearch(@RequestParam(value = "text", defaultValue = "") final String searchText,
-			final HttpServletRequest request, final Model model) throws CMSItemNotFoundException
+			@RequestParam(value="exportImages",required=false) final boolean exportImages,
+			@RequestParam(value="exportCsv",required=false) final boolean exportCsv,
+			@RequestParam(value="url",required=false) final String url,
+			final HttpServletRequest request,final HttpServletResponse response, final Model model) throws CMSItemNotFoundException, IOException
 	{
+		
 		if (StringUtils.isNotBlank(searchText))
 		{
 			final PageableData pageableData = createPageableData(0, getSearchPageSize(), null, ShowMode.Page);
@@ -94,6 +104,8 @@ public class SearchPageController extends AbstractSearchPageController
 			final SearchQueryData searchQueryData = new SearchQueryData();
 			searchQueryData.setValue(searchText);
 			searchState.setQuery(searchQueryData);
+			searchState.setUrl(url);
+			int data;
 
 			ProductSearchPageData<SearchStateData, ProductData> searchPageData = null;
 			try
@@ -103,6 +115,14 @@ public class SearchPageController extends AbstractSearchPageController
 			catch (final ConversionException e) // NOSONAR
 			{
 				// nothing to do - the exception is logged in SearchSolrQueryPopulator
+			}
+			if(exportImages||exportCsv)
+			{
+				data=(int) searchPageData.getPagination().getTotalNumberOfResults();
+				PageableData pageableData1 = createPageableData(0, data, null, ShowMode.Page);
+				searchPageData = encodeSearchPageData(productSearchFacade.textSearch(searchState, pageableData1));
+				csvFacade.GenerateCsvAndImageDownlaodWhileSearch(searchPageData,exportImages,exportCsv,url,request,response,getI18nService().getCurrentLocale(),getMessageSource());
+				return null;
 			}
 
 			if (searchPageData == null)
@@ -159,12 +179,26 @@ public class SearchPageController extends AbstractSearchPageController
 			@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
 			@RequestParam(value = "sort", required = false) final String sortCode,
-			@RequestParam(value = "text", required = false) final String searchText, final HttpServletRequest request,
-			final Model model) throws CMSItemNotFoundException
+			@RequestParam(value = "text", required = false) final String searchText,
+			@RequestParam(value="exportImages",required=false) final boolean exportImages,
+			@RequestParam(value="exportCsv",required=false) final boolean exportCsv,
+			@RequestParam(value="url",required=false) final String url,final HttpServletRequest request,
+			final HttpServletResponse response,
+			final Model model) throws CMSItemNotFoundException, IOException
 	{
+		
 		final ProductSearchPageData<SearchStateData, ProductData> searchPageData = performSearch(searchQuery, page, showMode,
 				sortCode, getSearchPageSize());
-
+		
+		int data;
+		if(exportImages||exportCsv)
+		{
+			ProductSearchPageData<SearchStateData, ProductData> searchPageData1 = null;
+			data=(int) searchPageData.getPagination().getTotalNumberOfResults();
+			searchPageData1 = performSearch(searchQuery, page, showMode, sortCode, data);
+			csvFacade.GenerateCsvAndImageDownlaodWhileSearch(searchPageData1,exportImages,exportCsv,url,request,response,getI18nService().getCurrentLocale(),getMessageSource());
+			return null;
+		}
 		populateModel(model, searchPageData, showMode);
 		model.addAttribute("userLocation", customerLocationService.getUserLocation());
 
