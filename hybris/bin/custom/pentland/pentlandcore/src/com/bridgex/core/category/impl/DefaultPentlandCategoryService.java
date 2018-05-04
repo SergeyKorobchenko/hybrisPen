@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.category.PentlandCategoryService;
 import com.bridgex.core.category.dao.PentlandCategoryDao;
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.product.PentlandProductService;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
@@ -34,7 +35,15 @@ public class DefaultPentlandCategoryService extends DefaultCategoryService imple
   }
 
   public CategoryModel getBrandCategoryForProduct(ProductModel productModel){
-    String sapBrand = (String)getProductService().getProductAttribute(productModel, ProductModel.SAPBRAND);
+	  String sapBrand;
+	  if(productModel instanceof ApparelSizeVariantProductModel)
+	  {
+		   sapBrand = (String)getProductService().getProductAttribute(((ApparelSizeVariantProductModel) productModel).getBaseProduct(), ProductModel.SAPBRAND);
+	  }
+	  else
+	  {
+		  sapBrand = (String)getProductService().getProductAttribute(productModel, ProductModel.SAPBRAND);
+	  }
     if(StringUtils.isNotEmpty(sapBrand)) {
       try {
         return this.getCategoryForCode(productModel.getCatalogVersion(), sapBrand);

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:if test="${not empty product.classifications}">
-	<dl class="product-classification">
+	<dl class="product-classification" style="padding-left: 82px;">
 		<c:forEach items="${product.classifications}" var="classification">
 
 					<c:forEach items="${classification.features}" var="feature">
