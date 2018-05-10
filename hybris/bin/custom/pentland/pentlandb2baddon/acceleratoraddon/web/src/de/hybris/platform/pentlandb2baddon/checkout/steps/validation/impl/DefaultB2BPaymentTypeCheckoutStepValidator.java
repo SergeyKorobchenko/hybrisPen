@@ -54,7 +54,7 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 		List<String> validateStock = pentlandCartFacade.validateStock();
 		if(!validateStock.isEmpty())
 		{
-			if(validateStock.get(1).contains("RDD"))
+			if(validateStock.get(0).contains("RDD"))
 			{
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
 						{validateStock.get(0)});

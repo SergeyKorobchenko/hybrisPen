@@ -137,7 +137,6 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 					  {
 						  validateMessage="Please select RDD on "+minDate+" to Deliver";
 						  validateData.add(validateMessage);
-						  validateData.add("RDD");
 					  }
 				  }
 			  }

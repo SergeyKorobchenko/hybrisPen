@@ -375,7 +375,7 @@ public class CartPageController extends AbstractCartPageController
 		List<String> validateStock = pentlandCartFacade.validateStock();
 		if(!validateStock.isEmpty())
 		{
-			if(validateStock.get(0).contains("isn't available")||!validateStock.get(1).contains("RDD"))
+			if(validateStock.get(0).contains("isn't available"))
 			{
 				GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
 						{validateStock.toString()});
