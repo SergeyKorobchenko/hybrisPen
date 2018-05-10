@@ -1,12 +1,12 @@
 package com.bridgex.facades.order.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -24,7 +24,9 @@ import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.facades.order.PentlandCartFacade;
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.ETReturnDto;
+import com.bridgex.integration.domain.FutureStocksDto;
 import com.bridgex.integration.domain.MaterialInfoDto;
+import com.bridgex.integration.domain.MaterialOutputGridDto;
 import com.bridgex.integration.domain.MultiBrandCartDto;
 import com.bridgex.integration.domain.MultiBrandCartInput;
 import com.bridgex.integration.domain.MultiBrandCartResponse;
@@ -41,6 +43,7 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.variants.model.VariantProductModel;
+import net.sf.ehcache.search.aggregator.Count;
 
 /**
  * Created by dmitry.konovalov@masterdata.ru on 30.10.2017.
@@ -74,11 +77,79 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
       root.getElements().stream().forEach(e -> populateSizeQuantities(e, codeToQuantity));
     }
   }
+  
+  @Override
+  public  List<String> validateStock() {
+	  List<String> validateData = new ArrayList<>();
+	  int inStockCount=0;
+	  String validateMessage;
+	  if (hasSessionCart()) {
+		  final CartModel cartModel = getCartService().getSessionCart();
+		  Date rdd = cartModel.getRdd();
+		  if(rdd != null)
+		  {
+			  List<Date> listOfDates = new ArrayList<>();
+			  if (isCartNotEmpty(cartModel)) {
+				  final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
+				  final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
+				  final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
+				 
+				  /* To check that all products stock is 0*/
+				  for (MaterialInfoDto materialInfoDto : materialList) {
+					  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
+					  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
+						  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+						  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+						  Date futureDate = futureStocksDto.getFutureDate();
+						  listOfDates.add(futureDate);
+						  if(Integer.valueOf(materialOutputGridDto.getAvailableQty())!=0)
+						  {
+							  inStockCount=inStockCount+1;
+							  
+						  }
+					  }
+				  }
+				  if(inStockCount!=0)
+				  {
+					  for (MaterialInfoDto materialInfoDto : materialList) {
+						  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
+						  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
 
+							  if(Integer.valueOf(materialOutputGridDto.getUserRequestedQty()) > Integer.valueOf(materialOutputGridDto.getAvailableQty()))
+							  {
+								  String ean = materialOutputGridDto.getEan();
+								  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+								  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+								  Date futureDate = futureStocksDto.getFutureDate();
+								  if(futureDate.compareTo(rdd)>0)
+								  {
+									  validateMessage=ean+" isn't available for the "+rdd+" and the item will be delivered at "+futureDate;
+									  validateData.add(validateMessage);
+								  }
+							  }
+						  }
+					  }
+				  }
+				  else
+				  {
+					  Date minDate = Collections.min(listOfDates);
+					  if(minDate.compareTo(rdd)>0)
+					  {
+						  validateMessage="Please select RDD on "+minDate+" to Deliver";
+						  validateData.add(validateMessage);
+						  validateData.add("RDD");
+					  }
+				  }
+			  }
+		  }
+	  }
+	  return validateData;
+  }
+  
   @Override
   public void populateCart() {
     if (hasSessionCart()) {
-      final CartModel cartModel = getCartService().getSessionCart();
+      final CartModel cartModel = getCartService().getSessionCart(); 
       if (isCartNotEmpty(cartModel)) {
         final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
         final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
