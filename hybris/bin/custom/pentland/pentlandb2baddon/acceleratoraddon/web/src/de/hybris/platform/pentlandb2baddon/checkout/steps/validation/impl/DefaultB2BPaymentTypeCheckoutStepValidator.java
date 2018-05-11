@@ -20,6 +20,8 @@ import de.hybris.platform.pentlandb2baddon.checkout.steps.validation.AbstractB2B
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
@@ -32,6 +34,9 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 
 	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
 	private PentlandCartFacade                cartFacade;
+	@Resource(name = "pentlandCartFacade")
+	private PentlandCartFacade pentlandCartFacade;
+
 
 	@Override
 	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
@@ -45,6 +50,18 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 			                               "checkout.error.empty.entry.cart");
 			return ValidationResults.FAILED;
 		}
+		
+		List<String> validateStock = pentlandCartFacade.validateStock();
+		if(!validateStock.isEmpty())
+		{
+			if(validateStock.get(0).contains("RDD"))
+			{
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
+						{validateStock.get(0)});
+				return ValidationResults.FAILED;
+			}
+		}
+		
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
 		cartFacade.populateCart();
 		CartData cartData = getCheckoutFacade().getCheckoutCart();
