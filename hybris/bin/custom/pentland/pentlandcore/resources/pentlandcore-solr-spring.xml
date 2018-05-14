@@ -210,6 +210,8 @@
 	</bean>
 
 	<bean id="clearanceValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.ClearanceValueResolver" parent="abstractBaseProductValueResolver"/>
+	
+	<bean id="sMUValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.SMUValueResolver" parent="abstractBaseProductValueResolver"/>
 
 
 	<bean id="abstractBaseProductValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBaseProductValueResolver" parent="abstractValueResolver" abstract="true"/>
@@ -222,6 +224,13 @@
 	</bean>
 
 	<bean id="variantProductClassificationAttributesValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.VariantProductClassificationAttributesValueResolver" parent="productClassificationAttributesValueResolver"/>
+	
+	<bean id="sMUProductVisibilityValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.SMUProductVisibilityValueResolver"
+	      parent="abstractValueResolver">
+	      <property name="categoryService" ref="categoryService"/>
+	      <property name="catalogVersionService" ref="catalogVersionService"/>
+	      <property name="pentlandProductDao" ref="pentlandProductDao"/>
+	      </bean>
 
 	<alias name="pentlandFacetSearchQueryFacetsPopulator" alias="facetSearchQueryFacetsPopulator"/>
 	<bean id="pentlandFacetSearchQueryFacetsPopulator" class="com.bridgex.core.search.solrfacetsearch.populator.PentlandFacetSearchQueryFacetsPopulator" parent="abstractFacetSearchQueryPopulator">

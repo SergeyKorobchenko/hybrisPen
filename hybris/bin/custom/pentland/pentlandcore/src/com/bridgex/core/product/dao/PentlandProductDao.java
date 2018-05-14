@@ -20,5 +20,7 @@ public interface PentlandProductDao extends ProductDao{
    * @return
    */
   List<ProductModel> findProductsForSapBrandAndCatalogVersion(String sapBrand, CatalogVersionModel catalogVersion, String flagField, Boolean flagValue);
+  
+  ProductModel checkProductWithCurrentUserSMUCategory(String productCode,String categoryCode,CatalogVersionModel catalogVersion);
 
 }

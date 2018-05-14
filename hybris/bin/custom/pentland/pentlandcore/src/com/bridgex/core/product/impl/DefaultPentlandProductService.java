@@ -1,24 +1,41 @@
 package com.bridgex.core.product.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
+import static java.lang.String.format;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
 
+import com.bridgex.core.category.PentlandCategoryService;
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
+import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.core.product.PentlandProductService;
 import com.bridgex.core.product.dao.PentlandProductDao;
 
+import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.mediaconversion.MediaConversionService;
 import de.hybris.platform.mediaconversion.enums.ConversionStatus;
 import de.hybris.platform.product.impl.DefaultProductService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.variants.model.VariantProductModel;
 
 /**
@@ -27,9 +44,15 @@ import de.hybris.platform.variants.model.VariantProductModel;
 public class DefaultPentlandProductService extends DefaultProductService implements PentlandProductService {
 
   private static final String PRIMARY_CONVERSION_GROUP = "productConversionGroup";
+  private static final String CATEGORY_CATALOG = "pentlandProductCatalog";
+  private static final String CATEGORY_CATALOG_VERSION = "Online";
 
   private PentlandProductDao                                            pentlandProductDao;
   private MediaConversionService                                        mediaConversionService;
+  
+  private PentlandCategoryService categoryService;
+  private UserService userService;
+  private CatalogVersionService                            catalogVersionService;
 
   @Override
   public List<ProductModel> findSMUProductsForSapBrandAndCatalogVersion(String sapBrand, CatalogVersionModel catalogVersion) {
@@ -113,7 +136,91 @@ public class DefaultPentlandProductService extends DefaultProductService impleme
     return value;
   }
 
-  @Required
+  @Override
+	public ProductModel getProductForCode(String code)
+    {
+	  validateParameterNotNull(code, "Parameter code must not be null");
+		final List<ProductModel> products = getProductDao().findProductsByCode(code);
+
+		validateIfSingleResult(products, format("Product with code '%s' not found!", code),
+				format("Product code '%s' is not unique, %d products found!", code, Integer.valueOf(products.size())));
+	
+		ProductModel productModel = products.get(0);
+		
+		CatalogVersionModel catalogVersion = getCatalogVersionService().getCatalogVersion(CATEGORY_CATALOG, CATEGORY_CATALOG_VERSION);
+		UserModel currentUser = getUserService().getCurrentUser();
+		
+		if(productModel instanceof ApparelSizeVariantProductModel)
+		{
+			ProductModel styleVariantModel = ((VariantProductModel) productModel).getBaseProduct();
+			ProductModel baseProduct = ((VariantProductModel) styleVariantModel).getBaseProduct();
+			Collection<VariantProductModel> variants = baseProduct.getVariants();
+			Set<VariantProductModel> smuVariants=new HashSet<>(variants);
+			for (VariantProductModel variantProductModel : variants)
+			{
+				if(variantProductModel instanceof ApparelStyleVariantProductModel && variantProductModel.isSmu())
+				{
+					
+					Collection<CategoryModel> supercategories = variantProductModel.getSupercategories();
+					 CategoryModel smuCategoryForProduct = supercategories.stream().filter(category ->category.getCode().contains("_SMU")).findFirst().orElse(null);
+					 if(smuCategoryForProduct!=null )
+					 {
+					 Collection<CategoryModel> smuCategoriesForCurrentUser = getCategoryService().getSMUCategoriesForCurrentUser(currentUser.getUid(), catalogVersion);
+					 CategoryModel userSmuCategory = smuCategoriesForCurrentUser.stream().filter(category->category.getCode().equals(smuCategoryForProduct.getCode())).findFirst().orElse(null);
+						if (userSmuCategory != null) {
+							smuVariants.add(variantProductModel);
+						} else {
+							smuVariants.remove(variantProductModel);
+						}
+					
+					 }
+					 else
+					 {
+						 smuVariants.remove(variantProductModel);
+					 }
+				}
+			}
+			baseProduct.setVariants(smuVariants);
+			((VariantProductModel) styleVariantModel).setBaseProduct(baseProduct);
+			((VariantProductModel) productModel).setBaseProduct(styleVariantModel);
+		}
+		return productModel;
+	}
+  
+  
+  protected ProductModel getBaseProduct(ProductModel productModel) {
+	    ProductModel currentProduct = productModel;
+	    while (currentProduct instanceof VariantProductModel) {
+	      currentProduct = ((VariantProductModel) currentProduct).getBaseProduct();
+	    }
+	    return currentProduct;
+	  }
+  
+  public PentlandCategoryService getCategoryService() {
+	return categoryService;
+}
+
+public void setCategoryService(PentlandCategoryService categoryService) {
+	this.categoryService = categoryService;
+}
+
+public UserService getUserService() {
+	return userService;
+}
+
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
+
+public CatalogVersionService getCatalogVersionService() {
+	return catalogVersionService;
+}
+
+public void setCatalogVersionService(CatalogVersionService catalogVersionService) {
+	this.catalogVersionService = catalogVersionService;
+}
+
+@Required
   public void setPentlandProductDao(PentlandProductDao pentlandProductDao) {
     this.pentlandProductDao = pentlandProductDao;
   }
@@ -122,4 +229,5 @@ public class DefaultPentlandProductService extends DefaultProductService impleme
   public void setMediaConversionService(MediaConversionService mediaConversionService) {
     this.mediaConversionService = mediaConversionService;
   }
+
 }
