@@ -21,7 +21,9 @@
 		</div>
 		<div class="details">
 			<a class="name" href="${entryProductUrl}">${fn:escapeXml(product.name)}</a>
+			<c:if test="${quantity >0}">
 			<div class="qty"><span><spring:theme code="popup.cart.quantity.added"/></span>&nbsp;${quantity}</div>
+			</c:if>
 			<%--<c:forEach items="${product.baseOptions}" var="baseOptions">--%>
 				<%--<c:forEach items="${baseOptions.selected.variantOptionQualifiers}" var="baseOptionQualifier">--%>
 					<%--<c:set var="baseOptionQualifierValue" value="${fn:escapeXml(baseOptionQualifier.value)}"/>--%>
