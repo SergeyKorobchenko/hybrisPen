@@ -60,6 +60,7 @@ import de.hybris.platform.acceleratorservices.enums.CheckoutFlowEnum;
 import de.hybris.platform.acceleratorservices.enums.CheckoutPciOptionEnum;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.ValidationResults;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCartPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -371,6 +372,15 @@ public class CartPageController extends AbstractCartPageController
 	protected void prepareDataForPage(final Model model) throws CMSItemNotFoundException
 	{
 		pentlandCartFacade.populateCart();
+		List<String> validateStock = pentlandCartFacade.validateStock();
+		if(!validateStock.isEmpty())
+		{
+			if(validateStock.get(0).contains("isn't available"))
+			{
+				GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
+						{validateStock.toString()});
+			}
+		}
 		super.prepareDataForPage(model);
 
 		if (!model.containsAttribute(VOUCHER_FORM))

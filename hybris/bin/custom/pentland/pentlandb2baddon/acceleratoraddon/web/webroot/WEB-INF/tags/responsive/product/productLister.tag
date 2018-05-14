@@ -35,7 +35,7 @@
             <li class="item__price"><spring:theme code="basket.page.price"/></li>
             <li class="item__description"><spring:theme code="basket.page.productdetails"/></li>
             <li class="item__variants"><spring:theme code="basket.page.id"/></li>
-            <li class="item__quantity"><spring:theme code="basket.page.qty"/></li>
+            <%-- <li class="item__quantity"><spring:theme code="basket.page.qty"/></li> --%>
             <li class="item__total--column"><spring:theme code="basket.page.total"/></li>
         </ul>
     </li>
