@@ -17,6 +17,7 @@ import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.category.impl.DefaultCategoryService;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
@@ -55,6 +56,13 @@ public class DefaultPentlandCategoryService extends DefaultCategoryService imple
     }
     return null;
   }
+  
+  @Override
+  public Collection<CategoryModel> getSMUCategoriesForCurrentUser(String userId,CatalogVersionModel catalogVersion)
+  {
+	  Collection<CategoryModel> smuCategoriesForCurrentUser = getCategoryDao().getSMUCategoriesForCurrentUser(userId,catalogVersion);
+  	return smuCategoriesForCurrentUser;
+  }
 
   protected PentlandCategoryDao getCategoryDao() {
     return categoryDao;
@@ -74,4 +82,5 @@ public class DefaultPentlandCategoryService extends DefaultCategoryService imple
   public void setProductService(PentlandProductService productService) {
     this.productService = productService;
   }
+
 }

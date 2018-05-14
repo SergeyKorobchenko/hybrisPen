@@ -35,9 +35,9 @@ public class SpecialCategoryAssignmentJobPerformable extends AbstractJobPerforma
     for(CatalogVersionModel catalogVersion: catalogVersions){
       Collection<CategoryModel> rootCategories = categoryService.getRootCategoriesForCatalogVersion(catalogVersion);
       for(CategoryModel brand: rootCategories){
-//        CategoryModel smuCategory = brand.getCategories().stream().filter(CategoryModel::isSmu).findFirst().orElse(null);
+        CategoryModel smuCategory = brand.getCategories().stream().filter(CategoryModel::isSmu).findFirst().orElse(null);
         CategoryModel clearanceCategory = brand.getCategories().stream().filter(CategoryModel::isClearance).findFirst().orElse(null);
-//        processSMUCategory(smuCategory, brand, catalogVersion);
+        processSMUCategory(smuCategory, brand, catalogVersion);
         processClearanceCategory(clearanceCategory, brand, catalogVersion);
       }
     }
