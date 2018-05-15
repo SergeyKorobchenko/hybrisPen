@@ -102,7 +102,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 						  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
 						  Date futureDate = futureStocksDto.getFutureDate();
 						  listOfDates.add(futureDate);
-						  if(Integer.valueOf(materialOutputGridDto.getAvailableQty())!=0)
+						  if(Double.valueOf(materialOutputGridDto.getAvailableQty())!=0)
 						  {
 							  inStockCount=inStockCount+1;
 							  
@@ -115,7 +115,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 						  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
 						  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
 
-							  if(Integer.valueOf(materialOutputGridDto.getUserRequestedQty()) > Integer.valueOf(materialOutputGridDto.getAvailableQty()))
+							  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
 							  {
 								  String ean = materialOutputGridDto.getEan();
 								  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
