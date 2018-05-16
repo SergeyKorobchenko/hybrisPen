@@ -93,19 +93,30 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 				  final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
 				  final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
 				  final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
-				 
+				
 				  /* To check that all products stock is 0*/
 				  for (MaterialInfoDto materialInfoDto : materialList) {
 					  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
 					  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-						  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
-						  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
-						  Date futureDate = futureStocksDto.getFutureDate();
-						  listOfDates.add(futureDate);
+						  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
+						  {
+							  if(materialOutputGridDto.getFutureStocksDtoList()!=null)
+							  {
+								  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+								  if(futureStocksDtoList.get(0)!=null)
+								  {
+									  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+									  if(futureStocksDto.getFutureDate()!=null)
+									  {
+										  Date futureDate = futureStocksDto.getFutureDate();
+										  listOfDates.add(futureDate);
+									  }
+								  }
+							  }
+						  }
 						  if(Double.valueOf(materialOutputGridDto.getAvailableQty())!=0)
 						  {
 							  inStockCount=inStockCount+1;
-							  
 						  }
 					  }
 				  }
@@ -114,16 +125,32 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 					  for (MaterialInfoDto materialInfoDto : materialList) {
 						  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
 						  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-
 							  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
 							  {
 								  String ean = materialOutputGridDto.getEan();
-								  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
-								  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
-								  Date futureDate = futureStocksDto.getFutureDate();
-								  if(futureDate.compareTo(rdd)>0)
+								  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
 								  {
-									  validateMessage=ean+" isn't available for the "+rdd+" and the item will be delivered at "+futureDate;
+									  if(materialOutputGridDto.getFutureStocksDtoList()!=null)
+									  {
+										  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+										  if(futureStocksDtoList.get(0)!=null)
+										  {
+											  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+											  if(futureStocksDto.getFutureDate()!=null)
+											  {
+												  Date futureDate = futureStocksDto.getFutureDate();
+												  if(futureDate.compareTo(rdd)>0)
+												  {
+													  validateMessage=ean+" isn't available for the "+rdd+" and the item will be delivered at "+futureDate;
+													  validateData.add(validateMessage);
+												  }
+											  }
+										  }
+									  }
+								  }
+								  else
+								  {
+									  validateMessage=ean+" isn't available for the "+rdd;
 									  validateData.add(validateMessage);
 								  }
 							  }
@@ -132,12 +159,21 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 				  }
 				  else
 				  {
-					  Date minDate = Collections.min(listOfDates);
-					  if(minDate.compareTo(rdd)>0)
+					  if(CollectionUtils.isNotEmpty(listOfDates))
 					  {
-						  validateMessage="Please select RDD on "+minDate+" to Deliver";
+						  Date minDate = Collections.min(listOfDates);
+						  if(minDate.compareTo(rdd)>0)
+						  {
+							  validateMessage="Please select RDD on "+minDate+" to Deliver";
+							  validateData.add(validateMessage);
+						  }
+					  }
+					  else
+					  {
+						  validateMessage="Product Stock on RDD not available";
 						  validateData.add(validateMessage);
 					  }
+
 				  }
 			  }
 		  }
