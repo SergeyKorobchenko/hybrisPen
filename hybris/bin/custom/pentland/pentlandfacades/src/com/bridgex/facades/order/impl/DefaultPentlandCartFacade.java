@@ -233,29 +233,32 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   }
 
   private void populatePrices(MaterialInfoDto material, CartModel cart) {
-  /*  AbstractOrderEntryModel entry = cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).findFirst().orElse(null);*/
-    List<AbstractOrderEntryModel> allEntries =cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).collect(Collectors.<AbstractOrderEntryModel>toList());
-   for (AbstractOrderEntryModel abstractOrderEntryModel : allEntries)
-   {
-	   if (abstractOrderEntryModel != null) {
-		      try {
-		    	  abstractOrderEntryModel.setErpPrice(Double.parseDouble(material.getUnitPrice()));
-		      } catch (NumberFormatException nfe) {
-		    	  abstractOrderEntryModel.setErpPrice(0.0);
-		      }
-		      try {
-		    	  if(abstractOrderEntryModel.getTotalPrice()<=0)
-		    	  {
-		    	    abstractOrderEntryModel.setTotalPrice(Double.parseDouble(material.getTotalPrice()));
-		    	  }
-		      } catch (NumberFormatException nfe) {
-		    	  abstractOrderEntryModel.setErpPrice(0.0);
-		      }
-		      getModelService().save(abstractOrderEntryModel);
-		    }
-   }
-    
-  }
+	    AbstractOrderEntryModel entry = cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).findFirst().orElse(null);
+	    List<AbstractOrderEntryModel> allEntries =cart.getEntries().stream().filter(e -> material.getMaterialNumber().equals(getColorCode(e.getProduct()))).collect(Collectors.<AbstractOrderEntryModel>toList());
+	   
+	    if (entry != null) {
+	    
+	      try {
+	        entry.setTotalPrice(Double.parseDouble(material.getTotalPrice()));
+	      } catch (NumberFormatException nfe) {
+	        entry.setTotalPrice(0.0);
+	      }
+	      getModelService().save(entry);
+	    }
+	    
+	    for (AbstractOrderEntryModel abstractOrderEntryModel : allEntries)
+	   {
+		   if (abstractOrderEntryModel != null) {
+			      try {
+			    	  abstractOrderEntryModel.setErpPrice(Double.parseDouble(material.getUnitPrice()));
+			      } catch (NumberFormatException nfe) {
+			    	  abstractOrderEntryModel.setErpPrice(0.0);
+			      }
+			      getModelService().save(abstractOrderEntryModel);
+			    }
+	   }
+	    
+	  }
 
   private String getColorCode(ProductModel productModel) {
     if (productModel instanceof ApparelSizeVariantProductModel) {
