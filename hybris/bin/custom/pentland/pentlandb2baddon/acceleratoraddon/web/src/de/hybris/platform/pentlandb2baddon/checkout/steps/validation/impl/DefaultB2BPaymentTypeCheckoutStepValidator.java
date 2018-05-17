@@ -51,7 +51,7 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 			return ValidationResults.FAILED;
 		}
 		
-		List<String> validateStock = pentlandCartFacade.validateStock();
+		/*List<String> validateStock = pentlandCartFacade.validateStock();
 		if(!validateStock.isEmpty())
 		{
 			if(validateStock.get(0).contains("RDD"))
@@ -60,7 +60,7 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 						{validateStock.get(0)});
 				return ValidationResults.FAILED;
 			}
-		}
+		}*/
 		
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
 		cartFacade.populateCart();
