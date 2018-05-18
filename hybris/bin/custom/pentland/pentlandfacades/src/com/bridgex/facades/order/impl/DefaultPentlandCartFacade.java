@@ -77,121 +77,24 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
       root.getElements().stream().forEach(e -> populateSizeQuantities(e, codeToQuantity));
     }
   }
-  
+   
   @Override
-  public  List<String> validateStock() {
-	  List<String> validateData = new ArrayList<>();
-	  int inStockCount=0;
-	  String validateMessage;
-	  if (hasSessionCart()) {
-		  final CartModel cartModel = getCartService().getSessionCart();
-		  Date rdd = cartModel.getRdd();
-		  if(rdd != null)
-		  {
-			  List<Date> listOfDates = new ArrayList<>();
-			  if (isCartNotEmpty(cartModel)) {
-				  final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
-				  final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
-				  final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
-				
-				  /* To check that all products stock is 0*/
-				  for (MaterialInfoDto materialInfoDto : materialList) {
-					  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
-					  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-						  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
-						  {
-							  if(materialOutputGridDto.getFutureStocksDtoList()!=null)
-							  {
-								  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
-								  if(futureStocksDtoList.get(0)!=null)
-								  {
-									  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
-									  if(futureStocksDto.getFutureDate()!=null)
-									  {
-										  Date futureDate = futureStocksDto.getFutureDate();
-										  listOfDates.add(futureDate);
-									  }
-								  }
-							  }
-						  }
-						  if(Double.valueOf(materialOutputGridDto.getAvailableQty())!=0)
-						  {
-							  inStockCount=inStockCount+1;
-						  }
-					  }
-				  }
-				  if(inStockCount!=0)
-				  {
-					  for (MaterialInfoDto materialInfoDto : materialList) {
-						  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
-						  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-							  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
-							  {
-								  String ean = materialOutputGridDto.getEan();
-								  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
-								  {
-									  if(materialOutputGridDto.getFutureStocksDtoList()!=null)
-									  {
-										  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
-										  if(futureStocksDtoList.get(0)!=null)
-										  {
-											  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
-											  if(futureStocksDto.getFutureDate()!=null)
-											  {
-												  Date futureDate = futureStocksDto.getFutureDate();
-												  if(futureDate.compareTo(rdd)>0)
-												  {
-													  validateMessage=ean+" isn't available for the "+rdd+" and the item will be delivered at "+futureDate;
-													  validateData.add(validateMessage);
-												  }
-											  }
-										  }
-									  }
-								  }
-								  else
-								  {
-									  validateMessage=ean+" isn't available for the "+rdd;
-									  validateData.add(validateMessage);
-								  }
-							  }
-						  }
-					  }
-				  }
-				  else
-				  {
-					  if(CollectionUtils.isNotEmpty(listOfDates))
-					  {
-						  Date minDate = Collections.min(listOfDates);
-						  if(minDate.compareTo(rdd)>0)
-						  {
-							  validateMessage="Please select RDD on "+minDate+" to Deliver";
-							  validateData.add(validateMessage);
-						  }
-					  }
-					  else
-					  {
-						  validateMessage="Product Stock on RDD not available";
-						  validateData.add(validateMessage);
-					  }
-
-				  }
-			  }
-		  }
-	  }
-	  return validateData;
-  }
-  
-  @Override
-  public void populateCart() {
+  public List<String> populateCart() {
+	  List<String> validateStock = null; 
     if (hasSessionCart()) {
       final CartModel cartModel = getCartService().getSessionCart(); 
       if (isCartNotEmpty(cartModel)) {
+    	  Date rdd = cartModel.getRdd();
         final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
         final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
         if (successResponse(response)) {
           resetCartPrices(cartModel);
           final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
           if (CollectionUtils.isNotEmpty(materialList)) {
+        	  if(rdd != null)
+        	  {
+        		  validateStock = validateStock(materialList,rdd);
+        	  }
             materialList.forEach(m -> populatePrices(m, cartModel));
           }
           try {
@@ -218,6 +121,90 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
         getModelService().save(cartModel);
       }
     }
+	return validateStock;
+  }
+
+  private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
+	  List<String> validateData = new ArrayList<>();
+	  int inStockCount=0;
+	  String validateMessage;
+	  List<Date> listOfDates = new ArrayList<>();
+
+	  /* To check that all products stock is 0*/
+	  for (MaterialInfoDto materialInfoDto : materialList) {
+		  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
+		  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
+			  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
+			  {
+				  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+				  if(futureStocksDtoList.get(0)!=null)
+				  {
+					  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+					  if(futureStocksDto.getFutureDate()!=null)
+					  {
+						  Date futureDate = futureStocksDto.getFutureDate();
+						  listOfDates.add(futureDate);
+					  }
+				  }
+			  }
+			  if(Double.valueOf(materialOutputGridDto.getAvailableQty())!=0)
+			  {
+				  inStockCount=inStockCount+1;
+			  }
+		  }
+	  }
+	  if(inStockCount!=0)
+	  {
+		  for (MaterialInfoDto materialInfoDto : materialList) {
+			  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
+			  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
+				  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
+				  {
+					  String ean = materialOutputGridDto.getEan();
+					  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
+					  {
+						  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+						  if(futureStocksDtoList.get(0)!=null)
+						  {
+							  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+							  if(futureStocksDto.getFutureDate()!=null)
+							  {
+								  Date futureDate = futureStocksDto.getFutureDate();
+								  if(futureDate.compareTo(rdd)>0)
+								  {
+									  validateMessage=ean+" isn't available for the "+rdd+" and the item will be delivered at "+futureDate;
+									  validateData.add(validateMessage);
+								  }
+							  }
+						  }
+					  }
+					  else
+					  {
+						  validateMessage=ean+" isn't available for the "+rdd;
+						  validateData.add(validateMessage);
+					  }
+				  }
+			  }
+		  }
+	  }
+	  else
+	  {
+		  if(CollectionUtils.isNotEmpty(listOfDates))
+		  {
+			  Date minDate = Collections.min(listOfDates);
+			  if(minDate.compareTo(rdd)>0)
+			  {
+				  validateMessage="Please select RDD on "+minDate+" to Deliver";
+				  validateData.add(validateMessage);
+			  }
+		  }
+		  else
+		  {
+			  validateMessage="Product Stock on RDD not available";
+			  validateData.add(validateMessage);
+		  }
+	  }
+	  return validateData;
   }
 
   private boolean isCartNotEmpty(CartModel cartModel) {
