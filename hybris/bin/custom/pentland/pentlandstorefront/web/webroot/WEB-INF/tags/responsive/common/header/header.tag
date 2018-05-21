@@ -33,7 +33,7 @@
 									</c:if>
 
 									<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-										<c:set var="maxNumberChars" value="25" />
+										<c:set var="maxNumberChars" value="50" />
 										<c:if test="${fn:length(user.firstName) gt maxNumberChars}">
 											<c:set target="${user}" property="firstName"
 												   value="${fn:substring(user.firstName, 0, maxNumberChars)}..." />

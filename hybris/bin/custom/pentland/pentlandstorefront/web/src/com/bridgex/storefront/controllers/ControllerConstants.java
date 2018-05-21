@@ -95,6 +95,12 @@ public interface ControllerConstants
 				String AccountPaymentInfoPage = "pages/account/accountPaymentInfoPage"; // NOSONAR
 				String AccountRegisterPage = "pages/account/accountRegisterPage"; // NOSONAR
 			}
+			
+			interface Footer{
+			    String RegisterforAccessPage="pages/footer/registerforAccessPage";  // NOSONAR
+			    String SuccessRegister = "pages/footer/successPage";  // NOSONAR
+			    String FailRegister = "pages/footer/failRegister";  // NOSONAR 
+			   }
 
 			interface Checkout // NOSONAR
 			{
