@@ -21,5 +21,4 @@ public interface PentlandOrderFacade extends OrderFacade {
 
   List<OrderData> getSapOrdersForOrderCode(String orderCode);
   
-  OrderData getSourceOrder(String sapOrderCode); 
 }

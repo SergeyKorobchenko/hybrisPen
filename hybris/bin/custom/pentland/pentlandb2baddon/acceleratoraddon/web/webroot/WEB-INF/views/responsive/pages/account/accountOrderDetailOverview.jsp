@@ -61,8 +61,8 @@
  </ul>
  </li>
 	<ycommerce:testId code="orderDetail_itemBody_section">
-	<c:forEach items="${sourceOrderData.entries}" var="entry" varStatus="loop">
-	<order:orderEntryDetails orderEntry="${entry}" order="${sourceOrderData}" itemIndex="${loop.index}"/>
+	<c:forEach items="${orderData.entries}" var="entry" varStatus="loop">
+	<order:orderEntryDetails orderEntry="${entry}" order="${orderData}" itemIndex="${loop.index}"/>
 	</c:forEach>
 	</ycommerce:testId>
 </ul>
