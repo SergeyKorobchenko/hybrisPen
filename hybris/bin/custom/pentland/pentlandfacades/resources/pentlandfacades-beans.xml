@@ -147,5 +147,19 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData">
 		<property name="sizeNo" type="java.lang.Integer"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="position" type="java.lang.String" />
+		<property name="accessRequired" type="java.lang.String"></property>
+		<property name="accountNumber" type="java.lang.String"></property>
+		<property name="userEmail" type="java.lang.String"></property>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="position" type="java.lang.String" />
+		<property name="accessRequired" type="java.lang.String"></property>
+		<property name="accountNumber" type="java.lang.String"></property>
+		<property name="userEmail" type="java.lang.String"></property>
+	</bean>
 
 </beans>

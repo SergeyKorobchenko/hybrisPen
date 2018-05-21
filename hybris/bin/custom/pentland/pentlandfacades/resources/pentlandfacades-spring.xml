@@ -447,5 +447,14 @@
 		<property name="cancelOrderQuoteService" ref="cancelOrderQuoteService"/>
 
 </bean>
+	<alias name="pentlandCustomerRegFacade" alias="pentlandCustomerRegFacade"/>
+<bean id="pentlandCustomerRegFacade" class="com.bridgex.facades.customer.impl.DefaultPentlandCustomerRegFacade">
+    <property name="modelService" ref="modelService"/>
+    <property name="eventService" ref="eventService"/>
+    <property name="baseStoreService" ref="baseStoreService"/>
+    <property name="baseSiteService" ref="baseSiteService"/>
+    <property name="commonI18NService" ref="commonI18NService"/>
+    <property name="i18nService" ref="i18nService"/>
+</bean>
 
 </beans>

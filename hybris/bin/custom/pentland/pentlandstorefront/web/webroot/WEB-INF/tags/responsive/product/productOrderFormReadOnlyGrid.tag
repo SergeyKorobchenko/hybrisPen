@@ -27,7 +27,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <c:set var="subtotal" value="${0}"/>
+                        <c:set var="subtotal" value="0.00"/>
                         <c:set var="currencyIso" value="GBP"/>
                         <c:forEach items="${readonlyGridData.value.leafDimensionDataSet}" var="leafDimensionData">
                             <td class="grid-prod-info">

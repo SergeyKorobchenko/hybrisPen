@@ -95,5 +95,7 @@
 		<value>D05</value>
 	</util:list>
 	<bean parent="defaultCommerceQuoteService" class="com.bridgex.core.quote.cancelservices.impl.CancelOrderQuoteServiceImpl" id="cancelOrderQuoteService"> </bean>
-
+	<alias alias="emailGenerationService" name="pentlandDefaultEmailGenerationService"/>
+	<bean id="pentlandDefaultEmailGenerationService" class="com.bridgex.core.actions.PentlandDefaultEmailGenerationService" parent="defaultEmailGenerationService">
+   </bean>
 </beans>
