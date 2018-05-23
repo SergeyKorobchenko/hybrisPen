@@ -150,6 +150,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 #;$solrIndexedType; productGroup     ;string ;  ; ; true; ; ;MultiSelectOr; Alpha; 5000; true; ; ; optionalModelPropertyFieldValueProvider;;
 ;$solrIndexedType; season           ;string ; ; ; true; ; ;MultiSelectOr; Alpha; 6000; true; ; ; productAttributesValueResolver;;;;;attribute->season
 ;$solrIndexedType; gender           ;string;;;;;;MultiSelectOr;Alpha; 4500;true;false;;genderValueResolver                       ;genderFacetDisplayNameProvider
+;$solrIndexedType; inStock		    ;string;;;;;;MultiSelectOr;Alpha; 3500;true;false;;pentlandStockAvailabilityResolver                       ;
 
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
 ;$solrIndexedType; primaryColors;;;false;20
@@ -238,6 +239,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;season:$solrIndexedType;;MultiSelectOr; 6000;
 ;gender:$solrIndexedType 			;;MultiSelectOr;7000;genderFacetDisplayNameProvider;;
 ;primaryColors:$solrIndexedType 			;;MultiSelectOr;2000;colorFacetDisplayNameProvider;;;;;
+;inStock:$solrIndexedType 			;;MultiSelectOr;6500;;;
 
 # Category search query facets
 INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;
