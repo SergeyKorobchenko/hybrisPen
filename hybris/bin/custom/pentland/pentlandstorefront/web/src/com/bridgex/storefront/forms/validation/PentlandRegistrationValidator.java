@@ -15,7 +15,7 @@ import org.springframework.validation.Validator;
 import com.bridgex.storefront.controllers.pages.PentlandCustomerRegistrationForm;
 
 /**
- * @author santoshi
+ * @author murali
  *
  */
 @Component("pentlandRegistrationValidator")
