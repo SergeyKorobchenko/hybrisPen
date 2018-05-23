@@ -4,7 +4,7 @@
 package com.bridgex.storefront.controllers.pages;
 
 /**
- * @author santoshi
+ * @author murali
  *
  */
 public class PentlandCustomerRegistrationForm {

@@ -30,8 +30,13 @@
                      <td style="color: red;"><form:errors path="position" cssClass="error" /></td>
                 </tr>
                  <tr>
-                    <td>accessRequired:</td>
-                    <td><form:input path="accessRequired" /></td>
+                    <td>Required Role:</td>
+                    <td>
+                    <select name="accessRequired">
+					<option value="StandardRole">Standard role</option>
+					<option value="ManagerRole">Manager role</option>
+					</select>
+                    </td>
                      <td style="color: red;"><form:errors path="accessRequired" cssClass="error" /></td>
                 </tr>
                 <tr>
@@ -40,14 +45,12 @@
                      <td style="color: red;"><form:errors path="email" cssClass="error" /></td>
                 </tr>
                 <tr>
-                    <td>AccountNumber:</td>
+                    <td>Account Number:</td>
                     <td><form:input path="accountNumber" /></td>
                      <td style="color: red;"><form:errors path="accountNumber" cssClass="error" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center"><input type="submit" value="Send" /></td>
-                </tr>
-                  <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Submit" /></td>
                     <td colspan="2" align="center"><input type="reset" value="Reset" /></td>
                 </tr>
             </table>

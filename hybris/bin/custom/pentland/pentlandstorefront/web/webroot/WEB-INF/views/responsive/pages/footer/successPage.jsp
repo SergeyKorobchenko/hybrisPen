@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h3>successfully register</h3>
+    <h3>Successfully submitted</h3>
 </body>
 </html>
