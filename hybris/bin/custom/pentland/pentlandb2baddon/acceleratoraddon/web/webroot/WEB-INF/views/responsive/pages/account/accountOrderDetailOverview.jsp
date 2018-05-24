@@ -11,7 +11,12 @@
 			<c:when test="${empty sapOrders}">
 				<div class="well well-tertiary well-single-headline">
 					<div class="well-headline">
-						<spring:theme code="checkout.multi.order.summary"/>&nbsp;${orderCode}
+							<div class="col-sm-5">
+       						<spring:theme code="checkout.multi.order.summary"/>&nbsp;${orderCode}
+       						</div>
+       						<div class="col-sm-5">
+       						<spring:theme code="text.account.orderHistory.POnumber"/>&nbsp;${order.purchaseOrderNumber}
+       						</div>
 					</div>
 				</div>
 
@@ -25,7 +30,12 @@
 				<c:forEach var="order" items="${sapOrders}">
 					<div class="well well-tertiary well-single-headline">
 						<div class="well-headline">
-							<spring:theme code="checkout.multi.order.summary"/>&nbsp;${order.code}
+							<div class="col-sm-5">
+       						<spring:theme code="checkout.multi.order.summary"/>&nbsp;${order.code}
+       						</div>
+       						<div class="col-sm-5">
+       						<spring:theme code="text.account.orderHistory.POnumber"/>&nbsp;${order.purchaseOrderNumber}
+       						</div>
 						</div>
 					</div>
 
@@ -61,8 +71,8 @@
  </ul>
  </li>
 	<ycommerce:testId code="orderDetail_itemBody_section">
-	<c:forEach items="${sourceOrderData.entries}" var="entry" varStatus="loop">
-	<order:orderEntryDetails orderEntry="${entry}" order="${sourceOrderData}" itemIndex="${loop.index}"/>
+	<c:forEach items="${orderData.entries}" var="entry" varStatus="loop">
+	<order:orderEntryDetails orderEntry="${entry}" order="${orderData}" itemIndex="${loop.index}"/>
 	</c:forEach>
 	</ycommerce:testId>
 </ul>

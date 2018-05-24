@@ -54,7 +54,7 @@
                     </ycommerce:testId>
                 </div>
             </div>
-            <div class="col-sm-2 item-wrapper">
+            <div class="col-sm-2 col-sm-offset-1 item-wrapper">
                 <div class="item-group">
                     <ycommerce:testId code="orderDetail_overviewOrderTotal_label">
                         <span class="item-label"><spring:theme code="text.summary.order.total"/></span>
