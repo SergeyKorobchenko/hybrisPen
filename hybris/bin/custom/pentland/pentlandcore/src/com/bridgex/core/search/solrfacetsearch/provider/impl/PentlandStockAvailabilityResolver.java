@@ -62,7 +62,8 @@ public class PentlandStockAvailabilityResolver extends AbstractBaseProductValueR
 		
 		List<MaterialInfoDto> materialInfo = multiBrandCartOutput.getMaterialInfo();
 		List<MaterialInfoDto> materialInfoDtos = materialInfo.stream().filter(m->m.getMaterialNumber().equals(baseProductModel.getCode())).collect(Collectors.<MaterialInfoDto>toList());
-		
+		if(CollectionUtils.isNotEmpty(materialInfoDtos))
+		{
 		List<Long> styleVariantStock=new ArrayList<>();
 		MaterialInfoDto materialInfoDto=materialInfoDtos.get(0);
 		List<MaterialOutputGridDto> materialOutputGridDto= materialInfoDto.getMaterialOutputGridList();
@@ -79,6 +80,7 @@ public class PentlandStockAvailabilityResolver extends AbstractBaseProductValueR
 		if(CollectionUtils.isNotEmpty(styleVariantStock))
 		{
 			inputDocument.addField(indexedProperty, new String("in stock"), valueResolverContext.getFieldQualifier());
+		}
 		}
 		
 	}
