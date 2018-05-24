@@ -1,6 +1,8 @@
 package com.bridgex.facades.order.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +44,7 @@ import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.product.ProductService;
 import de.hybris.platform.variants.model.VariantProductModel;
 import net.sf.ehcache.search.aggregator.Count;
 
@@ -56,8 +59,9 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   private PentlandB2BUnitService  pentlandB2BUnitService;
   private PentlandCategoryService categoryService;
   private OrderSimulationService  orderSimulationService;
+  private ProductService productService;
 
-  @Override
+@Override
   public void saveB2BCartData(CartData cartData) {
     if (hasSessionCart()) {
       final CartModel cart = getCartService().getSessionCart();
@@ -124,13 +128,13 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	return validateStock;
   }
 
-  private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
+  /*private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
 	  List<String> validateData = new ArrayList<>();
 	  int inStockCount=0;
 	  String validateMessage;
 	  List<Date> listOfDates = new ArrayList<>();
 
-	  /* To check that all products stock is 0*/
+	   To check that all products stock is 0
 	  for (MaterialInfoDto materialInfoDto : materialList) {
 		  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
 		  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
@@ -205,9 +209,55 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 		  }
 	  }
 	  return validateData;
-  }
+  }*/
 
-  private boolean isCartNotEmpty(CartModel cartModel) {
+  private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
+	// TODO Auto-generated method stub
+	  List<String> validateData = new ArrayList<>();
+	  String validateMessage;
+	  for (MaterialInfoDto materialInfoDto : materialList) {
+		  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
+		  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
+			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
+			  {
+				  String productCode = materialOutputGridDto.getEan();
+				  final ProductModel productModel = productService.getProductForCode(productCode);
+				  ApparelSizeVariantProductModel sizeProductModel=(ApparelSizeVariantProductModel)productModel;
+				  String size = sizeProductModel.getSize();
+				  String materialNumber = materialInfoDto.getMaterialNumber();
+				 
+				  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEEE dd MMMMM");
+				  String date = simpleDateFormat.format(rdd);
+				  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
+				  {
+					  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+					  if(futureStocksDtoList.get(0)!=null)
+					  {
+						  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+						  if(futureStocksDto.getFutureDate()!=null)
+						  {
+							  Date futureDate = futureStocksDto.getFutureDate();
+							  if(futureDate.compareTo(rdd)>0)
+							  {
+								  validateMessage="Size "+size +" for "+materialNumber+" isn't available to order for "+date+" , please remove this item from the basket to proceed.";
+								  //Size MB for QZ014030989 isn't available to order for Wednesday 30th May, please remove this item from the basket to proceed.
+								  validateData.add(validateMessage);
+							  }
+						  }
+					  }
+				  }
+				  else
+				  {
+					  validateMessage="Size "+size +" for "+materialNumber+" isn't available to order for "+date+" , please remove this item from the basket to proceed.";
+					  validateData.add(validateMessage);
+				  }
+			  }
+		  }
+	  }
+	return validateData;
+}
+
+private boolean isCartNotEmpty(CartModel cartModel) {
     return cartModel.getEntries().size() > 0;
   }
 
@@ -414,4 +464,11 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     this.orderSimulationService = orderSimulationService;
   }
 
+  public ProductService getProductService() {
+	  return productService;
+  }
+
+  public void setProductService(ProductService productService) {
+	  this.productService = productService;
+  }
 }

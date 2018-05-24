@@ -52,12 +52,9 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 		List<String> populateCart = cartFacade.populateCart();
 		if(CollectionUtils.isNotEmpty(populateCart))
 		{
-			if(populateCart.get(0).contains("RDD"))
-			{
-				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
-						{populateCart.toString()});
-				return ValidationResults.FAILED;
-			}
+			/*GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
+					{populateCart.toString()});*/
+			return ValidationResults.FAILED;
 		}
 		CartData cartData = getCheckoutFacade().getCheckoutCart();
 		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty()){
