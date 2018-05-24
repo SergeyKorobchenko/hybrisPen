@@ -40,6 +40,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.bridgex.facades.cart.cancel.quote.ICancelOrderQuoteFacade;
+import com.bridgex.facades.order.PentlandCartFacade;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -133,6 +134,9 @@ public class QuoteController extends AbstractCartPageController
 	
 	@Resource(name="cancelOrderQuoteFacade")
 	private ICancelOrderQuoteFacade cancelOrderQuoteFacade;
+	
+	@Resource(name = "pentlandCartFacade")
+	private PentlandCartFacade pentlandCartFacade;
 
 	/**
 	 * Creates a new quote based on session cart.
@@ -303,6 +307,7 @@ public class QuoteController extends AbstractCartPageController
 			return String.format(REDIRECT_QUOTE_DETAILS_URL, urlEncode(quoteCode));
 		}
 
+		 pentlandCartFacade.populateCart();
 		final CartData cartData = getCartFacade().getSessionCartWithEntryOrdering(false);
 		prepareQuotePageElements(model, cartData, true);
 
