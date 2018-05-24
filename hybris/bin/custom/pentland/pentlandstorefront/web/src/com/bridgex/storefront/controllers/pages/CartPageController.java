@@ -374,11 +374,8 @@ public class CartPageController extends AbstractCartPageController
 		List<String> populateCart = pentlandCartFacade.populateCart();
 		if(CollectionUtils.isNotEmpty(populateCart))
 		{
-			if(populateCart.get(0).contains("isn't available"))
-			{
-				GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
-						{populateCart.toString()});
-			}
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
+					{populateCart.toString()});
 		}
 		super.prepareDataForPage(model);
 
