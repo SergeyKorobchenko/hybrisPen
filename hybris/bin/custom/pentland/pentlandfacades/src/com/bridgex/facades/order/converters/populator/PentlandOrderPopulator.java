@@ -9,6 +9,7 @@ import com.bridgex.core.category.PentlandCategoryService;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.order.converters.populator.OrderPopulator;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
@@ -37,6 +38,10 @@ public class PentlandOrderPopulator extends OrderPopulator {
     }
     target.setCreditCheckPassed(source.isCreditCheckPassed());
     target.setPurchaseOrderNumber(source.getPurchaseOrderNumber());
+    if(source.getSurCharge()!=null)
+    {
+    	target.setSurCharge(createPrice(source, source.getSurCharge()));
+    }
 
     populateSapBrand(source, target);
   }

@@ -120,6 +120,8 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
     request.setPaymentType(orderModel.getPaymentType().getCode());
     request.setCustomerComment(orderModel.getCustomerNotes());
     request.setEmail(orderModel.getUser().getUid());
+    double surCharge=orderModel.getSurCharge()!=null?orderModel.getSurCharge():0.00;
+    request.setSurCharge(String.valueOf(surCharge));
 
     request.setPaymentTransactionCode(orderModel.getWorldpayOrderCode());
   }

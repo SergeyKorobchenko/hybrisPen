@@ -480,6 +480,11 @@
                         <defaultvalue>Boolean.TRUE</defaultvalue>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="surCharge" type="java.lang.Double">
+                        <description>surCharge for minimum order value not more than 100 GBP</description>
+                        <persistence type="property"/>
+                        <modifiers optional="true" read="true" write="true" search="true"/>
+                    </attribute>
                 </attributes>
             </itemtype>
 
