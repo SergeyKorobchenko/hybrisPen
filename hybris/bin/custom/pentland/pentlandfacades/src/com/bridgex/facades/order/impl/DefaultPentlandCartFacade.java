@@ -17,7 +17,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.spockframework.util.Nullable;
 import org.springframework.beans.factory.annotation.Required;
-
 import com.bridgex.core.category.PentlandCategoryService;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
@@ -44,9 +43,9 @@ import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.variants.model.VariantProductModel;
-import net.sf.ehcache.search.aggregator.Count;
 
 /**
  * Created by dmitry.konovalov@masterdata.ru on 30.10.2017.
@@ -54,12 +53,13 @@ import net.sf.ehcache.search.aggregator.Count;
 public class DefaultPentlandCartFacade extends DefaultCartFacade implements PentlandCartFacade {
 
   private static final Logger LOG = Logger.getLogger(DefaultPentlandCartFacade.class);
-
+  
   private StoreSessionFacade      storeSessionFacade;
   private PentlandB2BUnitService  pentlandB2BUnitService;
   private PentlandCategoryService categoryService;
   private OrderSimulationService  orderSimulationService;
-  private ProductService productService;
+  private ConfigurationService configurationService;
+
 
 @Override
   public void saveB2BCartData(CartData cartData) {
@@ -102,12 +102,40 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
             materialList.forEach(m -> populatePrices(m, cartModel));
           }
           try {
-            cartModel.setSubtotal(Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice()));
+        	  double subTotalPrice= Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice());
+        	  String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
+        	  if(subTotalPrice<=Double.parseDouble(minimumOrderValue))
+        	  {
+        		  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+        		  double surChargeValue=Double.parseDouble(surCharge);
+        		  cartModel.setSurCharge(surChargeValue);
+        		  cartModel.setSubtotal(subTotalPrice+surChargeValue);
+        	  }
+        	  else
+        	  {
+        		  cartModel.setSurCharge(null);
+        		  cartModel.setSubtotal(Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice()));
+        	  }
+        	  
           } catch (NullPointerException | NumberFormatException ex) {
             cartModel.setSubtotal(0d);
           }
           try {
-            cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+        	  double totalPrice= Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice());
+        	  String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
+        	  if(totalPrice<=Double.parseDouble(minimumOrderValue))
+        	  {
+        		  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+        		  double surChargeValue=Double.parseDouble(surCharge);
+        		  cartModel.setSurCharge(surChargeValue);
+        		  cartModel.setTotalPrice(totalPrice+surChargeValue);
+        	  }
+        	  else
+        	  {
+        		  cartModel.setSurCharge(null);
+        		  cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+        	  }
+            
           } catch (NullPointerException | NumberFormatException ex) {
             cartModel.setTotalPrice(0d);
           }
@@ -144,7 +172,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 			  {
 				  inStock=inStock+1;
 				  String productCode = materialOutputGridDto.getEan();
-				  final ProductModel productModel = productService.getProductForCode(productCode);
+				  final ProductModel productModel = getProductService().getProductForCode(productCode);
 				  ApparelSizeVariantProductModel sizeProductModel=(ApparelSizeVariantProductModel)productModel;
 				  String size = sizeProductModel.getSize();
 				  String materialNumber = materialInfoDto.getMaterialNumber();
@@ -407,11 +435,12 @@ private boolean isCartNotEmpty(CartModel cartModel) {
     this.orderSimulationService = orderSimulationService;
   }
 
-  public ProductService getProductService() {
-	  return productService;
-  }
+	public ConfigurationService getConfigurationService() {
+		return configurationService;
+	}
 
-  public void setProductService(ProductService productService) {
-	  this.productService = productService;
-  }
+	@Required
+	public void setConfigurationService(ConfigurationService configurationService) {
+		this.configurationService = configurationService;
+	}
 }

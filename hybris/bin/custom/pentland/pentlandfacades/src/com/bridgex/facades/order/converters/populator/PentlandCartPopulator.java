@@ -24,6 +24,10 @@ public class PentlandCartPopulator<T extends CartData> extends CartPopulator<T> 
     target.setRdd(source.getRdd());
     target.setPurchaseOrderNumber(source.getPurchaseOrderNumber());
     target.setCustomerNotes(source.getCustomerNotes());
+    if(source.getSurCharge()!=null)
+    {
+    	target.setSurCharge(createPrice(source, source.getSurCharge()));
+    }
 
     this.addMarkForAddress(source, target);
   }

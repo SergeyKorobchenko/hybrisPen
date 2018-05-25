@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Required;
 import com.bridgex.core.order.PentlandOrderExportService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 
+import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderStrategy;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
@@ -89,7 +90,7 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
 
         //check that cart b2bUnit is the same as the one address was for
         if(StringUtils.isNotEmpty(sapCustomerID)){
-          B2BUnitModel unit = orderModel.getUnit();
+          B2BUnitModel unit = orderModel.getUnit()!=null?orderModel.getUnit():b2BUnitService.getParent((B2BCustomerModel) orderModel.getUser());
           if(!sapCustomerID.equals(unit.getSapID())){
             B2BUnitModel unitBySapID = b2BUnitService.getUnitBySapID(sapCustomerID);
             orderModel.setUnit(unitBySapID);
