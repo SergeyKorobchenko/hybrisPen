@@ -18,7 +18,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/cart/delete" var="actionUrl1"  />
-<a href="#" class="cart__head--link pull-right" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false"><spring:theme code="basket.empty.cart" /></a>
+<a href="#" class="cart__head--link pull-right" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false"><span class="glyphicon glyphicon-trash"></span><spring:theme code="basket.empty.cart" /></a>
 
 <a href="#" class="cart__head--link js-save-cart-link pull-right"><span class="glyphicon glyphicon-plus"></span><spring:theme code="basket.save.cart" /></a>
     
