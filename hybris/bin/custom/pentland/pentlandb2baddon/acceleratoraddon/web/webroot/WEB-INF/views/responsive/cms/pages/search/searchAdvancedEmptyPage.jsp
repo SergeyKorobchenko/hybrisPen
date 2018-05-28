@@ -95,7 +95,7 @@
 
                         <c:if test="${not empty advancedSearchForm.keywords && advancedSearchForm.orderFormSearchResultType}">
                             <div class="product-action">
-                                <div class="hidden-xs">
+                                <div class="hidden-xs">&nbsp;&nbsp;&nbsp;
                                     <spring:theme code="product.grid.items.selected"/>&nbsp;
                                     <span class="js-total-items-count">0</span>
                                 </div>
