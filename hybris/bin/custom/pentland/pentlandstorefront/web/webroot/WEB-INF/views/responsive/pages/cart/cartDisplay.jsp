@@ -16,8 +16,8 @@
         <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
             <c:if test="${not empty savedCartCount and savedCartCount ne 0}">
                 <spring:url value="/my-account/saved-carts" var="listSavedCartUrl" htmlEscape="false"/>
-                <a href="${listSavedCartUrl}" class="save__cart--link cart__head--link">
-                    <span class="glyphicon glyphicon-folder-open"></span><spring:theme code="saved.cart.total.number" arguments="${savedCartCount}"/>
+                <a href="${listSavedCartUrl}" class="save__cart--link cart__head--link pull-left" >
+                    <span class="glyphicon glyphicon-folder-open" ></span><spring:theme code="saved.cart.total.number" arguments="${savedCartCount}"/>
                 </a>
                 <c:if test="${not empty quoteCount and quoteCount ne 0}">
                     <spring:url value="/my-account/my-quotes" var="listQuotesUrl" htmlEscape="false"/>

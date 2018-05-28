@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -371,16 +371,12 @@ public class CartPageController extends AbstractCartPageController
 	@Override
 	protected void prepareDataForPage(final Model model) throws CMSItemNotFoundException
 	{
-		pentlandCartFacade.populateCart();
-		/*List<String> validateStock = pentlandCartFacade.validateStock();
-		if(!validateStock.isEmpty())
+		List<String> populateCart = pentlandCartFacade.populateCart();
+		if(CollectionUtils.isNotEmpty(populateCart))
 		{
-			if(validateStock.get(0).contains("isn't available"))
-			{
-				GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
-						{validateStock.toString()});
-			}
-		}*/
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
+					{populateCart.toString()});
+		}
 		super.prepareDataForPage(model);
 
 		if (!model.containsAttribute(VOUCHER_FORM))

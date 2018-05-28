@@ -1,6 +1,8 @@
 package com.bridgex.facades.order.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +17,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.spockframework.util.Nullable;
 import org.springframework.beans.factory.annotation.Required;
-
 import com.bridgex.core.category.PentlandCategoryService;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
@@ -42,8 +43,9 @@ import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.product.ProductService;
 import de.hybris.platform.variants.model.VariantProductModel;
-import net.sf.ehcache.search.aggregator.Count;
 
 /**
  * Created by dmitry.konovalov@masterdata.ru on 30.10.2017.
@@ -51,13 +53,15 @@ import net.sf.ehcache.search.aggregator.Count;
 public class DefaultPentlandCartFacade extends DefaultCartFacade implements PentlandCartFacade {
 
   private static final Logger LOG = Logger.getLogger(DefaultPentlandCartFacade.class);
-
+  
   private StoreSessionFacade      storeSessionFacade;
   private PentlandB2BUnitService  pentlandB2BUnitService;
   private PentlandCategoryService categoryService;
   private OrderSimulationService  orderSimulationService;
+  private ConfigurationService configurationService;
 
-  @Override
+
+@Override
   public void saveB2BCartData(CartData cartData) {
     if (hasSessionCart()) {
       final CartModel cart = getCartService().getSessionCart();
@@ -77,130 +81,61 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
       root.getElements().stream().forEach(e -> populateSizeQuantities(e, codeToQuantity));
     }
   }
-  
+   
   @Override
-  public  List<String> validateStock() {
-	  List<String> validateData = new ArrayList<>();
-	  int inStockCount=0;
-	  String validateMessage;
-	  if (hasSessionCart()) {
-		  final CartModel cartModel = getCartService().getSessionCart();
-		  Date rdd = cartModel.getRdd();
-		  if(rdd != null)
-		  {
-			  List<Date> listOfDates = new ArrayList<>();
-			  if (isCartNotEmpty(cartModel)) {
-				  final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
-				  final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
-				  final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
-				
-				  /* To check that all products stock is 0*/
-				  for (MaterialInfoDto materialInfoDto : materialList) {
-					  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
-					  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-						  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
-						  {
-							  if(materialOutputGridDto.getFutureStocksDtoList()!=null)
-							  {
-								  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
-								  if(futureStocksDtoList.get(0)!=null)
-								  {
-									  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
-									  if(futureStocksDto.getFutureDate()!=null)
-									  {
-										  Date futureDate = futureStocksDto.getFutureDate();
-										  listOfDates.add(futureDate);
-									  }
-								  }
-							  }
-						  }
-						  if(Double.valueOf(materialOutputGridDto.getAvailableQty())!=0)
-						  {
-							  inStockCount=inStockCount+1;
-						  }
-					  }
-				  }
-				  if(inStockCount!=0)
-				  {
-					  for (MaterialInfoDto materialInfoDto : materialList) {
-						  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
-						  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-							  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
-							  {
-								  String ean = materialOutputGridDto.getEan();
-								  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
-								  {
-									  if(materialOutputGridDto.getFutureStocksDtoList()!=null)
-									  {
-										  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
-										  if(futureStocksDtoList.get(0)!=null)
-										  {
-											  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
-											  if(futureStocksDto.getFutureDate()!=null)
-											  {
-												  Date futureDate = futureStocksDto.getFutureDate();
-												  if(futureDate.compareTo(rdd)>0)
-												  {
-													  validateMessage=ean+" isn't available for the "+rdd+" and the item will be delivered at "+futureDate;
-													  validateData.add(validateMessage);
-												  }
-											  }
-										  }
-									  }
-								  }
-								  else
-								  {
-									  validateMessage=ean+" isn't available for the "+rdd;
-									  validateData.add(validateMessage);
-								  }
-							  }
-						  }
-					  }
-				  }
-				  else
-				  {
-					  if(CollectionUtils.isNotEmpty(listOfDates))
-					  {
-						  Date minDate = Collections.min(listOfDates);
-						  if(minDate.compareTo(rdd)>0)
-						  {
-							  validateMessage="Please select RDD on "+minDate+" to Deliver";
-							  validateData.add(validateMessage);
-						  }
-					  }
-					  else
-					  {
-						  validateMessage="Product Stock on RDD not available";
-						  validateData.add(validateMessage);
-					  }
-
-				  }
-			  }
-		  }
-	  }
-	  return validateData;
-  }
-  
-  @Override
-  public void populateCart() {
+  public List<String> populateCart() {
+	  List<String> validateStock = null; 
     if (hasSessionCart()) {
       final CartModel cartModel = getCartService().getSessionCart(); 
       if (isCartNotEmpty(cartModel)) {
+    	  Date rdd = cartModel.getRdd();
         final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
         final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
         if (successResponse(response)) {
           resetCartPrices(cartModel);
           final List<MaterialInfoDto> materialList = response.getMultiBrandCartOutput().getMaterialInfo();
           if (CollectionUtils.isNotEmpty(materialList)) {
+        	  if(rdd != null)
+        	  {
+        		  validateStock = validateStock(materialList,rdd);
+        	  }
             materialList.forEach(m -> populatePrices(m, cartModel));
           }
           try {
-            cartModel.setSubtotal(Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice()));
+        	  double subTotalPrice= Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice());
+        	  String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
+        	  if(subTotalPrice<=Double.parseDouble(minimumOrderValue))
+        	  {
+        		  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+        		  double surChargeValue=Double.parseDouble(surCharge);
+        		  cartModel.setSurCharge(surChargeValue);
+        		  cartModel.setSubtotal(subTotalPrice+surChargeValue);
+        	  }
+        	  else
+        	  {
+        		  cartModel.setSurCharge(null);
+        		  cartModel.setSubtotal(Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice()));
+        	  }
+        	  
           } catch (NullPointerException | NumberFormatException ex) {
             cartModel.setSubtotal(0d);
           }
           try {
-            cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+        	  double totalPrice= Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice());
+        	  String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
+        	  if(totalPrice<=Double.parseDouble(minimumOrderValue))
+        	  {
+        		  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+        		  double surChargeValue=Double.parseDouble(surCharge);
+        		  cartModel.setSurCharge(surChargeValue);
+        		  cartModel.setTotalPrice(totalPrice+surChargeValue);
+        	  }
+        	  else
+        	  {
+        		  cartModel.setSurCharge(null);
+        		  cartModel.setTotalPrice(Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice()));
+        	  }
+            
           } catch (NullPointerException | NumberFormatException ex) {
             cartModel.setTotalPrice(0d);
           }
@@ -218,9 +153,82 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
         getModelService().save(cartModel);
       }
     }
+	return validateStock;
   }
 
-  private boolean isCartNotEmpty(CartModel cartModel) {
+  private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
+	  // TODO Auto-generated method stub
+	  List<String> validateInStockData = new ArrayList<>();
+	  List<String> validateNoStockData = new ArrayList<>();
+	  String validateInStockMessage;
+	  String validateNoStockMessage;
+	  int inStock=0;
+	  int noStock=0;
+
+	  for (MaterialInfoDto materialInfoDto : materialList) {
+		  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
+		  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
+			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
+			  {
+				  inStock=inStock+1;
+				  String productCode = materialOutputGridDto.getEan();
+				  final ProductModel productModel = getProductService().getProductForCode(productCode);
+				  ApparelSizeVariantProductModel sizeProductModel=(ApparelSizeVariantProductModel)productModel;
+				  String size = sizeProductModel.getSize();
+				  String materialNumber = materialInfoDto.getMaterialNumber();
+
+				  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEEE dd MMMMM");
+				  String date = simpleDateFormat.format(rdd);
+
+				  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
+				  {
+					  List<FutureStocksDto> futureStocksDtoList = materialOutputGridDto.getFutureStocksDtoList();
+					  if(futureStocksDtoList.get(0)!=null)
+					  {
+						  FutureStocksDto futureStocksDto = futureStocksDtoList.get(0);
+						  if(futureStocksDto.getFutureDate()!=null)
+						  {
+							  Date futureDate = futureStocksDto.getFutureDate();
+							  if(futureDate.compareTo(rdd)>0)
+							  {
+								  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
+								  {
+									  noStock=noStock+1;
+									  validateNoStockMessage="Size "+size +" for "+materialNumber+" is not available for RDD "+date;;
+									  validateNoStockData.add(validateNoStockMessage);
+								  }
+								  validateInStockMessage="Size "+size +" for "+materialNumber+" isn't available to order for "+date;
+								  validateInStockData.add(validateInStockMessage);
+							  }
+						  }
+					  }
+				  }
+				  else
+				  {
+					  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
+					  {
+						  noStock=noStock+1;
+						  validateNoStockMessage="Size "+size +" for "+materialNumber+" is not available for RDD "+date;;
+						  validateNoStockData.add(validateNoStockMessage);
+					  }
+					  validateInStockMessage="Size "+size +" for "+materialNumber+" isn't available to order for "+date;
+					  validateInStockData.add(validateInStockMessage);
+				  }
+			  }
+		  }
+	  }
+	  if(inStock==noStock)
+	  {
+		  return validateNoStockData;
+	  }
+	  else
+	  {
+		  return validateInStockData; 
+	  }
+
+  }
+
+private boolean isCartNotEmpty(CartModel cartModel) {
     return cartModel.getEntries().size() > 0;
   }
 
@@ -427,4 +435,12 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
     this.orderSimulationService = orderSimulationService;
   }
 
+	public ConfigurationService getConfigurationService() {
+		return configurationService;
+	}
+
+	@Required
+	public void setConfigurationService(ConfigurationService configurationService) {
+		this.configurationService = configurationService;
+	}
 }

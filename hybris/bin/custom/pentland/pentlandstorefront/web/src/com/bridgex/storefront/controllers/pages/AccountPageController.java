@@ -335,11 +335,9 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			final OrderData orderDetails = orderFacade.requestOrderDetails(orderCode);
 			
-			OrderData sourceOrder = orderFacade.getSourceOrder(orderCode);
-			
-			if (sourceOrder.getEntries() != null && !sourceOrder.getEntries().isEmpty())
+			if (orderDetails.getEntries() != null && !orderDetails.getEntries().isEmpty())
 			{
-				for (final OrderEntryData entry : sourceOrder.getEntries())
+				for (final OrderEntryData entry : orderDetails.getEntries())
 				{
 					final String productCode = entry.getProduct().getCode();
 					final ProductData product = productFacade.getProductForCodeAndOptions(productCode,
@@ -349,7 +347,6 @@ public class AccountPageController extends AbstractSearchPageController
 				}
 			}
 			model.addAttribute("orderData", orderDetails);
-			model.addAttribute("sourceOrderData", sourceOrder);
 
 			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
 			breadcrumbs.add(new Breadcrumb("/my-account/orders", getMessageSource().getMessage("text.account.orderHistory", null,
@@ -381,7 +378,9 @@ public class AccountPageController extends AbstractSearchPageController
 	public String getProductVariantMatrixForResponsive(@PathVariable("orderCode") final String orderCode,
 			@RequestParam("productCode") final String productCode, final Model model)
 	{
-		final OrderData orderData = orderFacade.getOrderDetailsForCodeWithoutUser(orderCode);
+		//final OrderData orderData = orderFacade.getOrderDetailsForCodeWithoutUser(orderCode);
+		
+		final OrderData orderData = orderFacade.requestOrderDetails(orderCode);
 
 		final Map<String, ReadOnlyOrderGridData> readOnlyMultiDMap = orderGridFormFacade.getReadOnlyOrderGridForProductInOrder(
 				productCode, Arrays.asList(ProductOption.BASIC, ProductOption.CATEGORIES), orderData);

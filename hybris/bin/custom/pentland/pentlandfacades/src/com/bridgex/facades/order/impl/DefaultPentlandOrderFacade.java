@@ -1,6 +1,9 @@
 package com.bridgex.facades.order.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
@@ -11,8 +14,11 @@ import com.bridgex.core.integration.PentlandIntegrationService;
 import com.bridgex.facades.order.PentlandOrderFacade;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
+import com.bridgex.integration.domain.OrderEntryDto;
+import com.bridgex.integration.domain.SizeVariantDto;
 
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.order.impl.DefaultOrderFacade;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -53,8 +59,22 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
 
   @Override
   public OrderData requestOrderDetails(String code) {
+	  
+	  final BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
+	  OrderModel orderForCode = getCustomerAccountService().getOrderForCode(code, baseStoreModel); 
+	  OrderData sourceOrderData = getOrderConverter().convert(orderForCode.getSourceOrder());
+	  
     OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(code));
-    return orderDetailsConverter.convert(response);
+    List<OrderEntryData> entries = sourceOrderData.getEntries();
+    
+    List<OrderEntryData> orderData = response.getOrderEntries().stream()
+    .map(entry->entries.stream().filter(e->entry.getProduct().equals(e.getProduct().getCode())).findAny())
+    .filter(Optional::isPresent)
+    .map(Optional::get).collect(Collectors.<OrderEntryData>toList());
+    
+    OrderData order= orderDetailsConverter.convert(response);
+	order.setEntries(orderData);
+    return order;
   }
 
   @Override
@@ -81,13 +101,6 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
     return request;
   }
   
-  @Override
-  public OrderData getSourceOrder(String sapOrderCode)
-  {
-	  final BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
-	  OrderModel orderForCode = getCustomerAccountService().getOrderForCode(sapOrderCode, baseStoreModel);
-  	  return getOrderConverter().convert(orderForCode.getSourceOrder());
-  }
 
   protected PentlandCustomerAccountService getPentlandCustomerAccountService() {
     return pentlandCustomerAccountService;

@@ -34,9 +34,6 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 
 	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
 	private PentlandCartFacade                cartFacade;
-	@Resource(name = "pentlandCartFacade")
-	private PentlandCartFacade pentlandCartFacade;
-
 
 	@Override
 	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
@@ -50,17 +47,6 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 			                               "checkout.error.empty.entry.cart");
 			return ValidationResults.FAILED;
 		}
-		
-		/*List<String> validateStock = pentlandCartFacade.validateStock();
-		if(!validateStock.isEmpty())
-		{
-			if(validateStock.get(0).contains("RDD"))
-			{
-				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
-						{validateStock.get(0)});
-				return ValidationResults.FAILED;
-			}
-		}*/
 		
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
 		cartFacade.populateCart();

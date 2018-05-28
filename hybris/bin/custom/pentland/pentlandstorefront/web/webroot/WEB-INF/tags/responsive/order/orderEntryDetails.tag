@@ -110,7 +110,7 @@
     <div class="item__price">
         <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>:</span>
         <ycommerce:testId code="orderDetails_productItemPrice_label">
-            <format:price priceData="${entry.erpPrice}" displayFreeForZero="false"/>
+            <format:price priceData="${orderEntry.erpPrice}" displayFreeForZero="false"/>
         </ycommerce:testId>
     </div>
 

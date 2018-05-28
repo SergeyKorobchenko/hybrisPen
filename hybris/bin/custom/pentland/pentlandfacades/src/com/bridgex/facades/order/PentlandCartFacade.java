@@ -1,6 +1,9 @@
 package com.bridgex.facades.order;
 
+import java.util.Date;
 import java.util.List;
+
+import com.bridgex.integration.domain.MaterialInfoDto;
 
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
@@ -15,8 +18,5 @@ public interface PentlandCartFacade extends CartFacade {
 
   void populateVariantMatrixQuantity(ProductData productData);
 
-  void populateCart();
-  
-  List<String> validateStock();
-
+  List<String> populateCart();
 }
