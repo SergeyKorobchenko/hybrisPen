@@ -60,6 +60,7 @@
 		<property name="storeSessionFacade" ref="storeSessionFacade"/>
 		<property name="categoryService" ref="pentlandCategoryService" />
 		<property name="orderSimulationService" ref="orderSimulationService" />
+		<property name="configurationService" ref="configurationService"/>
 	</bean>
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">

@@ -68,6 +68,9 @@ public class OrderExportDto {
 
   @JsonProperty("I_USER_EMAIL")
   private String email = "";
+  
+  @JsonProperty("I_SURCHARGE_VALUE")
+  private String surCharge= "";
 
   @JsonProperty("I_MULTIBRAND_ORDER_INPUT_T")
   private List<MultiBrandOrderInput> orderEntries;
@@ -239,8 +242,19 @@ public class OrderExportDto {
   public void setEmail(String email) {
     this.email = email;
   }
+  
+  public String getSurCharge() {
+	return surCharge;
+  }
 
-  public String getPaymentTransactionCode() {
+public void setSurCharge(String surCharge) {
+	if(surCharge!=null)
+	{
+		this.surCharge = surCharge;
+	}
+}
+
+public String getPaymentTransactionCode() {
     return paymentTransactionCode;
   }
 

@@ -148,7 +148,7 @@
      <%-- total --%>
     <div class="item__total hidden-xs hidden-sm">
         <ycommerce:testId code="orderDetails_productTotalPrice_label">
-            <format:price priceData="${orderEntry.totalPrice}" displayFreeForZero="true"/>
+            <format:price priceData="${orderEntry.totalPrice}" displayFreeForZero="false"/>
         </ycommerce:testId>
     </div>
 
