@@ -33,8 +33,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <!-- <h4 class="modal-title">Modal Header</h4> -->
-      </div>
+        <h4 class="modal-title">Empty your basket</h4>
+      
       <div class="modal-body">
         <p>Do you really want to clear the basket</p>
       </div>
@@ -42,6 +42,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         <a href="${actionUrl1}" class="btn btn-primary">Yes</a>
       </div>
+    </div>
     </div>
 
   </div>
