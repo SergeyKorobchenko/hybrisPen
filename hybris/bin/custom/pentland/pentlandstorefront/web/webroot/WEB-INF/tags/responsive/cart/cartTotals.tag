@@ -51,6 +51,18 @@
             <%--</c:choose>--%>
         </ycommerce:testId>
     </div>
+    
+    <c:if test="${not empty cartData.surCharge}">
+    <div class="col-xs-6 cart-totals-left grand-total"><spring:theme code="basket.page.surcharge"/></div>
+     <div class="col-xs-6 cart-totals-right text-right grand-total">
+        <ycommerce:testId code="cart_totalPrice_label">
+            <format:price priceData="${cartData.surCharge}"/>
+        </ycommerce:testId>
+    </div>
+    <div class="col-xs-14 cart-totals-left" style="margin-left:-150px;font-size: medium;">
+            <spring:theme code="basket.page.totals.included.surcharges"/>
+        </div>
+    </c:if>
 
 
     <%--<c:if test="${not cartData.net}">--%>
