@@ -13,7 +13,7 @@
     </div>
     <div class="col-sm-4">
     <c:if test="${not empty cartData.surCharge}">
-    <div class="cart-totals">
+    <div class="cart-totals row">
     <div class="col-xs-6 cart-totals-left grand-total"><spring:theme code="basket.page.surcharge"/></div>
      <div class="col-xs-6 cart-totals-right text-right grand-total">
         <ycommerce:testId code="cart_totalPrice_label">
