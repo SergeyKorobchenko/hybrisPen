@@ -13,6 +13,8 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.ObjectUtils;
+
 import com.bridgex.core.product.OrderSimulationService;
 import com.bridgex.core.services.PentlandB2BUnitService;
 import com.bridgex.integration.constants.ErpintegrationConstants;
@@ -58,8 +60,12 @@ public class PentlandStockAvailabilityResolver extends AbstractBaseProductValueR
 		
 		final MultiBrandCartDto request = createOrderFormRequest(baseProductModel, new Date());
 		final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
+		if(!ObjectUtils.isEmpty(response))
+		{
 		MultiBrandCartOutput multiBrandCartOutput = response.getMultiBrandCartOutput();
 		
+		if(!ObjectUtils.isEmpty(multiBrandCartOutput) && CollectionUtils.isNotEmpty(multiBrandCartOutput.getMaterialInfo()))
+		{
 		List<MaterialInfoDto> materialInfo = multiBrandCartOutput.getMaterialInfo();
 		List<MaterialInfoDto> materialInfoDtos = materialInfo.stream().filter(m->m.getMaterialNumber().equals(baseProductModel.getCode())).collect(Collectors.<MaterialInfoDto>toList());
 		if(CollectionUtils.isNotEmpty(materialInfoDtos))
@@ -80,6 +86,8 @@ public class PentlandStockAvailabilityResolver extends AbstractBaseProductValueR
 		if(CollectionUtils.isNotEmpty(styleVariantStock))
 		{
 			inputDocument.addField(indexedProperty, new String("in stock"), valueResolverContext.getFieldQualifier());
+		}
+		}
 		}
 		}
 		
