@@ -375,7 +375,7 @@ public class CartPageController extends AbstractCartPageController
 		if(CollectionUtils.isNotEmpty(populateCart))
 		{
 			String string = populateCart.toString().replace("[", "").replace("]", "");
-			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
+			GlobalMessages.addMessage(model, GlobalMessages.INFO_MESSAGES_HOLDER, "checkout.error.empty.entry.stock", new Object[]
 					{string});
 		}
 		super.prepareDataForPage(model);
