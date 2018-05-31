@@ -19,7 +19,7 @@
 <c:if test="${searchPageData.pagination.totalNumberOfResults == 0 && top }">
 	<div class="pagination-bar pagination-empty">
 		<ycommerce:testId code="searchResults_productsFound_label">
-			<div class="total-results"><spring:theme code="${themeMsgKey}.totalResults" arguments="${searchPageData.pagination.totalNumberOfResults}"/></div>
+			<div class="total-results"><spring:theme code="${themeMsgKey}.totalResults" arguments="${searchPageData.pagination.totalNumberOfResults}"/>&nbsp&nbsp&nbsp</div>
 		</ycommerce:testId>
 	</div>
 </c:if>
@@ -90,7 +90,7 @@
         </c:if>
 
         <ycommerce:testId code="searchResults_productsFound_label">
-            <div class="total-results"><spring:theme code="${themeMsgKey}.totalResults" arguments="${searchPageData.pagination.totalNumberOfResults}"/></div>
+            <div class="total-results"><spring:theme code="${themeMsgKey}.totalResults" arguments="${searchPageData.pagination.totalNumberOfResults}"/>&nbsp&nbsp&nbsp</div>
         </ycommerce:testId>
 
         <c:if test="${searchPageData.pagination.numberOfPages > 1}">
