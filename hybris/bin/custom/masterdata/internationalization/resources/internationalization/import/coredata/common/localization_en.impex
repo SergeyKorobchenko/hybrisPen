@@ -233,6 +233,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;basket.page.totals.noNetTax;*No taxes are included in the total
 ;basket.page.totals.included.surcharges;if your order Net Total is a £100 or less a £5 charge will be applied
 ;basket.page.surcharge;surCharge
+;basket.checkout.page.surcharge;Surcharge:
 ;basket.page.totals.quote.total.after.discount;New subtotal:
 ;basket.page.totals.quote.total.original;Original subtotal:
 ;basket.page.totals.savings;Savings

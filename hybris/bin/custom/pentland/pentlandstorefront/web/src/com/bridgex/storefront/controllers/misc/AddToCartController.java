@@ -184,7 +184,7 @@ public class AddToCartController extends AbstractController
 			}
 		}
 
-		pentlandCartFacade.populateCart();
+		pentlandCartFacade.populateCart(null);
 
 		if (CollectionUtils.isNotEmpty(modificationDataList))
 		{

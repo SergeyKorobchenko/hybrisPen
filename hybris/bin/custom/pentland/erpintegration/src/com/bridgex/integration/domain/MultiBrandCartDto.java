@@ -69,6 +69,9 @@ public class MultiBrandCartDto {
   //Not used
   @JsonProperty("I_PO_TYPE")
   private String poType = "";
+  
+  @JsonProperty("I_SURCHARGE_VALUE")
+  private String surCharge= "";
 
   @JsonProperty("I_MULTI_BRAND_CART_INPUT_T")
   private List<MultiBrandCartInput> cartInput;
@@ -220,6 +223,14 @@ public class MultiBrandCartDto {
   public void setPoType(String poType) {
     this.poType = poType;
   }
+  
+	public String getSurCharge() {
+		return surCharge;
+	}
+
+  public void setSurCharge(String surCharge) {
+		this.surCharge = surCharge;
+	}
 
   public List getItParams() {
     return itParams;
