@@ -20,6 +20,9 @@ public class MultiBrandCartOutput {
 
   @JsonProperty("E_TOTAL_TAX_VALUE")
   private String totalTaxPrice;
+  
+  @JsonProperty("E_SURCHARGE_VALUE")
+  private String surCharge;
 
   @JsonProperty("ET_MATERIAL_INFO_LIST")
   private List<MaterialInfoDto> materialInfo;
@@ -56,7 +59,15 @@ public class MultiBrandCartOutput {
     this.totalTaxPrice = totalTaxPrice;
   }
 
-  public List<MaterialInfoDto> getMaterialInfo() {
+  public String getSurCharge() {
+	return surCharge;
+}
+
+public void setSurCharge(String surCharge) {
+	this.surCharge = surCharge;
+}
+
+public List<MaterialInfoDto> getMaterialInfo() {
     return materialInfo;
   }
 

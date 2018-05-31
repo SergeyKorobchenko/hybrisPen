@@ -307,7 +307,7 @@ public class QuoteController extends AbstractCartPageController
 			return String.format(REDIRECT_QUOTE_DETAILS_URL, urlEncode(quoteCode));
 		}
 
-		 pentlandCartFacade.populateCart();
+		 pentlandCartFacade.populateCart(null);
 		final CartData cartData = getCartFacade().getSessionCartWithEntryOrdering(false);
 		prepareQuotePageElements(model, cartData, true);
 

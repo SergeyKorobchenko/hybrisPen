@@ -14,8 +14,10 @@ import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.pentlandb2baddon.checkout.steps.validation.AbstractB2BCheckoutStepValidator;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 
 	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
 	private PentlandCartFacade                cartFacade;
+	private ConfigurationService configurationService;
 
 	@Override
 	protected ValidationResults doValidateOnEnter(final RedirectAttributes redirectAttributes) {
@@ -49,8 +52,18 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 		}
 		
 		pentlandB2BAcceleratorCheckoutFacade.cleanupZeroQuantityEntries();
-		cartFacade.populateCart();
+		 String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
+		 String surCharge=null;
+		 
 		CartData cartData = getCheckoutFacade().getCheckoutCart();
+		PriceData subTotal = cartData.getSubTotal();
+		if(subTotal.getValue().doubleValue()<=Double.valueOf(minimumOrderValue))
+		  {
+			surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+		  }
+		
+		cartFacade.populateCart(surCharge);
+		
 		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty()){
 			if(StringUtils.isEmpty(cartData.getPurchaseOrderNumber())){
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
@@ -105,4 +118,15 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 	public void setCartFacade(PentlandCartFacade cartFacade) {
 		this.cartFacade = cartFacade;
 	}
+
+	public ConfigurationService getConfigurationService() {
+		return configurationService;
+	}
+
+	@Required
+	public void setConfigurationService(ConfigurationService configurationService) {
+		this.configurationService = configurationService;
+	}
+	
+	
 }

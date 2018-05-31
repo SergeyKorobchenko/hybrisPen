@@ -56,6 +56,16 @@
 			</span>
 		</div>
 	</c:if>
+	<c:if test="${cartData.surCharge.value > 0}">
+	<div class="subtotal">
+		<spring:theme code="basket.checkout.page.surcharge"/>
+		<span>
+			<ycommerce:testId code="Order_Totals_Subtotal">
+				<format:price priceData="${cartData.surCharge}"/>
+			</ycommerce:testId>
+		</span>
+	</div>
+	</c:if>
 	<div class="totals">
 		<spring:theme code="checkout.page.totals.total"/>
 		<span>

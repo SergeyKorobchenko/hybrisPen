@@ -83,13 +83,13 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   }
    
   @Override
-  public List<String> populateCart() {
+  public List<String> populateCart(String surCharges) {
 	  List<String> validateStock = null; 
     if (hasSessionCart()) {
       final CartModel cartModel = getCartService().getSessionCart(); 
       if (isCartNotEmpty(cartModel)) {
     	  Date rdd = cartModel.getRdd();
-        final MultiBrandCartDto request = createSimulateOrderRequest(cartModel);
+        final MultiBrandCartDto request = createSimulateOrderRequest(cartModel,surCharges);
         final MultiBrandCartResponse response = getOrderSimulationService().simulateOrder(request);
         if (successResponse(response)) {
           resetCartPrices(cartModel);
@@ -110,6 +110,10 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
         		  double surChargeValue=Double.parseDouble(surCharge);
         		  cartModel.setSurCharge(surChargeValue);
         		  cartModel.setSubtotal(subTotalPrice+surChargeValue);
+        		  if(StringUtils.isNotEmpty(surCharges)&&Double.parseDouble(surCharges)>0)//in checkout page
+        		  {
+        			  cartModel.setSubtotal(subTotalPrice);
+        		  }
         	  }
         	  else
         	  {
@@ -275,8 +279,10 @@ private boolean isCartNotEmpty(CartModel cartModel) {
     return StringUtils.EMPTY;
   }
 
-  private MultiBrandCartDto createSimulateOrderRequest(CartModel cartModel) {
+  private MultiBrandCartDto createSimulateOrderRequest(CartModel cartModel,String surCharge) {
     final MultiBrandCartDto requestRoot = createRequestRoot(cartModel);
+    String surChargeValue=StringUtils.isNotEmpty(surCharge)?surCharge:"0.00";
+    requestRoot.setSurCharge(surChargeValue);
     final Map<String, B2BUnitModel> brandUnitsMap = createBrandUnitsMap(getPentlandB2BUnitService().getCurrentUnits());
     Map<ProductModel, List<AbstractOrderEntryModel>> groupedEntries =
       cartModel.getEntries().stream().collect(Collectors.groupingBy(e -> ((VariantProductModel) e.getProduct()).getBaseProduct()));

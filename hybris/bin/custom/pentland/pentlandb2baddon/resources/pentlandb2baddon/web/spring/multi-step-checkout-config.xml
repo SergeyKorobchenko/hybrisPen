@@ -151,6 +151,7 @@
 	<bean id="defaultB2BPaymentTypeCheckoutStepValidator" class="de.hybris.platform.pentlandb2baddon.checkout.steps.validation.impl.DefaultB2BPaymentTypeCheckoutStepValidator" parent="abstractB2BCheckoutStepValidator" >
 		<property name="pentlandB2BAcceleratorCheckoutFacade" ref="pentlandB2BAcceleratorCheckoutFacade"/>
 		<property name="cartFacade" ref="cartFacade"/>
+		<property name="configurationService" ref="configurationService"/>
 	</bean>
 	
 	<alias name="defaultB2BDeliveryMethodCheckoutStepValidator" alias="deliveryMethodCheckoutValidator" />

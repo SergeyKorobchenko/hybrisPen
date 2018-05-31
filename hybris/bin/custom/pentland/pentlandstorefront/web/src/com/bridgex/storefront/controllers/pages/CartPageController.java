@@ -371,7 +371,7 @@ public class CartPageController extends AbstractCartPageController
 	@Override
 	protected void prepareDataForPage(final Model model) throws CMSItemNotFoundException
 	{
-		List<String> populateCart = pentlandCartFacade.populateCart();
+		List<String> populateCart = pentlandCartFacade.populateCart(null);
 		if(CollectionUtils.isNotEmpty(populateCart))
 		{
 			String string = populateCart.toString().replace("[", "").replace("]", "");
