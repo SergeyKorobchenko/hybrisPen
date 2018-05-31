@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <td align="center" valign="top" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
-      <table width="570" align="center" border="0" cellspacing="0" cellpadding="0">
+      <table width="1000" align="center" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td align="center" valign="top" bgcolor="#FFFFFF">
             <table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" style="boarder-collapse;">
@@ -68,23 +68,19 @@
               <br/>
               <table align="center" border="1" cellspacing="0" cellpadding="15"> 
               <tr>
-               <th>OrderCode</th>
-               <th>PONumber</th>
-               <th>OrderStatus</th>
+               <th>Order Number</th>
                <th>Brand</th>
-               <th>DateOfPlaced</th>
-               <th>orderRdd</th>
-               <th>TotalPrice</th>
-               <th>Quantity</th>
+               <th>PO Number</th>
+               <th>Order Status</th>
+               <th>Date Placed</th>
+               <th>RDD</th>
+               <th>Total Qty</th>
+               <th>Order Total</th>
              </tr>
 				#foreach ($order in $ctx.order.subOrders)
                 <tr>
                   <td>
                     <div><strong>${ctx.order.code}</strong></div></td>
-                    <td><div>${ctx.order.purchaseOrderNumber}
-                    </div></td>
-                    <td><div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.statusDisplay}
-                </div></td>
                     #if (!$order.orderType)
                       #set($order.orderType = "")
                     #end
@@ -94,14 +90,18 @@
                    <td> 
                    <div>$order.brand
                                  </div></td>
-                   <td> <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.created)}
+                  <td><div>${ctx.order.purchaseOrderNumber}
+                    </div></td>
+                    <td><div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.statusDisplay}
+                </div></td>               
+                <td> <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.created)}
                   						</div></td>
                   <td>  <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.rdd)}
-                  					</div></td>
-                 <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalPrice.formattedValue}
-                                        </div></td>
-                 <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalUnitCount}
-                                        </div></td>
+                  					</div></td>                 
+                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalUnitCount}
+                                        </div></td> 
+                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalPrice.formattedValue}
+                                        </div></td> 
                 </tr>
 					#end
 					</table>

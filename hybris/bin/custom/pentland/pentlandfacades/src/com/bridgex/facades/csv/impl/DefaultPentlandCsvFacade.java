@@ -168,8 +168,11 @@ public class DefaultPentlandCsvFacade extends DefaultCsvFacade implements Pentla
 			for (VariantOptionData variantOptionData : variantOptions) {
 				String code = variantOptionData.getCode();
 				PriceData priceData = variantOptionData.getPriceData();
+				if(priceData!=null)
+				{
 				String formattedValue = priceData.getFormattedValue();
 				variantProductPrice.put(code, formattedValue);
+				}
 			}
 			productEntry.setStylecode(productData.getBaseProduct());
 			productEntry.setMaterialKey(variantCode);
