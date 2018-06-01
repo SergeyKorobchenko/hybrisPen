@@ -64,12 +64,17 @@
 					<cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
 					</cms:pageSlot>
-
+					<c:choose>
+					<c:when test="${product.brandCode eq '08'}">
+					<div class="size-chart-guide"><a href="https://www.speedo.com/uk/en/womens-size-guide.html" target="_blank"><spring:theme code="product.sizeChartGuide"/></a></div>
+					</c:when>					
+					<c:otherwise>
 					<c:if test="${not empty product.sizeChartGuide}">
 						<c:url value="${product.sizeChartGuide.url}" var="sizeChartGuideUrl" />
 						<div class="size-chart-guide" data-toggle="modal" data-target="#sizeChartModal" ><a href="javascript:void(0);"><spring:theme code="product.sizeChartGuide"/></a></div>
 					</c:if>
-
+					</c:otherwise>
+					</c:choose>
 					<cms:pageSlot position="AddToCart" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-add-to-cart-component"/>
 					</cms:pageSlot>
