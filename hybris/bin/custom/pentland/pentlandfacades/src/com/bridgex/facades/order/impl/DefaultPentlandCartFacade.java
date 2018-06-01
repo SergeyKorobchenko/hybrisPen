@@ -167,22 +167,32 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	  String validateInStockMessage;
 	  String validateNoStockMessage;
 	  int inStock=0;
-	  int noStock=0;
+	  //int noStock=0;
+	  int stockAvailabilityCount=0;
+	  String rddDate = null;
 
 	  for (MaterialInfoDto materialInfoDto : materialList) {
 		  List<MaterialOutputGridDto> materialOutputGridList = materialInfoDto.getMaterialOutputGridList();
 		  for (MaterialOutputGridDto materialOutputGridDto : materialOutputGridList) {
-			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
+			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty())!=0)
 			  {
 				  inStock=inStock+1;
+				  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
+				  {
+			  		stockAvailabilityCount=stockAvailabilityCount+1;
+				  }
+			  }
+			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
+			  {
 				  String productCode = materialOutputGridDto.getEan();
 				  final ProductModel productModel = getProductService().getProductForCode(productCode);
 				  ApparelSizeVariantProductModel sizeProductModel=(ApparelSizeVariantProductModel)productModel;
 				  String size = sizeProductModel.getSize();
 				  String materialNumber = materialInfoDto.getMaterialNumber();
+				  String userRequestedQty = materialOutputGridDto.getUserRequestedQty();
 
 				  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEEE dd MMMMM");
-				  String date = simpleDateFormat.format(rdd);
+				  rddDate = simpleDateFormat.format(rdd);
 
 				  if(CollectionUtils.isNotEmpty(materialOutputGridDto.getFutureStocksDtoList()))
 				  {
@@ -193,15 +203,16 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 						  if(futureStocksDto.getFutureDate()!=null)
 						  {
 							  Date futureDate = futureStocksDto.getFutureDate();
+							  String format = simpleDateFormat.format(futureDate);
 							  if(futureDate.compareTo(rdd)>0)
 							  {
-								  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
+								  /*if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
 								  {
 									  noStock=noStock+1;
-									  validateNoStockMessage="Size "+size +" for "+materialNumber+" is not available for RDD "+date;;
+									  validateNoStockMessage=materialNumber;
 									  validateNoStockData.add(validateNoStockMessage);
-								  }
-								  validateInStockMessage="Size "+size +" for "+materialNumber+" isn't available to order for "+date;
+								  }*/
+								  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty+" not available for "+rddDate+" at this time. and the item will be delivered at "+futureDate;
 								  validateInStockData.add(validateInStockMessage);
 							  }
 						  }
@@ -209,27 +220,36 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 				  }
 				  else
 				  {
-					  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
+					  /*if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
 					  {
 						  noStock=noStock+1;
-						  validateNoStockMessage="Size "+size +" for "+materialNumber+" is not available for RDD "+date;;
+						  validateNoStockMessage=materialNumber;
 						  validateNoStockData.add(validateNoStockMessage);
-					  }
-					  validateInStockMessage="Size "+size +" for "+materialNumber+" isn't available to order for "+date;
+					  }*/
+					  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty+" not available for "+rddDate+" at this time.";
 					  validateInStockData.add(validateInStockMessage);
 				  }
 			  }
 		  }
 	  }
-	  if(inStock==noStock)
+	  if(inStock==stockAvailabilityCount && inStock!=0 &&stockAvailabilityCount!=0)
 	  {
-		  return validateNoStockData;
+			 // String hasNoStock = "The Following products "+validateNoStockData.toString()+" are not available for "+rddDate +" RDD.";
+			  validateNoStockMessage="Your Order is not available for the RDD at this time. Please Continue to place your Order for future delivery.";
+			  validateNoStockData.add(validateNoStockMessage);
+			  return validateNoStockData;
 	  }
-	  else
+	  else if(inStock!=stockAvailabilityCount)
 	  {
-		  return validateInStockData; 
+		  if(CollectionUtils.isNotEmpty(validateInStockData))
+		  {
+			 //String hasInStock="Products that do not meet RDD will be placed on back order and proposed delivery will be confirmed by Customer Operations, alternatively please remove Out Of Stock products from your order.";
+			  validateInStockMessage=" Please continue with your order or remove Products/size not available.";
+			  validateInStockData.add(validateInStockMessage);
+			  return validateInStockData;
+		  }
 	  }
-
+	return null;
   }
 
 private boolean isCartNotEmpty(CartModel cartModel) {
