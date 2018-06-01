@@ -110,10 +110,6 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
         		  double surChargeValue=Double.parseDouble(surCharge);
         		  cartModel.setSurCharge(surChargeValue);
         		  cartModel.setSubtotal(subTotalPrice+surChargeValue);
-        		  if(StringUtils.isNotEmpty(surCharges)&&Double.parseDouble(surCharges)>0)//in checkout page
-        		  {
-        			  cartModel.setSubtotal(subTotalPrice);
-        		  }
         	  }
         	  else
         	  {
