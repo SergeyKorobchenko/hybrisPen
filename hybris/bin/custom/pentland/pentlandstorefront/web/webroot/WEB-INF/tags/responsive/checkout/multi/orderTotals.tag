@@ -10,6 +10,16 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="subtotals ${subtotalsCssClasses}">
+	<c:if test="${cartData.surCharge.value > 0}">
+	<div class="subtotal">
+		<spring:theme code="basket.checkout.page.surcharge"/>
+		<span>
+			<ycommerce:testId code="Order_Totals_Subtotal">
+				<format:price priceData="${cartData.surCharge}"/>
+			</ycommerce:testId>
+		</span>
+	</div>
+	</c:if>
 	<div class="subtotal">
 		<spring:theme code="basket.page.totals.subtotal"/>
 		<span>
@@ -55,16 +65,6 @@
 				<format:price priceData="${cartData.totalTax}"/>
 			</span>
 		</div>
-	</c:if>
-	<c:if test="${cartData.surCharge.value > 0}">
-	<div class="subtotal">
-		<spring:theme code="basket.checkout.page.surcharge"/>
-		<span>
-			<ycommerce:testId code="Order_Totals_Subtotal">
-				<format:price priceData="${cartData.surCharge}"/>
-			</ycommerce:testId>
-		</span>
-	</div>
 	</c:if>
 	<div class="totals">
 		<spring:theme code="checkout.page.totals.total"/>
