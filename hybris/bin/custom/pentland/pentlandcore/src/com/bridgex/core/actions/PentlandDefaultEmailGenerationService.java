@@ -19,8 +19,11 @@ import de.hybris.platform.acceleratorservices.model.email.EmailAddressModel;
 import de.hybris.platform.acceleratorservices.model.email.EmailMessageModel;
 import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
 import de.hybris.platform.commons.model.renderer.RendererTemplateModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.processengine.model.BusinessProcessModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 /**
  * @author santoshi
@@ -32,6 +35,8 @@ public class PentlandDefaultEmailGenerationService extends DefaultEmailGeneratio
  
  @Resource(name = "configurationService")
  private ConfigurationService configurationService;
+ private UserService userService;
+ private ModelService modelService;
  
  @Override
  public EmailMessageModel generate(final BusinessProcessModel businessProcessModel, final EmailPageModel emailPageModel)
@@ -88,7 +93,11 @@ public class PentlandDefaultEmailGenerationService extends DefaultEmailGeneratio
    }
 
   }
-
+  if(emailPageTemplateModel.getHtmlTemplate().getCode().equals("pentland_Email_Customer_Registration_Body"))
+  {
+	  UserModel userForUID = getUserService().getUserForUID(emailContext.getToEmail());
+	  getModelService().remove(userForUID);
+  }
   return emailMessageModel;
  }
 
@@ -109,6 +118,24 @@ public class PentlandDefaultEmailGenerationService extends DefaultEmailGeneratio
     new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBody, null);
 
  }
+
+public UserService getUserService() {
+	return userService;
+}
+
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
+
+public ModelService getModelService() {
+	return modelService;
+}
+
+public void setModelService(ModelService modelService) {
+	this.modelService = modelService;
+}
+ 
+ 
  
  
 

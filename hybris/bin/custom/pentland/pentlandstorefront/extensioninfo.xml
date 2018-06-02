@@ -13,13 +13,15 @@
 	<extension abstractclassprefix="Generated" classprefix="Pentlandstorefront" name="pentlandstorefront" usemaven="false">
 
 		
-		<requires-extension name="pentlandaccountsummaryaddon"/>
+		
+<requires-extension name="pentlandsecuresportaladdon"/>
+<requires-extension name="pentlandaccountsummaryaddon"/>
 		<requires-extension name="pentlandsupportticketingaddon"/>
 		<requires-extension name="internationalization"/>
 		<requires-extension name="assistedservicestorefront"/>
 		<requires-extension name="worldpayb2baddon"/>
 		<requires-extension name="worldpaynotifications"/>
-		<requires-extension name="secureportaladdon"/>
+		
 		<requires-extension name="pentlandb2baddon"/>
 	<!--	<requires-extension name="sapinvoiceaddon"/>-->
 		<requires-extension name="commerceorgaddon"/>

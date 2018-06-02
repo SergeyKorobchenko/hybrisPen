@@ -58,24 +58,29 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
   }
 
   @Override
-  public OrderData requestOrderDetails(String code) {
-	  
-	  final BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
-	  OrderModel orderForCode = getCustomerAccountService().getOrderForCode(code, baseStoreModel); 
-	  OrderData sourceOrderData = getOrderConverter().convert(orderForCode.getSourceOrder());
-	  
-    OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(code));
-    List<OrderEntryData> entries = sourceOrderData.getEntries();
-    
-    List<OrderEntryData> orderData = response.getOrderEntries().stream()
-    .map(entry->entries.stream().filter(e->entry.getProduct().equals(e.getProduct().getCode())).findAny())
-    .filter(Optional::isPresent)
-    .map(Optional::get).collect(Collectors.<OrderEntryData>toList());
-    
-    OrderData order= orderDetailsConverter.convert(response);
-	order.setEntries(orderData);
-    return order;
-  }
+	public OrderData requestOrderDetails(String code) {
+
+		OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(code));
+		final BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
+		OrderModel orderForCode = getCustomerAccountService().getOrderForCode(code, baseStoreModel);
+		OrderData order;
+		if (orderForCode.getSourceOrder() != null) {
+			OrderData sourceOrderData = getOrderConverter().convert(orderForCode.getSourceOrder());
+
+			List<OrderEntryData> entries = sourceOrderData.getEntries();
+
+			List<OrderEntryData> orderData = response.getOrderEntries().stream()
+					.map(entry -> entries.stream().filter(e -> entry.getProduct().equals(e.getProduct().getCode()))
+							.findAny())
+					.filter(Optional::isPresent).map(Optional::get).collect(Collectors.<OrderEntryData> toList());
+
+			order = orderDetailsConverter.convert(response);
+			order.setEntries(orderData);
+		} else {
+			order = orderDetailsConverter.convert(response);
+		}
+		return order;
+	}
 
   @Override
   public List<OrderData> getSapOrdersForOrderCode(String orderCode) {
