@@ -50,7 +50,7 @@
 		<!-- <extension name='b2bacceleratoraddon' /> -->
 		<extension name='b2bacceleratorfacades' />
 		<extension name='commerceorgaddon' />
-		<extension name='secureportaladdon' />
+		<extension name='pentlandsecuresportaladdon' />
 		<extension name='pentlandaccountsummaryaddon' />
 		<extension name="savedorderforms" />
 		<extension name="voucher" />

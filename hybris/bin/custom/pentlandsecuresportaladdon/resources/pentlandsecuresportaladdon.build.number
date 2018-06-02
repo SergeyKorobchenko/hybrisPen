@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Jul 31 22:37:19 UTC 2017
+builddate=20170731 2237
+description=pentlandsecuresportaladdon
+group.id=de.hybris.platform
+module.name=platform-module
+name=pentlandsecuresportaladdon
+releasedate=20170731 1020
+vendor=hybris
+version=6.5.0.0
+version.api=6.5.0

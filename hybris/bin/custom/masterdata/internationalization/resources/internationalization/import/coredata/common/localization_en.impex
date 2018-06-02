@@ -3077,3 +3077,8 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;text.quickOrder.page.size;Size
 
 ;quote.add.comment;Add comment
+
+;breadcrumb.register.access;Request For Access
+;breadcrumb.register.access.success;Request Success
+;register.access.dublicate.mail;Already request registered with "{0}" mail id 
+;register.access.link;Request For Access
