@@ -159,6 +159,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
 	  // TODO Auto-generated method stub
 	  List<String> validateInStockData = new ArrayList<>();
+	  List<String> validateInStockDataMesg = new ArrayList<>();
 	  List<String> validateNoStockData = new ArrayList<>();
 	  String validateInStockMessage;
 	  String validateNoStockMessage;
@@ -199,7 +200,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 						  if(futureStocksDto.getFutureDate()!=null)
 						  {
 							  Date futureDate = futureStocksDto.getFutureDate();
-							  String format = simpleDateFormat.format(futureDate);
+							  String futureDateFormat = simpleDateFormat.format(futureDate);
 							  if(futureDate.compareTo(rdd)>0)
 							  {
 								  /*if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
@@ -208,8 +209,10 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 									  validateNoStockMessage=materialNumber;
 									  validateNoStockData.add(validateNoStockMessage);
 								  }*/
-								  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty+" not available for "+rddDate+" at this time. and the item will be delivered at "+futureDate;
+								 // validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty+" not available for "+rddDate+" at this time. and the item will be delivered at "+futureDateFormat;
+								  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty;
 								  validateInStockData.add(validateInStockMessage);
+								  validateInStockDataMesg.add(" and "+validateInStockMessage+" will be delivered at "+futureDateFormat);
 							  }
 						  }
 					  }
@@ -231,23 +234,25 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	  if(inStock==stockAvailabilityCount && inStock!=0 &&stockAvailabilityCount!=0)
 	  {
 			 // String hasNoStock = "The Following products "+validateNoStockData.toString()+" are not available for "+rddDate +" RDD.";
-			  validateNoStockMessage="Your Order is not available for the RDD at this time. Please Continue to place your Order for future delivery. *please contact Customer Operations for revised delivery dates.";
+			  validateNoStockMessage="Your Order is not available for the "+rddDate+" at this time. Please Continue to place your Order for future delivery. Please contact Customer Operations for revised delivery dates.";
 			  validateNoStockData.add(validateNoStockMessage);
 			  return validateNoStockData;
 	  }
 	  else if(inStock!=stockAvailabilityCount)
 	  {
-		  if(CollectionUtils.isNotEmpty(validateInStockData))
+		  if(CollectionUtils.isNotEmpty(validateInStockData) && CollectionUtils.isNotEmpty(validateInStockDataMesg))
 		  {
 			 //String hasInStock="Products that do not meet RDD will be placed on back order and proposed delivery will be confirmed by Customer Operations, alternatively please remove Out Of Stock products from your order.";
-			  validateInStockMessage=" Please continue with your order or remove Products/size not available.";
-			  validateInStockData.add(validateInStockMessage);
-			  return validateInStockData;
+			 // validateInStockMessage=". Please continue with your order or remove Products/size not available.";
+			  validateInStockMessage = "Products "+validateInStockData.toString()+" not available for "+rddDate+" at this time";
+			  validateNoStockMessage= validateInStockDataMesg.toString()+". Please continue with your order or remove Products/size not available.";
+			  validateNoStockData.add(validateInStockMessage);
+			  validateNoStockData.add(validateNoStockMessage);
+			  return validateNoStockData;
 		  }
 	  }
 	return null;
   }
-
 private boolean isCartNotEmpty(CartModel cartModel) {
     return cartModel.getEntries().size() > 0;
   }
