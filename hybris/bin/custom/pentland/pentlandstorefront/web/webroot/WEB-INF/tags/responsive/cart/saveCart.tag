@@ -39,8 +39,8 @@
         <p>Do you really want to clear the basket</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <a href="${actionUrl1}" class="btn btn-primary">Yes</a>
+      	<a href="${actionUrl1}" class="btn btn-primary btn-block mini-cart-checkout-button">Yes</a>
+        <button type="button" class="btn btn-default btn-block mini-cart-checkout-button" data-dismiss="modal">No</button>
       </div>
     </div>
     </div>

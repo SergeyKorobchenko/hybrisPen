@@ -231,7 +231,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	  if(inStock==stockAvailabilityCount && inStock!=0 &&stockAvailabilityCount!=0)
 	  {
 			 // String hasNoStock = "The Following products "+validateNoStockData.toString()+" are not available for "+rddDate +" RDD.";
-			  validateNoStockMessage="Your Order is not available for the RDD at this time. Please Continue to place your Order for future delivery.";
+			  validateNoStockMessage="Your Order is not available for the RDD at this time. Please Continue to place your Order for future delivery. *please contact Customer Operations for revised delivery dates.";
 			  validateNoStockData.add(validateNoStockMessage);
 			  return validateNoStockData;
 	  }
