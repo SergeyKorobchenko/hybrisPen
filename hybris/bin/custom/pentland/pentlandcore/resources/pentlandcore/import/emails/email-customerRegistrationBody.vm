@@ -8,7 +8,6 @@
 #macro(genHtmlLink $url $textColor $bodyContent)
 <a href="$url"><font color="$textColor">$bodyContent</font></a>
 #end
-
 <html>
 	<head>
 	</head>
@@ -33,16 +32,6 @@
 									</td>
 								</tr>
 								<tr>
-									<td height="30" align="right" valign="middle" bgcolor="#000000">
-										<font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a href="${ctx.secureBaseUrl}/my-account"><font color="#FFFFFF">${ctx.messages.myAccount}</font></a> | <a href="${ctx.baseUrl}/store-finder"><font color="#FFFFFF">${ctx.messages.storeFinder}</font></a> &nbsp;&nbsp;</font>
-									</td>
-								</tr>
-								<tr>
-									<td align="center" valign="middle">
-										<a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.TopContent}</a>
-									</td>
-								</tr>
-								<tr>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
@@ -58,26 +47,16 @@
 									#end
 										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif"><b>${ctx.messages.getMessage('salutation', ${ctx.title},${ctx.displayName})}</b>,</font></p>
 										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.thankYouForRegistering}</font></p>
-										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registeredEmailInfo}: ${ctx.email}.</font></p>
-										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.instructionsShoppingUrl}: <a href="${ctx.baseUrl}"><font color="#666666">${ctx.baseUrl}</font></a> <br>
-										${ctx.messages.getMessage('instructionsAccountUrl', "#genHtmlLinkStartTag($secureAccountUrl)", "#genHtmlLinkEndTag()")}<br>
-										${ctx.messages.getMessage('instructionsForgottenPswdUrl', "#genHtmlLinkStartTag($securePswdResetUrl)", "#genHtmlLinkEndTag()")}</font></p>
-										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$instructionsContactUs</font></p>
+										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registeredEmailInfo}</font></p>
+										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registerFirstName}: ${ctx.customer.firstName} ${ctx.customer.lastName}.</font></p>
+										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registerLastName}: ${ctx.customer.lastName}</font></p>
+                                        <p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.position}: ${ctx.customer.position}</font></p>
+                                        <p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.requiredRole}: ${ctx.customer.accessRequired}</font></p>
+                                        <p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.email}: ${ctx.email}</font></p>
+                                        <p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registerAccountNumber}: ${ctx.customer.accountNumber}</font></p><br>
+										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$instructionsContactUs</font></p><br><br>
 										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.complimentaryClosing}</font></p>
 										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.signature}</font></p>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td align="center" valign="middle">
-										<a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
-									</td>
-								</tr>
-								<tr>
-									<td height="30" align="right" valign="middle" bgcolor="#000000">
-										<font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a href="${ctx.baseUrl}"><font color="#FFFFFF">${ctx.messages.help}</font></a> | <a href="${ctx.messages.contactUsPage}"><font color="#FFFFFF">${ctx.messages.contactUs}</font></a> | <a href="${ctx.baseUrl}"><font color="#FFFFFF">${ctx.messages.termsAndCondition}</font></a> &nbsp;&nbsp;</font>
 									</td>
 								</tr>
 								<tr>
@@ -89,6 +68,21 @@
 				</table>
 			</td>
 		</tr>
+		<tr>
+    <td bgcolor="#F4F4F4" style="padding-top:26px;padding-bottom:50px;padding-right:35px;padding-left:40px;">
+      <table style="width: 100%; height: 30px; border-collapse:collapse;" cellpadding="0">
+        <tbody>
+        <tr>
+          <td align="center" style="font-size: 14px;">
+						${ctx.messages.companyFullName}
+            <br/> ${ctx.messages.companyAddress}
+            <br/> ${ctx.secureBaseUrl}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
 		<tr>
 			<td>&nbsp;</td>
 		</tr>

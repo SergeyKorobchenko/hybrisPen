@@ -26,17 +26,15 @@
 <cart:saveCartModal titleKey="text.save.cart.title" actionUrl="${actionUrl}" messageKey="basket.save.cart.info.msg"/>
 
 
-<div id="myModal" class="modal fade" role="dialog" style="margin-top: 150px;">
-  <div class="modal-dialog modal-sm">
-
-    <!-- Modal content-->
+<div id="myModal" class="modal fade" role="dialog" style="margin-top: 240px;">
+  <div class="modal-dialog modal-sg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Empty your basket</h4>
       
       <div class="modal-body">
-        <p>Do you really want to clear the basket</p>
+        <p>Do you really want to clear the basket?</p>
       </div>
       <div class="modal-footer">
       	<a href="${actionUrl1}" class="btn btn-primary btn-block mini-cart-checkout-button">Yes</a>
