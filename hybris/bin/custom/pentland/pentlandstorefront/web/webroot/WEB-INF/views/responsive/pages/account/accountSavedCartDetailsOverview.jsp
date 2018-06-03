@@ -30,7 +30,7 @@
 					<div class="item-group">
 						<ycommerce:testId code="savedCartDetails_overviewNumItems_label">
 							<span class="item-label"><spring:theme code="text.account.savedCart.qty" /></span>
-							<span class="item-value">${fn:length(savedCartData.entries)}</span>
+							<span class="item-value">${fn:escapeXml(savedCartData.totalUnitCount)}</span>
 						</ycommerce:testId>
 					</div>
 					<div class="item-group">
