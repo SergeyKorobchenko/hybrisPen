@@ -163,7 +163,7 @@
 		<extension name="adaptivesearchsolr" />
 
 		<extension name='samlsinglesignon' />
-		<extension name='secureportaladdon' />
+		<!-- <extension name='secureportaladdon' /> -->
 
 	</extensions>
 </hybrisconfig>
