@@ -76,27 +76,28 @@ public class DefaultB2BPaymentTypeCheckoutStepValidator extends AbstractB2BCheck
 				return ValidationResults.FAILED;
 		}
 			List<String> sizeVars = new ArrayList<>();
-			   List<OrderEntryData> entries = cartData.getEntries();
-			   for (OrderEntryData orderEntryData : entries) {
-			    List<OrderEntryData> entries2 = orderEntryData.getEntries();
-			   
-			    for (OrderEntryData orderEntryData2 : entries2) {
-			      ProductData product = orderEntryData2.getProduct();
-			      if(product.getPurchasable() == false)
-			       
-			      {
-			      sizeVars.add(product.getSize()+ " of " + product.getMaterialKey());
-			      }
-			    
-			    }
-			   }
-			     if(CollectionUtils.isNotEmpty(sizeVars))
-			     {
-			      GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-			        "cart.remove.size.variants",new Object[]
-			          { sizeVars.toString() });
-			      return ValidationResults.FAILED;
-			     }
+			List<OrderEntryData> entries = cartData.getEntries();
+			for (OrderEntryData orderEntryData : entries) {
+				List<OrderEntryData> entries2 = orderEntryData.getEntries();
+
+				for (OrderEntryData orderEntryData2 : entries2) {
+					ProductData product = orderEntryData2.getProduct();
+					Long quantity = orderEntryData2.getQuantity();
+					if(product.getPurchasable() == false)
+
+					{
+						sizeVars.add(product.getMaterialKey()+"/"+product.getSize()+"/"+quantity);
+					}
+				}
+			}
+			if(CollectionUtils.isNotEmpty(sizeVars))
+			{
+				String sizeVarPurchasable = sizeVars.toString().replace("[", "").replace("]", "");
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						"cart.remove.size.variants",new Object[]
+								{ sizeVarPurchasable });
+				return ValidationResults.FAILED;
+			}
 			return ValidationResults.SUCCESS;
 		}
 
