@@ -45,6 +45,9 @@ public class AccountSummaryResponse {
 
   @JsonProperty("ET_RETURN")
   private List<ETReturnDto> etReturn;
+  
+  @JsonProperty("E_BRAND_NAME")
+  private String brandName;
 
   public String getSapCustomerId() {
     return sapCustomerId;
@@ -141,4 +144,14 @@ public class AccountSummaryResponse {
   public void setEtReturn(List<ETReturnDto> etReturn) {
     this.etReturn = etReturn;
   }
+
+public String getBrandName() {
+	return brandName;
+}
+
+public void setBrandName(String brandName) {
+	this.brandName = brandName;
+}
+  
+  
 }
