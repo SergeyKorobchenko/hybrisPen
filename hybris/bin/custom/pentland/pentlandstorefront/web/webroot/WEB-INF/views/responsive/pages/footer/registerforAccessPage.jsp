@@ -10,11 +10,12 @@
 <template:page pageTitle="${pageTitle}">
     <jsp:body>
      <spring:url value="/login/registered" var="registerUser" htmlEscape="false" />
-        <!-- <div align="center"> -->
         <spring:url value="/login/registered" var="registerUser" htmlEscape="false" />
+        <div align="center">
     <h4>Request for Register Access</h4>
+    </div>
         <form:form action="${registerUser}" method="POST" commandName="pentlandCustomerRegistrationForm">
-            <table border="0">
+            <table border="0" style="width:30%;" align="center">
                 <tr>
                     <td>FIRST NAME</td>
                     <td><form:input path="firstName" /></td>
@@ -50,13 +51,12 @@
                     <td><form:input path="accountNumber" /></td>
                      <td style="color: red;"><form:errors path="accountNumber" cssClass="error" /></td>
                 </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" value="Submit" /></td>
-                    <td colspan="2" align="center"><input type="reset" value="Reset" /></td>
-                </tr>
-            </table>
+                </table>
+                <div class="buttons" align="center" style="padding-top: 20px;">
+                    <input type="submit" value="Submit" style="margin-left: 120px;"/>
+                    <input type="reset" value="Reset" style="margin-left: 70px;"/>
+            	</div>
         </form:form>
-    <!-- </div> -->
     </jsp:body>
 </template:page>
 

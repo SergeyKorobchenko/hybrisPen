@@ -81,7 +81,7 @@
 				#foreach ($order in $ctx.order.subOrders)
                 <tr>
                   <td>
-                    <div><strong>${ctx.order.code}</strong></div></td>
+                    <div><strong>${order.code}</strong></div></td>
                     #if (!$order.orderType)
                       #set($order.orderType = "")
                     #end
@@ -91,25 +91,25 @@
                    <td> 
                    <div>$order.brand
                                  </div></td>
-                  <td><div>${ctx.order.purchaseOrderNumber}
+                  <td><div>${order.purchaseOrderNumber}
                     </div></td>
-                    <td><div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.statusDisplay}
+                    <td><div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${order.status}
                 </div></td>               
                 <td> <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.created)}
                   						</div></td>
                   <td>  <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.rdd)}
                   					</div></td>                 
-                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalUnitCount}
+                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${order.totalUnitCount}
                                         </div></td> 
-                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalTax.formattedValue}
+                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${order.totalTax.formattedValue}
                                         </div></td>
-                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${ctx.order.totalPrice.formattedValue}
+                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 14px;padding-bottom:5px;">${order.totalPrice.formattedValue}
                                         </div></td> 
                    
                 </tr>
 					#end
 					</table>
-					<h6 align="right">${ctx.messages.Surcharged}</h6>
+					<p align="right">${ctx.messages.Surcharged}</p>
 		<br/><br/>
 		<strong>${ctx.messages.deliveryItems}</strong><br/>
 	<br/>
