@@ -44,6 +44,7 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.variants.model.VariantProductModel;
 
@@ -59,6 +60,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   private PentlandCategoryService categoryService;
   private OrderSimulationService  orderSimulationService;
   private ConfigurationService configurationService;
+  private Converter<ProductModel, ProductData> productConverter;
 
 
 @Override
@@ -174,20 +176,17 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty())!=0)
 			  {
 				  inStock=inStock+1;
-				  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
-				  {
-			  		stockAvailabilityCount=stockAvailabilityCount+1;
-				  }
 			  }
 			  if(Double.valueOf(materialOutputGridDto.getUserRequestedQty()) > Double.valueOf(materialOutputGridDto.getAvailableQty()))
 			  {
 				  String productCode = materialOutputGridDto.getEan();
 				  final ProductModel productModel = getProductService().getProductForCode(productCode);
-				  ApparelSizeVariantProductModel sizeProductModel=(ApparelSizeVariantProductModel)productModel;
-				  String size = sizeProductModel.getSize();
+				  ProductData productData = productConverter.convert(productModel);
+				  String productName=productData.getName()!=null?productData.getName():"";
+				  String size = productData.getSize();
 				  String materialNumber = materialInfoDto.getMaterialNumber();
-				  String userRequestedQty = materialOutputGridDto.getUserRequestedQty();
-
+				  String RequestedQty = materialOutputGridDto.getUserRequestedQty();
+				  Integer userRequestedQty = Integer.parseInt(RequestedQty);
 				  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEEE dd MMMMM");
 				  rddDate = simpleDateFormat.format(rdd);
 
@@ -205,12 +204,9 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 							  {
 								  /*if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
 								  {
-									  noStock=noStock+1;
-									  validateNoStockMessage=materialNumber;
-									  validateNoStockData.add(validateNoStockMessage);
+									  stockAvailabilityCount=stockAvailabilityCount+1; 
 								  }*/
-								 // validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty+" not available for "+rddDate+" at this time. and the item will be delivered at "+futureDateFormat;
-								  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty;
+								  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty;
 								  validateInStockData.add(validateInStockMessage);
 								  validateInStockDataMesg.add(" and "+validateInStockMessage+" will be delivered at "+futureDateFormat);
 							  }
@@ -219,13 +215,11 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 				  }
 				  else
 				  {
-					  /*if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
+					  if(Double.valueOf(materialOutputGridDto.getAvailableQty())==0)
 					  {
-						  noStock=noStock+1;
-						  validateNoStockMessage=materialNumber;
-						  validateNoStockData.add(validateNoStockMessage);
-					  }*/
-					  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty+" not available for "+rddDate+" at this time.";
+						  stockAvailabilityCount=stockAvailabilityCount+1; 
+					  }
+					  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty;
 					  validateInStockData.add(validateInStockMessage);
 				  }
 			  }
@@ -234,17 +228,18 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	  if(inStock==stockAvailabilityCount && inStock!=0 &&stockAvailabilityCount!=0)
 	  {
 			 // String hasNoStock = "The Following products "+validateNoStockData.toString()+" are not available for "+rddDate +" RDD.";
-			  validateNoStockMessage="Your Order is not available for the "+rddDate+" at this time. Please Continue to place your Order for future delivery. Please contact Customer Operations for revised delivery dates.";
+			  validateNoStockMessage="Your order is not available for the "+rddDate+" at this time. Please continue to place your order for future delivery. Please contact Customer Operations for revised delivery dates.";
 			  validateNoStockData.add(validateNoStockMessage);
 			  return validateNoStockData;
 	  }
 	  else if(inStock!=stockAvailabilityCount)
 	  {
-		  if(CollectionUtils.isNotEmpty(validateInStockData) && CollectionUtils.isNotEmpty(validateInStockDataMesg))
+		  if(CollectionUtils.isNotEmpty(validateInStockData))
 		  {
 			 //String hasInStock="Products that do not meet RDD will be placed on back order and proposed delivery will be confirmed by Customer Operations, alternatively please remove Out Of Stock products from your order.";
 			 // validateInStockMessage=". Please continue with your order or remove Products/size not available.";
-			  validateInStockMessage = "Products "+validateInStockData.toString()+" not available for "+rddDate+" at this time";
+			  String validateInStockString = validateInStockData.toString().replace(",", " &");
+			  validateInStockMessage = "Products "+validateInStockString+" not available for "+rddDate+" at this time";
 			  validateNoStockMessage= validateInStockDataMesg.toString()+". Please continue with your order or remove Products/size not available.";
 			  validateNoStockData.add(validateInStockMessage);
 			  validateNoStockData.add(validateNoStockMessage);
@@ -469,5 +464,14 @@ private boolean isCartNotEmpty(CartModel cartModel) {
 	@Required
 	public void setConfigurationService(ConfigurationService configurationService) {
 		this.configurationService = configurationService;
+	}
+
+
+	public Converter<ProductModel, ProductData> getProductConverter() {
+		return productConverter;
+	}
+
+	public void setProductConverter(Converter<ProductModel, ProductData> productConverter) {
+		this.productConverter = productConverter;
 	}
 }

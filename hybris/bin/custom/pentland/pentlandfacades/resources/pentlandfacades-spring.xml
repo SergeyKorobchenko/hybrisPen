@@ -61,6 +61,7 @@
 		<property name="categoryService" ref="pentlandCategoryService" />
 		<property name="orderSimulationService" ref="orderSimulationService" />
 		<property name="configurationService" ref="configurationService"/>
+		<property name="productConverter" ref="productConverter"/>
 	</bean>
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">

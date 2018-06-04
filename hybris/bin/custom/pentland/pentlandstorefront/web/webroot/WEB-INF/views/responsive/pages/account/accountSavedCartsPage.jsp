@@ -113,7 +113,7 @@
 							<ycommerce:testId code="savedCarts_noOfItems_label">
 								<span class="js-saved-cart-number-of-items">
 									<c:if test="${importCartIsProcessing eq false}">
-										${fn:length(savedCart.entries)}
+										${fn:escapeXml(savedCart.totalUnitCount)}
 									</c:if>
 								</span>
 							</ycommerce:testId>
