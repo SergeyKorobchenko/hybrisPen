@@ -44,6 +44,7 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.variants.model.VariantProductModel;
 
@@ -59,6 +60,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
   private PentlandCategoryService categoryService;
   private OrderSimulationService  orderSimulationService;
   private ConfigurationService configurationService;
+  private Converter<ProductModel, ProductData> productConverter;
 
 
 @Override
@@ -179,11 +181,12 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 			  {
 				  String productCode = materialOutputGridDto.getEan();
 				  final ProductModel productModel = getProductService().getProductForCode(productCode);
-				  ApparelSizeVariantProductModel sizeProductModel=(ApparelSizeVariantProductModel)productModel;
-				  String size = sizeProductModel.getSize();
+				  ProductData productData = productConverter.convert(productModel);
+				  String productName=productData.getName()!=null?productData.getName():"";
+				  String size = productData.getSize();
 				  String materialNumber = materialInfoDto.getMaterialNumber();
-				  String userRequestedQty = materialOutputGridDto.getUserRequestedQty();
-
+				  String RequestedQty = materialOutputGridDto.getUserRequestedQty();
+				  Integer userRequestedQty = Integer.parseInt(RequestedQty);
 				  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEEE dd MMMMM");
 				  rddDate = simpleDateFormat.format(rdd);
 
@@ -203,7 +206,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 								  {
 									  stockAvailabilityCount=stockAvailabilityCount+1; 
 								  }*/
-								  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty;
+								  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty;
 								  validateInStockData.add(validateInStockMessage);
 								  validateInStockDataMesg.add(" and "+validateInStockMessage+" will be delivered at "+futureDateFormat);
 							  }
@@ -216,7 +219,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 					  {
 						  stockAvailabilityCount=stockAvailabilityCount+1; 
 					  }
-					  validateInStockMessage=materialNumber+"/"+size+"/"+userRequestedQty;
+					  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty;
 					  validateInStockData.add(validateInStockMessage);
 				  }
 			  }
@@ -461,5 +464,14 @@ private boolean isCartNotEmpty(CartModel cartModel) {
 	@Required
 	public void setConfigurationService(ConfigurationService configurationService) {
 		this.configurationService = configurationService;
+	}
+
+
+	public Converter<ProductModel, ProductData> getProductConverter() {
+		return productConverter;
+	}
+
+	public void setProductConverter(Converter<ProductModel, ProductData> productConverter) {
+		this.productConverter = productConverter;
 	}
 }
