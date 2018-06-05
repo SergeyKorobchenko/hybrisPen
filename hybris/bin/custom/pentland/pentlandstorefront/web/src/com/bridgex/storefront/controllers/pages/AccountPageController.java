@@ -10,7 +10,6 @@
  */
 package com.bridgex.storefront.controllers.pages;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,8 +20,6 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
-import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -39,6 +36,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.bridgex.facades.customer.PentlandCustomerFacade;
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
+import com.bridgex.facades.order.PentlandOrderFacade;
+import com.bridgex.storefront.controllers.ControllerConstants;
 
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
@@ -61,7 +63,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
@@ -82,13 +83,11 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
+import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-
-import com.bridgex.facades.customer.PentlandCustomerFacade;
-import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
-import com.bridgex.facades.order.PentlandOrderFacade;
-import com.bridgex.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -317,6 +316,16 @@ public class AccountPageController extends AbstractSearchPageController
 		// Handle paged search results
 		final PageableData pageableData = createPageableData(page, 10, sortCode, showMode);
 		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedB2BOrderHistoryForStatuses(pageableData);
+		
+		if(CollectionUtils.isNotEmpty(searchPageData.getResults()))
+		{
+			for (OrderHistoryData orderHistoryData : searchPageData.getResults())
+			{
+				OrderData requestOrderDetails = orderFacade.requestOrderDetails(orderHistoryData.getCode());
+				orderHistoryData.setStatusDisplay(requestOrderDetails.getStatusDisplay());
+			}
+		}
+		
 		populateModel(model, searchPageData, showMode);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));

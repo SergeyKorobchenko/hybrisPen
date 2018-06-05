@@ -33,7 +33,7 @@
     
      <div class="login_forgotPassword_link" style="margin-left: 540px;margin-top: -55px;">
         <ycommerce:testId code="login_Login_button">
-            <a href="<c:url value='/login/registerForAccess'/>">
+            <a href="<c:url value='/login/registerForAccess'/>" target="_blank">
             <spring:theme code="register.access.link"/>
             </a>
         </ycommerce:testId>
