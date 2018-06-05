@@ -15,46 +15,46 @@
     <h4>Request for Register Access</h4>
     </div>
         <form:form action="${registerUser}" method="POST" commandName="pentlandCustomerRegistrationForm">
-            <table border="0" style="width:30%;" align="center">
+            <table border="0" style="width:32%;" align="center">
                 <tr>
                     <td>COMPANY NAME <span style="color:red;">*</span></td>
                     
-                    <td><form:input path="companyName" required="true"/></td>
+                    <td><form:input path="companyName" required="true" style="width:250px"/></td>
                     <td style="color: red;"><form:errors path="firstName" cssClass = "error" /></td>
                 </tr>
                 <tr>
                     <td>FIRST NAME <span style="color:red;">*</span></td>
-                    <td><form:input path="firstName" required="true"/></td>
+                    <td><form:input path="firstName" required="true" style="width:250px"/></td>
                     <td style="color: red;"><form:errors path="firstName" cssClass="error" /></td>
                 </tr>
                  <tr>
                     <td>LAST NAME <span style="color:red;">*</span></td>
-                    <td><form:input path="lastName" required="true"/></td>
+                    <td><form:input path="lastName" required="true" style="width:250px"/></td>
                     <td style="color: red;"><form:errors path="lastName" cssClass="error" /></td>
                 </tr>
                  <tr>
                     <td>POSITION <span style="color:red;">*</span></td>
-                    <td><form:input path="position" required="true"/></td>
+                    <td><form:input path="position" required="true" style="width:250px"/></td>
                      <td style="color: red;"><form:errors path="position" cssClass="error" /></td>
                 </tr>
                  <tr>
                     <td>REQUIRED ROLE</td>
                     <td>
                     <select name="accessRequired">
-					<option value="StandardRole">Standard role</option>
-					<option value="ManagerRole">Manager role</option>
+					<option value="StandardRole" style="width:230px">Standard role</option>
+					<option value="ManagerRole" style="width:230px">Manager role</option>
 					</select>
                     </td>
                      <td style="color: red;"><form:errors path="accessRequired" cssClass="error" /></td>
                 </tr>
                 <tr>
                     <td>E-MAIL <span style="color:red;">*</span></td>
-                    <td><form:input path="email" type="email" required="true"/></td>
+                    <td><form:input path="email" type="email" required="true" style="width:250px"/></td>
                      <td style="color: red;"><form:errors path="email" cssClass="error" /></td>
                 </tr>
                 <tr>
                     <td>ACCOUNT NUMBER: <span style="color:red;">*</span></td>
-                    <td><form:input path="accountNumber" required="true"/></td>
+                    <td><form:input path="accountNumber" required="true" style="width:250px"/></td>
                      <td style="color: red;"><form:errors path="accountNumber" cssClass="error" /></td>
                 </tr>
                 </table>
