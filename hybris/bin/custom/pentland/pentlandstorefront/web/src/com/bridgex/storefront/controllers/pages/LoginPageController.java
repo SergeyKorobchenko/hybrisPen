@@ -200,7 +200,8 @@ public class LoginPageController extends AbstractLoginPageController
 	   data.setAccessRequired(pentlandCustomerRegistrationForm.getAccessRequired());
 	   data.setAccountNumber(pentlandCustomerRegistrationForm.getAccountNumber());
 	   data.setUserEmail(pentlandCustomerRegistrationForm.getEmail());
-
+	   data.setCompanyName(pentlandCustomerRegistrationForm.getCompanyName());
+	   
 	   model.addAttribute("pentlandCustomerRegistrationForm", pentlandCustomerRegistrationForm);
 
 	   if (null != data) {

@@ -62,11 +62,12 @@
                   <br />
 
                   <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('summaryBelowParagraph', "#genHtmlLinkStartTag($orderInfoUrl)", "#genHtmlBoldFont(${ctx.messages.hereLink})", "#genHtmlLinkEndTag()")}</font></p>
+                <br/>
                 </td>
               </tr>
               <br/>
               <br/>
-              <table align="center" border="1" cellspacing="0" cellpadding="15"> 
+              <table align="center" border="1" width="900px" cellspacing="0" cellpadding="15"> 
               <tr>
                <th>Order Number</th>
                <th>Brand</th>
@@ -109,7 +110,8 @@
                 </tr>
 					#end
 					</table>
-					<p align="right">${ctx.messages.Surcharged}</p>
+					<br/>
+		<p style="margin:2px 0" align="right"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.Surcharged}</font></p>
 		<br/><br/>
 		<strong>${ctx.messages.deliveryItems}</strong><br/>
 	<br/>

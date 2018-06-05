@@ -17,18 +17,24 @@
         <form:form action="${registerUser}" method="POST" commandName="pentlandCustomerRegistrationForm">
             <table border="0" style="width:30%;" align="center">
                 <tr>
-                    <td>FIRST NAME</td>
-                    <td><form:input path="firstName" /></td>
+                    <td>COMPANY NAME <span style="color:red;">*</span></td>
+                    
+                    <td><form:input path="companyName" required="true"/></td>
+                    <td style="color: red;"><form:errors path="firstName" cssClass = "error" /></td>
+                </tr>
+                <tr>
+                    <td>FIRST NAME <span style="color:red;">*</span></td>
+                    <td><form:input path="firstName" required="true"/></td>
                     <td style="color: red;"><form:errors path="firstName" cssClass="error" /></td>
                 </tr>
                  <tr>
-                    <td>LAST NAME</td>
-                    <td><form:input path="lastName" /></td>
+                    <td>LAST NAME <span style="color:red;">*</span></td>
+                    <td><form:input path="lastName" required="true"/></td>
                     <td style="color: red;"><form:errors path="lastName" cssClass="error" /></td>
                 </tr>
                  <tr>
-                    <td>POSITION</td>
-                    <td><form:input path="position" /></td>
+                    <td>POSITION <span style="color:red;">*</span></td>
+                    <td><form:input path="position" required="true"/></td>
                      <td style="color: red;"><form:errors path="position" cssClass="error" /></td>
                 </tr>
                  <tr>
@@ -42,13 +48,13 @@
                      <td style="color: red;"><form:errors path="accessRequired" cssClass="error" /></td>
                 </tr>
                 <tr>
-                    <td>E-MAIL</td>
-                    <td><form:input path="email" /></td>
+                    <td>E-MAIL <span style="color:red;">*</span></td>
+                    <td><form:input path="email" type="email" required="true"/></td>
                      <td style="color: red;"><form:errors path="email" cssClass="error" /></td>
                 </tr>
                 <tr>
-                    <td>ACCOUNT NUMBER:</td>
-                    <td><form:input path="accountNumber" /></td>
+                    <td>ACCOUNT NUMBER: <span style="color:red;">*</span></td>
+                    <td><form:input path="accountNumber" required="true"/></td>
                      <td style="color: red;"><form:errors path="accountNumber" cssClass="error" /></td>
                 </tr>
                 </table>
