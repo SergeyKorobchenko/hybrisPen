@@ -8,58 +8,67 @@ package com.bridgex.storefront.controllers.pages;
  *
  */
 public class PentlandCustomerRegistrationForm {
- private String firstName; 
- private String lastName;
-    private String position;
- private String accessRequired;
-    private String accountNumber;
- private String email;
+	private String firstName; 
+	private String lastName;
+	private String position;
+	private String accessRequired;
+	private String accountNumber;
+	private String email;
+	private String companyName;
 
- public String getFirstName() {
-  return firstName;
- }
+	public String getCompanyName() {
+		return companyName;
+	}
 
- public void setFirstName(String firstName) {
-  this.firstName = firstName;
- }
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
- public String getLastName() {
-  return lastName;
- }
+	public String getFirstName() {
+		return firstName;
+	}
 
- public void setLastName(String lastName) {
-  this.lastName = lastName;
- }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
- public String getPosition() {
-  return position;
- }
+	public String getLastName() {
+		return lastName;
+	}
 
- public void setPosition(String position) {
-  this.position = position;
- }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
- public String getAccessRequired() {
-  return accessRequired;
- }
+	public String getPosition() {
+		return position;
+	}
 
- public void setAccessRequired(String accessRequired) {
-  this.accessRequired = accessRequired;
- }
+	public void setPosition(String position) {
+		this.position = position;
+	}
 
- public String getAccountNumber() {
-  return accountNumber;
- }
+	public String getAccessRequired() {
+		return accessRequired;
+	}
 
- public void setAccountNumber(String accountNumber) {
-  this.accountNumber = accountNumber;
- }
+	public void setAccessRequired(String accessRequired) {
+		this.accessRequired = accessRequired;
+	}
 
- public String getEmail() {
-  return email;
- }
+	public String getAccountNumber() {
+		return accountNumber;
+	}
 
- public void setEmail(String email) {
-  this.email = email;
- }
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
