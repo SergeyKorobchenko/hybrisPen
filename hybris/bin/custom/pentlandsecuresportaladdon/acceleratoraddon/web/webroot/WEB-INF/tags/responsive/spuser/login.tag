@@ -29,15 +29,15 @@
                 <spring:theme code="login.link.forgottenPwd"/>
             </a>
         </ycommerce:testId>
-    </div>
-    
-     <div class="login_forgotPassword_link" style="margin-left: 540px;margin-top: -55px;">
-        <ycommerce:testId code="login_Login_button">
+         <div class="login_forgotPassword_link" style="float: right;">
+        <ycommerce:testId code="login_Login_button" >
             <a href="<c:url value='/login/registerForAccess'/>" target="_blank">
             <spring:theme code="register.access.link"/>
             </a>
         </ycommerce:testId>
         </div>
+    </div>
+    
 
     <div class="row login-form-action">
         <c:set var="loginBtnClasses" value="col-sm-12 col-md-6 col-md-push-6"/>

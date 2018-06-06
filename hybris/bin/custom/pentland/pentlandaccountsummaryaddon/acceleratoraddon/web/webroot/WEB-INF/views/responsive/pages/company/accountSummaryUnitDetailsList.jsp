@@ -161,7 +161,7 @@
                     <table class="responsive-table">
                         <tr class="responsive-table-head hidden-xs">
                             <th><spring:theme code="text.company.accountsummary.documentNumber.label" /></th>
-                            <th><spring:theme code="text.company.accountsummary.brandName.label" /></th>
+                            <%-- <th><spring:theme code="text.company.accountsummary.brandName.label" /></th> --%>
                             <th><spring:theme code="text.company.accountsummary.documentType.label"/></th>
                             <th><spring:theme code="text.company.accountsummary.date.label"/></th>
                             <th><spring:theme code="text.company.accountsummary.dueDate.label"/></th>
@@ -177,12 +177,12 @@
                                     <td class="responsive-table-cell">
                                         ${fn:escapeXml(result.documentNumber)}
                                     </td>
-                                    <td class="hidden-sm hidden-md hidden-lg">
+                                    <%-- <td class="hidden-sm hidden-md hidden-lg">
                                         <spring:theme code="text.company.accountsummary.brandName.label"/>
                                     </td>
                                     <td class="responsive-table-cell">
                                             ${fn:escapeXml(result.brandName)}
-                                    </td>
+                                    </td> --%>
                                     <td class="hidden-sm hidden-md hidden-lg">
                                         <spring:theme code="text.company.accountsummary.documentType.label"/>
                                     </td>
