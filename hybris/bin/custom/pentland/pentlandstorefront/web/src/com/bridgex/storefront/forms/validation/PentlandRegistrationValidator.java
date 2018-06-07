@@ -38,14 +38,15 @@ public class PentlandRegistrationValidator implements Validator{
   final String position = registerForm.getPosition();
   final String accessRequired = registerForm.getAccessRequired();
   final String accountNumber = registerForm.getAccountNumber();
-
+  final String companyName =   registerForm.getCompanyName();
   //validateTitleCode(errors, titleCode);
   validateName(errors, firstName, "firstName", "register.firstName.invalid");
   validateName(errors, lastName, "lastName", "register.lastName.invalid");
   validatePosition(errors, position, "position", "register.position.invalid");
   validateAccessRequired(errors, accessRequired, "accessRequired", "register.accessRequired.invalid");
   validateAccountNumber(errors, accountNumber, "accountNumber", "register.accountNumber.invalid");
-    
+  validateCompanyName(errors, companyName, "companyName", "register.companyName.invalid");
+  
   if (StringUtils.length(firstName) + StringUtils.length(lastName) > 255)
   {
    errors.rejectValue("lastName", "register.name.invalid");
@@ -56,7 +57,19 @@ public class PentlandRegistrationValidator implements Validator{
   
  }
  
- protected void validateAccountNumber(Errors errors, String accountNumber, String propertyName, String property) {
+ private void validateCompanyName(Errors errors, String companyName, String propertyName, String property) {
+	// TODO Auto-generated method stub
+	 if (StringUtils.isBlank(companyName))
+	  {
+	   errors.rejectValue(propertyName, property);
+	  }
+	  else if (StringUtils.length(companyName) > 255)
+	  {
+	   errors.rejectValue(propertyName, property);
+	  }
+}
+
+protected void validateAccountNumber(Errors errors, String accountNumber, String propertyName, String property) {
 
   if (StringUtils.isEmpty(accountNumber))
   {

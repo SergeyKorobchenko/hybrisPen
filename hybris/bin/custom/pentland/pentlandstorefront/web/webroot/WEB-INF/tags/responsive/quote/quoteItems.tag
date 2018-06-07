@@ -95,7 +95,7 @@
 
             <%-- total --%>
             <div class="item__total hidden-xs hidden-sm">
-                <format:price priceData="${orderEntry.totalPrice}" displayFreeForZero="true"/>
+                <format:price priceData="${orderEntry.totalPrice}" displayFreeForZero="false"/>
             </div>
 
             <div class="item__quantity__total visible-xs visible-sm">
