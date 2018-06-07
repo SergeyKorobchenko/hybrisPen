@@ -48,6 +48,7 @@
 										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif"><b>${ctx.messages.getMessage('salutation', ${ctx.title},${ctx.displayName})}</b>,</font></p>
 										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.thankYouForRegistering}</font></p>
 										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registeredEmailInfo}</font></p>
+										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registerCompanyName}: ${ctx.customer.companyName}</font></p>
 										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registerFirstName}: ${ctx.customer.firstName} ${ctx.customer.lastName}.</font></p>
 										<p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.registerLastName}: ${ctx.customer.lastName}</font></p>
                                         <p><font color="#333" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.position}: ${ctx.customer.position}</font></p>
