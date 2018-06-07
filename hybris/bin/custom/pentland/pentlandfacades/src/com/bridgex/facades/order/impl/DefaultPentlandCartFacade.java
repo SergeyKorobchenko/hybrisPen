@@ -106,9 +106,9 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
           try {
         	  double subTotalPrice= Double.parseDouble(response.getMultiBrandCartOutput().getSubtotalPrice());
         	  String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
-        	  if(subTotalPrice<=Double.parseDouble(minimumOrderValue))
+        	  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+        	  if(StringUtils.isNotEmpty(surCharge)&&subTotalPrice<=Double.parseDouble(minimumOrderValue))
         	  {
-        		  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
         		  double surChargeValue=Double.parseDouble(surCharge);
         		  cartModel.setSurCharge(surChargeValue);
         		  cartModel.setSubtotal(subTotalPrice+surChargeValue);
@@ -125,9 +125,9 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
           try {
         	  double totalPrice= Double.parseDouble(response.getMultiBrandCartOutput().getTotalPrice());
         	  String minimumOrderValue = getConfigurationService().getConfiguration().getString("basket.minimum.order.value");
-        	  if(totalPrice<=Double.parseDouble(minimumOrderValue))
+        	  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
+        	  if(StringUtils.isNotEmpty(surCharge)&&totalPrice<=Double.parseDouble(minimumOrderValue))
         	  {
-        		  String surCharge = getConfigurationService().getConfiguration().getString("basket.surcharge.value");
         		  double surChargeValue=Double.parseDouble(surCharge);
         		  cartModel.setSurCharge(surChargeValue);
         		  cartModel.setTotalPrice(totalPrice+surChargeValue);

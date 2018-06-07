@@ -68,7 +68,7 @@
                             </td>
                             <td class="hidden-sm hidden-md hidden-lg"><spring:theme code="text.account.orderHistory.orderStatus"/></td>
                             <td headers="header3" class="responsive-table-cell">
-                               <%--  <spring:theme code="text.account.order.status.display.${order.status}" var="localizedStatus"/>
+                                <spring:theme code="text.account.order.status.display.${order.status}" var="localizedStatus"/>
                                 <c:choose>
                                     <c:when test="${not empty localizedStatus && not fn:contains(localizedStatus, 'text.account.order.status.display')}">
                                         ${localizedStatus}
@@ -76,8 +76,7 @@
                                     <c:otherwise>
                                         ${order.status}
                                     </c:otherwise>
-                                </c:choose> --%>
-                                ${order.statusDisplay}
+                                </c:choose>
                             </td>
                             <td class="hidden-sm hidden-md hidden-lg"><spring:theme
                                     code="text.account.orderhistory.dateplaced"/></td>
