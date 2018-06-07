@@ -59,6 +59,7 @@
 				<b2b-order:accountOrderDetailsSoldTo order="${orderData}"/>
 			</ycommerce:testId>
 		</div>
+		<c:if test="${not empty orderData.entries}">
 		<ul class="item__list">
  <li class="hidden-xs hidden-sm">
  <ul class="item__list--header">
@@ -76,5 +77,6 @@
 	</c:forEach>
 	</ycommerce:testId>
 </ul>
+</c:if>
 	</c:otherwise>
 </c:choose>

@@ -10,27 +10,7 @@
  */
 package com.bridgex.facades.process.email.context;
 
-import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
-import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
-import de.hybris.platform.commercefacades.coupon.data.CouponData;
-import de.hybris.platform.commercefacades.order.data.OrderData;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
-import de.hybris.platform.commercefacades.product.ProductFacade;
-import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.ProductData;
-import de.hybris.platform.core.enums.ExportStatus;
-import de.hybris.platform.core.model.c2l.LanguageModel;
-import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.orderprocessing.model.OrderProcessModel;
-import de.hybris.platform.search.restriction.SearchRestrictionService;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.session.SessionExecutionBody;
-import de.hybris.platform.servicelayer.session.SessionService;
-import de.hybris.platform.servicelayer.user.UserService;
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +20,27 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.bridgex.facades.product.PentlandProductFacade;
+import com.bridgex.core.integration.PentlandIntegrationService;
+import com.bridgex.core.order.PentlandCartService;
+import com.bridgex.facades.order.PentlandOrderFacade;
+import com.bridgex.integration.domain.OrderDetailsDto;
+import com.bridgex.integration.domain.OrderDetailsResponse;
+
+import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
+import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
+import de.hybris.platform.commercefacades.coupon.data.CouponData;
+import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.core.enums.ExportStatus;
+import de.hybris.platform.core.model.c2l.LanguageModel;
+import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.session.SessionExecutionBody;
+import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 
 
 /**
@@ -53,6 +53,8 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	private List<CouponData>                 giftCoupons;
 	private SessionService                   sessionService;
 	private UserService                      userService;
+	private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
+	private PentlandOrderFacade orderFacade;
 	
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
@@ -69,6 +71,7 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				orderData = getOrderConverter().convert(order);
 				if(ExportStatus.EXPORTED.equals(order.getExportStatus()) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
 					orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
+					setSapEntriesFromSourceOrder(orderData);
 				}else{
 					orderData.setSubOrders(Collections.singletonList(orderData));
 				}
@@ -81,6 +84,26 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())
 				.collect(Collectors.toList());
 	}
+	
+	 private OrderDetailsDto createRequestDto(String code) {
+		    OrderDetailsDto request = new OrderDetailsDto();
+		    request.setOrderCode(code);
+		    return request;
+		  }
+	 
+	 private void setSapEntriesFromSourceOrder(OrderData orderData)
+	 {
+		 List<OrderData> orderByBrand=new ArrayList<>();
+			for (OrderData sapOrder : orderData.getSubOrders())
+			{
+				OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(sapOrder.getCode()));
+				List<OrderEntryData> spliptEntriesBySapOrders = getOrderFacade().spliptEntriesBySapOrders(response, orderData);
+				sapOrder.setEntries(spliptEntriesBySapOrders);
+				orderByBrand.add(sapOrder);
+			}
+			orderData.setSubOrders(orderByBrand);
+	 }
+	 
 	@Override
 	protected BaseSiteModel getSite(final OrderProcessModel orderProcessModel)
 	{
@@ -128,4 +151,21 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	
+	public void setOrderDetailsService(
+			PentlandIntegrationService<OrderDetailsDto, OrderDetailsResponse> orderDetailsService) {
+		this.orderDetailsService = orderDetailsService;
+	}
+
+	public PentlandOrderFacade getOrderFacade() {
+		return orderFacade;
+	}
+	
+	@Required
+	public void setOrderFacade(PentlandOrderFacade orderFacade) {
+		this.orderFacade = orderFacade;
+	}
+	
+	
+
 }
