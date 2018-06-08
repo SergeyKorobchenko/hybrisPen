@@ -110,10 +110,10 @@ public class PentlandDefaultEmailGenerationService extends DefaultEmailGeneratio
 
 		final EmailAddressModel pentlandAddress = getEmailService()
 				.getOrCreateEmailAddressForEmail(pentlandEmailAddress, pentlandNameAddress);
-	/*	final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
+		/*final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
 				emailContext.getToDisplayName());*/
 		toEmails.add(pentlandAddress);
-		//toEmails.add(toAddress);
+		// toEmails.add(toAddress);
 		fromAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getFromEmail(),
 				emailContext.getFromDisplayName());
 		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(),

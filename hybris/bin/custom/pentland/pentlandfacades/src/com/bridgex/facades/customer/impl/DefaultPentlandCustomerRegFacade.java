@@ -30,7 +30,7 @@ import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.store.services.BaseStoreService;
 
 /**
- * @author santoshi
+ * @author murali.venkata@bridge-x.com
  *
  */
 public class DefaultPentlandCustomerRegFacade implements PentlandCustomerRegFacade{
