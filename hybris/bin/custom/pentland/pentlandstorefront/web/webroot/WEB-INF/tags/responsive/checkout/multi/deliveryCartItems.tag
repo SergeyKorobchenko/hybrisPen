@@ -99,7 +99,7 @@
 					<product:productPrimaryImage product="${entry.product}" format="thumbnail"/>
 				</a>
 			</div>
-			<div class="price"><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></div>
+			<div class="price"><format:price priceData="${entry.totalPrice}" displayFreeForZero="false"/></div>
 			<div class="details">
 				<div class="name"><a href="${productUrl}">${fn:escapeXml(entry.product.name)}</a></div>
 				<div>
