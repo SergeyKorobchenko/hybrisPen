@@ -11,6 +11,7 @@
 package com.bridgex.facades.process.email.context;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,9 @@ import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.ProductFacade;
+import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -55,6 +59,7 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	private UserService                      userService;
 	private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
 	private PentlandOrderFacade orderFacade;
+	private ProductFacade productFacade;
 	
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
@@ -69,6 +74,10 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				userService.setCurrentUser(customer);
 				OrderModel order = orderProcessModel.getOrder();
 				orderData = getOrderConverter().convert(order);
+				for (OrderEntryData orderEntryData : orderData.getEntries()) {
+					ProductData productForCodeAndOptions = getProductFacade().getProductForCodeAndOptions(orderEntryData.getProduct().getCode(),Arrays.asList(ProductOption.BRAND));
+					orderEntryData.setProduct(productForCodeAndOptions);
+				}
 				if(ExportStatus.EXPORTED.equals(order.getExportStatus()) && CollectionUtils.isNotEmpty(order.getByBrandOrderList())) {
 					orderData.setSubOrders(getOrderConverter().convertAll(order.getByBrandOrderList()));
 					setSapEntriesFromSourceOrder(orderData);
@@ -85,20 +94,13 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				.collect(Collectors.toList());
 	}
 	
-	 private OrderDetailsDto createRequestDto(String code) {
-		    OrderDetailsDto request = new OrderDetailsDto();
-		    request.setOrderCode(code);
-		    return request;
-		  }
-	 
 	 private void setSapEntriesFromSourceOrder(OrderData orderData)
 	 {
 		 List<OrderData> orderByBrand=new ArrayList<>();
 			for (OrderData sapOrder : orderData.getSubOrders())
 			{
-				OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(sapOrder.getCode()));
-				List<OrderEntryData> spliptEntriesBySapOrders = getOrderFacade().spliptEntriesBySapOrders(response, orderData);
-				sapOrder.setEntries(spliptEntriesBySapOrders);
+				List<OrderEntryData> entries = orderData.getEntries().stream().filter(e->e.getProduct().getBrandName().equals(sapOrder.getBrand())).collect(Collectors.<OrderEntryData>toList());
+				sapOrder.setEntries(entries);
 				orderByBrand.add(sapOrder);
 			}
 			orderData.setSubOrders(orderByBrand);
@@ -165,6 +167,16 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	public void setOrderFacade(PentlandOrderFacade orderFacade) {
 		this.orderFacade = orderFacade;
 	}
+
+	public ProductFacade getProductFacade() {
+		return productFacade;
+	}
+
+	@Required
+	public void setProductFacade(ProductFacade productFacade) {
+		this.productFacade = productFacade;
+	}
+	
 	
 	
 

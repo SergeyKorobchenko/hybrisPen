@@ -127,7 +127,7 @@
 		<property name="list" ref="productConverter"/>
 		<property name="add" ref="apparelProductPopulator"/>
 	</bean>
-
+	
 	<!-- accelerator Image Format Mappings -->
 	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
 	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
@@ -182,6 +182,7 @@
 		<property name="userService" ref="userService"/>
 		<property name="orderFacade" ref="orderFacade"/>
 		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
+		<property name="productFacade" ref="productFacade"/>
 	</bean>
 
 	<bean id="orderConfirmationRepEmailContext" class="com.bridgex.facades.process.email.context.OrderConfirmationRepEmailContext" parent="orderNotificationEmailContext" scope="prototype">
