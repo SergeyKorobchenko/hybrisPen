@@ -164,7 +164,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	  List<String> validateInStockDataMesg = new ArrayList<>();
 	  List<String> validateNoStockData = new ArrayList<>();
 	  List<String> validateInStockFianlData = new ArrayList<>();
-	  String validateInStockMessage;
+	  String validateInStockMessage = null;
 	  String validateNoStockMessage;
 	  int inStock=0;
 	  //int noStock=0;
@@ -226,7 +226,14 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 					  {
 						  stockAvailabilityCount=stockAvailabilityCount+1; 
 					  }
-					  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty;
+					  if(stockAvailableQty!=0)
+					  {
+						  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty+" only "+stockAvailableQty+" are available";
+					  }
+					  else
+					  {
+						  validateInStockMessage=productName+"/"+materialNumber+"/"+size+"/"+userRequestedQty+" not available";
+					  }
 					  validateInStockData.add(validateInStockMessage);
 				  }
 			  }
@@ -248,7 +255,7 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 			  if(CollectionUtils.isNotEmpty(validateInStockData))
 			  {
 				  String validateInStockString = validateInStockData.toString().replace(",", " &");
-				  validateInStockMessage = "Products "+validateInStockString+" not available for "+rddDate+" at this time";
+				  validateInStockMessage = "Products "+validateInStockString+" for "+rddDate+" at this time";
 				  validateNoStockMessage= validateInStockDataMesg.toString()+". Please continue with your order or remove Products/size not available.";
 				  validateNoStockData.add(validateInStockMessage);
 				  validateNoStockData.add(validateNoStockMessage);
