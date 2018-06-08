@@ -2,8 +2,11 @@ package com.bridgex.facades.order;
 
 import java.util.List;
 
+import com.bridgex.integration.domain.OrderDetailsResponse;
+
 import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -20,5 +23,7 @@ public interface PentlandOrderFacade extends OrderFacade {
   OrderData requestOrderDetails(String orderCode);
 
   List<OrderData> getSapOrdersForOrderCode(String orderCode);
+  
+  List<OrderEntryData> spliptEntriesBySapOrders(OrderDetailsResponse response,OrderData targetOrder);
   
 }

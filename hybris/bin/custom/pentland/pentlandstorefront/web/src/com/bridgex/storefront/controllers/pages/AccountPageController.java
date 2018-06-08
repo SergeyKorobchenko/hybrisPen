@@ -322,7 +322,8 @@ public class AccountPageController extends AbstractSearchPageController
 			for (OrderHistoryData orderHistoryData : searchPageData.getResults())
 			{
 				OrderData requestOrderDetails = orderFacade.requestOrderDetails(orderHistoryData.getCode());
-				orderHistoryData.setStatusDisplay(requestOrderDetails.getStatusDisplay());
+				OrderStatus status=OrderStatus.valueOf(requestOrderDetails.getStatusDisplay());
+				orderHistoryData.setStatus(status);
 			}
 		}
 		

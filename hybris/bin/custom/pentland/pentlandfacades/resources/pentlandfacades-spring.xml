@@ -180,6 +180,8 @@
 		<property name="orderConverter" ref="orderConverter"/>
 		<property name="sessionService" ref="sessionService"/>
 		<property name="userService" ref="userService"/>
+		<property name="orderFacade" ref="orderFacade"/>
+		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 	</bean>
 
 	<bean id="orderConfirmationRepEmailContext" class="com.bridgex.facades.process.email.context.OrderConfirmationRepEmailContext" parent="orderNotificationEmailContext" scope="prototype">
