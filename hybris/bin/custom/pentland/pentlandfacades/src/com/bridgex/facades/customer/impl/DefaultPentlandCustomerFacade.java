@@ -1,10 +1,9 @@
 package com.bridgex.facades.customer.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
@@ -19,6 +18,12 @@ import com.bridgex.facades.customer.PentlandCustomerFacade;
 import de.hybris.platform.b2b.model.B2BCustomerModel;
 import de.hybris.platform.b2b.model.B2BUnitModel;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
+import de.hybris.platform.commercefacades.order.CheckoutFacade;
+import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.ProductFacade;
+import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
@@ -35,10 +40,12 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
   private static final Logger LOG = Logger.getLogger(DefaultPentlandCustomerFacade.class);
 
   private PentlandB2BUnitService b2BUnitService;
-
   private PentlandCustomerAccountService pentlandCustomerAccountService;
+  private CheckoutFacade checkoutFacade;
+  private ProductFacade productFacade;
   
-  @Override
+  
+@Override
   public void loginSuccess(){
     final CustomerData userData = getCurrentCustomer();
 
@@ -94,6 +101,21 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
   @Override
   public boolean hasMarkFors() {
     UserModel currentUser = getCurrentUser();
+    final CartData cartData = checkoutFacade.getCheckoutCart();
+    List<OrderEntryData> entries = cartData.getEntries();
+    boolean hasMitreProduct=false;
+    for (OrderEntryData orderEntryData : entries) {
+    	ProductData productForCodeAndOptions = productFacade.getProductForCodeAndOptions(orderEntryData.getProduct().getCode(),Arrays.asList(ProductOption.BRAND));
+        orderEntryData.setProduct(productForCodeAndOptions);
+        if(orderEntryData.getProduct().getBrandCode()!=null)
+        {
+        	if(orderEntryData.getProduct().getBrandCode().equals("05"))
+        	{
+        		hasMitreProduct=true;
+        	}
+        }
+	}
+    
     if(currentUser instanceof B2BCustomerModel) {
       B2BCustomerModel currentCustomer = (B2BCustomerModel) currentUser;
       Collection<B2BUnitModel> firstLevelParents = b2BUnitService.getFirstLevelParents(currentCustomer);
@@ -107,7 +129,7 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
                                           .filter(address -> BooleanUtils.isTrue(address.getMarkForAddress()) || CollectionUtils.isNotEmpty(address.getMarkForAddresses()))
                                           .findFirst()
                                           .isPresent();
-        return hasMarkFors;
+        return hasMarkFors && hasMitreProduct ;
       }
     }
     return false;
@@ -135,5 +157,21 @@ public PentlandCustomerAccountService getPentlandCustomerAccountService() {
 public void setPentlandCustomerAccountService(PentlandCustomerAccountService pentlandCustomerAccountService) {
 	this.pentlandCustomerAccountService = pentlandCustomerAccountService;
 }
+public CheckoutFacade getCheckoutFacade() {
+	return checkoutFacade;
+}
+
+public void setCheckoutFacade(CheckoutFacade checkoutFacade) {
+	this.checkoutFacade = checkoutFacade;
+}
+
+public ProductFacade getProductFacade() {
+	return productFacade;
+}
+
+public void setProductFacade(ProductFacade productFacade) {
+	this.productFacade = productFacade;
+}
+
 
 }

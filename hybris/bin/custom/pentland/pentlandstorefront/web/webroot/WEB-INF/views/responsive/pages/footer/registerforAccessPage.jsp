@@ -54,8 +54,8 @@
 	                    <td style="color: red;"><form:errors path="email" cssClass="error" /></td>
 	                </tr>
 	                <tr>
-	                    <td>ACCOUNT NUMBER: <span style="color:red;">*</span></td>
-	                    <td><form:input path="accountNumber" required="true" style="width:250px"/></td>
+	                    <td>ACCOUNT NUMBER:</td>
+	                    <td><form:input path="accountNumber" style="width:250px"/></td>
 	                    <td style="color: red;"><form:errors path="accountNumber" cssClass="error" /></td>
 	                </tr>
 	                <tr>

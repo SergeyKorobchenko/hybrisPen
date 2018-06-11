@@ -37,14 +37,14 @@ public class PentlandRegistrationValidator implements Validator{
   final String email = registerForm.getEmail();
   final String position = registerForm.getPosition();
   final String accessRequired = registerForm.getAccessRequired();
-  final String accountNumber = registerForm.getAccountNumber();
+  //final String accountNumber = registerForm.getAccountNumber();
   final String companyName =   registerForm.getCompanyName();
   //validateTitleCode(errors, titleCode);
   validateName(errors, firstName, "firstName", "register.firstName.invalid");
   validateName(errors, lastName, "lastName", "register.lastName.invalid");
   validatePosition(errors, position, "position", "register.position.invalid");
   validateAccessRequired(errors, accessRequired, "accessRequired", "register.accessRequired.invalid");
-  validateAccountNumber(errors, accountNumber, "accountNumber", "register.accountNumber.invalid");
+  //validateAccountNumber(errors, accountNumber, "accountNumber", "register.accountNumber.invalid");
   validateCompanyName(errors, companyName, "companyName", "register.companyName.invalid");
   
   if (StringUtils.length(firstName) + StringUtils.length(lastName) > 255)
