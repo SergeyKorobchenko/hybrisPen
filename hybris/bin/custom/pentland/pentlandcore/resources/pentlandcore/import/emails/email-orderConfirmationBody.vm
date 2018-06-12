@@ -68,7 +68,7 @@
               <br/>
               <br/>
 
-              <table align="center" border="1" width="90%" cellspacing="0" cellpadding="15"> 
+              <table align="center" border="1" width="100%" cellspacing="0" cellpadding="15"> 
               <tr>
                <th>Order Number</th>
                <th>Brand</th>
@@ -82,7 +82,7 @@
              </tr>
 				#foreach ($order in $ctx.order.subOrders)
                 <tr>
-                  <td>
+                  <td align="center">
                     <div><strong>${order.code}</strong></div></td>
                     #if (!$order.orderType)
                       #set($order.orderType = "")
@@ -90,32 +90,28 @@
                     #if (!$order.brand)
                       #set($order.brand = "")
                     #end
-                   <td> 
+                   <td align="center"> 
                    <div>$order.brand
                                  </div></td>
-                  <td><div>${order.purchaseOrderNumber}
+                  <td align="center"><div>${order.purchaseOrderNumber}
                     </div></td>
-                    <td><div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.status}
+                    <td align="center"><div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.status}
                 </div></td>               
-                <td> <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.created)}
+                <td align="center"> <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.created)}
                   						</div></td>
-                  <td>  <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.rdd)}
+                  <td align="center">  <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${ctx.dateTool.format('d MMM, yyyy', $order.rdd)}
                   					</div></td>                 
-                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.totalUnitCount}
+                   <td align="center">   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.totalUnitCount}
                                         </div></td> 
-                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.totalTax.formattedValue}
+                   <td align="center">   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.totalTax.formattedValue}
                                         </div></td>
-                   <td>   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.totalPrice.formattedValue}
+                   <td align="center">   <div style="display: block;font-family:arial,helvetica,sans-serif;font-size: 12px;padding-bottom:5px;">${order.totalPrice.formattedValue}
                                         </div></td> 
                    
                 </tr>
 					#end
 					</table>
 					<br/>
-		<p style="margin:2px 0" align="right"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.Surcharged}</font></p>
-		<br/><br/>
-		<p width="100%" colspan="4" height="30" align="left"><font size="4" style="padding-left:5px"><strong>${ctx.messages.deliveryItems}</strong></font></p>
-	
 		  #if ($ctx.order.subOrders.size() > 0)
 		  #set ($sizeValue =0)
 		 #foreach( $orderGroup in ${ctx.order.subOrders} )
@@ -125,7 +121,7 @@
 		 #end
 		  #end
 		  #if ($ctx.order.subOrders.size() > 0 && $sizeValue > 0)
-	<table width="90%" border="0" align="center" cellpadding="2" cellspacing="2" bordercolor="#51585c" class="products" style="solid #51585c;">
+	<table width="100%" border="0" align="center" cellpadding="2" cellspacing="2" bordercolor="#51585c" class="products" style="solid #51585c;">
 		<tr>
 				<td>
 				
@@ -133,15 +129,15 @@
 					<table width="100%" cellpadding="0" cellspacing="0">
 					<br/>
 					<tr>
-							<td width="100%" colspan="4" height="30" align="left" ><font  size="4" style="padding-left:5px">${ctx.messages.yourDeliveryItems}&nbsp;$orderGroup.code</b></font></td>
+							<td width="100%" colspan="5" height="30" align="left" ><font  size="2">Order&nbsp;$orderGroup.code</b></font></td>
 						</tr>
 						<br/>
-						<tr width="100%" height="30" bgcolor="#000000">
-							<td width="20%"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.itemNumber}</b></font></td>
-							<td width="40%"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.item}</b></font></td>
-							<td width="20%"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.quantity}</b></font></td>
-							<td width="17%"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.itemPrice}</b></font></td>
-							<td width="30%"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.total}</b></font></td>
+						<tr width="100%" align="center" height="30" bgcolor="#000000">
+							<td width="10%" align="center"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.itemNumber}</b></font></td>
+							<td width="50%" align="center"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.item}</b></font></td>
+							<td width="10%" align="center"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.quantity}</b></font></td>
+							<td width="15%" align="center"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.itemPrice}</b></font></td>
+							<td width="15%" align="center"><font color="#FFFFFF" style="padding-left:10px;padding-right:10px;">${ctx.messages.total}</b></font></td>
 						</tr>
 						#foreach( $entry in ${orderGroup.entries} )
 						<tr>
@@ -151,13 +147,13 @@
 							<tr>
 							
 							 
-							    <td valign="top" ><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif" style="padding-left:20px;">$velocityCount</font></p>
+							    <td width="10% valign="top" align="center"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$velocityCount</font></p>
 							     </td>
                             
 							<td>
 									<table width="100%" border="0" cellpadding="0" cellspacing="0">
 										<tr>
-											<td width="40% valign="top" style="padding-left:10px;padding-right:10px;">
+											<td width="50% valign="top" align="center">
 												<p><font color="#666666"  size="2" face="Arial, Helvetica, sans-serif">
 													<a href="${ctx.baseUrl}$entry.product.url"><font color="#666666"><b>$entry.product.code/$entry.product.name</b></font></a>
 												</p>
@@ -167,7 +163,7 @@
 														#if (!$option.selected.isEmpty && ($option.selected.url == $entry1.product.url))
 															<table width="100%" cellpadding="0" cellspacing="0">
 																#foreach ($selectedOption in $option.selected.variantOptionQualifiers)
-																  <td style="padding-left:5px;padding-right:5px;" valign="top"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$selectedOption.name : &nbsp; $selectedOption.value </font></p></td>
+																  <td align="center" valign="top"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$selectedOption.name : &nbsp; $selectedOption.value </font></p></td>
 																#end
 															</table>
 														#end
@@ -179,12 +175,12 @@
 									</table>
 								</td>
 								
-								<td valign="top" width="20%"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.quantity</font></p>
+								<td valign="top" width="10%" align="center"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.quantity</font></p>
 								</td>
-								<td valign="top" width="12%"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.erpPrice.formattedValue</font></p>
+								<td valign="top" width="15%" align="center"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.erpPrice.formattedValue</font></p>
 								</td>
 								#set ($total = $entry.erpPrice.value * $entry.quantity)
-								<td valign="top" width="8%"><p><font color="#414a4f" size="3" face="Arial, Helvetica, sans-serif"><b>£$total</b></font></p>
+								<td valign="top" width="15%" align="center"><p><font color="#414a4f" size="2" face="Arial, Helvetica, sans-serif">£$total</font></p>
 								</td>
 							</tr>
 							
@@ -260,7 +256,7 @@
 								<td valign="top" width="12%"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$entry.erpPrice.formattedValue</font></p>
 								</td>
 								#set ($total = $entry.erpPrice.value * $entry.quantity)
-								<td valign="top" width="8%"><p><font color="#414a4f" size="3" face="Arial, Helvetica, sans-serif"><b>£$total</b></font></p>
+								<td valign="top" width="8%"><p><font color="#414a4f" size="2" face="Arial, Helvetica, sans-serif"><b>£$total</b></font></p>
 								</td>
 							</tr>
 							
@@ -342,4 +338,3 @@
 </body>
 
 </html>
-

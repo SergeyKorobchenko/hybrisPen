@@ -61,6 +61,7 @@ public class DefaultPentlandCustomerRegFacade implements PentlandCustomerRegFaca
   customerModel.setPosition(registerData.getPosition());
   customerModel.setAccessRequired(registerData.getAccessRequired());
   customerModel.setAccountNumber(registerData.getAccountNumber());
+  customerModel.setCompanyName(registerData.getCompanyName());
   setUidForRegister(registerData, customerModel);
   try
   {
