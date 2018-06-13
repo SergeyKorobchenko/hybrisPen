@@ -213,14 +213,14 @@
 	
 	<bean id="sMUValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.SMUValueResolver" parent="abstractBaseProductValueResolver"/>
 	
-	<bean id="pentlandStockAvailabilityResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandStockAvailabilityResolver" parent="abstractBaseProductValueResolver">
+	<!-- <bean id="pentlandStockAvailabilityResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.PentlandStockAvailabilityResolver" parent="abstractBaseProductValueResolver">
 	<property name="pentlandB2BUnitService" ref="pentlandB2BUnitService"/>
 	<property name="userService" ref="userService"/>
 	<property name="orderSimulationService" ref="orderSimulationService"/>
 	<property name="i18nService" ref="i18nService"/>
 	<property name="configurationService" ref="configurationService"/>
 	</bean>
-
+ -->
 
 	<bean id="abstractBaseProductValueResolver" class="com.bridgex.core.search.solrfacetsearch.provider.impl.AbstractBaseProductValueResolver" parent="abstractValueResolver" abstract="true"/>
 
