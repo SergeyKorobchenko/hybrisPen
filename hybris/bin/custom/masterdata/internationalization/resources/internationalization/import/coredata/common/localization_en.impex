@@ -1,4 +1,12 @@
 INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
+;request.register.accountnumber.tooltip;Please contact Customer Operations if you do not have your account number
+;request.register.companyname;COMPANY NAME
+;request.register.firstname;FIRST NAME
+;request.register.lastname;LAST NAME
+;request.register.position;POSITION
+;request.register.requiredrole;REQUIRED ROLE
+;request.register.email;E-MAIL
+;request.register.accountnumber;ACCOUNT NUMBER:
 ;account.confirmation.address.added;Address created successfully
 ;account.confirmation.address.removed;Address removed successfully
 ;account.confirmation.address.updated;Address updated successfully
@@ -3082,3 +3090,4 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;breadcrumb.register.access.success;Request Success
 ;register.access.dublicate.mail;Already request registered with "{0}" mail id 
 ;register.access.link;Request For Access
+
