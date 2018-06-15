@@ -174,7 +174,7 @@
                         </c:if>
 
                         <script id="product-id-tag-box-template" type="text/x-jquery-tmpl">
-                            <span class="product-id-tag-box js-remove-product-id" id="product-id-\${productId}">
+                            <span class="product-id-tag-box js-remove-product-id" id="product-id-\${productId}" style="color: white;">
                               <span class="product-id">\${productId}</span>
                               <span class="glyphicon glyphicon-remove">
                             </span>

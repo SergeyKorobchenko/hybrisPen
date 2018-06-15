@@ -59,7 +59,7 @@
             </c:if>
             <label class="form-control-checkbox">
                 <input type="checkbox" value="${fn:escapeXml(product.code)}" class="${checkBoxClass}">
-                <div class="form-control-label"><c:out value='${product.code}'/></div>
+                <div class="form-control-label"><c:out value='${product.materialKey}'/></div>
             </label>
         </div>
 

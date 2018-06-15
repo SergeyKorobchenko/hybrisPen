@@ -129,7 +129,7 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
                                           .filter(address -> BooleanUtils.isTrue(address.getMarkForAddress()) || CollectionUtils.isNotEmpty(address.getMarkForAddresses()))
                                           .findFirst()
                                           .isPresent();
-        return hasMarkFors && hasMitreProduct ;
+        return (hasMarkFors && hasMitreProduct) ;
       }
     }
     return false;

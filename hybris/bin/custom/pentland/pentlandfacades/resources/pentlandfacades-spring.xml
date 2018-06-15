@@ -464,4 +464,7 @@
     <property name="i18nService" ref="i18nService"/>
 </bean>
 
+<alias name="pentlandCustomerPopulator" alias="customerPopulator"/>
+<bean id="pentlandCustomerPopulator" class="com.bridgex.facades.order.converters.populator.PentlandCustomerPopulator" parent="defaultCustomerPopulator"/>
+
 </beans>
