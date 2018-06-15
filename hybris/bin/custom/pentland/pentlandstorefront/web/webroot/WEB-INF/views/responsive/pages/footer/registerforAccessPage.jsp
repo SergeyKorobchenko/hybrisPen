@@ -19,27 +19,27 @@
         	<div class="table-responsive" align="center">
 	            <table class="table" style="width:auto;">
 	                <tr>
-	                    <td>COMPANY NAME <span style="color:red;">*</span></td>
+	                    <td><spring:theme code="request.register.companyname"/><span style="color:red;">*</span></td>
 	                    <td><form:input path="companyName" required="true" style="width:250px"/></td>
 	                    <td style="color: red;"><form:errors path="firstName" cssClass = "error" /></td>
 	                </tr>
 	                <tr>
-	                    <td>FIRST NAME <span style="color:red;">*</span></td>
+	                    <td><spring:theme code="request.register.firstname"/><span style="color:red;">*</span></td>
 	                    <td><form:input path="firstName" required="true" style="width:250px"/></td>
 	                    <td style="color: red;"><form:errors path="firstName" cssClass="error" /></td>
 	                </tr>
 	                 <tr>
-	                    <td>LAST NAME <span style="color:red;">*</span></td>
+	                    <td><spring:theme code="request.register.lastname"/><span style="color:red;">*</span></td>
 	                    <td><form:input path="lastName" required="true" style="width:250px"/></td>
 	                    <td style="color: red;"><form:errors path="lastName" cssClass="error" /></td>
 	                </tr>
 	                 <tr>
-	                    <td>POSITION <span style="color:red;">*</span></td>
+	                    <td><spring:theme code="request.register.position"/><span style="color:red;">*</span></td>
 	                    <td><form:input path="position" required="true" style="width:250px"/></td>
 	                    <td style="color: red;"><form:errors path="position" cssClass="error" /></td>
 	                </tr>
 	                 <tr>
-	                    <td>REQUIRED ROLE</td>
+	                    <td><spring:theme code="request.register.requiredrole"/></td>
 	                    <td>
 		                    <select name="accessRequired">
 								<option value="StandardRole" style="width:230px">Standard role</option>
@@ -49,14 +49,14 @@
 	                    <td style="color: red;"><form:errors path="accessRequired" cssClass="error" /></td>
 	                </tr>
 	                <tr>
-	                    <td>E-MAIL <span style="color:red;">*</span></td>
+	                    <td><spring:theme code="request.register.email"/><span style="color:red;">*</span></td>
 	                    <td><form:input path="email" type="email" required="true" style="width:250px"/></td>
 	                    <td style="color: red;"><form:errors path="email" cssClass="error" /></td>
 	                </tr>
 	                <tr>
-	                    <td>ACCOUNT NUMBER:</td>
-	                    <td><form:input path="accountNumber" style="width:250px"/></td>
-	                    <td style="color: red;"><form:errors path="accountNumber" cssClass="error" /></td>
+	                    <td><spring:theme code="request.register.accountnumber"/><span style="color:red;">*</span></td>
+	                    <td><form:input path="accountNumber" required="true" style="width:250px"/></td>
+	                    <td style="font-size:0.8em; vertical-align:bottom; color: black;"><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" data-trigger="hover" title='<spring:theme code="request.register.accountnumber.tooltip"></spring:theme>'></span><form:errors path="accountNumber" cssClass="error" /></td>
 	                </tr>
 	                <tr>
 	                    <td></td>
