@@ -11,6 +11,7 @@
 package com.bridgex.storefront.controllers.pages.checkout.steps;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bridgex.facades.customer.PentlandCustomerFacade;
 import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.bridgex.storefront.controllers.ControllerConstants;
 
@@ -43,6 +45,10 @@ import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.ProductFacade;
+import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 
 @Controller
@@ -56,6 +62,9 @@ public class MarkForAddressCheckoutStepController extends AbstractCheckoutStepCo
 
 	@Resource
 	private PentlandAcceleratorCheckoutFacade acceleratorCheckoutFacade;
+	
+	@Resource
+	private ProductFacade productFacade;
 
 	@ModelAttribute("checkoutSteps")
 	public List<CheckoutSteps> addCheckoutStepsToModel() {
@@ -87,9 +96,22 @@ public class MarkForAddressCheckoutStepController extends AbstractCheckoutStepCo
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		List<OrderEntryData> entries = cartData.getEntries();
+		 boolean hasMitreProduct=false;
+		    for (OrderEntryData orderEntryData : entries) {
+		    	ProductData productForCodeAndOptions = productFacade.getProductForCodeAndOptions(orderEntryData.getProduct().getCode(),Arrays.asList(ProductOption.BRAND));
+		        orderEntryData.setProduct(productForCodeAndOptions);
+		        if(orderEntryData.getProduct().getBrandCode()!=null)
+		        {
+		        	if(orderEntryData.getProduct().getBrandCode().equals("05"))
+		        	{
+		        		hasMitreProduct=true;
+		        	}
+		        }
+			}
 
 		List<? extends AddressData> markForAddresses = getMarkForAddresses(cartData.getDeliveryAddress());
-		if(CollectionUtils.isEmpty(markForAddresses)){
+		if(CollectionUtils.isEmpty(markForAddresses) || !hasMitreProduct){
 			return getCheckoutStep().nextStep();
 		}
 
