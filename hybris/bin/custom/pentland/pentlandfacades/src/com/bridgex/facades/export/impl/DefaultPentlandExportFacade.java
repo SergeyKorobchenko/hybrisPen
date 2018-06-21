@@ -2,6 +2,7 @@ package com.bridgex.facades.export.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -20,6 +21,8 @@ import org.springframework.beans.factory.annotation.Required;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.product.PentlandProductService;
 import com.bridgex.facades.export.PentlandExportFacade;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageDecoder;
 
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
@@ -75,7 +78,9 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
       try{
         zipOutputStream.putNextEntry(zipEntry);
 //        BufferedImage image = ImageIO.read(new URL(urlPrefix + media.getDownloadURL()));
-        BufferedImage image = ImageIO.read(new File(pathPrefix + media.getLocation()));
+        JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(new FileInputStream( new File(pathPrefix + media.getLocation()) ) );
+        BufferedImage image = decoder.decodeAsBufferedImage();
+       // BufferedImage image = ImageIO.read(new File(pathPrefix + media.getLocation()));
         String imageFormat = "jpg";
         //try to get image format from filename
         String[] split = fileName.split("\\.");
