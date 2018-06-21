@@ -181,8 +181,8 @@
 		<property name="sessionService" ref="sessionService"/>
 		<property name="userService" ref="userService"/>
 		<property name="orderFacade" ref="orderFacade"/>
-		<property name="orderDetailsService" ref="pentlandOrderDetailsService"/>
 		<property name="productFacade" ref="productFacade"/>
+		<property name="b2BUnitService" ref="b2bUnitService"/>
 	</bean>
 
 	<bean id="orderConfirmationRepEmailContext" class="com.bridgex.facades.process.email.context.OrderConfirmationRepEmailContext" parent="orderNotificationEmailContext" scope="prototype">
