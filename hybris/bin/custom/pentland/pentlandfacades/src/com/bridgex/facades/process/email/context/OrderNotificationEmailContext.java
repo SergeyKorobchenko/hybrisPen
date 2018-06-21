@@ -19,16 +19,16 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.velocity.tools.generic.NumberTool;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.bridgex.core.integration.PentlandIntegrationService;
-import com.bridgex.core.order.PentlandCartService;
 import com.bridgex.facades.order.PentlandOrderFacade;
-import com.bridgex.integration.domain.OrderDetailsDto;
-import com.bridgex.integration.domain.OrderDetailsResponse;
 
 import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
 import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
+import de.hybris.platform.b2b.model.B2BCustomerModel;
+import de.hybris.platform.b2b.model.B2BUnitModel;
+import de.hybris.platform.b2b.services.B2BUnitService;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
@@ -40,6 +40,7 @@ import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.session.SessionExecutionBody;
@@ -57,16 +58,19 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	private List<CouponData>                 giftCoupons;
 	private SessionService                   sessionService;
 	private UserService                      userService;
-	private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
 	private PentlandOrderFacade orderFacade;
 	private ProductFacade productFacade;
+	private B2BUnitService<B2BUnitModel, UserModel> b2BUnitService;
 	
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
 	{
 		super.init(orderProcessModel, emailPageModel);
 		CustomerModel customer = getCustomer(orderProcessModel);
+		B2BUnitModel unitForUid = b2BUnitService.getParent((B2BCustomerModel) customer);
+		put("b2bunit",unitForUid);
 		put("customer", customer);
+		put("numberTool", new NumberTool());
 
 		sessionService.executeInLocalView(new SessionExecutionBody() {
 			@Override
@@ -154,10 +158,7 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 		this.userService = userService;
 	}
 	
-	public void setOrderDetailsService(
-			PentlandIntegrationService<OrderDetailsDto, OrderDetailsResponse> orderDetailsService) {
-		this.orderDetailsService = orderDetailsService;
-	}
+	
 
 	public PentlandOrderFacade getOrderFacade() {
 		return orderFacade;
@@ -175,6 +176,14 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 	@Required
 	public void setProductFacade(ProductFacade productFacade) {
 		this.productFacade = productFacade;
+	}
+
+	public B2BUnitService<B2BUnitModel, UserModel> getB2BUnitService() {
+		return b2BUnitService;
+	}
+
+	public void setB2BUnitService(B2BUnitService<B2BUnitModel, UserModel> b2bUnitService) {
+		b2BUnitService = b2bUnitService;
 	}
 	
 	
