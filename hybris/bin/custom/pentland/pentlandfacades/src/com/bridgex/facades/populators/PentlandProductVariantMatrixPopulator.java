@@ -11,6 +11,7 @@ import com.bridgex.core.enums.DiscontinuedStatus;
 import com.bridgex.core.model.ApparelSizeVariantProductModel;
 import com.bridgex.core.model.ApparelStyleVariantProductModel;
 import com.bridgex.core.product.util.ProductSizeComparator;
+import com.bridgex.facades.utils.ProductUtils;
 
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.*;
@@ -42,7 +43,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
     int maxVariants = 0;
 
     for (VariantProductModel styleLevelVariantModel : baseProductModel.getVariants()) {
-      if (isOnlineProduct(styleLevelVariantModel) && hasPrice(styleLevelVariantModel)) {
+      if ((CollectionUtils.isNotEmpty(styleLevelVariantModel.getSupercategories())) && (isOnlineProduct(styleLevelVariantModel)) && hasPrice(styleLevelVariantModel)) {
         ApparelStyleVariantProductModel styleVariantProductModel = (ApparelStyleVariantProductModel) styleLevelVariantModel;
         VariantMatrixElementData styleElementData = createNode(styleVariantProductModel);
         styleElementData.setVariantName(styleVariantProductModel.getStyle());
@@ -54,7 +55,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
         styleVariantOptionData.setBrandCode(styleLevelVariantModel.getSapBrand());
         styleElementData.setVariantOption(styleVariantOptionData);
 
-        List<ApparelSizeVariantProductModel> sizeLevelVariants = styleVariantProductModel.getVariants().stream().map(e->(ApparelSizeVariantProductModel)e).sorted(new ProductSizeComparator()).collect(Collectors.toList());
+        List<ApparelSizeVariantProductModel> sizeLevelVariants = styleVariantProductModel.getVariants().stream().filter(s->isOnlineProduct(s)).map(e->(ApparelSizeVariantProductModel)e).sorted(new ProductSizeComparator()).collect(Collectors.toList());
 
         for (ApparelSizeVariantProductModel sizeVariantProductModel : sizeLevelVariants) {
           VariantMatrixElementData sizeElementData = createNode(sizeVariantProductModel);
@@ -90,7 +91,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
   }
 
   private boolean isOnlineProduct(ProductModel productModel) {
-    return productModel.getDiscontinuedStatus() == null || onlineStatusSet.contains(productModel.getDiscontinuedStatus());
+    return productModel.getDiscontinuedStatus() == null || ProductUtils.isNotDiscontinued(productModel);
   }
 
   protected ProductModel getBaseProduct(ProductModel productModel) {
@@ -114,7 +115,7 @@ public class PentlandProductVariantMatrixPopulator<SOURCE extends ProductModel, 
 
   protected void populateVariantOptionData(ProductModel productModel, VariantOptionData variantOptionData) {
     variantOptionData.setCode(productModel.getCode());
-    if (productModel instanceof VariantProductModel) {
+    if (productModel instanceof VariantProductModel && ProductUtils.isNotDiscontinued(productModel)) {
       getVariantOptionDataMediaPopulator().populate((VariantProductModel) productModel, variantOptionData);
     }
   }

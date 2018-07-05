@@ -15,7 +15,7 @@
        						<spring:theme code="checkout.multi.order.summary"/>&nbsp;${orderCode}
        						</div>
        						<div class="col-sm-5">
-       						<spring:theme code="text.account.orderHistory.POnumber"/>&nbsp;${order.purchaseOrderNumber}
+       						<spring:theme code="text.account.orderHistory.POnumber"/>&nbsp;${orderData.purchaseOrderNumber}
        						</div>
 					</div>
 				</div>

@@ -26,6 +26,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
 
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 
@@ -45,7 +46,9 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 	public void populate(final VariantProductModel source, final VariantOptionData target)
 	{
 		super.populate(source, target);
-
+		
+		if(CollectionUtils.isNotEmpty(source.getSupercategories()))
+		  {
 		final ComposedTypeModel productType = getTypeService().getComposedTypeForClass(source.getClass());
 		final MediaContainerModel mediaContainer = getPrimaryImageMediaContainer(source);
 
@@ -63,7 +66,8 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 				variantOptionQualifier.setSizeNo(((Integer) value));
 			}
 
-		}
+		   }
+		  }
 
 	}
 
