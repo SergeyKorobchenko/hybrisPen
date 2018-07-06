@@ -197,7 +197,7 @@
 	<bean id="pentlandBatchParentB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE B2BUnit;uid[unique=true];salesOrg;distCh;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=$lang];active[default=true];groups(uid)[collection-delimiter=|]
+				INSERT_UPDATE B2BUnit;uid[unique=true,cellDecorator=com.bridgex.core.impex.decorator.B2BUnitDynamicEnumCellDecorator];salesOrg;distCh;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name[cellDecorator=com.bridgex.core.impex.decorator.B2BUnitDynamicEnumCellDecorator];locName[lang=$lang,cellDecorator=com.bridgex.core.impex.decorator.B2BUnitDynamicEnumCellDecorator];active[default=true];groups(uid)[collection-delimiter=|]
 			</value>
 		</property>
 		<property name="impexRow">
@@ -209,7 +209,7 @@
 	<bean id="pentlandBatchB2BUnitConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
 		<property name="header">
 			<value>#{pentlandImpexProductHeader}
-				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid)[collection-delimiter=|];salesOrg;distCh;sapID;sapPriceList;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=$lang];active[default=true]
+				INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid)[collection-delimiter=|,cellDecorator=com.bridgex.core.impex.decorator.PriceGroupDynamicEnumCellDecorator];salesOrg;distCh;sapID;sapPriceList;userPriceGroup(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sapBrand;customerType(code);division(code);currency(isocode)[default='GBP'];name;locName[lang=$lang];active[default=true]
 			</value>
 		</property>
 		<property name="impexRow">

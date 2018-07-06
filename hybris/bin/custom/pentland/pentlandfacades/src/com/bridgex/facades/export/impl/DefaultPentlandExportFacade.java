@@ -78,9 +78,9 @@ public class DefaultPentlandExportFacade implements PentlandExportFacade{
       try{
         zipOutputStream.putNextEntry(zipEntry);
 //        BufferedImage image = ImageIO.read(new URL(urlPrefix + media.getDownloadURL()));
-        JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(new FileInputStream( new File(pathPrefix + media.getLocation()) ) );
-        BufferedImage image = decoder.decodeAsBufferedImage();
-       // BufferedImage image = ImageIO.read(new File(pathPrefix + media.getLocation()));
+       // JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(new FileInputStream( new File(pathPrefix + media.getLocation()) ) );
+       // BufferedImage image = decoder.decodeAsBufferedImage();
+          BufferedImage image = ImageIO.read(new File(pathPrefix + media.getLocation()));
         String imageFormat = "jpg";
         //try to get image format from filename
         String[] split = fileName.split("\\.");

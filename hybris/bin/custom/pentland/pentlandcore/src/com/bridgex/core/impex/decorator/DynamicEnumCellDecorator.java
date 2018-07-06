@@ -8,6 +8,7 @@ import de.hybris.platform.core.HybrisEnumValue;
 import de.hybris.platform.core.Registry;
 import de.hybris.platform.core.model.enumeration.EnumerationValueModel;
 import de.hybris.platform.enumeration.EnumerationService;
+import de.hybris.platform.europe1.enums.UserPriceGroup;
 import de.hybris.platform.impex.jalo.header.AbstractDescriptor;
 import de.hybris.platform.impex.jalo.header.AbstractImpExCSVCellDecorator;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -24,6 +25,12 @@ public class DynamicEnumCellDecorator extends AbstractImpExCSVCellDecorator {
     if(StringUtils.isNotEmpty(initialVal)) {
       AbstractDescriptor.DescriptorParams descriptorData = this.getColumnDescriptor().getDescriptorData();
       String type = descriptorData.getModifier("type");
+      String brandCode = srcLine.get(5);
+      if(position==4 && type.contains("UserPriceGroup") && brandCode.contains("08"))
+      {
+    	  initialVal="8A";
+    	  //UserPriceGroup.valueOf("8A");
+      }
       if(StringUtils.isNotEmpty(type)){
         ModelService modelService = ((ModelService) Registry.getApplicationContext().getBean("modelService"));
         EnumerationService enumerationService = ((EnumerationService) Registry.getApplicationContext().getBean("enumerationService"));
