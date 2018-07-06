@@ -61,7 +61,7 @@
                   <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('thankYouParagraph')}</font></p>
                   <br />
 
-                  <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('summaryBelowParagraph', "#genHtmlLinkStartTag($orderInfoUrl)", "#genHtmlBoldFont(${ctx.messages.hereLink})", "#genHtmlLinkEndTag()")}</font></p>
+                  <p style="margin:2px 0"><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('summaryBelowParagraph', "#genHtmlLinkStartTag($ordersUrl)", "#genHtmlBoldFont(${ctx.messages.hereLink})", "#genHtmlLinkEndTag()")}</font></p>
                 </td>
               </tr>
 							#foreach ($order in $ctx.order.subOrders)
