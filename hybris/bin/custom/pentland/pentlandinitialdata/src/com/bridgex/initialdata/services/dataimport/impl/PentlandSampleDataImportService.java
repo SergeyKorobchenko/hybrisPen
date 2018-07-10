@@ -14,6 +14,7 @@ import de.hybris.platform.core.initialization.SystemSetupContext;
 public class PentlandSampleDataImportService extends SampleDataImportService implements InitializingBean{
 
   public static final String IMPORT_SAMPLE_DATA                         = "importSampleData";
+  private static final String IMPORT_SITE = "importSite";
   public static final String BTG_EXTENSION_NAME                         = "btg";
   public static final String CMS_COCKPIT_EXTENSION_NAME                 = "cmscockpit";
   public static final String PRODUCT_COCKPIT_EXTENSION_NAME             = "productcockpit";
@@ -40,10 +41,13 @@ public class PentlandSampleDataImportService extends SampleDataImportService imp
   {
     final boolean importSampleData = systemSetup.getBooleanSystemSetupParameter(context, IMPORT_SAMPLE_DATA);
     importProductSample = systemSetup.getBooleanSystemSetupParameter(context, IMPORT_PRODUCT_SAMPLE);
+    final String site = context.getParameter(context.getExtensionName() + "_" + IMPORT_SITE);
 
     if (importSampleData) {
       for (final ImportData data : importData) {
-        importAllData(systemSetup, context, data, true);
+        if (org.apache.commons.lang.StringUtils.isNotBlank(data.getProductCatalogName()) && data.getProductCatalogName().equals(site)) {
+          importAllData(systemSetup, context, data, true);
+        }
       }
     }
   }

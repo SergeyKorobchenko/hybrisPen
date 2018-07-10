@@ -47,9 +47,16 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
 	private static final String IMPORT_PRODUCT_SAMPLE = "importProductSample";
 
+	private static final String IMPORT_SITE = "importSite";
+
 	private static final String PENTLAND = "pentland";
 	private static final String PENTLAND_STORE = "pentland";
-	private static final List<String> STORES = Collections.singletonList(PENTLAND_STORE);
+	private static final List<String> B2B_STORES = Collections.singletonList(PENTLAND_STORE);
+
+	private static final String ENDURA = "endurasport";
+	private static final String ENDURA_UK_STORE = "endurasport_uk";
+	private static final String ENDURA_US_STORE = "endurasport_us";
+	private static final List<String> ENDURA_STORES =  Arrays.asList(ENDURA_UK_STORE,ENDURA_US_STORE);
 
 	private CoreDataImportService coreDataImportService;
 	private SampleDataImportService sampleDataImportService;
@@ -63,11 +70,20 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	{
 		final List<SystemSetupParameter> params = new ArrayList<SystemSetupParameter>();
 
-		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", true));
-		params.add(createBooleanSystemSetupParameter(IMPORT_SAMPLE_DATA, "Import Sample Data", true));
-		params.add(createBooleanSystemSetupParameter(ACTIVATE_SOLR_CRON_JOBS, "Activate Solr Cron Jobs", true));
-		params.add(createBooleanSystemSetupParameter(IMPORT_PRODUCT_SAMPLE, "Import Product Data", true));
+		final SystemSetupParameter syncProductsParam = new SystemSetupParameter(IMPORT_SITE);
+		syncProductsParam.setLabel("Choose site to Import");
+		syncProductsParam.addValue(PENTLAND, true);
+		syncProductsParam.addValue(ENDURA, false);
+
+		params.add(syncProductsParam);
+
+		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", false));
+		params.add(createBooleanSystemSetupParameter(IMPORT_SAMPLE_DATA, "Import Sample Data", false));
+		params.add(createBooleanSystemSetupParameter(ACTIVATE_SOLR_CRON_JOBS, "Activate Solr Cron Jobs", false));
+		params.add(createBooleanSystemSetupParameter(IMPORT_PRODUCT_SAMPLE, "Import Product Data", false));
 		// Add more Parameters here as you require
+
+
 
 		return params;
 	}
@@ -115,17 +131,23 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		final List<ImportData> importData = new ArrayList<>();
 
 
-		final ImportData sampleImportData = new ImportData();
-		sampleImportData.setProductCatalogName(PENTLAND);
-		sampleImportData.setContentCatalogNames(Collections.singletonList(PENTLAND));
-		sampleImportData.setStoreNames(STORES);
-		importData.add(sampleImportData);
+		final ImportData pentlandImportData = new ImportData();
+		pentlandImportData.setProductCatalogName(PENTLAND);
+		pentlandImportData.setContentCatalogNames(Collections.singletonList(PENTLAND));
+		pentlandImportData.setStoreNames(B2B_STORES);
+		importData.add(pentlandImportData);
+
+		final ImportData enduraImportData = new ImportData();
+		enduraImportData.setProductCatalogName(ENDURA);
+		enduraImportData.setContentCatalogNames(Collections.singletonList(ENDURA));
+		enduraImportData.setStoreNames(ENDURA_STORES);
+		importData.add(enduraImportData);
 
 		getCoreDataImportService().execute(this, context, importData);
-		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+		//getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
 
 		getSampleDataImportService().execute(this, context, importData);
-		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		//getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 
 	}
 

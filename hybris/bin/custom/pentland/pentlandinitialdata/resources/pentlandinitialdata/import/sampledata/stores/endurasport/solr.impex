@@ -1,0 +1,67 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for SOLR Configuration
+
+# Macros / Replacement Parameter definitions
+$classificationCatalog=pentlandClassificationCatalog
+$contentCatalog=pentlandContentCatalog
+
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$classCatalogVersion=catalogVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
+$productCatalog=pentlandProductCatalog
+$productCatalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$solrIndexedType=pentlandProductType
+$fieldValueProvider = variantProductClassificationAttributesValueResolver
+
+# Define Range Set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+
+# Define Ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code);facetSort(code);priority;visible;fieldValueProvider;customFacetSortProvider;rangeSets(name);$classAttributeAssignment
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=true];fieldValueProvider[default=$fieldValueProvider];$classAttributeAssignment;;facet[default=true];facetType(code)[default=MultiSelectOr];facetSort(code)[default=Alpha]
+#;$solrIndexedType;teamwearType;string;;;;clTeamwear:::teamwearType::::
+#;$solrIndexedType;trainingwearType;string;;;;clTrainingWear:::trainingwearType::::
+;$solrIndexedType;sport;string;;;;clBalls:::sport::::
+;$solrIndexedType;useageOccasion;string;;;;clBalls:::useageOccasion::::
+;$solrIndexedType;surface;string;;;;clBalls:::surface::::
+#;$solrIndexedType;accessoryType;string;;;;clEquipment:::accessoryType::::
+;$solrIndexedType;trainingMethod;string;;;;clEquipment:::trainingMethod::::
+
+# Import Classification Features
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=false];fieldValueProvider;$classAttributeAssignment
+
+# Show the Classification Features in the Product List View Category /Search Pages
+INSERT_UPDATE ClassAttributeAssignment;$classClass[unique=true];$classAttribute[unique=true];$classSystemVersion[unique=true];listable[default=true]
+
+# Redirect page URL
+INSERT_UPDATE SolrURIRedirect;url[unique=true]
+
+INSERT_UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true]
+
+INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
+
+INSERT_UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
+
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+#;teamwearType:$solrIndexedType;;MultiSelectOr;5000;
+#;trainingwearType:$solrIndexedType;;MultiSelectOr;5000;
+;sport:$solrIndexedType;;MultiSelectOr;5000;
+;useageOccasion:$solrIndexedType;;MultiSelectOr;5000;
+;surface:$solrIndexedType;;MultiSelectOr;5000;
+#;accessoryType:$solrIndexedType;;MultiSelectOr;5000;
+;trainingMethod:$solrIndexedType;;MultiSelectOr;5000;

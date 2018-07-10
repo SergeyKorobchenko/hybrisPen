@@ -25,6 +25,8 @@
 		<extension name="internationalization" />
 		<extension name="internationalizationbackoffice" />
 
+		<extension name="pentlandb2cstorefront" />
+
 		<extension name="erpintegration" />
 
 		<!--SAP exts-->

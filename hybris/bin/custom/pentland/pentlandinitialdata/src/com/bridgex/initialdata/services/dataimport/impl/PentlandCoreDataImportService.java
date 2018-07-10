@@ -8,21 +8,26 @@ import de.hybris.platform.commerceservices.setup.data.ImportData;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.validation.services.ValidationService;
+import org.apache.commons.lang.StringUtils;
 
 public class PentlandCoreDataImportService extends CoreDataImportService {
 
   public static final String IMPORT_CORE_DATA = "importCoreData";
+  private static final String IMPORT_SITE = "importSite";
 
   @Override
   public void execute(final AbstractSystemSetup systemSetup, final SystemSetupContext context, final List<ImportData> importData)
   {
     final boolean importCoreData = systemSetup.getBooleanSystemSetupParameter(context, IMPORT_CORE_DATA);
+    final String site = context.getParameter(context.getExtensionName() + "_" + IMPORT_SITE);
 
     if (importCoreData)
     {
       for (final ImportData data : importData)
       {
-        importAllData(systemSetup, context, data, false);
+        if (StringUtils.isNotBlank(data.getProductCatalogName()) && data.getProductCatalogName().equals(site)) {
+          importAllData(systemSetup, context, data, false);
+        }
       }
 
       final ValidationService validation = getBeanForName("validationService");
