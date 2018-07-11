@@ -77,7 +77,6 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
         if(deliveryAddress != null){
           sapCustomerID = deliveryAddress.getSapCustomerID();
           deliveryAddress.setSapCustomerID(StringUtils.EMPTY);
-          deliveryAddress.setAddressID(String.join("-", orderModel.getCode(),deliveryAddress.getAddressID()));
           getModelService().save(deliveryAddress);
         }
         AddressModel markFor = orderModel.getMarkFor();
@@ -86,7 +85,6 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
             sapCustomerID = markFor.getSapCustomerID();
           }
           markFor.setSapCustomerID(StringUtils.EMPTY);
-          markFor.setAddressID(String.join("-", orderModel.getCode(),markFor.getAddressID()));
           getModelService().save(markFor);
         }
 

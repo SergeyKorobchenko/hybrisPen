@@ -5,12 +5,11 @@ import com.bridgex.integration.domain.*;
 import de.hybris.platform.b2b.services.B2BOrderService;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.jalo.order.AbstractOrderEntry;
-import de.hybris.platform.jalo.order.CartEntry;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -23,7 +22,6 @@ import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author Goncharenko Mikhail, created on 02.11.2017.
@@ -31,6 +29,7 @@ import java.util.stream.Collectors;
 public class PentlandOrderDetailsService implements PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> {
 
   private static final String ORDER_DETAILS_SESSION_KEY = "orderDetails:%s";
+  private static final Logger LOG                       = Logger.getLogger(PentlandOrderDetailsService.class);
 
   private IntegrationService<OrderDetailsDto, OrderDetailsResponse> integrationService;
   private CommonI18NService                                         commonI18NService;
@@ -42,9 +41,11 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
   public OrderDetailsResponse requestData(OrderDetailsDto request) {
     request.setLanguage(commonI18NService.getCurrentLanguage().getIsocode().toUpperCase());
     OrderDetailsResponse response = integrationService.sendRequest(request, OrderDetailsResponse.class).getBody();
-    checkRequestSuccess(response);
-    storeOrderDetailsInSession(response);
-    updateOrderStatus(request.getOrderCode(), response.getStatus());
+    if(checkRequestSuccess(response))
+    {
+    	storeOrderDetailsInSession(response);
+    	updateOrderStatus(request.getOrderCode(), response.getStatus());
+    }
     return response;
   }
 
@@ -56,13 +57,16 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
     }
   }
 
-  private void checkRequestSuccess(OrderDetailsResponse response) {
+  private boolean checkRequestSuccess(OrderDetailsResponse response) {
     if (response.getEtReturn() != null && !response.getEtReturn().isEmpty()) {
       ETReturnDto etReturn = response.getEtReturn().get(0);
-      if (etReturn.getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
-        throw new ResourceAccessException("ERP request failed with response: " + etReturn.getMessage());
+      if (!etReturn.getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
+        return true;
       }
     }
+    LOG.warn("ERP request failed with response: " + response.getCode() != null ? response.getCode()
+    		: "nullResponse");
+	return false;
   }
 
   private void storeOrderDetailsInSession(OrderDetailsResponse response) {
