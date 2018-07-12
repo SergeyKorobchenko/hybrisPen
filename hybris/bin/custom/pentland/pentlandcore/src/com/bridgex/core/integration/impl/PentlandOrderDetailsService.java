@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.ResourceAccessException;
 
 import com.bridgex.core.integration.PentlandIntegrationService;
+import com.bridgex.core.integration.PentlandOrderDetailsIntegrationService;
 import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.service.IntegrationService;
 
@@ -26,7 +27,7 @@ import java.util.Map;
 /**
  * @author Goncharenko Mikhail, created on 02.11.2017.
  */
-public class PentlandOrderDetailsService implements PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> {
+public class PentlandOrderDetailsService implements PentlandOrderDetailsIntegrationService<OrderDetailsDto,OrderDetailsResponse> {
 
   private static final String ORDER_DETAILS_SESSION_KEY = "orderDetails:%s";
   private static final Logger LOG                       = Logger.getLogger(PentlandOrderDetailsService.class);
@@ -38,14 +39,12 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
   private ModelService                                              modelService;
 
   @Override
-  public OrderDetailsResponse requestData(OrderDetailsDto request) {
+  public OrderDetailsResponse requestDataForOrderDetails(OrderDetailsDto request,Integer pageValue) {
     request.setLanguage(commonI18NService.getCurrentLanguage().getIsocode().toUpperCase());
     OrderDetailsResponse response = integrationService.sendRequest(request, OrderDetailsResponse.class).getBody();
-    if(checkRequestSuccess(response))
-    {
+    	checkRequestSuccess(response,pageValue);
     	storeOrderDetailsInSession(response);
     	updateOrderStatus(request.getOrderCode(), response.getStatus());
-    }
     return response;
   }
 
@@ -57,16 +56,18 @@ public class PentlandOrderDetailsService implements PentlandIntegrationService<O
     }
   }
 
-  private boolean checkRequestSuccess(OrderDetailsResponse response) {
+  private void checkRequestSuccess(OrderDetailsResponse response,Integer pageSize) {
     if (response.getEtReturn() != null && !response.getEtReturn().isEmpty()) {
       ETReturnDto etReturn = response.getEtReturn().get(0);
-      if (!etReturn.getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE)) {
-        return true;
+      if (etReturn.getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE) && pageSize==null) {
+    	  
+          throw new ResourceAccessException("ERP request failed with response: " + etReturn.getMessage());
+      }
+      else if(etReturn.getType().equals(ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE))
+      {
+    	  LOG.info("ERP request failed with response: " + etReturn.getMessage());
       }
     }
-    LOG.warn("ERP request failed with response: " + response.getCode() != null ? response.getCode()
-    		: "nullResponse");
-	return false;
   }
 
   private void storeOrderDetailsInSession(OrderDetailsResponse response) {

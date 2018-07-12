@@ -20,7 +20,7 @@ public interface PentlandOrderFacade extends OrderFacade {
 
   SearchPageData<OrderHistoryData> getPagedB2BOrderHistoryForStatuses(final PageableData pageableData, final OrderStatus... statuses);
 
-  OrderData requestOrderDetails(String orderCode);
+  OrderData requestOrderDetails(String orderCode,Integer pageSize);
 
   List<OrderData> getSapOrdersForOrderCode(String orderCode);
   
