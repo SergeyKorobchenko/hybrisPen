@@ -321,11 +321,9 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			for (OrderHistoryData orderHistoryData : searchPageData.getResults())
 			{
-				OrderData requestOrderDetails = orderFacade.requestOrderDetails(orderHistoryData.getCode());
-				if (requestOrderDetails != null) {
+				OrderData requestOrderDetails = orderFacade.requestOrderDetails(orderHistoryData.getCode(),page);
 					OrderStatus status = OrderStatus.valueOf(requestOrderDetails.getStatusDisplay());
 					orderHistoryData.setStatus(status);
-				}
 			}
 		}
 		
@@ -345,7 +343,8 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		try
 		{
-			final OrderData orderDetails = orderFacade.requestOrderDetails(orderCode);
+			Integer pageSize = null;
+			final OrderData orderDetails = orderFacade.requestOrderDetails(orderCode,pageSize);
 			
 			if (orderDetails.getEntries() != null && !orderDetails.getEntries().isEmpty())
 			{
@@ -391,8 +390,8 @@ public class AccountPageController extends AbstractSearchPageController
 			@RequestParam("productCode") final String productCode, final Model model)
 	{
 		//final OrderData orderData = orderFacade.getOrderDetailsForCodeWithoutUser(orderCode);
-		
-		final OrderData orderData = orderFacade.requestOrderDetails(orderCode);
+		Integer pageSize = null;
+		final OrderData orderData = orderFacade.requestOrderDetails(orderCode,pageSize);
 
 		final Map<String, ReadOnlyOrderGridData> readOnlyMultiDMap = orderGridFormFacade.getReadOnlyOrderGridForProductInOrder(
 				productCode, Arrays.asList(ProductOption.BASIC, ProductOption.CATEGORIES), orderData);

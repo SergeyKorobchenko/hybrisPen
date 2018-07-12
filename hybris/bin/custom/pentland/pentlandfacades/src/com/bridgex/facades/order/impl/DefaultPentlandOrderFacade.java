@@ -12,10 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.bridgex.core.customer.PentlandCustomerAccountService;
-import com.bridgex.core.integration.PentlandIntegrationService;
-import com.bridgex.core.order.PentlandCartService;
+import com.bridgex.core.integration.PentlandOrderDetailsIntegrationService;
 import com.bridgex.facades.order.PentlandOrderFacade;
-import com.bridgex.integration.constants.ErpintegrationConstants;
 import com.bridgex.integration.domain.OrderDetailsDto;
 import com.bridgex.integration.domain.OrderDetailsResponse;
 import de.hybris.platform.commercefacades.order.data.OrderData;
@@ -27,7 +25,6 @@ import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.enums.ExportStatus;
 import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
@@ -40,11 +37,10 @@ import de.hybris.platform.store.BaseStoreModel;
 public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements PentlandOrderFacade {
 
   private static final Logger LOG = Logger.getLogger(DefaultPentlandOrderFacade.class);
-  private static final String ORDER_ERROR_TYPE=ErpintegrationConstants.RESPONSE.ET_RETURN.ERROR_TYPE;
 
   private PentlandCustomerAccountService pentlandCustomerAccountService;
 
-  private PentlandIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
+  private PentlandOrderDetailsIntegrationService<OrderDetailsDto,OrderDetailsResponse> orderDetailsService;
 
   private Converter<OrderDetailsResponse,OrderData> orderDetailsConverter;
   
@@ -63,14 +59,13 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
 
   
 @Override
-	public OrderData requestOrderDetails(String code) {
+	public OrderData requestOrderDetails(String code,Integer pageSize) {
 
-		OrderDetailsResponse response = orderDetailsService.requestData(createRequestDto(code));
-		OrderData order = null;
-		if(!response.getEtReturn().isEmpty() && !response.getEtReturn().get(0).getType().equals(ORDER_ERROR_TYPE))
-		{
+		OrderDetailsResponse response = orderDetailsService.requestDataForOrderDetails(createRequestDto(code),pageSize);
+	
 		final BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
 		OrderModel orderForCode = getCustomerAccountService().getOrderForCode(code, baseStoreModel);
+		OrderData order;
 		if (orderForCode.getSourceOrder() != null) {
 			OrderData orderData = getOrderConverter().convert(orderForCode.getSourceOrder());
 			List<OrderEntryData> spliptEntriesBySapOrders = spliptEntriesBySapOrders(response,orderData);
@@ -78,7 +73,6 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
 			order.setEntries(spliptEntriesBySapOrders);
 		} else {
 			order = orderDetailsConverter.convert(response);
-		}
 		}
 		return order;
 	}
@@ -130,7 +124,7 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
     this.pentlandCustomerAccountService = pentlandCustomerAccountService;
   }
 
-  public void setOrderDetailsService(PentlandIntegrationService<OrderDetailsDto, OrderDetailsResponse> orderDetailsService) {
+  public void setOrderDetailsService(PentlandOrderDetailsIntegrationService<OrderDetailsDto, OrderDetailsResponse> orderDetailsService) {
     this.orderDetailsService = orderDetailsService;
   }
 
