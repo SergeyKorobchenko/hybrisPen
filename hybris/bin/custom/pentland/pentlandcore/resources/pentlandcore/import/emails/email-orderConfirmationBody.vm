@@ -158,7 +158,7 @@
 												#if (!$entry1.product.baseOptions.isEmpty())
 													#foreach ($option in $entry1.product.baseOptions)
 														#if (!$option.selected.isEmpty && ($option.selected.url == $entry1.product.url))
-															<table width="100%" cellpadding="0" cellspacing="0" style="padding-left:10px;padding-right:10px;">
+															<table width="100%" cellpadding="0" cellspacing="0" style="padding-right:20px;">
 																#foreach ($selectedOption in $option.selected.variantOptionQualifiers)
 																  <td valign="top" style="float:left;padding-right:10px;"><p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">$selectedOption.name : &nbsp; $selectedOption.value </font></p></td>
 																#end
