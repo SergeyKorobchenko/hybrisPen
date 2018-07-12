@@ -14,7 +14,7 @@
 $productCatalog=endurasportProductCatalog
 $contentCatalog=endurasportContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$defaultLanguage=en
+$defaultLanguage=en_GB
 $storeUid=endurasport_uk
 $siteUid=endurasport
 $webServiceSiteUid=$siteUidWS
@@ -22,7 +22,6 @@ $siteMapLangCur=enGbp,enUsd,enEur
 $defaultCurrency=GBP
 $siteMapUrlLimitPerFile=50000
 $siteMapPage=Homepage,Product,CategoryLanding,Category,Store,Content,Custom
-$customSiteMapUrls=
 
 # Import config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
@@ -37,7 +36,7 @@ $storefrontContextRoot=$config-storefrontContextRoot
 INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=pentlandPromoGrp];enableRegistration
 ;$siteUid;lambda;B2C;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^.*pentlandb2cstorefront.*$,(?i)^https?://checkout.endurasport.com.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;;;false
 
-INSERT_UPDATE StoresForCMSSite;source(uid);target(uid)
+INSERT_UPDATE StoresForCMSSite;source(uid)[unique=true];target(uid)[unique=true]
 ;$siteUid;$storeUid
 
 # Cart Cleanup CronJobs

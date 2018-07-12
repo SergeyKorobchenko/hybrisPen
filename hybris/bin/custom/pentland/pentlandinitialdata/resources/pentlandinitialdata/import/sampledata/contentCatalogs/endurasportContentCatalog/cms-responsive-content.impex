@@ -14,14 +14,14 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 $productCatalog=endurasportProductCatalog
 $productCatalogName=endurasport Product Catalog
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$siteResource=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/endurasportstore/import/sampledata/contentCatalogs/$contentCatalog
+$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $medias=medias(code, $contentCV);
 $mediaContainer=media(qualifier, $contentCV);
 $product=product(code, $productCV)
 $category=category(code, $productCV)
-$jarResourceCms=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/cockpits/cmscockpit
+$jarResourceCms=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/cockpits/cmscockpit
 $media=media(code, $contentCV);
-$productResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/productCatalogs/$productCatalog
+$productResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/productCatalogs/$productCatalog
 
 
 # CMS Site Settings
@@ -153,7 +153,7 @@ INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&
 
 # CMS Language and Currency Component
 INSERT_UPDATE LanguageCurrencyComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
+#;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
 
 INSERT_UPDATE ProductRefinementComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;RefinementFacetComponent;Product Refinement Facet Component;RefinementFacetComponent

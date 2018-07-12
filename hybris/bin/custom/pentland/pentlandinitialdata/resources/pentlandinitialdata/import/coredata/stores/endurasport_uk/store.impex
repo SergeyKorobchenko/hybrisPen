@@ -14,20 +14,19 @@
 
 $productCatalog=endurasportProductCatalog
 $classificationCatalog=endurasportClassificationCatalog
-$currencies=USD
+$currencies=GBP,EUR
 $net=true
 $storeUid=endurasport_uk
 $defaultCurrency=GBP
-$languages=en
-$defaultLanguage=en
-$orderProcessCode=order-process
+$languages=en_GB
+$defaultLanguage=en_GB
+$orderProcessCode=b2c-order-process
 $pickupInStoreMode=DISABLED
 $customerAllowedToIgnoreSuggestions=true
 $paymentProvider=Worldpay
 $expressCheckoutEnabled=false
-$checkoutGroup=b2cCheckoutGroup
-$returnProcessCode=return-process
-$deliveryCountries=UK
+$returnProcessCode=b2c-return-process
+$deliveryCountries=GB
 
 INSERT_UPDATE PromotionGroup;Identifier[unique=true];
 ;endurasportPromoGrp;
@@ -38,8 +37,6 @@ INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;de
 
 
 INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
-;$storeUid;premium-gross
-;$storeUid;standard-gross
 ;$storeUid;premium-net
 ;$storeUid;standard-net
 

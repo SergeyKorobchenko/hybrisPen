@@ -21,13 +21,13 @@ $page=page(uid, $contentCV);
 $contentPage=contentPage(uid, $contentCV);
 $product=product(code, $productCV)
 $category=category(code, $productCV)
-$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/contentCatalogs/$contentCatalog
-$productResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/productCatalogs/$productCatalog
-$jarResourceCms=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/cockpits/cmscockpit
+$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/cockpits/cmscockpit
 
 # CMS Site Settings
 UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);defaultPreviewProduct(code, $productCV)
-;endurasport;575;2053367
+#;endurasport;575;2053367
 
 # Site Logo
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
@@ -39,7 +39,7 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;SiteLogoComponent;Site Logo Component;SiteLogoComponent;"/"
 
 # CMS Link Components
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];;;
 ;;HomepageNavLink;Home Page Nav Link;/;HomepageNavLink;HomepageNavLink;;;;
 ;;StoreFinderLink;Store Finder Link;/store-finder;StoreFinderLink;StoreFinderLink;;;;
 ;;LoginLink;Login Link;/login;LoginLink;LoginLink;;;;
@@ -198,7 +198,7 @@ INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&
 
 # CMS Language and Currency Component
 INSERT_UPDATE LanguageCurrencyComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
+#;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
 
 INSERT_UPDATE ProductRefinementComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;RefinementFacetComponent;Product Refinement Facet Component;RefinementFacetComponent

@@ -13,8 +13,8 @@
 #
 
 # Language
-$lang=en
+$lang=en_US
 
 # Create CMS Site
 UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
-;endurasport;"EnduraSport Site";en_US
+;endurasport;"EnduraSport US Site";en_US

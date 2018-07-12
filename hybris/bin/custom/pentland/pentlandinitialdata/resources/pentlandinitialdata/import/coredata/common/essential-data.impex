@@ -31,7 +31,8 @@ INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[de
 ;en;;;
 ;de;en;
 ;fr;en;
-
+;en_US;en;
+;en_GB;en;
 
 # Currencies
 INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol
@@ -70,6 +71,7 @@ if (warehouse != null)
     line.clear();
 }"
 ;default;Default Warehouse;
+;endurasport;EnduraSport Warehouse;
 
 
 # Disable preview for email pages

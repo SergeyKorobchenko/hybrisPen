@@ -23,7 +23,7 @@ $searchIndexNamePrefix=endurasport
 $solrIndexedType=endurasportProductType
 $indexBaseSite=endurasport
 $indexLanguages=en
-$indexCurrencies=USD,GBP
+$indexCurrencies=GBP,EUR
 $backofficeSFCName=Solr Config for Backoffice;
 
 INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster

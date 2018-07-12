@@ -14,8 +14,8 @@ $contentCatalog=endurasportContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $picture=media(code, $contentCV);
 $wideContent=CMSImageComponent,BannerComponent
-$jarResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import
-$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/contentCatalogs/$contentCatalog
+$jarResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import
+$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 
 # Language
 $lang=en

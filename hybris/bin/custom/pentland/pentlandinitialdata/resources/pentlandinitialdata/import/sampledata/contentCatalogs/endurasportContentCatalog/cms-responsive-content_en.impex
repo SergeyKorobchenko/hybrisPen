@@ -15,7 +15,7 @@ $productCatalog=endurasportProductCatalog
 $productCatalogName=endurasport Product Catalog
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $picture=media(code, $contentCV);
-$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/endurasportstore/import/sampledata/contentCatalogs/$contentCatalog
+$siteResource=jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $medias=medias(code, $contentCV);
 $lang=en
 $mediaContainer=media(qualifier, $contentCV)[lang=$lang];

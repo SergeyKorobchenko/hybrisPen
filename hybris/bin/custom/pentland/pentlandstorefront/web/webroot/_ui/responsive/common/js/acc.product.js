@@ -147,7 +147,7 @@ ACC.product = {
                 productsOnPage.push(product);
             });
             var $form = $("#export-images");
-           //	 $form.find("input[name='content']").val(productsOnPage);
+            //$form.find("input[name='content']").val(productsOnPage);
             $form.submit();
         });
     }
