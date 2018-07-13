@@ -12,22 +12,31 @@ package com.bridgex.facades.populators;
 
 import de.hybris.platform.commercefacades.product.ImageFormatMapping;
 import de.hybris.platform.commercefacades.product.converters.populator.VariantOptionDataPopulator;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.VariantOptionData;
 import de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData;
 import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaFormatModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.type.ComposedTypeModel;
+import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.media.MediaContainerService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.type.TypeService;
+import de.hybris.platform.variants.model.VariantAttributeDescriptorModel;
 import de.hybris.platform.variants.model.VariantProductModel;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
 
 /**
@@ -45,7 +54,60 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 	@Override
 	public void populate(final VariantProductModel source, final VariantOptionData target)
 	{
-		super.populate(source, target);
+		//super.populate(source, target);
+		Assert.notNull(source, "Parameter source cannot be null.");
+		Assert.notNull(target, "Parameter target cannot be null.");
+
+		if (source.getBaseProduct() != null)
+		{
+			final List<VariantAttributeDescriptorModel> descriptorModels = getVariantsService()
+					.getVariantAttributesForVariantType(source.getBaseProduct().getVariantType());
+
+			final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<VariantOptionQualifierData>();
+			for (final VariantAttributeDescriptorModel descriptorModel : descriptorModels)
+			{
+				// Create the variant qualifier
+				final VariantOptionQualifierData variantOptionQualifier = new VariantOptionQualifierData();
+				final String qualifier = descriptorModel.getQualifier();
+				variantOptionQualifier.setQualifier(qualifier);
+				variantOptionQualifier.setName(descriptorModel.getName());
+				// Lookup the value
+				
+				final Object variantAttributeValue = lookupVariantAttributeName(source, qualifier);
+				variantOptionQualifier.setValue(variantAttributeValue == null ? "" : variantAttributeValue.toString());
+				
+
+				// Add to list of variants
+				variantOptionQualifiers.add(variantOptionQualifier);
+			}
+			target.setVariantOptionQualifiers(variantOptionQualifiers);
+			target.setCode(source.getCode());
+			if(CollectionUtils.isNotEmpty(source.getSupercategories()))
+			{
+			target.setUrl(getProductModelUrlResolver().resolve(source));
+			}
+			target.setStock(getStockConverter().convert(source));
+
+			final PriceDataType priceType;
+			final PriceInformation info;
+			if (CollectionUtils.isEmpty(source.getVariants()))
+			{
+				priceType = PriceDataType.BUY;
+				info = getCommercePriceService().getWebPriceForProduct(source);
+			}
+			else
+			{
+				priceType = PriceDataType.FROM;
+				info = getCommercePriceService().getFromPriceForProduct(source);
+			}
+
+			if (info != null)
+			{
+				final PriceData priceData = getPriceDataFactory().create(priceType,
+						BigDecimal.valueOf(info.getPriceValue().getValue()), info.getPriceValue().getCurrencyIso());
+				target.setPriceData(priceData);
+			}
+		}
 		
 		if(CollectionUtils.isNotEmpty(source.getSupercategories()))
 		  {

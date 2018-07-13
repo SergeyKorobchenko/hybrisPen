@@ -61,6 +61,7 @@
                                 <c:set var="imageData" value="${variantOptionQualifier.image}"/>
                             </c:if>
                         </c:forEach>
+                        <c:if test="${not empty variantStyle.url}">
                         <li <c:if test="${variantStyle.url eq currentStyleUrl}"> class="active"</c:if>>
                             <c:if test="${variantStyle.url eq currentStyleUrl}">
                                 <div id="currentStyleValue" data-style-value="${styleValue}"></div>
@@ -75,6 +76,7 @@
                                 </c:if>
                             </a>
                         </li>
+                        </c:if>
                     </c:forEach>
                 </ul>
             </div>

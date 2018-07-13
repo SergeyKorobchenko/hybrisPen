@@ -10,6 +10,39 @@
  */
 package com.bridgex.storefront.controllers.pages;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
+import com.bridgex.core.model.ApparelStyleVariantProductModel;
+import com.bridgex.facades.product.PentlandProductFacade;
+import com.bridgex.facades.utils.ProductUtils;
+import com.bridgex.storefront.controllers.ControllerConstants;
+import com.google.common.collect.Maps;
+
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -35,32 +68,6 @@ import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
-import com.bridgex.facades.product.PentlandProductFacade;
-import com.bridgex.facades.utils.ProductUtils;
-import com.bridgex.storefront.controllers.ControllerConstants;
-
-import java.io.UnsupportedEncodingException;
-import java.util.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.common.collect.Maps;
-
 
 /**
  * Controller for product details page
@@ -82,6 +89,7 @@ public class ProductPageController extends AbstractPageController
 	private static final String FUTURE_STOCK_ENABLED = "storefront.products.futurestock.enabled";
 	private static final String STOCK_SERVICE_UNAVAILABLE = "basket.page.viewFuture.unavailable";
 	private static final String NOT_MULTISKU_ITEM_ERROR = "basket.page.viewFuture.not.multisku";
+	private static final String PAGE_NOT_FOUND = "storefront.product.page.notfound";
 
 	@Resource(name = "productDataUrlResolver")
 	private UrlResolver<ProductData> productDataUrlResolver;
@@ -112,11 +120,18 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
+		ProductModel productModel = productService.getProductForCode(productCode);
+		ProductModel baseProductModel = getBaseProductModel(productModel);
+		 if(CollectionUtils.isEmpty(baseProductModel.getSupercategories()))
+		 {
+			request.setAttribute("message", PAGE_NOT_FOUND);
+			return FORWARD_PREFIX + "/404";
+		 }
 		final Optional<String> sizeUrl = productFacade.getSizeUrlForProduct(productCode);
 		if (sizeUrl.isPresent()) {
 			return REDIRECT_PREFIX + sizeUrl.get();
 		}
-
+		
 		final List<ProductOption> extraOptions = null;
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
@@ -139,6 +154,16 @@ public class ProductPageController extends AbstractPageController
 		setUpMetaData(model, metaKeywords, metaDescription);
 		return getViewForPage(model);
 	}
+	
+	 public ProductModel getBaseProductModel(final ProductModel model)
+	  {
+	    if (model instanceof ApparelSizeVariantProductModel) {
+	      return ((ApparelSizeVariantProductModel) model).getBaseProduct();
+	    }else{
+	      return model;
+	    }
+	  }
+
 
 	//@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/orderForm", method = RequestMethod.GET)
 	public String productOrderForm(@PathVariable("productCode") final String productCode, final Model model,

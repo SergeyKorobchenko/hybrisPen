@@ -1068,6 +1068,7 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;quote.cart.comments;Basket Comments
 ;quote.cart.empty.error;Missing or empty basket
 ;quote.cart.insufficient.access.rights.error;Insufficient access rights for basket {0}.
+;quote.reject.check.quantity;If the products do not have a quantity added, these will not be included in your query.
 ;quote.cart.title;This basket is being order queried
 ;quote.comment.invalid;Comment cannot be more than 255 characters
 ;quote.create;Request an order query
@@ -3090,4 +3091,4 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;breadcrumb.register.access.success;Request Success
 ;register.access.dublicate.mail;Already request registered with "{0}" mail id 
 ;register.access.link;Request For Access
-
+;storefront.product.page.notfound;404 Page Not Found
