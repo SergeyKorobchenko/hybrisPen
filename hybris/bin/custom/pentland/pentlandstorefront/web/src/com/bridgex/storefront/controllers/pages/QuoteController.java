@@ -40,6 +40,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.bridgex.facades.cart.cancel.quote.ICancelOrderQuoteFacade;
+import com.bridgex.facades.order.PentlandAcceleratorCheckoutFacade;
 import com.bridgex.facades.order.PentlandCartFacade;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -69,14 +70,22 @@ import de.hybris.platform.commercefacades.voucher.data.VoucherData;
 import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
 import de.hybris.platform.commerceservices.enums.QuoteAction;
 import de.hybris.platform.commerceservices.order.CommerceQuoteAssignmentException;
+import de.hybris.platform.commerceservices.order.CommerceQuoteService;
 import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteStateException;
 import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteSubmitException;
 import de.hybris.platform.commerceservices.order.exceptions.QuoteUnderThresholdException;
+import de.hybris.platform.commerceservices.order.strategies.QuoteUserIdentificationStrategy;
+import de.hybris.platform.core.model.order.QuoteModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.order.CartService;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.ModelSavingException;
 import de.hybris.platform.servicelayer.exceptions.SystemException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.internal.model.impl.ItemModelCloneCreator.CannotCloneException;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.store.services.BaseStoreService;
 
 
 /**
@@ -111,6 +120,7 @@ public class QuoteController extends AbstractCartPageController
 	private static final String QUOTE_SUBMIT_SUCCESS = "quote.submit.success";
 	private static final String QUOTE_REJECT_INITIATION_REQUEST = "quote.reject.initiate.request";
 	private static final String QUOTE_CART_INSUFFICIENT_ACCESS_RIGHTS = "quote.cart.insufficient.access.rights.error";
+	private static final String QUOTE_REJECT_QUANTITY_CHECK = "quote.reject.check.quantity";
 
 	private static final Logger LOG = Logger.getLogger(QuoteController.class);
 
@@ -137,6 +147,9 @@ public class QuoteController extends AbstractCartPageController
 	
 	@Resource(name = "pentlandCartFacade")
 	private PentlandCartFacade pentlandCartFacade;
+	
+	@Resource(name = "pentlandB2BAcceleratorCheckoutFacade")
+	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
 
 	/**
 	 * Creates a new quote based on session cart.
@@ -428,6 +441,12 @@ public class QuoteController extends AbstractCartPageController
 				{
 					return optionalUrl.get();
 				}
+			}
+			if(pentlandB2BAcceleratorCheckoutFacade.cartHasZeroQuantityBaseEntries())
+			{
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						QUOTE_REJECT_QUANTITY_CHECK);
+				return String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteCode));
 			}
 			removeCoupons(redirectModel);
 			getQuoteFacade().submitQuote(quoteCode);

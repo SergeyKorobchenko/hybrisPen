@@ -67,7 +67,7 @@ public class DefaultPentlandOrderExportService implements PentlandOrderExportSer
   }
 
   private OrderExportDto createOrderExportRequest(OrderModel orderModel) {
-    B2BUnitModel unit = orderModel.getUnit();
+	B2BUnitModel unit = orderModel.getUnit()!=null?orderModel.getUnit():pentlandB2BUnitService.getParent((B2BCustomerModel) orderModel.getUser());
     AddressModel deliveryAddressModel = orderModel.getDeliveryAddress();
     OrderExportDto request = new OrderExportDto();
 
