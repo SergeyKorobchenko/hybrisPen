@@ -34,20 +34,20 @@
                 </c:if>
             </h1>
         </div>
-        <div class="col-xs-12 col-sm-7">
+        <div class="col-xs-12 col-sm-5" style="float: right;">
             <c:if test="${not empty savedCartCount and savedCartCount ne 0}">
                 <spring:url value="/my-account/saved-carts" var="listSavedCartUrl" htmlEscape="false"/>
-                <a href="${listSavedCartUrl}" class="save__cart--link cart__head--link">
+                <a href="${listSavedCartUrl}" class="save__quote--link cart__head--link">
                     <spring:theme code="saved.cart.total.number" arguments="${savedCartCount}"/>
                 </a>
             </c:if>
             <c:if test="${not empty quoteCount and quoteCount ne 0}">
                 <spring:url value="/my-account/my-quotes" var="listQuotesUrl" htmlEscape="false"/>
-                    <a href="${listQuotesUrl}" class="cart__quotes--link cart__head--link">
+                    <a href="${listQuotesUrl}" class="cart__quote--link cart__head--link">
                         <span class="glyphicon glyphicon-flash"></span><spring:theme code="saved.quote.total.number" arguments="${quoteCount}"/>
                     </a>
             </c:if>
-            <a href="${newCartUrl}" class="new__cart--link cart__head--link">
+            <a href="${newCartUrl}" class="new__quote--link cart__head--link">
                 <span class="glyphicon glyphicon-floppy-disk"></span><spring:theme code="quote.edit.done" />
             </a>
         </div>
