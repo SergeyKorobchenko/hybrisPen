@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:file="http://www.springframework.org/schema/integration/file"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <bean id="endurasportFileOrderComparator" class="de.hybris.platform.acceleratorservices.dataimport.batch.FileOrderComparator">
+        <property name="prefixPriority">
+            <map>
+                <!-- default priority is 0; -->
+                <entry key="product" value="1" />
+                <entry key="stock" value="2" />
+                <entry key="price" value="2" />
+            </map>
+        </property>
+    </bean>
+    <!-- product import -->
+    <bean id="endurasportImpexProductHeader" class="java.lang.String">
+        <constructor-arg>
+            <!--to import both into Online and Staged - specify two impex headers in the value -->
+            <value># ImpEx for importing data into $CATALOG$
+                #% impex.enableCodeExecution(true)
+                #% impex.setLocale(Locale.ENGLISH);
+                $catalog=$CATALOG$
+                $catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
+                $baseProduct=baseProduct(code, catalogVersion(catalog(id[default=$CATALOG$]),version[default='Staged']))
+                $lang=$LANGUAGE$
+                $warehouse=endurasport
+            </value>
+        </constructor-arg>
+    </bean>
+    <bean id="baseDirectoryEndurasport" class="java.lang.String">
+        <constructor-arg value="#{baseDirectory}/${tenantId}/pentland/b2c/endurasport"/>
+    </bean>
+
+    <!-- 1) Scan for files -->
+    <file:inbound-channel-adapter id="batchFilesEndurasport" directory="#{baseDirectoryEndurasport}"
+                                  filename-regex="^(.*)-(\d+)\.csv" comparator="endurasportFileOrderComparator"
+                                  auto-startup="#{configurationService.configuration.getProperty('hotfolder.autostart')}">
+        <int:poller fixed-rate="1000"/>
+    </file:inbound-channel-adapter>
+
+    <alias name="endurasportBatchRunnerTask" alias="batchRunnerTask"/>
+    <bean id="endurasportBatchRunnerTask" class="com.bridgex.core.dataimport.batch.task.AbstractLoggingImpexRunnerTask">
+        <property name="sessionService" ref="sessionService" />
+        <property name="importService" ref="hotfolderImportService" />
+        <lookup-method name="getImportConfig" bean="importConfig" />
+    </bean>
+
+    <!-- 2) move the file to processing and create header -->
+    <int:service-activator input-channel="endurasportBatchFilesHeaderInit" output-channel="endurasportBatchFilesHeader" ref="endurasportHeaderInitTask"
+                           method="execute" />
+    <bean id="endurasportHeaderInitTask" parent="headerInitTask">
+        <property name="fallbackLanguage" value="en" />
+    </bean>
+
+    <file:outbound-gateway request-channel="batchFilesEndurasport" reply-channel="batchFilesEndurasportProc"
+                           directory="#{baseDirectoryEndurasport}/processing" delete-source-files="true"/>
+    <int:service-activator input-channel="batchFilesEndurasportProc" output-channel="endurasportBatchFilesHeaderInit" ref="endurasportHeaderSetupTask"
+                           method="execute"/>
+
+    <bean id="endurasportHeaderSetupTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+        <property name="catalog" value="endurasportProductCatalog"/>
+        <property name="net" value="true"/>
+        <property name="storeBaseDirectory" ref="baseDirectoryEndurasport"/>
+    </bean>
+
+    <!-- 3) transform csv to impex file -->
+    <int:service-activator input-channel="endurasportBatchFilesHeader" output-channel="batchFilesTran" ref="endurasportBatchTransformerTask"
+                           method="execute" />
+    <bean id="endurasportBatchTransformerTask" parent="batchTransformerTask">
+        <property name="fieldSeparator" value="," />
+    </bean>
+
+    <!-- Transformer converters mappings -->
+    <bean id="endurasportBatchBaseProductConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="product"
+          p:converter-ref="endurasportBatchBaseProductConverter"/>
+
+    <bean id="endurasportBatchStyleProductConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="product"
+          p:converter-ref="endurasportBatchStyleProductConverter"/>
+
+    <bean id="endurasportBatchSizeProductConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="product"
+          p:converter-ref="endurasportBatchSizeProductConverter"/>
+
+    <bean id="endurasportBatchProductPriceConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="price"
+          p:converter-ref="endurasportBatchProductPriceConverter"/>
+
+    <bean id="endurasportBatchProductStockConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="price"
+          p:converter-ref="endurasportBatchProductStockConverter"/>
+
+    <!-- Converters -->
+
+    <bean id="endurasportBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>#{pentlandImpexProductHeader}
+                $approved=approvalstatus(code)[default='approved']
+                INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>
+                ;{+0};{6};{11};{12};{13};{17};;$catalog:Staged;;
+                ;{+0};{6};{11};{12};{13};{17};;$catalog:Online;;
+            </value>
+        </property>
+    </bean>
+    <bean id="endurasportBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>#{pentlandImpexProductHeader}
+                $approved=approvalstatus(code)[default='approved']
+                INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>
+                ;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;
+                ;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Online;;
+            </value>
+        </property>
+    </bean>
+    <bean id="endurasportBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>#{pentlandImpexProductHeader}
+                $approved=approvalstatus(code)[default='approved']
+                INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sizeNo;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>
+                ;{+1}:$catalog:Staged;{2};{+3};{4};{9};{10};{11};{15};$catalog:Staged;;
+                ;{+1}:$catalog:Online;{2};{+3};{4};{9};{10};{11};{15};$catalog:Online;;
+            </value>
+        </property>
+    </bean>
+
+    <bean id="endurasportBatchProductPriceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>#{pentlandImpexProductHeader}
+                INSERT_UPDATE PriceRow;productId[unique = true];price;currency(isocode)[unique = true,default='GBP'];startTime[dateformat='yyyyMMdd',default='19000101'];endTime[dateformat='yyyyMMdd',default='30001231'];ug(code)[unique =true,type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unitFactor[default=1];minqtd[default=1];net[default=true];unit(code[unique = true])[cellDecorator=com.bridgex.core.impex.decorator.PriceProductUnitDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>;{+0};{+1};{2};{3};{4};{5};;;;{+0};{S}</value>
+        </property>
+    </bean>
+
+    <bean id="endurasportBatchProductStockConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+        <property name="header">
+            <value>#{endurasportImpexProductHeader}
+                # Insert stock
+                UPDATE Product;code[unique=true];@stock[translator=de.hybris.platform.acceleratorservices.dataimport.batch.stock.StockTranslator,adapter=stockImportAdapter];$catalogVersion
+            </value>
+        </property>
+        <property name="impexRow">
+            <value>
+                ;{+0};$warehouse:{1};$catalog:Staged
+            </value>
+        </property>
+    </bean>
+
+</beans>
