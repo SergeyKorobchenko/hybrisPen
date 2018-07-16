@@ -38,6 +38,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
+import com.bridgex.core.model.ApparelSizeVariantProductModel;
+import com.bridgex.core.model.ApparelStyleVariantProductModel;
+
 
 /**
  * Accelerator specific variant option data converter implementation.
@@ -82,9 +85,11 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 			}
 			target.setVariantOptionQualifiers(variantOptionQualifiers);
 			target.setCode(source.getCode());
-			if(CollectionUtils.isNotEmpty(source.getSupercategories()))
-			{
-			target.setUrl(getProductModelUrlResolver().resolve(source));
+			if (source instanceof ApparelStyleVariantProductModel
+					&& CollectionUtils.isNotEmpty(source.getSupercategories())) {
+				target.setUrl(getProductModelUrlResolver().resolve(source));
+			} else if (source instanceof ApparelSizeVariantProductModel) {
+				target.setUrl(getProductModelUrlResolver().resolve(source));
 			}
 			target.setStock(getStockConverter().convert(source));
 
@@ -109,13 +114,12 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 			}
 		}
 		
-		if(CollectionUtils.isNotEmpty(source.getSupercategories()))
-		  {
+		
 		final ComposedTypeModel productType = getTypeService().getComposedTypeForClass(source.getClass());
 		final MediaContainerModel mediaContainer = getPrimaryImageMediaContainer(source);
 
 		for (final VariantOptionQualifierData variantOptionQualifier : target.getVariantOptionQualifiers()) {
-			if (mediaContainer != null) {
+			if (mediaContainer != null && CollectionUtils.isNotEmpty(source.getSupercategories())) {
 				final MediaModel media = getMediaWithImageFormat(mediaContainer, lookupImageFormat(productType, variantOptionQualifier.getQualifier()));
 				if (media != null) {
 					variantOptionQualifier.setImage(getImageConverter().convert(media));
@@ -129,7 +133,7 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 			}
 
 		   }
-		  }
+		 
 
 	}
 
