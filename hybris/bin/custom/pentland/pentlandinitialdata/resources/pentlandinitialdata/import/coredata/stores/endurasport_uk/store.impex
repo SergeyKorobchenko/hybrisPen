@@ -12,6 +12,8 @@
 # Create the BaseStore
 #
 
+#% impex.enableCodeExecution(true);
+
 $productCatalog=endurasportProductCatalog
 $classificationCatalog=endurasportClassificationCatalog
 $currencies=GBP,EUR
@@ -27,6 +29,26 @@ $paymentProvider=Worldpay
 $expressCheckoutEnabled=false
 $returnProcessCode=b2c-return-process
 $deliveryCountries=GB
+
+INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default, forceWrite=true];default[default=true, forceWrite=true]
+"#%groovy% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
+String warehouseCode = line.get(Integer.valueOf(1));
+WarehouseModel warehouse;
+try
+{
+    warehouse = Registry.getApplicationContext().getBean(""warehouseService"").getWarehouseForCode(warehouseCode);
+}
+catch (Exception e)
+{
+    warehouse = null;
+}
+if (warehouse != null)
+{
+    line.clear();
+}"
+;$storeUid;EnduraSport UK Warehouse;
 
 INSERT_UPDATE PromotionGroup;Identifier[unique=true];
 ;endurasportPromoGrp;

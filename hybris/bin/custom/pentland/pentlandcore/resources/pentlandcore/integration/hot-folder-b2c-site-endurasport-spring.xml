@@ -27,8 +27,8 @@
         <property name="prefixPriority">
             <map>
                 <!-- default priority is 0; -->
-                <entry key="product" value="1" />
-                <entry key="stock" value="2" />
+                <entry key="product" value="0" />
+                <entry key="stock" value="1" />
                 <entry key="price" value="2" />
             </map>
         </property>
@@ -44,7 +44,7 @@
                 $catalogVersion=catalogversion(catalog(id[default=$CATALOG$]),version[default='Staged'])[unique=true]
                 $baseProduct=baseProduct(code, catalogVersion(catalog(id[default=$CATALOG$]),version[default='Staged']))
                 $lang=$LANGUAGE$
-                $warehouse=endurasport
+                $defaultUpg=endurasport
             </value>
         </constructor-arg>
     </bean>
@@ -114,62 +114,63 @@
 
     <bean id="endurasportBatchProductStockConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="price"
+          p:mapping="stock"
           p:converter-ref="endurasportBatchProductStockConverter"/>
 
     <!-- Converters -->
 
     <bean id="endurasportBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
-            <value>#{pentlandImpexProductHeader}
+            <value>#{endurasportImpexProductHeader}
                 $approved=approvalstatus(code)[default='approved']
-                INSERT_UPDATE Product;code[unique=true];sapBrand;unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];productGroup[lang=$lang];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;
+                INSERT_UPDATE Product;code[unique=true];unit(code)[default=pieces];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];varianttype(code)[default=ApparelStyleVariantProduct];$catalogVersion;$approved;
             </value>
         </property>
         <property name="impexRow">
+            <!-- 11 - code for base level, 13 - gender -->
             <value>
-                ;{+0};{6};{11};{12};{13};{17};;$catalog:Staged;;
-                ;{+0};{6};{11};{12};{13};{17};;$catalog:Online;;
+                ;{+11};;{13};;$catalog:Staged;;
+                ;{+11};;{13};;$catalog:Online;;
             </value>
         </property>
     </bean>
     <bean id="endurasportBatchStyleProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
-            <value>#{pentlandImpexProductHeader}
+            <value>#{endurasportImpexProductHeader}
                 $approved=approvalstatus(code)[default='approved']
-                INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];sapName;sapBrand;style[lang=$lang];primaryColors(code)[mode=replace,type=SwatchColorEnum,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unit(code)[default=pieces];season[lang=$lang];gender(code)[type=Gender,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];clearance;smu;productGroup[lang=$lang];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;
+                INSERT_UPDATE ApparelStyleVariantProduct;$baseProduct;code[unique=true];name[lang=$lang];description[lang=$lang];style[lang=$lang];unit(code)[default=pieces];varianttype(code)[default=ApparelSizeVariantProduct];$catalogVersion;$approved;
             </value>
         </property>
         <property name="impexRow">
             <value>
-                ;{+0}:$catalog:Staged;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Staged;;
-                ;{+0}:$catalog:Online;{+1};{5};{6};{7};{8};{11};{12};{13};{14};{16};{17};;$catalog:Online;;
+                ;{+11}:$catalog:Staged;{+17};{1};{2};{15};;;$catalog:Staged;;
+                ;{+11}:$catalog:Online;{+17};{1};{2};{15};;;$catalog:Online;;
             </value>
         </property>
     </bean>
     <bean id="endurasportBatchSizeProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
-            <value>#{pentlandImpexProductHeader}
+            <value>#{endurasportImpexProductHeader}
                 $approved=approvalstatus(code)[default='approved']
-                INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;sku;code[unique=true];upc;sizeNo;size[lang=$lang];unit(code);discontinuedStatus(code)[cellDecorator=com.bridgex.core.impex.decorator.DiscontinuedStatusCellDecorator];$catalogVersion;$approved;
+                INSERT_UPDATE ApparelSizeVariantProduct;$baseProduct;code[unique=true];size[lang=$lang];unit(code)[default=pieces];$catalogVersion;$approved;
             </value>
         </property>
         <property name="impexRow">
             <value>
-                ;{+1}:$catalog:Staged;{2};{+3};{4};{9};{10};{11};{15};$catalog:Staged;;
-                ;{+1}:$catalog:Online;{2};{+3};{4};{9};{10};{11};{15};$catalog:Online;;
+                ;{+17}:$catalog:Staged;{+0};{16};;$catalog:Staged;;
+                ;{+17}:$catalog:Online;{+0};{16};;$catalog:Online;;
             </value>
         </property>
     </bean>
 
     <bean id="endurasportBatchProductPriceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
-            <value>#{pentlandImpexProductHeader}
-                INSERT_UPDATE PriceRow;productId[unique = true];price;currency(isocode)[unique = true,default='GBP'];startTime[dateformat='yyyyMMdd',default='19000101'];endTime[dateformat='yyyyMMdd',default='30001231'];ug(code)[unique =true,type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];unitFactor[default=1];minqtd[default=1];net[default=true];unit(code[unique = true])[cellDecorator=com.bridgex.core.impex.decorator.PriceProductUnitDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+            <value>#{endurasportImpexProductHeader}
+                INSERT_UPDATE PriceRow;productId[unique = true];price;currency(isocode)[unique = true,default='GBP'];startTime[dateformat='yyyyMMdd',default='19000101'];endTime[dateformat='yyyyMMdd',default='30001231'];unitFactor[default=1];minqtd[default=1];net[default=true];unit(code[unique = true])[cellDecorator=com.bridgex.core.impex.decorator.PriceProductUnitDecorator];ug(code)[unique =true,type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
             </value>
         </property>
         <property name="impexRow">
-            <value>;{+0};{+1};{2};{3};{4};{5};;;;{+0};{S}</value>
+            <value>;{+0};{+1};{2};{3};{4};;;;{+0};$defaultUpg;{S}</value>
         </property>
     </bean>
 
@@ -182,7 +183,7 @@
         </property>
         <property name="impexRow">
             <value>
-                ;{+0};$warehouse:{1};$catalog:Staged
+                ;{+0};{2}:{1};$catalog:Staged
             </value>
         </property>
     </bean>

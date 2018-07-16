@@ -12,6 +12,8 @@
 # Create the BaseStore
 #
 
+#% impex.enableCodeExecution(true);
+
 $productCatalog=endurasportProductCatalog
 $classificationCatalog=endurasportClassificationCatalog
 $currencies=USD
@@ -28,12 +30,29 @@ $expressCheckoutEnabled=false
 $returnProcessCode=b2c-return-process
 $deliveryCountries=US
 
-INSERT_UPDATE PromotionGroup;Identifier[unique=true];
-;endurasportPromoGrp;
+INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default, forceWrite=true];default[default=true, forceWrite=true]
+"#%groovy% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
+String warehouseCode = line.get(Integer.valueOf(1));
+WarehouseModel warehouse;
+try
+{
+    warehouse = Registry.getApplicationContext().getBean(""warehouseService"").getWarehouseForCode(warehouseCode);
+}
+catch (Exception e)
+{
+    warehouse = null;
+}
+if (warehouse != null)
+{
+    line.clear();
+}"
+;$storeUid;EnduraSport US Warehouse;
 
 # Base Store
-INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);submitOrderProcessCode;paymentProvider;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;expressCheckoutEnabled;createReturnProcessCode;deliveryCountries(isocode);externalTaxEnabled
-;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;$defaultCurrency;$languages;$defaultLanguage;$orderProcessCode;$paymentProvider;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$expressCheckoutEnabled;$returnProcessCode;$deliveryCountries;true
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);submitOrderProcessCode;paymentProvider;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;expressCheckoutEnabled;createReturnProcessCode;deliveryCountries(isocode);externalTaxEnabled;warehouses(code)
+;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;$defaultCurrency;$languages;$defaultLanguage;$orderProcessCode;$paymentProvider;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$expressCheckoutEnabled;$returnProcessCode;$deliveryCountries;true;$storeUid
 
 
 INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]

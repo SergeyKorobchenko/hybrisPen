@@ -259,6 +259,15 @@
 
 
         <typegroup name="cms">
+            <itemtype code="BaseSite" autocreate="false" generate="false" >
+                <description>Pentland customization for the site object</description>
+                <attributes>
+                    <attribute qualifier="defaultUpg" type="EnumerationValue" autocreate="true">
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
             <itemtype code="PentlandCategoryNavigationComponent" autocreate="true"
                       generate="true" extends="SimpleCMSComponent"
                       jaloclass="com.bridgex.core.jalo.cms.PentlandCategoryNavigationComponent">

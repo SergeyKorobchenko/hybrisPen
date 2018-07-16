@@ -42,13 +42,7 @@ import de.hybris.platform.util.Config;
 import com.bridgex.b2cstorefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -426,7 +420,7 @@ public class ProductPageController extends AbstractPageController
 	{
 		model.addAttribute("galleryImages", getGalleryImages(productData));
 		model.addAttribute("product", productData);
-		if (productData.getConfigurable())
+		if (Optional.ofNullable(productData.getConfigurable()).orElse(Boolean.FALSE))
 		{
 			final List<ConfigurationInfoData> configurations = productFacade.getConfiguratorSettingsForCode(productData.getCode());
 			if (CollectionUtils.isNotEmpty(configurations))

@@ -32,9 +32,15 @@ $jarResource=$config-jarResource
 # Load the storefront context root config param
 $storefrontContextRoot=$config-storefrontContextRoot
 
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;endurasportPromoGrp;
+
 # CMS Site
-INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=pentlandPromoGrp];enableRegistration
-;$siteUid;lambda;B2C;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^.*pentlandb2cstorefront.*$,(?i)^https?://checkout.endurasport.com.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;;;false
+INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=endurasportPromoGrp];enableRegistration
+;$siteUid;lambda;B2C;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^.*pentlandb2cstorefront.*$,(?i)^https?://checkout.endurasport.com.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;;;true
+
+UPDATE BaseSite;uid[unique=true];defaultUpg(code)[type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];
+;$siteUid;$siteUid
 
 INSERT_UPDATE StoresForCMSSite;source(uid)[unique=true];target(uid)[unique=true]
 ;$siteUid;$storeUid

@@ -10,11 +10,6 @@
 		<property name="simpleSuggestionDao" ref="simpleSuggestionDao"/>
 	</bean>
 
-	<alias alias="commerceStockService" name="pentlandCommerceStockService"/>
-	<bean id="pentlandCommerceStockService"
-	      class="com.bridgex.core.stock.impl.PentlandCommerceStockService"
-	      parent="defaultCommerceStockService"/>
-
 	<alias alias="categoryService" name="pentlandCategoryService"/>
 	<bean id="pentlandCategoryService"
 	      class="com.bridgex.core.category.impl.DefaultPentlandCategoryService"
@@ -132,5 +127,10 @@
 
 	<alias name="pentlandAssistedServiceService" alias="assistedServiceService"/>
 	<bean id="pentlandAssistedServiceService" class="com.bridgex.core.assistedservices.impl.PentlandAssistedServiceService" parent="defaultAssistedServiceService"/>
-	
+
+	<alias name="pentlandActivateBaseSiteInSessionStrategy" alias="activateBaseSiteInSessionStrategy" />
+	<bean id="pentlandActivateBaseSiteInSessionStrategy" class="com.bridgex.core.basecommerce.strategies.impl.PentlandActivateBaseSiteInSessionStrategy" parent="baseCommerceActivateBaseSiteInSessionStrategy">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
 </beans>
