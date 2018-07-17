@@ -65,7 +65,7 @@ public abstract class AbstractWorldpayPaymentMethodCheckoutStepController extend
     @Resource
     private WorldpayHostedOrderFacade worldpayHostedOrderFacade;
 
-    @Resource
+    @Resource(name = "pentlandB2BAcceleratorCheckoutFacade")
     private PentlandAcceleratorCheckoutFacade acceleratorCheckoutFacade;
 
     @Resource

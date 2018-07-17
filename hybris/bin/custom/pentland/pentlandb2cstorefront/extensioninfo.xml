@@ -11,7 +11,9 @@
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
 	<extension abstractclassprefix="Generated" classprefix="Pentlandb2cstorefront" name="pentlandb2cstorefront" usemaven="false">		
-        <requires-extension name="acceleratorstorefrontcommons"/>
+        
+<requires-extension name="worldpayaddon"/>
+<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="pentlandfacades"/>
 
 		<webmodule jspcompile="false" webroot="/pentlandb2cstorefront"/>
