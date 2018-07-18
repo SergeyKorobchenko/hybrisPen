@@ -39,7 +39,7 @@ import static java.text.MessageFormat.format;
  * Web controller to handle HOP responses
  */
 @Controller
-@RequestMapping(value = "/checkout/multi/worldpay/hop")
+@RequestMapping(value = "/checkout/multi/worldpay/b2c/")
 public class WorldpayHopResponseController extends WorldpayChoosePaymentMethodCheckoutStepController {
 
     private static final Logger LOG = Logger.getLogger(WorldpayHopResponseController.class);
