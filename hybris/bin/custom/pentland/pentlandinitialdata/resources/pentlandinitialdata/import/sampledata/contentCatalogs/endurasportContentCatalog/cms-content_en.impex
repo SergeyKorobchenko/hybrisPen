@@ -255,3 +255,24 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 ;;EmptyCartParagraphComponent;"<h2>Your shopping cart is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>"
 ;;HelpParagraphComponent;"<strong>Need Help with your checkout process?</strong> <span>Contact Us or Call phone number.</span>"
+
+
+
+INSERT_UPDATE WorldpayAPMComponent; uid[unique = true]; $contentCV[unique = true]; $picture[lang = $lang];
+#; visaComponent      ; ; cc-icon
+#; mastercardComponent; ; cc-icon
+; payPalComponent     ; ; paypal-icon
+; boletoComponent     ; ; boleto-icon
+; postepayComponent   ; ; postepay-icon
+; poliComponent       ; ; poli-icon
+; polinzComponent     ; ; polinz-icon
+; mistercashComponent ; ; mistercash-icon
+; nordeaComponent     ; ; nordea-icon
+; idealComponent      ; ; ideal-icon
+; klarnaComponent     ; ; klarna-icon
+
+INSERT_UPDATE WorldpayCCComponent; uid[unique = true]; $contentCV[unique = true]; $picture[lang = $lang]
+;creditCardComponent;;cc-icon
+
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
+; ; WorldpayHelpParagraphComponent ; "<strong>Need help with your checkout process?</strong> <span> Contact us or Call +44 (0) 191 516 5610</span>" ;

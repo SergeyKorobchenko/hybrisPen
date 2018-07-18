@@ -1,7 +1,11 @@
 package com.worldpay.service.impl;
 
 import com.worldpay.service.WorldpayAddonEndpointService;
+
+import de.hybris.platform.acceleratorservices.config.SiteConfigService;
+import de.hybris.platform.commerceservices.enums.SiteChannel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.site.BaseSiteService;
 
 import javax.annotation.Resource;
 
@@ -26,6 +30,9 @@ public class DefaultWorldpayAddonEndpointService implements WorldpayAddonEndpoin
 
     @Resource
     private ConfigurationService configurationService;
+
+    @Resource
+    private BaseSiteService baseSiteService;
 
     @Override
     public String getCheckoutSummaryPage() {
@@ -63,7 +70,9 @@ public class DefaultWorldpayAddonEndpointService implements WorldpayAddonEndpoin
     }
 
     protected String getEndpoint(final String path) {
-        return configurationService.getConfiguration().getString(WORLDPAY_ADDON_PREFIX, UNDEFINED_PREFIX) + path;
+        SiteChannel channel = baseSiteService.getCurrentBaseSite().getChannel();
+        String prop = channel != null ? channel.getCode().toLowerCase() : "";
+        return configurationService.getConfiguration().getString(prop + "." + WORLDPAY_ADDON_PREFIX, UNDEFINED_PREFIX) + path;
     }
 
     @Override

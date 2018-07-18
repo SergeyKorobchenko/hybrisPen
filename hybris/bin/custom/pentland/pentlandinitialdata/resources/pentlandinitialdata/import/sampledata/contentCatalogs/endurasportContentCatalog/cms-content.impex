@@ -220,11 +220,9 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;SiteLogoSlot;SiteLogoComponent
 ;;HomepageNavLinkSlot;HomepageNavLink
 ;;MiniCartSlot;MiniCart
-;;NavigationBarSlot;NavBarComponent,breadcrumbComponent
 ;;TabsSlot;TabPanelContainer
 ;;FooterSlot;FooterComponent
 ;;HeaderLinksSlot;ContactInfo
-;;SearchBoxSlot;SearchBox,LangCurrencyComponent
 ;;VariantSelectorSlot;VariantSelector
 ;;AddToCartSlot;AddToCart
 ;;UpSellingSlot;Similar
@@ -292,7 +290,7 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];na
 
 # Update CMS Footer Component with Nav Nodes
 INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef)
-;;FooterComponent;AcceleratorNavNode,HybrisNavNode,FollowUsNavNode
+;;FooterComponent;
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
@@ -533,13 +531,11 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 #INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
 #;;faqMenuParagraph;FAQ Paragraph;FAQMenuParagraph;;;;
 #;;faqTextParagraph;FAQ Paragraph;FAQTextParagraph;;;;
-#
- ContentSlot
+
 #INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 #;;Section2ASlot-FAQ;Section2A Slot for FAQ Page;true;FAQMenuParagraph;;;
 #;;Section2BSlot-FAQ;Section2B Slot for FAQ Page;true;FAQTextParagraph;;;
-#
- ContentSlotForPage
+
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='faq'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;Section2A-FAQ;Section2A;;Section2ASlot-FAQ;;;
 #;;Section2B-FAQ;Section2B;;Section2BSlot-FAQ;;;
@@ -618,7 +614,7 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 #;;SideContent-Account;Side Content Slot for My Account Homepage;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-Account;Body Content Slot for My Account Homepage;true;AccountHomepageComponent;;;
 #
- ContentSlotForPage
+
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-Account;SideContent;;SideContent-Account;;;
 #;;BodyContent-Account;BodyContent;;BodyContent-Account;;;
@@ -640,7 +636,7 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 #;;SideContent-address-book;Side Content Slot for Account Address Book;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-address-book;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
 #
- ContentSlotForPage
+
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='address-book'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-address-book;SideContent;;SideContent-address-book;;;
 #;;BodyContent-address-book;BodyContent;;BodyContent-address-book;;;
@@ -764,3 +760,70 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;LeftContentSlot-checkout-login;LeftContentSlot;;LeftContentSlot-checkout-login;;;
 ;;CenterContentSlot-checkout-login;CenterContentSlot;;CenterContentSlot-checkout-login;;;
 ;;RightContentSlot-checkout-login;RightContentSlot;;RightContentSlot-checkout-login;;;
+
+
+################     worldpay
+$media = @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$siteResource = jar:com.bridgex.initialdata.constants.PentlandinitialdataConstants&/pentlandinitialdata/import/sampledata/images/apmIcons
+$picture = media(code, $contentCV);
+
+# Create medias
+INSERT_UPDATE Media; code[unique = true]; $media; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)
+                   ; alipay-icon     ; $siteResource/alipay-icon.png     ; ; ; images
+                   ; cc-icon         ; $siteResource/cc-icon.png         ; ; ; images
+                   ; cup-icon        ; $siteResource/cup-icon.png        ; ; ; images
+                   ; enets-icon      ; $siteResource/enets-icon.jpg      ; ; ; images
+                   ; paypal-icon     ; $siteResource/paypal-icon.png     ; ; ; images
+                   ; boleto-icon     ; $siteResource/boleto-icon.png     ; ; ; images
+                   ; postepay-icon   ; $siteResource/postepay-icon.png   ; ; ; images
+                   ; poli-icon       ; $siteResource/poli-icon.png       ; ; ; images
+                   ; polinz-icon     ; $siteResource/polinz-icon.png     ; ; ; images
+                   ; mistercash-icon ; $siteResource/mistercash-icon.png ; ; ; images
+                   ; nordea-icon     ; $siteResource/nordea-icon.png     ; ; ; images
+                   ; ideal-icon      ; $siteResource/ideal-icon.png      ; ; ; images
+                   ; klarna-icon     ; $siteResource/klarna-icon.png     ; ; ; images
+
+INSERT_UPDATE WorldpayCCComponent; uid[unique = true]; $contentCV[unique = true]; name;
+;creditCardComponent;;"Credit Card"
+
+INSERT_UPDATE WorldpayAPMComponent; uid[unique = true]; $contentCV[unique = true]; name; apmConfiguration(code); restrictions(uid, $contentCV)
+#; visaComponent       ; ; "Visa"       ; VISA-SSL           ; AssistedServiceSessionReversedRestriction
+#; mastercardComponent ; ; "Mastercard" ; ECMC-SSL           ; AssistedServiceSessionReversedRestriction
+; payPalComponent     ; ; "PayPal"     ; PAYPAL-EXPRESS     ; AssistedServiceSessionReversedRestriction
+; boletoComponent     ; ; "Boleto"     ; BOLETO-SSL         ; AssistedServiceSessionReversedRestriction
+; postepayComponent   ; ; "PostePay"   ; POSTEPAY-SSL       ; AssistedServiceSessionReversedRestriction
+; poliComponent       ; ; "POLi"       ; POLI-SSL           ; AssistedServiceSessionReversedRestriction
+; polinzComponent     ; ; "POLi - NZ"  ; POLINZ-SSL         ; AssistedServiceSessionReversedRestriction
+; mistercashComponent ; ; "Mistercash" ; MISTERCASH-SSL     ; AssistedServiceSessionReversedRestriction
+; nordeaComponent     ; ; "Nordea"     ; BANKLINKNORDEA-SSL ; AssistedServiceSessionReversedRestriction
+; idealComponent      ; ; "iDeal"      ; IDEAL-SSL          ; AssistedServiceSessionReversedRestriction
+; klarnaComponent     ; ; "Klarna"     ; KLARNA-SSL         ; AssistedServiceSessionReversedRestriction
+
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
+; ; WorldpayPaymentButtonsSlot ;creditCardComponent
+#boletoComponent,postepayComponent,poliComponent,polinzComponent,mistercashComponent,nordeaComponent,idealComponent,klarnaComponent
+
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]
+; ; WorldpayHelpParagraphComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; SideContent-WorldpayPaymentAndBillingCheckoutPage ; Put content here ; true ; WorldpayHelpParagraphComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique = true];uid[unique = true];position[unique = true];page(uid, $contentCV)[unique = true];contentSlot(uid, $contentCV)[unique = true]
+; ; Side-WorldpayPaymentAndBillingCheckoutPage ; SideContent ; worldpayPaymentAndBillingCheckoutPage ; SideContent-WorldpayPaymentAndBillingCheckoutPage
+
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page
+# This update modifies the existing AccountOrderDetailsShippingComponent jspInclude component (with payment details in order history) by setting a new page existing in the worldpayb2baddon
+; ; AccountOrderDetailsShippingComponent   ; Account Order Details Shipping Info Component  ; /WEB-INF/views/addons/worldpayaddon/responsive/pages/account/worldpayAccountOrderDetailShippingInfo.jsp
+; ; OrderConfirmationShippingComponent     ; Order Confirmation Shipping Info Component     ; /WEB-INF/views/addons/worldpayaddon/responsive/pages/account/worldpayAccountOrderDetailShippingInfo.jsp
+; ; OrderConfirmationThankMessageComponent ; Order Confirmation Thank You Message Component ; /WEB-INF/views/addons/worldpayaddon/responsive/pages/checkout/worldpayCheckoutConfirmationThankMessage.jsp
+# This update modifies the existing CheckoutComponent jspInclude component by setting a new page existing in the worldpayaddon
+; ; CheckoutComponent                      ; Checkout Display Component                     ; /WEB-INF/views/addons/worldpayaddon/responsive/pages/cart/checkoutDisplay.jsp
+
+
+INSERT_UPDATE AssistedServiceSessionRestriction; $contentCV[unique = true]; uid[unique = true]; name; &uid
+; ; AssistedServiceSessionRestriction ; ASM Session Restriction ; AssistedServiceSessionRestriction
+
+INSERT_UPDATE CMSInverseRestriction; $contentCV[unique = true]; name; originalRestriction(&uid); uid[unique = true];
+; ; Assisted Service Session Reversed Restriction ; AssistedServiceSessionRestriction ; AssistedServiceSessionReversedRestriction ;
