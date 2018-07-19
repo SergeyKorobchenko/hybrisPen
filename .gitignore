@@ -63,6 +63,7 @@ hybris/bin/custom/pentland/pentlandcore/src/de/*
 hybris/bin/custom/pentland/pentlandstorefront/node_modules
 hybris/bin/custom/**/web/commonwebsrc
 hybris/bin/custom/**/web/addonsrc
+hybris/bin/custom/**/web/addontestsrc
 hybris/bin/custom/**/web/webroot/_ui/addons/**
 hybris/bin/custom/**/web/webroot/cscockpit/*
 hybris/bin/custom/**/web/webroot/cmscockpit/*
@@ -94,3 +95,5 @@ hybris/bin/custom/pentland/pentlandstorefront/web/webroot/WEB-INF/_ui-src/respon
 hybris/config/solr/instances/default/hsperfdata_*/
 
 hybris/config/local.properties
+
+hybris/config/hybris4intellij\.properties

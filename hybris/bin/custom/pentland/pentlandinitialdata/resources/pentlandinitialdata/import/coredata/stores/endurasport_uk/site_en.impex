@@ -17,4 +17,4 @@ $lang=en_GB
 
 # Create CMS Site
 UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
-;endurasport;"EnduraSport UK Site";en_UK
+;endurasport;"EnduraSport UK Site";$lang
