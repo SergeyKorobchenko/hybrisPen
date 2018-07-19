@@ -30,6 +30,7 @@
                 <entry key="product" value="0" />
                 <entry key="stock" value="1" />
                 <entry key="price" value="2" />
+                <entry key="customer" value="3" />
             </map>
         </property>
     </bean>
@@ -117,6 +118,11 @@
           p:mapping="stock"
           p:converter-ref="endurasportBatchProductStockConverter"/>
 
+    <bean id="endurasportBatchB2CCustomerConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="customer"
+          p:converter-ref="endurasportBatchB2CCustomerConverter"/>
+
     <!-- Converters -->
 
     <bean id="endurasportBatchBaseProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -188,13 +194,13 @@
         </property>
     </bean>
 
-    <bean id="pentlandBatchB2BCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+    <bean id="endurasportBatchB2CCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
             <value>#{pentlandImpexProductHeader}
                 $passwordEncoding=pbkdf2
                 $defaultPassword=Pentland2018
                 $setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
-                INSERT_UPDATE Customer;uid[unique=true];email[unique=true];@b2bGroups[translator=com.bridgex.core.customer.impex.translators.B2BCustomerGroupsTranslator,default=b2bcustomergroup,collection-delimiter=|];name;groups(uid)[collection-delimiter=|];division(code);sessionCurrency(isocode)[default=GBP];$setPassword;loginDisabled[default=false];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator];sessionLanguage(isocode)[default=en];
+                INSERT_UPDATE Customer;uid[unique=true];email[unique=true];name;groups(uid)[collection-delimiter=|];sessionCurrency(isocode)[default=GBP];$setPassword;loginDisabled[default=false];
             </value>
         </property>
         <property name="impexRow">
