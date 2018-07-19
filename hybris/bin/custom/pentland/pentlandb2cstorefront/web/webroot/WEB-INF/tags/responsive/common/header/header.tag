@@ -19,7 +19,7 @@
 </c:if>
 
 <header class="js-mainHeader">
-    <nav class="navigation navigation--top hidden-xs hidden-sm">
+    <nav class="navigation navigation--top">
         <div class="row">
             <div class="col-sm-12 col-md-4">
                 <div class="nav__left js-site-logo">

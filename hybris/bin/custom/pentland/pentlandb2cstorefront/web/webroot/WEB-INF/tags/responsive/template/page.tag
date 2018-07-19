@@ -28,7 +28,7 @@
 	</jsp:attribute>
 
 	<jsp:body>
-		<div class="branding-mobile hidden-md hidden-lg">
+		<div class="branding-mobile hidden">
 			<div class="js-mobile-logo">
 				<%--populated by JS acc.navigation--%>
 			</div>
