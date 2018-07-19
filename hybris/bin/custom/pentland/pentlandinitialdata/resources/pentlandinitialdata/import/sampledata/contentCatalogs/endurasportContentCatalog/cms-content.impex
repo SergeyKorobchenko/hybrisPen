@@ -148,86 +148,87 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;ContactInfo;Contact information;ContactInfo
 
 # CMS VariantSelector Components
-INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;VariantSelector;Product Variant Selector;VariantSelector
+INSERT_UPDATE ProductVariantSelectorComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; VariantSelector ; Product Variant Selector ; VariantSelector
 
 # CMS ProductAddToCart Components
-INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
-;;AddToCart;Product Add To Cart;AddToCartAction,PickUpInStoreAction,ShareOnSocialNetworkAction;AddToCart
+INSERT_UPDATE ProductAddToCartComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(&actionRef); &componentRef
+; ; AddToCart ; Product Add To Cart ; AddToCartAction,PickUpInStoreAction,ShareOnSocialNetworkAction ; AddToCart
 
 # CMS AddToCart Action
-INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
-;;AddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;AddToCartAction
+INSERT_UPDATE AddToCartAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; AddToCartAction ; /cart/add ; Product Add To Cart Action ; ActionRestriction ; AddToCartAction
 
-INSERT_UPDATE ListAddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
-;;ListAddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;ListAddToCartAction
+INSERT_UPDATE ListAddToCartAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ListAddToCartAction ; /cart/add ; Product Add To Cart Action ; ActionRestriction ; ListAddToCartAction
 
-INSERT_UPDATE ListPickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
-;;ListPickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Pickup in Store Action;ActionRestriction;ListPickUpInStoreAction
+INSERT_UPDATE ListPickUpInStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ListPickUpInStoreAction ; /store-pickup/{productCode}/pointOfServices ; Pickup in Store Action ; ActionRestriction ; ListPickUpInStoreAction
 
 # CMS PickUpInStoreAction Action
-INSERT_UPDATE PickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
-;;PickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Pickup in Store Action;ActionRestriction;PickUpInStoreAction
+INSERT_UPDATE PickUpInStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; PickUpInStoreAction ; /store-pickup/{productCode}/pointOfServices ; Pickup in Store Action ; ActionRestriction ; PickUpInStoreAction
 
 # CMS ShareOnSocialNetwork Action
-INSERT_UPDATE ShareOnSocialNetworkAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
-;;ShareOnSocialNetworkAction;/;Share On Social Network Action;ActionRestriction;ShareOnSocialNetworkAction
+INSERT_UPDATE ShareOnSocialNetworkAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+; ; ShareOnSocialNetworkAction ; / ; Share On Social Network Action ; ActionRestriction ; ShareOnSocialNetworkAction
 
 # CMS Action Restrictions
-INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name;
-;;ActionRestriction;A CMSAction restriction;
+INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name;
+; ; ActionRestriction ; A CMSAction restriction ;
 
 # CMS ProductReferences Components
-INSERT_UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;&componentRef
-;;accessories;Accessories;ACCESSORIES;5;accessories
-;;CrossSelling;Cross Selling;CROSSELLING;5;CrossSelling
-;;Others;Others;OTHERS;5;Others
-;;Similar;Similar;SIMILAR;5;Similar
+INSERT_UPDATE ProductReferencesComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; &componentRef
+; ; accessories  ; Accessories   ; ACCESSORIES ; 5 ; accessories
+; ; CrossSelling ; Cross Selling ; CROSSELLING ; 5 ; CrossSelling
+; ; Others       ; Others        ; OTHERS      ; 5 ; Others
+; ; Similar      ; Similar       ; SIMILAR     ; 5 ; Similar
 
 # CMS PurchasedCategorySuggestion Components
-INSERT_UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;category(code, $productCV);&componentRef
+INSERT_UPDATE PurchasedCategorySuggestionComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; filterPurchased; category(code, $productCV); &componentRef
 #;;PurchasedCategorySuggestions;Purchased Category Suggestions;OTHERS;10;true;578;PurchasedCategorySuggestions
 
 # CMS CartSuggestion Components
-INSERT_UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;&componentRef
-;;CartSuggestions;Cart Suggestions;ACCESSORIES,SIMILAR;20;true;CartSuggestions
+INSERT_UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; filterPurchased; &componentRef
+; ; CartSuggestions ; Cart Suggestions ; ACCESSORIES,SIMILAR ; 20 ; true ; CartSuggestions
 
 # CMS SearchBox Components
-INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;SearchBox;Search Box;SearchBox
+INSERT_UPDATE SearchBoxComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; SearchBox ; Search Box ; SearchBox
 
 # CMS Language and Currency Component
-INSERT_UPDATE LanguageCurrencyComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+INSERT_UPDATE LanguageCurrencyComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 #;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
 
-INSERT_UPDATE ProductRefinementComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;RefinementFacetComponent;Product Refinement Facet Component;RefinementFacetComponent
+INSERT_UPDATE ProductRefinementComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; RefinementFacetComponent ; Product Refinement Facet Component ; RefinementFacetComponent
 
-INSERT_UPDATE CMSProductListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
-;;ProductListComponent;Product List Component;ListPickUpInStoreAction,ListAddToCartAction;ProductListComponent
+INSERT_UPDATE CMSProductListComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; ProductListComponent ; Product List Component ; ListPickUpInStoreAction,ListAddToCartAction ; ProductListComponent
 
-INSERT_UPDATE ProductGridComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
-;;ProductGridComponent;Product Grid Component;ListPickUpInStoreAction,ListAddToCartAction;ProductGridComponent
+INSERT_UPDATE ProductGridComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; ProductGridComponent ; Product Grid Component ; ListPickUpInStoreAction,ListAddToCartAction ; ProductGridComponent
 
-INSERT_UPDATE SearchResultsListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
-;;SearchResultsList;Search Result List Component;ListPickUpInStoreAction,ListAddToCartAction;SearchResultsList
+INSERT_UPDATE SearchResultsListComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; SearchResultsList ; Search Result List Component ; ListPickUpInStoreAction,ListAddToCartAction ; SearchResultsList
 
-INSERT_UPDATE SearchResultsGridComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
-;;SearchResultsGrid;Search Result Grid Component;ListPickUpInStoreAction,ListAddToCartAction;SearchResultsGrid
+INSERT_UPDATE SearchResultsGridComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
+; ; SearchResultsGrid ; Search Result Grid Component ; ListPickUpInStoreAction,ListAddToCartAction ; SearchResultsGrid
 
 # Content Slots
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;SiteLogoSlot;SiteLogoComponent
-;;HomepageNavLinkSlot;HomepageNavLink
-;;MiniCartSlot;MiniCart
-;;TabsSlot;TabPanelContainer
-;;FooterSlot;FooterComponent
-;;HeaderLinksSlot;ContactInfo
-;;VariantSelectorSlot;VariantSelector
-;;AddToCartSlot;AddToCart
-;;UpSellingSlot;Similar
-;;CrossSellingSlot;accessories
-;;ProductLeftRefinements;RefinementFacetComponent
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; SiteLogoSlot           ; SiteLogoComponent
+; ; HomepageNavLinkSlot    ; HomepageNavLink
+; ; MiniCartSlot           ; MiniCart
+; ; NavigationBarSlot      ; NavBarComponent,breadcrumbComponent
+; ; TabsSlot               ; TabPanelContainer
+; ; HeaderLinksSlot        ; ContactInfo
+; ; SearchBoxSlot          ; SearchBox,LangCurrencyComponent
+; ; VariantSelectorSlot    ; VariantSelector
+; ; AddToCartSlot          ; AddToCart
+; ; UpSellingSlot          ; Similar
+; ; CrossSellingSlot       ; accessories
+; ; ProductLeftRefinements ; RefinementFacetComponent
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
 #;;CamerasPagePreview;text/png;CamerasPage.png;$jarResourceCms/preview-images/endurasport/CamerasPage.png
@@ -290,7 +291,7 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];na
 
 # Update CMS Footer Component with Nav Nodes
 INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef)
-;;FooterComponent;
+;;FooterComponent;AcceleratorNavNode,HybrisNavNode,FollowUsNavNode
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
@@ -531,11 +532,13 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 #INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
 #;;faqMenuParagraph;FAQ Paragraph;FAQMenuParagraph;;;;
 #;;faqTextParagraph;FAQ Paragraph;FAQTextParagraph;;;;
-
+#
+ ContentSlot
 #INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 #;;Section2ASlot-FAQ;Section2A Slot for FAQ Page;true;FAQMenuParagraph;;;
 #;;Section2BSlot-FAQ;Section2B Slot for FAQ Page;true;FAQTextParagraph;;;
-
+#
+ ContentSlotForPage
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='faq'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;Section2A-FAQ;Section2A;;Section2ASlot-FAQ;;;
 #;;Section2B-FAQ;Section2B;;Section2BSlot-FAQ;;;
@@ -614,7 +617,7 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 #;;SideContent-Account;Side Content Slot for My Account Homepage;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-Account;Body Content Slot for My Account Homepage;true;AccountHomepageComponent;;;
 #
-
+ ContentSlotForPage
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-Account;SideContent;;SideContent-Account;;;
 #;;BodyContent-Account;BodyContent;;BodyContent-Account;;;
@@ -636,7 +639,7 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 #;;SideContent-address-book;Side Content Slot for Account Address Book;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-address-book;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
 #
-
+ ContentSlotForPage
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='address-book'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-address-book;SideContent;;SideContent-address-book;;;
 #;;BodyContent-address-book;BodyContent;;BodyContent-address-book;;;
@@ -827,3 +830,70 @@ INSERT_UPDATE AssistedServiceSessionRestriction; $contentCV[unique = true]; uid[
 
 INSERT_UPDATE CMSInverseRestriction; $contentCV[unique = true]; name; originalRestriction(&uid); uid[unique = true];
 ; ; Assisted Service Session Reversed Restriction ; AssistedServiceSessionRestriction ; AssistedServiceSessionReversedRestriction ;
+
+###### Footer Component Refactor Start ######
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
+; ; FooterSlot ; FooterNavigationComponent
+
+INSERT_UPDATE FooterNavigationComponent; $contentCV[unique = true]; uid[unique = true]; wrapAfter; &componentRef; showLanguageCurrency; navigationNode(&nodeRef)
+; ; FooterNavigationComponent ; 10 ; FooterNavigationComponent ; false ; FooterNavNode ;
+
+# the order of children is the same as the display order on the site
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); &nodeRef; children(uid, $contentCV)
+; FooterNavNode ; ; Footer Pages ; EnduraNavNode ; FooterNavNode ; ContactsNavNode,FollowUsNavNode,SupportNavNode,ProductsNavNode
+
+# children of FooterNavNode #
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; &nodeRef; children(uid, $contentCV); links(&linkRef)
+; ContactsNavNode ; ; Contact Us Pages ; ContactsNavNode ; ContactUsNavNode,CareersNavNode
+; FollowUsNavNode ; ; Follow Us Pages  ; FollowUsNavNode ; TwitterNavNode,InstagramNavNode,YoutubeNavNode,FacebookNavNode
+; SupportNavNode  ; ; Support Pages    ; SupportNavNode  ; SupportGuaranteeNavNode,SupportSatisfactionGuaranteeNavNode,SupportReplacementNavNode,SupportSizingNavNode,SupportCareNavNode,SupportGoodsNavNode,SupportPrivacyNavNode,SupportCookiesNavNode,SupportDealersNavNode
+; ProductsNavNode ; ; Products Pages   ; ProductsNavNode ; ProductsAllNavNode,ProductsWomenNavNode,ProductsCollectionsNavNode,ProductsCategoriesNavNode,ProductsCatalogueNavNode
+
+# children of above navigation nodes #
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; &nodeRef; children(uid, $contentCV); links(&linkRef);
+; SupportGuaranteeNavNode             ; ; Support Guarantee Page              ; SupportGuaranteeNavNode
+; SupportSatisfactionGuaranteeNavNode ; ; Support Satisfaction Guarantee Page ; SupportSatisfactionGuaranteeNavNode
+; SupportReplacementNavNode           ; ; Support Replacement Page            ; SupportReplacementNavNode
+; SupportSizingNavNode                ; ; Support Sizing Page                 ; SupportSizingNavNode
+; SupportCareNavNode                  ; ; Support Care Page                   ; SupportCareNavNode
+; SupportGoodsNavNode                 ; ; Support Goods Page                  ; SupportGoodsNavNode
+; SupportTermsNavNode                 ; ; Support Terms Page                  ; SupportTermsNavNode
+; SupportPrivacyNavNode               ; ; Support Privacy Page                ; SupportPrivacyNavNode
+; SupportCookiesNavNode               ; ; Support Cookies Page                ; SupportCookiesNavNode
+; SupportDealersNavNode               ; ; Support Dealers Page                ; SupportDealersNavNode
+; ProductsAllNavNode                  ; ; Products Page                       ; ProductsAllNavNode
+; ProductsWomenNavNode                ; ; Products Women Page                 ; ProductsWomenNavNode
+; ProductsCollectionsNavNode          ; ; Products Collections Page           ; ProductsCollectionsNavNode
+; ProductsCategoriesNavNode           ; ; Products Categories Page            ; ProductsCategoriesNavNode
+; ProductsCatalogueNavNode            ; ; Products Catalogue Page             ; ProductsCatalogueNavNode
+; CareersNavNode                      ; ; Careers Page                        ; CareersNavNode
+; ContactUsNavNode                    ; ; Contact Us Page                     ; ContactUsNavNode
+; TwitterNavNode                      ; ; Twitter Page                        ; TwitterNavNode
+; InstagramNavNode                    ; ; Instagram Page                      ; InstagramNavNode
+; YoutubeNavNode                      ; ; YouTube Page                        ; YoutubeNavNode
+; FacebookNavNode                     ; ; Facebook Page                       ; FacebookNavNode
+
+# entries of the above navigation nodes ##
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
+; SupportGuaranteeNavNodeEntry             ; ; Support Guarantee Navigation Node Entry              ; SupportGuaranteeNavNode             ; SupportGuaranteeLink             ;
+; SupportSatisfactionGuaranteeNavNodeEntry ; ; Support Satisfaction Guarantee Navigation Node Entry ; SupportSatisfactionGuaranteeNavNode ; SupportSatisfactionGuaranteeLink ;
+; SupportReplacementNodeEntry              ; ; Support Replacement Navigation Node Entry            ; SupportReplacementNavNode           ; SupportReplacementLink           ;
+; SupportSizingNavNodeEntry                ; ; Support Sizing Navigation Node Entry                 ; SupportSizingNavNode                ; SupportSizingLink                ;
+; SupportCareNavNodeEntry                  ; ; Support Care Navigation Node Entry                   ; SupportCareNavNode                  ; SupportCareLink                  ;
+; SupportGoodsNavNodeEntry                 ; ; Support Goods Navigation Node Entry                  ; SupportGoodsNavNode                 ; SupportGoodsLink                 ;
+; SupportTermsNavNodeEntry                 ; ; Support Terms Navigation Node Entry                  ; SupportTermsNavNode                 ; SupportTermsLink                 ;
+; SupportPrivacyNavNodeEntry               ; ; Support Privacy Navigation Node Entry                ; SupportPrivacyNavNode               ; SupportPrivacyLink               ;
+; SupportCookiesNavNodeEntry               ; ; Support Cookies Navigation Node Entry                ; SupportCookiesNavNode               ; SupportCookiesLink               ;
+; SupportDealersNavNodeEntry               ; ; Support Dealers Navigation Node Entry                ; SupportDealersNavNode               ; SupportDealersLink               ;
+; ProductsAllNavNodeEntry                  ; ; Products All Navigation Node Entry                   ; ProductsAllNavNode                  ; ProductsAllLink                  ;
+; ProductsWomenNavNodeEntry                ; ; Products Women Navigation Node Entry                 ; ProductsWomenNavNode                ; ProductsWomenLink                ;
+; ProductsCollectionsNavNodeEntry          ; ; Products Collections Navigation Node Entry           ; ProductsCollectionsNavNode          ; ProductsCollectionsLink          ;
+; ProductsCategoriesNavNodeEntry           ; ; Products Categories Navigation Node Entry            ; ProductsCategoriesNavNode           ; ProductsCategoriesLink           ;
+; PProductsCatalogueNavNodeEntry           ; ; Products Catalogue Navigation Node Entry             ; ProductsCatalogueNavNode            ; ProductsCatalogueLink            ;
+; CareersNavNodeEntry                      ; ; Careers Navigation Node Entry                        ; CareersNavNode                      ; CareersLink                      ;
+; ContactUsNavNodeEntry                    ; ; Contact Us Navigation Node Entry                     ; ContactUsNavNode                    ; ContactUsLink                    ;
+; TwitterNavNodeEntry                      ; ; Twitter Navigation Node Entry                        ; TwitterNavNode                      ; TwitterLink                      ;
+; InstagramNavNodeEntry                    ; ; Instagram Navigation Node Entry                      ; InstagramNavNode                    ; InstagramLink                    ;
+; YoutubeNavNodeEntry                      ; ; YouTube Navigation Node Entry                        ; YoutubeNavNode                      ; YoutubeLink                      ;
+; FacebookNavNodeEntry                     ; ; Facebook Navigation Node Entry                       ; FacebookNavNode                     ; FacebookLink                     ;
+###### Footer Component Refactor End ######

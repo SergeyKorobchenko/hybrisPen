@@ -256,8 +256,6 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 ;;EmptyCartParagraphComponent;"<h2>Your shopping cart is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>"
 ;;HelpParagraphComponent;"<strong>Need Help with your checkout process?</strong> <span>Contact Us or Call phone number.</span>"
 
-
-
 INSERT_UPDATE WorldpayAPMComponent; uid[unique = true]; $contentCV[unique = true]; $picture[lang = $lang];
 #; visaComponent      ; ; cc-icon
 #; mastercardComponent; ; cc-icon
