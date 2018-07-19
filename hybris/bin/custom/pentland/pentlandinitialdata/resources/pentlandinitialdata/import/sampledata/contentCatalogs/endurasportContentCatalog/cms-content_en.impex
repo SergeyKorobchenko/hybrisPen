@@ -51,40 +51,15 @@ UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName
 ; ; AccountUpdatePasswordLink        ; "Change your password"
 ; ; AccountViewOrderHistoryLink      ; "View order history"
 ; ; AllBrandsCategoryLink            ; "Brands"
-; ; BlackAndWhiteFilmsCategoryLink   ; "Black & White Films"
-; ; BlankVideotapesCategoryLink      ; "Blank Videotapes"
-; ; CameraAccessoriesCategoryLink    ; "Camera Accessories & Supplies"
-; ; CameraLensesCategoryLink         ; "Camera Lenses"
-; ; CamerasCategoryLink              ; "Cameras"
-; ; CamerasFlashesCategoryLink       ; "Camera Flashes"
-; ; CanonBrandCategoryLink           ; "Canon"
-; ; ColourFilmsCategoryLink          ; "Color Films"
 ; ; ComponentsCategoryLink           ; "Components"
 ; ; ConsentManagementLink            ; "Consent Management"
 ; ; ContactUsLink                    ; "Contact Us"
-; ; DigitalCamerasCategoryLink       ; "Digital Cameras"
-; ; DigitalCompactsCategoryLink      ; "Compact Cameras"
-; ; DigitalSLRCategoryLink           ; "SLR Cameras"
 ; ; TwitterLink                      ; "Twitter"
 ; ; InstagramLink                    ; "Instagram"
 ; ; YoutubeLink                      ; "YouTube"
 ; ; FacebookLink                     ; "Facebook"
-; ; FilmCamerasCategoryLink          ; "Film Cameras"
-; ; FlashMemoryCategoryLink          ; "Flash Memory"
-; ; FujifilmBrandCategoryLink        ; "Fujifilm"
-; ; HandheldCamcordersCategoryLink   ; "Hand Held Camcorders"
 ; ; HomepageNavLink                  ; "Home"
-; ; IciduBrandCategoryLink           ; "Icidu"
-; ; KingstonBrandCategoryLink        ; "Kingston"
-; ; KodakBrandCategoryLink           ; "Kodak"
-; ; PowerSuppliesCategoryLink        ; "Power Supplies"
-; ; SamsungBrandCategoryLink         ; "Samsung"
-; ; SonyBrandCategoryLink            ; "Sony"
 ; ; SpecialOffersLink                ; "Special Offers"
-; ; SweexBrandCategoryLink           ; "Sweex"
-; ; TDKBrandCategoryLink             ; "TDK"
-; ; ToshibaBrandCategoryLink         ; "Toshiba"
-; ; TripodsCategoryLink              ; "Tripods"
 
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpeg']; &imageRef; folder(qualifier)[default = 'images']; altText
@@ -126,15 +101,12 @@ UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = true]; t
 
 # Category Pages
 UPDATE CategoryPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
-; ; Cameras        ; "Cameras"
-; ; DigitalCameras ; "Digital Cameras"
+; ; Cameras ; "Cameras"
 
 # CMS Navigation Nodes
 UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]; comments
 ; ; SupportNavNode               ; "Support"
 ; ; ProductsNavNode              ; "Products"
-; ; AccessoriesNavNode           ; "Accessories"
-; ; AccessoryBrandLinksNavNode   ; "Accessories"
 ; ; AccountAddressBookNavNode    ; "Address Book"
 ; ; AccountLeftNavNode           ; "My Account"
 ; ; AccountOrderHistoryNavNode   ; "Order History"
@@ -142,19 +114,10 @@ UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[l
 ; ; AccountProfileNavNode        ; "Profile"
 ; ; BrandLinksNavNode            ; "Cameras"
 ; ; BrandsNavNode                ; "Brands"
-; ; CameraAccessoriesNavNode     ; "Camera Accessories & Supplies"
-; ; CamerasNavNode               ; "Cameras"
-; ; DigitalCamerasNavNode        ; "Digital Cameras"
-; ; ElectronicsNavNode           ; "Endura Site"
-; ; FilmCamerasNavNode           ; "Film Cameras"
-; ; FlashMemoryNavNode           ; "Flash Memory"
+; ; EnduraNavNode                ; "Endura Site"
 ; ; FollowUsNavNode              ; "Follow Us"
-; ; HandheldCamcordersNavNode    ; "Hand Held Camcorders"
 ; ; ContactsNavNode              ; "Contact"
-; ; PowerSuppliesNavNode         ; "Power Supplies"
 ; ; SiteRootNode                 ; "SiteRoot"
-; ; SuppliesNavNode              ; "Supplies"
-; ; WebcamsNavNode               ; "Webcams"
 
 # Electronics Order Expired Page
 UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = en];
@@ -192,17 +155,12 @@ UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; $pi
 
 UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; headline[lang = $lang]; $picture[lang = $lang]; content[lang = $lang]
 ; ; AccessoriesBannerComponent           ; Camera Accessories and Supplies                                    ; Elec_228x178_HomeCat_Accessories_EN_01.jpg   ; "Everything you need to accessorise your camera"
-; ; CanonPowershotBannerComponent        ; Canon PowerShot A480                                               ; 1934793_1719.jpg                             ; "Affordable, intuitive and fun!"
 ; ; CarouselCamcorderBanner              ; New - Ignite your passion for film with the latest HD camcorder... ; Elec_468x418_HomeCarouselCamcorder_EN_01.jpg ; ""
 ; ; CarouselCyberBanner                  ; What colour are you? Sony Cybershot - a colour for any mood.       ; Elec_468x418_HomeCarouselCyber_EN_01.jpg     ; ""
 ; ; CarouselFunBanner                    ; Fun on the run  - Never miss a memory!                             ; Elec_468x418_HomeCarouselFun_EN_01.jpg       ; ""
 ; ; DigitalCompactCamerasBannerComponent ; Digital Compact Cameras                                            ; Elec_228x178_HomeCat_DigiCom_EN_01.jpg       ; "Find the perfect camera to capture those special moments"
 ; ; DigitalSLRCamerasBannerComponent     ; Digital SLR Cameras                                                ; Elec_228x178_HomeCat_DigiSLR_EN_01.jpg       ; "See the latest DSLR technology from the leading brands"
-; ; KodakEasyshareBannerComponent        ; Kodak EASYSHARE V1253                                              ; 1320808-1767.jpg                             ; "Seize the moment with 12 megapixel photos!"
 ; ; MemoryBannerComponent                ; Camera and Camcorder Memory                                        ; Elec_228x178_HomeCat_Memory_EN_01.jpg        ; "Exclusive discounts on our memory cards"
-; ; SonyCybershotBannerComponent         ; Sony Cybershot DSC-S930                                            ; 1992695-Sony-DSC-S930P-11441.jpg             ; "Compact, easy to use and amazingly affordable."
-; ; SonyDSCBannerComponent               ; Sony DSC-H20                                                       ; 1978440-Sony-DSC-H20-114081.jpg              ; "Perfect for serious performance in a compact design."
-
 UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
 ; ; ElectronicsHomepageProductCarouselComponent ; Our Bestselling Products
 
@@ -277,7 +235,7 @@ INSERT_UPDATE WorldpayAPMComponent; uid[unique = true]; $contentCV[unique = true
 ; klarnaComponent     ; ; klarna-icon
 
 INSERT_UPDATE WorldpayCCComponent; uid[unique = true]; $contentCV[unique = true]; $picture[lang = $lang]
-;creditCardComponent;;cc-icon
+; creditCardComponent ; ; cc-icon
 
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
 ; ; WorldpayHelpParagraphComponent ; "<strong>Need help with your checkout process?</strong> <span> Contact us or Call +44 (0) 191 516 5610</span>" ;
