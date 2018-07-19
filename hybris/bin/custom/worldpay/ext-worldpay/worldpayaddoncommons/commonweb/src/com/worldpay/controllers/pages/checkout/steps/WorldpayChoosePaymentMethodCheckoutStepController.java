@@ -1,5 +1,6 @@
 package com.worldpay.controllers.pages.checkout.steps;
 
+import com.bridgex.core.services.PentlandBaseSiteService;
 import com.worldpay.core.services.WorldpayCartService;
 import com.worldpay.facades.order.WorldpayPaymentCheckoutFacade;
 import com.worldpay.facades.order.impl.WorldpayCheckoutFacadeDecorator;
@@ -68,8 +69,16 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
 
     @Resource
     private WorldpayPaymentCheckoutFacade worldpayPaymentCheckoutFacade;
+
     @Resource (name = "worldpayCheckoutFacade")
-    private AcceleratorCheckoutFacade checkoutFacade;
+    private AcceleratorCheckoutFacade b2bcheckoutFacade;
+
+    @Resource (name = "worldpayB2CCheckoutFacade")
+    private AcceleratorCheckoutFacade b2ccheckoutFacade;
+
+    @Resource
+    private PentlandBaseSiteService baseSiteService;
+
     @Resource
     private CartService cartService;
     @Resource
@@ -321,7 +330,10 @@ public class WorldpayChoosePaymentMethodCheckoutStepController extends AbstractW
      */
     @Override
     protected AcceleratorCheckoutFacade getCheckoutFacade() {
-        return this.checkoutFacade;
+        if (baseSiteService.isB2BChannel()) {
+            return b2bcheckoutFacade;
+        }
+        return b2ccheckoutFacade;
     }
 
     public String getRedirectToPaymentMethod() {

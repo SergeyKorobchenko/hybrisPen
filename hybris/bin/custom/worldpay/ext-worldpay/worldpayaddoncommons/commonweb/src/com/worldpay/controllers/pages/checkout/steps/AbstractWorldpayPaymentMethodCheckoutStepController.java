@@ -128,7 +128,7 @@ public abstract class AbstractWorldpayPaymentMethodCheckoutStepController extend
         for (final Map.Entry<String, CheckoutStep> entry : progressBarMap.entrySet()) {
             final CheckoutStep checkoutStep = entry.getValue();
             if("deliveryAddress.markFor".equals(checkoutStep.getProgressBarId()) && (CollectionUtils.isEmpty(markForAddressesForShippingAddress)|| !pentlandCustomerFacade.hasMarkFors())
-               || "paymentMethod".equals(checkoutStep.getProgressBarId()) && "ACCOUNT".equals(paymentType.getCode())){
+               || "paymentMethod".equals(checkoutStep.getProgressBarId()) && paymentType != null && "ACCOUNT".equals(paymentType.getCode())){
                 continue;
             }
             if (checkoutStep.isEnabled()) {

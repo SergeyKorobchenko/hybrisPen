@@ -133,4 +133,8 @@
 		<property name="sessionService" ref="sessionService" />
 	</bean>
 
+	<alias name="pentlandBaseSiteService" alias="baseSiteService"/>
+	<bean name="pentlandBaseSiteService" class="com.bridgex.core.services.impl.DefaultPentlandBaseSiteService"
+		  parent="defaultBaseSiteService"/>
+
 </beans>
