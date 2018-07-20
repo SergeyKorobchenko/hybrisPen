@@ -2956,6 +2956,9 @@ INSERT_UPDATE LocalizationEntry;code[unique=true];localizedText[lang=en]
 ;order.export.global.error;"We are unable to process this order at this time. We will re-process this request. In the meantime, the Order Number displayed below is a temporary number assigned to it.
 <br>We apologize for the inconvenience. If you have any further queries or require assistance – please <a href=""{0}"">contact us.</a>"
 
+;order.export.global.export.error;"We are unable to process some of  order(s) at this time. We will re-process this request. In the meantime, the temporary Order Number  is {1}  assigned to it.
+<br>We apologize for the inconvenience. If you have any further queries or require assistance – please <a href=""{0}"">contact us.</a>"
+
 ;checkout.error.empty.po;Please fill in P.O. number before proceeding to checkout
 ;checkout.error.empty.rdd;Please fill in Requested Delivery Date before proceeding to checkout
 ;checkout.error.empty.cart;Your basket does not have any quantity. Please add quantity before proceeding to checkout.

@@ -63,7 +63,7 @@
             </label>
         </div>
 
-        <c:choose>
+      <%--   <c:choose>
             <c:when test="${not empty product.firstCategoryNameList }">
                 <div id="priority1Dimensions" class ="variant-checkboxes">
                     <div class="row">
@@ -106,6 +106,6 @@
                     </div>
                 </c:if>
             </c:otherwise>
-        </c:choose>
+        </c:choose> --%>
     </div>
 </li>

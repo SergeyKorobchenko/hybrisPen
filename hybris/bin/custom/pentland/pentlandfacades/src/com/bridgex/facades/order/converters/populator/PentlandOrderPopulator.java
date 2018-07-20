@@ -43,6 +43,10 @@ public class PentlandOrderPopulator extends OrderPopulator {
     	target.setSurCharge(createPrice(source, source.getSurCharge()));
     }
 
+    if(source.getExportStatus()!=null)
+    {
+    	target.setExportStatus(source.getExportStatus().getCode());
+    }
     populateSapBrand(source, target);
   }
 

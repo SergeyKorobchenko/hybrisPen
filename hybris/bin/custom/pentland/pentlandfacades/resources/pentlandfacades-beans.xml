@@ -66,6 +66,7 @@
 		<property name="brand" type="String"/>
 		<property name="subOrders" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderData>"/>
 		<property name="creditCheckPassed" type="boolean"/>
+		<property name="exportStatus" type="String"/>
 	</bean>
 
 	<bean class="com.bridgex.facades.order.data.OrderItemData">

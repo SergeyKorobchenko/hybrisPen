@@ -34,6 +34,7 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
+import de.hybris.platform.constants.GeneratedCoreConstants.Enumerations.ExportStatus;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
@@ -217,7 +218,13 @@ public class CheckoutController extends AbstractCheckoutController
 		List<OrderData> sapOrders = orderFacade.getSapOrdersForOrderCode(orderCode);
 		if(sapOrders == null){
 			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "order.export.global.error", new Object[]{Config.getString("storefrontContextRoot", "") + "/contactus"});
-		}else{
+		}else if(CollectionUtils.isNotEmpty(sapOrders) && orderDetails.getExportStatus().equals(ExportStatus.NOTEXPORTED)){
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "order.export.global.export.error", new Object[]{Config.getString("storefrontContextRoot", "") + "/contactus",orderDetails.getCode()});
+			model.addAttribute("sapOrders", sapOrders);
+			model.addAttribute("sapOrderCodes",sapOrders.stream().map(s->s.getCode().concat("/").concat(s.getBrand())).collect(Collectors.joining(", ")) );
+		}
+		else
+		{
 			model.addAttribute("sapOrders", sapOrders);
 			model.addAttribute("sapOrderCodes", sapOrders.stream().map(AbstractOrderData::getCode).collect(Collectors.joining(", ")));
 		}
