@@ -51,7 +51,7 @@
             </a>
         </ycommerce:testId>
 
-        <div class="item__code">${fn:escapeXml(product.code)}</div>
+        <div class="item__code">${fn:escapeXml(product.materialKey)}</div>
     </div>
 
     <%-- price --%>

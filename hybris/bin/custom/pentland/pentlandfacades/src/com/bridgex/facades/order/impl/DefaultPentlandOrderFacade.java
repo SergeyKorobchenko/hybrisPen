@@ -85,7 +85,7 @@ public class DefaultPentlandOrderFacade extends DefaultOrderFacade implements Pe
       OrderModel orderModel = getCustomerAccountService().getOrderForCode((CustomerModel) getUserService().getCurrentUser(), orderCode,
                                                              baseStoreModel);
       List<OrderModel> byBrandOrderList = orderModel.getByBrandOrderList();
-      if(ExportStatus.EXPORTED.equals(orderModel.getExportStatus()) && CollectionUtils.isNotEmpty(byBrandOrderList)){
+      if(CollectionUtils.isNotEmpty(byBrandOrderList)){
         return Converters.convertAll(byBrandOrderList, getOrderConverter());
       }
     }catch (final ModelNotFoundException e) {
