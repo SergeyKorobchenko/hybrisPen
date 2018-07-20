@@ -4,6 +4,9 @@
 <%@ attribute name="pageScripts" required="false" fragment="true"%>
 <%@ attribute name="hideHeaderLinks" required="false"%>
 
+<%-- Temporary attribute for only MVP1, helps to disable unused components, must be deleted in future --%>
+<%@ attribute name="isMVP1" required="false"%>
+
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
@@ -25,7 +28,7 @@
 	</jsp:attribute>
 
 	<jsp:body>
-		<div class="branding-mobile hidden-md hidden-lg">
+		<div class="branding-mobile hidden">
 			<div class="js-mobile-logo">
 				<%--populated by JS acc.navigation--%>
 			</div>
@@ -37,11 +40,8 @@
 			<a href="#skiptonavigation" class="skiptonavigation" data-role="none">${fn:escapeXml(skipToNavigation)}</a>
 
 
-			<header:header hideHeaderLinks="${hideHeaderLinks}" />
+			<header:header hideHeaderLinks="${hideHeaderLinks}" isMVP1="${isMVP1}" />
 
-
-			
-			
 			<a id="skip-to-content"></a>
 		
 			<div>

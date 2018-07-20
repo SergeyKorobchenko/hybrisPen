@@ -20,6 +20,11 @@ footer {
       text-align: center;
     }
 
+    .footer__nav--title {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
     .footer__nav--links {
       padding-left: 0px;
       width: 100%;
@@ -27,12 +32,17 @@ footer {
       list-style: none;
 
       .footer__link {
-        margin-top: 10px;
+        margin-top: 5px;
       }
 
       a {
         color: @footer-text-color;
         font-size: 14px;
+
+        &:hover {
+          color: @footer-text-color-hover;
+          text-decoration: underline;
+        }
       }
     }
   }
