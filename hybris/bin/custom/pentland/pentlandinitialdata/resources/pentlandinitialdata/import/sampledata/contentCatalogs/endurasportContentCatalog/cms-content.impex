@@ -43,33 +43,9 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; StoreFinderLink                  ; Store Finder Link                   ; /store-finder                                        ; StoreFinderLink                  ; StoreFinderLink                  ;           ; ; ;
 ; ; LoginLink                        ; Login Link                          ; /login                                               ; LoginLink                        ; LoginLink                        ;           ; ; ;
 #;;AllBrandsCategoryLink;All Brands Link;/Brands/c/brands;AllBrandsCategoryLink;AllBrandsCategoryLink;;brands;;
-#;;SonyBrandCategoryLink;Sony Link;/Brands/Sony/c/brand_5;SonyBrandCategoryLink;SonyBrandCategoryLink;;brand_5;;
-#;;CanonBrandCategoryLink;Canon Link;/Brands/Canon/c/brand_10;CanonBrandCategoryLink;CanonBrandCategoryLink;;brand_10;;
-#;;KodakBrandCategoryLink;Kodak Link;/Brands/Kodak/c/brand_88;KodakBrandCategoryLink;KodakBrandCategoryLink;;brand_88;;
-#;;SamsungBrandCategoryLink;Samsung Link;/Brands/Samsung/c/brand_26;SamsungBrandCategoryLink;SamsungBrandCategoryLink;;brand_26;;
-#;;ToshibaBrandCategoryLink;Toshiba Link;/Brands/Toshiba/c/brand_2;ToshibaBrandCategoryLink;ToshibaBrandCategoryLink;;brand_2;;
-#;;FujifilmBrandCategoryLink;Fujifilm Link;/Brands/Fujifilm/c/brand_75;FujifilmBrandCategoryLink;FujifilmBrandCategoryLink;;brand_75;;
-#;;KingstonBrandCategoryLink;Kingston Link;/Brands/Kingston/c/brand_18;KingstonBrandCategoryLink;KingstonBrandCategoryLink;;brand_18;;
-#;;IciduBrandCategoryLink;Icidu Link;/Brands/ICIDU/c/brand_2171;IciduBrandCategoryLink;IciduBrandCategoryLink;;brand_2171;;
-#;;TDKBrandCategoryLink;TDK Link;/Brands/TDK/c/brand_251;TDKBrandCategoryLink;TDKBrandCategoryLink;;brand_251;;
-#;;SweexBrandCategoryLink;Sweex Link;/Brands/Sweex/c/brand_702;SweexBrandCategoryLink;SweexBrandCategoryLink;;brand_702;;
-#;;DigitalCompactsCategoryLink;Digital Compacts Link;/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/c/576;DigitalCompactsCategoryLink;DigitalCompactsCategoryLink;;576;;
-#;;DigitalSLRCategoryLink;Digital SLR Link;/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/c/578;DigitalSLRCategoryLink;DigitalSLRCategoryLink;;578;;
 #;;CamerasCategoryLink;Cameras Category Link;/Open-Catalogue/Cameras/c/571;CamerasCategoryLink;CamerasCategoryLink;;571;;
 #;;ComponentsCategoryLink;Components Category Link;/Open-Catalogue/Components/c/106;ComponentsCategoryLink;ComponentsCategoryLink;;106;;
-#;;DigitalCamerasCategoryLink;Digital Cameras Category Link;/Open-Catalogue/Cameras/Digital-Cameras/c/575;DigitalCamerasCategoryLink;DigitalCamerasCategoryLink;;575;;
-#;;FilmCamerasCategoryLink;Film Cameras Category Link;/Open-Catalogue/Cameras/Film-Cameras/c/574;FilmCamerasCategoryLink;FilmCamerasCategoryLink;;574;;
-#;;CameraAccessoriesCategoryLink;Camera Accessories Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/c/585;CameraAccessoriesCategoryLink;CameraAccessoriesCategoryLink;;585;;
-#;;PowerSuppliesCategoryLink;Power Supplies Category Link;/Open-Catalogue/Components/Power-Supplies/c/816;PowerSuppliesCategoryLink;PowerSuppliesCategoryLink;;816;;
-#;;FlashMemoryCategoryLink;Flash Memory Category Link;/Open-Catalogue/Data-storage/Flash-Memory/c/902;FlashMemoryCategoryLink;FlashMemoryCategoryLink;;902;;
-#;;HandheldCamcordersCategoryLink;Handheld Camcorders Category Link;/Open-Catalogue/Cameras/Hand-held-Camcorders/c/584;HandheldCamcordersCategoryLink;HandheldCamcordersCategoryLink;;584;;
 #;;SpecialOffersLink;Special Offers Link;"/Open-Catalogue/c/1?q=%3AtopRated%3AallPromotions%3ABOGOFendurasport%3AallPromotions%3A10DiscountCanonEOS450D%3AallPromotions%3AMultiBuyendurasport%3AallPromotions%3APerfectPartnerendurasport%3AallPromotions%3AProductBundleendurasport";SpecialOffersLink;SpecialOffersLink;;1;;
-#;;CamerasFlashesCategoryLink;Cameras Flashes Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Camera-Flashes/c/586;CamerasFlashesCategoryLink;CamerasFlashesCategoryLink;;586;;
-#;;TripodsCategoryLink;Tripods Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Tripods/c/587;TripodsCategoryLink;TripodsCategoryLink;;587;;
-#;;CameraLensesCategoryLink;Camera Lenses Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Camera-Lenses/c/588;CameraLensesCategoryLink;CameraLensesCategoryLink;;588;;
-#;;ColourFilmsCategoryLink;ColourFilms Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Colour-Films/c/597;ColourFilmsCategoryLink;ColourFilmsCategoryLink;;597;;
-#;;BlackAndWhiteFilmsCategoryLink;Black And WhiteFilms Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Black-26-White-Films/c/598;BlackAndWhiteFilmsCategoryLink;BlackAndWhiteFilmsCategoryLink;;598;;
-#;;BlankVideotapesCategoryLink;BlankVideotapes Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Blank-Video-Tapes/c/604;BlankVideotapesCategoryLink;BlankVideotapesCategoryLink;;604;;
 ; ; SupportGuaranteeLink             ; Support Guarantee Link              ; "https://www.endurasport.com/support/guarantee/"     ; SupportGuaranteeLink             ; SupportGuaranteeLink             ; newWindow ; ; ;
 ; ; SupportSatisfactionGuaranteeLink ; Support Satisfaction Guarantee Link ; "https://www.endurasport.com/support/guarantee/"     ; SupportSatisfactionGuaranteeLink ; SupportSatisfactionGuaranteeLink ; newWindow ; ; ;
 ; ; SupportReplacementLink           ; Support Replacement Link            ; "https://www.endurasport.com/support/helmets/"       ; SupportReplacementLink           ; SupportReplacementLink           ; newWindow ; ; ;
@@ -117,14 +93,7 @@ INSERT_UPDATE MiniCartComponent; $contentCV[unique = true]; uid[unique = true]; 
 INSERT_UPDATE NavigationBarComponent; $contentCV[unique = true]; uid[unique = true]; name; wrapAfter; link(uid, $contentCV); styleClass; &componentRef
 #;;CamerasBarComponent;Cameras Bar Component;10;CamerasCategoryLink;;CamerasBarComponent
 #;;ComponentsBarComponent;Components Bar Component;10;ComponentsCategoryLink;;ComponentsBarComponent
-#;;DigitalCamerasBarComponent;Digital Cameras Bar Component;10;DigitalCamerasCategoryLink;;DigitalCamerasBarComponent
-#;;FilmCamerasBarComponent;Film Cameras Bar Component;10;FilmCamerasCategoryLink;;FilmCamerasBarComponent
-#;;CameraAccessoriesBarComponent;Camera Accessories BarComponent;10;CameraAccessoriesCategoryLink;;CameraAccessoriesBarComponent
-#;;PowerSuppliesBarComponent;Power Supplies Bar Component;10;PowerSuppliesCategoryLink;;PowerSuppliesBarComponent
-#;;FlashMemoryBarComponent;Flash Memory Bar Component;10;FlashMemoryCategoryLink;;FlashMemoryBarComponent
-#;;HandheldCamcordersBarComponent;Handheld Camcorders Bar Component;10;HandheldCamcordersCategoryLink;;HandheldCamcordersBarComponent
-#;;SpecialOffersBarComponent;Special Offers Bar Component;10;SpecialOffersLink;special_offer;SpecialOffersBarComponent
-
+;;SpecialOffersBarComponent;Special Offers Bar Component;10;SpecialOffersLink;special_offer;SpecialOffersBarComponent
 
 # Navigation Bar Component
 INSERT_UPDATE AccountNavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; navigationNode(&nodeRef); styleClass; &componentRef
@@ -140,7 +109,7 @@ INSERT_UPDATE AccountNavigationCollectionComponent; $contentCV[unique = true]; u
 
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarCollectionComponent; $contentCV[unique = true]; uid[unique = true]; name; components(uid, $contentCV); &componentRef
-#;;NavBarComponent;Navigation Bar Collection Componeent;BrandsBarComponent,DigitalCamerasBarComponent,FilmCamerasBarComponent,HandheldCamcordersBarComponent,PowerSuppliesBarComponent,FlashMemoryBarComponent,CameraAccessoriesBarComponent,SpecialOffersBarComponent;NavBarComponent
+;;NavBarComponent;Navigation Bar Collection Componeent;BrandsBarComponent,SpecialOffersBarComponent;NavBarComponent
 
 # CMS tabs components
 INSERT_UPDATE CMSTabParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; visible; &componentRef
@@ -192,7 +161,7 @@ INSERT_UPDATE ProductReferencesComponent; $contentCV[unique = true]; uid[unique 
 
 # CMS PurchasedCategorySuggestion Components
 INSERT_UPDATE PurchasedCategorySuggestionComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; filterPurchased; category(code, $productCV); &componentRef
-#;;PurchasedCategorySuggestions;Purchased Category Suggestions;OTHERS;10;true;578;PurchasedCategorySuggestions
+;;PurchasedCategorySuggestions;Purchased Category Suggestions;OTHERS;10;true;578;PurchasedCategorySuggestions
 
 # CMS CartSuggestion Components
 INSERT_UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; filterPurchased; &componentRef
@@ -204,7 +173,7 @@ INSERT_UPDATE SearchBoxComponent; $contentCV[unique = true]; uid[unique = true];
 
 # CMS Language and Currency Component
 INSERT_UPDATE LanguageCurrencyComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
-#;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
+;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
 
 INSERT_UPDATE ProductRefinementComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
 ; ; RefinementFacetComponent ; Product Refinement Facet Component ; RefinementFacetComponent
@@ -259,21 +228,8 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ##- level 1. SiteRoot -##
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
 ; SiteRootNode ; ; SiteRootNode ; root ; ; SiteRootNode
-#;ElectronicsNavNode;;Electronics Site;SiteRootNode;HomepageNavLink;ElectronicsNavNode
-#;BrandsNavNode;;Brand Links;ElectronicsNavNode;AllBrandsCategoryLink;BrandsNavNode
-#;BrandLinksNavNode;;Brand Links;BrandsNavNode;CanonBrandCategoryLink,SonyBrandCategoryLink,KodakBrandCategoryLink,SamsungBrandCategoryLink,ToshibaBrandCategoryLink,FujifilmBrandCategoryLink;BrandLinksNavNode
-#;AccessoryBrandLinksNavNode;;Accessory Brand Links;BrandsNavNode;KingstonBrandCategoryLink,IciduBrandCategoryLink,TDKBrandCategoryLink,SweexBrandCategoryLink;AccessoryBrandLinksNavNode
-#;DigitalCameraTypesNavNode;;Digital Camera Type Links;DigitalCamerasNavNode;DigitalCompactsCategoryLink,DigitalSLRCategoryLink;DigitalCameraTypesNavNode
-#;CamerasNavNode;;Cameras Category;ElectronicsNavNode;DigitalCamerasCategoryLink,FilmCamerasCategoryLink;CamerasNavNode
-#;DigitalCamerasNavNode;;Digital Cameras Category;CamerasNavNode;DigitalCamerasCategoryLink;DigitalCamerasNavNode
-#;FilmCamerasNavNode;;Film Cameras Category;CamerasNavNode;FilmCamerasCategoryLink;FilmCamerasNavNode
-#;WebcamsNavNode;;Webcams Category;CamerasNavNode;;WebcamsNavNode
-#;CameraAccessoriesNavNode;;Camera Accessories Category;CamerasNavNode;CameraAccessoriesCategoryLink;CameraAccessoriesNavNode
-#;HandheldCamcordersNavNode;;Hand-held Camcorders Category;CamerasNavNode;HandheldCamcordersCategoryLink;HandheldCamcordersNavNode
-#;PowerSuppliesNavNode;;Power Supplies Category;ElectronicsNavNode;PowerSuppliesCategoryLink;PowerSuppliesNavNode
-#;FlashMemoryNavNode;;Flash Memory Category;ElectronicsNavNode;FlashMemoryCategoryLink;FlashMemoryNavNode
-#;AccessoriesNavNode;;Accessories Links;CameraAccessoriesNavNode;CamerasFlashesCategoryLink,TripodsCategoryLink,CameraLensesCategoryLink;AccessoriesNavNode
-#;SuppliesNavNode;;Supplies Links;CameraAccessoriesNavNode;ColourFilmsCategoryLink,BlackAndWhiteFilmsCategoryLink,BlankVideotapesCategoryLink;SuppliesNavNode
+#;BrandsNavNode;;Brand Links;EnduraNavNode;AllBrandsCategoryLink;BrandsNavNode
+#;BrandLinksNavNode;;Brand Links;BrandsNavNode;BrandLinksNavNode
 #;AccountLeftNavNode;;My Account;SiteRootNode;AccountProfileLink,AccountAddressBookLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;AccountLeftNavNode
 #;AccountProfileNavNode;;Profile;AccountLeftNavNode;AccountPersonalDetailsLink,AccountUpdatePasswordLink;AccountProfileNavNode
 #;AccountAddressBookNavNode;;Address Book;AccountLeftNavNode;AccountManageAddressLink;AccountAddressBookNavNode
@@ -287,15 +243,9 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarComponent; $contentCV[unique = true]; uid[unique = true]; navigationNode(&nodeRef); dropDownLayout(code)
 #;;CamerasBarComponent;CamerasNavNode
-#;;DigitalCamerasBarComponent;DigitalCamerasNavNode
-#;;FilmCamerasBarComponent;FilmCamerasNavNode
-#;;CameraAccessoriesBarComponent;CameraAccessoriesNavNode;AUTO
-#;;PowerSuppliesBarComponent;PowerSuppliesNavNode
-#;;FlashMemoryBarComponent;FlashMemoryNavNode
-#;;HandheldCamcordersBarComponent;HandheldCamcordersNavNode
 
 INSERT_UPDATE NavigationBarComponent; $contentCV[unique = true]; uid[unique = true]; name; wrapAfter; navigationNode(&nodeRef); link(uid, $contentCV); styleClass; dropDownLayout(code); &componentRef
-#;;BrandsBarComponent;All Brands;10;BrandsNavNode;AllBrandsCategoryLink;;AUTO;BrandsBarComponent
+;;BrandsBarComponent;All Brands;10;BrandsNavNode;AllBrandsCategoryLink;;AUTO;BrandsBarComponent
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; folder(qualifier)[default = 'images']
@@ -323,7 +273,7 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 #;;updateForgottenPasswordPagePreview;text/png;UpdateForgottenPasswordPage.png;$jarResourceCms/preview-images/endurasport/UpdateForgottenPasswordPage.png
 #;;productGridPagePreview;text/png;ProductGridPage.png;$jarResourceCms/preview-images/endurasport/ProductGridPage.png
 #;;defaultCategoryPagePreview;text/png;DefaultCategoryPage.png;$jarResourceCms/preview-images/endurasport/DefaultCategoryPage.png
-#;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;$jarResourceCms/preview-images/endurasport/OrderExpiredPage.png;;;
+;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;$jarResourceCms/preview-images/endurasport/OrderExpiredPage.png;;;
 
 # Site-wide Homepage
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(&linkRef)
@@ -348,14 +298,7 @@ UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(
 ; ; notFound                     ; notFoundPagePreview
 #;;searchEmpty;searchResultsEmptyPagePreview
 #;;updatePassword;updateForgottenPasswordPagePreview
-#;;orderExpired;orderExpiredPagePreview
-
-# Order Expired Page
-UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
-; ; orderExpired ; orderExpiredPagePreview
-
-UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(&linkRef)
-; ; termsAndConditions ; termsAndConditionsPage ; TermsAndConditionsLink
+;;orderExpired;orderExpiredPagePreview
 
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; linkComponents(&linkRef);;;;;
 #;;storefinderPage;StoreFinderLink
@@ -372,12 +315,6 @@ UPDATE CategoryPage; $contentCV[unique = true]; uid[unique = true]; previewImage
 #;;category;defaultCategoryPagePreview
 
 ###### Electronics Homepage ######
-
-INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpeg']; altText; &imageRef; folder(qualifier)[default = 'images']
-#;;1934793_1719.jpg;$productResource/images/96Wx96H/1934793_1719.jpg;;"Canon PowerShot A480";1934793_1719.jpg
-#;;1992695-Sony-DSC-S930P-11441.jpg;$productResource/images/96Wx96H/1992695-Sony-DSC-S930P-11441.jpg;;"Sony Cybershot DSC-S930";1992695-Sony-DSC-S930P-11441.jpg
-#;;1320808-1767.jpg;$productResource/images/96Wx96H/1320808-1767.jpg;;"Kodak EASYSHARE V1253";1320808-1767.jpg
-#;;1978440-Sony-DSC-H20-114081.jpg;$productResource/images/96Wx96H/1978440-Sony-DSC-H20-114081.jpg;;"Sony DSC-H20";1978440-Sony-DSC-H20-114081.jpg
 
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink
 #;;BrandsGaloreBanner;Brands Galore Banner;BrandsGaloreBanner;/Brands/c/brands
@@ -413,7 +350,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 #;;Section4Slot-Homepage;Section4 Slot for Homepage;true;DigitalCompactCamerasBannerComponent,DigitalSLRCamerasBannerComponent,MemoryBannerComponent,AccessoriesBannerComponent
 #;;Section5Slot-Homepage;Section5 Slot for Homepage;true;NextDayDeliveryBanner
 
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'homepage']; contentSlot(uid, $contentCV)[unique = true]
+#INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'homepage']; contentSlot(uid, $contentCV)[unique = true]
 #;;Section1-Homepage;Section1;;Section1Slot-Homepage
 #;;Section2A-Homepage;Section2A;;Section2ASlot-Homepage
 #;;Section2B-Homepage;Section2B;;Section2BSlot-Homepage
@@ -445,7 +382,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 #;;Section2Slot-CameraAccessories;Section2 Slot for Camera Accessories Page;true;BuyOnlineBanner
 #;;Section3Slot-CameraAccessories;Section3 Slot for Camera Accessories Page;true;CameraFlashesFeatureComponent,TripodFeatureComponent,CameraLensesFeatureComponent,ColourFilmsFeatureComponent,BlackAndWhiteFilmsFeatureComponent,BlankVideoTapesFeatureComponent
 
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'CamerasAccessoriesAndSuppliesCategoryPage']; contentSlot(uid, $contentCV)[unique = true]
+#INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'CamerasAccessoriesAndSuppliesCategoryPage']; contentSlot(uid, $contentCV)[unique = true]
 #;;Section2-CameraAccessories;Section2;;Section2Slot-CameraAccessories
 #;;Section3-CameraAccessories;Section3;;Section3Slot-CameraAccessories
 
@@ -600,7 +537,7 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 #;;SideContent-Account;Side Content Slot for My Account Homepage;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-Account;Body Content Slot for My Account Homepage;true;AccountHomepageComponent;;;
 #
-ContentSlotForPage
+
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-Account;SideContent;;SideContent-Account;;;
 #;;BodyContent-Account;BodyContent;;BodyContent-Account;;;
@@ -610,8 +547,7 @@ ContentSlotForPage
 #INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 #;;SideContent-profile;Side Content Slot for My Account Profile;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-profile;Body Content Slot for My Account Profile;true;AccountProfileComponent;;;
-#
-# ContentSlotForPage
+
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='profile'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-profile;SideContent;;SideContent-profile;;;
 #;;BodyContent-profile;BodyContent;;BodyContent-profile;;;
@@ -621,8 +557,7 @@ ContentSlotForPage
 #INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 #;;SideContent-address-book;Side Content Slot for Account Address Book;true;AccountLeftNavigationComponent;;;
 #;;BodyContent-address-book;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
-#
-ContentSlotForPage
+
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='address-book'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-address-book;SideContent;;SideContent-address-book;;;
 #;;BodyContent-address-book;BodyContent;;BodyContent-address-book;;;
@@ -649,7 +584,6 @@ ContentSlotForPage
 #;;SideContent-payment-details;SideContent;;SideContent-payment-details;;;
 #;;BodyContent-payment-details;BodyContent;;BodyContent-payment-details;;;
 
-
 ###### Account Order History
 
 # ContentSlot
@@ -661,7 +595,6 @@ ContentSlotForPage
 #INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orders'];contentSlot(uid,$contentCV)[unique=true];;;
 #;;SideContent-orders;SideContent;;SideContent-orders;;;
 #;;BodyContent-orders;BodyContent;;BodyContent-orders;;;
-
 
 ###### Account Order Details
 
@@ -732,7 +665,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 #;;LeftContentSlot-login;Left Content Slot for Customer Login;true;ReturningCustomerLoginComponent;;;
 #;;RightContentSlot-login;Right Content Slot for Customer Login;true;NewCustomerLoginComponent;;;
 
-INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'login']; contentSlot(uid, $contentCV)[unique = true];;;
+#INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'login']; contentSlot(uid, $contentCV)[unique = true];;;
 #;;LeftContentSlot-login;LeftContentSlot;;LeftContentSlot-login;;;
 #;;RightContentSlot-login;RightContentSlot;;RightContentSlot-login;;;
 
