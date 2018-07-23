@@ -34,52 +34,53 @@
   }
 }
 
-.cart-top-bar{
-	background: @table-2n-line-bg;
-	padding: 10px;
-    .full-width-padding();
+.cart-top-bar {
+  background: @table-2n-line-bg;
+  padding: 10px;
+  .full-width-padding();
 
-	a.help{
+  a.help {
     font-size: @font-size-small;
     position: relative;
     padding-right: 25px;
 
-      .glyphicon {
-          color: @link-color;
-          font-size: 1.5em;
-          position: absolute;
-          right: 0;
-          top: -1px;
-      }
-	}
+    .glyphicon {
+      color: @link-color;
+      font-size: 1.5em;
+      position: absolute;
+      right: 0;
+      top: -1px;
+    }
+  }
 
-	.help-popup-content-holder{
-		display: none;
-	}
+  .help-popup-content-holder {
+    display: none;
+  }
 }
 
-.cart-restoration-bar{
-	background: #F2F4F7;
-	margin-bottom: @grid-gutter-width;
-	padding: (@grid-gutter-width/2);
-    .full-width-padding();
+.cart-restoration-bar {
+  background: #F2F4F7;
+  margin-bottom: @grid-gutter-width;
+  padding: (@grid-gutter-width/2);
+  .full-width-padding();
 }
-.help-popup-content{
-	strong{
-		display: block;
-		margin-bottom: 15px;
-	}
+
+.help-popup-content {
+  strong {
+    display: block;
+    margin-bottom: 15px;
+  }
 }
 
 .cart__content {
   .row();
 }
 
-.cart__top--totals{
-	text-align: right;
-	font-size: 15px;
-    margin-top: 15px;
-    .full-width-padding();
+.cart__top--totals {
+  text-align: right;
+  font-size: 15px;
+  margin-top: 15px;
+  .full-width-padding();
 
   .cart__top--amount {
     margin-left: 5px;
@@ -120,31 +121,33 @@
 .item__list__cart {
   margin-top: 15px;
   margin-bottom: 10px;
-  
+
   table td {
-      padding: 0;
-   }
-   
+    padding: 0;
+  }
+
   // entry-group starts here now
   & > table {
     tbody > .entry-group-header {
 
       & > th {
-        background-color: @entry-group-header  ;
+        background-color: @entry-group-header;
         font-size: 16px;
         font-weight: 700;
         color: @entry-group-text;
         padding-right: 35px;
       }
 
-      a { color: @link-color; }
+      a {
+        color: @link-color;
+      }
 
     }
 
     // entry-group sub-group starts here in 2nd table
     table {
       td {
-        background-color: @entry-group-item ;
+        background-color: @entry-group-item;
       }
 
       tbody > .entry-group-header > th {
@@ -167,7 +170,7 @@
 
   .item__list--item {
     border-top: 1px solid @border-color-2;
-    
+
     .item__image {
       padding: 10px;
     }
@@ -246,7 +249,7 @@
   }
 
   .item__configuration--entry {
-    @media (max-width:@screen-xs) {
+    @media (max-width: @screen-xs) {
       margin-bottom: 5px;
     }
   }
@@ -340,26 +343,26 @@
     padding-right: 60px;
   }
 
-	.cart-price {
-	  font-weight: bold;
-	}
+  .cart-price {
+    font-weight: bold;
+  }
 
-	.discount {
-		color: @item-promo-color;
-	}
-	
-	.quote-discount-link {
-  		text-transform: uppercase;
-	}
+  .discount {
+    color: @item-promo-color;
+  }
 
-	.grand-total {
-      font-size: @font-size-large-3;
-      text-transform: uppercase;
-      line-height: 1.3em;
-      font-weight: bold;
-      padding-top: 15px;
-      padding-bottom: 15px;
-	}
+  .quote-discount-link {
+    text-transform: uppercase;
+  }
+
+  .grand-total {
+    font-size: @font-size-large-3;
+    text-transform: uppercase;
+    line-height: 1.3em;
+    font-weight: bold;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 
   .cart-totals-taxes {
     clear: both;
@@ -395,7 +398,7 @@
     margin: 0;
 
     .pull-right {
-      float: none!important;
+      float: none !important;
     }
 
     .row {
@@ -404,43 +407,42 @@
   }
 }
 
-.express-checkout{
-	background-color: @table-2n-line-bg;
-	padding: @grid-gutter-width (@grid-gutter-width*2);
-	margin: @grid-gutter-width 0;
+.express-checkout {
+  background-color: @table-2n-line-bg;
+  padding: @grid-gutter-width (@grid-gutter-width*2);
+  margin: @grid-gutter-width 0;
 
-    @media (min-width: @screen-sm) {
-      margin-right: 20px;
+  @media (min-width: @screen-sm) {
+    margin-right: 20px;
+  }
+
+  @media (min-width: @screen-md) {
+    margin-right: 30px;
+  }
+
+  .headline {
+    font-size: @font-size-large-4;
+    font-weight: 600;
+    margin: 0 0 (@grid-gutter-width/2) 0;
+  }
+
+  ul {
+    margin-top: 5px;
+
+    li {
+      list-style-type: disc;
     }
+  }
 
-    @media (min-width: @screen-md) {
-      margin-right: 30px;
-    }
-
-	.headline{
-		font-size: @font-size-large-4;
-        font-weight: 600;
-		margin:  0 0 (@grid-gutter-width/2) 0;
-	}
-
-	ul {
-      margin-top: 5px;
-
-      li {
-        list-style-type: disc;
-      }
-    }
-
-    @media (max-width: @screen-sm-max) and (min-width: @screen-sm-min) {
-      padding: @grid-gutter-width;
-      margin-right: 20px;
-    }
-    @media (max-width: @screen-xs-max) {
-      margin: 0 0 20px 0;
-      padding: @grid-gutter-width;
-    }
+  @media (max-width: @screen-sm-max) and (min-width: @screen-sm-min) {
+    padding: @grid-gutter-width;
+    margin-right: 20px;
+  }
+  @media (max-width: @screen-xs-max) {
+    margin: 0 0 20px 0;
+    padding: @grid-gutter-width;
+  }
 }
-
 
 @image-offset: 100px;
 .cartpotproline,
@@ -461,11 +463,11 @@
   color: @item-promo-color;
 }
 
-.error-details-section{
-	.action{
-		text-align: center;
-		margin: (@grid-gutter-width/2) 0;
-	}
+.error-details-section {
+  .action {
+    text-align: center;
+    margin: (@grid-gutter-width/2) 0;
+  }
 }
 
 .doFlowSelectedChange,
@@ -474,32 +476,31 @@
 }
 
 @media (max-width: @screen-xs-max) {
-    .cartpotproline,
-    .cartproline {
-      padding: @grid-gutter-width/2 @grid-gutter-width (@grid-gutter-width + 5);
-    }
-
-    .btn--continue-shopping,
-    .btn--continue-checkout,
-    .btn-create-quote {
-      margin-bottom: (@grid-gutter-width - 5);
-    }
-
-    .doFlowSelectedChange {
-      margin-top: @grid-gutter-width;
-    }
+  .cartpotproline,
+  .cartproline {
+    padding: @grid-gutter-width/2 @grid-gutter-width (@grid-gutter-width + 5);
   }
 
-  #cboxContent {
-    .cart_popup_error_msg {
-      margin-bottom: @grid-gutter-width;
-    }
+  .btn--continue-shopping,
+  .btn--continue-checkout,
+  .btn-create-quote {
+    margin-bottom: (@grid-gutter-width - 5);
   }
+
+  .doFlowSelectedChange {
+    margin-top: @grid-gutter-width;
+  }
+}
+
+#cboxContent {
+  .cart_popup_error_msg {
+    margin-bottom: @grid-gutter-width;
+  }
+}
 
 .content__empty {
   .content {
-    margin: 0 auto;
-    width: 50%;
+    .full-width-padding();
   }
 }
 
@@ -507,9 +508,9 @@
 //   mini cart modal                     //
 ///////////////////////////////////////////
 
-.mini-cart{
- 
-  .mini-cart-body{
+.mini-cart {
+
+  .mini-cart-body {
     .clearfix;
 
     .legend {
@@ -519,57 +520,57 @@
       }
     }
 
-    .mini-cart-list{
+    .mini-cart-list {
       .list-unstyled;
 
-      li+li{
+      li + li {
         margin-top: (@grid-gutter-width/2);
       }
 
       .mini-cart-item {
         //.clearfix;
-        .thumb{
+        .thumb {
           float: left;
           margin-right: (@grid-gutter-width/2);
-            img {
-              max-width: 65px;
-            }
+          img {
+            max-width: 65px;
+          }
         }
-        .details{
+        .details {
           margin-left: 65px+(@grid-gutter-width/2);
-          .name{
+          .name {
             font-weight: bold;
             color: inherit;
           }
         }
 
-        .price{
+        .price {
           text-align: right;
           font-weight: bold;
         }
       }
     }
 
-    .mini-cart-totals{
-      border:1px solid @border-color-2;
-      border-width:1px 0;
+    .mini-cart-totals {
+      border: 1px solid @border-color-2;
+      border-width: 1px 0;
       margin: (@grid-gutter-width/2) 0 (@grid-gutter-width + @grid-gutter-width/2);
       padding: (@grid-gutter-width/2);
 
-      .key{
+      .key {
         float: left;
       }
 
-      .value{
+      .value {
         text-align: right;
       }
     }
 
-    .mini-cart-checkout-button{
+    .mini-cart-checkout-button {
       margin: (@grid-gutter-width/2) 0;
     }
 
-    & img{
+    & img {
       width: 100%;
     }
   }
@@ -656,7 +657,7 @@
   display: block;
 }
 
-textarea.quote__comments--textarea{
+textarea.quote__comments--textarea {
   min-height: 100px;
   max-width: 100%;
   width: 100%;
@@ -722,7 +723,7 @@ textarea.quote__comments--textarea{
 
 .quote__comments .quote__comments--time {
   font-weight: bold;
-  
+
   @media (max-width: @screen-sm) {
     margin-bottom: 5px;
   }
@@ -736,48 +737,47 @@ textarea.quote__comments--textarea{
   word-break: break-all;
 }
 
-
-  .form-element-icon.datepicker.quote__expiration .glyphicon {
-    @media (min-width: @screen-md) {
-      top: 10px;
-    }
-
-    @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
-      top: 28px;
-    }
+.form-element-icon.datepicker.quote__expiration .glyphicon {
+  @media (min-width: @screen-md) {
+    top: 10px;
   }
 
-  .quote__expiration {
-    @media (min-width: @screen-md) {
-      .form-group {
-        display: table;
-        width: 100%;
-        margin-bottom: 0;
-        margin-top: @grid-gutter-width / 2;
-      }
+  @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
+    top: 28px;
+  }
+}
+
+.quote__expiration {
+  @media (min-width: @screen-md) {
+    .form-group {
+      display: table;
+      width: 100%;
+      margin-bottom: 0;
+      margin-top: @grid-gutter-width / 2;
     }
   }
+}
 
-  .quote__expiration--label {
-    @media (min-width: @screen-md) {
-      display: table-cell;
-      text-align: right;
-      padding-right: @grid-gutter-width / 2;
-    }
-
-    @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
-      margin-bottom: 0px;
-    }
+.quote__expiration--label {
+  @media (min-width: @screen-md) {
+    display: table-cell;
+    text-align: right;
+    padding-right: @grid-gutter-width / 2;
   }
 
-  .quote__expiration--input {
-    @media (min-width: @screen-md) {
-      display: table-cell;
-
-    }
-
-    @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
-      padding: (@grid-gutter-width / 4) (@grid-gutter-width / 2);
-      height: 28px;
-    }
+  @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
+    margin-bottom: 0px;
   }
+}
+
+.quote__expiration--input {
+  @media (min-width: @screen-md) {
+    display: table-cell;
+
+  }
+
+  @media (min-width: @screenSm) and (max-width: @screen-sm-max) {
+    padding: (@grid-gutter-width / 4) (@grid-gutter-width / 2);
+    height: 28px;
+  }
+}
