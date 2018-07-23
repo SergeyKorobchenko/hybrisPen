@@ -60,6 +60,18 @@ UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName
 ; ; FacebookLink                     ; "Facebook"
 ; ; HomepageNavLink                  ; "Home"
 ; ; SpecialOffersLink                ; "Special Offers"
+; ; PersonalDetailsLink              ; "Personal Details"
+; ; UpdateEmailLink                  ; "Email Address"
+; ; UpdatePasswordLink               ; "Password"
+; ; AddressBookLink                  ; "Address Book"
+; ; PaymentDetailsLink               ; "Payment Details"
+; ; OrderHistoryLink                 ; "Order History"
+; ; SavedCartsLink                   ; "Saved Carts"
+; ; ImportSavedCartLink              ; "Import Saved Cart"
+; ; importCSVSavedCartPage           ; "Import Saved Cart"
+; ; savedCartDetailsPage             ; "Saved Cart Details"
+; ; saved-carts                      ; "Saved Carts"
+; ; QuickOrderLink                   ; "Quick Order"
 
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpeg']; &imageRef; folder(qualifier)[default = 'images']; altText
@@ -91,9 +103,9 @@ UPDATE ProductReferencesComponent; $contentCV[unique = true]; uid[unique = true]
 ; ; Similar      ; "You may also like..."
 ; ; accessories  ; "Accessories"
 
-# CMS PurchasedCategorySuggestion Components
-UPDATE PurchasedCategorySuggestionComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
-; ; PurchasedCategorySuggestions ; "You may also like..."
+# CMS PurchasedCategorySuggestion Components -- MAYBE WILL USE IN FUTURE
+#UPDATE PurchasedCategorySuggestionComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+#; ; PurchasedCategorySuggestions ; "You may also like..."
 
 # CMS CartSuggestion Components
 UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
@@ -161,6 +173,7 @@ UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; headline[
 ; ; DigitalCompactCamerasBannerComponent ; Digital Compact Cameras                                            ; Elec_228x178_HomeCat_DigiCom_EN_01.jpg       ; "Find the perfect camera to capture those special moments"
 ; ; DigitalSLRCamerasBannerComponent     ; Digital SLR Cameras                                                ; Elec_228x178_HomeCat_DigiSLR_EN_01.jpg       ; "See the latest DSLR technology from the leading brands"
 ; ; MemoryBannerComponent                ; Camera and Camcorder Memory                                        ; Elec_228x178_HomeCat_Memory_EN_01.jpg        ; "Exclusive discounts on our memory cards"
+
 UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
 ; ; ElectronicsHomepageProductCarouselComponent ; Our Bestselling Products
 
@@ -202,7 +215,6 @@ UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; $pi
 ; ; SLRLensesBanner      ; Elec_148x300_Sec4_LensesBanner_EN_01.jpg
 
 UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
-#;;EmptyCartParagraphComponent;"<h2>Your shopping cart is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>"
 ; ; NoSearchResultsParagraphComponent ; "<h2>Sorry, we couldn't find any results for your search</h2><p>Suggestions:</p><ul><li>You may have typed your keywords incorrectly - please check for misspellings.</li><li>You may have been too specific - please broaden your search by using fewer keywords.</li><li>Browse our products by selecting a category above.</li></ul>"
 
 # Electronics Cart Page
@@ -239,3 +251,246 @@ INSERT_UPDATE WorldpayCCComponent; uid[unique = true]; $contentCV[unique = true]
 
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
 ; ; WorldpayHelpParagraphComponent ; "<strong>Need help with your checkout process?</strong> <span> Contact us or Call +44 (0) 191 516 5610</span>" ;
+
+####### cms-responsive-content.impex
+
+# CMS tabbed jsp include components
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; ProductDetailsTabComponent ; Product Details
+; ; ProductSpecsTabComponent   ; Specs
+; ; ProductReviewsTabComponent ; Reviews
+
+############ above is the desktop data, below is the responsive data ################################
+
+UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; NewElectronicsHomepageProductCarouselComponent ; What's New ;
+
+###  Home page splash   #######
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; mobile     ; Elec_480x320_HomeSpeed_EN_01_480W.jpg   ; $siteResource/images/banners/homepage/responsive/Elec_480x320_HomeSpeed_EN_01_480W.jpg   ; Elec_480x320_HomeSpeed_EN_01_480W.jpg   ; "Save Big On Select SLR & DSLR Cameras" ;
+; tablet     ; Elec_770x350_HomeSpeed_EN_01_770W.jpg   ; $siteResource/images/banners/homepage/responsive/Elec_770x350_HomeSpeed_EN_01_770W.jpg   ; Elec_770x350_HomeSpeed_EN_01_770W.jpg   ; "Save Big On Select SLR & DSLR Cameras" ;
+; desktop    ; Elec_960x330_HomeSpeed_EN_01_960W.jpg   ; $siteResource/images/banners/homepage/responsive/Elec_960x330_HomeSpeed_EN_01_960W.jpg   ; Elec_960x330_HomeSpeed_EN_01_960W.jpg   ; "Save Big On Select SLR & DSLR Cameras" ;
+; widescreen ; Elec_1400x440_HomeSpeed_EN_01_1400W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_1400x440_HomeSpeed_EN_01_1400W.jpg ; Elec_1400x440_HomeSpeed_EN_01_1400W.jpg ; "Save Big On Select SLR & DSLR Cameras" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-spalsh-en ; Elec_480x320_HomeSpeed_EN_01_480W.jpg,Elec_770x350_HomeSpeed_EN_01_770W.jpg,Elec_960x330_HomeSpeed_EN_01_960W.jpg,Elec_1400x440_HomeSpeed_EN_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageSplashBannerComponent ; electronics-homepage-spalsh-en
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; mobile     ; Elec_480x118_HomeDiscount_EN_01_480W.jpg  ; $siteResource/images/banners/homepage/responsive/Elec_480x118_HomeDiscount_EN_01_480W.jpg  ; Elec_480x118_HomeDiscount_EN_01_480W.jpg  ; "Save Big on Select Camera Accessories & Supplies" ;
+; tablet     ; Elec_770x80_HomeDiscount_EN_01_770W.jpg   ; $siteResource/images/banners/homepage/responsive/Elec_770x80_HomeDiscount_EN_01_770W.jpg   ; Elec_770x80_HomeDiscount_EN_01_770W.jpg   ; "Save Big on Select Camera Accessories & Supplies" ;
+; desktop    ; Elec_960x80_HomeDiscount_EN_01_960W.jpg   ; $siteResource/images/banners/homepage/responsive/Elec_960x80_HomeDiscount_EN_01_960W.jpg   ; Elec_960x80_HomeDiscount_EN_01_960W.jpg   ; "Save Big on Select Camera Accessories & Supplies" ;
+; widescreen ; Elec_1400x80_HomeDiscount_EN_01_1400W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_1400x80_HomeDiscount_EN_01_1400W.jpg ; Elec_1400x80_HomeDiscount_EN_01_1400W.jpg ; "Save Big on Select Camera Accessories & Supplies" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-discount-en ; Elec_480x118_HomeDiscount_EN_01_480W.jpg,Elec_770x80_HomeDiscount_EN_01_770W.jpg,Elec_960x80_HomeDiscount_EN_01_960W.jpg,Elec_1400x80_HomeDiscount_EN_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageDiscountBannerComponent ; electronics-homepage-discount-en ;
+
+###  Home page slot 2A  ####
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x150_HomeFam_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x150_HomeFam_EN_01_200W.jpg ; Elec_200x150_HomeFam_EN_01_200W.jpg ; "Compact Cameras" ;
+; desktop    ; Elec_240x180_HomeFam_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x180_HomeFam_EN_01_240W.jpg ; Elec_240x180_HomeFam_EN_01_240W.jpg ; "Compact Cameras" ;
+; widescreen ; Elec_350x262_HomeFam_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x262_HomeFam_EN_01_350W.jpg ; Elec_350x262_HomeFam_EN_01_350W.jpg ; "Compact Cameras" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-light-fam-en ; Elec_200x150_HomeFam_EN_01_200W.jpg,Elec_240x180_HomeFam_EN_01_240W.jpg,Elec_350x262_HomeFam_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageLightFamBannerComponent ; electronics-homepage-light-fam-en
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x150_HomeFamLight_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x150_HomeFamLight_EN_01_200W.jpg ; Elec_200x150_HomeFamLight_EN_01_200W.jpg ; "Camera Lenses" ;
+; desktop    ; Elec_240x180_HomeFamLight_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x180_HomeFamLight_EN_01_240W.jpg ; Elec_240x180_HomeFamLight_EN_01_240W.jpg ; "Camera Lenses" ;
+; widescreen ; Elec_350x262_HomeFamLight_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x262_HomeFamLight_EN_01_350W.jpg ; Elec_350x262_HomeFamLight_EN_01_350W.jpg ; "Camera Lenses" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-light-text-en ; Elec_200x150_HomeFamLight_EN_01_200W.jpg,Elec_240x180_HomeFamLight_EN_01_240W.jpg,Elec_350x262_HomeFamLight_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageLightFamTextBannerComponent ; electronics-homepage-light-text-en
+
+#### Home section 2B #######
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x150_HomeKid_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x150_HomeKid_EN_01_200W.jpg ; Elec_200x150_HomeKid_EN_01_200W.jpg ; "Power Supplies" ;
+; desktop    ; Elec_240x180_HomeKid_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x180_HomeKid_EN_01_240W.jpg ; Elec_240x180_HomeKid_EN_01_240W.jpg ; "Power Supplies" ;
+; widescreen ; Elec_350x262_HomeKid_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x262_HomeKid_EN_01_350W.jpg ; Elec_350x262_HomeKid_EN_01_350W.jpg ; "Power Supplies" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-camcorders-en ; Elec_200x150_HomeKid_EN_01_200W.jpg,Elec_240x180_HomeKid_EN_01_240W.jpg,Elec_350x262_HomeKid_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageCamcordersBannerComponent ; electronics-homepage-camcorders-en
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg ; Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg ; "Camcorders" ;
+; desktop    ; Elec_240x180_HomeCaptureFirst_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x180_HomeCaptureFirst_EN_01_240W.jpg ; Elec_240x180_HomeCaptureFirst_EN_01_240W.jpg ; "Camcorders" ;
+; widescreen ; Elec_350x262_HomeCaptureFirst_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x262_HomeCaptureFirst_EN_01_350W.jpg ; Elec_350x262_HomeCaptureFirst_EN_01_350W.jpg ; "Camcorders" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-camcorders-02-en ; Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg,Elec_240x180_HomeCaptureFirst_EN_01_240W.jpg,Elec_350x262_HomeCaptureFirst_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageCamcordersChildBannerComponent ; electronics-homepage-camcorders-02-en
+### Section 4
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg ; Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg ; "Canyon Web Camera 100KpxelIM CMOS" ;
+; desktop    ; Elec_240x240_HomeSmallDiscount_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x240_HomeSmallDiscount_EN_01_240W.jpg ; Elec_240x240_HomeSmallDiscount_EN_01_240W.jpg ; "Canyon Web Camera 100KpxelIM CMOS" ;
+; widescreen ; Elec_350x350_HomeSmallDiscount_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x350_HomeSmallDiscount_EN_01_350W.jpg ; Elec_350x350_HomeSmallDiscount_EN_01_350W.jpg ; "Canyon Web Camera 100KpxelIM CMOS" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-sm-discount-en ; Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg,Elec_240x240_HomeSmallDiscount_EN_01_240W.jpg,Elec_350x350_HomeSmallDiscount_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageSmDiscountBannerComponent ; electronics-homepage-sm-discount-en
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x200_HomeShop_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShop_EN_01_200W.jpg ; Elec_200x200_HomeShop_EN_01_200W.jpg ; "Logitech QuickCam for Notebook Pro" ;
+; desktop    ; Elec_240x240_HomeShop_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x240_HomeShop_EN_01_240W.jpg ; Elec_240x240_HomeShop_EN_01_240W.jpg ; "Logitech QuickCam for Notebook Pro" ;
+; widescreen ; Elec_350x350_HomeShop_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x350_HomeShop_EN_01_350W.jpg ; Elec_350x350_HomeShop_EN_01_350W.jpg ; "Logitech QuickCam for Notebook Pro" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-shop-en ; Elec_200x200_HomeShop_EN_01_200W.jpg,Elec_240x240_HomeShop_EN_01_240W.jpg,Elec_350x350_HomeShop_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageShopBannerComponent ; electronics-homepage-shop-en
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x200_HomeShipment_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShipment_EN_01_200W.jpg ; Elec_200x200_HomeShipment_EN_01_200W.jpg ; "Samsung NV10 Compact Camera" ;
+; desktop    ; Elec_240x240_HomeShipment_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x240_HomeShipment_EN_01_240W.jpg ; Elec_240x240_HomeShipment_EN_01_240W.jpg ; "Samsung NV10 Compact Camera" ;
+; widescreen ; Elec_350x350_HomeShipment_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x350_HomeShipment_EN_01_350W.jpg ; Elec_350x350_HomeShipment_EN_01_350W.jpg ; "Samsung NV10 Compact Camera" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-shipment-en ; Elec_200x200_HomeShipment_EN_01_200W.jpg,Elec_240x240_HomeShipment_EN_01_240W.jpg,Elec_350x350_HomeShipment_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageShipmentBannerComponent ; electronics-homepage-shipment-en
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; tablet     ; Elec_200x200_HomeService_EN_01_200W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_200x200_HomeService_EN_01_200W.jpg ; Elec_200x200_HomeService_EN_01_200W.jpg ; "Sony Light HVL-20DW2" ;
+; desktop    ; Elec_240x240_HomeService_EN_01_240W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_240x240_HomeService_EN_01_240W.jpg ; Elec_240x240_HomeService_EN_01_240W.jpg ; "Sony Light HVL-20DW2" ;
+; widescreen ; Elec_350x350_HomeService_EN_01_350W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_350x350_HomeService_EN_01_350W.jpg ; Elec_350x350_HomeService_EN_01_350W.jpg ; "Sony Light HVL-20DW2" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-service-en ; Elec_200x200_HomeService_EN_01_200W.jpg,Elec_240x240_HomeService_EN_01_240W.jpg,Elec_350x350_HomeService_EN_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageServiceBannerComponent ; electronics-homepage-service-en
+
+### Section 5
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; mobile     ; Elec_475x119_HomeFreeDel_EN_01_475W.jpg  ; $siteResource/images/banners/homepage/responsive/Elec_475x119_HomeFreeDel_EN_01_475W.jpg  ; Elec_475x119_HomeFreeDel_EN_01_475W.jpg  ; "Free Shipping on All Orders This Weekend" ;
+; tablet     ; Elec_770x50_HomeFreeDel_EN_01_770W.jpg   ; $siteResource/images/banners/homepage/responsive/Elec_770x50_HomeFreeDel_EN_01_770W.jpg   ; Elec_770x50_HomeFreeDel_EN_01_770W.jpg   ; "Free Shipping on All Orders This Weekend" ;
+; desktop    ; Elec_960x50_HomFreeDel_EN_01_960W.jpg    ; $siteResource/images/banners/homepage/responsive/Elec_960x50_HomFreeDel_EN_01_960W.jpg    ; Elec_960x50_HomFreeDel_EN_01_960W.jpg    ; "Free Shipping on All Orders This Weekend" ;
+; widescreen ; Elec_1400x50_HomeFreeDel_EN_01_1400W.jpg ; $siteResource/images/banners/homepage/responsive/Elec_1400x50_HomeFreeDel_EN_01_1400W.jpg ; Elec_1400x50_HomeFreeDel_EN_01_1400W.jpg ; "Free Shipping on All Orders This Weekend" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-homepage-free-del-en ; Elec_475x119_HomeFreeDel_EN_01_475W.jpg,Elec_770x50_HomeFreeDel_EN_01_770W.jpg,Elec_960x50_HomFreeDel_EN_01_960W.jpg,Elec_1400x50_HomeFreeDel_EN_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsHompageFreeDelBannerComponent ; electronics-homepage-free-del-en
+
+##### DSLR Category Page ######
+
+##### Section 1
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; mobile  ; Elec_480x320_Category11_EN_01_480W.jpg   ; $siteResource/images/banners/category/responsive/Elec_480x320_Category11_EN_01_480W.jpg   ; Elec_480x320_Category11_EN_01_480W.jpg   ; "Shop All" ;
+; tablet  ; Elec_770x350_Category11_EN_01_770W.jpg   ; $siteResource/images/banners/category/responsive/Elec_770x350_Category11_EN_01_770W.jpg   ; Elec_770x350_Category11_EN_01_770W.jpg   ; "Shop All" ;
+; desktop ; Elec_1400x440_Category11_EN_01_1400W.jpg ; $siteResource/images/banners/category/responsive/Elec_1400x440_Category11_EN_01_1400W.jpg ; Elec_1400x440_Category11_EN_01_1400W.jpg ; "Shop All" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-slr-category-splash-en ; Elec_480x320_Category11_EN_01_480W.jpg,Elec_770x350_Category11_EN_01_770W.jpg,Elec_1400x440_Category11_EN_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsSLRSplashBannerComponent ; electronics-slr-category-splash-en
+
+##### Section 2
+# A330
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; tablet  ; Elec_200x200_Category02_EN_01_200W.jpg ; $siteResource/images/banners/category/responsive/Elec_200x200_Category02_EN_01_200W.jpg ; Elec_200x200_Category02_EN_01_200W.jpg ; "View" ;
+; desktop ; Elec_350x350_Category02_EN_01_350W.jpg ; $siteResource/images/banners/category/responsive/Elec_350x350_Category02_EN_01_350W.jpg ; Elec_350x350_Category02_EN_01_350W.jpg ; "View" ;
+
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-sony-A330-banner-en ; Elec_350x350_Category02_EN_01_350W.jpg,Elec_200x200_Category02_EN_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsSonyA330BannerComponent ; electronics-sony-A330-banner-en
+
+#Canon 500D
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; tablet  ; Elec_200x200_Category07_EN_01_200W.jpg ; $siteResource/images/banners/category/responsive/Elec_200x200_Category07_EN_01_200W.jpg ; Elec_200x200_Category07_EN_01_200W.jpg ; "View" ;
+; desktop ; Elec_350x350_Category07_EN_01_350W.jpg ; $siteResource/images/banners/category/responsive/Elec_350x350_Category07_EN_01_350W.jpg ; Elec_350x350_Category07_EN_01_350W.jpg ; "View" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-canon-500D-banner-en ; Elec_350x350_Category07_EN_01_350W.jpg,Elec_200x200_Category07_EN_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsCanon500DBannerComponent ; electronics-canon-500D-banner-en
+
+#Canon 450D
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; tablet  ; Elec_200x200_Category06_EN_01_200W.jpg ; $siteResource/images/banners/category/responsive/Elec_200x200_Category06_EN_01_200W.jpg ; Elec_200x200_Category06_EN_01_200W.jpg ; "View" ;
+; desktop ; Elec_350x350_Category06_EN_01_350W.jpg ; $siteResource/images/banners/category/responsive/Elec_350x350_Category06_EN_01_350W.jpg ; Elec_350x350_Category06_EN_01_350W.jpg ; "View" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-canon-450-banner-en ; Elec_350x350_Category06_EN_01_350W.jpg,Elec_200x200_Category06_EN_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsCanon450DBannerComponent ; electronics-canon-450-banner-en
+
+# Sony A100
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; tablet  ; Elec_200x200_Category05_EN_01_200W.jpg ; $siteResource/images/banners/category/responsive/Elec_200x200_Category05_EN_01_200W.jpg ; Elec_200x200_Category05_EN_01_200W.jpg ; "View" ;
+; desktop ; Elec_350x350_Category05_EN_01_350W.jpg ; $siteResource/images/banners/category/responsive/Elec_350x350_Category05_EN_01_350W.jpg ; Elec_350x350_Category05_EN_01_350W.jpg ; "View" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-sony-a100-banner-en ; Elec_350x350_Category05_EN_01_350W.jpg,Elec_200x200_Category05_EN_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsSonyA100HBannerComponent ; electronics-sony-a100-banner-en
+
+# Sony Alpha 200
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; tablet  ; Elec_200x200_Category03_EN_01_200W.jpg ; $siteResource/images/banners/category/responsive/Elec_200x200_Category03_EN_01_200W.jpg ; Elec_200x200_Category03_EN_01_200W.jpg ; "View" ;
+; desktop ; Elec_350x350_Category03_EN_01_350W.jpg ; $siteResource/images/banners/category/responsive/Elec_350x350_Category03_EN_01_350W.jpg ; Elec_350x350_Category03_EN_01_350W.jpg ; "View" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-sony-A200-banner-en ; Elec_350x350_Category03_EN_01_350W.jpg,Elec_200x200_Category03_EN_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsSonyA200BannerComponent ; electronics-sony-A200-banner-en
+
+# Sony Alpha 350
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; tablet  ; Elec_200x200_Category01_EN_01_200W.jpg ; $siteResource/images/banners/category/responsive/Elec_200x200_Category01_EN_01_200W.jpg ; Elec_200x200_Category01_EN_01_200W.jpg ; "View" ;
+; desktop ; Elec_350x350_Category01_EN_01_350W.jpg ; $siteResource/images/banners/category/responsive/Elec_350x350_Category01_EN_01_350W.jpg ; Elec_350x350_Category01_EN_01_350W.jpg ; "View" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-sony-Alpha-350-banner-en ; Elec_350x350_Category01_EN_01_350W.jpg,Elec_200x200_Category01_EN_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsSonyAlpha350BannerComponent ; electronics-sony-Alpha-350-banner-en
+
+##### Section 3
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; mobile  ; Elec_480x118_Category10_EN_01_480W.jpg   ; $siteResource/images/banners/category/responsive/Elec_480x118_Category10_EN_01_480W.jpg   ; Elec_480x118_Category10_EN_01_480W.jpg   ; "Shop Now" ;
+; tablet  ; Elec_770x80_Category10_EN_01_770W.jpg    ; $siteResource/images/banners/category/responsive/Elec_770x80_Category10_EN_01_770W.jpg    ; Elec_770x80_Category10_EN_01_770W.jpg    ; "Shop Now" ;
+; desktop ; Elec_1400x140_Category10_EN_01_1400W.jpg ; $siteResource/images/banners/category/responsive/Elec_1400x140_Category10_EN_01_1400W.jpg ; Elec_1400x140_Category10_EN_01_1400W.jpg ; "Shop Now" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; electronics-save-big-banner-en ; Elec_480x118_Category10_EN_01_480W.jpg,Elec_770x80_Category10_EN_01_770W.jpg,Elec_1400x140_Category10_EN_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; ElectronicsSaveBigDLSRBannerComponent ; electronics-save-big-banner-en
+
+#update navigation node title
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; MyAccountNavNode ; "My Account"
+
+# CMS Paragraph Component
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; QuickOrderInfoParagraphComponent ; "You can add up to 25 valid SKUs below and add to cart. Stock is reserved once products are added to cart."
