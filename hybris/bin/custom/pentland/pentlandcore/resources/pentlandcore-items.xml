@@ -518,6 +518,9 @@
                         <defaultvalue>3</defaultvalue>
                         <persistence type="property"/>
                     </attribute>
+                    <attribute qualifier="site" type="BaseSite" >
+                        <persistence type="property"/>
+                    </attribute>
                 </attributes>
             </itemtype>
             <itemtype code="FileMigrationCronJob" extends="CronJob" autocreate="true" generate="true">

@@ -144,10 +144,15 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		importData.add(enduraImportData);
 
 		getCoreDataImportService().execute(this, context, importData);
-		//getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+		final String site = context.getParameter(context.getExtensionName() + "_" + IMPORT_SITE);
+		if (!ENDURA.equals(site)) {
+			getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+		}
 
 		getSampleDataImportService().execute(this, context, importData);
-		//getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		if (!ENDURA.equals(site)) {
+			getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		}
 
 	}
 

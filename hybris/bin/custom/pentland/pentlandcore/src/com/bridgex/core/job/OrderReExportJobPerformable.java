@@ -114,10 +114,12 @@ public class OrderReExportJobPerformable extends AbstractJobPerformable<OrderExp
     StringBuilder queryBuilder = new StringBuilder("select {pk} from {" + OrderModel._TYPECODE + "} ");
     queryBuilder.append("where {" + OrderModel.EXPORTSTATUS + "}=?exportStatus ");
     queryBuilder.append("and {" + OrderModel.MODIFIEDTIME + "} < ?modifiedMargin ");
-
+    queryBuilder.append("and {" + OrderModel.SITE + "} = ?site");
     FlexibleSearchQuery query = new FlexibleSearchQuery(queryBuilder.toString());
     query.addQueryParameter("exportStatus", ExportStatus.NOTEXPORTED);
     query.addQueryParameter("modifiedMargin", DateUtils.addMinutes( new Date(), -timeout));
+    query.addQueryParameter("site", cronJob.getSite());
+
     return query;
   }
 
