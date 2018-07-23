@@ -494,3 +494,13 @@ UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[l
 # CMS Paragraph Component
 UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
 ; ; QuickOrderInfoParagraphComponent ; "You can add up to 25 valid SKUs below and add to cart. Stock is reserved once products are added to cart."
+
+###### NOT FOUND PAGE START ######
+
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/svg+xml']; $contentCV[unique = true]; folder(qualifier)[default = images]
+; widescreen ; Endura_1400x401_NotFoundPage_EN_1400W.svg ; $siteResource/images/banners/site/Endura_1400x401_NotFoundPage_EN_1400W.svg ; Endura_1400x401_NotFoundPage_EN_1400W.svg ; "Page not found" ;
+
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; media(code, $contentCV)[lang = $lang]
+; ; EnduraNotFoundBannerComponent ; Endura_1400x401_NotFoundPage_EN_1400W.svg
+
+###### NOT FOUND PAGE END ######

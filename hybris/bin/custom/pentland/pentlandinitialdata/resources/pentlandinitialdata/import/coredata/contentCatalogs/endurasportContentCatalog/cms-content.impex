@@ -12,7 +12,7 @@
 # Import the CMS content for the endurasport site
 #
 $contentCatalog = endurasportContentCatalog
-$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default=Staged])[default = $contentCatalog:Staged]
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
 
 # Import modulegen config properties into impex macros
 UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
@@ -857,8 +857,8 @@ INSERT_UPDATE CategoryPage; $contentCV[unique = true]; uid[unique = true]; name;
 ; ; productGrid ; Product Grid          ; ProductGridPageTemplate ; false ;
 ; ; category    ; Default Category Page ; CategoryPageTemplate    ; false ;
 
+###### WorldPay START ######
 
-################# worldpay
 INSERT_UPDATE PageTemplate; $contentCV[unique = true]; uid[unique = true]; name; restrictedPageTypes(code); active[default = true]; frontendTemplateName
 ; ; WorldpayCSEPaymentAndBillingCheckoutPageTemplate      ; Worldpay CSE Payment Page Template      ; WorldpayPaymentPage ; ; addon:/worldpayaddon/pages/checkout/multi/worldpayChooseCSEPaymentDetailsPage
 ; ; WorldpayRedirectPaymentAndBillingCheckoutPageTemplate ; Worldpay Redirect Payment Page Template ; WorldpayPaymentPage ; ; addon:/worldpayaddon/pages/checkout/multi/worldpayChooseRedirectPaymentDetailsPage
@@ -870,7 +870,6 @@ INSERT_UPDATE PageTemplate; $contentCV[unique = true]; uid[unique = true]; veloc
 
 # Content Pages
 INSERT_UPDATE WorldpayPaymentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false'];
-#;;worldpayPaymentAndBillingCheckoutPage;Worldpay Payment And Billing Checkout Page;WorldpayCSEPaymentAndBillingCheckoutPageTemplate;worldpayPaymentAndBillingCheckoutStep
 ; ; worldpayPaymentAndBillingCheckoutPage ; Worldpay Payment And Billing Checkout Page ; WorldpayRedirectPaymentAndBillingCheckoutPageTemplate ; worldpayPaymentAndBillingCheckoutStep
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name
@@ -903,3 +902,5 @@ INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = tr
 ; ; TopHeaderSlot-WorldpayRedirectPaymentAndBillingCheckoutPage          ; TopHeaderSlot          ; ; TopHeaderSlot              ; true
 ; ; BottomHeaderSlot-WorldpayRedirectPaymentAndBillingCheckoutPage       ; BottomHeaderSlot       ; ; BottomHeaderSlot           ; true
 ; ; PlaceholderContentSlot-WorldpayRedirectPaymentAndBillingCheckoutPage ; PlaceholderContentSlot ; ; PlaceholderContentSlot     ; true
+
+###### WorldPay END ######
