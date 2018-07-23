@@ -66,7 +66,7 @@ public class AddToCartController extends AbstractController
 
 	private static final Logger LOG = Logger.getLogger(AddToCartController.class);
 
-	@Resource(name = "cartFacade")
+	@Resource(name = "defaultCartFacade")
 	private CartFacade cartFacade;
 
 	@Resource(name = "productVariantFacade")

@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.worldpay.controllers.pages.checkout.steps.WorldpayHopResponseController.*;
+import static com.worldpay.controllers.pages.checkout.steps.WorldpayResponseController.*;
 import static com.worldpay.service.model.AuthorisedStatus.*;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
@@ -45,7 +45,7 @@ import static org.mockito.Mockito.*;
 
 @UnitTest
 @RunWith(MockitoJUnitRunner.class)
-public class WorldpayHopResponseControllerTest {
+public class WorldpayResponseControllerTest {
 
     private static final String PAYMENT_STATUS_PARAMETER_NAME = "paymentStatus";
     private static final String STATUS_ERROR = "ERROR";
@@ -67,7 +67,7 @@ public class WorldpayHopResponseControllerTest {
 
     @Spy
     @InjectMocks
-    private WorldpayHopResponseController testObj;
+    private WorldpayResponseController testObj;
 
     @Mock
     private Model modelMock;

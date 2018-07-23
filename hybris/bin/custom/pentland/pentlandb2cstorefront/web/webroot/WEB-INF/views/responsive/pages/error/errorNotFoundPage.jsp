@@ -9,10 +9,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
-<template:page pageTitle="${pageTitle}">
+<template:page pageTitle="${pageTitle}" isMVP1="true">
 	
 	<c:url value="/" var="homePageUrl" />
-
 
 	<cms:pageSlot position="MiddleContent" var="comp" element="div" class="errorNotFoundPageMiddle">
 		<cms:component component="${comp}" element="div" class="errorNotFoundPageMiddle-component" />
