@@ -165,4 +165,10 @@
 		<property name="companyName" type="java.lang.String"></property>
 	</bean>
 
+	<bean class="com.bridgex.facades.cart.dto.CartEntryDTO">
+		<property name="number" type="java.lang.String"/>
+		<property name="code" type="java.lang.String"/>
+		<property name="qty" type="java.lang.Long"/>
+	</bean>
+
 </beans>

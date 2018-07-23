@@ -10,6 +10,9 @@
  */
 package com.bridgex.b2cstorefront.controllers.pages;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
+
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryAction;
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryActionFacade;
 import de.hybris.platform.acceleratorfacades.cart.action.exceptions.CartEntryActionException;
@@ -30,11 +33,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.SaveCart
 import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.SaveCartFacade;
-import de.hybris.platform.commercefacades.order.data.CartData;
-import de.hybris.platform.commercefacades.order.data.CartModificationData;
-import de.hybris.platform.commercefacades.order.data.CommerceSaveCartParameterData;
-import de.hybris.platform.commercefacades.order.data.CommerceSaveCartResultData;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.order.data.*;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
@@ -45,9 +44,13 @@ import de.hybris.platform.commerceservices.order.CommerceCartModificationExcepti
 import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.core.enums.QuoteState;
 import de.hybris.platform.enumeration.EnumerationService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.site.BaseSiteService;
+import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 import com.bridgex.b2cstorefront.controllers.ControllerConstants;
+import com.bridgex.core.services.PentlandBaseStoreService;
+import com.bridgex.facades.cart.dto.CartEntryDTO;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -61,6 +64,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.ws.rs.DefaultValue;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -69,12 +73,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -126,6 +125,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "cartEntryActionFacade")
 	private CartEntryActionFacade cartEntryActionFacade;
+
+	@Resource(name = "baseStoreService")
+	private PentlandBaseStoreService baseStoreService;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -621,6 +623,27 @@ public class CartPageController extends AbstractCartPageController
 	{
 		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
 		return quoteData != null ? String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode())) : REDIRECT_CART_URL;
+	}
+
+	@PostMapping(value = "/addcart", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
+	public String addOrUpdateCart(@RequestParam(defaultValue = "endurasport") String baseSiteId,
+	                              @RequestParam String baseStoreId,
+	                              @RequestParam List<CartEntryDTO> entries) throws CommerceCartModificationException {
+		setSiteAndStore(baseSiteId, baseStoreId);
+		getCartFacade().removeSessionCart();
+		for (CartEntryDTO entry : entries) {
+			getCartFacade().addToCart(entry.getCode(), entry.getQty());
+		}
+		return REDIRECT_CART_URL;
+	}
+
+	private void setSiteAndStore(String baseSiteId, String baseStoreId) {
+		getBaseSiteService().setCurrentBaseSite(baseSiteId, true);
+		getBaseStoreService().setCurrentBaseStore(baseStoreId);
+	}
+
+	public PentlandBaseStoreService getBaseStoreService() {
+		return baseStoreService;
 	}
 
 }
