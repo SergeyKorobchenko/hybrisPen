@@ -102,6 +102,7 @@
 
 .cart__actions,
 .cart__actions--top {
+  padding-top: 20px;
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 32px;
@@ -119,6 +120,8 @@
 }
 
 .item__list__cart {
+  .full-width-padding();
+
   margin-top: 15px;
   margin-bottom: 10px;
 
@@ -169,7 +172,7 @@
   }
 
   .item__list--item {
-    border-top: 1px solid @border-color-2;
+    border-top: 1px solid @border-color-4;
 
     .item__image {
       padding: 10px;
@@ -334,13 +337,13 @@
   .half-width-padding();
 
   .cart-totals-left {
-    padding-left: 50px;
+    padding-left: 20px;
   }
 
   .cart-totals-right {
     font-weight: bold;
     padding-left: 0;
-    padding-right: 60px;
+    padding-right: 50px;
   }
 
   .cart-price {
@@ -369,7 +372,7 @@
     font-size: @font-size-base;
     font-weight: 700;
     line-height: 1.5em;
-    padding-right: 60px;
+    padding-right: 50px;
     padding-left: @cart-totals-padding-right;
   }
 
@@ -377,8 +380,8 @@
     .cart-totals-left,
     .cart-totals-right,
     .cart-totals-taxes {
-      padding-left: @grid-gutter-width + 10;
-      padding-right: @grid-gutter-width + 10;
+      padding-left: @grid-gutter-width;
+      padding-right: @grid-gutter-width;
     }
   }
 
@@ -410,7 +413,7 @@
 .express-checkout {
   background-color: @table-2n-line-bg;
   padding: @grid-gutter-width (@grid-gutter-width*2);
-  margin: @grid-gutter-width 0;
+  margin: @grid-gutter-width 0 0;
 
   @media (min-width: @screen-sm) {
     margin-right: 20px;

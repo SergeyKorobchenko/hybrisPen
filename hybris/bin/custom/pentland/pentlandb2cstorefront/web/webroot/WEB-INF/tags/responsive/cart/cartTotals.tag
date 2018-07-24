@@ -8,6 +8,9 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="quote" tagdir="/WEB-INF/tags/responsive/quote" %>
 
+<%-- Temporary attribute for only MVP1, helps to disable unused components, must be deleted in future --%>
+<%@ attribute name="isMVP1" required="false" %>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="js-cart-totals row">
@@ -66,17 +69,17 @@
         </ycommerce:testId>
     </div>
 
+    <c:if test="${empty isMVP1}">
+        <c:if test="${not cartData.net}">
+            <div class="cart-totals-taxes text-right">
+                <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.grossTax" arguments="${cartData.totalTax.formattedValue}" argumentSeparator="!!!!"/></ycommerce:testId>
+             </div>
+        </c:if>
 
-    <c:if test="${not cartData.net}">
-        <div class="cart-totals-taxes text-right">
-            <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.grossTax" arguments="${cartData.totalTax.formattedValue}" argumentSeparator="!!!!"/></ycommerce:testId>
-         </div>
-    </c:if>
-
-
-    <c:if test="${cartData.net && not showTax }">
-        <div class="cart-totals-taxes text-right">
-            <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.noNetTax"/></ycommerce:testId>
-        </div>
+        <c:if test="${cartData.net && not showTax }">
+            <div class="cart-totals-taxes text-right">
+                <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.noNetTax"/></ycommerce:testId>
+            </div>
+        </c:if>
     </c:if>
 </div>

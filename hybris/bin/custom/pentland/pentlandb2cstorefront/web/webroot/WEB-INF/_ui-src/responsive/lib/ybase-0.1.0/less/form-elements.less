@@ -1,38 +1,39 @@
 input[type="radio"],
-input[type="checkbox"]{
+input[type="checkbox"] {
   margin-right: 10px;
   margin-bottom: 20px;
 }
 
 label {
-	color: @label-color;
-	font-weight: 600;
-	text-transform: uppercase;
-	font-size: 13px;
-    &.uncased {
-      text-transform: none;
-    }
+  color: @label-color;
+  font-weight: 600;
+  //text-transform: uppercase;
+  //font-size: 13px;
+
+  &.uncased {
+    text-transform: none;
+  }
 }
 
 .form-control:focus {
-	border-color: @input-border-focus;
-	outline:0;
-	box-shadow: none;
+  border-color: @input-border-focus;
+  outline: 0;
+  box-shadow: none;
 }
-
 
 .form-control::-moz-placeholder {
-	color: @placeholder-color;
-	opacity:1
+  color: @placeholder-color;
+  opacity: 1
 }
+
 .form-control:-ms-input-placeholder,
 .form-control::-webkit-input-placeholder {
-	color: @placeholder-color;
+  color: @placeholder-color;
 }
 
 select.form-control {
-	text-transform: uppercase;
-	font-size: 13px;
+  text-transform: uppercase;
+  font-size: 13px;
 }
 
 .form-control {
@@ -42,14 +43,14 @@ select.form-control {
     color: @text-color-secondary;
   }
 }
+
 .has-error {
-  .form-control-validation(@label-color,@input-error,@input-error-bg,@input-error-text);
+  .form-control-validation(@label-color, @input-error, @input-error-bg, @input-error-text);
 }
 
 .has-success {
-  .form-control-validation(@label-color,@input-success,@input-success-bg,@input-success-text);
+  .form-control-validation(@label-color, @input-success, @input-success-bg, @input-success-text);
 }
-
 
 legend {
   font-size: 18px;
@@ -57,6 +58,7 @@ legend {
   margin-top: @grid-gutter-width;
   margin-bottom: @grid-gutter-width;
 }
+
 // For input fields with glyphicon
 .form-element-icon {
   position: relative;
@@ -84,7 +86,7 @@ legend {
 .form-control-checkbox {
   display: block;
 
-  input{
+  input {
     margin-bottom: 0;
     float: left;
   }
@@ -92,7 +94,6 @@ legend {
     margin-left: 25px;
   }
 }
-
 
 fieldset {
   > div:last-of-type {
@@ -130,7 +131,9 @@ textarea {
   float: right;
 }
 
-.toggle-switch__input {display:none;}
+.toggle-switch__input {
+  display: none;
+}
 
 .toggle-switch__slider {
   position: absolute;
