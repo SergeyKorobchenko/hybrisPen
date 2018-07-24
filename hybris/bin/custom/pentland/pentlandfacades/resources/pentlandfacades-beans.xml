@@ -165,10 +165,16 @@
 		<property name="companyName" type="java.lang.String"></property>
 	</bean>
 
-	<bean class="com.bridgex.facades.cart.dto.CartEntryDTO">
+	<bean class="com.bridgex.facades.cart.dto.CartEntryDto">
 		<property name="number" type="java.lang.String"/>
 		<property name="code" type="java.lang.String"/>
 		<property name="qty" type="java.lang.Long"/>
+	</bean>
+
+	<bean class="com.bridgex.facades.cart.dto.AddCartRequestDto">
+		<property name="baseSiteId" type="String"/>
+		<property name="baseStoreId" type="String"/>
+		<property name="entries" type="java.util.List&lt;com.bridgex.facades.cart.dto.CartEntryDto>"/>
 	</bean>
 
 </beans>

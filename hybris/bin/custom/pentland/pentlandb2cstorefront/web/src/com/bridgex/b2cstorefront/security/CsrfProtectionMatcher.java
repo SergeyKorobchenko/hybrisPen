@@ -36,7 +36,7 @@ public class CsrfProtectionMatcher implements RequestMatcher
 	private static final Logger LOG = LoggerFactory.getLogger(CsrfProtectionMatcher.class);
 
 	// Comma separated URL patterns (regular expression) that should not be protected from CSRF token validation
-	private static final String CSRF_PROTECTION_EXCLUDE_URLS = "csrf.allowed.url.patterns";
+	private static final String CSRF_PROTECTION_EXCLUDE_URLS = "b2c.csrf.allowed.url.patterns";
 
 	// List of URL patterns (regular expression) that should be allowed to go through without CSRF token validation
 	private List<String> csrfAllowedUrlPatterns;
