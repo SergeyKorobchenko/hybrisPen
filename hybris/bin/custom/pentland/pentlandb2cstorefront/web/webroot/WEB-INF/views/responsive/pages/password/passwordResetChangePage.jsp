@@ -5,6 +5,6 @@
 
 <spring:theme code="resetPwd.title" var="pageTitle"/>
 
-<template:page pageTitle="${pageTitle}">
+<template:page pageTitle="${pageTitle}" isMVP1="true">
 	<user:updatePwd/>
 </template:page>
