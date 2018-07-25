@@ -19,8 +19,7 @@
 				</cms:pageSlot>
 			</div>
 		</div>
-		
-			
+
 		<cms:pageSlot position="CenterContentSlot" var="feature" class="checkoutLoginPageCenter" element="div">
 			<cms:component component="${feature}" class="checkoutLoginPageCenter-component"/>
 		</cms:pageSlot>

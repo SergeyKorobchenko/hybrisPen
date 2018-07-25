@@ -16,21 +16,18 @@
 </div>
 
 <c:if test="${actionNameKey ne hideDescription}">
-	<p>
-		<spring:theme code="login.description" />
-	</p>
+	<p><spring:theme code="login.description" /></p>
 </c:if>
 
 <form:form action="${action}" method="post" commandName="loginForm">
 	<c:if test="${not empty message}">
-		<span class="has-error"> <spring:theme code="${message}" />
-		</span>
+		<span class="has-error"><spring:theme code="${message}" /></span>
 	</c:if>	
 	
 		<formElement:formInputBox idKey="j_username" labelKey="login.email"
-			path="j_username" mandatory="true" />
+			path="j_username" mandatory="true" inputCSS="input-sm" />
 		<formElement:formPasswordBox idKey="j_password"
-			labelKey="login.password" path="j_password" inputCSS="form-control"
+			labelKey="login.password" path="j_password" inputCSS="input-sm form-control"
 			mandatory="true" />
 	
 			<div class="forgotten-password">
