@@ -39,10 +39,10 @@ import static java.text.MessageFormat.format;
  * Web controller to handle HOP responses
  */
 @Controller
-@RequestMapping(value = "/checkout/multi/worldpay/hop")
-public class WorldpayHopResponseController extends WorldpayChoosePaymentMethodCheckoutStepController {
+@RequestMapping(value = "/checkout/multi/worldpay")
+public class WorldpayResponseController extends WorldpayChoosePaymentMethodCheckoutStepController {
 
-    private static final Logger LOG = Logger.getLogger(WorldpayHopResponseController.class);
+    private static final Logger LOG = Logger.getLogger(WorldpayResponseController.class);
 
     protected static final String REDIRECT_URL_ADD_DELIVERY_ADDRESS = REDIRECT_PREFIX + "/checkout/multi/delivery-address/add";
     protected static final String REDIRECT_URL_CHOOSE_DELIVERY_METHOD = REDIRECT_PREFIX + "/checkout/multi/delivery-method/choose";

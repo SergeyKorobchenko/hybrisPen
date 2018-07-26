@@ -11,6 +11,8 @@
 -->
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
 
+	<!-- NOT IN USE - check Worldpayfulfilment extension!!!  -->
+
 	<action id="checkOrder" bean="checkOrderAction">
 		<transition name="OK" to="checkAuthorizeOrderPayment"/>
 		<transition name="NOK" to="error"/>

@@ -30,7 +30,7 @@
 
 	<!--Security config for checkout - it has its own login page-->
 	<security:http pattern="/checkout/**">
-        <security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+    <security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
 		<security:access-denied-handler error-page="/login"/>
 		<security:session-management session-authentication-strategy-ref="fixation" />
 		<security:intercept-url pattern="/**" requires-channel="https" />
@@ -69,7 +69,7 @@
 	</bean>
 
 	<!-- The set of url(s) to exclude from the 'Default security config'-->
-	<bean id="excludeUrlSet" class="java.util.HashSet" />
+	<bean id="excludeUrlSet" class="java.util.HashSet"/>
 
 	<!-- Path matcher to use, AntPathMatcher is the default -->
 	<alias name="antPathMatcher" alias="defaultPathMatcher" />
@@ -179,6 +179,7 @@
 			<value>/orderConfirmation/*</value>
 			<value>/login</value>
 			<value>/login/checkout</value>
+			<value>/cart/addCart</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />

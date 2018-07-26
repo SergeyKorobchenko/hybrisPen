@@ -19,4 +19,7 @@ public interface PentlandCartFacade extends CartFacade {
   void populateVariantMatrixQuantity(ProductData productData);
 
   List<String> populateCart(String surCharge);
+
+  void setSessionCartByCode(String cartId);
+
 }

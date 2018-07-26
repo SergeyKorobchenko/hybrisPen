@@ -158,7 +158,13 @@ public class DefaultPentlandCartFacade extends DefaultCartFacade implements Pent
 	return validateStock;
   }
 
-  private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
+    @Override
+    public void setSessionCartByCode(String cartId) {
+        CartModel cart = getCommerceCartService().getCartForCodeAndUser(cartId, getUserService().getAnonymousUser());
+        getCartService().setSessionCart(cart);
+    }
+
+    private List<String> validateStock(List<MaterialInfoDto> materialList, Date rdd) {
 	  // TODO Auto-generated method stub
 	  List<String> validateInStockData = new ArrayList<>();
 	  List<String> validateInStockDataMesg = new ArrayList<>();

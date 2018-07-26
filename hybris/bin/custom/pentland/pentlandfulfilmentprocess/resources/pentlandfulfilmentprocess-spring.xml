@@ -48,25 +48,45 @@
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 	
-	<!-- Process Definitions -->
+	<!-- B2B Process Definitions -->
 
-	<bean id="orderProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/order-process.xml"/>
+<!--	<bean id="b2bOrderProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/b2b-order-process.xml"/>
+	</bean>-->
+
+	<bean id="b2bConsignmentProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/b2b-consignment-process.xml"/>
 	</bean>
 
-	<bean id="consignmentProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/consignment-process.xml"/>
+	<bean id="b2bReturnProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/b2b-return-process.xml"/>
 	</bean>
 
-	<bean id="returnProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/return-process.xml"/>
+	<!-- B2C Process Definitions -->
+
+	<bean id="b2cOrderProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/b2c-order-process.xml"/>
 	</bean>
 
-	<!-- Process Actions -->
+	<bean id="b2cConsignmentProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/b2c-consignment-process.xml"/>
+	</bean>
 
-	<import resource="/pentlandfulfilmentprocess/process/order-process-spring.xml"/>
-	<import resource="/pentlandfulfilmentprocess/process/consignment-process-spring.xml"/>
-	<import resource="/pentlandfulfilmentprocess/process/return-process-spring.xml"/>
+	<bean id="b2cReturnProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/pentlandfulfilmentprocess/process/b2c-return-process.xml"/>
+	</bean>
+
+	<!-- B2B Process Actions -->
+
+	<import resource="/pentlandfulfilmentprocess/process/b2b-order-process-spring.xml"/>
+	<import resource="/pentlandfulfilmentprocess/process/b2b-consignment-process-spring.xml"/>
+	<import resource="/pentlandfulfilmentprocess/process/b2b-return-process-spring.xml"/>
+
+	<!-- B2C Process Actions -->
+
+	<import resource="/pentlandfulfilmentprocess/process/b2c-order-process-spring.xml"/>
+	<import resource="/pentlandfulfilmentprocess/process/b2c-consignment-process-spring.xml"/>
+	<import resource="/pentlandfulfilmentprocess/process/b2c-return-process-spring.xml"/>
 
 	<!-- Order Check Service -->
 	<!-- Performs some basic validation for the order as part of the first stage of the process. -->
@@ -79,12 +99,12 @@
 	<bean id="pentlandfulfilmentprocessOrderSplittingService" parent="defaultOrderSplittingService" >
 		<property name="strategiesList">
 			<list>
-				<ref bean="splitByAvailableCount"/>
+<!--				<ref bean="splitByAvailableCount"/>
 				<ref bean="splitByDeliveryMode" />
 				<ref bean="splitByPoS" />
 				<ref bean="splitByNamedDeliveryDate" />
 				<ref bean="splitByEntryDeliveryAddress" />
-				<ref bean="splitByWarehouse" />
+				<ref bean="splitByWarehouse" />-->
 			</list>
 		</property>
 	</bean>

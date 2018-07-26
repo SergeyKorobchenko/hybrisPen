@@ -4,6 +4,8 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 
 import java.util.Date;
 
+import com.bridgex.core.services.PentlandBaseSiteService;
+import de.hybris.platform.site.BaseSiteService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -118,7 +120,10 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
 
         getOrderService().submitOrder(orderModel);
 
-        pentlandOrderExportService.exportOrder(orderModel);
+        //TODO Strategy for B2C export?
+        if (getBaseSiteService().isB2BChannel()) {
+          pentlandOrderExportService.exportOrder(orderModel);
+        }
       }
       else {
         throw new IllegalArgumentException(String.format("Order was not properly created from cart %s", cartModel.getCode()));
@@ -139,5 +144,10 @@ public class PentlandCommercePlaceOrderStrategy extends DefaultCommercePlaceOrde
   @Required
   public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
     this.b2BUnitService = b2BUnitService;
+  }
+
+  @Override
+  protected PentlandBaseSiteService getBaseSiteService() {
+    return (PentlandBaseSiteService) super.getBaseSiteService();
   }
 }

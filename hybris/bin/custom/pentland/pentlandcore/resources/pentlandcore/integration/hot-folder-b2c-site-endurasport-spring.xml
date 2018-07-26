@@ -50,7 +50,7 @@
         </constructor-arg>
     </bean>
     <bean id="baseDirectoryEndurasport" class="java.lang.String">
-        <constructor-arg value="#{baseDirectory}/${tenantId}/pentland/b2c/endurasport"/>
+        <constructor-arg value="#{baseDirectory}/${tenantId}/endurasport"/>
     </bean>
 
     <!-- 1) Scan for files -->
@@ -95,32 +95,32 @@
     <!-- Transformer converters mappings -->
     <bean id="endurasportBatchBaseProductConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="product"
+          p:mapping="endurasport_product"
           p:converter-ref="endurasportBatchBaseProductConverter"/>
 
     <bean id="endurasportBatchStyleProductConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="product"
+          p:mapping="endurasport_product"
           p:converter-ref="endurasportBatchStyleProductConverter"/>
 
     <bean id="endurasportBatchSizeProductConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="product"
+          p:mapping="endurasport_product"
           p:converter-ref="endurasportBatchSizeProductConverter"/>
 
     <bean id="endurasportBatchProductPriceConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="price"
+          p:mapping="endurasport_price"
           p:converter-ref="endurasportBatchProductPriceConverter"/>
 
     <bean id="endurasportBatchProductStockConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="stock"
+          p:mapping="endurasport_stock"
           p:converter-ref="endurasportBatchProductStockConverter"/>
 
     <bean id="endurasportBatchB2CCustomerConverterMapping"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
-          p:mapping="customer"
+          p:mapping="endurasport_customer"
           p:converter-ref="endurasportBatchB2CCustomerConverter"/>
 
     <!-- Converters -->
@@ -196,7 +196,7 @@
 
     <bean id="endurasportBatchB2CCustomerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
-            <value>#{pentlandImpexProductHeader}
+            <value>#{endurasportImpexProductHeader}
                 $passwordEncoding=pbkdf2
                 $defaultPassword=Pentland2018
                 $setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
@@ -204,7 +204,7 @@
             </value>
         </property>
         <property name="impexRow">
-            <value>;{+0};{+0};{1};{+2} {+3};{+4};{5};{6};{8}:{7};;{S}</value>
+            <value>;{+0};{+0};{1};{+2} {+3};{+4};{5};{6};{8}:{7};;</value>
         </property>
     </bean>
 

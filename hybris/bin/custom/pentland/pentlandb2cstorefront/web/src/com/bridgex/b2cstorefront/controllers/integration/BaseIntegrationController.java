@@ -14,7 +14,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractContr
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.site.CMSSiteModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
-import de.hybris.platform.site.BaseSiteService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.bridgex.core.services.PentlandBaseSiteService;
+import com.bridgex.core.services.PentlandBaseStoreService;
 
 /**
  * Base controller for all integration controllers.
@@ -40,7 +41,10 @@ public class BaseIntegrationController extends AbstractController
 	protected CMSSiteService cmsSiteService;
 
 	@Resource(name = "baseSiteService")
-	protected BaseSiteService baseSiteService;
+	protected PentlandBaseSiteService baseSiteService;
+
+	@Resource(name = "baseStoreService")
+	protected PentlandBaseStoreService baseStoreService;
 
 	protected void initializeSiteFromRequest(final HttpServletRequest httpRequest)
 	{

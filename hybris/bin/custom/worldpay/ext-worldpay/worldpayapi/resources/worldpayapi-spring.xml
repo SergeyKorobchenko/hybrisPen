@@ -610,10 +610,18 @@
         <property name="orderInquiryService" ref="orderInquiryService"/>
     </bean>
 
-    <alias name="worldpayCheckoutFacadeDecorator" alias="worldpayCheckoutFacade"/>
-    <bean id="worldpayCheckoutFacadeDecorator" class="com.worldpay.facades.order.impl.WorldpayCheckoutFacadeDecorator">
+    <alias name="worldpayB2BCheckoutFacadeDecorator" alias="worldpayCheckoutFacade"/>
+    <bean id="worldpayB2BCheckoutFacadeDecorator" class="com.worldpay.facades.order.impl.WorldpayCheckoutFacadeDecorator">
         <property name="checkoutFlowFacade" ref="checkoutFlowFacade"/>
         <property name="cartService" ref="cartService"/>
+        <property name="addressConverter" ref="addressConverter"/>
+        <property name="pentlandB2BCheckoutFacade" ref="b2bCheckoutFacade" />
+    </bean>
+
+    <alias name="worldpayB2CCheckoutFacadeDecorator" alias="worldpayB2CCheckoutFacade"/>
+    <bean id="worldpayB2CCheckoutFacadeDecorator" class="com.worldpay.facades.order.impl.WorldpayCheckoutFacadeDecorator">
+        <property name="checkoutFlowFacade" ref="defaultCheckoutFlowFacade"/>
+        <property name="cartService" ref="defaultCartService"/>
         <property name="addressConverter" ref="addressConverter"/>
         <property name="pentlandB2BCheckoutFacade" ref="b2bCheckoutFacade" />
     </bean>

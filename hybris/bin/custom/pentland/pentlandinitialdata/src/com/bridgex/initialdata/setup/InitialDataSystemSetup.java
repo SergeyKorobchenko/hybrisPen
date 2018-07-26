@@ -129,25 +129,34 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	public void createProjectData(final SystemSetupContext context)
 	{
 		final List<ImportData> importData = new ArrayList<>();
+		final String site = context.getParameter(context.getExtensionName() + "_" + IMPORT_SITE);
 
+		if (PENTLAND.equals(site)) {
+			final ImportData pentlandImportData = new ImportData();
+			pentlandImportData.setProductCatalogName(PENTLAND);
+			pentlandImportData.setContentCatalogNames(Collections.singletonList(PENTLAND));
+			pentlandImportData.setStoreNames(B2B_STORES);
+			importData.add(pentlandImportData);
+		}
 
-		final ImportData pentlandImportData = new ImportData();
-		pentlandImportData.setProductCatalogName(PENTLAND);
-		pentlandImportData.setContentCatalogNames(Collections.singletonList(PENTLAND));
-		pentlandImportData.setStoreNames(B2B_STORES);
-		importData.add(pentlandImportData);
-
-		final ImportData enduraImportData = new ImportData();
-		enduraImportData.setProductCatalogName(ENDURA);
-		enduraImportData.setContentCatalogNames(Collections.singletonList(ENDURA));
-		enduraImportData.setStoreNames(ENDURA_STORES);
-		importData.add(enduraImportData);
+		if (ENDURA.equals(site)) {
+			final ImportData enduraImportData = new ImportData();
+			enduraImportData.setProductCatalogName(ENDURA);
+			enduraImportData.setContentCatalogNames(Collections.singletonList(ENDURA));
+			enduraImportData.setStoreNames(ENDURA_STORES);
+			importData.add(enduraImportData);
+		}
 
 		getCoreDataImportService().execute(this, context, importData);
-		//getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+
+		if (!ENDURA.equals(site)) {
+			getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+		}
 
 		getSampleDataImportService().execute(this, context, importData);
-		//getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		if (!ENDURA.equals(site)) {
+			getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		}
 
 	}
 
