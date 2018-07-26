@@ -12,7 +12,7 @@
 # Import the endurasport Content Catalog
 #
 $contentCatalog=endurasportContentCatalog
-$languages=ja,en,de,zh
+$languages=en,en_GB,en_US
 
 # Content catalog for CMS contents
 INSERT_UPDATE ContentCatalog;id[unique=true]

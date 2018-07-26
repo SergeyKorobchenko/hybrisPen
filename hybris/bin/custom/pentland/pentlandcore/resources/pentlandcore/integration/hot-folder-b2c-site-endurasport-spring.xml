@@ -172,11 +172,11 @@
     <bean id="endurasportBatchProductPriceConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
             <value>#{endurasportImpexProductHeader}
-                INSERT_UPDATE PriceRow;productId[unique = true];price;currency(isocode)[unique = true,default='GBP'];startTime[dateformat='yyyyMMdd',default='19000101'];endTime[dateformat='yyyyMMdd',default='30001231'];unitFactor[default=1];minqtd[default=1];net[default=true];unit(code[unique = true])[cellDecorator=com.bridgex.core.impex.decorator.PriceProductUnitDecorator];ug(code)[unique =true,type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
+                INSERT_UPDATE PriceRow;productId[unique = true];price;currency(isocode)[unique = true,default='GBP'];startTime[dateformat='yyyyMMdd',default='19000101'];endTime[dateformat='yyyyMMdd',default='30001231'];unitFactor[default=1];minqtd[default=1];net[default=true];unit(code[unique = true])[default=pieces];ug(code)[unique =true,type=UserPriceGroup,cellDecorator=com.bridgex.core.impex.decorator.DynamicEnumCellDecorator];sequenceId[translator=de.hybris.platform.acceleratorservices.dataimport.batch.converter.SequenceIdTranslator]
             </value>
         </property>
         <property name="impexRow">
-            <value>;{+0};{+1};{2};{3};{4};;;;{+0};$defaultUpg;{S}</value>
+            <value>;{+0};{+1};{2};{3};{4};;;;;$defaultUpg;{S}</value>
         </property>
     </bean>
 
