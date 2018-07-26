@@ -12,6 +12,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 
+<%-- Temporary attribute for only MVP1, helps to disable unused components, must be deleted in future --%>
+<%@ attribute name="isMVP1" required="false" %>
 
 <%--
     Represents single cart item on cart page
@@ -42,26 +44,44 @@
         <c:url value="${entry.product.url}" var="productUrl"/>
 
         <li class="item__list--item">
-            <%-- chevron for multi-d products --%>
-            <div class="hidden-xs hidden-sm item__toggle">
-                <c:if test="${entry.product.multidimensional}" >
-                    <div class="js-show-editable-grid" data-index="${index}" data-read-only-multid-grid="${not entry.updateable}">
-                        <ycommerce:testId code="cart_product_updateQuantity">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </ycommerce:testId>
-                    </div>
-                </c:if>
-            </div>
+            <c:if test="${empty isMVP1}">
+                <%-- chevron for multi-d products --%>
+                <div class="hidden-xs hidden-sm item__toggle">
+                    <c:if test="${entry.product.multidimensional}" >
+                        <div class="js-show-editable-grid" data-index="${index}" data-read-only-multid-grid="${not entry.updateable}">
+                            <ycommerce:testId code="cart_product_updateQuantity">
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </ycommerce:testId>
+                        </div>
+                    </c:if>
+                </div>
+            </c:if>
 
             <%-- product image --%>
             <div class="item__image">
-                <a href="${productUrl}"><product:productPrimaryImage product="${entry.product}" format="thumbnail"/></a>
+                <c:if test="${empty isMVP1}">
+                    <a href="${productUrl}">
+                </c:if>
+
+                <product:productPrimaryImage product="${entry.product}" format="thumbnail"/>
+
+                <c:if test="${empty isMVP1}">
+                    </a>
+                </c:if>
             </div>
 
             <%-- product name, code, promotions --%>
             <div class="item__info">
                 <ycommerce:testId code="cart_product_name">
-                    <a href="${productUrl}"><span class="item__name">${fn:escapeXml(entry.product.name)}</span></a>
+                    <c:if test="${empty isMVP1}">
+                        <a href="${productUrl}">
+                    </c:if>
+
+                    <span class="item__name">${fn:escapeXml(entry.product.name)}</span>
+
+                    <c:if test="${empty isMVP1}">
+                        </a>
+                    </c:if>
                 </ycommerce:testId>
 
                 <div class="item__code">${fn:escapeXml(entry.product.code)}</div>
@@ -200,23 +220,25 @@
                 </c:choose>
             </div>
 
-            <%-- delivery --%>
-            <div class="item__delivery">
-                <c:if test="${entry.product.purchasable}">
-                    <c:if test="${not empty entryStock and entryStock ne 'outOfStock'}">
-                        <c:if test="${entry.deliveryPointOfService eq null or not entry.product.availableForPickup}">
-                            <span class="item__delivery--label"><spring:theme code="basket.page.shipping.ship"/></span>
+            <c:if test="${empty isMVP1}">
+                <%-- delivery --%>
+                <div class="item__delivery">
+                    <c:if test="${entry.product.purchasable}">
+                        <c:if test="${not empty entryStock and entryStock ne 'outOfStock'}">
+                            <c:if test="${entry.deliveryPointOfService eq null or not entry.product.availableForPickup}">
+                                <span class="item__delivery--label"><spring:theme code="basket.page.shipping.ship"/></span>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${not empty entry.deliveryPointOfService.name}">
+                            <span class="item__delivery--label"><spring:theme code="basket.page.shipping.pickup"/></span>
+                        </c:if>
+
+                        <c:if test="${entry.product.availableForPickup and not empty entry.deliveryPointOfService.name}">
+                            <div class="item__delivery--store">${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
                         </c:if>
                     </c:if>
-                    <c:if test="${not empty entry.deliveryPointOfService.name}">
-                        <span class="item__delivery--label"><spring:theme code="basket.page.shipping.pickup"/></span>
-                    </c:if>
-
-                    <c:if test="${entry.product.availableForPickup and not empty entry.deliveryPointOfService.name}">
-                        <div class="item__delivery--store">${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
-                    </c:if>
-                </c:if>
-            </div>
+                </div>
+            </c:if>
 
             <%-- total --%>
             <ycommerce:testId code="cart_totalProductPrice_label">
@@ -225,67 +247,72 @@
                 </div>
             </ycommerce:testId>
 
-            <%-- menu icon --%>
-            <div class="item__menu">
-                <c:if test="${entry.updateable}" >
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
-                            <span class="glyphicon glyphicon-option-vertical"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <c:if test="${not empty cartData.quoteData}">
+            <c:if test="${empty isMVP1}">
+                <%-- menu icon --%>
+                <div class="item__menu">
+                    <c:if test="${entry.updateable}" >
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
+                                <span class="glyphicon glyphicon-option-vertical"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <c:if test="${not empty cartData.quoteData}">
+                                    <c:choose>
+                                        <c:when test="${not entry.product.multidimensional}">
+                                            <li>
+                                                <a href="#entryCommentDiv_${entry.entryNumber}" data-toggle="collapse" >
+                                                    <spring:theme code="basket.page.comment.menu"/>
+                                                </a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li>
+                                                <a href="#entryCommentDiv_${entry.entries.get(0).entryNumber}" data-toggle="collapse" >
+                                                    <spring:theme code="basket.page.comment.menu"/>
+                                                </a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
+                                <form:form id="cartEntryActionForm" action="" method="post" />
+                                 <%-- Build entry numbers string for execute action -- Start --%>
                                 <c:choose>
-                                    <c:when test="${not entry.product.multidimensional}">
-                                        <li>
-                                            <a href="#entryCommentDiv_${entry.entryNumber}" data-toggle="collapse" >
-                                                <spring:theme code="basket.page.comment.menu"/>
-                                            </a>
-                                        </li>
+                                    <c:when test="${entry.entryNumber eq -1}"> <%-- for multid entry --%>
+                                        <c:forEach items="${entry.entries}" var="subEntry" varStatus="stat">
+                                            <c:set var="actionFormEntryNumbers" value="${stat.first ? '' : actionFormEntryNumbers.concat(';')}${subEntry.entryNumber}" />
+                                        </c:forEach>
                                     </c:when>
                                     <c:otherwise>
-                                        <li>
-                                            <a href="#entryCommentDiv_${entry.entries.get(0).entryNumber}" data-toggle="collapse" >
-                                                <spring:theme code="basket.page.comment.menu"/>
-                                            </a>
-                                        </li>
+                                        <c:set var="actionFormEntryNumbers" value="${entry.entryNumber}" />
                                     </c:otherwise>
                                 </c:choose>
-                            </c:if>
-                            <form:form id="cartEntryActionForm" action="" method="post" />
-                             <%-- Build entry numbers string for execute action -- Start --%>
-                            <c:choose>
-					            <c:when test="${entry.entryNumber eq -1}"> <%-- for multid entry --%>
-					                <c:forEach items="${entry.entries}" var="subEntry" varStatus="stat">
-						    			<c:set var="actionFormEntryNumbers" value="${stat.first ? '' : actionFormEntryNumbers.concat(';')}${subEntry.entryNumber}" />
-						    		</c:forEach>
-					            </c:when>
-					            <c:otherwise>
-					                <c:set var="actionFormEntryNumbers" value="${entry.entryNumber}" />
-					            </c:otherwise>
-					        </c:choose>
-					        <%-- Build entry numbers string for execute action -- End --%>
-                            <c:forEach var="entryAction" items="${entry.supportedActions}">
-                                <c:url value="/cart/entry/execute/${entryAction}" var="entryActionUrl"/>
-                                <li class="js-execute-entry-action-button" id="actionEntry_${fn:escapeXml(entryNumber)}"
-                                    data-entry-action-url="${entryActionUrl}"
-                                    data-entry-action="${fn:escapeXml(entryAction)}"
-                                    data-entry-product-code="${fn:escapeXml(entry.product.code)}"
-                                    data-entry-initial-quantity="${entry.quantity}"
-                                    data-action-entry-numbers="${actionFormEntryNumbers}">
-                                    <a href="#"><spring:theme code="basket.page.entry.action.${entryAction}"/></a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </c:if>
-            </div>
+                                <%-- Build entry numbers string for execute action -- End --%>
+                                <c:forEach var="entryAction" items="${entry.supportedActions}">
+                                    <c:url value="/cart/entry/execute/${entryAction}" var="entryActionUrl"/>
+                                    <li class="js-execute-entry-action-button" id="actionEntry_${fn:escapeXml(entryNumber)}"
+                                        data-entry-action-url="${entryActionUrl}"
+                                        data-entry-action="${fn:escapeXml(entryAction)}"
+                                        data-entry-product-code="${fn:escapeXml(entry.product.code)}"
+                                        data-entry-initial-quantity="${entry.quantity}"
+                                        data-action-entry-numbers="${actionFormEntryNumbers}">
+                                        <a href="#"><spring:theme code="basket.page.entry.action.${entryAction}"/></a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </c:if>
+                </div>
+            </c:if>
 
             <div class="item__quantity__total visible-xs visible-sm">
-                <c:if test="${entry.product.multidimensional}" >
-                    <ycommerce:testId code="cart_product_updateQuantity">
-                        <c:set var="showEditableGridClass" value="js-show-editable-grid"/>
-                    </ycommerce:testId>
+                <c:if test="${empty isMVP1}">
+                    <c:if test="${entry.product.multidimensional}" >
+                        <ycommerce:testId code="cart_product_updateQuantity">
+                            <c:set var="showEditableGridClass" value="js-show-editable-grid"/>
+                        </ycommerce:testId>
+                    </c:if>
                 </c:if>
+
                 <div class="details ${showEditableGridClass}" data-index="${index}" data-read-only-multid-grid="${not entry.updateable}">
                     <div class="qty">
                         <c:choose>
@@ -318,11 +345,15 @@
                                 </form:form>
                             </c:otherwise>
                         </c:choose>
-                        <c:if test="${entry.product.multidimensional}" >
-                            <ycommerce:testId code="cart_product_updateQuantity">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </ycommerce:testId>
+
+                        <c:if test="${empty isMVP1}">
+                            <c:if test="${entry.product.multidimensional}" >
+                                <ycommerce:testId code="cart_product_updateQuantity">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </ycommerce:testId>
+                            </c:if>
                         </c:if>
+
                         <ycommerce:testId code="cart_totalProductPrice_label">
                             <div class="item__total js-item-total">
                                 <format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>

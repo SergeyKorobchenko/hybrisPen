@@ -3,86 +3,109 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<!-- Product Reference Lookup Strategies-->
-	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
-	<bean id="apparelCrossSellingProductReferenceTargetStrategy"
-	      parent="defaultCrossSellingProductReferenceTargetStrategy">
-		<property name="productReferenceTargetStrategies">
-			<list merge="true">
-				<ref bean="apparelSizeProductReferenceTargetStrategy"/>
-			</list>
-		</property>
-	</bean>
+    <!-- Product Reference Lookup Strategies-->
+    <alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
+    <bean id="apparelCrossSellingProductReferenceTargetStrategy"
+          parent="defaultCrossSellingProductReferenceTargetStrategy">
+        <property name="productReferenceTargetStrategies">
+            <list merge="true">
+                <ref bean="apparelSizeProductReferenceTargetStrategy"/>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="apparelSizeProductReferenceTargetStrategy"
-	      class="com.bridgex.core.strategies.impl.ApparelSizeProductReferenceTargetStrategy">
-		<property name="commerceCategoryService" ref="commerceCategoryService"/>
-		<property name="rootCategoryCode" value="categories"/>
-	</bean>
+    <bean id="apparelSizeProductReferenceTargetStrategy"
+          class="com.bridgex.core.strategies.impl.ApparelSizeProductReferenceTargetStrategy">
+        <property name="commerceCategoryService" ref="commerceCategoryService"/>
+        <property name="rootCategoryCode" value="categories"/>
+    </bean>
 
+    <alias name="pentlandCartValidationStrategy" alias="cartValidationStrategy"/>
+    <bean id="pentlandCartValidationStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandCartValidationStrategy"
+          parent="defaultCartValidationStrategy">
+    </bean>
 
-	<alias name="pentlandCartValidationStrategy" alias="cartValidationStrategy"/>
-	<bean id="pentlandCartValidationStrategy"
-	      class="com.bridgex.core.strategies.impl.PentlandCartValidationStrategy" parent="defaultCartValidationStrategy">
-	</bean>
+    <alias name="pentlandCommerceUpdateCartEntryStrategy" alias="commerceUpdateCartEntryStrategy"/>
+    <bean id="pentlandCommerceUpdateCartEntryStrategy"
+          class="com.bridgex.core.order.impl.PentlandCommerceUpdateCartEntryStrategy"
+          parent="defaultCommerceUpdateCartEntryStrategy"/>
 
-	<alias name="pentlandCommerceUpdateCartEntryStrategy" alias="commerceUpdateCartEntryStrategy"/>
-	<bean id="pentlandCommerceUpdateCartEntryStrategy" class="com.bridgex.core.order.impl.PentlandCommerceUpdateCartEntryStrategy" parent="defaultCommerceUpdateCartEntryStrategy"/>
+    <alias name="pentlandQuoteUserTypeIdentificationStrategy" alias="quoteUserTypeIdentificationStrategy"/>
+    <bean id="pentlandQuoteUserTypeIdentificationStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandQuoteUserTypeIdentificationStrategy"
+          parent="defaultQuoteUserTypeIdentificationStrategy">
+        <property name="b2bCustomerGroup" value="b2bcustomergroup"/>
+        <property name="b2bManagerGroup" value="b2bmanagergroup"/>
+        <property name="salesRepGroup" value="salesrepgroup"/>
+    </bean>
 
-	<alias name="pentlandQuoteUserTypeIdentificationStrategy" alias="quoteUserTypeIdentificationStrategy"/>
-	<bean id="pentlandQuoteUserTypeIdentificationStrategy"
-	      class="com.bridgex.core.strategies.impl.PentlandQuoteUserTypeIdentificationStrategy" parent="defaultQuoteUserTypeIdentificationStrategy">
-		<property name="b2bCustomerGroup" value="b2bcustomergroup"/>
-		<property name="b2bManagerGroup" value="b2bmanagergroup"/>
-		<property name="salesRepGroup" value="salesrepgroup"/>
-	</bean>
+    <alias name="pentlandRecipientTypeToContextClassMap" alias="recipientTypeToContextClassMap"/>
+    <util:map id="pentlandRecipientTypeToContextClassMap">
+        <entry value="com.bridgex.core.ticket.PentlandCustomerTicketContext">
+            <key>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsEmailRecipients.CUSTOMER"/>
+            </key>
+        </entry>
+        <entry value="com.bridgex.core.ticket.PentlandCustomerRepTicketContext">
+            <key>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsEmailRecipients.CUSTOMERREP"/>
+            </key>
+        </entry>
+    </util:map>
 
-	<alias name="pentlandRecipientTypeToContextClassMap" alias="recipientTypeToContextClassMap"/>
-	<util:map id="pentlandRecipientTypeToContextClassMap">
-		<entry value="com.bridgex.core.ticket.PentlandCustomerTicketContext">
-			<key><util:constant static-field="de.hybris.platform.ticket.enums.CsEmailRecipients.CUSTOMER"/></key>
-		</entry>
-		<entry value="com.bridgex.core.ticket.PentlandCustomerRepTicketContext">
-			<key><util:constant static-field="de.hybris.platform.ticket.enums.CsEmailRecipients.CUSTOMERREP"/></key>
-		</entry>
-	</util:map>
+    <alias name="pentlandB2BDeliveryAddressesLookupStrategy" alias="b2bDeliveryAddressesLookupStrategy"/>
+    <bean id="pentlandB2BDeliveryAddressesLookupStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandB2BDeliveryAddressesLookupStrategy"
+          parent="defaultB2BDeliveryAddressesLookupStrategy">
+        <property name="b2BUnitService" ref="pentlandB2BUnitService"/>
+    </bean>
 
-	<alias name="pentlandB2BDeliveryAddressesLookupStrategy" alias="b2bDeliveryAddressesLookupStrategy"/>
-	<bean id="pentlandB2BDeliveryAddressesLookupStrategy" class="com.bridgex.core.strategies.impl.PentlandB2BDeliveryAddressesLookupStrategy"
-	      parent="defaultB2BDeliveryAddressesLookupStrategy">
-		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
-	</bean>
+    <alias name="defaultMarkForAddressStrategy" alias="markForAddressStrategy"/>
+    <bean id="defaultMarkForAddressStrategy" class="com.bridgex.core.order.impl.DefaultMarkForAddressStrategy">
+        <property name="modelService" ref="modelService"/>
+    </bean>
 
-	<alias name="defaultMarkForAddressStrategy" alias="markForAddressStrategy"/>
-	<bean id="defaultMarkForAddressStrategy" class="com.bridgex.core.order.impl.DefaultMarkForAddressStrategy">
-		<property name="modelService" ref="modelService"/>
-	</bean>
+    <alias name="pentlandCommercePlaceOrderStrategy" alias="b2bCommercePlaceOrderStrategy"/>
+    <alias name="pentlandCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
+    <bean id="pentlandCommercePlaceOrderStrategy" class="com.bridgex.core.order.impl.PentlandCommercePlaceOrderStrategy"
+          parent="defaultCommercePlaceOrderStrategy">
+        <property name="pentlandOrderExportService" ref="pentlandOrderExportService"/>
+        <property name="b2BUnitService" ref="pentlandB2BUnitService"/>
+    </bean>
 
-	<alias name="pentlandCommercePlaceOrderStrategy" alias="b2bCommercePlaceOrderStrategy"/>
-	<alias name="pentlandCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
-	<bean id="pentlandCommercePlaceOrderStrategy" class="com.bridgex.core.order.impl.PentlandCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy">
-		<property name="pentlandOrderExportService" ref="pentlandOrderExportService"/>
-		<property name="b2BUnitService" ref="pentlandB2BUnitService"/>
-	</bean>
+    <alias name="pentlandCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+    <bean id="pentlandCommerceAddToCartStrategy" class="com.bridgex.core.order.impl.PentlandCommerceAddToCartStrategy"
+          parent="defaultCommerceAddToCartStrategy"/>
 
-	<alias name="pentlandCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
-	<bean id="pentlandCommerceAddToCartStrategy" class="com.bridgex.core.order.impl.PentlandCommerceAddToCartStrategy" parent="defaultCommerceAddToCartStrategy"/>
+    <alias name="pentlandTicketEventEmailStrategy" alias="ticketEventEmailStrategy"/>
+    <bean id="pentlandTicketEventEmailStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandTicketEventEmailStrategy"
+          parent="defaultTicketEventEmailStrategy">
+        <property name="pentlandMediaService" ref="mediaService"/>
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
 
-	<alias name="pentlandTicketEventEmailStrategy" alias="ticketEventEmailStrategy"/>
-	<bean id="pentlandTicketEventEmailStrategy" class="com.bridgex.core.strategies.impl.PentlandTicketEventEmailStrategy" parent="defaultTicketEventEmailStrategy">
-		<property name="pentlandMediaService" ref="mediaService"/>
-		<property name="enumerationService" ref="enumerationService"/>
-	</bean>
+    <alias name="pentlandCommerceDeliveryAddressStrategy" alias="b2bCommerceDeliveryAddressStrategy"/>
+    <alias name="pentlandCommerceDeliveryAddressStrategy" alias="commerceDeliveryAddressStrategy"/>
+    <bean id="pentlandCommerceDeliveryAddressStrategy"
+          class="com.bridgex.core.order.impl.PentlandCommerceDeliveryAddressStrategy"
+          parent="defaultCommerceDeliveryAddressStrategy"/>
 
-	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="b2bCommerceDeliveryAddressStrategy"/>
-	<alias name="pentlandCommerceDeliveryAddressStrategy" alias="commerceDeliveryAddressStrategy"/>
-	<bean id="pentlandCommerceDeliveryAddressStrategy" class="com.bridgex.core.order.impl.PentlandCommerceDeliveryAddressStrategy" parent="defaultCommerceDeliveryAddressStrategy"/>
+    <alias name="pentlandQuoteExpirationTimeValidationStrategy" alias="quoteExpirationTimeValidationStrategy"/>
+    <bean id="pentlandQuoteExpirationTimeValidationStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandQuoteExpirationTimeValidationStrategy">
+    </bean>
 
-	<alias name="pentlandQuoteExpirationTimeValidationStrategy" alias="quoteExpirationTimeValidationStrategy" />
-	<bean id="pentlandQuoteExpirationTimeValidationStrategy" class="com.bridgex.core.strategies.impl.PentlandQuoteExpirationTimeValidationStrategy">
-	</bean>
+    <alias name="pentlandQuoteCartValidationStrategy" alias="quoteCartValidationStrategy"/>
+    <bean id="pentlandQuoteCartValidationStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandQuoteCartValidationStrategy"
+          parent="defaultQuoteCartValidationStrategy"/>
 
-	<alias name="pentlandQuoteCartValidationStrategy" alias="quoteCartValidationStrategy" />
-	<bean id="pentlandQuoteCartValidationStrategy" class="com.bridgex.core.strategies.impl.PentlandQuoteCartValidationStrategy" parent="defaultQuoteCartValidationStrategy"/>
+    <alias name="pentlandEmailTemplateTranslationStrategy" alias="emailTemplateTranslationStrategy"/>
+    <bean id="pentlandEmailTemplateTranslationStrategy" parent="defaultEmailTemplateTranslationStrategy"
+          class="com.bridgex.core.strategies.impl.PentlandEmailTemplateTranslationStrategy">
+        <property name="siteService" ref="baseSiteService"/>
+    </bean>
 
 </beans>

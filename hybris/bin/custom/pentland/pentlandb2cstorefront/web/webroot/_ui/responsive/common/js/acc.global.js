@@ -6,7 +6,8 @@ ACC.global = {
         "bindToggleXsSearch",
         "bindHoverIntentMainNavigation",
         "initImager",
-        "backToHome"
+        "backToHome",
+        "backToCart"
     ],
 
     passwordStrength: function () {
@@ -135,6 +136,12 @@ ACC.global = {
             var sUrl = ACC.config.contextPath;
             window.location = sUrl;
         });
-    }
+    },
 
+    backToCart: function () {
+        $(".backToCart").on("click", function () {
+            var sUrl = ACC.config.contextPath + "/login/checkout/";
+            window.location = sUrl;
+        });
+    }
 };

@@ -7042,7 +7042,9 @@ UPDATE ApparelStyleVariantProduct;code[unique=true];$picture;$thumbnail;$others;
 ;8-000882264;/300Wx300H/94474_1.jpg;/96Wx96H/94474_1.jpg;/515Wx515H/94474_1.jpg,/300Wx300H/94474_1.jpg,/96Wx96H/94474_1.jpg,/65Wx65H/94474_1.jpg,/30Wx30H/94474_1.jpg;/300Wx300H/94474_1.jpg;/96Wx96H/94474_1.jpg;;94474_base_1
 ;8-002582846;/300Wx300H/94474_3.jpg;/96Wx96H/94474_3.jpg;/515Wx515H/94474_3.jpg,/300Wx300H/94474_3.jpg,/96Wx96H/94474_3.jpg,/65Wx65H/94474_3.jpg,/30Wx30H/94474_3.jpg;/300Wx300H/94474_3.jpg;/96Wx96H/94474_3.jpg;;94474_3,94474_4
 ;5A38138BCO;/300Wx300H/94474_5.jpg;/96Wx96H/94474_5.jpg;/515Wx515H/94474_5.jpg,/300Wx300H/94474_5.jpg,/96Wx96H/94474_5.jpg,/65Wx65H/94474_5.jpg,/30Wx30H/94474_5.jpg;/300Wx300H/94474_5.jpg;/96Wx96H/94474_5.jpg;;94474_5,94474_6
-;5-BB1090PBB;/300Wx300H/94474_5.jpg;/96Wx96H/94474_5.jpg;/515Wx515H/94474_5.jpg,/300Wx300H/94474_5.jpg,/96Wx96H/94474_5.jpg,/65Wx65H/94474_5.jpg,/30Wx30H/94474_5.jpg;/300Wx300H/94474_5.jpg;/96Wx96H/94474_5.jpg;;94474_5,94474_6
+
+# Commented because Apparel Style Variant Product with id 5-BB1090PBB doesn't exist
+#;5-BB1090PBB;/300Wx300H/94474_5.jpg;/96Wx96H/94474_5.jpg;/515Wx515H/94474_5.jpg,/300Wx300H/94474_5.jpg,/96Wx96H/94474_5.jpg,/65Wx65H/94474_5.jpg,/30Wx30H/94474_5.jpg;/300Wx300H/94474_5.jpg;/96Wx96H/94474_5.jpg;;94474_5,94474_6
 
 # Products for Order Details Integration Testing
 UPDATE ApparelStyleVariantProduct;code[unique=true];$picture;$thumbnail;$others;$normal;$thumbnails;$catalogVersion;$galleryImages

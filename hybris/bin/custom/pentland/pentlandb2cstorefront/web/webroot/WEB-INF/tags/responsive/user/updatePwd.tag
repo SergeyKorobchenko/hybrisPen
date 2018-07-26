@@ -12,11 +12,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <formElement:formPasswordBox idKey="password" labelKey="updatePwd.pwd" path="pwd"
-                                                         inputCSS="form-control password-strength" mandatory="true"/>
+                                                         inputCSS="form-control input-sm password-strength" mandatory="true"/>
                         </div>
                         <div class="form-group">
                             <formElement:formPasswordBox idKey="updatePwd.checkPwd" labelKey="updatePwd.checkPwd"
-                                                         path="checkPwd" inputCSS="form-control" mandatory="true"/>
+                                                         path="checkPwd" inputCSS="form-control input-sm" mandatory="true"/>
                         </div>
                         <div class="row login-form-action">
                             <div class="col-sm-6">
@@ -25,7 +25,7 @@
                                 </button>
                             </div>
                             <div class="col-sm-6">
-                                <button type="button" class="btn btn-default btn-block backToHome">
+                                <button type="button" class="btn btn-default btn-block backToCart">
                                     <spring:theme code="text.button.cancel"/>
                                 </button>
                             </div>
