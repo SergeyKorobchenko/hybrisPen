@@ -39,7 +39,7 @@ UPDATE RendererTemplate; code[unique = true]; description[lang = $lang]; templat
 UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; fromEmail[lang = $lang]; fromName[lang = $lang]
 ; ; CustomerRegistrationEmail    ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; DeliverySentEmail            ; "customerservices@hybris.com" ; "Customer Services Team"
-; ; ForgottenPasswordEmail       ; "customerservices@hybris.com" ; "Customer Services Team"
+; ; ForgottenPasswordEmail       ; "ukenquiry@endura.co.uk"      ; "Endura Customer Services"
 ; ; OrderCancelledEmail          ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; OrderCollectionReminderEmail ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; OrderConfirmationEmail       ; "customerservices@hybris.com" ; "Customer Services Team"
