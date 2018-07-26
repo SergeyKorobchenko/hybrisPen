@@ -26,7 +26,7 @@ public class PentlandFsQueryParameterProvider implements ParameterProvider{
   public Map<String, Object> createParameters() {
     HashMap<String, Object> parameters = new HashMap<>();
 
-    parameters.put("discontinuedStates", Arrays.asList(DiscontinuedStatus.D03, DiscontinuedStatus.D04, DiscontinuedStatus.D05));
+    parameters.put("discontinuedStates", Arrays.asList(DiscontinuedStatus.D03, DiscontinuedStatus.D04));
     parameters.put("approvalStatus", ArticleApprovalStatus.APPROVED);
     parameters.put("catalogVersion", catalogVersionService.getCatalogVersion(PRODUCT_CATALOG, VERSION));
 

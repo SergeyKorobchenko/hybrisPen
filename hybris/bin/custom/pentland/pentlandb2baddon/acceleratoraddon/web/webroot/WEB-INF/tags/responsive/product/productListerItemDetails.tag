@@ -45,9 +45,9 @@
 
     <%-- product name, code, promotions --%>
     <div class="item__info">
-        <ycommerce:testId code="searchPage_productName_link_${product.code}">
+        <ycommerce:testId code="searchPage_productName_link_${product.materialKey}">
             <a href="${searchUrl}" title="${fn:escapeXml(product.name)}">
-                <div class="item-name">${fn:escapeXml(product.name)}</div>
+                <div class="item-name"><c:out value='${product.name}'/></div>
             </a>
         </ycommerce:testId>
 

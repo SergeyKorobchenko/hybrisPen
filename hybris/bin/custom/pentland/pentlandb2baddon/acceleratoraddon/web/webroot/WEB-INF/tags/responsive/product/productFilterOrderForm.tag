@@ -58,7 +58,7 @@
                 <c:set var="checkBoxClass" value="js-checkbox-base-product"/>
             </c:if>
             <label class="form-control-checkbox">
-                <input type="checkbox" value="${fn:escapeXml(product.code)}" class="${checkBoxClass}">
+                <input type="checkbox" value="${fn:escapeXml(product.materialKey)}" class="${checkBoxClass}">
                 <div class="form-control-label"><c:out value='${product.materialKey}'/></div>
             </label>
         </div>

@@ -112,6 +112,7 @@ public class AdvanceSearchPageController extends AbstractSearchPageController
 		final SearchPageData<ProductData> searchPageData = performSearch(searchState, pageableData, useFlexibleSearch);
 		List<ProductData> allProducts=new ArrayList<ProductData>();
 		for (ProductData productData : searchPageData.getResults()) {
+			LOG.warn("Material key in order form"+productData.getMaterialKey());
 			productFacade.populateCustomerPrice(productData);
 			productFacade.populateOrderForm(productData);
 			allProducts.add(productData);
