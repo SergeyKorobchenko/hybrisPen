@@ -176,7 +176,7 @@
             </value>
         </property>
         <property name="impexRow">
-            <value>;{+0};{+1};{2};{3};{4};;;;{+0};$defaultUpg;{S}</value>
+            <value>;{+0};{+1};{2};{3};{4};;;;;$defaultUpg;{S}</value>
         </property>
     </bean>
 
