@@ -70,11 +70,23 @@
 	      class="com.bridgex.core.order.hooks.PentlandQuoteCommerceCartMetadataUpdateValidationHook" parent="defaultQuoteCommerceCartMetadataUpdateValidationHook">
 	</bean>
 
-	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="commerceCartCalculationStrategy"/>
-	<alias name="defaultPentlandCommerceCartCalculationStrategy" alias="checkoutCartCalculationStrategy"/>
+	<alias name="pentlandCommerceCartCalculationRouter" alias="commerceCartCalculationStrategy"/>
+	<alias name="pentlandCommerceCartCalculationRouter" alias="checkoutCartCalculationStrategy"/>
+	<bean name="pentlandCommerceCartCalculationRouter" class="com.bridgex.core.order.impl.PentlandCartCalculationRouter">
+		<property name="b2cCartCalculationStrategy" ref="defaultCommerceCartCalculationStrategy"/>
+		<property name="b2bCartCalculationStrategy" ref="defaultPentlandCommerceCartCalculationStrategy"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
+
 	<bean id="defaultPentlandCommerceCartCalculationStrategy" class="com.bridgex.core.order.impl.DefaultPentlandCommerceCartCalculationStrategy" parent="defaultCommerceCartCalculationStrategy" />
 
-	<alias name="defaultPentlandCalculationService" alias="calculationService"/>
+	<alias name="pentlandCalculationServiceRouter" alias="calculationService"/>
+	<bean name="pentlandCalculationServiceRouter" class="com.bridgex.core.order.impl.PentlandCalculationServiceRouter">
+		<property name="b2cCalculationService" ref="defaultCalculationService"/>
+		<property name="b2bCalculationService" ref="defaultPentlandCalculationService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
+
 	<bean id="defaultPentlandCalculationService" class="com.bridgex.core.order.impl.DefaultPentlandCalculationService" parent="defaultCalculationService" >
 		<property name="pentlandOrderRequiresCalculationStrategy" ref="orderRequiresCalculationStrategy"/>
 	</bean>
