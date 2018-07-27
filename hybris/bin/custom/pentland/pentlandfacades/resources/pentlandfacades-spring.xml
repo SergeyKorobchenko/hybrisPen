@@ -385,6 +385,7 @@
 		<property name="pentlandCustomerAccountService" ref="pentlandCustomerAccountService"/>
 		<property name="checkoutFacade" ref="checkoutFacade"/>
 		<property name="productFacade" ref="productFacade"/>
+		<property name="customerIdentifierStrategy" ref="customerIdentifierStrategy"/>
 	</bean>
 
 	<alias name="pentlandRemoveCartEntryActionHandler" alias="removeCartEntryActionHandler"/>

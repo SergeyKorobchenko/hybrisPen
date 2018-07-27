@@ -105,6 +105,16 @@
 		<property name="typeCode" value="Order"/>
 	</bean>
 
+	<bean name="pentlandCustomerUidPrepareInterceptor" class="com.bridgex.core.customer.interceptor.PentlandCustomerUidPrepareInterceptor"/>
+	<bean id="pentlandCustomerUidPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor">
+			<bean class="com.bridgex.core.customer.interceptor.PentlandCustomerUidPrepareInterceptor"/>
+		</property>
+		<property name="replacedInterceptors" ref="customerOriginalUIDPrepareInterceptor"/>
+		<property name="typeCode" value="Customer"/>
+	</bean>
+
+
 	<util:list id="onlineStatusSet" value-type="com.bridgex.core.enums.DiscontinuedStatus">
 		<value>D03</value>
 		<value>D04</value>

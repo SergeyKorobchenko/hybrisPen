@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Required;
 import com.bridgex.core.constants.PentlandcoreConstants;
 import com.bridgex.core.customer.PentlandCustomerAccountService;
 import com.bridgex.core.services.PentlandB2BUnitService;
+import com.bridgex.core.strategies.CustomerIdentifierStrategy;
 import com.bridgex.facades.customer.PentlandCustomerFacade;
 
 import de.hybris.platform.b2b.model.B2BCustomerModel;
@@ -26,9 +27,11 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.order.exceptions.CalculationException;
 
@@ -39,13 +42,13 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
 
   private static final Logger LOG = Logger.getLogger(DefaultPentlandCustomerFacade.class);
 
-  private PentlandB2BUnitService b2BUnitService;
+  private PentlandB2BUnitService         b2BUnitService;
   private PentlandCustomerAccountService pentlandCustomerAccountService;
-  private CheckoutFacade checkoutFacade;
-  private ProductFacade productFacade;
-  
-  
-@Override
+  private CheckoutFacade                 checkoutFacade;
+  private ProductFacade                  productFacade;
+  private CustomerIdentifierStrategy     customerIdentifierStrategy;
+
+  @Override
   public void loginSuccess(){
     final CustomerData userData = getCurrentCustomer();
 
@@ -135,6 +138,13 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
     return false;
   }
 
+  @Override
+  protected void setUidForRegister(RegisterData registerData, CustomerModel customer) {
+    String uid = customerIdentifierStrategy.createUidFromLogin(registerData.getLogin());
+    customer.setUid(uid);
+    customer.setOriginalUid(registerData.getLogin());
+  }
+
   @Required
   public void setB2BUnitService(PentlandB2BUnitService b2BUnitService) {
     this.b2BUnitService = b2BUnitService;
@@ -173,5 +183,7 @@ public void setProductFacade(ProductFacade productFacade) {
 	this.productFacade = productFacade;
 }
 
-
+  public void setCustomerIdentifierStrategy(CustomerIdentifierStrategy customerIdentifierStrategy) {
+    this.customerIdentifierStrategy = customerIdentifierStrategy;
+  }
 }

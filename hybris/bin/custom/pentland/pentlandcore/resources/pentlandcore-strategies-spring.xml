@@ -85,4 +85,6 @@
 	<alias name="pentlandQuoteCartValidationStrategy" alias="quoteCartValidationStrategy" />
 	<bean id="pentlandQuoteCartValidationStrategy" class="com.bridgex.core.strategies.impl.PentlandQuoteCartValidationStrategy" parent="defaultQuoteCartValidationStrategy"/>
 
+	<bean id="customerIdentifierStrategy" class="com.bridgex.core.strategies.impl.BaseSiteCustomerIdentifierStrategy"/>
+
 </beans>
