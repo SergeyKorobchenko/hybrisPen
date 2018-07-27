@@ -54,7 +54,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<spring:theme code="checkout.pickup.items.to.be.delivered" />
+				<div class="title"><spring:theme code="checkout.pickup.items.to.be.delivered" /></div>
 			</c:otherwise>
 		</c:choose>
 

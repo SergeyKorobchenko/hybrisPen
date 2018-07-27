@@ -11,12 +11,15 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
+<%-- Temporary variable for only MVP1, helps to disable unused components, must be deleted in future --%>
+<c:set var="isMVP1" value="true"/>
+
+<template:page pageTitle="${pageTitle}" hideHeaderLinks="true" isMVP1="true">
 
 <div class="row">
     <div class="col-sm-6">
 	    <div class="checkout-headline">
-            <span class="glyphicon glyphicon-lock"></span>
+            <%--<span class="glyphicon glyphicon-lock"></span>--%>
             <spring:theme code="checkout.multi.secure.checkout" />
         </div>
         <multi-checkout:checkoutSteps checkoutSteps="${checkoutSteps}" progressBarId="${progressBarId}">
@@ -83,11 +86,13 @@
 		<multi-checkout:checkoutOrderDetails cartData="${cartData}" showDeliveryAddress="false" showPaymentInfo="false" showTaxEstimate="false" showTax="true" />
     </div>
 
-    <div class="col-sm-12 col-lg-12">
-        <cms:pageSlot position="SideContent" var="feature" element="div" class="checkout-help">
-            <cms:component component="${feature}"/>
-        </cms:pageSlot>
-    </div>
+    <c:if test="${empty isMVP1}">
+        <div class="col-sm-12 col-lg-12">
+            <cms:pageSlot position="SideContent" var="feature" element="div" class="checkout-help">
+                <cms:component component="${feature}"/>
+            </cms:pageSlot>
+        </div>
+    </c:if>
 </div>
 
 </template:page>

@@ -35,7 +35,7 @@
 				skipBlank="false" skipBlankMessageKey="address.country"
 				items="${supportedCountries}" itemValue="isocode"
 				selectedValue="${addressForm.countryIso}"
-				selectCSSClass="form-control" />
+				selectCSSClass="form-control input-sm" />
 		</div>
 		<div id="i18nAddressForm" class="i18nAddressForm">
 			<c:if test="${not empty country}">
