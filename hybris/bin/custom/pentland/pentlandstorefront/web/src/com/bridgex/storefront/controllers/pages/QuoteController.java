@@ -69,12 +69,14 @@ import de.hybris.platform.commercefacades.voucher.VoucherFacade;
 import de.hybris.platform.commercefacades.voucher.data.VoucherData;
 import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
 import de.hybris.platform.commerceservices.enums.QuoteAction;
+import de.hybris.platform.commerceservices.enums.QuoteUserType;
 import de.hybris.platform.commerceservices.order.CommerceQuoteAssignmentException;
 import de.hybris.platform.commerceservices.order.CommerceQuoteService;
 import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteStateException;
 import de.hybris.platform.commerceservices.order.exceptions.IllegalQuoteSubmitException;
 import de.hybris.platform.commerceservices.order.exceptions.QuoteUnderThresholdException;
 import de.hybris.platform.commerceservices.order.strategies.QuoteUserIdentificationStrategy;
+import de.hybris.platform.commerceservices.order.strategies.QuoteUserTypeIdentificationStrategy;
 import de.hybris.platform.core.model.order.QuoteModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.order.CartService;
@@ -150,7 +152,13 @@ public class QuoteController extends AbstractCartPageController
 	
 	@Resource(name = "pentlandB2BAcceleratorCheckoutFacade")
 	private PentlandAcceleratorCheckoutFacade pentlandB2BAcceleratorCheckoutFacade;
-
+	
+	@Resource(name = "quoteUserTypeIdentificationStrategy")
+	private QuoteUserTypeIdentificationStrategy quoteUserTypeIdentificationStrategy;
+	
+	@Resource(name = "quoteUserIdentificationStrategy")
+	private QuoteUserIdentificationStrategy quoteUserIdentificationStrategy;
+	
 	/**
 	 * Creates a new quote based on session cart.
 	 *
@@ -320,7 +328,7 @@ public class QuoteController extends AbstractCartPageController
 			return String.format(REDIRECT_QUOTE_DETAILS_URL, urlEncode(quoteCode));
 		}
 
-		 pentlandCartFacade.populateCart(null);
+		pentlandCartFacade.populateCart(null);
 		final CartData cartData = getCartFacade().getSessionCartWithEntryOrdering(false);
 		prepareQuotePageElements(model, cartData, true);
 
@@ -442,7 +450,8 @@ public class QuoteController extends AbstractCartPageController
 					return optionalUrl.get();
 				}
 			}
-			if(pentlandB2BAcceleratorCheckoutFacade.cartHasZeroQuantityBaseEntries())
+			final QuoteUserType quoteUserType = quoteUserTypeIdentificationStrategy.getCurrentQuoteUserType(quoteUserIdentificationStrategy.getCurrentQuoteUser()).get();
+			if(quoteUserType.equals(QuoteUserType.BUYER) && pentlandB2BAcceleratorCheckoutFacade.cartHasZeroQuantityBaseEntries())
 			{
 				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
 						QUOTE_REJECT_QUANTITY_CHECK);
