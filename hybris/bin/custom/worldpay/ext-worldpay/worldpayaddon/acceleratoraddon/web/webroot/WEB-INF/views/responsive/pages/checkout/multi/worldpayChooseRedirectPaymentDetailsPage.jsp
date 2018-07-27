@@ -12,7 +12,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:url value="${currentStepUrl}" var="choosePaymentMethodUrl"/>
-<template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
+<template:page pageTitle="${pageTitle}" hideHeaderLinks="true" isMVP1="true">
 
     <jsp:attribute name="pageScripts">
         <script>
@@ -26,7 +26,7 @@
         <div id="hop" class="row">
             <div class="col-sm-6">
                 <div class="checkout-headline">
-                    <span class="glyphicon glyphicon-lock"></span>
+                    <%--<span class="glyphicon glyphicon-lock"></span>--%>
                     <spring:theme code="checkout.multi.secure.checkout"/>
                 </div>
                 <multi-checkout:checkoutSteps checkoutSteps="${checkoutSteps}" progressBarId="${progressBarId}">
