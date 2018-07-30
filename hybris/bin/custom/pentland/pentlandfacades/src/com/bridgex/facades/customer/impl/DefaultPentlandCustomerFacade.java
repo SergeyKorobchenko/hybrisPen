@@ -34,6 +34,7 @@ import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.order.exceptions.CalculationException;
+import de.hybris.platform.site.BaseSiteService;
 
 /**
  * @author Created by ekaterina.agievich@bridge-x.com on 11/24/2017.
@@ -47,6 +48,7 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
   private CheckoutFacade                 checkoutFacade;
   private ProductFacade                  productFacade;
   private CustomerIdentifierStrategy     customerIdentifierStrategy;
+  private BaseSiteService baseSiteService;
 
   @Override
   public void loginSuccess(){
@@ -143,6 +145,8 @@ public class DefaultPentlandCustomerFacade extends DefaultCustomerFacade impleme
     String uid = customerIdentifierStrategy.createUidFromLogin(registerData.getLogin());
     customer.setUid(uid);
     customer.setOriginalUid(registerData.getLogin());
+    customer.setLogin(registerData.getLogin());
+    customer.setRegistrationSite(baseSiteService.getCurrentBaseSite());
   }
 
   @Required
@@ -182,6 +186,10 @@ public ProductFacade getProductFacade() {
 public void setProductFacade(ProductFacade productFacade) {
 	this.productFacade = productFacade;
 }
+
+  public void setBaseSiteService(BaseSiteService baseSiteService) {
+    this.baseSiteService = baseSiteService;
+  }
 
   public void setCustomerIdentifierStrategy(CustomerIdentifierStrategy customerIdentifierStrategy) {
     this.customerIdentifierStrategy = customerIdentifierStrategy;

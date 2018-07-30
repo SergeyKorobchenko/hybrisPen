@@ -105,10 +105,10 @@
 		<property name="typeCode" value="Order"/>
 	</bean>
 
-	<bean name="pentlandCustomerUidPrepareInterceptor" class="com.bridgex.core.customer.interceptor.PentlandCustomerUidPrepareInterceptor"/>
+	<bean name="pentlandCustomerUidPrepareInterceptor" class="com.bridgex.core.customer.interceptor.PentlandLoginPrepareInterceptor"/>
 	<bean id="pentlandCustomerUidPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor">
-			<bean class="com.bridgex.core.customer.interceptor.PentlandCustomerUidPrepareInterceptor"/>
+			<bean class="com.bridgex.core.customer.interceptor.PentlandLoginPrepareInterceptor"/>
 		</property>
 		<property name="replacedInterceptors" ref="customerOriginalUIDPrepareInterceptor"/>
 		<property name="typeCode" value="Customer"/>

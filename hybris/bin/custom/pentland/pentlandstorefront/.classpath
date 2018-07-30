@@ -30,6 +30,7 @@
 <classpathentry combineaccessrules="false" kind="src" path="/pentlandb2baddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/pentlandsupportticketingaddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/pentlandaccountsummaryaddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/pentlandauthenticationaddon"/>
 
 
 

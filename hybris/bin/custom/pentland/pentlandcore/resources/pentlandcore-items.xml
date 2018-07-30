@@ -573,6 +573,18 @@
                 </attributes>
             </itemtype>
 
+            <itemtype code="User" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="registrationSite" type="BaseSite">
+                        <modifiers initial="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="login" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
         </typegroup>
 
         <typegroup name="BaseStore">

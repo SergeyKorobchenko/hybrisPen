@@ -16,6 +16,7 @@
 	<classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry exported="false" kind="src" path="/platform"/>
 <classpathentry combineaccessrules="false" kind="src" path="/worldpayaddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/pentlandauthenticationaddon"/>
 
 				
 </classpath>

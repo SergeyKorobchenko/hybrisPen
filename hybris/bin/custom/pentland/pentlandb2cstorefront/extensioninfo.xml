@@ -12,8 +12,9 @@
 
 	<extension abstractclassprefix="Generated" classprefix="Pentlandb2cstorefront" name="pentlandb2cstorefront" usemaven="false">		
         
-<requires-extension name="worldpayaddon"/>
-<requires-extension name="acceleratorstorefrontcommons"/>
+		<requires-extension name="pentlandauthenticationaddon"/>
+		<requires-extension name="worldpayaddon"/>
+		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="pentlandfacades"/>
 
 		<webmodule jspcompile="false" webroot="/pentlandb2cstorefront"/>

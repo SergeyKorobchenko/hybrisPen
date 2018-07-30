@@ -10,7 +10,7 @@ import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
 /**
  * @author Goncharenko Mikhail, created on 27.07.2018.
  */
-public class PentlandCustomerUidPrepareInterceptor implements PrepareInterceptor<CustomerModel> {
+public class PentlandLoginPrepareInterceptor implements PrepareInterceptor<CustomerModel> {
 
   @Override
   public void onPrepare(CustomerModel customer, InterceptorContext ctx) throws InterceptorException {
@@ -24,12 +24,12 @@ public class PentlandCustomerUidPrepareInterceptor implements PrepareInterceptor
   private void adjustIds(CustomerModel customer) {
     final String original = customer.getOriginalUid();
     final String uid = customer.getUid();
-    if (StringUtils.isNotEmpty(uid))
-    {
+
+    if (StringUtils.isNotEmpty(uid)) {
       customer.setUid(uid.toLowerCase());
     }
-    if (StringUtils.isNotEmpty(original))
-    {
+
+    if (StringUtils.isNotEmpty(original)) {
       customer.setOriginalUid(original.toLowerCase());
     }
   }

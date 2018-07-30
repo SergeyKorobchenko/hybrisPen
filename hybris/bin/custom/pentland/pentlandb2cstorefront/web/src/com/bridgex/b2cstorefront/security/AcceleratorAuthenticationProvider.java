@@ -21,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.bridgex.security.AbstractPentlandAuthenticationProvider;
 
 /**
  * Derived authentication provider supporting additional authentication checks. See
@@ -33,7 +34,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * any login as admin disables SearchRestrictions and therefore no page can be viewed correctly
  */
-public class AcceleratorAuthenticationProvider extends AbstractAcceleratorAuthenticationProvider
+public class AcceleratorAuthenticationProvider extends AbstractPentlandAuthenticationProvider
 {
 	private static final String ROLE_ADMIN_GROUP = "ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase();
 

@@ -14,8 +14,9 @@
 
 		
 		
-<requires-extension name="pentlandsecuresportaladdon"/>
-<requires-extension name="pentlandaccountsummaryaddon"/>
+		<requires-extension name="pentlandauthenticationaddon"/>
+		<requires-extension name="pentlandsecuresportaladdon"/>
+		<requires-extension name="pentlandaccountsummaryaddon"/>
 		<requires-extension name="pentlandsupportticketingaddon"/>
 		<requires-extension name="internationalization"/>
 		<requires-extension name="assistedservicestorefront"/>

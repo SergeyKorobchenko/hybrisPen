@@ -27,6 +27,8 @@
 
 		<extension name="pentlandb2cstorefront" />
 
+		<extension name="pentlandauthenticationaddon" />
+
 		<extension name="erpintegration" />
 
 		<!--SAP exts-->

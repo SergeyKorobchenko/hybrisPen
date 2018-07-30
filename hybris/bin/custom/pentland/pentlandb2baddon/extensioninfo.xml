@@ -12,12 +12,14 @@
 
 	<extension abstractclassprefix="Generated" classprefix="B2bacceleratoraddon" description="pentlandb2baddon extension" managername="B2bacceleratoraddonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="pentlandb2baddon">
 
-		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
+		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+		<requires-extension name="pentlandauthenticationaddon"/>
 		<requires-extension name="b2bacceleratorfacades"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="addonsupport"/>
 		<requires-extension name="pentlandaccountsummaryaddon"/>
 		<requires-extension name="pentlandfacades"/>
+
 
 		<coremodule generated="true" manager="de.hybris.platform.pentlandb2baddon.jalo.B2bacceleratoraddonManager" packageroot="de.hybris.platform.pentlandb2baddon"/>
 			

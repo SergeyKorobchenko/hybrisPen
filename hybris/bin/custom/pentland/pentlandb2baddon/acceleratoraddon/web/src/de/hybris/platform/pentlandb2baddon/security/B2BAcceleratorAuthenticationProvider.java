@@ -22,6 +22,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.bridgex.security.AbstractPentlandAuthenticationProvider;
 
 /**
  * Derived authentication provider supporting additional authentication checks. See
@@ -35,7 +36,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * any login as admin disables SearchRestrictions and therefore no page can be viewed correctly
  */
-public class B2BAcceleratorAuthenticationProvider extends AbstractAcceleratorAuthenticationProvider
+public class B2BAcceleratorAuthenticationProvider extends AbstractPentlandAuthenticationProvider
 {
 
 	private B2BUserGroupProvider b2bUserGroupProvider;
