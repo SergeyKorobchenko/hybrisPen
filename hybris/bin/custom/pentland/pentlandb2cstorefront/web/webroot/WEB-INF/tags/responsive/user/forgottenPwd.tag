@@ -11,7 +11,7 @@
 	<form:form method="post" commandName="forgottenPwdForm">
 		<div class="control-group">
 			<ycommerce:testId code="login_forgotPasswordEmail_input">
-				<formElement:formInputBox idKey="forgottenPwd.email" labelKey="forgottenPwd.email" path="email" mandatory="true"/>
+				<formElement:formInputBox idKey="forgottenPwd.email" labelKey="forgottenPwd.email" inputCSS="input-sm" path="email" mandatory="true"/>
 			</ycommerce:testId>
 			<ycommerce:testId code="login_forgotPasswordSubmit_button">
 				<button class="btn btn-primary btn-block" type="submit">

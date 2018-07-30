@@ -7,6 +7,9 @@
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<%-- Temporary attribute for only MVP1, helps to disable unused components, must be deleted in future --%>
+<%@ attribute name="isMVP1" required="false" %>
+
 <%--
    Represents root entry group on cart page
 --%>
@@ -45,9 +48,7 @@
             <c:if test="${not empty entryGroup.orderEntries}">
                 <c:forEach items="${entryGroup.orderEntries}" var="entry">
                     <tr>
-                        <td>
-                            <cart:cartItem cartData="${cartData}" entry="${entry}" index="${entryGroup.groupNumber}"/>
-                        </td>
+                        <td><cart:cartItem isMVP1="${isMVP1}" cartData="${cartData}" entry="${entry}" index="${entryGroup.groupNumber}"/></td>
                     </tr>
                 </c:forEach>
             </c:if>

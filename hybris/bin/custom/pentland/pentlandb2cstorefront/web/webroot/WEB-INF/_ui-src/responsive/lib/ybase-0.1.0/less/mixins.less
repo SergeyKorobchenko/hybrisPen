@@ -1,80 +1,80 @@
-
 // Button variants
 // -------------------------
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
 .button-box-shadow() when (@btn-box-shadow) {
-	.box-shadow(0 2px 2px 0 darken(@background,25%));
+  .box-shadow(0 2px 2px 0 darken(@background, 25%));
 }
+
 .button-variant(@color; @background; @border; @hoverColor; @hoverBorder; @hoverBackground; @disabledBackground) {
-	color: @color;
-	background-color: @background;
-	border-color: @border;
-	.button-box-shadow();
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+  .button-box-shadow();
 
-	&:hover,
-	&:focus,
-	&:active,
-	&.active,
-	.open .dropdown-toggle& {
-		color: @hoverColor;
-		background-color: @hoverBackground;
-		border-color: @hoverBorder;
-		.box-shadow(none)
-	}
-	&:active,
-	&.active,
-	.open .dropdown-toggle& {
-		background-image: none;
-	}
-	&.disabled,
-	&[disabled],
-	fieldset[disabled] & {
-		&,
-		&:hover,
-		&:focus,
-		&:active,
-		&.active {
-			color: @color;
-			background-color: @disabledBackground;
-			border-color: @disabledBackground;
-			.button-box-shadow();
-		}
-	}
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    color: @hoverColor;
+    background-color: @hoverBackground;
+    border-color: @hoverBorder;
+    .box-shadow(none)
+  }
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: @color;
+      background-color: @disabledBackground;
+      border-color: @disabledBackground;
+      .button-box-shadow();
+    }
+  }
 
-	.badge {
-		color: @background;
-		background-color: @color;
-	}
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
 }
 
 .flex-display(@value) {
-	display: ~"-webkit-@{value}";
-	display: ~"-moz-@{value}";
-	display: ~"-ms-@{value}box";
-	display: ~"-ms-@{value}";
-	display: @value;
+  display: ~"-webkit-@{value}";
+  display: ~"-moz-@{value}";
+  display: ~"-ms-@{value}box";
+  display: ~"-ms-@{value}";
+  display: @value;
 }
 
 .flex-wrap(@value) {
-	-webkit-flex-wrap: @value;
-	-moz-flex-wrap: @value;
-	-ms-flex-wrap: @value;
-	flex-wrap: @value;
+  -webkit-flex-wrap: @value;
+  -moz-flex-wrap: @value;
+  -ms-flex-wrap: @value;
+  flex-wrap: @value;
 }
 
 .flex-direction(@value) {
-	-webkit-flex-direction: @value;
-	-moz-flex-direction: @value;
-	-ms-flex-direction: @value;
-	flex-direction: @value;
+  -webkit-flex-direction: @value;
+  -moz-flex-direction: @value;
+  -ms-flex-direction: @value;
+  flex-direction: @value;
 }
 
 .flex (@value) {
-	-webkit-flex: @value;
-	-moz-flex: @value;
-	-ms-flex: @value;
-	flex: @value;
+  -webkit-flex: @value;
+  -moz-flex: @value;
+  -ms-flex: @value;
+  flex: @value;
 }
 
 .accordion-bg (@n, @i: 1) when (@i =< @n) {
@@ -93,14 +93,14 @@
   }
 }
 
-
 // text variants
 .page-headline {
   color: @headline-color;
-  font-size: @font-size-h3;
+  font-size: @font-size-h1;
   line-height: 35px;
   font-weight: 700;
-  padding: @grid-gutter-width 0;
+  text-transform: uppercase;
+  padding: 0 0 @grid-gutter-width;
   margin: 0;
 
   &.border {
@@ -132,8 +132,8 @@
   padding-right: 30px;
 
   @media (max-width: @screen-md) {
-	padding-left: 20px;
-	padding-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
 }
@@ -143,14 +143,14 @@
   padding-right: 20px;
 
   @media (max-width: @screen-md) {
-	padding-left: 10px;
-	padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
 }
 
 .form-control-validation(@label-color; @border-color; @background-color; @hint-color) {
-  .control-label{
+  .control-label {
     color: @label-color;
   }
 
@@ -161,11 +161,11 @@
 
   .help-block {
     font-weight: 600;
-    color:@hint-color;
+    color: @hint-color;
   }
 }
 
-.cart-voucher-placeholder(){
+.cart-voucher-placeholder() {
   font-size: @font-size-small;
   font-weight: 600;
   color: @text-color;

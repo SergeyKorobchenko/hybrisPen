@@ -4,7 +4,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<template:page pageTitle="${pageTitle}">
+<template:page pageTitle="${pageTitle}" isMVP1="true">
 	<div class="checkout-login">
 		<div class="row">
 			<div class="col-md-6">
@@ -19,8 +19,7 @@
 				</cms:pageSlot>
 			</div>
 		</div>
-		
-			
+
 		<cms:pageSlot position="CenterContentSlot" var="feature" class="checkoutLoginPageCenter" element="div">
 			<cms:component component="${feature}" class="checkoutLoginPageCenter-component"/>
 		</cms:pageSlot>

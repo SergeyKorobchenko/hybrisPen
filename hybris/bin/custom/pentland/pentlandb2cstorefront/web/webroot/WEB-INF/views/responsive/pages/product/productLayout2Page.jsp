@@ -1,10 +1,11 @@
+
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 
-<template:page pageTitle="${pageTitle}">
+<template:page pageTitle="${pageTitle}" isMVP1="true">
 	<cms:pageSlot position="Section1" var="comp" element="div" class="productDetailsPageSection1">
 		<cms:component component="${comp}" element="div" class="productDetailsPageSection1-component"/>
 	</cms:pageSlot>
