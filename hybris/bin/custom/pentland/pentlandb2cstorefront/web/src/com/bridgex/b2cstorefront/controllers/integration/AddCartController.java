@@ -8,7 +8,6 @@ import java.util.Collections;
 import javax.annotation.Resource;
 
 import com.bridgex.facades.order.PentlandCartFacade;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import com.bridgex.facades.cart.dto.AddCartRequestDto;
 import com.bridgex.facades.cart.dto.CartEntryDto;
 
-import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 
 /**
@@ -37,18 +35,15 @@ public class AddCartController extends BaseIntegrationController{
     return REDIRECT_CART_URL;
   }
 
-  @ResponseBody
   @PostMapping(path = "/addcart", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
-  public ResponseEntity addOrUpdateCart(@RequestBody AddCartRequestDto request) throws CommerceCartModificationException {
+  public String addOrUpdateCart(@RequestBody AddCartRequestDto request) throws CommerceCartModificationException {
     baseSiteService.setCurrentBaseSite(request.getBaseSiteId(), true);
     baseStoreService.setCurrentBaseStore(request.getBaseStoreId());
     cartFacade.removeSessionCart();
     for (CartEntryDto entry : request.getEntries()) {
       cartFacade.addToCart(entry.getCode(), entry.getQty());
     }
-    return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body(Collections.singletonMap("cartId",cartFacade.getSessionCart().getCode()));
+    return REDIRECT_CART_URL;
   }
 
   @ExceptionHandler(Exception.class)
