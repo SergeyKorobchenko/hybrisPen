@@ -70,6 +70,9 @@
 		<!-- filter to log out guest user if he/she attempts to access a page outside of checkout flow -->
 		<ref bean="anonymousCheckoutFilter"/>
 
+		<!-- filter for redirect to cart page -->
+		<ref bean="redirectToCartFilter"/>
+
 		<!-- filter to restore items in cart -->
 		<ref bean="cartRestorationFilter"/>
 
@@ -167,6 +170,8 @@
 	<bean id="anonymousCheckoutFilter" class="com.bridgex.b2cstorefront.filters.AnonymousCheckoutFilter" >
 		<property name="guestCheckoutCartCleanStrategy"  ref="guestCheckoutCartCleanStrategy" />
 	</bean>
+
+	<bean id="redirectToCartFilter" class="com.bridgex.b2cstorefront.filters.RedirectToCartFilter" />
 
 	<bean id="customerLocationRestorationFilter" class="com.bridgex.b2cstorefront.filters.CustomerLocationRestorationFilter" >
 		<property name="customerLocationFacade" ref="customerLocationFacade"/>
